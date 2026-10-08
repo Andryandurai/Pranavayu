@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = "Prepare Phase 3A2 UTC/alignment, geography, station panel and Hyderabad diagnostics."
 
     def add_arguments(self, parser):
-        parser.add_argument("--clock-shift-hours", type=float, default=0)
+        parser.add_argument("--clock-shift-hours", type=float, default=-5.5)
 
     def handle(self, *args, **options):
         run = prepare_data(options["clock_shift_hours"])

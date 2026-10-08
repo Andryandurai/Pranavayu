@@ -108,7 +108,7 @@ def alignment_diagnostic(city, frames, output):
     return findings
 
 
-def prepare_data(clock_shift_hours=0):
+def prepare_data(clock_shift_hours=-5.5):
     protocol = json.loads(Path("docs/results/PHASE3A2_PROTOCOL.json").read_text())
     with analysis_run(
         name="phase3a2-data", clock_shift_hours=clock_shift_hours, protocol=protocol
@@ -175,7 +175,12 @@ def prepare_data(clock_shift_hours=0):
             lag_findings.extend(
                 alignment_diagnostic(
                     city,
-                    {"legacy": analysis_dataframe(city.slug, 2), "IST quarters": model_frame},
+                    {
+                        "legacy": analysis_dataframe(city.slug, 2),
+                        "corrected IST"
+                        if clock_shift_hours == -5.5
+                        else "IST quarters": model_frame,
+                    },
                     output,
                 )
             )
@@ -228,13 +233,20 @@ def prepare_data(clock_shift_hours=0):
             database_timezone=database_timezone,
             timestamp_types=timestamp_types,
             concentration_storage=(
-                "Naive XKDR times interpreted as IST; explicit OpenCity offsets "
-                "preserved as UTC; database timestamps are timestamptz"
+                "Database timestamps are UTC timestamptz. Historical XKDR clocks are IST. "
+                "Raw OpenCity UTC labels are retained as published; independently verified "
+                "IST wall clocks are converted to UTC in this versioned analysis."
             ),
             weather_timezone="UTC request, utc_offset_seconds=0 validated",
             method_fix=(
-                "Reconstruct IST-hour means from cached PM2.5/PM10 quarters; "
-                "never relabel a UTC-hour mean as an IST-hour mean"
+                "Decode verified OpenCity IST wall clocks despite +0000 labels; existing "
+                "four-quarter publisher-hour means are native IST-hour means after -5.5h. "
+                "For literal UTC sensitivity runs, reconstruct bins across UTC-hour boundaries."
+            ),
+            source_clock_proof=(
+                json.loads(Path("docs/results/PHASE3A2_CLOCK_PROOF.json").read_text())
+                if clock_shift_hours == -5.5
+                else None
             ),
         )
     return run.pk

@@ -8,7 +8,7 @@ import pytest
 import responses
 from sklearn.ensemble import RandomForestRegressor
 
-from apps.analytics.diagnostic_data import cached_quarters
+from apps.analytics.diagnostic_data import cached_quarters, correct_published_clock
 from apps.analytics.model_diagnostics import (
     lag_correlations,
     pooled_normalise,
@@ -37,6 +37,15 @@ def test_lag_identifies_a_known_positive_and_negative_timestamp_offset():
         peak = result.loc[result.correlation.idxmax()]
         assert peak.lag_hours == offset
         assert peak.correlation == pytest.approx(1)
+
+
+def test_verified_opencity_wall_clock_converts_to_utc_without_shifting_other_sources():
+    times = pd.Series(pd.to_datetime(["2024-01-01T00:00:00Z"] * 2, utc=True))
+    converted = correct_published_clock(times, ["opencity", "cpcb-ccr"])
+    assert converted.iloc[0] == pd.Timestamp("2023-12-31T18:30:00Z")
+    assert converted.iloc[0].tz_convert("Asia/Kolkata").hour == 0
+    assert converted.iloc[1] == times.iloc[1]
+    assert times.iloc[0] == pd.Timestamp("2024-01-01T00:00:00Z")
 
 
 def test_week_cv_never_leaks_ist_weeks_or_boundary_embargo():

@@ -1,0 +1,100 @@
+{
+  "verified_at": "2026-10-08T17:29:50.045660+00:00",
+  "correction_hours": -5.5,
+  "scope": "Cached OpenCity 2024-2025 CPCB wide concentration exports with +0000 wall clocks; analysis correction only, raw warehouse labels preserved",
+  "independent_clock_documentation": "https://github.com/xKDR/Air-Quality-Database/blob/main/docs/PUBLIC_API.md",
+  "publisher_processing_context": "https://github.com/Vonter/india-cpcb-aqi/blob/a58f47848e678c7cea58a69758343d08d0b49915/parse.py#L100-L114",
+  "records": [
+    {
+      "city": "bengaluru",
+      "site": "site_1554",
+      "source_csv": "data/raw/opencity/bengaluru/10e27e2a-276b-40fd-b457-5b7d10be7e21.csv",
+      "source_sha256": "e4e6c5de622d80941bf160790845b6344c2d9eb660d99f3aff904a4f2f940594",
+      "independent_url": "https://airquality.xkdr.org/v1/measurements?station=site_1554&parameter=PM2.5&start=2024-01-01&end=2024-01-07&format=csv&limit=10000",
+      "independent_csv": ".tools/phase3a2-validation/clock-proof/bengaluru_site_1554_xkdr_2024.csv",
+      "independent_sha256": "b78bf40c405289b55a8e1d2ec4fef2f48e96726fad7c28cdb4c0070ac95aedf2",
+      "matched_hours": 168,
+      "mean_absolute_difference": 0.0,
+      "max_absolute_difference": 0.0,
+      "correlation": 1.0
+    },
+    {
+      "city": "chennai",
+      "site": "site_306",
+      "source_csv": "data/raw/opencity/chennai/2184895b-d5ac-4410-99ae-b19eb9997b03.csv",
+      "source_sha256": "c53f885dc0c97deab33624a5c38fc5ba6ebae29b2bc4b112b261fc5fab357318",
+      "independent_url": "https://airquality.xkdr.org/v1/measurements?station=site_306&parameter=PM2.5&start=2024-01-01&end=2024-01-07&format=csv&limit=10000",
+      "independent_csv": ".tools/phase3a2-validation/clock-proof/chennai_site_306_xkdr_2024.csv",
+      "independent_sha256": "1564fe7d004ce818d2a44395d8eafce91f6d8cfdfe46d1a6e4154b8e2927a016",
+      "matched_hours": 168,
+      "mean_absolute_difference": 0.002435515873016132,
+      "max_absolute_difference": 0.005000000000009663,
+      "correlation": 0.9999999855187218
+    },
+    {
+      "city": "delhi",
+      "site": "site_1560",
+      "source_csv": "data/raw/opencity/delhi/102d2fad-f2dd-41c5-b5a6-2db6c75b3712.csv",
+      "source_sha256": "599bdcd07623abe2fea9050a1dd112dc134155907951fcee342d5cf1dc97cf4d",
+      "independent_url": "https://airquality.xkdr.org/v1/measurements?station=site_1560&parameter=PM2.5&start=2024-01-01&end=2024-01-07&format=csv&limit=10000",
+      "independent_csv": ".tools/phase3a2-validation/clock-proof/delhi_site_1560_xkdr_2024.csv",
+      "independent_sha256": "5f6e85d1c29358598d919c7acea4f22403bd670a742156f2b070be4192c20042",
+      "matched_hours": 167,
+      "mean_absolute_difference": 0.0,
+      "max_absolute_difference": 0.0,
+      "correlation": 0.9999999999999999
+    },
+    {
+      "city": "hyderabad",
+      "site": "site_5597",
+      "source_csv": "data/raw/opencity/hyderabad/054a52fa-2552-438e-baab-8d9b22fed81b.csv",
+      "source_sha256": "a6d0d6ae48e08d707285db3148bb2e3411776bd7ded9508d86c1ef441c88ce7f",
+      "independent_url": "https://airquality.xkdr.org/v1/measurements?station=site_5597&parameter=PM2.5&start=2024-01-01&end=2024-01-07&format=csv&limit=10000",
+      "independent_csv": ".tools/phase3a2-validation/clock-proof/hyderabad_site_5597_xkdr_2024.csv",
+      "independent_sha256": "cfdcee96b8e69ad4e49cc28d56587ded58b23bf7b562e2eb135dab9e79fbd4c4",
+      "matched_hours": 93,
+      "mean_absolute_difference": 0.0021684587813618496,
+      "max_absolute_difference": 0.005000000000002558,
+      "correlation": 0.9999998583939858
+    },
+    {
+      "city": "kolkata",
+      "site": "site_5129",
+      "source_csv": "data/raw/opencity/kolkata/011526e1-213e-475d-aacc-064e46b0a17e.csv",
+      "source_sha256": "8b0f42816ec5135af4e0ccf9695a714297469f92b1f5bebc58cc133bf286ef9a",
+      "independent_url": "https://airquality.xkdr.org/v1/measurements?station=site_5129&parameter=PM2.5&start=2024-01-01&end=2024-01-07&format=csv&limit=10000",
+      "independent_csv": ".tools/phase3a2-validation/clock-proof/kolkata_site_5129_xkdr_2024.csv",
+      "independent_sha256": "a56bab17e327af67291a01883a5c600bfeb461bf6d552d0f2a07596d242e457d",
+      "matched_hours": 167,
+      "mean_absolute_difference": 0.0025199600798408357,
+      "max_absolute_difference": 0.005000000000009663,
+      "correlation": 0.9999999778362298
+    },
+    {
+      "city": "mumbai",
+      "site": "site_5412",
+      "source_csv": "data/raw/opencity/mumbai/1b8de968-d82f-4135-a9d2-1834d6b02fbd.csv",
+      "source_sha256": "8e2c4c745b63db59a1c1deca4c88b127505bdd57f75d8366023015e08a47d2e4",
+      "independent_url": "https://airquality.xkdr.org/v1/measurements?station=site_5412&parameter=PM2.5&start=2024-01-01&end=2024-01-07&format=csv&limit=10000",
+      "independent_csv": ".tools/phase3a2-validation/clock-proof/mumbai_site_5412_xkdr_2024.csv",
+      "independent_sha256": "ee40341aa3c958c659a5f8dde8213c3fa8b54fa3417ad704ec9b2cb4d113d30e",
+      "matched_hours": 165,
+      "mean_absolute_difference": 0.002383838383838606,
+      "max_absolute_difference": 0.005000000000002558,
+      "correlation": 0.9999999490122697
+    },
+    {
+      "city": "pune",
+      "site": "site_5408",
+      "source_csv": "data/raw/opencity/pune/0aaa077d-2dfd-4b22-9fad-485357f075a8.csv",
+      "source_sha256": "8f858f7292e0d4c1b25e3342ea9314f25fb8735eb611d285b84f8a55032d6132",
+      "independent_url": "https://airquality.xkdr.org/v1/measurements?station=site_5408&parameter=PM2.5&start=2024-01-01&end=2024-01-07&format=csv&limit=10000",
+      "independent_csv": ".tools/phase3a2-validation/clock-proof/pune_site_5408_xkdr_2024.csv",
+      "independent_sha256": "57dd289277f7f24e70a2aa34df2f22daad3e8b9655a058e4e34b6e05cb402dc0",
+      "matched_hours": 156,
+      "mean_absolute_difference": 0.0024519230769228283,
+      "max_absolute_difference": 0.005000000000009663,
+      "correlation": 0.9999999877885408
+    }
+  ]
+}

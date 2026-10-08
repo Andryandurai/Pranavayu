@@ -78,6 +78,8 @@ def cached_quarters(city, clock_shift_hours=0):
 
 
 def station_hours(city, clock_shift_hours=0):
+    if clock_shift_hours == -5.5:
+        return verified_ist_station_hours(city)
     records = list(
         Reading.objects.filter(station__city=city, pollutant__code="pm25")
         .exclude(station__source__slug="opencity")
@@ -101,6 +103,65 @@ def station_hours(city, clock_shift_hours=0):
     )
     result = result.merge(info.rename(columns={"id": "station_id"}), on="station_id", how="left")
     result["year"] = result.observed_at.dt.tz_convert(IST).dt.year
+    return result, files
+
+
+def correct_published_clock(times, source_slugs, clock_shift_hours=-5.5):
+    """Apply the independently verified export clock to derived data, never raw rows."""
+    canonical = pd.Series(pd.to_datetime(times, utc=True)).copy()
+    mask = pd.Series(source_slugs, index=canonical.index) == "opencity"
+    shifted = canonical.loc[mask].astype("int64") + int(clock_shift_hours * 3600 * 1e9)
+    canonical.loc[mask] = pd.to_datetime(shifted, utc=True)
+    return canonical
+
+
+def verified_ist_station_hours(city):
+    proof_path = Path("docs/results/PHASE3A2_CLOCK_PROOF.json")
+    proof = json.loads(proof_path.read_text())
+    verified = {
+        record["city"]
+        for record in proof["records"]
+        if record["matched_hours"] >= 48 and record["mean_absolute_difference"] <= 0.01
+    }
+    if Reading.objects.filter(station__city=city, station__source__slug="opencity").exists():
+        if city.slug not in verified or proof["correction_hours"] != -5.5:
+            raise ValueError(f"No independent source-clock proof for {city.slug}")
+    records = list(
+        Reading.objects.filter(station__city=city, pollutant__code="pm25").values(
+            "station_id", "observed_at", "value", "quality_flag", "station__source__slug"
+        )
+    )
+    result = pd.DataFrame(records)
+    # Stored UTC-hour means came from four publisher wall-clock quarters. Those
+    # quarters are IST, so their existing means are exactly native IST-hour means.
+    result["observed_at"] = correct_published_clock(
+        result.observed_at, result["station__source__slug"]
+    )
+    result = result.drop(columns=["station__source__slug"])
+    excluded = set(
+        StationEligibility.objects.filter(excluded_from_city=True).values_list(
+            "station_id", flat=True
+        )
+    )
+    result = result[
+        (result.quality_flag == "ok") & result.value.notna() & ~result.station_id.isin(excluded)
+    ].copy()
+    info = pd.DataFrame(
+        list(Station.objects.filter(city=city).values("id", "external_id", "name", "source__slug"))
+    )
+    result = result.merge(info.rename(columns={"id": "station_id"}), on="station_id", how="left")
+    result["year"] = result.observed_at.dt.tz_convert(IST).dt.year
+    files = []
+    cache = RawCache()
+    for path in sorted(cache.root.glob(f"opencity/{city.slug}/*.csv")):
+        with path.open(encoding="utf-8-sig", newline="") as handle:
+            fields = next(csv.reader(handle))
+        if "Timestamp" not in fields:
+            continue
+        _, manifest = cache.local(path)
+        files.append(
+            dict(path=manifest["path"], sha256=manifest["sha256"], bytes=path.stat().st_size)
+        )
     return result, files
 
 

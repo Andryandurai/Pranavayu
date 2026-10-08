@@ -52,7 +52,7 @@ def analysis_run(name="phase3a", start="2015-01-01", end="2026-10-07", **paramet
     print(json.dumps({"event": "analysis_started", "run": run.pk, "name": name}), flush=True)
     try:
         yield run, output
-    except Exception as exc:
+    except BaseException as exc:
         run.status = "failed"
         run.error_message = f"{type(exc).__name__}: {exc}"
         raise

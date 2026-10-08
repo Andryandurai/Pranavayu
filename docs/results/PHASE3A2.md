@@ -164,4 +164,14 @@ parameter and structural uncertainty.
 
 ## Actual diagnostics/results
 
-Pending execution; no new model scores inspected at freeze.
+No new model scores were inspected at the protocol freeze. During diagnostics,
+independent same-site XKDR hourly records demonstrated that the seven recent
+OpenCity exports retain IST wall-clock values under `+0000` labels. See
+[the clock proof](PHASE3A2_CLOCK_PROOF.json): 93-168 matched hours per city,
+maximum difference 0.005 ug/m3 from independent-source rounding. This evidence,
+rather than model performance, determines the -5.5 hour conversion in derived
+analysis timestamps. Raw files and warehouse rows remain unchanged. The literal
+UTC interpretation is preserved in diagnostic run 4; provisional model run 5
+was interrupted and marked failed before final results. Readiness criteria and
+the prespecified variant list remain unchanged. Corrected results follow after
+the run completes.
