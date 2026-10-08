@@ -101,6 +101,11 @@ def hyderabad_raw_audit(data, output):
     city = pd.read_csv(data / "hyderabad_raw_daily.csv")
     city = city[pd.to_datetime(city.date).dt.year == 2025]
     axes[1].plot(pd.to_datetime(city.date), city.value, label="Quality-screened city daily mean")
+    panel = pd.read_csv(data / "hyderabad_panel_raw_daily.csv")
+    panel = panel[pd.to_datetime(panel.date).dt.year == 2025]
+    axes[1].plot(
+        pd.to_datetime(panel.date), panel.value, label="Six-station fixed panel", alpha=0.8
+    )
     axes[1].axhline(60, color="red", linestyle="--", label="60 ug/m3")
     axes[1].set_ylabel("PM2.5 (ug/m3)")
     axes[1].legend()
@@ -333,6 +338,10 @@ def export_report(run_id):
     lags = pd.read_csv(data / "alignment_summary.csv")
     nulls = pd.read_csv(data / "weather_nulls.csv")
     hyde = json.loads((data / "hyderabad_sanity.json").read_text())
+    hyde_panel = pd.read_csv(data / "hyderabad_panel_raw_daily.csv")
+    hyde_panel = hyde_panel[pd.to_datetime(hyde_panel.date).dt.year == 2025].dropna(
+        subset=["value"]
+    )
     panels = json.loads((data / "fixed_panels.json").read_text())
     lines = [
         "## Actual diagnostics and results",
@@ -719,6 +728,16 @@ def export_report(run_id):
             "erase these failures."
         ),
         "### D7: Hyderabad sanity check",
+        (
+            f"The six-station fixed panel has {len(hyde_panel)} valid 2025 days, "
+            f"mean {fmt(hyde_panel.value.mean())} ug/m3, maximum "
+            f"{fmt(hyde_panel.value.max())} ug/m3 and "
+            f"{int((hyde_panel.value > 60).sum())} days above 60. "
+            "The full network's zero versus the fixed panel's exceedances demonstrates "
+            "that station composition changes the conclusion. This is a comparison of "
+            "two aggregation panels, not evidence that every part of the city stays "
+            "below 60. The source's rounded/limited values remain a separate concern."
+        ),
         (
             f"Corrected 2025 city series: **{hyde['valid_days']}** valid days, daily maximum "
             f"**{fmt(hyde['daily_max'])} ug/m3**, annual mean **{fmt(hyde['annual_mean'])} "
