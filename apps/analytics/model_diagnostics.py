@@ -1,5 +1,7 @@
 """Deterministic validation and pooled-reference normalisation, without database I/O."""
 
+from datetime import timedelta
+
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
@@ -47,11 +49,11 @@ def week_folds(times, n_folds=5, seed=42, embargo_hours=24):
         train = ~test
         if embargo_hours:
             for week in sorted(set(weeks[test])):
-                first = pd.Timestamp(week, tz=IST).tz_convert("UTC")
-                last = first + pd.Timedelta(days=7)
+                first = pd.Timestamp(week, tz=IST).tz_convert("UTC").to_pydatetime()
+                last = first + timedelta(days=7)
                 train &= ~(
-                    (times >= first - pd.Timedelta(hours=embargo_hours))
-                    & (times < last + pd.Timedelta(hours=embargo_hours))
+                    (times >= first - timedelta(hours=embargo_hours))
+                    & (times < last + timedelta(hours=embargo_hours))
                 ).to_numpy()
         yield np.flatnonzero(train), np.flatnonzero(test)
 
@@ -63,7 +65,7 @@ def lag_correlations(pm, wind, max_lag=12, minimum_pairs=48):
     wind = wind.dropna().sort_index()
     for lag in range(-max_lag, max_lag + 1):
         shifted = wind.copy()
-        shifted.index = shifted.index - pd.Timedelta(hours=lag)
+        shifted.index = pd.to_datetime(shifted.index.asi8 - lag * 3600 * 1_000_000_000, utc=True)
         pairs = pd.concat([pm.rename("pm"), shifted.rename("wind")], axis=1).dropna()
         enough = len(pairs) >= minimum_pairs and pairs.pm.std() > 0 and pairs.wind.std() > 0
         records.append(
@@ -109,9 +111,9 @@ def target_rows(hourly, weather, target="hourly"):
     grouped = rows.groupby("date").agg(value=("value", "mean"), hours=("value", "count"))
     grouped = grouped[grouped.hours >= 18].reset_index()
     grouped["observed_at"] = pd.to_datetime(grouped.date).dt.tz_localize(IST).dt.tz_convert("UTC")
-    return grouped[["observed_at", "value"]].merge(
-        weather_daily(weather), on="observed_at", how="left"
-    )
+    return grouped.rename(columns={"hours": "valid_count"})[
+        ["observed_at", "value", "valid_count"]
+    ].merge(weather_daily(weather), on="observed_at", how="left")
 
 
 def features(frame, config, original=False):
@@ -271,7 +273,7 @@ def evaluate(frame, weather, config, scheme="weeks", seed=42, n_trees=100, origi
     )
 
 
-def pooled_normalise(model, targets, reference, n_samples=300, seed=42):
+def pooled_normalise(model, targets, reference, n_samples=300, seed=42, return_draws=False):
     """One common observed donor draw, fixing only explicit period and local trend."""
     if n_samples < 300:
         raise ValueError("At least 300 pooled reference draws required")
@@ -307,7 +309,9 @@ def pooled_normalise(model, targets, reference, n_samples=300, seed=42):
         samples[offset : offset + len(selected)] = model.predict(scenarios).reshape(
             len(selected), n_samples
         )
-    return samples.mean(axis=1)[inverse], samples.std(axis=1, ddof=1)[inverse] / np.sqrt(n_samples)
+    mean = samples.mean(axis=1)[inverse]
+    error = samples.std(axis=1, ddof=1)[inverse] / np.sqrt(n_samples)
+    return (mean, error, samples, inverse) if return_draws else (mean, error)
 
 
 def residual_tables(daily):

@@ -3,7 +3,7 @@
 import csv
 import json
 from collections import defaultdict
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 import pandas as pd
@@ -50,7 +50,7 @@ def cached_quarters(city, clock_shift_hours=0):
                 timestamp = datetime.fromisoformat(raw["Timestamp"])
                 if timestamp.tzinfo is None:
                     raise ValueError("OpenCity timestamp lacks the advertised UTC offset")
-                timestamp = timestamp.astimezone(UTC) + pd.Timedelta(hours=clock_shift_hours)
+                timestamp = timestamp.astimezone(UTC) + timedelta(hours=clock_shift_hours)
                 for code, column in columns.items():
                     if column:
                         unit = column.split("(", 1)[1].rstrip(")") if "(" in column else "ug/m3"
