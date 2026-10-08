@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/0837d556-381c-4cee-8186-d7a3d4af78a2/download/396354b8-a05d-4e54-8ddf-763752130e03.csv",
+  "request_sha256": "a7c90a811a9323d5e9de454d02650f8dcd4b2da7dc72a52d4329048d20f84e56",
+  "path": "opencity/mumbai/0837d556-381c-4cee-8186-d7a3d4af78a2.csv",
+  "sha256": "9958506520316d02571b15a45abe46b03be57e7aadfdccbc37960dd0a2a44cb8",
+  "size_bytes": 129225,
+  "retrieved_at": "2026-10-08T11:35:24.970800+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Borivali East IITM AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

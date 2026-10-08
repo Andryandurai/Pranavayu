@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/ea7d5bf8-f82a-436d-ac58-1d431a2d1997/download/chn-manali-village-tnpcb-2024-25.csv",
+    "request_sha256":  "51992ede3ca5f3ffdd1e079baf801aee1990c2245d86975ad91780f878de01ba",
+    "path":  "opencity/chennai/ea7d5bf8-f82a-436d-ac58-1d431a2d1997.csv",
+    "sha256":  "a82ec87e8c5475af20a1ee7385667f8632fcbce5f94958aefca083dca01253f9",
+    "size_bytes":  11955810,
+    "retrieved_at":  "2026-10-08T11:25:37.931962+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Manali Village TNPCB 15 minute AQI Data for 2024-25",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

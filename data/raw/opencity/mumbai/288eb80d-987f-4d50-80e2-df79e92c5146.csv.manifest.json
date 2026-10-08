@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/288eb80d-987f-4d50-80e2-df79e92c5146/download/mum-deonar-iitm-2024-25.csv",
+  "request_sha256": "fc48e009b3b057e043f8c7c99e93741ba021c8384140d6728d17877949efc544",
+  "path": "opencity/mumbai/288eb80d-987f-4d50-80e2-df79e92c5146.csv",
+  "sha256": "a82512603776fb8f21492c89a3e29751910d42bc3730c946f4d8c75e959bf67a",
+  "size_bytes": 10464461,
+  "retrieved_at": "2026-10-08T11:37:17.576554+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Deonar IITM 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

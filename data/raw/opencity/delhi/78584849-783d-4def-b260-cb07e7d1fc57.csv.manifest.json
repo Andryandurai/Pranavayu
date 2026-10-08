@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/78584849-783d-4def-b260-cb07e7d1fc57/download/679bab2f-866c-490c-a2c3-49972b268135.csv",
+  "request_sha256": "acf765cb0ebc938e43f6a1025659d15ff2fe340122e1962b03f7bf713f5e52ca",
+  "path": "opencity/delhi/78584849-783d-4def-b260-cb07e7d1fc57.csv",
+  "sha256": "70f58ef46e9220c22da22e59c70056ac7491b582b3ec376b778d912638178683",
+  "size_bytes": 279998,
+  "retrieved_at": "2026-10-08T11:30:36.142972+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "IGI Airport T3 IMD AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

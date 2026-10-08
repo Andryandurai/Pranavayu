@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Jaipur+air+quality&rows=100",
+  "request_sha256": "d2e83d473c246f21c9e890cf47c17de93cd35c2bc33399553b331f649596449a",
+  "path": "opencity/catalogues/jaipur.json",
+  "sha256": "679dd61c172de4fa58c19240cff8deb56369199e3f6f069024f5e5c8ada79725",
+  "size_bytes": 452645,
+  "retrieved_at": "2026-10-08T11:35:12.142295+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/603ea279-ff5b-46f3-ae00-fac60f7b29ac/download/a4b645af-8197-4fd0-8812-aceb65e5ec7a.csv",
+  "request_sha256": "65d7a01a472e7e23be6d9ad4eb14123cfab18e6bbb3dd372f5681172f0898ade",
+  "path": "opencity/delhi/603ea279-ff5b-46f3-ae00-fac60f7b29ac.csv",
+  "sha256": "e810b16afb8c9e31e8441cf6ce29dffe80594f25745dc306cabeb152c4e27678",
+  "size_bytes": 285106,
+  "retrieved_at": "2026-10-08T11:30:52.039977+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Major Dhyan Chand National Stadium DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

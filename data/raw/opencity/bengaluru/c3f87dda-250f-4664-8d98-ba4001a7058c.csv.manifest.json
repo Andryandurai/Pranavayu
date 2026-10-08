@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/c3f87dda-250f-4664-8d98-ba4001a7058c/download/blr-kasturi-nagar-kspcb-2024-25.csv",
+    "request_sha256":  "615cf1c67333b1f1901a6c76fa41fda3d9b2d945816d34f2d10046cfea434cc1",
+    "path":  "opencity/bengaluru/c3f87dda-250f-4664-8d98-ba4001a7058c.csv",
+    "sha256":  "43ae610a1351131d58af599c23bcb9fd3655982dcc81824dfb38bd7d8be20c04",
+    "size_bytes":  14242769,
+    "retrieved_at":  "2026-10-08T11:25:03.699597+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Kasturi Nagar KSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

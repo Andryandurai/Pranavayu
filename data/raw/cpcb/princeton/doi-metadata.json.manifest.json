@@ -1,0 +1,10 @@
+{
+  "url": "https://api.datacite.org/dois/10.34770/60j3-yp02",
+  "request_sha256": "f8a01fadb1248e5e5565312bcaabf63e731aa70cdf0ea9dde0f274d350406019",
+  "path": "cpcb/princeton/doi-metadata.json",
+  "sha256": "8cb7b7e8828d8a3f91762bb944c67c8c75435b61b06936dd5adbba83007f3c0c",
+  "size_bytes": 6482,
+  "retrieved_at": "2026-10-08T07:35:21.278204+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {}
+}

@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/0b42bae6-65b8-4f75-8077-3d3c30f741c5/download/f5b3476f-f0f7-4121-ac92-09d65a115e34.csv",
+    "request_sha256":  "06e32e49c07975a5c51d0b225731a69686c3462cab5c3f54049f472ce7750e8b",
+    "path":  "opencity/chennai/0b42bae6-65b8-4f75-8077-3d3c30f741c5.csv",
+    "sha256":  "990c72ae9a4048c37708710a452be0f3eb428872cc1cb807c82fd52a970d3d8f",
+    "size_bytes":  136613,
+    "retrieved_at":  "2026-10-08T11:25:16.283153+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Arumbakkam Hourly AQI Data 2020-2023",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

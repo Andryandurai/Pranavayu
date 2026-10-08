@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Bengaluru+air+quality&rows=100",
+  "request_sha256": "eab7ac6091b00e9c343f3dcd780cdb18de4c8d66db0ae0ac808071c9260ac5ec",
+  "path": "opencity/catalogues/bengaluru.json",
+  "sha256": "511bda4387486818fc9023b0f1ca55729febf8ed4b84359c2d6fbfcbf5602ff9",
+  "size_bytes": 515638,
+  "retrieved_at": "2026-10-08T11:30:05.402211+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/da0ab893-d803-4640-aa12-6141ed22d492/download/ae701f4b-81d0-430d-bb9d-595d58e87f2d.csv",
+  "request_sha256": "8125309700519ea91c2705dc02ecf4324ac26568aab185167e6ed736418e456b",
+  "path": "opencity/delhi/da0ab893-d803-4640-aa12-6141ed22d492.csv",
+  "sha256": "d172e503c99bb49f5e99493886c9ef9c369ef7eec4b4dd24b86154971e46ac76",
+  "size_bytes": 319092,
+  "retrieved_at": "2026-10-08T11:31:09.939806+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Punjabi Bagh DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

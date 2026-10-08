@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Jaipur&source=cpcb_caaqm&parameter=PM2.5&start=2018-09-01&end=2018-09-30&format=csv",
+  "request_sha256": "996d6662c5d9039c9f3370b06f51457afb125696f704515d12beb8758966a5a6",
+  "path": "cpcb/xkdr/jaipur/2018-09-01_2018-09-30.csv",
+  "sha256": "627e5c8e50f529dcaef6abf780cb8b3ce8106d7a47e1f85667195d9daf2efd58",
+  "size_bytes": 102804,
+  "retrieved_at": "2026-10-08T11:14:10.280888+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Jaipur",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

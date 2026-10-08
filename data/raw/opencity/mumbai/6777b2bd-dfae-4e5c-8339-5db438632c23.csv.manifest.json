@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/6777b2bd-dfae-4e5c-8339-5db438632c23/download/mum-sion-mpcb-2024-25.csv",
+  "request_sha256": "4168afcd75fcfcbe8d02772efd41824e92bcde31b16dc73e91a7f1415b67b35c",
+  "path": "opencity/mumbai/6777b2bd-dfae-4e5c-8339-5db438632c23.csv",
+  "sha256": "ef39af988d5f56ce6f00882d3cd33e563b536431d3656f68d79bc9864d391e61",
+  "size_bytes": 11918459,
+  "retrieved_at": "2026-10-08T11:38:34.837171+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Sion MPCB 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

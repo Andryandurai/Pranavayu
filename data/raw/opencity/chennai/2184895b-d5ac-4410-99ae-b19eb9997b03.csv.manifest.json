@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/2184895b-d5ac-4410-99ae-b19eb9997b03/download/chn-manali-cpcb-2024-25.csv",
+    "request_sha256":  "5327149e26c4a627deea8a7dce7daf08b352cee52f0ccc69cc7f2cd1ff4dec77",
+    "path":  "opencity/chennai/2184895b-d5ac-4410-99ae-b19eb9997b03.csv",
+    "sha256":  "c53f885dc0c97deab33624a5c38fc5ba6ebae29b2bc4b112b261fc5fab357318",
+    "size_bytes":  12115662,
+    "retrieved_at":  "2026-10-08T11:25:39.835738+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Manali CPCB 15 minute AQI Data for 2024-25",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/7e48b781-991a-42ef-90fc-2514b5a1bf04/download/02c9cd86-a3a3-4520-8b88-c729eee9d2a5.csv",
+  "request_sha256": "3fe5a3a03f5732502f92cf7c5864a1fa4d7215a3b9737541827cfbb70a1d5be8",
+  "path": "opencity/delhi/7e48b781-991a-42ef-90fc-2514b5a1bf04.csv",
+  "sha256": "17548e725c019f737497b5704a7609ae34192c9413ce9efe22cbd0cb7cd22bca",
+  "size_bytes": 286220,
+  "retrieved_at": "2026-10-08T11:30:45.510526+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Jawaharlal Nehru Stadium DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

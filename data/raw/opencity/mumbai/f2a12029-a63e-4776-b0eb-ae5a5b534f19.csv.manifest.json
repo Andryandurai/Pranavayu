@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/f2a12029-a63e-4776-b0eb-ae5a5b534f19/download/e694b4a1-3112-489a-8280-e12508ad1744.csv",
+  "request_sha256": "7e2d6226c88fed4ae0d286e18f6ca6b6dfba92280f3ba98453d240edd0907b7f",
+  "path": "opencity/mumbai/f2a12029-a63e-4776-b0eb-ae5a5b534f19.csv",
+  "sha256": "5b6e928848398036a46ecef2e4d72546454153c729577e0bcef3d5b58eb02998",
+  "size_bytes": 198371,
+  "retrieved_at": "2026-10-08T11:36:07.521844+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Worli MPCB AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

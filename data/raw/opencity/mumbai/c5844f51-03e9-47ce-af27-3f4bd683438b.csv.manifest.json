@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/c5844f51-03e9-47ce-af27-3f4bd683438b/download/b059b226-984e-489f-9803-d2b3c97e1614.csv",
+  "request_sha256": "911b0c0c909ecd9441a6c414188b50191476076ba9c18021110c67cfcef9dd8c",
+  "path": "opencity/mumbai/c5844f51-03e9-47ce-af27-3f4bd683438b.csv",
+  "sha256": "43192ef898a6c97652109ff22e85dfd66d2170ebcf1e3b73a6808316e575ce67",
+  "size_bytes": 8247,
+  "retrieved_at": "2026-10-08T11:35:36.036246+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Ghatkopar BMC AQI Data 2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

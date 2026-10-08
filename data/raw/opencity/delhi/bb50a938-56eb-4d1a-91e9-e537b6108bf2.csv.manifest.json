@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/bb50a938-56eb-4d1a-91e9-e537b6108bf2/download/581aad29-9709-42d5-ade0-4dd1384fc384.csv",
+  "request_sha256": "cff44205a418d7d4b41f11d383abb7549dcc61952ded2dd4296a4921e9d48341",
+  "path": "opencity/delhi/bb50a938-56eb-4d1a-91e9-e537b6108bf2.csv",
+  "sha256": "0a17c06ed71667fe59c4274edac20c44f2bbd1fc93584ddf4d19c4b2370fa562",
+  "size_bytes": 270088,
+  "retrieved_at": "2026-10-08T11:30:19.109875+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Bawana DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

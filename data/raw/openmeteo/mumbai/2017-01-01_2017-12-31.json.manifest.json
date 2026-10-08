@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=19.076&longitude=72.8777&start_date=2017-01-01&end_date=2017-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "2aeb5ec7a1b5a263fe21c5cafef59e120568a4aec58c31e95d64f28f2848b769",
+  "path": "openmeteo/mumbai/2017-01-01_2017-12-31.json",
+  "sha256": "ad395d7d48fc0700afa74046e61e63216eeae87fa86e45de43adc8d8564382f0",
+  "size_bytes": 589921,
+  "retrieved_at": "2026-10-08T11:40:13.904901+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "mumbai",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=26.4499&longitude=80.3319&start_date=2026-01-01&end_date=2026-10-03&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "40d22a4a026bd32d826345e76dad4a4508ba9bd0080f4dbca4c55cb43e12d52a",
+  "path": "openmeteo/kanpur/2026-01-01_2026-10-03.json",
+  "sha256": "f8a0652c58e4d28c31628ec0d21a3c2a19bf9d5c20e79d5419f504ce556b6f66",
+  "size_bytes": 440082,
+  "retrieved_at": "2026-10-08T07:59:42.997884+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "kanpur",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

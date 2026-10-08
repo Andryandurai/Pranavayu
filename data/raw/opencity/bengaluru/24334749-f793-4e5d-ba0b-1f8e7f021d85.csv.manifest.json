@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/24334749-f793-4e5d-ba0b-1f8e7f021d85/download/7aa93d04-0cf6-4ce7-b90b-e4f4c7284ea0.csv",
+    "request_sha256":  "a06b99d4516fa87d5458e7697e83c792a6836e787351795db3c01ba074111a2a",
+    "path":  "opencity/bengaluru/24334749-f793-4e5d-ba0b-1f8e7f021d85.csv",
+    "sha256":  "70fa0c3034dc298fc79b1e168f058a1a5d7a5fbb2fb32280f95a559d67c094d6",
+    "size_bytes":  269849,
+    "retrieved_at":  "2026-10-08T11:24:42.364465+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Peenya CPCB Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

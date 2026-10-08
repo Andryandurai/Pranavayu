@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/aaac1a26-f1bc-4229-a16d-5d8e7a8d1545/download/chn-kodungaiyur-tnpcb-2024-25.csv",
+    "request_sha256":  "5a9cb647ff090cabec9d021ba378eb6ceb3611de1d446d714352c0f88525ea25",
+    "path":  "opencity/chennai/aaac1a26-f1bc-4229-a16d-5d8e7a8d1545.csv",
+    "sha256":  "93ca7042c4bff99d702474ae7f367d1f864e2e8d20194aa48b54e2caba5f787c",
+    "size_bytes":  12368293,
+    "retrieved_at":  "2026-10-08T11:25:35.918307+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Kodungaiyur TNPCB 15 minute AQI Data for 2024-25",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

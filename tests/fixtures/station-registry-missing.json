@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "station_id": "site_293",
+      "station_name": "Alandur Bus Depot Chennai",
+      "state_name": null,
+      "city_name": null,
+      "source": "cpcb_caaqm",
+      "latitude": null,
+      "longitude": null,
+      "first_seen": "2009-03-01T00:00:00",
+      "last_seen": "2025-08-19T16:00:00",
+      "n_rows": 996461,
+      "parameters": [
+        "Benzene",
+        "CO",
+        "Eth-Benzene",
+        "MP-Xylene",
+        "NH3",
+        "NO",
+        "NO2",
+        "NOx",
+        "O_Xylene",
+        "Ozone",
+        "PM10",
+        "PM2.5",
+        "SO2",
+        "Toluene"
+      ]
+    },
+    {
+      "station_id": "site_5618",
+      "station_name": "Gandhi Nagar Ennore Chennai",
+      "state_name": null,
+      "city_name": null,
+      "source": "cpcb_caaqm",
+      "latitude": null,
+      "longitude": null,
+      "first_seen": "2022-08-08T16:00:00",
+      "last_seen": "2024-03-06T22:00:00",
+      "n_rows": 78064,
+      "parameters": [
+        "Benzene",
+        "CO",
+        "Eth-Benzene",
+        "MP-Xylene",
+        "NH3",
+        "NO",
+        "NO2",
+        "NOx",
+        "Ozone",
+        "PM10",
+        "PM2.5",
+        "SO2"
+      ]
+    }
+  ]
+}

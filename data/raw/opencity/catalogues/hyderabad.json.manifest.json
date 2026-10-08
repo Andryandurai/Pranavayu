@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Hyderabad+air+quality&rows=100",
+  "request_sha256": "7d9fb1a78204e3a0d808a6bbe657fcd7925b4f0c82b015b4580552a87c3e1256",
+  "path": "opencity/catalogues/hyderabad.json",
+  "sha256": "c40a8e9ce07eaacbc69960abcb4a39458181b6c492b9ccb7edba7c3f8f61007c",
+  "size_bytes": 452645,
+  "retrieved_at": "2026-10-08T11:34:50.365616+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

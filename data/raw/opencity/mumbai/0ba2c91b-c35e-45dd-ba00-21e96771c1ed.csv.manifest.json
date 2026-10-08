@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/0ba2c91b-c35e-45dd-ba00-21e96771c1ed/download/06e49de9-cbf3-41f6-bd3b-8f6b1eb6cdd4.csv",
+  "request_sha256": "104e83db7d8fe87c69f12cbe0b9f7f252bd4721599f535a35cf57c31520d780f",
+  "path": "opencity/mumbai/0ba2c91b-c35e-45dd-ba00-21e96771c1ed.csv",
+  "sha256": "e87bbf93d1ae071e78486f6ad4a68cfa55be840ae20d04f847f6c9eaca0b803a",
+  "size_bytes": 207459,
+  "retrieved_at": "2026-10-08T11:35:59.435652+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Sion MPCB AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

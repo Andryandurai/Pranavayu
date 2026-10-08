@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/141e4cba-7c35-4017-ab56-85c738f7324b/download/e6e36ebe-f548-4055-929f-0df8d7918de0.csv",
+    "request_sha256":  "e16a71ee309c5057b496b1f563dfe243e30050d57b2d24da5ced8aea410b82f9",
+    "path":  "opencity/chennai/141e4cba-7c35-4017-ab56-85c738f7324b.csv",
+    "sha256":  "aa5e862215827ec3171339cf406d9c5eb9e7e0dc69324942c6797a86fb168f58",
+    "size_bytes":  141383,
+    "retrieved_at":  "2026-10-08T11:25:15.028996+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Royapuram Hourly AQI Data - 2020-2023",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

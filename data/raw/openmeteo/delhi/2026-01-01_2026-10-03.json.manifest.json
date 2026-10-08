@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=28.6139&longitude=77.209&start_date=2026-01-01&end_date=2026-10-03&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "7bc180864aca8dc5dcd5a49b17567eb09608f53e489d0b6f26ca96d61f67a989",
+  "path": "openmeteo/delhi/2026-01-01_2026-10-03.json",
+  "sha256": "353113dcdf3a737ce1b07c1df9faa077a56dd69b2a9225c41f4795a704887f76",
+  "size_bytes": 439311,
+  "retrieved_at": "2026-10-08T07:58:08.839718+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "delhi",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

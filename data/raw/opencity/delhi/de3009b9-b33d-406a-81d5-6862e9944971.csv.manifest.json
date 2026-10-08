@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/de3009b9-b33d-406a-81d5-6862e9944971/download/16848bfd-8c6b-49c7-b656-7582e775c1d5.csv",
+  "request_sha256": "c7df31e05e2be143e71d5bacac4a96242b66927f54a85122585c4a2cf35e0c3f",
+  "path": "opencity/delhi/de3009b9-b33d-406a-81d5-6862e9944971.csv",
+  "sha256": "73cc712ebd56b9bf8ad08d5be3b4f39a8bedd35bfcb56b630c58870eb76c9ffd",
+  "size_bytes": 277845,
+  "retrieved_at": "2026-10-08T11:30:57.882264+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Najafgarh DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

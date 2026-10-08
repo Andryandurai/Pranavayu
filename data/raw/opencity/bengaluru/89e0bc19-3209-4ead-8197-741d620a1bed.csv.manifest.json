@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/89e0bc19-3209-4ead-8197-741d620a1bed/download/caf6834f-ed33-45fb-b27c-3b538e7a7d42.csv",
+    "request_sha256":  "cd78862e721466ad5b617eb9e952f08a70b217feae0f157d5777571bb47e0f19",
+    "path":  "opencity/bengaluru/89e0bc19-3209-4ead-8197-741d620a1bed.csv",
+    "sha256":  "e9315123ab2fd657e8c6e00b638291041e1a629644359d8f3fb3a08c90b6d14b",
+    "size_bytes":  270960,
+    "retrieved_at":  "2026-10-08T11:24:31.597589+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "BTM Layout Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

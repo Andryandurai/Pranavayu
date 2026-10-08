@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/0dbb78ca-8aba-43f9-b328-2be021693aff/download/hyd-ecil-kapra-tspcb-2024-25.csv",
+    "request_sha256":  "5c84f484254f5568b6e288fc90901212c17a1b4fce471f0867ed344491fcbade",
+    "path":  "opencity/hyderabad/0dbb78ca-8aba-43f9-b328-2be021693aff.csv",
+    "sha256":  "01761012807253d62e515f3fad86c312142ffbcee20d723456df793b324da7fe",
+    "size_bytes":  13583666,
+    "retrieved_at":  "2026-10-08T11:27:19.434544+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "ECIL Kapra TSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

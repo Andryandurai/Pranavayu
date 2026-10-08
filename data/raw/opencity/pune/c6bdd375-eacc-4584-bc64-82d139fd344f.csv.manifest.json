@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/c6bdd375-eacc-4584-bc64-82d139fd344f/download/pune-bhosari-iitm-2024-25.csv",
+    "request_sha256":  "76a106c121c2d4a466768683fef267c189c492300d069c0d8bd18fd0ca60e2e9",
+    "path":  "opencity/pune/c6bdd375-eacc-4584-bc64-82d139fd344f.csv",
+    "sha256":  "520e5fc73db3f06a9daf894a0be78aa95a0dbc1b9c3005f3fcbfa9ed78ba9570",
+    "size_bytes":  5533047,
+    "retrieved_at":  "2026-10-08T11:26:05.283346+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Bhosari IITM 15 minute AQI Data for 2024-25",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

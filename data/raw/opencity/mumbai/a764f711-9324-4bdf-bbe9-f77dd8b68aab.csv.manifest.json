@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/a764f711-9324-4bdf-bbe9-f77dd8b68aab/download/76010362-b7b7-4907-a382-22ea185eb5b8.csv",
+  "request_sha256": "9dd3e3746d4747f116af93e335d7532319043ead78ff77a40514d22ad9e4722b",
+  "path": "opencity/mumbai/a764f711-9324-4bdf-bbe9-f77dd8b68aab.csv",
+  "sha256": "be5aa533160eb436469f73093d3693688301c2bb42d2d50cbf511725799076da",
+  "size_bytes": 197006,
+  "retrieved_at": "2026-10-08T11:36:01.834059+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Vasai West MPCB AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

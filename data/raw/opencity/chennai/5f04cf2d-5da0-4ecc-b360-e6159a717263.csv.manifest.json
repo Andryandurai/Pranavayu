@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/5f04cf2d-5da0-4ecc-b360-e6159a717263/download/chn-arumbakkam-tnpcb-2024-25.csv",
+    "request_sha256":  "929cd9b19e7b45705f55f8fe1fc7c7e470e66cdd002976b62d9d7bdb8a3afb64",
+    "path":  "opencity/chennai/5f04cf2d-5da0-4ecc-b360-e6159a717263.csv",
+    "sha256":  "37ab0fcde06ae3fb4ef93a14fc43aabbc0cc1ea86dc7aa5bb89659bd95114501",
+    "size_bytes":  10899490,
+    "retrieved_at":  "2026-10-08T11:25:31.712583+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Arumbakkam TNPCB 15 minute AQI Data for 2024-25",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

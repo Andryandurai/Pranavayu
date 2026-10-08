@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/786ce63d-8046-419a-a1a6-69b8fae0e5d1/download/547bd8c3-8022-4c35-8d5c-ed19d80712d0.csv",
+    "request_sha256":  "3ab0d7dc0067f4c02c2817f411f4ffd0e58356ee1b2b34042c1e69b30c29471a",
+    "path":  "opencity/hyderabad/786ce63d-8046-419a-a1a6-69b8fae0e5d1.csv",
+    "sha256":  "c34c9c748d1aff53ceb87b3d2e21dc00c0a5a237997fa24613d3461a4fda1b02",
+    "size_bytes":  277944,
+    "retrieved_at":  "2026-10-08T11:26:56.123466+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "IDA Pashamylaram TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

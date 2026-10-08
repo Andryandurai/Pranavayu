@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Delhi+air+quality&rows=100",
+  "request_sha256": "72f5521a6f3a16cb43ba49ef16cbf2e6007c84b6256f581ef4219f9f1c1b3a7a",
+  "path": "opencity/catalogues/delhi.json",
+  "sha256": "f39bdb08134e31dcf67e1067cb65fb7be5a74a0fde17a17e8df322c62f54490d",
+  "size_bytes": 510734,
+  "retrieved_at": "2026-10-08T11:30:11.043428+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=18.5204&longitude=73.8567&start_date=2018-01-01&end_date=2018-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "0032a2d0d7352f4ee14b99d8bf6a651a90c0ac05c070e0726f0ba1165e180047",
+  "path": "openmeteo/pune/2018-01-01_2018-12-31.json",
+  "sha256": "1018b515ad34c0a16a1201041c62fb96ac260bca81436a731e3f6c96a0a0db19",
+  "size_bytes": 582230,
+  "retrieved_at": "2026-10-08T11:41:21.722721+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "pune",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

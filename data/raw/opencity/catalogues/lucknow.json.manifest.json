@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Lucknow+air+quality&rows=100",
+  "request_sha256": "3375d3077e3bd0ed983884c4c0d22ef1b61d60f14b0604428871e39fc18e87a1",
+  "path": "opencity/catalogues/lucknow.json",
+  "sha256": "679dd61c172de4fa58c19240cff8deb56369199e3f6f069024f5e5c8ada79725",
+  "size_bytes": 452645,
+  "retrieved_at": "2026-10-08T11:35:20.296118+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/58879be9-cce1-432d-afce-6ad08a669c40/download/55fc20b4-8717-4bd3-a833-829df2fc612d.csv",
+  "request_sha256": "ca7384cb482336b2aa301d4faa6243cffd6eeb97e14a8062dfef9548b460ce66",
+  "path": "opencity/delhi/58879be9-cce1-432d-afce-6ad08a669c40.csv",
+  "sha256": "d0e431bc7f915084d44ee82cc13684da8e36165c5d45fcb5063559f8bceaedde",
+  "size_bytes": 328820,
+  "retrieved_at": "2026-10-08T11:30:54.112764+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Mandir Marg DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Ahmedabad+air+quality&rows=100",
+  "request_sha256": "6d0301ea171bcbe738a5f0224a9e8c53b277ee9abdce0dba2c24134a28714f99",
+  "path": "opencity/catalogues/ahmedabad.json",
+  "sha256": "679dd61c172de4fa58c19240cff8deb56369199e3f6f069024f5e5c8ada79725",
+  "size_bytes": 452645,
+  "retrieved_at": "2026-10-08T11:23:57.154526+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

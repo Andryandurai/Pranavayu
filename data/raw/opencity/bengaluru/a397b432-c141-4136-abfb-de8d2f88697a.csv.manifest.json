@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/a397b432-c141-4136-abfb-de8d2f88697a/download/6f0dc88b-83bd-49c0-ae12-f6f951960fe8.csv",
+    "request_sha256":  "e14c0b88ee6cb06af15fe2ffb11a44666ecfbf8bee11f42c3b01de688975173e",
+    "path":  "opencity/bengaluru/a397b432-c141-4136-abfb-de8d2f88697a.csv",
+    "sha256":  "13c5e75b5e7af4fbbce7c746bc662cc2ff72ab6d9eda66530a42423315206e53",
+    "size_bytes":  45316,
+    "retrieved_at":  "2026-10-08T11:24:43.564296+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "RVCE Mailasandra Hourly AQI Data 2022-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,93 @@
+name: enviroinsights-india
+
+x-app: &app
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+    args:
+      INSTALL_DEV: "true"
+  image: enviroinsights-india:dev
+  env_file: .env
+  environment:
+    DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
+    RUFF_CACHE_DIR: /tmp/ruff-cache
+    PYTEST_ADDOPTS: "-o cache_dir=/tmp/pytest-cache"
+  volumes:
+    - .:/app
+    - media:/app/media
+  depends_on:
+    db:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+  restart: unless-stopped
+
+services:
+  db:
+    image: timescale/timescaledb-ha:pg16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-enviroinsights}
+      POSTGRES_USER: ${POSTGRES_USER:-enviroinsights}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      TIMESCALEDB_TELEMETRY: "off"
+    command: ["postgres", "-c", "shared_preload_libraries=timescaledb", "-c", "timescaledb.telemetry_level=off"]
+    volumes:
+      - postgres:/home/postgres/pgdata/data
+      - ./docker/init/020_extensions.sql:/docker-entrypoint-initdb.d/020_extensions.sql:ro
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4.2-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis:/data
+    ports:
+      - "127.0.0.1:${REDIS_PORT:-6380}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  web:
+    <<: *app
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8000}:8000"
+
+  worker:
+    <<: *app
+    environment:
+      DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
+      WAIT_FOR_MIGRATIONS: "1"
+    command: ["celery", "-A", "enviroinsights", "worker", "--loglevel=INFO", "--concurrency=2", "--events"]
+
+  beat:
+    <<: *app
+    environment:
+      DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
+      WAIT_FOR_MIGRATIONS: "1"
+    command: ["celery", "-A", "enviroinsights", "beat", "--loglevel=INFO", "--scheduler=django_celery_beat.schedulers:DatabaseScheduler", "--pidfile=/tmp/celerybeat.pid"]
+
+  flower:
+    <<: *app
+    environment:
+      DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
+      WAIT_FOR_MIGRATIONS: "1"
+      FLOWER_BASIC_AUTH: ${FLOWER_BASIC_AUTH:?Set FLOWER_BASIC_AUTH in .env}
+    command: ["celery", "-A", "enviroinsights", "flower", "--port=5555"]
+    ports:
+      - "127.0.0.1:${FLOWER_PORT:-5555}:5555"
+
+volumes:
+  postgres:
+  redis:
+  media:

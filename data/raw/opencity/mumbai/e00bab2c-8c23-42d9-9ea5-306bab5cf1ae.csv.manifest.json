@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/e00bab2c-8c23-42d9-9ea5-306bab5cf1ae/download/mum-malad-west-iitm-2024-25.csv",
+  "request_sha256": "3828b352d072beb347f444076650e1c19b7e53a46ef17abf3f2c30773859a3e2",
+  "path": "opencity/mumbai/e00bab2c-8c23-42d9-9ea5-306bab5cf1ae.csv",
+  "sha256": "1c18ba8c92852ca98b2c5f2ae76f5451ab7413c8dcc93e79a7438990d1372dc0",
+  "size_bytes": 10755280,
+  "retrieved_at": "2026-10-08T11:37:46.488275+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Malad West IITM 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

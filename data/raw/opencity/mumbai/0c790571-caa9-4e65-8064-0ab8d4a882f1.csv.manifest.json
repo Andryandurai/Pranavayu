@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/0c790571-caa9-4e65-8064-0ab8d4a882f1/download/489677b3-d948-4604-a3ac-a66ca4f21c06.csv",
+  "request_sha256": "36e998830b0adbeea2230e2a88c2adccfd38a0f69655f323cdd5ccdfd633500c",
+  "path": "opencity/mumbai/0c790571-caa9-4e65-8064-0ab8d4a882f1.csv",
+  "sha256": "6ada6be14dd3e8488a3772cce22daed4547fb166cec92c9775b5f38ef6906df0",
+  "size_bytes": 209868,
+  "retrieved_at": "2026-10-08T11:35:42.587644+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Kurla MPCB AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

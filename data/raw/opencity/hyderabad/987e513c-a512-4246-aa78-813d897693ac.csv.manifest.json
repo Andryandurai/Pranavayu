@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/987e513c-a512-4246-aa78-813d897693ac/download/3ada2319-b74c-423d-b9d5-47c1639d7988.csv",
+    "request_sha256":  "2055c9807ff0d12a3da0e821d8bc19c36b1e13cb50c01eaa16a8f2ccd6343c26",
+    "path":  "opencity/hyderabad/987e513c-a512-4246-aa78-813d897693ac.csv",
+    "sha256":  "2722a03c8ee2d6080aa19b2f22393fd956bdb04438ae95bcd5fd9dc3c6dc1278",
+    "size_bytes":  294864,
+    "retrieved_at":  "2026-10-08T11:26:38.591215+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Bollaram Industrial Area TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/e7b5d2c1-07df-4b1a-bef2-78d365f97040/download/chn-gandhi-nagar_ennore-tnpcb-2024-25.csv",
+    "request_sha256":  "bc5c5dfbcf3bd033db5c2b12b46dc82e3245c602f16c62a941c53e5715b4915d",
+    "path":  "opencity/chennai/e7b5d2c1-07df-4b1a-bef2-78d365f97040.csv",
+    "sha256":  "0ca531b3e66bbcd7adbc71891be5daf2efe0da695adb2af5f9ff815c122797ab",
+    "size_bytes":  9421248,
+    "retrieved_at":  "2026-10-08T11:25:33.851343+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Gandhi Nagar_Ennore TNPCB 15 minute AQI Data for 2024-25",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

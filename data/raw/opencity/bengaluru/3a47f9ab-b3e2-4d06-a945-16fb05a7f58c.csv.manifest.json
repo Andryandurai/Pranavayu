@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/3a47f9ab-b3e2-4d06-a945-16fb05a7f58c/download/blr-bapuji-nagar-kspcb-2024-25.csv",
+    "request_sha256":  "dfa1bd4614e3cb3e95a2e3c1cb248b1251f2a27aa2cd56054d93d3b6371e7ac4",
+    "path":  "opencity/bengaluru/3a47f9ab-b3e2-4d06-a945-16fb05a7f58c.csv",
+    "sha256":  "e699d5a4432a2402594578fb23a7887d0b446b227677d1f8d0fe7448b5724467",
+    "size_bytes":  10808871,
+    "retrieved_at":  "2026-10-08T11:24:49.079544+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Bapuji Nagar KSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

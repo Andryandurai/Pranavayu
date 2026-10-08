@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/9f35f458-a9e8-45ae-92dc-95b8b304998d/download/24edbfb9-877a-4ceb-b2a7-a3925891fa6f.csv",
+    "request_sha256":  "248b32c34162678f508e73f1f5cd5001ef43030580391d6c40705a21490c829c",
+    "path":  "opencity/bengaluru/9f35f458-a9e8-45ae-92dc-95b8b304998d.csv",
+    "sha256":  "d375e3cdf59440385f1e686c20f23a4b78b9386e6365f533edc7e854175244a8",
+    "size_bytes":  282035,
+    "retrieved_at":  "2026-10-08T11:24:34.000965+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "City Railway Station Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

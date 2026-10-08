@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/e09b7f47-29dc-4646-b76a-e13efac90f78/download/4f962463-514a-4257-a4e7-e69c7dfed0a8.csv",
+  "request_sha256": "9f4be40086ddac489bf4cbf7c502291f732209503cb5c2bc7c4bc093843122fc",
+  "path": "opencity/mumbai/e09b7f47-29dc-4646-b76a-e13efac90f78.csv",
+  "sha256": "8322767aba0de50a0ff7361296c355259e7daf8b24db8856eb61ea49c3795928",
+  "size_bytes": 9448,
+  "retrieved_at": "2026-10-08T11:35:54.190027+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Shivaji Nagar BMC AQI Data 2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

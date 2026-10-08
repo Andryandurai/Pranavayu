@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/a0418277-c1ea-4991-afe7-e65fea173fd2/download/mum-colaba-mpcb-2024-25.csv",
+  "request_sha256": "662ef52b6d0e80d24cec62ce9e0c39eef7e092dda8e4540ceb43bf7a24be4746",
+  "path": "opencity/mumbai/a0418277-c1ea-4991-afe7-e65fea173fd2.csv",
+  "sha256": "fcae17cff5b78966fc2685369a3b8cce5ba43f667355d3964cf73c7bf8c8210d",
+  "size_bytes": 10628334,
+  "retrieved_at": "2026-10-08T11:37:11.892572+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Colaba MPCB 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

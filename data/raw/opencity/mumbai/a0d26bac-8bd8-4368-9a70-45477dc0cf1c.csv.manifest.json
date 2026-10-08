@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/a0d26bac-8bd8-4368-9a70-45477dc0cf1c/download/mum-kandivali-west-bmc-2024-25.csv",
+  "request_sha256": "b0e5e3c770f8ff0dcf55774506e34828ab3ab06759d017d3fe92f922d22003bd",
+  "path": "opencity/mumbai/a0d26bac-8bd8-4368-9a70-45477dc0cf1c.csv",
+  "sha256": "a5a9e7e4cf3dac024ef05feb1b403f4c7479c2c21b4652908ea5d162024c93e0",
+  "size_bytes": 13498801,
+  "retrieved_at": "2026-10-08T11:37:35.962762+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Kandivali West BMC 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

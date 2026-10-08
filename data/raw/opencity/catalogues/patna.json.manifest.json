@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Patna+air+quality&rows=100",
+  "request_sha256": "dfdd3540a0221bcaea9869ede033c9809a842ecd0077341387eeadf60f0b7237",
+  "path": "opencity/catalogues/patna.json",
+  "sha256": "679dd61c172de4fa58c19240cff8deb56369199e3f6f069024f5e5c8ada79725",
+  "size_bytes": 452645,
+  "retrieved_at": "2026-10-08T11:38:55.018169+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/425eb3a5-c030-414f-b003-e58719f73425/download/10f87d38-a3a3-4883-af10-35c05dce8292.csv",
+  "request_sha256": "f1c08db3a32f7f87dedd1fa5245b5f975842066a2e2505f1972cb3440bc2bb3d",
+  "path": "opencity/delhi/425eb3a5-c030-414f-b003-e58719f73425.csv",
+  "sha256": "3e8d6ed96386b65533e6c6da3fbef070489ee1150b422e000b439dc602930132",
+  "size_bytes": 286990,
+  "retrieved_at": "2026-10-08T11:31:13.984390+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Rohini DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

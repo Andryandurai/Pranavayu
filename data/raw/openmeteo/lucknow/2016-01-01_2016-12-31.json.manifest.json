@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=26.8467&longitude=80.9462&start_date=2016-01-01&end_date=2016-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "ef982d5f4cdf2f29965455133d60268a9692964aefd18aadfebd2e149d240d31",
+  "path": "openmeteo/lucknow/2016-01-01_2016-12-31.json",
+  "sha256": "8b88f2ed29b8286a188a141ce84b5bcc175b4462d3cf184f55a7a0bdf2963ea1",
+  "size_bytes": 582547,
+  "retrieved_at": "2026-10-08T08:00:18.646014+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "lucknow",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

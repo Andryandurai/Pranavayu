@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/c6b4282e-43c8-4f14-a855-83e4b52a80d7/download/blr-peenya-cpcb-2024-25.csv",
+    "request_sha256":  "9f044c243a6e92ee681b012dbd174cf4a139c9c29fe9bc6f1260738dba27722b",
+    "path":  "opencity/bengaluru/c6b4282e-43c8-4f14-a855-83e4b52a80d7.csv",
+    "sha256":  "1f35a49c0ffe813f4b403c9daa51cc6686d883bbc3cc244c4daa97431b9c329d",
+    "size_bytes":  11641908,
+    "retrieved_at":  "2026-10-08T11:25:05.817961+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Peenya CPCB 15 minute AQI Data for 2024-25",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

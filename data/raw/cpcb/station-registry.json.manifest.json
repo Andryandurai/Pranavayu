@@ -1,0 +1,13 @@
+{
+  "url": "https://airquality.xkdr.org/v1/stations",
+  "request_sha256": "e45e7e46477979dc6b099c95245f976e85a3541d199a056e6af36f6f577da53f",
+  "path": "cpcb/station-registry.json",
+  "sha256": "523a1f6779f599399f41695611daf31d95fa1304ba0cc7fe878539836ae45043",
+  "size_bytes": 210164,
+  "retrieved_at": "2026-10-08T07:35:33.039604+00:00",
+  "content_type": "application/json",
+  "metadata": {
+    "publisher": "XKDR Forum",
+    "licence": "CC BY 4.0"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "station_id": "site_107",
+      "station_name": "Pusa, Delhi - DPCC",
+      "state_name": "Delhi",
+      "city_name": "Delhi",
+      "source": "cpcb_caaqm",
+      "latitude": 28.639652,
+      "longitude": 77.146275,
+      "first_seen": "2017-09-06T13:00:00",
+      "last_seen": "2025-09-01T23:00:00",
+      "n_rows": 523396,
+      "parameters": [
+        "Benzene",
+        "CO",
+        "Eth-Benzene",
+        "NO",
+        "NO2",
+        "NOx",
+        "Ozone",
+        "PM10",
+        "PM2.5",
+        "Toluene",
+        "Xylene"
+      ]
+    },
+    {
+      "station_id": "site_1563",
+      "station_name": "Pusa, Delhi - DPCC",
+      "state_name": "Delhi",
+      "city_name": "Delhi",
+      "source": "cpcb_caaqm",
+      "latitude": 28.639652,
+      "longitude": 77.146275,
+      "first_seen": "2018-07-03T18:00:00",
+      "last_seen": "2025-09-01T23:00:00",
+      "n_rows": 597188,
+      "parameters": [
+        "Benzene",
+        "CO",
+        "NH3",
+        "NO",
+        "NO2",
+        "NOx",
+        "Ozone",
+        "PM10",
+        "PM2.5",
+        "SO2",
+        "Toluene"
+      ]
+    }
+  ]
+}

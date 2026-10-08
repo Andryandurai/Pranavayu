@@ -1,0 +1,5 @@
+from ._source import SourceCommand
+
+
+class Command(SourceCommand):
+    source_name = "era5"

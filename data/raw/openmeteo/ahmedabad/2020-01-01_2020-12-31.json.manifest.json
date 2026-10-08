@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=23.0225&longitude=72.5714&start_date=2020-01-01&end_date=2020-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "8accce6f771b3968117e3ed8b66e84f848e5191a78431b8b744e2ece18b8b397",
+  "path": "openmeteo/ahmedabad/2020-01-01_2020-12-31.json",
+  "sha256": "a912c13ef39170fd1bbd9bab5957bd924e3c70c0b95651b5de3cb31c136856b4",
+  "size_bytes": 586649,
+  "retrieved_at": "2026-10-08T07:53:10.226167+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "ahmedabad",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

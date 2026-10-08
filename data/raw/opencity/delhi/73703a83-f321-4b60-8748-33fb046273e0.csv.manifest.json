@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/73703a83-f321-4b60-8748-33fb046273e0/download/del-ashok-vihar-dpcc-2024-25.csv",
+  "request_sha256": "4f33220cce9e2d1ffbe9468bd774ae681109dc2ebdb33cb5d4b95c1785c9c397",
+  "path": "opencity/delhi/73703a83-f321-4b60-8748-33fb046273e0.csv",
+  "sha256": "8e405c516a2edd8e93897a7717a588a48c40333d6c74af9e5731413b02eb7d92",
+  "size_bytes": 12425743,
+  "retrieved_at": "2026-10-08T11:31:37.024455+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Ashok Vihar DPCC 15 minute AQI Data for 2024-25",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

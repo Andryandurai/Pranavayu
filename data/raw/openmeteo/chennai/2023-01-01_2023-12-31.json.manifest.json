@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=13.0827&longitude=80.2707&start_date=2023-01-01&end_date=2023-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "e6092d975cb256be6a0b763dc3ac69313a65eb08d5ec7159254ecf4dcf3a4813",
+  "path": "openmeteo/chennai/2023-01-01_2023-12-31.json",
+  "sha256": "9537df4c260ecafb324a32ebd109e18b224515ef32dbf0348b9331b343348e9f",
+  "size_bytes": 594241,
+  "retrieved_at": "2026-10-08T07:55:21.952913+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "chennai",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

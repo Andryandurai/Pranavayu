@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/b0e7d53f-791b-487c-9f1f-d056fca1c086/download/mum-ghatkopar-bmc-2024-25.csv",
+  "request_sha256": "810c2272033e086d79c7a5925af4cfcab9303f628893014b08bd87ac374e84b6",
+  "path": "opencity/mumbai/b0e7d53f-791b-487c-9f1f-d056fca1c086.csv",
+  "sha256": "f74e3bfc3737cce717199e898707544b949cfa81ce838a01374551b09b8ace9d",
+  "size_bytes": 13116171,
+  "retrieved_at": "2026-10-08T11:37:25.329157+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Ghatkopar BMC 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

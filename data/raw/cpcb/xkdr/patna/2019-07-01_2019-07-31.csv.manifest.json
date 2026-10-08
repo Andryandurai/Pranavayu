@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Patna&source=cpcb_caaqm&parameter=PM2.5&start=2019-07-01&end=2019-07-31&format=csv",
+  "request_sha256": "1f7193f83cfa1e621265391397aa7fa0384c1b755a9e6b13932ddd7752c7a2bb",
+  "path": "cpcb/xkdr/patna/2019-07-01_2019-07-31.csv",
+  "sha256": "266c35e380eaed58ac424e34cbf19d91fc5bfab4e5a7b391730a499f0d0b15e4",
+  "size_bytes": 35857,
+  "retrieved_at": "2026-10-08T11:22:23.858843+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Patna",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

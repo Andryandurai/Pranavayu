@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/a4e68e58-785b-496a-b029-5f8fac21bfe2/download/mum-siddharth-nagar-worli-iitm-2024-25.csv",
+  "request_sha256": "fb5c624d50dec526bb179bebf6e4689c62bf9d3b88fcc284bd10ad7a6706df98",
+  "path": "opencity/mumbai/a4e68e58-785b-496a-b029-5f8fac21bfe2.csv",
+  "sha256": "84131dfdc95f8c172429212762fea7aed5ff31c061b0f7abfb8195addf5c586e",
+  "size_bytes": 11327629,
+  "retrieved_at": "2026-10-08T11:38:31.138730+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Siddharth Nagar Worli 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

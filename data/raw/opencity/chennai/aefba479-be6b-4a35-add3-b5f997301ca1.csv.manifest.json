@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/aefba479-be6b-4a35-add3-b5f997301ca1/download/1a42d80f-0cfd-4374-8173-2f0883ff3133.csv",
+    "request_sha256":  "0f55a8fd6edf955a7d448149d677a0171356723a296392d20db3e0e4fa427cda",
+    "path":  "opencity/chennai/aefba479-be6b-4a35-add3-b5f997301ca1.csv",
+    "sha256":  "8653d07be2aab7232a772a7ea08ee15d9f9116d8923c47d9379b87f9cf131b6d",
+    "size_bytes":  143800,
+    "retrieved_at":  "2026-10-08T11:25:18.632982+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Kodungaiyur Hourly AQI Data 2020-2023",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/cbbff781-cff3-4e57-8957-676030834ec2/download/mum-kherwadi_bandra-east-mpcb-2024-25.csv",
+  "request_sha256": "841712e328236613614e6ea3a28d473caad9d61604fb702edaae73d43a106869",
+  "path": "opencity/mumbai/cbbff781-cff3-4e57-8957-676030834ec2.csv",
+  "sha256": "e2ec24a6ec83d1b56bc3092062291908523a2bdbeb354f77d03ecf03ea0ad4ef",
+  "size_bytes": 14488561,
+  "retrieved_at": "2026-10-08T11:37:38.454029+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Kherwadi_Bandra East MPCB 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

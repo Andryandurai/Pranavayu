@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/3d948e56-62b8-47c1-9e52-e6c74385995f/download/381e5357-0273-4929-844c-064299ff40da.csv",
+    "request_sha256":  "02ffc2159c5f3c4f79877a003a341772bac608f40a1c84e04831d6565880c74f",
+    "path":  "opencity/chennai/3d948e56-62b8-47c1-9e52-e6c74385995f.csv",
+    "sha256":  "25d16eeb5d9dbb0d15eb68c1247d2a70a9711aa879845254c0b54f91ad8aeb83",
+    "size_bytes":  166996,
+    "retrieved_at":  "2026-10-08T11:25:20.998699+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Manali Village Hourly AQI Data 2019-2023",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

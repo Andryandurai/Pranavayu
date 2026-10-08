@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/8e319d28-e9e0-49d7-b735-7f6829b1baf3/download/f2ea6fc8-ee3e-44ff-988c-0695b73e5639.csv",
+  "request_sha256": "676b8ed87281a6028bf0bd5f45ef2ef445fd4dea932dacb407863c811a195a8b",
+  "path": "opencity/delhi/8e319d28-e9e0-49d7-b735-7f6829b1baf3.csv",
+  "sha256": "106521b96061d7f361ec0d3816cb041a4369836d3149162f2e29461e5ab451bc",
+  "size_bytes": 316230,
+  "retrieved_at": "2026-10-08T11:30:41.693396+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "ITO CPCB AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

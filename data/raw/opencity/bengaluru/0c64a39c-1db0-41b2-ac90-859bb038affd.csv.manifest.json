@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/0c64a39c-1db0-41b2-ac90-859bb038affd/download/80cf5630-453a-4fb2-ba1a-37710b9964a4.csv",
+    "request_sha256":  "5616b6ad2c4ce52bfc3645c6edf2d1496a7615abc434967436dbcd5e62da9a1f",
+    "path":  "opencity/bengaluru/0c64a39c-1db0-41b2-ac90-859bb038affd.csv",
+    "sha256":  "b3de09df6ec3dfd51fba5e7068c6c2e89d3a580e5885e294c30380e4123ad2e5",
+    "size_bytes":  244544,
+    "retrieved_at":  "2026-10-08T11:24:47.170488+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Central Silk Board Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

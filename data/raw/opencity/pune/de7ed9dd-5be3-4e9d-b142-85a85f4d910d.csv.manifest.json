@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/de7ed9dd-5be3-4e9d-b142-85a85f4d910d/download/pune-revenue-colony-shivajinagar-iitm-2024-25.csv",
+    "request_sha256":  "356f87e8592948ffdadf82399073bcbf912797e41402bd7691c422d138f026c4",
+    "path":  "opencity/pune/de7ed9dd-5be3-4e9d-b142-85a85f4d910d.csv",
+    "sha256":  "929460053765ce50118abc38eaa24b3104c60e987a3c178b3c78ae961b4d5ebe",
+    "size_bytes":  11224425,
+    "retrieved_at":  "2026-10-08T11:26:24.071258+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Revenue Colony Shivajinagar 15 minute AQI Data for 2024-25",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

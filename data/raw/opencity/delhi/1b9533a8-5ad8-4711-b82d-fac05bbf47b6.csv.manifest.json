@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/1b9533a8-5ad8-4711-b82d-fac05bbf47b6/download/bc69a00c-f8ff-49b3-9a5d-0aa7e35a3f3b.csv",
+  "request_sha256": "bd68b790ac023295b000556bf421d8f882b13186f3e9a56ddf35806052f23249",
+  "path": "opencity/delhi/1b9533a8-5ad8-4711-b82d-fac05bbf47b6.csv",
+  "sha256": "683ec5e76941ec34de5265f032f62f2de2528c757d83224bb011b396079f178c",
+  "size_bytes": 270353,
+  "retrieved_at": "2026-10-08T11:30:56.171147+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Mundka DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

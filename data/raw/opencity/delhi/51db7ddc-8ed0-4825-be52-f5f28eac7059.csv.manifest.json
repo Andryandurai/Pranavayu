@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/51db7ddc-8ed0-4825-be52-f5f28eac7059/download/5c7ee2ed-92d8-419c-982e-6f03127ad372.csv",
+  "request_sha256": "667f88ec9a0affd370c5023825d160f2437666212efe5704ccbdbb15905deac9",
+  "path": "opencity/delhi/51db7ddc-8ed0-4825-be52-f5f28eac7059.csv",
+  "sha256": "b324bc86bd008352a6a6fc8bd33cd1db618a5d0469d1d8eaa4f1affe680df093",
+  "size_bytes": 211545,
+  "retrieved_at": "2026-10-08T11:30:21.073421+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Burari Crossing IMD AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

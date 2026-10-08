@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/e2583c9b-b8c3-44f8-b4c3-6e3c96523a34/download/75558c18-1c67-4d34-aed4-d40635fb3091.csv",
+  "request_sha256": "c123e1f1d6e7da7498e2ebecef834854705ef30ed114b6e7648516b705479285",
+  "path": "opencity/mumbai/e2583c9b-b8c3-44f8-b4c3-6e3c96523a34.csv",
+  "sha256": "48cebf22b06bea8fcc149e7f548035ab79130fb6e4cfb5e850f2ede8d712ebf0",
+  "size_bytes": 23880,
+  "retrieved_at": "2026-10-08T11:35:39.827156+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Kherwadi Bandra East MPCB AQI Data 2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

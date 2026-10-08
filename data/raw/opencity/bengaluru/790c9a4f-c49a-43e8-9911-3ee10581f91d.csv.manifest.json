@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/790c9a4f-c49a-43e8-9911-3ee10581f91d/download/d1cb2da6-1dc9-4968-961a-5c313b5a50e5.csv",
+    "request_sha256":  "947cfa5b1d544afe73fff85a302b9a2469b1d8c61f5b50cb858369fee11cb1bd",
+    "path":  "opencity/bengaluru/790c9a4f-c49a-43e8-9911-3ee10581f91d.csv",
+    "sha256":  "8c59614f06b0ac94da66554ce44ae9dfeadef55140652a8998c929771bd8f6c4",
+    "size_bytes":  35424,
+    "retrieved_at":  "2026-10-08T11:24:41.137993+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Kasturi Nagar Hourly AQI Data 2022-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

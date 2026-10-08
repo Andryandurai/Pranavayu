@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/922c72d8-c66e-4336-8cd9-49898776ca69/download/del-mandir-marg-dpcc-2024-25.csv",
+  "request_sha256": "cfc985611cb2be0013b611fc740a235697968f4d36be01d53b795c94d5ebf5c4",
+  "path": "opencity/delhi/922c72d8-c66e-4336-8cd9-49898776ca69.csv",
+  "sha256": "502e52c6abdc66109b0aa1e9a74d5cd4ce39c7f351c0903927b5546bab1cf2ed",
+  "size_bytes": 11921398,
+  "retrieved_at": "2026-10-08T11:32:45.199467+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Mandir Marg DPCC 15 minute AQI Data for 2024-25",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

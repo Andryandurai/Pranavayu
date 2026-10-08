@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/cb68d44b-3f78-4976-a52f-e9e855e05521/download/09a20a32-80f6-452f-997b-183311173216.csv",
+    "request_sha256":  "b176089c13af831223db1a7ceef56b279e33a3dfe6a1864f743da206cdd841cc",
+    "path":  "opencity/chennai/cb68d44b-3f78-4976-a52f-e9e855e05521.csv",
+    "sha256":  "d1880b51440e68eae09608000b70ea371c7a577b9513e1735628756455526031",
+    "size_bytes":  138682,
+    "retrieved_at":  "2026-10-08T11:25:22.171718+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Perungudi Hourly AQI Data 2020-2023. ",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

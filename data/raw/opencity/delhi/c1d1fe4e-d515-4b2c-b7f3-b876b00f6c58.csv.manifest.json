@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/c1d1fe4e-d515-4b2c-b7f3-b876b00f6c58/download/6c3a6f63-8294-44c0-88dd-ad078ef4c91b.csv",
+  "request_sha256": "e717a920b1a6b63e65439452df288793316fb4074f0cdeff8a7796afc9670a83",
+  "path": "opencity/delhi/c1d1fe4e-d515-4b2c-b7f3-b876b00f6c58.csv",
+  "sha256": "a401a278e5d2e2ab06d5b006924240d6ee2dadca5ed1a56f3e1074473ffb3d65",
+  "size_bytes": 295151,
+  "retrieved_at": "2026-10-08T11:30:13.208330+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Anand Vihar DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

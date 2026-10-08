@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/a2a2b22f-d106-4923-9b4e-f164b2c5d0dc/download/09e5424c-f0b0-4a79-82b4-e2d91bc6ee0e.csv",
+  "request_sha256": "155a005eeb12061a5f1caafeae0d68e18d7b5b948917b02bb35f604b7b1a44ca",
+  "path": "opencity/mumbai/a2a2b22f-d106-4923-9b4e-f164b2c5d0dc.csv",
+  "sha256": "2436c5f7031dacc6c37c27e78461e55ee6156ff5041e59a1ec81f60e6c387744",
+  "size_bytes": 9226,
+  "retrieved_at": "2026-10-08T11:35:38.569568+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Kandivali West BMC AQI Data 2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

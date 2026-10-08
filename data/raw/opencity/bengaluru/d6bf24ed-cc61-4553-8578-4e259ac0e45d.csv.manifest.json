@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/d6bf24ed-cc61-4553-8578-4e259ac0e45d/download/3e154d19-cce0-4b3c-b38c-ce5eb0baf9da.csv",
+    "request_sha256":  "22f2e3542a4d322920ac163e91f0de8337d631d999e1071ab7a77e8a5fa7cb6f",
+    "path":  "opencity/bengaluru/d6bf24ed-cc61-4553-8578-4e259ac0e45d.csv",
+    "sha256":  "26cf2c5243d92471f58f494ea98bd0ddaa62f4fa7f36d42e50c7ef3abbd47b5c",
+    "size_bytes":  241419,
+    "retrieved_at":  "2026-10-08T11:24:32.805658+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "BWSSB Kadubeesanahalli CPCB Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Pune+air+quality&rows=100",
+  "request_sha256": "f0c6ab0c7395b473c32763917fe05ed138da20eb208dcea30ad25d7568f34f39",
+  "path": "opencity/catalogues/pune.json",
+  "sha256": "ed73f92a4976ad184bbcf6e13a207ac214566ec7890053af29ad1d7b172fb6fd",
+  "size_bytes": 455811,
+  "retrieved_at": "2026-10-08T11:38:55.548951+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

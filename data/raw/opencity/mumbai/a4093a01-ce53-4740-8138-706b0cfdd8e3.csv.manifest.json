@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/a4093a01-ce53-4740-8138-706b0cfdd8e3/download/mum-borivali-east-iitm-2024-25.csv",
+  "request_sha256": "340815afa08bfd6e63dd2b4930e21054512ea6acd8ddac9e8ec065c11b4c497f",
+  "path": "opencity/mumbai/a4093a01-ce53-4740-8138-706b0cfdd8e3.csv",
+  "sha256": "e95ab868f776f86d2e7bbc4a0a9b67ce55af8f4fcd22354d1c2f0167c1cbcdd0",
+  "size_bytes": 10666157,
+  "retrieved_at": "2026-10-08T11:36:38.026052+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Borivali East IITM 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/a264b477-8625-4dd1-8cdb-1d140b250cd0/download/blr-btm-layout-cpcb-2024-25.csv",
+    "request_sha256":  "213c4ddaeaa71cd9970bf7fd4af2d0c36068c14fd1ad1fb21c35f0721978aac8",
+    "path":  "opencity/bengaluru/a264b477-8625-4dd1-8cdb-1d140b250cd0.csv",
+    "sha256":  "32f0086acd31910bf6b090919b64bff69831d31e613112c56f3ebb9dfe05b159",
+    "size_bytes":  12688114,
+    "retrieved_at":  "2026-10-08T11:24:51.079904+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "BTM Layout CPCB 15 minute AQI Data for 2024-25",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

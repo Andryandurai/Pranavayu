@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/f7e21bb3-9ac3-4638-82d2-0a8bf905912e/download/445f878b-e3e1-4637-94e5-74e3667a5abd.csv",
+  "request_sha256": "38b90eb5d63e4c8e12703261df822bc656aa4afe6f0cf83aa89aced49d72debd",
+  "path": "opencity/delhi/f7e21bb3-9ac3-4638-82d2-0a8bf905912e.csv",
+  "sha256": "59d5640a91b9ead30be641fe5f0b8557282aceb49d639f446f7197babd603d88",
+  "size_bytes": 317649,
+  "retrieved_at": "2026-10-08T11:30:39.630900+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "IHBAS Dilshad Garden CPCB AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/6ec3e594-4c91-470a-b89d-5068bcc49706/download/2552d10e-d991-4337-867c-73903276b803.csv",
+  "request_sha256": "22a7b20e17182dd08859f5f9a2f67fc7c7b534e3f760b435f19fe31166ace1e2",
+  "path": "opencity/mumbai/6ec3e594-4c91-470a-b89d-5068bcc49706.csv",
+  "sha256": "b6d265842bf4a4bac179522fd91b73e682b37c65b6bf1b81d547bf202fdc93f7",
+  "size_bytes": 146602,
+  "retrieved_at": "2026-10-08T11:35:48.573160+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Mulund West MPCB AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

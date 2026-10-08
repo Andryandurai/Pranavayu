@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/80cd5068-abbd-44f6-9e5b-8019e9292899/download/hyd-bollaram-industrial-area-tspcb-2024-25.csv",
+    "request_sha256":  "3da35790b9dc85b8e5b8dc58c4aed685a79fdb7896a141afeb9889b6184d5afc",
+    "path":  "opencity/hyderabad/80cd5068-abbd-44f6-9e5b-8019e9292899.csv",
+    "sha256":  "335dfd5a8dfb38e08e2007ef3987bc2b68b572b04a06d71660d5bdc564569466",
+    "size_bytes":  13649116,
+    "retrieved_at":  "2026-10-08T11:27:13.291051+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Bollaram Industrial Area TSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

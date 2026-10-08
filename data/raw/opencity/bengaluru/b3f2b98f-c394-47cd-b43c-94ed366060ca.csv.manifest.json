@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/b3f2b98f-c394-47cd-b43c-94ed366060ca/download/blr-shivapura_peenya-kspcb-2024-25.csv",
+    "request_sha256":  "dd4a6c8ab4dd97af6785f1300e9d852e9ee328879e78b2d154a1701cc25b5fe4",
+    "path":  "opencity/bengaluru/b3f2b98f-c394-47cd-b43c-94ed366060ca.csv",
+    "sha256":  "d96babaf43c3d9fdb3000bc728eaaccc7ad029fd9f895c7bb0c6929548df2dff",
+    "size_bytes":  13227751,
+    "retrieved_at":  "2026-10-08T11:25:11.941247+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Shivapura_Peenya KSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

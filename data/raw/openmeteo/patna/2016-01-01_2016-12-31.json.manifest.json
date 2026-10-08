@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=25.5941&longitude=85.1376&start_date=2016-01-01&end_date=2016-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "522d44d242a500546133be46ddfdb97eeea1faa4a0766d21b48bf80fb91dc8d1",
+  "path": "openmeteo/patna/2016-01-01_2016-12-31.json",
+  "sha256": "b713be125cc6e3fa1301386f97582628e655e7488beebbcd0228ed4f784f9a5e",
+  "size_bytes": 586684,
+  "retrieved_at": "2026-10-08T11:40:50.826999+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "patna",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

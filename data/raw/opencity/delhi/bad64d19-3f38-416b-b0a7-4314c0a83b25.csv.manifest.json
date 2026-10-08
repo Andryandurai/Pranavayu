@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/bad64d19-3f38-416b-b0a7-4314c0a83b25/download/59aece12-ec31-49cb-958d-be2613abc8df.csv",
+  "request_sha256": "8306fc7da4cc9ab90a4eb2c84327ea83d466fc99a94cd403d16aac8b6b6a0f02",
+  "path": "opencity/delhi/bad64d19-3f38-416b-b0a7-4314c0a83b25.csv",
+  "sha256": "5a0c76fa787e60b033f71816eb5e892870ff4f20fa5aee9f2f8ec9a7a74d14d6",
+  "size_bytes": 280271,
+  "retrieved_at": "2026-10-08T11:31:08.411049+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Patparganj DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

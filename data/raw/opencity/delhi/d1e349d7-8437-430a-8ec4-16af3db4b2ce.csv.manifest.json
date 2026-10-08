@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/d1e349d7-8437-430a-8ec4-16af3db4b2ce/download/ec033486-29c7-40e2-98aa-f7e76ef4d6c1.csv",
+  "request_sha256": "9df86d3c4c87b444aebe66d656fbd4d5f70227f1314cfbafc426b77da362a6f5",
+  "path": "opencity/delhi/d1e349d7-8437-430a-8ec4-16af3db4b2ce.csv",
+  "sha256": "031e7f518439eef37072a2528207274e39f22d9fd554fe7c38b0a1f4c32d5345",
+  "size_bytes": 288607,
+  "retrieved_at": "2026-10-08T11:30:43.296489+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Jahangirpuri DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

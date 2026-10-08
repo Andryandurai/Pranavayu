@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=17.385&longitude=78.4867&start_date=2019-01-01&end_date=2019-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "6bcf7ce7285f2545a00724d15baf149cac99b539e30c3bdaa12da2883af17052",
+  "path": "openmeteo/hyderabad/2019-01-01_2019-12-31.json",
+  "sha256": "a32f5258e150972e9aa22f569862277d6cf92b02c62fdae8273703aff9fd7715",
+  "size_bytes": 585408,
+  "retrieved_at": "2026-10-08T07:58:21.201115+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "hyderabad",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

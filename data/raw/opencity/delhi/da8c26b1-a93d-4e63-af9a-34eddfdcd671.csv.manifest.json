@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/da8c26b1-a93d-4e63-af9a-34eddfdcd671/download/df00c3a4-1d16-44ff-a668-205585f155f2.csv",
+  "request_sha256": "347ec3907e4b0f936ee000863b07e222a922ac65e6b82b75ad3e7edb081e8536",
+  "path": "opencity/delhi/da8c26b1-a93d-4e63-af9a-34eddfdcd671.csv",
+  "sha256": "50d654f5980bbfcd33d11a3801aecd3b4013f5d029845685f5c26ad63b0f1ea6",
+  "size_bytes": 286105,
+  "retrieved_at": "2026-10-08T11:31:23.621070+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Vivek Vihar DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

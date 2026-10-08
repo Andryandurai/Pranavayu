@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/b57171f5-c7db-4f9f-b55c-97babe4798a3/download/3a5644f9-5393-4251-813b-bbe750f35e5e.csv",
+    "request_sha256":  "d86921f4fae0d83b3ff5ef372c9d56d176918c4d27b27c631593f902d0b84982",
+    "path":  "opencity/chennai/b57171f5-c7db-4f9f-b55c-97babe4798a3.csv",
+    "sha256":  "d32bc7ed0a6df3935a7565f48a3082cf30aa82a345a53f5e667db98daf13e975",
+    "size_bytes":  244524,
+    "retrieved_at":  "2026-10-08T11:25:24.567066+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Alandur Bus Depot AQI Data 2017-2023",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

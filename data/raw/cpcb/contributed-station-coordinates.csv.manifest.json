@@ -1,0 +1,15 @@
+{
+  "url": "https://huggingface.co/datasets/Zeel/C1/resolve/1fbf3fa5bebf5195ca095e43c4a9a27a666b944c/station_data.csv",
+  "request_sha256": "a1a997cb26cf25ddbaa682ee9516aeb7e8bf042de720815245d7ceb0ebf9a7d6",
+  "path": "cpcb/contributed-station-coordinates.csv",
+  "sha256": "a2f699c0ef71752fd36618bbd0055faeb8aef1dc0c2a987510ae1f6677f0845c",
+  "size_bytes": 67890,
+  "retrieved_at": "2026-10-08T12:26:25.619510+00:00",
+  "content_type": "text/plain; charset=utf-8",
+  "metadata": {
+    "publisher": "Zeel/C1 contributed station metadata",
+    "revision": "1fbf3fa5bebf5195ca095e43c4a9a27a666b944c",
+    "licence": "Not declared by this metadata compilation",
+    "coordinates_independently_surveyed": false
+  }
+}

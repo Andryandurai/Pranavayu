@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/87194cc0-fb6f-46f0-b62f-5e7ea2db3ba0/download/9dacc9aa-b08f-4306-ac0f-dfa67b2d7771.csv",
+  "request_sha256": "637cbc5e5092b7750f4406b8d77e13e33fb06dd49d7c91a605687dd064f81c88",
+  "path": "opencity/delhi/87194cc0-fb6f-46f0-b62f-5e7ea2db3ba0.csv",
+  "sha256": "94e43b6ca8c29537b7a20599df5a8734199da9bd3a413d2667dfba0255f9e71c",
+  "size_bytes": 314422,
+  "retrieved_at": "2026-10-08T11:31:05.067762+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "NSIT Dwarka CPCB AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

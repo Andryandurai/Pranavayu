@@ -1,0 +1,39 @@
+name: Phase 1 foundation
+on: [push, pull_request]
+
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create isolated CI environment
+        run: |
+          cp .env.example .env
+          python3 - <<'PY'
+          from pathlib import Path
+          import secrets
+          path = Path('.env')
+          password = secrets.token_hex(24)
+          text = path.read_text()
+          text = text.replace('replace-with-a-random-secret-of-at-least-50-characters', secrets.token_urlsafe(64))
+          text = text.replace('replace-with-a-random-password', password)
+          path.write_text(text)
+          PY
+      - run: make up
+      - run: make migrate seed
+      - run: make lint schema
+      - name: Wait for the real worker
+        run: |
+          for attempt in $(seq 1 30); do
+            if make health; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - run: make verify-worker test
+      - name: Show service logs
+        if: always()
+        run: docker compose logs --no-color --tail=150
+      - name: Stop services
+        if: always()
+        run: docker compose down

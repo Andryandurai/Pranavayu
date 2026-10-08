@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Ahmedabad&source=cpcb_caaqm&parameter=PM2.5&start=2018-05-01&end=2018-05-31&format=csv",
+  "request_sha256": "866975e9c5f608c8732119c2aa6baa474bd44f74f0deaabcc7a6c1ef6fa513ae",
+  "path": "cpcb/xkdr/ahmedabad/2018-05-01_2018-05-31.csv",
+  "sha256": "de74d73fb356646cb7c042d7bdb834df25d46b93cebdb1f1acaf710fac81cb5e",
+  "size_bytes": 34685,
+  "retrieved_at": "2026-10-08T07:37:30.120072+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Ahmedabad",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

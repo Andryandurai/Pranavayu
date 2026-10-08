@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/718b7dd5-3653-4032-bfb0-32a19dc87ef2/download/hyd-nacharam_tsiic-iala-tspcb-2024-25.csv",
+    "request_sha256":  "72f64b4eefe830eec14067ddc6a13623896273d79be9fec89ddc5dcfbbfef8dc",
+    "path":  "opencity/hyderabad/718b7dd5-3653-4032-bfb0-32a19dc87ef2.csv",
+    "sha256":  "bbef908896f50d82585fa0363d8fe9913817df3355a78cb5570bb85774cf70a7",
+    "size_bytes":  13474419,
+    "retrieved_at":  "2026-10-08T11:27:33.098293+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Nacharam_TSIIC IALA TSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

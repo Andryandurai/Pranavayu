@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Pune&source=cpcb_caaqm&parameter=PM2.5&start=2018-11-01&end=2018-11-30&format=csv",
+  "request_sha256": "16c41157579bc2b0b94121d5a7abdc7b5adf1b6e90c3c8ab3349b25cf5d0f8ee",
+  "path": "cpcb/xkdr/pune/2018-11-01_2018-11-30.csv",
+  "sha256": "8c2ab61b445036efe57b1309b782f21cae3b055637dd9c8cdc4704ed3caedfad",
+  "size_bytes": 50,
+  "retrieved_at": "2026-10-08T11:23:37.444251+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Pune",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

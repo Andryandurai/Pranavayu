@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Kanpur&source=cpcb_caaqm&parameter=PM2.5&start=2015-11-01&end=2015-11-30&format=csv",
+  "request_sha256": "6668f424927468cda1f5b9d7f875f821f1bff472c8d94b47ffa23bc601e55a72",
+  "path": "cpcb/xkdr/kanpur/2015-11-01_2015-11-30.csv",
+  "sha256": "21d50649c3bf954e8d7c4b8fba71db4f4e9eba4fcd4974f5b39f8c8b5ba36856",
+  "size_bytes": 34633,
+  "retrieved_at": "2026-10-08T11:15:09.547756+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Kanpur",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

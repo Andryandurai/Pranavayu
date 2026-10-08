@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/53f67994-b45a-42fd-b9c2-bdda7c32e073/download/17226f5a-ccd0-4439-8fff-abdb5e618a85.csv",
+    "request_sha256":  "8a6e6737decd3c3f0e0eed07c59a95db6ce77a18507a0e78b86c5bd9528ba2cc",
+    "path":  "opencity/hyderabad/53f67994-b45a-42fd-b9c2-bdda7c32e073.csv",
+    "sha256":  "2a72208670537a3cfe3514b91cbf872c5f4b6904bc61dab357a85f925fa9ece1",
+    "size_bytes":  80951,
+    "retrieved_at":  "2026-10-08T11:27:01.464524+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Kokapet TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

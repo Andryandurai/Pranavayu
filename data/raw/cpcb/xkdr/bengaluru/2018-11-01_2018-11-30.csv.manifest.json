@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Bengaluru&source=cpcb_caaqm&parameter=PM2.5&start=2018-11-01&end=2018-11-30&format=csv",
+  "request_sha256": "7641946a46582a50c77aefb7ea8f4d1ebaf733b3054872deeb12d14d9b4c305e",
+  "path": "cpcb/xkdr/bengaluru/2018-11-01_2018-11-30.csv",
+  "sha256": "1578f7bd9d920816762039d59cc83b6ba301aea7b8e97fd020b40c31b709c179",
+  "size_bytes": 252032,
+  "retrieved_at": "2026-10-08T07:40:08.314146+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Bengaluru",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

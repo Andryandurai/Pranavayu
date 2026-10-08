@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Mumbai&source=cpcb_caaqm&parameter=PM2.5&start=2016-11-01&end=2016-11-30&format=csv",
+  "request_sha256": "d773ef8d9b9a8664803c4c9886a7f4cf3b791a33408e36c4e6b2e56e01b6fef7",
+  "path": "cpcb/xkdr/mumbai/2016-11-01_2016-11-30.csv",
+  "sha256": "f392a083aa6f31d57f6d1bdf18037a6493487d40b42544a85ed06c34f072b7ac",
+  "size_bytes": 34800,
+  "retrieved_at": "2026-10-08T11:20:08.181661+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Mumbai",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

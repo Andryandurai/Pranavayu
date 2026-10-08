@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/710561f9-2d6d-48b8-bcc1-9b36a27b2891/download/cadb9791-498e-45c1-b896-67f5541158b1.csv",
+  "request_sha256": "a854b53aee1fc6307db0dfd07dbf1a71fed0ac9551c5e363f791b7faed31beab",
+  "path": "opencity/delhi/710561f9-2d6d-48b8-bcc1-9b36a27b2891.csv",
+  "sha256": "47348d64470e15f9b5232ccd72bf64a65f836ea0918c7f126558c52876f3630d",
+  "size_bytes": 291363,
+  "retrieved_at": "2026-10-08T11:31:06.863295+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Okhla Phase-2 DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

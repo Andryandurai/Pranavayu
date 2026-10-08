@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/ee687c2e-70a4-4ce1-bb39-8b9aae7f081e/download/hyd-kompally-municipal-office-tspcb-2024-25.csv",
+    "request_sha256":  "ab1495f99bd78be093d6eb7a5671c2f1b9ea7ec26257b863787f7cbf88c27a3d",
+    "path":  "opencity/hyderabad/ee687c2e-70a4-4ce1-bb39-8b9aae7f081e.csv",
+    "sha256":  "f558fa7c0369e31043db2cf1a9fc402d73a9e683b715e9bed8608738b74c0fa6",
+    "size_bytes":  14408476,
+    "retrieved_at":  "2026-10-08T11:27:29.877567+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Kompally Municipal Office TSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

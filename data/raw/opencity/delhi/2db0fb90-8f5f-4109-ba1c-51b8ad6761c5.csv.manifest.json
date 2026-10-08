@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/2db0fb90-8f5f-4109-ba1c-51b8ad6761c5/download/5a10cbc7-2e90-424a-b422-8b75608759b5.csv",
+  "request_sha256": "4263447758bc91116ee6037ee00858ee49d96ebc648a934d08ae74e832e5a5b0",
+  "path": "opencity/delhi/2db0fb90-8f5f-4109-ba1c-51b8ad6761c5.csv",
+  "sha256": "4771aefd29881dc3d54f8d53e8b485f24e160340f5247fef0c26498ec527a174",
+  "size_bytes": 210122,
+  "retrieved_at": "2026-10-08T11:31:20.162479+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Sonia Vihar DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

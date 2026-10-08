@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/a5bc6bfa-0800-4232-a68a-e3c5feb49cd8/download/fa5b276a-31f8-4632-9aa6-ce4cf0bff7b8.csv",
+  "request_sha256": "ca52acf6870430ac7d12a3cb0a4ce870e5724ddfacb0437ee80f9e8d1aafe857",
+  "path": "opencity/mumbai/a5bc6bfa-0800-4232-a68a-e3c5feb49cd8.csv",
+  "sha256": "02ff6ee45ea705ebec7d3c77cda5efbc45cdc11c827623b76e18e5d874928590",
+  "size_bytes": 7720,
+  "retrieved_at": "2026-10-08T11:35:52.966584+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Sewri BMC AQI Data 2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

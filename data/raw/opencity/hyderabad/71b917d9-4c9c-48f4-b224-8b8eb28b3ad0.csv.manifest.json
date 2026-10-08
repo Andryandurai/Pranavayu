@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/71b917d9-4c9c-48f4-b224-8b8eb28b3ad0/download/8ad84eca-f9e0-4359-88ad-8ca5ab60604b.csv",
+    "request_sha256":  "33efdd4bcebc8f55b3991d59f16e18a6cd67438e16a5134d7cbeb50e3bb50dbb",
+    "path":  "opencity/hyderabad/71b917d9-4c9c-48f4-b224-8b8eb28b3ad0.csv",
+    "sha256":  "cba3425f2873cc7cfc7d5fa4443963640d1e131d8a24193fa7ea496ebbbdfebd",
+    "size_bytes":  79480,
+    "retrieved_at":  "2026-10-08T11:27:06.933540+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Ramachandrapuram TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

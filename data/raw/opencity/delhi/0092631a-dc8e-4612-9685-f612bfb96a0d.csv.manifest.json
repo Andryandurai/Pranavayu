@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/0092631a-dc8e-4612-9685-f612bfb96a0d/download/08140157-f303-43b6-a15b-a7cd43f25245.csv",
+  "request_sha256": "f1681159d5f0469e3d7c34b8488bf56e65322458551d2b701b5eb10dd23e6a6e",
+  "path": "opencity/delhi/0092631a-dc8e-4612-9685-f612bfb96a0d.csv",
+  "sha256": "de695611b8220bb7aeb4a5043236c35dbc8799bbfaab916758b75e051a8d71d9",
+  "size_bytes": 259357,
+  "retrieved_at": "2026-10-08T11:31:21.967952+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Sri Aurobindo Marg DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

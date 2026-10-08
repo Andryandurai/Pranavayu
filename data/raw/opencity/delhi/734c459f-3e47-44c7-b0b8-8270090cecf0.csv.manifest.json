@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/734c459f-3e47-44c7-b0b8-8270090cecf0/download/del-jahangirpuri-dpcc-2024-25.csv",
+  "request_sha256": "189c97876599fce48dafcbbabc0c541832c63dea11e6130186ef48b5d0bbf699",
+  "path": "opencity/delhi/734c459f-3e47-44c7-b0b8-8270090cecf0.csv",
+  "sha256": "3f401d35e477d119e46ad496862e055af05e4dbf0fa5f1c2e5c12ebd81ddaa6d",
+  "size_bytes": 12371475,
+  "retrieved_at": "2026-10-08T11:32:11.824860+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Jahangirpuri DPCC 15 minute AQI Data for 2024-25",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

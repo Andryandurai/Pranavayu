@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/fb537436-3eaa-4fd3-b4ca-404584198402/download/1c04beb9-c084-4dd2-a3bd-0bf75ccf59ca.csv",
+    "request_sha256":  "c400dc3bd0b0e46db124f7ea044786936dc3accaf04998a9dc694799d2374388",
+    "path":  "opencity/bengaluru/fb537436-3eaa-4fd3-b4ca-404584198402.csv",
+    "sha256":  "069289a0b8c8c0f8011d0ec43d6a595f23ea3ab13afbdda4a75db246b644331b",
+    "size_bytes":  233194,
+    "retrieved_at":  "2026-10-08T11:24:35.191419+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Hebbal Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/72c61b2b-c088-457b-a2a1-65e4e5677b89/download/b3dc3026-2876-4934-97a4-3c843d6f0933.csv",
+  "request_sha256": "86ef15a16ee505769aa2031df013d025927a69acb3dbc2fe3ddc92be8328fca7",
+  "path": "opencity/delhi/72c61b2b-c088-457b-a2a1-65e4e5677b89.csv",
+  "sha256": "6062883758f82f8cdf92de60477fe94f681c26f08ee83f251dcc61ebfce02ed1",
+  "size_bytes": 270388,
+  "retrieved_at": "2026-10-08T11:31:02.174646+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "North Campus DU IMD AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

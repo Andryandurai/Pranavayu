@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/1dc41e6b-ae22-43c5-a1dd-ea7552fc0890/download/mum-mindspace-malad-west-mpcb-2024-25.csv",
+  "request_sha256": "c5166c2af514d25da746a4202092c5183f660efe6d1db035ef94e6504c8be668",
+  "path": "opencity/mumbai/1dc41e6b-ae22-43c5-a1dd-ea7552fc0890.csv",
+  "sha256": "9cbe44cbd4e2f610195d818d0b2cb4d6eb07d125c135b2f4b7c15caca3e802ac",
+  "size_bytes": 14426179,
+  "retrieved_at": "2026-10-08T11:37:51.422747+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Mindspace Malad West 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

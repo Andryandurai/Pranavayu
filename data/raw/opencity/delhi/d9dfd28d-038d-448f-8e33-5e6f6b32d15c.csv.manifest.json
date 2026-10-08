@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/d9dfd28d-038d-448f-8e33-5e6f6b32d15c/download/del-r-k-puram-dpcc-2024-25.csv",
+  "request_sha256": "0b89a8bb7a6a1021734b4a924b5de5e72a0cca32fb0c42b97b50a1db27a2c664",
+  "path": "opencity/delhi/d9dfd28d-038d-448f-8e33-5e6f6b32d15c.csv",
+  "sha256": "2da67b756d4866e3f49c27df61091add5752c2f45e1d13d6f0240cf04fc52340",
+  "size_bytes": 12256125,
+  "retrieved_at": "2026-10-08T11:34:24.846196+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "R K Puram DPCC 15 minute AQI Data for 2024-25",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

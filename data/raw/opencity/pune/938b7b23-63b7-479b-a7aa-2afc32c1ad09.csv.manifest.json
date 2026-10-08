@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/938b7b23-63b7-479b-a7aa-2afc32c1ad09/download/pune-mhada-colony-iitm-2024-25.csv",
+    "request_sha256":  "dc7f56bc886da047ba1df42ba9cb5a19d2b292fd5161310d63de550b32630712",
+    "path":  "opencity/pune/938b7b23-63b7-479b-a7aa-2afc32c1ad09.csv",
+    "sha256":  "815e6e45597666e3ffae11f6bf3249430c449ca14ba1b8417a83708af4821e33",
+    "size_bytes":  9888920,
+    "retrieved_at":  "2026-10-08T11:26:17.912219+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Mhada Colony IITM 15 minute AQI Data for 2024-25",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

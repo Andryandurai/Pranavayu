@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/15d82ada-9e8f-474c-93b7-f0f616295bad/download/6c9be432-4a82-4661-972f-e4ac9be0d252.csv",
+    "request_sha256":  "f1c224d59d0bc3494b782ecf142ba079a5cf5785d9045b3ef38a6590768e1987",
+    "path":  "opencity/pune/15d82ada-9e8f-474c-93b7-f0f616295bad.csv",
+    "sha256":  "d7603bd882bb63b6ac810ddb679f3a178e2257bbbe2c26f853fcb7defb8da486",
+    "size_bytes":  101772,
+    "retrieved_at":  "2026-10-08T11:25:50.244521+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Bhosari IITM AQI Data 2017-2023",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/b7ff579a-c865-44e3-ab51-2bdb0b460d20/download/611ba8d0-1102-4ce2-9f22-f17e96182a11.csv",
+  "request_sha256": "eea1e29d067d2e237831578441609697edcea9743e2418665707d1e77cf018b4",
+  "path": "opencity/mumbai/b7ff579a-c865-44e3-ab51-2bdb0b460d20.csv",
+  "sha256": "162cc06c94e5d4224aa8aae913afd6405f510a496c675a228464ecf5fa7745a2",
+  "size_bytes": 134130,
+  "retrieved_at": "2026-10-08T11:35:29.209669+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Chakala Andheri East IITM AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/9d86f89b-a414-467a-9b81-c48b910a10ec/download/11986023-67d3-48f2-94b3-ef20e47d4a61.csv",
+  "request_sha256": "53628d75e160e6a9eb959427e537fb08d34ca491aaf929a043ac436e0d162efa",
+  "path": "opencity/delhi/9d86f89b-a414-467a-9b81-c48b910a10ec.csv",
+  "sha256": "a8465a3320b5edc8eff4764e309df5e7e5fc85922a9e21b756e2861dbbda9ac5",
+  "size_bytes": 279914,
+  "retrieved_at": "2026-10-08T11:31:00.830611+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Nehru Nagar DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

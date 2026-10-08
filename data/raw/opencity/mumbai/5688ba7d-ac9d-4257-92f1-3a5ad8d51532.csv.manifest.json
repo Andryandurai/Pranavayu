@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/5688ba7d-ac9d-4257-92f1-3a5ad8d51532/download/02b12e40-79ac-46c2-bf4c-1409177d1892.csv",
+  "request_sha256": "28c09e2263a6467c26ed087f51953c1222c3cc4c1ec661ce6537c4f4c4b91383",
+  "path": "opencity/mumbai/5688ba7d-ac9d-4257-92f1-3a5ad8d51532.csv",
+  "sha256": "afa6aed3fb191aebe8007f05a5e6c2ff8491aa0603f7f9ae6fbc40f5d7b80e97",
+  "size_bytes": 204649,
+  "retrieved_at": "2026-10-08T11:35:33.519633+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Colaba MPCB AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

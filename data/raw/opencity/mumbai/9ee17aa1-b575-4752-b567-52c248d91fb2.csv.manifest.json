@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/9ee17aa1-b575-4752-b567-52c248d91fb2/download/mum-powai-mpcb-2024-25.csv",
+  "request_sha256": "3086d4784a02453f954379a4182c1e8158377f4f7c914e3442def6fb96ff6b26",
+  "path": "opencity/mumbai/9ee17aa1-b575-4752-b567-52c248d91fb2.csv",
+  "sha256": "8b8109e582a1a49e28c970dacbcbf61180e33421589e6876693d2d127418e542",
+  "size_bytes": 12397183,
+  "retrieved_at": "2026-10-08T11:38:05.379892+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Powai MPCB 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

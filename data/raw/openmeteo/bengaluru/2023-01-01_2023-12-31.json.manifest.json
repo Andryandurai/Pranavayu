@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=12.9716&longitude=77.5946&start_date=2023-01-01&end_date=2023-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "f21ffcbd4dfca275c119071b4605835337f906783926511d782040c07e2570bb",
+  "path": "openmeteo/bengaluru/2023-01-01_2023-12-31.json",
+  "sha256": "13ace7fe4b2fd1cf09ff3091c1d00d0cebf7a29a5f4483dd613fe377f1f9d5a1",
+  "size_bytes": 585561,
+  "retrieved_at": "2026-10-08T07:54:20.842202+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "bengaluru",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

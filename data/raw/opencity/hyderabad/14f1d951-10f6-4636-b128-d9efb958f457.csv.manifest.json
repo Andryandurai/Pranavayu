@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/14f1d951-10f6-4636-b128-d9efb958f457/download/6ac23909-9a45-4c09-8c1f-a7d1bc5b3f4d.csv",
+    "request_sha256":  "45a61fb37966e126ee56cbe4694994194e9e785f374cf76de2fb4d231e47494a",
+    "path":  "opencity/hyderabad/14f1d951-10f6-4636-b128-d9efb958f457.csv",
+    "sha256":  "665f2333c3dfd4930a0d6043e3dcaf0c8ef3e595c431037b779386111b059759",
+    "size_bytes":  276078,
+    "retrieved_at":  "2026-10-08T11:26:45.292122+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Central University TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

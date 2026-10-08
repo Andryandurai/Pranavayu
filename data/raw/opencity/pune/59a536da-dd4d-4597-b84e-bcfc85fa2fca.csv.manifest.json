@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/59a536da-dd4d-4597-b84e-bcfc85fa2fca/download/pune-hadapsar-iitm-2024-25.csv",
+    "request_sha256":  "2b2381b04109328cc75cda7e92b63266d1d6f437e004890463d78202b623a7be",
+    "path":  "opencity/pune/59a536da-dd4d-4597-b84e-bcfc85fa2fca.csv",
+    "sha256":  "386590d5a7c333d0a9579213f1d1a1f0f5924205d82ca6d40c3f4eff27f038a3",
+    "size_bytes":  4356470,
+    "retrieved_at":  "2026-10-08T11:26:10.899720+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Hadapsar IITM 15 minute AQI Data for 2024-25",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/92d4c486-232e-46e7-9de1-a517bc9c7f98/download/115d23c4-9511-4efe-83a9-59852805ad49.csv",
+  "request_sha256": "e5718398ca2a5f54309edbcc83257ea9d39be6919701286ecd933c93dc1e7ead",
+  "path": "opencity/mumbai/92d4c486-232e-46e7-9de1-a517bc9c7f98.csv",
+  "sha256": "08eb6a2484e8b171baae350bf91e2adf0b80421c4227a431e21053066519d8ae",
+  "size_bytes": 133035,
+  "retrieved_at": "2026-10-08T11:35:34.826450+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Deonar IITM AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

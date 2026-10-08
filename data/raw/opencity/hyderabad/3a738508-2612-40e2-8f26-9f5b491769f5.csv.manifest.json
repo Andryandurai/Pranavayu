@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/3a738508-2612-40e2-8f26-9f5b491769f5/download/ac27da56-101e-4caa-a607-353ad05dd7fe.csv",
+    "request_sha256":  "2456566a82e7dcb1a991b614de815b1a2e97147f7d7f5f5df62d7b07f17925cf",
+    "path":  "opencity/hyderabad/3a738508-2612-40e2-8f26-9f5b491769f5.csv",
+    "sha256":  "3528ab544fbbf3fd7342bbf624136c23dca67cd0555c0101dda7b56f55373f40",
+    "size_bytes":  85433,
+    "retrieved_at":  "2026-10-08T11:27:04.271748+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Nacharam TSIIC IALA TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

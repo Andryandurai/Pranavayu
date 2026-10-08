@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/a64023fe-1738-4564-a59a-1e89ae9aab74/download/730ec052-19c1-444e-be37-8a84e7846132.csv",
+    "request_sha256":  "1abdb59f79a59fa014d0ddedf0fc0d5f6ee20d5050a3f30869171b0843b07f7c",
+    "path":  "opencity/bengaluru/a64023fe-1738-4564-a59a-1e89ae9aab74.csv",
+    "sha256":  "3de4fbbd6368863f40c7b0ba243894de1d8b0386b09f38e6536059f52d779800",
+    "size_bytes":  30920,
+    "retrieved_at":  "2026-10-08T11:24:39.925912+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Jigani Hourly AQI Data 2023. ",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

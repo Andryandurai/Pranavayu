@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/c30dbe51-8aaa-4657-abf8-47078870ddc4/download/blr-silk-board-kspcb-2024-25.csv",
+    "request_sha256":  "94c2021ae9ab92829457d3f1ff529ef75b682f413fb99f877cbbed2aa6c49668",
+    "path":  "opencity/bengaluru/c30dbe51-8aaa-4657-abf8-47078870ddc4.csv",
+    "sha256":  "c2f1b520141dd3514eb08f5c0f72280b84712fab902b40c60e9fe4d57ef21655",
+    "size_bytes":  11641884,
+    "retrieved_at":  "2026-10-08T11:25:13.868887+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Silk Board KSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

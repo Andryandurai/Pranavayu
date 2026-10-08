@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/a00761c0-a1a7-4513-b58b-2f940b8b64ff/download/f421cdb4-57de-42ad-bd16-0bfd54e79cae.csv",
+    "request_sha256":  "622575490c257be492576d2561448624322579b7f9c55795962270d945e5b581",
+    "path":  "opencity/pune/a00761c0-a1a7-4513-b58b-2f940b8b64ff.csv",
+    "sha256":  "76ba60a60f0dd0a1cd80b8d7d47095579ab542ad1bf3fccbaaf88184a2233d7f",
+    "size_bytes":  221666,
+    "retrieved_at":  "2026-10-08T11:25:52.624842+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Karve Road MPCB AQI Data 2017-2023",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

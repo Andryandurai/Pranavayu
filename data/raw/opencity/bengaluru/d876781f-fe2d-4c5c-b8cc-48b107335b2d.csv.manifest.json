@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/d876781f-fe2d-4c5c-b8cc-48b107335b2d/download/6a787336-5a21-4c6c-959c-f67f37604f62.csv",
+    "request_sha256":  "7f562ab405cfd0f532eef3e4e924199f337b2c16fa5a285f223d4117bad5def8",
+    "path":  "opencity/bengaluru/d876781f-fe2d-4c5c-b8cc-48b107335b2d.csv",
+    "sha256":  "5470a03b5705fd26ec7e372813cec512c48a651d924697da6f5c49c02ab132bb",
+    "size_bytes":  238899,
+    "retrieved_at":  "2026-10-08T11:24:29.199529+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Jayanagar 5th Block Air Quality Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

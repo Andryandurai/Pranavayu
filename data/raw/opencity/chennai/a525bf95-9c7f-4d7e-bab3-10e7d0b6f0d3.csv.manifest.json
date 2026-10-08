@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/a525bf95-9c7f-4d7e-bab3-10e7d0b6f0d3/download/12603c96-d646-4094-afe6-b309ba6073e5.csv",
+    "request_sha256":  "c495067996467c45894eae751362015729a7201c22bd89875be5ea86b407c5fb",
+    "path":  "opencity/chennai/a525bf95-9c7f-4d7e-bab3-10e7d0b6f0d3.csv",
+    "sha256":  "0c1f0336e6549a6c3f7b4a049e2c88f028960e1664e512c5f8cd227fe09b63bf",
+    "size_bytes":  263540,
+    "retrieved_at":  "2026-10-08T11:25:19.809592+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Manali CPCB Hourly AQI Data 2017-2023",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

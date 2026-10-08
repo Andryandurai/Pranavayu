@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/bde0eac3-374b-44fc-b22b-572c7e4baf48/download/f0fba5de-cefc-49ee-9e9c-275f4f91d06c.csv",
+  "request_sha256": "c3d3f8c387926f03a04e1d5ed6f91fccf74f9ec14d9620b9dc8a3ff4e55db000",
+  "path": "opencity/mumbai/bde0eac3-374b-44fc-b22b-572c7e4baf48.csv",
+  "sha256": "a03970c9d7e6aafd0d6c8a7bfa798e3f1ea39ab3759222ddebf896fccac6bb1c",
+  "size_bytes": 25031,
+  "retrieved_at": "2026-10-08T11:35:22.354383+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Bandra Kurla Complex MPCB AQI Data 2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

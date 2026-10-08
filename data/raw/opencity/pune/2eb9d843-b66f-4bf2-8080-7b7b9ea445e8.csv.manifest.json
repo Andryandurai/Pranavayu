@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/2eb9d843-b66f-4bf2-8080-7b7b9ea445e8/download/bce229f1-23a9-4805-acd0-e21a6c72691b.csv",
+    "request_sha256":  "58323e17a1310daff23b5d7a777469bf68fd5579b9214b853fad79066d89647d",
+    "path":  "opencity/pune/2eb9d843-b66f-4bf2-8080-7b7b9ea445e8.csv",
+    "sha256":  "d47760fa5c9cc2a8a328364a7c1a4914b4e09ea71d8deba2a002dcdbf7de1220",
+    "size_bytes":  27570,
+    "retrieved_at":  "2026-10-08T11:25:53.855884+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Katraj Dairy MPCB AQI Data 2023",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

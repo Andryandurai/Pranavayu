@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/05f057ad-93a6-4136-8669-d7ed81f7eae1/download/df3ea324-5b2f-4fff-be04-6f6d7101ea4d.csv",
+  "request_sha256": "79f1422c1fe0e944dc7d9149b07cf09794211f7cb8ebb169a605db15cbfe9883",
+  "path": "opencity/mumbai/05f057ad-93a6-4136-8669-d7ed81f7eae1.csv",
+  "sha256": "d7a95f01813e56632bd176ecbc7bf369b69050ed8870b7f909086abd4c7b1004",
+  "size_bytes": 151751,
+  "retrieved_at": "2026-10-08T11:35:45.767675+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Mazgaon IITM AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/c497090e-02c3-40a8-88ba-7af93a429908/download/mum-mulund-west-mpcb-2024-25.csv",
+  "request_sha256": "a69861c4cef146ed8163ed7e8051c40dce287ac19781d876c03a4ece4130ff41",
+  "path": "opencity/mumbai/c497090e-02c3-40a8-88ba-7af93a429908.csv",
+  "sha256": "d1fcf48ddf31425f54be60ddd76b7eca1f5d37db6a9694837c7f6eb90af010dd",
+  "size_bytes": 11462377,
+  "retrieved_at": "2026-10-08T11:37:53.671119+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Mulund West MPCB 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

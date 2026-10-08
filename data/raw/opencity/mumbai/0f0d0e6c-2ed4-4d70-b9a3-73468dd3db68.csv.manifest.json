@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/0f0d0e6c-2ed4-4d70-b9a3-73468dd3db68/download/ea61c218-358d-4761-95d5-be2e02e01bc6.csv",
+  "request_sha256": "4244c63e191d56f5dd6dae753aed19cb651bce7f60bf5c2171197ba22c2f0183",
+  "path": "opencity/mumbai/0f0d0e6c-2ed4-4d70-b9a3-73468dd3db68.csv",
+  "sha256": "d362b3a0dcf54914dacc2a97447666a17ab2abc9d35fc6fa8ef9517b53bad17a",
+  "size_bytes": 8956,
+  "retrieved_at": "2026-10-08T11:35:27.844037+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Byculla BMC AQI Data 2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

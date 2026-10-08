@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Lucknow&source=cpcb_caaqm&parameter=PM2.5&start=2019-08-01&end=2019-08-31&format=csv",
+  "request_sha256": "4601b725d18ce68421abd28090f820b9e94764aca3284f7d0f789aac47b8403f",
+  "path": "cpcb/xkdr/lucknow/2019-08-01_2019-08-31.csv",
+  "sha256": "37e623bb76a3ca3053209c4ef93da17c2b91529de8decbdf1bc4b7a5c69ea6f5",
+  "size_bytes": 81810,
+  "retrieved_at": "2026-10-08T11:19:26.304328+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Lucknow",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

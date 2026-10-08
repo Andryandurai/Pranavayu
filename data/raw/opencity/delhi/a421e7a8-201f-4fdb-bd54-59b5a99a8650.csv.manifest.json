@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/a421e7a8-201f-4fdb-bd54-59b5a99a8650/download/2d4119ae-f4a3-4761-9827-cf633bcda318.csv",
+  "request_sha256": "a1186cb7db0fc467d37b6e74b990c4ae6feca512e4ccd00e480b7ab2c3f21685",
+  "path": "opencity/delhi/a421e7a8-201f-4fdb-bd54-59b5a99a8650.csv",
+  "sha256": "53253e85eac1201f94be2ec3c16b603d0b74bc56949dfe205e48098c05b2b512",
+  "size_bytes": 281517,
+  "retrieved_at": "2026-10-08T11:30:26.892150+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Dr. Karni Singh Shooting Range DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

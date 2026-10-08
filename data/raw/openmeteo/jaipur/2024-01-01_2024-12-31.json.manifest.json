@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=26.9124&longitude=75.7873&start_date=2024-01-01&end_date=2024-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "bc32d3f4b4b0f4cc418e54aa0b35b29f2a8d2f05e25ef7b8740be83e59cba79b",
+  "path": "openmeteo/jaipur/2024-01-01_2024-12-31.json",
+  "sha256": "2b061a409e77d7a45ed1ea5cd96204748c24746ff4aaa2dff2e7144f76eacade",
+  "size_bytes": 569499,
+  "retrieved_at": "2026-10-08T07:59:05.917114+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "jaipur",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

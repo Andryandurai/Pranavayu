@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/8d9950b8-2938-4268-839e-532417716f88/download/e9dba999-228f-4156-bec9-e960c9a8a4cb.csv",
+  "request_sha256": "447b53a59c6a77a05ea3a18d2ea037370561e8c6abfcb93ae4359ac601869f9d",
+  "path": "opencity/delhi/8d9950b8-2938-4268-839e-532417716f88.csv",
+  "sha256": "3d7b60f4761e12bef345556ced0fa22f129ec52d0be92d49be1f61b018ce6c20",
+  "size_bytes": 274228,
+  "retrieved_at": "2026-10-08T11:30:16.686370+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Aya Nagar IMD AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

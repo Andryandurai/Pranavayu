@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/6d4d24e9-62f8-4d5e-861d-49c4e353cd2f/download/0f8576b1-56fc-49bd-83d7-898ce46e5430.csv",
+    "request_sha256":  "6d3a9f7baf90a2c7c8c879c82b279deed3faf610a16ba70d0c09d4e787b2b338",
+    "path":  "opencity/bengaluru/6d4d24e9-62f8-4d5e-861d-49c4e353cd2f.csv",
+    "sha256":  "39e43139c5d30a81e5fc290f79851f4bae7956ba9db59ca61d0519bf428d46b0",
+    "size_bytes":  223660,
+    "retrieved_at":  "2026-10-08T11:24:37.751530+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Hombegowda Nagar Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

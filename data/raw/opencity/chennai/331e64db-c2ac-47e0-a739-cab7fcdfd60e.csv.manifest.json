@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/331e64db-c2ac-47e0-a739-cab7fcdfd60e/download/chn-alandur-bus-depot-cpcb-2024-25.csv",
+    "request_sha256":  "af8a37307fb31df642bc503fd815e52350e34cdf3de3c784f479eaaa59103226",
+    "path":  "opencity/chennai/331e64db-c2ac-47e0-a739-cab7fcdfd60e.csv",
+    "sha256":  "0b7b4ab6f9bfab9abee3f35c961d08733060fa58dc70cae1d9dd246b2775e8d2",
+    "size_bytes":  11743278,
+    "retrieved_at":  "2026-10-08T11:25:28.483975+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Alandur Bus Depot CPCB 15 minute AQI Data for 2024-25",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

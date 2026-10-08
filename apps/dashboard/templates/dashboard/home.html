@@ -1,0 +1,11 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+<h1>EnviroInsights-India</h1>
+<p>A research platform for India's air quality. Phase 1 establishes the reference catalogue and infrastructure.</p>
+<p>Observations will become available after real data is downloaded in a future phase.</p>
+<nav aria-label="Project tools">
+  <a href="{% url 'swagger-ui' %}">API documentation</a>
+  <a href="{% url 'admin:index' %}">Data curator admin</a>
+  <a href="{% url 'health' %}">Infrastructure health</a>
+</nav>
+{% endblock %}

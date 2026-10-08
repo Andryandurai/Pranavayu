@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/e73c44a9-dbee-4b77-809b-3f3d45bf462f/download/7b6d1623-8112-4ecf-823f-6fd1051af6b4.csv",
+  "request_sha256": "42bd0ce925576c7a505dff9f7c04374524175eecf07bcbbe52e35240ca7e199f",
+  "path": "opencity/delhi/e73c44a9-dbee-4b77-809b-3f3d45bf462f.csv",
+  "sha256": "5a7f8b6a0accc6c11920fb87febb8ae58ede66c986644f824047d0dca25b1557",
+  "size_bytes": 316463,
+  "retrieved_at": "2026-10-08T11:31:15.315254+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "R K Puram DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

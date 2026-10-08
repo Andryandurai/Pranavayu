@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/06db3da0-ff75-4cef-a0bc-987dc24f74a1/download/6c059e9b-361b-4ec1-8558-88eebac373bb.csv",
+  "request_sha256": "98c4d3439e92de532ab2f49f3527c56aeb1a30768c06110d3545bdc1eea979c9",
+  "path": "opencity/mumbai/06db3da0-ff75-4cef-a0bc-987dc24f74a1.csv",
+  "sha256": "bc3c9b08d12ca8b54781171c5045db4a0f1cdcc6d17f503b77ccee27af7d85cc",
+  "size_bytes": 138052,
+  "retrieved_at": "2026-10-08T11:35:37.340197+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Kandivali East MPCB AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

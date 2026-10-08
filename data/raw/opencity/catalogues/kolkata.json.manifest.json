@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Kolkata+air+quality&rows=100",
+  "request_sha256": "380313e3635438406287ca3fc8035d2a028581706564cce0aedfba9bff29a938",
+  "path": "opencity/catalogues/kolkata.json",
+  "sha256": "5fbf752a7e5ac4c185aa57f598dd3e3b3bc6363be2dafc9c6f51fe9b5f2b48de",
+  "size_bytes": 452645,
+  "retrieved_at": "2026-10-08T11:35:12.656539+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

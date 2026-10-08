@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/ab463261-5537-45db-9ce0-8b6f637f7c6b/download/2c1eec00-1e00-4f65-9a86-84fa08990711.csv",
+  "request_sha256": "2b33b2177fd5174331861a347e3677a25f3ee0780aff9411a12b194d85d86b29",
+  "path": "opencity/mumbai/ab463261-5537-45db-9ce0-8b6f637f7c6b.csv",
+  "sha256": "8e08e1564771fe10f91290d8fee06b86112b7a114c7314d9ceb8ba53845c1934",
+  "size_bytes": 24932,
+  "retrieved_at": "2026-10-08T11:35:30.501570+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Chembur MPCB AQI Data 2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

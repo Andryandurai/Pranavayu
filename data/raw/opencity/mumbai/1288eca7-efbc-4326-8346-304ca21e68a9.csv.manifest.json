@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/1288eca7-efbc-4326-8346-304ca21e68a9/download/d1c2160e-c646-425b-a334-8f3999111a6e.csv",
+  "request_sha256": "0c3e8f539b02cd5d77edafe88015caae9b40c3bf702f43244f1ad3822069fb86",
+  "path": "opencity/mumbai/1288eca7-efbc-4326-8346-304ca21e68a9.csv",
+  "sha256": "7d92751ef74bfb48beb66558c60a009f74e331452d861d3e2e94ccd24c884778",
+  "size_bytes": 202920,
+  "retrieved_at": "2026-10-08T11:35:32.145586+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Chatrapathi Shivaji Airport T2 MPCB AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

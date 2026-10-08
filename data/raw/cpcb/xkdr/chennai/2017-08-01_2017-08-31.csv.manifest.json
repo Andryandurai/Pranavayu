@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Chennai&source=cpcb_caaqm&parameter=PM2.5&start=2017-08-01&end=2017-08-31&format=csv",
+  "request_sha256": "9034d74cb57ebb94a0604c5486e3281d8a5431eff9a75f5a3b991dc7d33e3e1c",
+  "path": "cpcb/xkdr/chennai/2017-08-01_2017-08-31.csv",
+  "sha256": "a6bd2a21245ef54a6642df067fc918bd76d6512523e0d22f54edda87a94fc4a6",
+  "size_bytes": 57467,
+  "retrieved_at": "2026-10-08T07:42:08.071039+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Chennai",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/5ffa89f3-7d73-4e75-8c73-679ff0083345/download/68028368-298c-49c2-926b-775732a63849.csv",
+  "request_sha256": "7d581e10e61b097343d68d3eb042e9275835d2676de35c954b14ed06275de6d3",
+  "path": "opencity/delhi/5ffa89f3-7d73-4e75-8c73-679ff0083345.csv",
+  "sha256": "6030ab84677d5e252027a0c68a36de9a6d92baf26424c220d325006728506358",
+  "size_bytes": 268752,
+  "retrieved_at": "2026-10-08T11:31:11.370053+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Pusa DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

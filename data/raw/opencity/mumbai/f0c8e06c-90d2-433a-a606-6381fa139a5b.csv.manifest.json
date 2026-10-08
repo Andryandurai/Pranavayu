@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/f0c8e06c-90d2-433a-a606-6381fa139a5b/download/mum-bandra-kurla-complex-iitm-2024-25.csv",
+  "request_sha256": "35995ce47a1a3bbe0d5caced5b0518ba783d552316319a65f21d34cfe6b2d8b3",
+  "path": "opencity/mumbai/f0c8e06c-90d2-433a-a606-6381fa139a5b.csv",
+  "sha256": "0aeec420e1ab2ce96796d1fa167942c271537afb02f3bfa83c188250dc05b4a3",
+  "size_bytes": 9645604,
+  "retrieved_at": "2026-10-08T11:36:13.858253+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Bandra Kurla Complex IITM 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/850d0305-26f0-40a8-8f5f-9ef3ddc1f632/download/faa8c721-f0d7-46c4-99ed-57aaf32bd846.csv",
+  "request_sha256": "eb7eec9f8a40195be5001757b28ca8efa756d2b413e633b86ce596d70c4d86d0",
+  "path": "opencity/delhi/850d0305-26f0-40a8-8f5f-9ef3ddc1f632.csv",
+  "sha256": "cee2b7df15dfd1aad58ed904b62ef26205df603ca7b939c496c2abc4f6217fc3",
+  "size_bytes": 291175,
+  "retrieved_at": "2026-10-08T11:31:16.892211+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Shadipur CPCB AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

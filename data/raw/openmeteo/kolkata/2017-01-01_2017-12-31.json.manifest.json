@@ -1,0 +1,15 @@
+{
+  "url": "https://archive-api.open-meteo.com/v1/archive?latitude=22.5726&longitude=88.3639&start_date=2017-01-01&end_date=2017-12-31&hourly=temperature_2m%2Crelative_humidity_2m%2Cdew_point_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Csurface_pressure%2Ccloud_cover%2Cprecipitation%2Cshortwave_radiation%2Cboundary_layer_height&timezone=UTC&wind_speed_unit=ms&models=era5",
+  "request_sha256": "59150a7d2347428a53ac0e4d20dfc9b4dd662d78cad15780275cf5a3aada0e7d",
+  "path": "openmeteo/kolkata/2017-01-01_2017-12-31.json",
+  "sha256": "99f9d7705d3485e3be046f427da1893c0343331b55e779a5b68e4762a5cdb92b",
+  "size_bytes": 590654,
+  "retrieved_at": "2026-10-08T07:59:48.761226+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "kolkata",
+    "model": "era5",
+    "timezone": "UTC",
+    "boundary_layer_height": "ERA5 archive variable, metres; null when missing"
+  }
+}

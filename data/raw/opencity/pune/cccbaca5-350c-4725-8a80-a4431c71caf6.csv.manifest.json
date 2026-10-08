@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/cccbaca5-350c-4725-8a80-a4431c71caf6/download/fbf99e33-887b-4a97-8861-fe44d24cb48a.csv",
+    "request_sha256":  "ca0a055d23651e6f02366751fc8eb9dba127a6b9adf7798becee2c4b92bfbffe",
+    "path":  "opencity/pune/cccbaca5-350c-4725-8a80-a4431c71caf6.csv",
+    "sha256":  "aa8d2c4472089288515d1d76351a4ae144ca2c0be5b4633fc7403aed92763166",
+    "size_bytes":  136965,
+    "retrieved_at":  "2026-10-08T11:25:57.673005+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Revenue Colony-Shivajinagar IITM AQI Data 2017-2023",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

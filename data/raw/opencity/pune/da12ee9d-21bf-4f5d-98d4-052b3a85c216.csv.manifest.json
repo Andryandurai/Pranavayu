@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/b16b4972-1d7e-4b7e-b1d6-23228cc63c83/resource/da12ee9d-21bf-4f5d-98d4-052b3a85c216/download/pune-panchawati_pashan-iitm-2024-25.csv",
+    "request_sha256":  "e5bbfc0a6142a430fbb2d9303d8e786ef271836a2663677d77679ecaf1b12b1f",
+    "path":  "opencity/pune/da12ee9d-21bf-4f5d-98d4-052b3a85c216.csv",
+    "sha256":  "dd4612b799bd009d18a67728b24658c947b4a4e9bfff1aaf3a1b937688ee3989",
+    "size_bytes":  11280260,
+    "retrieved_at":  "2026-10-08T11:26:21.112519+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Pune",
+                     "resource_name":  "Panchawati_Pashan IITM 15 minute AQI Data for 2024-25",
+                     "package":  "pune-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

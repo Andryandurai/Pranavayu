@@ -1,0 +1,10 @@
+{
+  "url": "https://hub.worldpop.org/geodata/summary?id=73812",
+  "request_sha256": "a9454cbd9bd8373b6db5a30ad63c36e660d8dd60b2e69e5d46d47faf72c21fa1",
+  "path": "worldpop/catalogue-73812.html",
+  "sha256": "c004eeda311dfaa0575dda7f3b44436bcd73bc63004e4afe0e1a85912fc2f117",
+  "size_bytes": 18027,
+  "retrieved_at": "2026-10-08T07:51:58.583112+00:00",
+  "content_type": "text/html; charset=UTF-8",
+  "metadata": {}
+}

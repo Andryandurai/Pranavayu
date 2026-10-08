@@ -1,0 +1,16 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Delhi&source=cpcb_caaqm&parameter=PM2.5&start=2018-11-01&end=2018-11-15&format=csv",
+  "request_sha256": "be7aae157c9a528edfc296de8bc1a6d1f69904d334eb5332428a8fd4ad8d2ac8",
+  "path": "cpcb/xkdr/delhi/2018-11-01_2018-11-15.csv",
+  "sha256": "cbd92f536c854ad3fa7c1a42498f8dcdabec06079ec89e2de3ae81dd618ec229",
+  "size_bytes": 498382,
+  "retrieved_at": "2026-10-08T07:47:48.830043+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Delhi",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release",
+    "truncated_parent": true
+  }
+}

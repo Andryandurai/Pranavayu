@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/39633547-0933-4f17-ad67-60a8e97eb405/download/chn-velachery-res-2024-25.csv",
+    "request_sha256":  "a2c3fefcd5cb41674748d91f5b527dea4270885994e8f2b5aecb97a1be555ab3",
+    "path":  "opencity/chennai/39633547-0933-4f17-ad67-60a8e97eb405.csv",
+    "sha256":  "70a02432678c3910ae9caab924d89cc925d338eb18031d0c3b6f9dba9b76faa3",
+    "size_bytes":  13308348,
+    "retrieved_at":  "2026-10-08T11:25:47.867953+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Velachery Res. Area CPCB 15 minute AQI Data for 2024-25",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/2327b689-9f8b-4ed2-ba3a-6e1c76ef89fe/download/e83d0dba-7914-4d14-b889-3db7684ea5cd.csv",
+    "request_sha256":  "a36631a42a101004c6423e7eef4978834aa8f77b6655cf6f9489df9b1b244a44",
+    "path":  "opencity/hyderabad/2327b689-9f8b-4ed2-ba3a-6e1c76ef89fe.csv",
+    "sha256":  "6427a9689ee9db1cc0b7f3e14cef3a743030ec3d800011bfd409560c46b03cab",
+    "size_bytes":  277726,
+    "retrieved_at":  "2026-10-08T11:26:52.868913+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "ICRISAT Patancheru TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

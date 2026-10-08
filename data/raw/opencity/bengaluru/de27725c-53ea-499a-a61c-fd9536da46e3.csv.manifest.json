@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/de27725c-53ea-499a-a61c-fd9536da46e3/download/bb22438b-15bd-4a30-93ca-ca416529eef7.csv",
+    "request_sha256":  "4b9faa909b10081a8259fbb03fc9f0bc612fae1bd7a56c32ebfa77c5b4a975bf",
+    "path":  "opencity/bengaluru/de27725c-53ea-499a-a61c-fd9536da46e3.csv",
+    "sha256":  "184c360490451520f50284e535a23959f1c7af0d152c10309445cded65f0e1e1",
+    "size_bytes":  40681,
+    "retrieved_at":  "2026-10-08T11:24:45.985309+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Shivapura Peenya Hourly AQI Data 2022-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

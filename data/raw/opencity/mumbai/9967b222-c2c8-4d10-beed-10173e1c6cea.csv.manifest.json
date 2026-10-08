@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/9967b222-c2c8-4d10-beed-10173e1c6cea/download/59d25f27-7bca-46fe-be44-4bde29d93f95.csv",
+  "request_sha256": "23d209ab4436a186e2435c1cba469c6e012c1b4035950bc8d9406ebba439da36",
+  "path": "opencity/mumbai/9967b222-c2c8-4d10-beed-10173e1c6cea.csv",
+  "sha256": "9a200911d88f230d41664843b23c7574f3c201ef6b7b16e25a1885406f0d30db",
+  "size_bytes": 142211,
+  "retrieved_at": "2026-10-08T11:35:44.337899+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Malad West IITM AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

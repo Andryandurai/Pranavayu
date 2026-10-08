@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/c6b9f92d-e007-4115-a28d-8b7c40a86f6f/download/4a65fc9e-830f-452c-a88c-4bf7dac90bbe.csv",
+    "request_sha256":  "cc9d942c9c095a6a8435cf4eaeaf7638c982663d23dd709fb601a9ad5032a2ea",
+    "path":  "opencity/hyderabad/c6b9f92d-e007-4115-a28d-8b7c40a86f6f.csv",
+    "sha256":  "d7c64487b1f6f13a9db697f5ae524d05bc3434e6ed38b3619f31ef266f079299",
+    "size_bytes":  267289,
+    "retrieved_at":  "2026-10-08T11:27:08.266553+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Sanathnagar TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/446860a2-4b37-462d-856f-bae813bf9d45/download/3c28077f-0fd5-48e4-b04f-a5c90d32f98c.csv",
+  "request_sha256": "69cb0116327c6fa3a5274fc54c909e2f2bdc60e17e8acfcc7c6fa977a37c4e46",
+  "path": "opencity/delhi/446860a2-4b37-462d-856f-bae813bf9d45.csv",
+  "sha256": "74efc950e9ad17e31d04fd11d472137e236dbd9cb439290a1cfaffac94ea495b",
+  "size_bytes": 294355,
+  "retrieved_at": "2026-10-08T11:31:25.227842+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Wazirpur DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

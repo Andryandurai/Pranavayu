@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Kolkata&source=cpcb_caaqm&parameter=PM2.5&start=2018-09-01&end=2018-09-30&format=csv",
+  "request_sha256": "f9f35b4843319c2acb91f86f5e7cf4233f969fcc9c3c99d497d83097790c1bc3",
+  "path": "cpcb/xkdr/kolkata/2018-09-01_2018-09-30.csv",
+  "sha256": "25d9b8d1e751a075859d42e4018678310b04aa98cde8d1e645ef45c2978562d1",
+  "size_bytes": 35087,
+  "retrieved_at": "2026-10-08T11:17:37.872565+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Kolkata",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

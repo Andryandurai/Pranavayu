@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/054a52fa-2552-438e-baab-8d9b22fed81b/download/hyd-iith-kandi-tspcb-2024-25.csv",
+    "request_sha256":  "afcbb00ef25c83958d6a082fc73400d914638bd3a6a21e3cb2b7ce82ad5a7fd0",
+    "path":  "opencity/hyderabad/054a52fa-2552-438e-baab-8d9b22fed81b.csv",
+    "sha256":  "a6d0d6ae48e08d707285db3148bb2e3411776bd7ded9508d86c1ef441c88ce7f",
+    "size_bytes":  12964138,
+    "retrieved_at":  "2026-10-08T11:27:25.768587+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "IITH Kandi TSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

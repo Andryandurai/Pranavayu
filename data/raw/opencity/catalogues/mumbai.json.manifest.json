@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Mumbai+air+quality&rows=100",
+  "request_sha256": "f385276265cda485186c1fd6aa8ea862203c80f031bd69e09d769b6607aef1f8",
+  "path": "opencity/catalogues/mumbai.json",
+  "sha256": "ba405188e614e8a593ef129ebc2853278de6604f5dc5b1308cc2cf8c4adad558",
+  "size_bytes": 473403,
+  "retrieved_at": "2026-10-08T11:35:20.731333+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

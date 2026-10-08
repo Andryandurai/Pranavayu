@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Chennai+air+quality&rows=100",
+  "request_sha256": "b24d2c7a5579aaba452d74746344550f1552d855a9ca71b8bd971670c023b32e",
+  "path": "opencity/catalogues/chennai.json",
+  "sha256": "2cdf59c51c72593a8d9837d770dfea4791a6e7e0dbabec89b8b4393f709e28d0",
+  "size_bytes": 467531,
+  "retrieved_at": "2026-10-08T11:30:09.187328+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

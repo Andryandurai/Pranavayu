@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/4eaf725f-30bf-4654-bc6b-ac6e11be7bb6/download/mum-chhatrapati-shivaji-intl-2024-25.csv",
+  "request_sha256": "36c81ee5a08f6b9811106241a8b5ded0361bb8a3216f3a4930f290845897a762",
+  "path": "opencity/mumbai/4eaf725f-30bf-4654-bc6b-ac6e11be7bb6.csv",
+  "sha256": "b0cbcb9b8e916f3aaaa4e2f7a11f5715abe94ecbca168bb5495ae29719e55e85",
+  "size_bytes": 14817833,
+  "retrieved_at": "2026-10-08T11:37:06.922811+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Chhatrapati Shivaji Intl. Airport (T2) MPCB 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

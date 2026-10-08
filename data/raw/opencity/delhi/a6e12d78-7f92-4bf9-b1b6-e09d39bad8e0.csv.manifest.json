@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/a6e12d78-7f92-4bf9-b1b6-e09d39bad8e0/download/ffc82051-ef46-47de-aa8e-a90998d7d117.csv",
+  "request_sha256": "6200f954ba0119ec87e353ccc98e0efaff0a0a4c0143bd7dd5d75ece8b5ae8c3",
+  "path": "opencity/delhi/a6e12d78-7f92-4bf9-b1b6-e09d39bad8e0.csv",
+  "sha256": "66871b49ef37f6dfcd2a5cbb0e596510b95ebba5e484e9ebc25bf13357354375",
+  "size_bytes": 117501,
+  "retrieved_at": "2026-10-08T11:30:48.605369+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Lodhi Road IITM AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

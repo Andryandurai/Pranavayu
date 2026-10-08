@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/5106f650-ef48-4ce1-a5f8-8e269434150c/download/e769499d-53df-4a2b-89e0-7aec537b405d.csv",
+    "request_sha256":  "28d8fab403a4aa325f3bf08a47a24b03d97af7a67b051f33ba8f0e65e4f66931",
+    "path":  "opencity/chennai/5106f650-ef48-4ce1-a5f8-8e269434150c.csv",
+    "sha256":  "85ebd2a656fd026534d9b89bee12542f81b06d5074c8d45bc09f1acda9fcabe2",
+    "size_bytes":  251029,
+    "retrieved_at":  "2026-10-08T11:25:23.378849+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Velachery Residential Area Hourly AQI Data 2022-2023",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

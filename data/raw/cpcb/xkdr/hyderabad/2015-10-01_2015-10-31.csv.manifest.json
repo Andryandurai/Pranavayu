@@ -1,0 +1,15 @@
+{
+  "url": "https://airquality.xkdr.org/v1/measurements?city=Hyderabad&source=cpcb_caaqm&parameter=PM2.5&start=2015-10-01&end=2015-10-31&format=csv",
+  "request_sha256": "aeb799b8f62f382879bfc32583703766ba8af721a764eea519b3ef90858200ab",
+  "path": "cpcb/xkdr/hyderabad/2015-10-01_2015-10-31.csv",
+  "sha256": "f58effd30c1757cafbce0121efb34f9b4f31cac395f8c83e6072240bdb1138e2",
+  "size_bytes": 35168,
+  "retrieved_at": "2026-10-08T07:54:13.254049+00:00",
+  "content_type": "text/csv; charset=utf-8",
+  "metadata": {
+    "city": "Hyderabad",
+    "publisher": "XKDR Forum",
+    "timezone": "Asia/Kolkata",
+    "scope": "PM2.5 public mirror; not the Princeton release"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/3c05a5ad-9f2c-419c-80f1-7b215dc46f85/download/mum-sewri-bmc-2024-25.csv",
+  "request_sha256": "9355ff1b8fa8828ec8e6c0af48036be5fc68991263530ab847761a898c5390c6",
+  "path": "opencity/mumbai/3c05a5ad-9f2c-419c-80f1-7b215dc46f85.csv",
+  "sha256": "c11c4d8ff7759f70a9e4b6e0b6123b2d6175efb00fedcb8fbd4023fa04ec8e4a",
+  "size_bytes": 12571355,
+  "retrieved_at": "2026-10-08T11:38:22.695037+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Sewri BMC 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

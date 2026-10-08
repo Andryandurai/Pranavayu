@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/aaeed9d4-5769-4641-b94f-cc73bcbcd6a9/download/hyd-zoo-park-tspcb-2024-25.csv",
+  "request_sha256": "5b0f1c3dc15f35ab0635609cca4a9f04079327824d41af7e962a4c7db878fcde",
+  "path": "opencity/hyderabad/aaeed9d4-5769-4641-b94f-cc73bcbcd6a9.csv",
+  "sha256": "b121da03f9df58b1a365d537e053a072f96f448e58687868ac58ca41fbf8e926",
+  "size_bytes": 13172070,
+  "retrieved_at": "2026-10-08T11:35:10.780329+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Hyderabad",
+    "resource_name": "Zoo Park TSPCB 15 minute AQI Data for 2024-25",
+    "package": "hyderabad-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

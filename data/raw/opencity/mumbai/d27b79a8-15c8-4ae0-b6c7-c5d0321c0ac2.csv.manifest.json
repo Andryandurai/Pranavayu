@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/d27b79a8-15c8-4ae0-b6c7-c5d0321c0ac2/download/81dd5bee-5c82-451a-84ba-231b5248ae10.csv",
+  "request_sha256": "61e557e2f4bc8332d378d45222f68b246de2b8fc5a6020c0d2de0866959c1594",
+  "path": "opencity/mumbai/d27b79a8-15c8-4ae0-b6c7-c5d0321c0ac2.csv",
+  "sha256": "8a6d9e804ad31b26e3c24e4f5d71b4f27593d7110bc7e35a3a05f9c2e6571036",
+  "size_bytes": 135174,
+  "retrieved_at": "2026-10-08T11:35:50.073116+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Navy Nagar Colaba IITM AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/bf745fe1-813a-4f17-ab47-a908cec048f2/download/ff56dde4-933a-4240-a1ba-1ee66e9f3ff8.csv",
+    "request_sha256":  "8cff8778a53de17848534b79e8f6292f8c86053022132597c0d5ccdd0aa82a4e",
+    "path":  "opencity/bengaluru/bf745fe1-813a-4f17-ab47-a908cec048f2.csv",
+    "sha256":  "73ca9c4efab326522dcb0bce09eaf213b7836ba9b478d9ad145d2761fc91ec32",
+    "size_bytes":  236574,
+    "retrieved_at":  "2026-10-08T11:24:44.834366+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Saneguruva Halli Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

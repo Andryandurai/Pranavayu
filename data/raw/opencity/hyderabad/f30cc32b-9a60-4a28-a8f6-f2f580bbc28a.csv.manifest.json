@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/f30cc32b-9a60-4a28-a8f6-f2f580bbc28a/download/703aecfe-555b-448e-a6b9-72ddf120f1ec.csv",
+    "request_sha256":  "747dad4d2cfd9283940ba2a5d00a93ca93773aa107d223e7a5c284d1eb859adb",
+    "path":  "opencity/hyderabad/f30cc32b-9a60-4a28-a8f6-f2f580bbc28a.csv",
+    "sha256":  "aa8d6f19cb83c6af018b88334ee5c9353b4b8669b60df0e685849677d2750736",
+    "size_bytes":  83478,
+    "retrieved_at":  "2026-10-08T11:27:09.412586+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "Somajiguda TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

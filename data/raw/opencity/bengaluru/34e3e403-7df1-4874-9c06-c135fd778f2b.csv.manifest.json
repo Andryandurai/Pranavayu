@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/34e3e403-7df1-4874-9c06-c135fd778f2b/download/ca6efc92-82b3-46cc-a29d-bf1fc4c357fd.csv",
+    "request_sha256":  "b78b7b5cad4ed60b14cff82b670cc66c5bedbb61ae09cd4acb319ad4203b61d2",
+    "path":  "opencity/bengaluru/34e3e403-7df1-4874-9c06-c135fd778f2b.csv",
+    "sha256":  "125421884978f1ed00170030dd6086e53d13afe13c430ee5acf2940678f2ef29",
+    "size_bytes":  239417,
+    "retrieved_at":  "2026-10-08T11:24:30.393582+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Bapuji Nagar Hourly AQI Data 2017-2023",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

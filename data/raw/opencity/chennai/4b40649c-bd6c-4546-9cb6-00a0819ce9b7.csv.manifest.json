@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/45503a94-0503-410c-abe5-23f44c8e77ae/resource/4b40649c-bd6c-4546-9cb6-00a0819ce9b7/download/3a20d161-c164-49e0-8dd0-7848602ab53b.csv",
+    "request_sha256":  "a4cc538e0856865c0a4db851b4f085ca7791634c1d737bbbc832d219c028c3fd",
+    "path":  "opencity/chennai/4b40649c-bd6c-4546-9cb6-00a0819ce9b7.csv",
+    "sha256":  "6458deb218f0e4f44caa2fc7816ca226d19ff88be4eda01f3e9cc647fa4a34ca",
+    "size_bytes":  66537,
+    "retrieved_at":  "2026-10-08T11:25:17.435688+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Chennai",
+                     "resource_name":  "Gandhi Nagar Ennore Hourly AQI Data 2022-2023",
+                     "package":  "chennai-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

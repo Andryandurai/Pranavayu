@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/7a729fcc-f39e-498d-a577-1393a6e873b7/resource/64ae1a4e-3490-46a9-ac6c-ee45365712d3/download/17b80ce4-26e7-4de3-8574-280539b826e6.csv",
+    "request_sha256":  "9c0ba63b89fe7a8bd6a4e2726a100efddf24a6b45caf2e3d2c50c0cbe82aa576",
+    "path":  "opencity/hyderabad/64ae1a4e-3490-46a9-ac6c-ee45365712d3.csv",
+    "sha256":  "75039f7f258d040c4524dd5fc783cc6674fdb455880369090f6afbaec528c7d9",
+    "size_bytes":  79803,
+    "retrieved_at":  "2026-10-08T11:27:05.649589+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Hyderabad",
+                     "resource_name":  "New Malakpet TSPCB AQI Data 2017-2023",
+                     "package":  "hyderabad-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

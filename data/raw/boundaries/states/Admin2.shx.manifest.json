@@ -1,0 +1,14 @@
+{
+  "url": "https://raw.githubusercontent.com/datameet/maps/b3fbbde595310b397a55d718e0958ce249a4fa1f/States/Admin2.shx",
+  "request_sha256": "5e8504d10fe4f55cbf19d917502a416d7c685ec73d0f0e875a7d3df520c4fda8",
+  "path": "boundaries/states/Admin2.shx",
+  "sha256": "dc428a44ed20384b02c3c5971f2b200b15d429923b6cc770cae940d0af21016a",
+  "size_bytes": 388,
+  "retrieved_at": "2026-10-08T07:35:15.237305+00:00",
+  "content_type": "application/octet-stream",
+  "metadata": {
+    "commit": "b3fbbde595310b397a55d718e0958ce249a4fa1f",
+    "layer": "states",
+    "district_vintage": 2011
+  }
+}

@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/79fa909a-38f1-4657-b369-6d0e2a6f500e/resource/10e27e2a-276b-40fd-b457-5b7d10be7e21/download/blr-hebbal-kspcb-2024-25.csv",
+    "request_sha256":  "377b58cddff8a569c50694c187cc70463af3c49dfed2075b050a55bbf48251d3",
+    "path":  "opencity/bengaluru/10e27e2a-276b-40fd-b457-5b7d10be7e21.csv",
+    "sha256":  "e4e6c5de622d80941bf160790845b6344c2d9eb660d99f3aff904a4f2f940594",
+    "size_bytes":  10000302,
+    "retrieved_at":  "2026-10-08T11:24:54.577738+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Bengaluru",
+                     "resource_name":  "Hebbal KSPCB 15 minute AQI Data for 2024-25",
+                     "package":  "bengaluru-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}

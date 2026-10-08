@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/8ea03804-655d-41f0-82d6-d503aa52d455/download/mum-chakala-andheri-east-iitm-2024-25.csv",
+  "request_sha256": "6862787e57dddbc4a3ee9b6ce77c3a8a4e5f72ff26a7fa159fe464a49872824a",
+  "path": "opencity/mumbai/8ea03804-655d-41f0-82d6-d503aa52d455.csv",
+  "sha256": "280a870bd301b68d314afa13efbbe848fbb4842204b1509fc3b15bcd741917cd",
+  "size_bytes": 13138325,
+  "retrieved_at": "2026-10-08T11:36:57.980955+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Chakala Andheri East 15 minute AQI Data for 2024-25",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/defccef1-4f29-4969-ac7e-1394d69fe7a5/download/409d604b-99ff-4388-abf3-4fe3d86d3109.csv",
+  "request_sha256": "a67acc0f3cd3705c47a18227bd9c74071b8f765634dd5dd1addee9247bb5dd1c",
+  "path": "opencity/delhi/defccef1-4f29-4969-ac7e-1394d69fe7a5.csv",
+  "sha256": "3ce639a612091679084ac60ede809834406fae680ea120bd2c11708e2b91fefb",
+  "size_bytes": 288273,
+  "retrieved_at": "2026-10-08T11:30:59.466491+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Narela DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

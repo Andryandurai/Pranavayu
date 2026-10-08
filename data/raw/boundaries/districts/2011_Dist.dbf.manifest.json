@@ -1,0 +1,14 @@
+{
+  "url": "https://raw.githubusercontent.com/datameet/maps/b3fbbde595310b397a55d718e0958ce249a4fa1f/Districts/Census_2011/2011_Dist.dbf",
+  "request_sha256": "2c89565bca722bd9d6996a77d32312b78a41e105d6abe38a55ed1118067a77bc",
+  "path": "boundaries/districts/2011_Dist.dbf",
+  "sha256": "2c7b03578fdf41a4c4e29941a564fa90bf0b0e4f865f5e54481ef7ac8494eb7d",
+  "size_bytes": 54678,
+  "retrieved_at": "2026-10-08T07:35:19.214227+00:00",
+  "content_type": "application/octet-stream",
+  "metadata": {
+    "commit": "b3fbbde595310b397a55d718e0958ce249a4fa1f",
+    "layer": "districts",
+    "district_vintage": 2011
+  }
+}

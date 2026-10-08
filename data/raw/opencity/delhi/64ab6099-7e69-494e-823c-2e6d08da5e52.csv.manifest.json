@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/0dc7b9fe-9fd4-46ee-a37e-88f0bd6f6362/resource/64ab6099-7e69-494e-823c-2e6d08da5e52/download/cc428f84-cc61-4ef8-934b-b4e7fc397e74.csv",
+  "request_sha256": "53e3b86b8658e71495e51928b03125334afb1dbfc0764510249c44cbba4feada",
+  "path": "opencity/delhi/64ab6099-7e69-494e-823c-2e6d08da5e52.csv",
+  "sha256": "a7ae8a6787ba7a669dfb19b529129534058833b3086ef0274345a6d5f9dbd324",
+  "size_bytes": 248406,
+  "retrieved_at": "2026-10-08T11:30:11.620043+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Delhi",
+    "resource_name": "Alipur DPCC AQI Data 2017-2023",
+    "package": "delhi-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

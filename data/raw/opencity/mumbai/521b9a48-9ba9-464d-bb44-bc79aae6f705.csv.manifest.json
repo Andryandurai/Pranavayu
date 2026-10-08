@@ -1,0 +1,15 @@
+{
+  "url": "https://data.opencity.in/dataset/a99667bf-a5b8-40ae-9553-1329847292f4/resource/521b9a48-9ba9-464d-bb44-bc79aae6f705/download/8c85cdb2-b739-4265-a9c5-ce50e5700f40.csv",
+  "request_sha256": "c57837db37c5e6b42963474c34c058e9ae1098520693ae4917700cc1937a4868",
+  "path": "opencity/mumbai/521b9a48-9ba9-464d-bb44-bc79aae6f705.csv",
+  "sha256": "b034ccb7acfd4560822054751bed61439127de89153594eb8c5671a439edbb0d",
+  "size_bytes": 123831,
+  "retrieved_at": "2026-10-08T11:35:41.132614+00:00",
+  "content_type": "text/csv",
+  "metadata": {
+    "city": "Mumbai",
+    "resource_name": "Khindipada Bhandup West IITM AQI Data 2017-2023",
+    "package": "mumbai-hourly-air-quality-reports",
+    "licence": "Other (Public Domain)"
+  }
+}

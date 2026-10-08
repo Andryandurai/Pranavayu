@@ -1,0 +1,10 @@
+{
+  "url": "https://data.opencity.in/api/3/action/package_search?q=Kanpur+air+quality&rows=100",
+  "request_sha256": "b3322e5c5cc978c4e87edb329337e0943b884329301bca985967129ee8e06a72",
+  "path": "opencity/catalogues/kanpur.json",
+  "sha256": "679dd61c172de4fa58c19240cff8deb56369199e3f6f069024f5e5c8ada79725",
+  "size_bytes": 452645,
+  "retrieved_at": "2026-10-08T11:35:12.398485+00:00",
+  "content_type": "application/json;charset=utf-8",
+  "metadata": {}
+}

@@ -1,0 +1,15 @@
+{
+    "url":  "https://data.opencity.in/dataset/3a0c1c28-dbd2-42f0-8d76-7acb0b2f9e18/resource/ad9debfa-aa31-4776-bd67-c7419b34f42d/download/39247c0a-3540-480f-8cde-7b54cfa561d7.csv",
+    "request_sha256":  "05e07f5a0fb2ebac7bbb555b1650a7c1c1ae5faa2e347f3e18c996b12b90e353",
+    "path":  "opencity/kolkata/ad9debfa-aa31-4776-bd67-c7419b34f42d.csv",
+    "sha256":  "3ac96027c35fcd45a2a769930fe971e69f9cc68e3b31ad8391442629f452ffed",
+    "size_bytes":  189396,
+    "retrieved_at":  "2026-10-08T11:23:58.710648+00:00",
+    "content_type":  "text/csv",
+    "metadata":  {
+                     "city":  "Kolkata",
+                     "resource_name":  "Bidhannagar WBPCB AQI Data 2017-2023",
+                     "package":  "kolkata-hourly-air-quality-reports",
+                     "licence":  "Other (Public Domain)"
+                 }
+}
