@@ -67,6 +67,26 @@ class OpenCitySource(AirSource):
                     if manifest_path.exists()
                     else {}
                 )
+                from apps.ingest.clocks import CLOCK_VERSION, approved_clock
+
+                manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+                if approved_clock(path, manifest.get("sha256")):
+                    metadata["published_clock_timezone"] = "Asia/Kolkata"
+                    self.run.params["timestamp_clock_version"] = CLOCK_VERSION
+                else:
+                    import csv
+
+                    from apps.ingest.models import IngestionRun
+
+                    with path.open(encoding="utf-8-sig", newline="") as stream:
+                        fields = next(csv.reader(stream))
+                    canonical = IngestionRun.objects.filter(
+                        source__slug="opencity", params__timestamp_clock_version=CLOCK_VERSION
+                    ).exists()
+                    if canonical and "Timestamp" in fields:
+                        raise SourceUnavailable(
+                            "Unverified new publisher clock; approve its evidence first"
+                        )
                 self.load_csv(path, registry=registry, quarter=True, metadata=metadata)
             except Exception as exc:
                 self.fail_asset(path.relative_to(self.cache.root), exc)

@@ -267,7 +267,12 @@ class AirSource(Source):
                     registry,
                 )
             station = stations[external_id]
-            instant = to_utc(timestamp)
+            if (metadata or {}).get("published_clock_timezone") == "Asia/Kolkata":
+                from apps.ingest.clocks import published_ist_to_utc
+
+                instant = published_ist_to_utc(timestamp)
+            else:
+                instant = to_utc(timestamp)
             values = []
             if "parameter_name" in lowered or "pollutant" in lowered:
                 parameter = lowered.get("parameter_name") or lowered["pollutant"]
@@ -310,8 +315,13 @@ class AirSource(Source):
                         }
                     )
         for (station_id, code, unit), samples in series.items():
-            variations = quarter_variation(samples)
-            for instant, value, raw_mean, flag in aggregate_quarters(samples):
+            from datetime import UTC
+
+            from apps.ingest.units import IST
+
+            bins = IST if (metadata or {}).get("published_clock_timezone") else UTC
+            variations = quarter_variation(samples, bins)
+            for instant, value, raw_mean, flag in aggregate_quarters(samples, bins):
                 rows.append(
                     {
                         "station_id": station_id,

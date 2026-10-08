@@ -1,0 +1,110 @@
+{
+  "frozen_at": "2026-10-08T18:47:04.530980+00:00",
+  "baseline_run": 7,
+  "eligible_cities": [
+    "delhi",
+    "hyderabad",
+    "kanpur",
+    "lucknow",
+    "mumbai",
+    "pune",
+    "bengaluru"
+  ],
+  "bengaluru": "fixed panel only",
+  "outer_folds": 3,
+  "inner_folds": 3,
+  "embargo_hours": 24,
+  "seed": 20261009,
+  "variants": [
+    {
+      "name": "hourly_trend_pooled_blh",
+      "target": "hourly",
+      "trend": true,
+      "periods": "pooled",
+      "blh": true
+    },
+    {
+      "name": "hourly_trend_pooled_no_blh",
+      "target": "hourly",
+      "trend": true,
+      "periods": "pooled",
+      "blh": false
+    },
+    {
+      "name": "hourly_no_trend_pooled_no_blh",
+      "target": "hourly",
+      "trend": false,
+      "periods": "pooled",
+      "blh": false
+    },
+    {
+      "name": "hourly_trend_separate_no_blh",
+      "target": "hourly",
+      "trend": true,
+      "periods": "separate",
+      "blh": false
+    },
+    {
+      "name": "daily_trend_pooled_blh",
+      "target": "daily",
+      "trend": true,
+      "periods": "pooled",
+      "blh": true
+    },
+    {
+      "name": "daily_trend_pooled_no_blh",
+      "target": "daily",
+      "trend": true,
+      "periods": "pooled",
+      "blh": false
+    },
+    {
+      "name": "daily_no_trend_pooled_no_blh",
+      "target": "daily",
+      "trend": false,
+      "periods": "pooled",
+      "blh": false
+    },
+    {
+      "name": "daily_trend_separate_no_blh",
+      "target": "daily",
+      "trend": true,
+      "periods": "separate",
+      "blh": false
+    }
+  ],
+  "unchanged_readiness": {
+    "daily_oof_r2_min_each_period": 0.5,
+    "absolute_nmb_percent_max_each_period": 10,
+    "absolute_month_nmb_percent_max_each_period": 20,
+    "minimum_days_month_each_period": 20,
+    "minimum_weeks_each_period": 26
+  },
+  "refits": 20,
+  "bootstrap_unit": "whole IST weeks within year and observed period, with replacement; fixed Run 7 structure",
+  "comparison_interval": "mixture of 20 actual refitted normalisations and 500 year/seven-day observed daily block resamples, with centred nested OOF residuals; pooled weather joint 300 common donors per city/refit",
+  "baseline_ncap": "both calendar 2017 and 2018 required; recent both 2024 and 2025 required; PM2.5 proxy, no official compliance",
+  "seasons": {
+    "winter": [
+      10,
+      11,
+      12,
+      1,
+      2
+    ],
+    "pre_monsoon": [
+      3,
+      4,
+      5
+    ],
+    "monsoon": [
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "explanations": "exact tree-path-dependent TreeSHAP; 30 complete days per era/season, whole hourly days when hourly target; aggregate signed contributions per day before mean absolute; grouped circular wind direction; ALE 12 quantile bins / 12 angular sectors",
+  "gam": "Gaussian statsmodels GLMGam, cubic B-splines df=6 for nonconstant continuous predictors, fixed alpha=10; explicit circular sine/cosine; same outer weeks; no post-result penalty tuning",
+  "interpretation": "associations, predictive weather-only R2 is not causal variance decomposition; no causal policy claims; no forecasts/RAG/simulator/dashboard"
+}

@@ -128,16 +128,30 @@ def verified_ist_station_hours(city):
             raise ValueError(f"No independent source-clock proof for {city.slug}")
     records = list(
         Reading.objects.filter(station__city=city, pollutant__code="pm25").values(
-            "station_id", "observed_at", "value", "quality_flag", "station__source__slug"
+            "station_id",
+            "observed_at",
+            "value",
+            "quality_flag",
+            "station__source__slug",
+            "ingestion_run_id",
         )
     )
     result = pd.DataFrame(records)
     # Stored UTC-hour means came from four publisher wall-clock quarters. Those
     # quarters are IST, so their existing means are exactly native IST-hour means.
-    result["observed_at"] = correct_published_clock(
-        result.observed_at, result["station__source__slug"]
+    from apps.ingest.clocks import CLOCK_VERSION
+    from apps.ingest.models import IngestionRun
+
+    canonical_runs = set(
+        IngestionRun.objects.filter(params__timestamp_clock_version=CLOCK_VERSION).values_list(
+            "pk", flat=True
+        )
     )
-    result = result.drop(columns=["station__source__slug"])
+    pending = ~result.ingestion_run_id.isin(canonical_runs)
+    result.loc[pending, "observed_at"] = correct_published_clock(
+        result.loc[pending, "observed_at"], result.loc[pending, "station__source__slug"]
+    )
+    result = result.drop(columns=["station__source__slug", "ingestion_run_id"])
     excluded = set(
         StationEligibility.objects.filter(excluded_from_city=True).values_list(
             "station_id", flat=True
