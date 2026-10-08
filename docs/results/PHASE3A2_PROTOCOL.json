@@ -1,0 +1,83 @@
+{
+  "frozen_at": "2026-10-08T16:29:51.054711+00:00",
+  "baseline_run": 2,
+  "seed": 42,
+  "n_trees": 100,
+  "max_depth": 12,
+  "min_samples_leaf": 12,
+  "max_features": 0.7,
+  "cv_folds": 5,
+  "cv_week_timezone": "Asia/Kolkata",
+  "cv_embargo_hours": 24,
+  "normalisation_draws": 300,
+  "bootstrap_draws": 500,
+  "criteria": {
+    "daily_oof_r2_min_each_period": 0.5,
+    "absolute_nmb_percent_max_each_period": 10,
+    "absolute_month_nmb_percent_max_each_period": 20,
+    "minimum_days_month_each_period": 20,
+    "minimum_weeks_each_period": 26
+  },
+  "variants": [
+    {
+      "name": "hourly_trend_pooled_blh",
+      "target": "hourly",
+      "trend": true,
+      "periods": "pooled",
+      "blh": true
+    },
+    {
+      "name": "hourly_trend_pooled_no_blh",
+      "target": "hourly",
+      "trend": true,
+      "periods": "pooled",
+      "blh": false
+    },
+    {
+      "name": "hourly_no_trend_pooled_no_blh",
+      "target": "hourly",
+      "trend": false,
+      "periods": "pooled",
+      "blh": false
+    },
+    {
+      "name": "hourly_trend_separate_no_blh",
+      "target": "hourly",
+      "trend": true,
+      "periods": "separate",
+      "blh": false
+    },
+    {
+      "name": "daily_trend_pooled_blh",
+      "target": "daily",
+      "trend": true,
+      "periods": "pooled",
+      "blh": true
+    },
+    {
+      "name": "daily_trend_pooled_no_blh",
+      "target": "daily",
+      "trend": true,
+      "periods": "pooled",
+      "blh": false
+    },
+    {
+      "name": "daily_no_trend_pooled_no_blh",
+      "target": "daily",
+      "trend": false,
+      "periods": "pooled",
+      "blh": false
+    },
+    {
+      "name": "daily_trend_separate_no_blh",
+      "target": "daily",
+      "trend": true,
+      "periods": "separate",
+      "blh": false
+    }
+  ],
+  "selection": "Per city, maximum mean period-specific daily OOF R2 on common valid days across eight fixed variants; tie by listed order. Evaluate readiness on all usable selected-design OOF days, regardless of whether it passes.",
+  "normalisation": "Identical joint complete observed weather/seasonal donor draws pooled across 2015-2019 and 2024-2025 per city. Hold period and within-period trend fixed; no trend bridges the gap.",
+  "normalised_intervals": "500 year/seven-calendar-day block resamples of normalised daily values with centred week-CV daily residuals added for conditional target-variability uncertainty. No model-parameter or station-network uncertainty.",
+  "timestamps": "Never choose a source-clock shift to improve scores. Require source or cross-provider evidence. Rebin cached quarters to IST hours without rewriting original observations."
+}
