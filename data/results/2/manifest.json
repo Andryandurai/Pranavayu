@@ -1,0 +1,614 @@
+{
+  "run": 2,
+  "name": "phase3a",
+  "status": "success",
+  "started_at": "2026-10-08T15:21:29.774289+00:00",
+  "finished_at": "2026-10-08T15:43:21.503357+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2026-10-07"
+  ],
+  "git_commit": "2b0f254ce0ddff9751019c1277ca5ac0e7194726",
+  "parameters": {
+    "seed": 42,
+    "n_trees": 100,
+    "versions": {
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "Django": "5.2.18",
+      "pandas": "2.3.3",
+      "matplotlib": "3.11.2",
+      "scikit-learn": "1.9.1"
+    },
+    "git_state": "versioned",
+    "n_samples": 300,
+    "code_sha256": "30cdb2ccf89c614e917c88bd7a77dfb60b9985c9fdd05cb8b4c0d1a3eafc5ed0",
+    "eligibility": "75% valid calendar hours and days; daily18/monthly75%",
+    "model_validation": "chronological80/20 with seven-day purge",
+    "readiness_screen": {
+      "r2_min": 0.5,
+      "test_min": 1000,
+      "train_min": 2000,
+      "relative_rmse_max": 0.5,
+      "absolute_relative_bias_max": 0.1
+    },
+    "export_revision": {
+      "git_commit": "7e0adff38a82580bfef799dfa9fde2d867c47065",
+      "code_sha256": "017584a496a10e9f5679f01d97ab6b69d7baf260225ce4c96b3c8ded42554864",
+      "started_at": "2026-10-08T15:47:41.867965+00:00",
+      "reason": "Correct only figure axis bounds, empty panels, distinct city colours and report export provenance; data and fitted models unchanged",
+      "finished_at": "2026-10-08T15:47:58.166989+00:00"
+    }
+  },
+  "files": [
+    {
+      "path": "PHASE3A.md",
+      "bytes": 27793,
+      "sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c"
+    },
+    {
+      "path": "ahmedabad_deweathered_daily.csv",
+      "bytes": 36477,
+      "sha256": "efafa3bb0c2c8c9d6999e140bfcec4e16a0a9974864434c0df14132995101d41"
+    },
+    {
+      "path": "ahmedabad_deweathered_monthly.csv",
+      "bytes": 1308,
+      "sha256": "fddda56ab2da726ca5842ffb04cadaad5896cef1c8344bfeddce3c1ccf249ead"
+    },
+    {
+      "path": "ahmedabad_model.json",
+      "bytes": 3086,
+      "sha256": "a19eee4002679e7a5242c193eab1260d7b369f30c498daf98c3ca65c5a0c58e5"
+    },
+    {
+      "path": "ahmedabad_random_forest.joblib",
+      "bytes": 2393992,
+      "sha256": "c5d9f1e7a786d77c0eebe51fb0a383829594d1f3abde029fb2a50debb8ca3956"
+    },
+    {
+      "path": "ahmedabad_raw_daily.csv",
+      "bytes": 92388,
+      "sha256": "25ee5e8db08991ae85674405fa41d5a3c060a2f5c1824d1e5d822fe34b6c54f8"
+    },
+    {
+      "path": "ahmedabad_raw_monthly.csv",
+      "bytes": 3182,
+      "sha256": "f76169f59d1e2ef857eb513dae57c11fb5ab0a16465928b5977761aebbaffa5f"
+    },
+    {
+      "path": "analysis_coverage.csv",
+      "bytes": 38791,
+      "sha256": "e53fb64c3b439b7944a5465450ad078afa8858e789fac20c31b8efc2843e0058"
+    },
+    {
+      "path": "annual_pm25.png",
+      "bytes": 80002,
+      "sha256": "e53cf37b1e7dffdeda6e5d00875c928a94df117231de0da3758643f5501d2e3e"
+    },
+    {
+      "path": "annual_pm25.svg",
+      "bytes": 57064,
+      "sha256": "7cd88a6b9eca934648f98213248d95cb1fb7da41d6bcafad1159612f6adc4a4d"
+    },
+    {
+      "path": "bengaluru_deweathered_daily.csv",
+      "bytes": 120284,
+      "sha256": "3502225430ba9264b221c8dd576b6581a1e576133a61ecbe6664d489f367d830"
+    },
+    {
+      "path": "bengaluru_deweathered_monthly.csv",
+      "bytes": 3965,
+      "sha256": "60ae04c16f428398b616e81fce6b52f91a2777217e3987610a9e97564c9628b1"
+    },
+    {
+      "path": "bengaluru_model.json",
+      "bytes": 3134,
+      "sha256": "13a7f79a715c2840dbf9de10e8c37d859611420bdc403cda4b4615cb71026478"
+    },
+    {
+      "path": "bengaluru_random_forest.joblib",
+      "bytes": 4529728,
+      "sha256": "e4df5ad8f0a35a95ee5a52398ad1b4de38bc4810f753da2932f89d6a35b14557"
+    },
+    {
+      "path": "bengaluru_raw_daily.csv",
+      "bytes": 115395,
+      "sha256": "bb34694b9ad4a7f14d24f38b07028b3a00ae67c15f70e7e761bd84a2afb31c55"
+    },
+    {
+      "path": "bengaluru_raw_monthly.csv",
+      "bytes": 3849,
+      "sha256": "0dec63e7a6d826b253e8de94173b2a821cd22ba32e4e1e098cd6781a34c3b490"
+    },
+    {
+      "path": "chennai_deweathered_daily.csv",
+      "bytes": 106897,
+      "sha256": "f363f77ce0855085559f859d26e09c67438ffdeabb478e448c237c581cde0648"
+    },
+    {
+      "path": "chennai_deweathered_monthly.csv",
+      "bytes": 3550,
+      "sha256": "db751bd2e064e7bc86004ed1a7a49ecb6d3e415949f1a6575d64dbd5394eb792"
+    },
+    {
+      "path": "chennai_model.json",
+      "bytes": 3132,
+      "sha256": "18c628f89335c985e6540f48c556bf8088428d462b60242221350edfc5fc6e7a"
+    },
+    {
+      "path": "chennai_random_forest.joblib",
+      "bytes": 4390553,
+      "sha256": "2258196b0b83bf6efe363fe789f520c47def7325c32125613c47a20ed807321b"
+    },
+    {
+      "path": "chennai_raw_daily.csv",
+      "bytes": 113916,
+      "sha256": "c6097b0fe1e72c0dd3ca7b9b0c86051b8ee3664b1380c747f30184d4cfc1fce2"
+    },
+    {
+      "path": "chennai_raw_monthly.csv",
+      "bytes": 3889,
+      "sha256": "701f9a7eb032d10508c6c726c08af35c74ac9a81f334bc0cb4b7ea826f0bd452"
+    },
+    {
+      "path": "cli-help.log",
+      "bytes": 3266,
+      "sha256": "f1170001def81fc8ec1c6ca8990907f99a3b87ac5fa9c5ad9a11d647d51ea1d7"
+    },
+    {
+      "path": "compose-final.log",
+      "bytes": 2210,
+      "sha256": "c26d3177cbfae5efa71888a03dee3eed528901034212edfef57b604d9e28166e"
+    },
+    {
+      "path": "delhi_deweathered_daily.csv",
+      "bytes": 127252,
+      "sha256": "5c953d7a87859e01d5ec48d3e6521cef272cd05b96e3aa7d247fa7c6f0a0b4b0"
+    },
+    {
+      "path": "delhi_deweathered_monthly.csv",
+      "bytes": 4247,
+      "sha256": "d033dc45e23c880b53365c343d0de2351c967f10b1a8cc2e917231c8b65d1505"
+    },
+    {
+      "path": "delhi_model.json",
+      "bytes": 3136,
+      "sha256": "f3f7ccd81493b6f326f1502794219b5bb3a1e4b2b061d48f773a64c55dde3fe1"
+    },
+    {
+      "path": "delhi_random_forest.joblib",
+      "bytes": 5635768,
+      "sha256": "eaab58a804f0110b2f7acd9ac5c06c6e66d87695fea24c1d550c4fb8fd67ab7c"
+    },
+    {
+      "path": "delhi_raw_daily.csv",
+      "bytes": 119102,
+      "sha256": "b69e877181dc75c42a9504123357c72454cd3da7c969beb91ace44614ed44096"
+    },
+    {
+      "path": "delhi_raw_monthly.csv",
+      "bytes": 3994,
+      "sha256": "c86e96269a503626f53d291f705f49960ad06e349f54ed381ab4f6d00e73143b"
+    },
+    {
+      "path": "deploy-final.log",
+      "bytes": 100,
+      "sha256": "569740892270a412c02f5021e0703ecaafdc8a409e03320c9bdac90bb6558f0b"
+    },
+    {
+      "path": "descriptive_annual.csv",
+      "bytes": 2389,
+      "sha256": "ec047c1cd5bfedf4a69547c4b3f4b01d8bd94d8e9b26ffe8efb5f212892e2eb4"
+    },
+    {
+      "path": "descriptive_change.csv",
+      "bytes": 2264,
+      "sha256": "0ff1bf77eb0bcfc26bf5df34c5578a6041354df3825adf536bd80519d770b90b"
+    },
+    {
+      "path": "descriptive_climatology.csv",
+      "bytes": 4393,
+      "sha256": "0e5475e76e9ae7fcdb832ec88b3ef3c3b62b2ff573ad83a8d535cc0f7c00d24a"
+    },
+    {
+      "path": "descriptive_diurnal.csv",
+      "bytes": 48958,
+      "sha256": "16c0fa4eaa8e096e9007a65b035b606b035f20110f8cc1caa9eb2830cf9d1f20"
+    },
+    {
+      "path": "descriptive_diwali.csv",
+      "bytes": 15129,
+      "sha256": "fea95e62e84e738e193bf3ba88eb54609b4bba8bd04aa8a6dcbad6686f488e53"
+    },
+    {
+      "path": "descriptive_weekday.csv",
+      "bytes": 4078,
+      "sha256": "de8752b3b6546b50c2cbd95d0cecf519c1e2995dfc121d00467462aa760227ea"
+    },
+    {
+      "path": "descriptive_winter_smog.csv",
+      "bytes": 6535,
+      "sha256": "1dd3e4f953af1424347e24cd1b907c937bd212aea03384bf3537660972c15326"
+    },
+    {
+      "path": "deweathering_performance.csv",
+      "bytes": 2632,
+      "sha256": "26b096cb238918ff2277ec64602941f6fc79d34f68e062d8730f28e0d2cfad51"
+    },
+    {
+      "path": "diwali_window.png",
+      "bytes": 211833,
+      "sha256": "3e0f653a3cb7b0dd3b6a4ee825d744cf126ab66c6441d83da87fd7578af3550e"
+    },
+    {
+      "path": "diwali_window.svg",
+      "bytes": 63597,
+      "sha256": "3ea47f0af192b07136e5b4cfe4cb189d528b92fc189dbc3d476c32d3af1b927f"
+    },
+    {
+      "path": "docker-version.log",
+      "bytes": 1568,
+      "sha256": "b04942315b889d6af2e7881a148c161cfb210d55f9f1510cb7b01b6fd3431ce7"
+    },
+    {
+      "path": "flag_audit.json",
+      "bytes": 3522139,
+      "sha256": "91e247e9be0db24f1a72b4c6a94c81693569a9a41d8747b8e7d46ce36335530c"
+    },
+    {
+      "path": "flag_rates.png",
+      "bytes": 66521,
+      "sha256": "0a2a09c474c2d8e68d05d48b1329d5d93f62dab425bd133b8848ae56ac2bf8d2"
+    },
+    {
+      "path": "flag_rates.svg",
+      "bytes": 36960,
+      "sha256": "57bd0f88ad0dc4e6523133d8f7d15a82090d65bc3a189b50beb37ed0c0adf1bb"
+    },
+    {
+      "path": "flags_after.csv",
+      "bytes": 325495,
+      "sha256": "2955dd1aea91421e59195bed8686368a6ba8dc5bf4f6bffa7301c7123a6b47d0"
+    },
+    {
+      "path": "flags_before.csv",
+      "bytes": 325495,
+      "sha256": "2955dd1aea91421e59195bed8686368a6ba8dc5bf4f6bffa7301c7123a6b47d0"
+    },
+    {
+      "path": "health-final.log",
+      "bytes": 880,
+      "sha256": "7b09c8b9bfd1a2600c00531559e4b78b9b1ab0d4292274a1f1a2bdcfcd86208f"
+    },
+    {
+      "path": "hyderabad_deweathered_daily.csv",
+      "bytes": 107234,
+      "sha256": "f09afd7a694b6647935f0e0261f7376a922dec4d47ab54d72d64b4db008c3ab4"
+    },
+    {
+      "path": "hyderabad_deweathered_monthly.csv",
+      "bytes": 3571,
+      "sha256": "70f4e4855f769285c4d6ec73c0d4a01b8ca1cad010d47ec202a43282f645f2f2"
+    },
+    {
+      "path": "hyderabad_model.json",
+      "bytes": 3134,
+      "sha256": "cbaf88c3d807fd2cf86bebfcea5b573476656b58cf200d76f19fb4a7b58319c3"
+    },
+    {
+      "path": "hyderabad_random_forest.joblib",
+      "bytes": 4610303,
+      "sha256": "922022631633dcb13ad45f41807711812660b9924e605088203efebae150c91f"
+    },
+    {
+      "path": "hyderabad_raw_daily.csv",
+      "bytes": 114531,
+      "sha256": "e16d6fdccca61b5bfdfda9584dc2031cb7baa27fca43d3f22994eff121022311"
+    },
+    {
+      "path": "hyderabad_raw_monthly.csv",
+      "bytes": 3886,
+      "sha256": "bc5ea57532f3bf7705f5439ff1ae3bc24801649e95a1292f787d22d79eca4793"
+    },
+    {
+      "path": "jaipur_deweathered_daily.csv",
+      "bytes": 39502,
+      "sha256": "773845f7147987679096f1ae9c5f3d5cdc411c2384e498cdaacacda4c10cf7ba"
+    },
+    {
+      "path": "jaipur_deweathered_monthly.csv",
+      "bytes": 1347,
+      "sha256": "ee54f864865abdba3a0ca48581635c9c50f41be845024f8c67b4bd445605a7b6"
+    },
+    {
+      "path": "jaipur_model.json",
+      "bytes": 3105,
+      "sha256": "8ac7640bee885daff8e7f693a291c18380c723896b9de8d1954b32b9bcc351b6"
+    },
+    {
+      "path": "jaipur_random_forest.joblib",
+      "bytes": 2683768,
+      "sha256": "687cf8f52083e29a3e4a365395d8bdaa9bea189b75d9b1dd5550c76900e1ce76"
+    },
+    {
+      "path": "jaipur_raw_daily.csv",
+      "bytes": 87901,
+      "sha256": "ac3dbdecac87ebadb0fef17913922884f088dff9f1bfc32276fcf36cd587b4cb"
+    },
+    {
+      "path": "jaipur_raw_monthly.csv",
+      "bytes": 2940,
+      "sha256": "005037511ab6c6dec247e1acb15213e232d7bce2a4e888110eb6c07083cac94a"
+    },
+    {
+      "path": "kanpur_deweathered_daily.csv",
+      "bytes": 71396,
+      "sha256": "406709a686383760fe78832e50c4ce0cbcc6ddc2f23d01bf39f04ed30591ce1e"
+    },
+    {
+      "path": "kanpur_deweathered_monthly.csv",
+      "bytes": 2419,
+      "sha256": "40f246c9c43abf26f46812de37bb57b0ee64d44bbc45120653c150e02136914f"
+    },
+    {
+      "path": "kanpur_model.json",
+      "bytes": 3094,
+      "sha256": "09407f7acce242a2fb75eee383683710985fb08f55f53dcff75bfd8387bae1d3"
+    },
+    {
+      "path": "kanpur_random_forest.joblib",
+      "bytes": 3631884,
+      "sha256": "8ae7caa31f285bc1bb6d43a115355ce69ea9b9c03ce28b752510e8b02f9b16d3"
+    },
+    {
+      "path": "kanpur_raw_daily.csv",
+      "bytes": 96296,
+      "sha256": "4df1d0dc134a859856042d66e95266f163ccd7a523fd5993f2ffdb32087cf180"
+    },
+    {
+      "path": "kanpur_raw_monthly.csv",
+      "bytes": 3347,
+      "sha256": "1dce02a0add86d3ddd1cd078a69b20b7e52774a801647729edf570fff8515d39"
+    },
+    {
+      "path": "kolkata_deweathered_daily.csv",
+      "bytes": 49411,
+      "sha256": "2d9c78af5c7e75f4d1952f79b1da7def0953bd796f72716371ae00afef4ea9a1"
+    },
+    {
+      "path": "kolkata_deweathered_monthly.csv",
+      "bytes": 1672,
+      "sha256": "2fb34f4a8f79c0112d0e45dfc3cee570bbe196755c10c32b563e74f09d912c98"
+    },
+    {
+      "path": "kolkata_model.json",
+      "bytes": 3117,
+      "sha256": "cdbfb22218356df3679cd08bfba20eb43498d140049418dc6a96403a2040c319"
+    },
+    {
+      "path": "kolkata_random_forest.joblib",
+      "bytes": 2799360,
+      "sha256": "2caef62aaf09208e8b9438ea53903747af9c38a642f87b80d359ca2b839d0df4"
+    },
+    {
+      "path": "kolkata_raw_daily.csv",
+      "bytes": 95868,
+      "sha256": "73a436d5f05d7316199b50ce014bcf3caf05e2d43cd81a048f8a1d46183f0273"
+    },
+    {
+      "path": "kolkata_raw_monthly.csv",
+      "bytes": 3219,
+      "sha256": "ebb6e2d7b472e5976701ccdc4837f36cd45c63e5322bd3141bb0769a9d49a4bb"
+    },
+    {
+      "path": "lucknow_deweathered_daily.csv",
+      "bytes": 90203,
+      "sha256": "e88867878a7659405859316026f4af635e384fcf593182a7be00d27f84291d5f"
+    },
+    {
+      "path": "lucknow_deweathered_monthly.csv",
+      "bytes": 2988,
+      "sha256": "21131b6cceb259c7ad4f38eebfb7a98878df380dcea5b9c7c1a1112cd6332bf6"
+    },
+    {
+      "path": "lucknow_model.json",
+      "bytes": 3121,
+      "sha256": "cc1b04e9f4817dd0bbba9f4b96e2a9e360fed593bc18f9a411aef2f2241c3e35"
+    },
+    {
+      "path": "lucknow_random_forest.joblib",
+      "bytes": 4062386,
+      "sha256": "fe3217d56b9a8c4ae353b1b158b234aa7b6d6b9aaf9776ca423f455f9b30d9de"
+    },
+    {
+      "path": "lucknow_raw_daily.csv",
+      "bytes": 101194,
+      "sha256": "3f57cd91c9ff76d67cf06a1a1c9b30c4c483f75279f922c3532c72e05326bc75"
+    },
+    {
+      "path": "lucknow_raw_monthly.csv",
+      "bytes": 3434,
+      "sha256": "8719e81ce302dbf9ebb3adac81823a78d5769cff0a247d53a7b3cc1c29ee09e1"
+    },
+    {
+      "path": "monthly_climatology.png",
+      "bytes": 376164,
+      "sha256": "0d172c981cdd0b9c2c0485eb3fdb19f4431664ba0159e8261a4277332e860b75"
+    },
+    {
+      "path": "monthly_climatology.svg",
+      "bytes": 144750,
+      "sha256": "403f20d04a9665f9413200788536a3dbb8191c39a2453bef05d1d1d73c152885"
+    },
+    {
+      "path": "mumbai_deweathered_daily.csv",
+      "bytes": 104963,
+      "sha256": "032aac8d4975c8c92cf4ab8a27dee7dc0c6f670183b5bbd848f27e5996ef12db"
+    },
+    {
+      "path": "mumbai_deweathered_monthly.csv",
+      "bytes": 3524,
+      "sha256": "456bfb5d21fc03621dfa5162052b5d8a0994d769d82a4580d7552932dc049f25"
+    },
+    {
+      "path": "mumbai_model.json",
+      "bytes": 3144,
+      "sha256": "8006b0cf696dacd3046ca88812409aae02904d9dbc84a1dc668bcf2e787bfbd5"
+    },
+    {
+      "path": "mumbai_random_forest.joblib",
+      "bytes": 4922570,
+      "sha256": "67153e70f6269466d7f9ae2698783cf650cd695bac7ab0323bc36f67456181d5"
+    },
+    {
+      "path": "mumbai_raw_daily.csv",
+      "bytes": 112254,
+      "sha256": "a69b123d55d0868ba6f1fbf8da195342de48d42d919cb7fd0780c304a8956003"
+    },
+    {
+      "path": "mumbai_raw_monthly.csv",
+      "bytes": 3820,
+      "sha256": "2b55846aa79fbbf7118ae980b4ee362630bd66e51c3d01ddb1e2e33d7f5b2a05"
+    },
+    {
+      "path": "patna_deweathered_daily.csv",
+      "bytes": 38275,
+      "sha256": "c44b28bd8bcad5112fe55310cbbb12af3bed11f6d59a00e33371bf35b70e665a"
+    },
+    {
+      "path": "patna_deweathered_monthly.csv",
+      "bytes": 1340,
+      "sha256": "8cd458547389853e624240823ac21f32409147d4ed36712f32e1b0ff6d4cdbbd"
+    },
+    {
+      "path": "patna_model.json",
+      "bytes": 3083,
+      "sha256": "37aea4801508e8d6e8a6f11d602456667f887e48c2e884c7692656a6555f4bfb"
+    },
+    {
+      "path": "patna_random_forest.joblib",
+      "bytes": 2608090,
+      "sha256": "b22a027a06040c986558ecb56cc986963c421b2cf73400906b8dc4dbe1b9f0e9"
+    },
+    {
+      "path": "patna_raw_daily.csv",
+      "bytes": 91064,
+      "sha256": "218e0ad415c08682850be49e3143b1de284e246f8ccac49588e9cb9101516b7b"
+    },
+    {
+      "path": "patna_raw_monthly.csv",
+      "bytes": 3051,
+      "sha256": "2944dc03e014ae72c3eb793a5760fe7543395cf49b62ea76f71a39e73a3df53f"
+    },
+    {
+      "path": "powershell-stderr-probe.log",
+      "bytes": 1000,
+      "sha256": "42a313c8525cab7194d28d33c36149e8710d43c926dc4774b9c09233111dd0bf"
+    },
+    {
+      "path": "precision_audit.json",
+      "bytes": 4898,
+      "sha256": "f56b0ca681738460cc4fcc6936190b7a14f70fbc4f989b268be745204aab49c5"
+    },
+    {
+      "path": "pune_deweathered_daily.csv",
+      "bytes": 29645,
+      "sha256": "0df8aa90ccc4d515c2982bf713d9d09eecc12c81d7ff29528c85279bd4bc6f42"
+    },
+    {
+      "path": "pune_deweathered_monthly.csv",
+      "bytes": 1021,
+      "sha256": "da188f1cbf0ea2f96ce2cf27922b26d087ef2490ca9c26bd6859829003125fbe"
+    },
+    {
+      "path": "pune_model.json",
+      "bytes": 3081,
+      "sha256": "0f614814628865b2ac4ad27b150cb94ffd8ed8e8e87f6f2a972060b25e27b5ec"
+    },
+    {
+      "path": "pune_random_forest.joblib",
+      "bytes": 2046001,
+      "sha256": "906e2ce18f229083b0d8f905f408dd56fd1145465328a262e91edadc83ea5f6e"
+    },
+    {
+      "path": "pune_raw_daily.csv",
+      "bytes": 86415,
+      "sha256": "2c5ffe82576f65bd5f16f03b9353fe719eae1c64cb8f29908bc9ba694cf85a68"
+    },
+    {
+      "path": "pune_raw_monthly.csv",
+      "bytes": 2889,
+      "sha256": "22ea8c0956e8420fca7bec0b4d6e88f97440fe14206af7199531a82f733f5f0a"
+    },
+    {
+      "path": "pytest-completion.log",
+      "bytes": 4088,
+      "sha256": "adf5459ff92834277342d8967a51cd28a1842926073e98a97df0f1f19b435f77"
+    },
+    {
+      "path": "quarter_flag_evidence.csv",
+      "bytes": 18270569,
+      "sha256": "ecbac68a15268ab4ffb800c39f790053e28e07475bed763ffc9a08e0e70733b2"
+    },
+    {
+      "path": "raw_deweathered_monthly.png",
+      "bytes": 1184820,
+      "sha256": "0245da474e536248257f10275ee5a61aff87e19fcdbcf340976e73eef0fcff79"
+    },
+    {
+      "path": "raw_deweathered_monthly.svg",
+      "bytes": 413632,
+      "sha256": "77037e813a4ed684907d6351816a1855d8fa576522867d56654c2ec33873110b"
+    },
+    {
+      "path": "raw_flag_examples.json",
+      "bytes": 139237,
+      "sha256": "c203eed17424ba4f671174842c5c8e1fa302bb7adbdf4e37315e986dce837298"
+    },
+    {
+      "path": "ruff-completion.log",
+      "bytes": 100,
+      "sha256": "e6813102171fbc103f923a526afdf18fa69ad647549934ef6fdaf4a088727187"
+    },
+    {
+      "path": "schema-final.log",
+      "bytes": 54882,
+      "sha256": "56813b647aa9c3f1c1ba2814ab96fcc75ed9870ab7e86cbdb5170b66d1e2bbd7"
+    },
+    {
+      "path": "seasonal_diurnal.png",
+      "bytes": 598309,
+      "sha256": "d5c226f4c7105588298602f2ad7466d352dedcfb6bef1f8b557e86b8cc11f72c"
+    },
+    {
+      "path": "seasonal_diurnal.svg",
+      "bytes": 153412,
+      "sha256": "4144f973c0aa247a8dc3341aa6a8da7f8fc0d26a1023df65b8a39b0f8336c05c"
+    },
+    {
+      "path": "verification-final.log",
+      "bytes": 2716,
+      "sha256": "a0ce26bdc8bebd6b7d66a1a54745c4a4aa59351e7bff0e17b593dafff09e9b97"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 28051,
+      "sha256": "cf9ec270b840dd05c0c6bcdb26a0642cf0c7e0f664356dc8c83d3108b5974523"
+    },
+    {
+      "path": "verify_final.py",
+      "bytes": 8206,
+      "sha256": "03175b0b0bf25ff9057a6673d93ebac28ddafefd7725af94c937a904c621a215"
+    }
+  ],
+  "error_message": "",
+  "post_run_export": {
+    "git_commit": "7e0adff38a82580bfef799dfa9fde2d867c47065",
+    "code_sha256": "017584a496a10e9f5679f01d97ab6b69d7baf260225ce4c96b3c8ded42554864",
+    "started_at": "2026-10-08T15:47:41.867965+00:00",
+    "reason": "Correct only figure axis bounds, empty panels, distinct city colours and report export provenance; data and fitted models unchanged",
+    "finished_at": "2026-10-08T15:47:58.166989+00:00"
+  },
+  "verification_at": "2026-10-08T15:57:33.493938+00:00"
+}

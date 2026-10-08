@@ -130,6 +130,8 @@ the wrapper and returns a failure; the `test` target runs checks, migration drif
 and the entire suite inside `web`, explicitly selecting test settings with `--ds`
 so Compose's development environment cannot override pytest's configuration.
 Docker command temporary files also stay under the active project's `.tools/temp`.
+Native stderr stays visible; the wrapper uses the real exit code so informational
+Python/Docker logs do not falsely fail a successful command on PowerShell 5.1.
 `down` preserves volumes. Run commands normally;
 if PowerShell reports an execution-policy error, use a process-only invocation:
 `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\dev.ps1 test`.

@@ -548,3 +548,158 @@ the completed public pipeline. Optional OpenAQ/FIRMS/CDS live access remains
 unverified until credentials exist; original Princeton delivery still requires
 account access. Reopen the D: checkout in the client if its visible workspace
 still points at the retained C: backup. No Phase 3 feature was implemented.
+
+## Phase 3A live verification — 8 October 2026
+
+All work uses `D:\EnviroInsights-India` and the existing Compose database. No
+warehouse data volume was removed. The baseline 87 tests remain unchanged: all
+13 original Python test-file SHA256 values match `.tools/tests-before-phase3a.json`.
+The 23 added analytics cases use small fixtures and mock external HTTP; the
+existing foundation checks still exercise local PostgreSQL, Redis and Celery.
+
+The first real pipeline ran through Celery as task
+`4b1009c3-8ef1-410c-b1e4-cf0629b5d180`, AnalysisRun **1**, and succeeded.
+Its CLI returned:
+
+```text
+Phase 3A completed: AnalysisRun 1
+```
+
+It corrected **12,498** stuck flags, built **1,228,198** city/pollutant/hour rows,
+identified **52** eligible PM2.5 city-years, fitted all **12** city forests and
+exported **98** initially manifested artifacts. A later file-hash/size check
+matched all 98. The count/hash of all 16,266,240 warehouse readings, measured/raw
+values, natural keys and original ingestion links remained unchanged:
+`{'rows': 16266240, 'order_independent_record_hash': 695864490642684660}`.
+Corrections were 12,415 CO,
+44 O3, 32 NH3 and 7 PM10 rows; all changed stuck → ok. Most flags were missing
+data rather than questionable finite readings. The detailed initial audit and
+raw-quarter evidence are preserved under `data/results/1/`.
+
+The initial image lacked Git and the checkout was not versioned. Added Git to
+the Docker image, created a local code snapshot (no remote/push), checked staged
+files against actual secret values without printing them, and verified that
+`.env`, `.tools`, raw bodies and result bodies are excluded; manifests remain
+eligible. Revision **2b0f254ce0ddff9751019c1277ca5ac0e7194726** is available
+inside the rebuilt containers. Source SHA256 is
+`30cdb2ccf89c614e917c88bd7a77dfb60b9985c9fdd05cb8b4c0d1a3eafc5ed0`.
+The final repeat run retains the initial measured pre-correction audit, rather
+than replacing it with already-corrected repeat-run counts.
+
+Actual checks before and after the image rebuild:
+
+```text
+PS D:\EnviroInsights-India> .\scripts\dev.ps1 test
+System check identified no issues (0 silenced).
+No changes detected
+collected 110 items
+110 passed, 1 warning in 48.78s
+
+RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility.
+Expected 16 from C header, got 96 from PyObject
+
+PS D:\EnviroInsights-India> .\scripts\dev.ps1 lint
+All checks passed!
+135 files already formatted
+
+PS D:\EnviroInsights-India> .\scripts\dev.ps1 schema
+Schema exit code: 0
+
+PS D:\EnviroInsights-India> docker compose exec -T web python manage.py check --deploy --settings=enviroinsights.settings.prod
+System check identified no issues (0 silenced).
+```
+
+The known NetCDF/NumPy import warning is not filtered. Production check reported
+no warnings. Earlier full-suite execution before the Git image rebuild also
+passed all 110 checks in 45.96 seconds. Full local outputs are retained in
+`.tools/phase3a-validation/`. New-suite coverage includes completeness boundaries,
+equal-station weighting/exclusions, Diwali/exceedances, corrected flags, replay
+immutability, deterministic blocked RF fitting, direct-donor equivalence and
+read-only/gap-safe APIs. No original test was changed to obtain these results.
+
+Initial live HTTP checks returned 200 for health (every check true), coverage
+(144 PM2.5 city-years, 52 eligible), Delhi summary (26 metrics), Delhi raw daily
+series for 2025 (365 rows) and deweathered monthly queries inside the gap (zero
+rows). Final repeat-run comparisons and API/export validation are recorded below.
+Scientific performance and full coverage tables are
+in [results/PHASE3A.md](results/PHASE3A.md); successful execution does not imply
+reliable weather normalisation for research.
+
+The change from Phase 2's 53 eligible city-years to 52 is explained by Patna 2016:
+it has 6,981/8,784 valid hours, but only 257/366 days meet the daily 18-hour rule.
+It fails the new ≥75% valid-day requirement. This is a stricter analysis selection,
+not deletion or interpolation of historical data.
+
+### Completed repeat run and final checks
+
+Task **a0588198-5fb5-4478-8430-fec71e561947**, AnalysisRun **2**, finished
+**successfully**. Database job times are 20:51:29–21:13:21 IST; elapsed
+**1,311.729 seconds**. Celery recorded SUCCESS after finishing the manifest.
+The repeat changed **zero** flags, inspected **104,660** quarter-backed candidates
+(including previously cleared candidates), found the same **129** varying-quarter
+candidates, and retained the original measurement/provenance fingerprint. Run 1's
+pre-correction baseline remains explicitly linked in Run 2's `flag_audit.json`.
+WorldPop registration run 80 succeeded with zero downloads/new observations.
+
+The wrapper initially reported failure because PowerShell 5.1 treated a redirected
+Matplotlib INFO message, `generated new fontManager`, as a terminating native
+error record. The Celery job itself succeeded. `Invoke-Compose` now leaves stderr
+visible and checks the real exit code. A fresh-font-cache management-shell probe
+produced that actual INFO message plus deliberate stderr and exited 0; a second
+probe exited 7 and the wrapper correctly raised:
+
+```text
+Native stderr success probe completed
+Deliberate native stderr probe, exit 0
+Confirmed: stderr remains visible, wrapper exit 0
+Real failure preserved: docker compose exec -T web python manage.py shell --command=import sys; sys.exit(7) failed (exit 7).
+```
+
+Figure review found that empty-era panels had Matplotlib's default clock-date
+labels. Fixed explicit era boundaries, marked empty panels “No observed series”,
+used matched scales per city and distinct city colours, and split annual plots
+into the two observed eras. Regenerated only figures/report from the saved real
+Run 2 tables/CSVs. Computation revision remains `2b0f254`; export revision is
+**7e0adff38a82580bfef799dfa9fde2d867c47065**, recorded with its code SHA256,
+reason and actual export times in `AnalysisRun.parameters` and the manifest.
+No data value, fitted model or quantitative result changed during this export.
+
+The final verifier checked the actual task result, code/version provenance,
+original test hashes, unchanged 16,266,240-row fingerprint, exclusions/default
+population, coverage, absence of gap/future modelled rows, pandas export, all
+model scores and all recorded artifact hashes/sizes. Actual output:
+
+```text
+Validated 103 real HTTP responses, 57 reproduced CSVs and all 12 city model metrics
+manifested_files_verified: 99
+eligible_pm25_city_years: 52
+city_hourly_rows: 1228198
+delhi_dataframe_rows: 61118
+deweathered_gap_rows: 0
+```
+
+CSV/model comparisons passed within numerical tolerance 1e-10; the explanatory
+text for an unavailable old/recent comparison was corrected to “At least one
+observed era lacks eligible years”. All remaining values match. HTTP checks cover
+all 12 cities, both series kinds/frequencies, missing-BLH periods and the gap;
+all successful reads returned 200, writes 405, invalid filters 400 and unknown
+runs/cities 404. During execution the default API continued to serve successful
+Run 1, with incomplete Run 2 returning 404; after completion it served Run 2.
+
+The full suite was rerun after the wrapper/export fixes:
+
+```text
+System check identified no issues (0 silenced).
+No changes detected
+110 passed, 1 warning in 50.62s
+All checks passed!
+135 files already formatted
+```
+
+The same NetCDF/NumPy warning remains visible. Full outputs, the standalone
+verification script and `verification.json` are retained with Run 2's artifacts;
+its manifest includes supplemental verification evidence. No city passed the
+predefined meteorological-normalisation readiness screen. Descriptive datasets
+are available, but RF normalisation needs further scientific validation before
+Phase 3B relies on it. Phase 3B questions, forecasts, RAG, simulators and dashboards
+were not implemented.
