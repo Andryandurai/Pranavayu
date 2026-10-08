@@ -44,7 +44,7 @@ def hyderabad_raw_audit(data, output):
         column = next(h for h in headers if h.startswith("PM2.5 ("))
         rows = pd.read_csv(path, usecols=["Timestamp", "Station ID", "Station Name", column])
         # Verified publisher wall clock: stripping the incorrect offset restores IST dates.
-        rows = rows[rows.Timestamp.str.startswith("2025-")].copy()
+        rows = rows[rows.Timestamp.str.startswith("2025-", na=False)].copy()
         rows = rows.drop_duplicates(["Station ID", "Timestamp"])
         values = pd.to_numeric(rows[column], errors="coerce").dropna()
         if values.empty:
@@ -160,6 +160,26 @@ def geography_figures(data, output):
     return geo, summaries, counts
 
 
+def full_weather_nulls(data, output):
+    records = []
+    for path in sorted(data.glob("*_weather.pkl")):
+        frame = pd.read_pickle(path)
+        for variable in frame.columns.drop("observed_at"):
+            records.append(
+                dict(
+                    city=path.stem.removesuffix("_weather"),
+                    variable=variable,
+                    hours=len(frame),
+                    nulls=int(frame[variable].isna().sum()),
+                    first=frame.observed_at.min().isoformat(),
+                    last=frame.observed_at.max().isoformat(),
+                )
+            )
+    result = pd.DataFrame(records)
+    result.to_csv(output / "full_weather_nulls.csv", index=False)
+    return result
+
+
 def model_figures(summary, original, comparisons, data, output):
     cities = [r["city"] for r in summary]
     variants = list(dict.fromkeys(r["variant"] for r in comparisons))
@@ -263,6 +283,9 @@ def update_manifest(run, output):
     manifest = json.loads(path.read_text())
     commit, metadata = code_metadata()
     manifest["export_revision"] = dict(git_commit=commit, **metadata)
+    hourly_path = output / "D4_corrected_hourly_validation.json"
+    if hourly_path.exists():
+        manifest["supplement_revision"] = json.loads(hourly_path.read_text())["supplement_revision"]
     files = []
     for item in sorted(output.rglob("*")):
         if item.is_file() and item.name != "manifest.json":
@@ -290,9 +313,11 @@ def export_report(run_id):
     figures.mkdir(exist_ok=True)
     summary = json.loads((output / "readiness.json").read_text())
     original = json.loads((output / "D4_original_validation.json").read_text())
+    corrected_hourly = json.loads((output / "D4_corrected_hourly_validation.json").read_text())
     comparisons = json.loads((output / "D5_comparisons.json").read_text())
     changes = pd.read_csv(output / "old_recent_differences.csv")
     geo, geo_summary, network = geography_figures(data, figures)
+    full_nulls = full_weather_nulls(data, figures)
     hyde_raw, hyde_days = hyderabad_raw_audit(data, figures)
     model_figures(summary, original, comparisons, data, figures)
     proof = json.loads((root / "docs/results/PHASE3A2_CLOCK_PROOF.json").read_text())
@@ -300,6 +325,11 @@ def export_report(run_id):
         source = root / record["independent_csv"]
         shutil.copyfile(source, figures / source.name)
     (figures / "clock_proof.json").write_text(json.dumps(proof, indent=2))
+    independent_hyderabad = root / ".tools/phase3a2-validation/extras/hyderabad_independent.json"
+    if independent_hyderabad.exists():
+        shutil.copyfile(independent_hyderabad, figures / "hyderabad_independent.json")
+        for source in independent_hyderabad.parent.glob("hyderabad_*_independent.csv"):
+            shutil.copyfile(source, figures / source.name)
     lags = pd.read_csv(data / "alignment_summary.csv")
     nulls = pd.read_csv(data / "weather_nulls.csv")
     hyde = json.loads((data / "hyderabad_sanity.json").read_text())
@@ -478,6 +508,34 @@ def export_report(run_id):
                 for c in summary
             ],
         ),
+        (
+            "Corrected hourly diagnostics below use the selected hourly model, or its "
+            "hourly counterpart from the same frozen variant list when selection favours "
+            "a daily target. These are actual random-hour, week-hour and transfer-hour "
+            "evaluations on corrected data; they are descriptive and do not change "
+            "selection or the daily readiness gate."
+        ),
+        table(
+            [
+                "City",
+                "Hourly design",
+                "a hourly R2",
+                "b hourly R2",
+                "c old/recent R2",
+                "c recent/old R2",
+            ],
+            [
+                [
+                    r["city"],
+                    r["config"]["name"],
+                    fmt(r["random"]["native"]["r2"]),
+                    fmt(r["weeks"]["native"]["r2"]),
+                    fmt(r["transfer"]["native_periods"].get("recent", {}).get("r2")),
+                    fmt(r["transfer"]["native_periods"].get("old", {}).get("r2")),
+                ]
+                for r in corrected_hourly["cities"]
+            ],
+        ),
         "### D5: model structure and method decision",
         (
             "Eight prespecified paired variants compare hourly/daily target, BLH inclusion, "
@@ -523,6 +581,26 @@ def export_report(run_id):
                     fmt(100 * g.nulls.iloc[0] / g.hours.iloc[0], 2),
                 ]
                 for (p, v), g in nulls.groupby(["period", "variable"], sort=True)
+            ],
+        ),
+        (
+            "Across the complete cached weather window, including years outside the "
+            "model eras, null counts are shown separately below. The final provider "
+            "weather day has nulls in every variable and is outside PM model targets. "
+            "The first five IST hours of 2015 precede the source's UTC start and have "
+            "no weather row; absent rows are distinct from null-valued rows. The "
+            "full per-city weather audit is retained in full_weather_nulls.csv."
+        ),
+        table(
+            ["Variable", "Stored source hours all cities", "Null values", "Null %"],
+            [
+                [
+                    variable,
+                    int(group.hours.sum()),
+                    int(group.nulls.sum()),
+                    fmt(100 * group.nulls.sum() / group.hours.sum(), 3),
+                ]
+                for variable, group in full_nulls.groupby("variable")
             ],
         ),
         (
@@ -608,6 +686,24 @@ def export_report(run_id):
         ),
         "### D6: residual seasonality",
         table(
+            ["City", "Era", "Worst month", "OOF days", "Mean bias ug/m3", "NMB %"],
+            [
+                [
+                    r["city"],
+                    period,
+                    int(worst.month),
+                    int(worst.n),
+                    fmt(worst.bias),
+                    fmt(worst.nmb_percent, 2),
+                ]
+                for r in summary
+                for period, group in pd.read_csv(
+                    output / (r["city"] + "_residual_month.csv")
+                ).groupby("period")
+                for worst in [group.loc[group.nmb_percent.abs().idxmax()]]
+            ],
+        ),
+        table(
             ["City", "Era", "Season", "OOF days", "Mean bias ug/m3", "NMB %"],
             [
                 [r["city"], row.period, row.season, row.n, fmt(row.bias), fmt(row.nmb_percent, 2)]
@@ -674,7 +770,21 @@ def export_report(run_id):
             "station composition and averaging distinction above; it is not independently "
             "validated as a citywide exposure claim."
         ),
+        (
+            "Additional independent checks reproduce first-week 2024 hourly values at "
+            "four legacy Hyderabad stations (103-167 matched hours, rounding-level "
+            "differences); no rows were returned for the fifth station in that window. "
+            "The public mirror returned no January 2025 rows for these sites, so this "
+            "does not independently certify their 2025 measurements. The paired CSVs "
+            "and coverage limitations are preserved in hyderabad_independent.json."
+        ),
         "### Updated old/recent differences",
+        (
+            "Normalised series are retained for every city as diagnostic outputs. "
+            "Where a screen fails, their differences and intervals do not qualify "
+            "that city or period for Phase 3B use. The fixed-panel gate is separate "
+            "from the all-station gate."
+        ),
         (
             "Values are equally weighted annual means over each series' eligible observed "
             "years; differences are recent minus old. Raw intervals use 500 "
@@ -696,6 +806,30 @@ def export_report(run_id):
                 "Bootstrap 95% interval",
             ],
             interval_rows(changes),
+        ),
+        table(
+            ["City", "Fixed-panel old/recent OOF R2", "Fixed-panel passes"],
+            [
+                [
+                    r["city"],
+                    "/".join(
+                        fmt(
+                            next(
+                                (
+                                    p["r2"]
+                                    for p in r["fixed_panel"]["readiness"]["periods"]
+                                    if p["period"] == era
+                                ),
+                                None,
+                            )
+                        )
+                        for era in ["old", "recent"]
+                    ),
+                    "PASS" if r["fixed_panel"]["readiness"]["passed"] else "FAIL",
+                ]
+                for r in summary
+                if r["fixed_panel"]["status"] == "available"
+            ],
         ),
         "### What was wrong and what remains limited",
         (

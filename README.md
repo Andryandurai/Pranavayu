@@ -251,3 +251,46 @@ figures are local under `data/results/<run_id>/`; only `manifest.json` is eligib
 for Git. The descriptive comparisons are not causal effects. Models use observed,
 complete-case hours only and a blocked holdout; they do not forecast or bridge
 2020–2023. Phase 3B research, forecasting, RAG, simulators and dashboards are deferred.
+
+## Phase 3A2: corrected deweathering method
+
+Use this method for the audited PM2.5 snapshot. The Phase 3A command above is
+retained for legacy comparisons; it uses the old clock interpretation and terminal
+holdout. The corrected method does not begin Phase 3B research.
+
+```powershell
+# Reconstruct and audit the corrected observed series; note the returned data-run ID.
+.\scripts\dev.ps1 manage diagnose_deweathering
+# Substitute that ID; note the returned model-run ID.
+.\scripts\dev.ps1 manage run_phase3a2 --data-run 6
+# Substitute the model-run ID in both commands.
+.\scripts\dev.ps1 manage supplement_phase3a2 --run 7
+.\scripts\dev.ps1 manage export_phase3a2_report --run 7
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+`run_phase3a2` without `--data-run` creates a new diagnostic data run first.
+Run one full model job at a time. Fixed seeds, the eight prespecified variants,
+readiness criteria and identical pooled reference-weather donors are recorded in
+[PHASE3A2_PROTOCOL.json](docs/results/PHASE3A2_PROTOCOL.json). The model grid takes
+substantially longer than the legacy single-model run. The hourly supplement is
+descriptive and does not change selection, thresholds or normalised values.
+
+Independent same-site comparisons in all seven recent cities establish that the
+OpenCity exports' `+0000` labels contain IST wall clocks. The corrected analysis
+converts those clocks to UTC, reuses the audited native IST four-quarter means,
+and joins UTC weather at IST-hour midpoints. Raw files and warehouse observations
+retain the published labels for provenance. Use corrected `CityHourly`/series
+for aligned PM2.5 work; raw warehouse times require the versioned correction.
+`diagnose_deweathering --clock-shift-hours 0` reproduces the literal-UTC sensitivity
+case, rebuilding quarter bins across UTC-hour boundaries. It is not the corrected
+default. See [PHASE3A2_CLOCK_PROOF.json](docs/results/PHASE3A2_CLOCK_PROOF.json).
+
+Successful full `phase3a2` runs become the analytics API and pandas-helper default;
+diagnostic, failed and running jobs do not. Earlier full runs remain addressable
+with `?run=2`. Phase 3A2 stores PM2.5 diagnostics and series; use the legacy full
+run explicitly for other pollutants and its older descriptive metrics. Read the
+[actual diagnostic report](docs/results/PHASE3A2.md) before using normalisation:
+passing execution or random-hour fitting does not mean passing readiness, and
+normalised bootstrap intervals exclude model-refit and network uncertainty.

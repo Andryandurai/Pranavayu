@@ -110,3 +110,15 @@ job at a time. CSVs, joblib models, SVG/PNG figures and a SHA256 manifest live u
 `data/results/<run_id>/`; bodies are ignored by Git, manifests retained. There is
 no model target or plot axis spanning the 2020–2023 concentration gap. Read-only
 DRF coverage, city summary and raw/deweathered series endpoints expose these runs.
+
+Phase 3A2 retains the legacy pipeline and adds `diagnostic_data`/`diagnostic_pipeline`
+for verified source-clock conversion, native IST bins, geography, station panels
+and source sanity checks. `model_diagnostics` implements random splits, embargoed
+week folds, transfer diagnostics, bias/support gates and reproducible common-weather
+normalisation. `revised_deweather` evaluates the frozen eight-variant grid and
+stores new models/series in a full `phase3a2` run. `hourly_validation` reports the
+hourly counterpart when selection favours a daily target; it does not alter fits
+or readiness. `diagnostic_report` exports the measured figures/tables separately.
+The result manifest distinguishes compute, supplement and export revisions.
+Only successful full `phase3a`/`phase3a2` runs become the read-only API default;
+diagnostic data and failed provisional results remain available for the audit.

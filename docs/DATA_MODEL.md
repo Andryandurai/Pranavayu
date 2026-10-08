@@ -238,3 +238,20 @@ requires revisiting both Django's relation support and the reverse migration.
 The analytics migration depends on ingestion 0002 and warehouse 0001. It leaves
 the foundational hypertables and their reversible migration unchanged. See
 [actual Phase 3A results](results/PHASE3A.md) for coverage and model limits.
+
+24. **Corrected source clocks:** Phase 3A2 uses independently verified IST wall
+    clocks for cached OpenCity concentration exports despite their UTC labels.
+    Original files/warehouse keys remain immutable. Corrected derived hourly
+    timestamps subtract 5.5 hours only for that source; historical CPCB and weather
+    physical timestamps are unchanged. Audited four-quarter publisher means are
+    native IST-hour means after conversion. Literal UTC sensitivity runs rebin the
+    original quarters across the IST half-hour boundary instead of relabelling means.
+25. **Readiness and reference weather:** `phase3a2-data` stores audited PM2.5
+    snapshots/panels; `phase3a2` stores the new fits, OOF diagnostics and normalised
+    series. Five folds assign whole IST weeks within each observed era, with a
+    24-hour embargo. Immutable protocol thresholds gate daily OOF R2, overall and
+    monthly NMB and support separately in each era. Random-hour and cross-period
+    transfer scores are supplementary. Both eras draw the same pooled observed
+    weather/calendar reference, holding explicit period and within-era trend.
+    Calendar gaps never become targets. Fixed panels match physical CPCB IDs
+    across source-specific station identities, with coverage checked separately.

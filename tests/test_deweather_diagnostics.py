@@ -67,6 +67,24 @@ def test_completed_revised_run_is_default_and_legacy_comparison_remains_addressa
     assert query_run(Request(factory.get("/", {"run": legacy.pk})))[1] == legacy
 
 
+@pytest.mark.django_db
+def test_interrupted_analysis_is_failed_and_retains_a_manifest(tmp_path, settings):
+    from apps.analytics.lifecycle import analysis_run
+    from apps.analytics.models import AnalysisRun
+
+    settings.BASE_DIR = tmp_path
+    with pytest.raises(KeyboardInterrupt):
+        with analysis_run(name="phase3a2") as (run, output):
+            (output / "partial.txt").write_text("Partial diagnostic output")
+            raise KeyboardInterrupt("Stopped for verified clock correction")
+    stored = AnalysisRun.objects.get(pk=run.pk)
+    manifest = json.loads((output / "manifest.json").read_text())
+    assert stored.status == "failed" and stored.finished_at is not None
+    assert "KeyboardInterrupt" in stored.error_message
+    assert manifest["status"] == "failed"
+    assert manifest["files"][0]["path"] == "partial.txt"
+
+
 def test_week_cv_never_leaks_ist_weeks_or_boundary_embargo():
     times = pd.Series(
         pd.date_range("2019-01-01", periods=24 * 120, freq="h", tz="UTC").append(

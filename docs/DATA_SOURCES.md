@@ -227,3 +227,24 @@ Grange/rmweather method, actual flag audit and model results are retained in
 [PHASE3A.md](results/PHASE3A.md) and `apps/analytics/descriptive.py` comments.
 External HTTP is mocked in the new analytics tests. Existing local PostgreSQL,
 Redis and worker integration tests continue unchanged.
+
+## Phase 3A2 source-clock verification
+
+Independent XKDR comparisons establish that the recent OpenCity CPCB wide
+exports preserve IST wall clocks while displaying `+0000`. A first-week 2024
+same-site comparison in every recent city matches 93–168 hourly means, exactly
+or within 0.005 µg/m³ rounding. URLs, input SHA256 and paired records are retained
+in [PHASE3A2_CLOCK_PROOF.json](results/PHASE3A2_CLOCK_PROOF.json) and result artifacts.
+[XKDR's schema](https://github.com/xKDR/Air-Quality-Database/blob/main/docs/PUBLIC_API.md)
+explicitly describes its naive `collected_at` as IST. The related publisher
+repository's UTC-label attachment supplies processing context, but direct file
+lineage is not established for every OpenCity export; the numeric/time matches
+provide the independent evidence. This supersedes the unresolved-clock limitation
+above for these cached exports. It does not justify changing arbitrary UTC data.
+
+The correction lives in versioned analytical timestamps. Raw source observations
+keep their original labels and provenance; directly joining them to weather
+without that correction is invalid. Open-Meteo requests/returned offsets remain
+UTC. Returned ERA5 grid coordinates are audited alongside requested city points.
+Hyderabad's published integer ranges/repeated values and city-versus-station
+exceedances are documented without inventing an instrument or uncapping correction.

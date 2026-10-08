@@ -50,7 +50,7 @@ motivates daily RF targets, validation and resampling.
 distinguishes blocked interpolation from induced extrapolation.
 [EPA evaluation guidance](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=P100W5V2.TXT)
 motivates NMB and seasonal evaluation. The PM2.5 benchmark discussion in the
-[Huang et al. EPA HERO record](https://hero.epa.gov/reference/7696632/) reports
+[Huang et al. (2021)](https://acp.copernicus.org/articles/21/2725/2021/) reports
 10%/20% NMB goal/criterion magnitudes. Our monthly gate and R2 threshold are
 explicit project adaptations, not thresholds attributed to Grange.
 

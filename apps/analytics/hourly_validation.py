@@ -31,7 +31,11 @@ def supplement_hourly(run_id, watch=False):
             path = output / f"{city.slug}_revised_model.json"
             if not path.exists():
                 continue
-            selected = json.loads(path.read_text())
+            try:
+                selected = json.loads(path.read_text())
+            except json.JSONDecodeError:
+                # A watched producer may still be writing its result file.
+                continue
             config = selected["selected_design"]
             if config["target"] == "hourly":
                 result = dict(
