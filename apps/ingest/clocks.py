@@ -67,12 +67,46 @@ def correct_stored_clocks():
         if cursor.fetchone()[0]:
             raise ValueError("Pending rows do not match verified 2024-2025 UTC-labelled hour bins")
         before = value_fingerprint()
-        cursor.execute(
-            """UPDATE warehouse_reading SET observed_at=observed_at-interval '5h30m'
-            WHERE ingestion_run_id=ANY(%s)""",
-            [ids],
-        )
-        changed = cursor.rowcount
+        cursor.execute("""SELECT range_start,range_end FROM timescaledb_information.chunks
+            WHERE hypertable_name='warehouse_reading' ORDER BY range_start""")
+        chunks = cursor.fetchall()
+        changed = 0
+        for first, last in chunks:
+            # Timescale inheritance partitions do not route cross-chunk UPDATEs.
+            # Ascending chunks and the original minute-zero guard prevent a second shift.
+            cursor.execute(
+                """WITH moved AS (
+                DELETE FROM warehouse_reading WHERE ingestion_run_id=ANY(%s)
+                AND observed_at>=%s AND observed_at<%s+interval '5h30m'
+                AND extract(minute FROM observed_at AT TIME ZONE 'UTC')=0
+                RETURNING station_id,pollutant_id,observed_at-interval '5h30m' AS observed_at,
+                  value,raw_value,quality_flag,ingestion_run_id)
+                INSERT INTO warehouse_reading
+                  (station_id,pollutant_id,observed_at,value,raw_value,quality_flag,ingestion_run_id)
+                SELECT * FROM moved""",
+                [ids, first, first],
+            )
+            changed += cursor.rowcount
+            cursor.execute(
+                """UPDATE warehouse_reading
+                SET observed_at=observed_at-interval '5h30m'
+                WHERE ingestion_run_id=ANY(%s) AND observed_at>=%s+interval '5h30m'
+                AND observed_at<%s
+                AND extract(minute FROM observed_at AT TIME ZONE 'UTC')=0""",
+                [ids, first, last],
+            )
+            changed += cursor.rowcount
+            if cursor.rowcount:
+                print(
+                    json.dumps(
+                        dict(
+                            event="clock_chunk_corrected",
+                            start=first.isoformat(),
+                            cumulative_rows=changed,
+                        )
+                    ),
+                    flush=True,
+                )
         cursor.execute("""UPDATE warehouse_station SET first_seen=first_seen-interval '5h30m',
             last_seen=last_seen-interval '5h30m' WHERE source_id=
             (SELECT id FROM ingest_datasource WHERE slug='opencity')""")

@@ -29,11 +29,24 @@ def test_stored_clock_repair_preserves_values_and_is_idempotent(tmp_path, settin
         quality_flag="ok",
         ingestion_run=run,
     )
+    boundary = datetime(2024, 1, 4, tzinfo=UTC)
+    Reading.objects.create(
+        station=station,
+        pollutant=pollutant,
+        observed_at=boundary,
+        value=96,
+        raw_value=96,
+        quality_flag="ok",
+        ingestion_run=run,
+    )
     first = correct_stored_clocks()
-    row = Reading.objects.get(station=station)
-    assert first["corrected_rows"] == 1
+    row = Reading.objects.filter(station=station).order_by("observed_at").first()
+    assert first["corrected_rows"] == 2
     assert row.observed_at == datetime(2023, 12, 31, 18, 30, tzinfo=UTC)
     assert (row.value, row.raw_value, row.ingestion_run_id) == (42, 42, run.pk)
+    assert Reading.objects.get(station=station, value=96).observed_at == datetime(
+        2024, 1, 3, 18, 30, tzinfo=UTC
+    )
     assert correct_stored_clocks()["corrected_rows"] == 0
     run.refresh_from_db()
     assert run.params["timestamp_clock_version"] == CLOCK_VERSION
