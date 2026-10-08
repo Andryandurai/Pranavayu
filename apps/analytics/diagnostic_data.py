@@ -41,7 +41,7 @@ def cached_quarters(city, clock_shift_hours=0):
                 continue
             _, manifest = cache.local(path)
             files.append(
-                dict(path=manifest["path"], sha256=manifest["sha256"], bytes=manifest["bytes"])
+                dict(path=manifest["path"], sha256=manifest["sha256"], bytes=path.stat().st_size)
             )
             for raw in reader:
                 station = lookup.get(raw.get("Station ID"))
