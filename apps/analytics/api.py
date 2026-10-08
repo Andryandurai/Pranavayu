@@ -28,7 +28,7 @@ def query_run(request):
     query = Query(data=request.query_params)
     query.is_valid(raise_exception=True)
     params = query.validated_data
-    rows = AnalysisRun.objects.filter(status="success", name="phase3a")
+    rows = AnalysisRun.objects.filter(status="success", name__in=["phase3a", "phase3a2"])
     if "run" in params:
         rows = rows.filter(pk=params["run"])
     run = rows.order_by("-id").first()

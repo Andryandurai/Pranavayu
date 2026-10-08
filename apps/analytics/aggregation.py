@@ -77,7 +77,11 @@ def analysis_dataframe(city, run=None, pollutant="pm25"):
     if run is None:
         from .models import AnalysisRun
 
-        run = AnalysisRun.objects.filter(status="success", name="phase3a").order_by("-id").first()
+        run = (
+            AnalysisRun.objects.filter(status="success", name__in=["phase3a", "phase3a2"])
+            .order_by("-id")
+            .first()
+        )
         if run is None:
             return pd.DataFrame()
     rows = rows.filter(run=run).order_by("observed_at")

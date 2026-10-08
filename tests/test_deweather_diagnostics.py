@@ -48,6 +48,25 @@ def test_verified_opencity_wall_clock_converts_to_utc_without_shifting_other_sou
     assert times.iloc[0] == pd.Timestamp("2024-01-01T00:00:00Z")
 
 
+@pytest.mark.django_db
+def test_completed_revised_run_is_default_and_legacy_comparison_remains_addressable():
+    from django.utils import timezone
+    from rest_framework.request import Request
+    from rest_framework.test import APIRequestFactory
+
+    from apps.analytics.api import query_run
+    from apps.analytics.models import AnalysisRun
+
+    fields = dict(data_start="2015-01-01", data_end="2025-12-31", started_at=timezone.now())
+    legacy = AnalysisRun.objects.create(name="phase3a", status="success", **fields)
+    revised = AnalysisRun.objects.create(name="phase3a2", status="success", **fields)
+    AnalysisRun.objects.create(name="phase3a2-data", status="success", **fields)
+    AnalysisRun.objects.create(name="phase3a2", status="failed", **fields)
+    factory = APIRequestFactory()
+    assert query_run(Request(factory.get("/")))[1] == revised
+    assert query_run(Request(factory.get("/", {"run": legacy.pk})))[1] == legacy
+
+
 def test_week_cv_never_leaks_ist_weeks_or_boundary_embargo():
     times = pd.Series(
         pd.date_range("2019-01-01", periods=24 * 120, freq="h", tz="UTC").append(
