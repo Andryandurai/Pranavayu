@@ -36,10 +36,10 @@ def figures(run, output, descriptive, audit):
     cities = list(City.objects.all())
     annual = pd.DataFrame(descriptive["annual"])
     if not annual.empty:
-        fig, ax = plt.subplots(figsize=(12, 6))
+        fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
         for index, (city, rows) in enumerate(annual.groupby("city")):
             color = plt.get_cmap("tab20")(index)
-            for first, last in [(2015, 2019), (2024, 2025)]:
+            for ax, (first, last) in zip(axes, [(2015, 2019), (2024, 2025)], strict=True):
                 subset = rows[rows.year.between(first, last)].sort_values("year")
                 ax.scatter(
                     subset.year,
@@ -48,11 +48,15 @@ def figures(run, output, descriptive, audit):
                     color=color,
                     label=city if first == 2015 else None,
                 )
-        ax.set_ylabel("PM2.5 (µg/m³)")
-        ax.set_xlabel("Eligible observed year")
-        ax.set_title("Annual means: observed eras; no gap interpolation")
-        ax.legend(ncol=3, fontsize=8)
-        fig.tight_layout()
+        for ax, (first, last) in zip(axes, [(2015, 2019), (2024, 2025)], strict=True):
+            ax.set_xlim(first - 0.3, last + 0.3)
+            ax.set_xticks(range(first, last + 1))
+            ax.set_xlabel("Eligible observed year")
+            ax.set_title(f"{first}–{last}")
+        axes[0].set_ylabel("PM2.5 (µg/m³)")
+        handles, labels = axes[0].get_legend_handles_labels()
+        fig.legend(handles, labels, ncol=4, loc="upper center", fontsize=8)
+        fig.tight_layout(rect=(0, 0, 1, 0.85))
         save_figure(fig, output, "annual_pm25")
     climate = pd.DataFrame(descriptive["climatology"])
     fig, axes = plt.subplots(4, 3, figsize=(14, 12), sharex=True)
@@ -79,9 +83,15 @@ def figures(run, output, descriptive, audit):
     episodes = pd.DataFrame(descriptive["diwali"])
     fig, ax = plt.subplots(figsize=(11, 6))
     if not episodes.empty:
-        for city, rows in episodes.groupby("city"):
+        for index, (city, rows) in enumerate(episodes.groupby("city")):
             profile = rows.groupby("offset").value.mean()
-            ax.plot(profile.index, profile.values, marker="o", label=city)
+            ax.plot(
+                profile.index,
+                profile.values,
+                marker="o",
+                label=city,
+                color=plt.get_cmap("tab20")(index),
+            )
     ax.set_xlabel("Days from official-calendar Diwali")
     ax.set_ylabel("PM2.5 (µg/m³)")
     ax.set_title("Observed Diwali windows in eligible city-years; descriptive")
@@ -93,6 +103,7 @@ def figures(run, output, descriptive, audit):
     for row, city in enumerate(cities):
         for col, (first, last) in enumerate([(2015, 2019), (2024, 2025)]):
             ax = axes[row, col]
+            has_values = False
             for kind in ["raw", "deweathered"]:
                 records = list(
                     CitySeries.objects.filter(
@@ -107,9 +118,15 @@ def figures(run, output, descriptive, audit):
                 )
                 frame = pd.DataFrame(records)
                 if not frame.empty:
+                    has_values = has_values or frame.value.notna().any()
                     dates = pd.date_range(f"{first}-01-01", f"{last}-12-01", freq="MS")
                     values = frame.set_index(pd.to_datetime(frame.date)).value.reindex(dates)
                     ax.plot(dates, values, label=kind)
+            ax.set_xlim(pd.Timestamp(f"{first}-01-01"), pd.Timestamp(f"{last}-12-31"))
+            if not has_values:
+                ax.text(
+                    0.5, 0.5, "No observed series", ha="center", va="center", transform=ax.transAxes
+                )
             ax.set_title(f"{city.name}: {first}–{last}")
             ax.set_ylabel("PM2.5 (µg/m³)")
             ax.legend(fontsize=7)
@@ -414,6 +431,8 @@ def write_report(run, output, audit, tables, descriptive, performance, populatio
             "## Reproducibility and limitations\n",
             "```json\n" + json.dumps(run.parameters, indent=2) + "\n```\n",
             f"Recorded Git commit: `{run.git_commit or 'unavailable'}`. "
+            f"Figure/report export commit: "
+            f"`{run.parameters.get('export_revision', {}).get('git_commit', run.git_commit)}`. "
             "The source-code SHA256 and installed library versions are also stored with the run. "
             "Fixed seeds cannot remove changes in inputs or libraries.\n",
             "2020–2023/2026 concentration coverage is absent or negligible. Historical "

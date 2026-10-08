@@ -38,9 +38,18 @@ $env:TMP = $projectTemp
 
 function Invoke-Compose {
     param([string[]]$DockerArguments)
-    & $dockerExecutable compose @DockerArguments
-    if ($LASTEXITCODE -ne 0) {
-        throw "docker compose $($DockerArguments -join ' ') failed (exit $LASTEXITCODE)."
+    # PowerShell 5.1 turns redirected native stderr (including INFO logs) into
+    # error records. Keep that output visible and use the real process exit code.
+    $previousErrorPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'
+        & $dockerExecutable compose @DockerArguments
+        $composeExitCode = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $previousErrorPreference
+    }
+    if ($composeExitCode -ne 0) {
+        throw "docker compose $($DockerArguments -join ' ') failed (exit $composeExitCode)."
     }
 }
 
