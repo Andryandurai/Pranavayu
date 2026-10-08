@@ -1,0 +1,876 @@
+{
+  "run": 4,
+  "name": "phase3a2-data",
+  "status": "success",
+  "started_at": "2026-10-08T16:53:10.646287+00:00",
+  "finished_at": "2026-10-08T17:11:42.136486+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2026-10-07"
+  ],
+  "git_commit": "f3438bf22a20284ce60ae1c0a39509fcffbf309b",
+  "parameters": {
+    "clock_shift_hours": 0,
+    "protocol": {
+      "frozen_at": "2026-10-08T16:29:51.054711+00:00",
+      "baseline_run": 2,
+      "seed": 42,
+      "n_trees": 100,
+      "max_depth": 12,
+      "min_samples_leaf": 12,
+      "max_features": 0.7,
+      "cv_folds": 5,
+      "cv_week_timezone": "Asia/Kolkata",
+      "cv_embargo_hours": 24,
+      "normalisation_draws": 300,
+      "bootstrap_draws": 500,
+      "criteria": {
+        "daily_oof_r2_min_each_period": 0.5,
+        "absolute_nmb_percent_max_each_period": 10,
+        "absolute_month_nmb_percent_max_each_period": 20,
+        "minimum_days_month_each_period": 20,
+        "minimum_weeks_each_period": 26
+      },
+      "variants": [
+        {
+          "name": "hourly_trend_pooled_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "hourly_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_no_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_trend_separate_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_pooled_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "daily_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_no_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_separate_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        }
+      ],
+      "selection": "Per city, maximum mean period-specific daily OOF R2 on common valid days across eight fixed variants; tie by listed order. Evaluate readiness on all usable selected-design OOF days, regardless of whether it passes.",
+      "normalisation": "Identical joint complete observed weather/seasonal donor draws pooled across 2015-2019 and 2024-2025 per city. Hold period and within-period trend fixed; no trend bridges the gap.",
+      "normalised_intervals": "500 year/seven-calendar-day block resamples of normalised daily values with centred week-CV daily residuals added for conditional target-variability uncertainty. No model-parameter or station-network uncertainty.",
+      "timestamps": "Never choose a source-clock shift to improve scores. Require source or cross-provider evidence. Rebin cached quarters to IST hours without rewriting original observations."
+    },
+    "git_state": "versioned",
+    "code_sha256": "9b423cbdb1941fbedd860fe25aef2093e01eaf31ce41fb5cadfdd4beb1eb96ca",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "files": [
+    {
+      "path": "ahmedabad_IST quarters_old_diurnal.csv",
+      "bytes": 1887,
+      "sha256": "5ae38518cac4a2a7f135978884f24979df6f5d7a37b1eebc52e95429637e6015"
+    },
+    {
+      "path": "ahmedabad_alignment_diurnal.png",
+      "bytes": 164172,
+      "sha256": "0092ab815afd8a0ea3fb316e5c3cb57e6d5bdd315961cab49cce7d95725f38ce"
+    },
+    {
+      "path": "ahmedabad_alignment_diurnal.svg",
+      "bytes": 75516,
+      "sha256": "f0939c7677bc8ef556c95a14c573bc623a106c8c781ffba75b32b121afeef038"
+    },
+    {
+      "path": "ahmedabad_hourly.pkl",
+      "bytes": 2867991,
+      "sha256": "e524c0477c2116219c49409de74d572a84e8602e44808172486bdbcdc42469b1"
+    },
+    {
+      "path": "ahmedabad_legacy_old_diurnal.csv",
+      "bytes": 1893,
+      "sha256": "22d4c0e913b391ad3319c54d54614d8fcf9d51d1d0db8e2e6ebbe103e520b6ec"
+    },
+    {
+      "path": "ahmedabad_raw_daily.csv",
+      "bytes": 92388,
+      "sha256": "25ee5e8db08991ae85674405fa41d5a3c060a2f5c1824d1e5d822fe34b6c54f8"
+    },
+    {
+      "path": "ahmedabad_station_hours.pkl",
+      "bytes": 1435092,
+      "sha256": "543152b22b495a96dbc1705e380d41adcbb340784c5f2cc4b8e6ccadd9ca1cc4"
+    },
+    {
+      "path": "ahmedabad_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "18fea976a1d02ab0df793d4f38b2a50a2ec56ef672be3af1586bb0ecbc03ea70"
+    },
+    {
+      "path": "ahmedabad_wind_lags.csv",
+      "bytes": 2722,
+      "sha256": "5837e9c91e95a448a5ef4e2ba67e551beff75071d3d4ef3729347e8358b20aaf"
+    },
+    {
+      "path": "alignment_summary.csv",
+      "bytes": 3383,
+      "sha256": "6d231ffe116b09a8a2706a8e44a568efd29754552f4dba261b5940097dfcb7bb"
+    },
+    {
+      "path": "analysis_coverage.csv",
+      "bytes": 5250,
+      "sha256": "f1ff1c87a69e27cc38bf16c15bedaa3d7d194272fbf742056fcef073b7b2251b"
+    },
+    {
+      "path": "bengaluru_IST quarters_old_diurnal.csv",
+      "bytes": 1898,
+      "sha256": "be162d33314b095c77f2bb397d815e073517a1b33b2b722dd59a59b04c5b2e54"
+    },
+    {
+      "path": "bengaluru_IST quarters_recent_diurnal.csv",
+      "bytes": 1906,
+      "sha256": "a4a0c0aec4f291ad03c3933cbbf4f3a2aef10f891d1392889a64a2046efb59aa"
+    },
+    {
+      "path": "bengaluru_alignment_diurnal.png",
+      "bytes": 312132,
+      "sha256": "dc8b27a89220f03937c2398fd64b1a3d292da242d203a243a5906e3f8727a65a"
+    },
+    {
+      "path": "bengaluru_alignment_diurnal.svg",
+      "bytes": 107522,
+      "sha256": "ae3f45bf7d6c0c5836a435ed94b8938c719f86d2c159873b63ba7fa803627ce6"
+    },
+    {
+      "path": "bengaluru_hourly.pkl",
+      "bytes": 5524215,
+      "sha256": "a3e418503216efb78489798f263641f830b6b0fb0227416f3ece24b72ccbad58"
+    },
+    {
+      "path": "bengaluru_legacy_old_diurnal.csv",
+      "bytes": 1898,
+      "sha256": "be162d33314b095c77f2bb397d815e073517a1b33b2b722dd59a59b04c5b2e54"
+    },
+    {
+      "path": "bengaluru_legacy_recent_diurnal.csv",
+      "bytes": 1905,
+      "sha256": "c5f2b4756d7b87cc4e51ab2d86ef241b12c1ee4df7222995b895c05952cc9005"
+    },
+    {
+      "path": "bengaluru_panel_hourly.pkl",
+      "bytes": 5304855,
+      "sha256": "4c9acb2e80f64550a34db15a771b2c029055c72bd5c9292e3b7f6c26f0905a08"
+    },
+    {
+      "path": "bengaluru_panel_raw_daily.csv",
+      "bytes": 111996,
+      "sha256": "51b47f35937e9329053fbe463d2d91c7e38eff9ccb25e219b2b09438cb8ee897"
+    },
+    {
+      "path": "bengaluru_raw_daily.csv",
+      "bytes": 115378,
+      "sha256": "20a520521bae4f2d554355ab9aec924a39b72aebf38ef781c015e1dff8d4ebb1"
+    },
+    {
+      "path": "bengaluru_station_hours.pkl",
+      "bytes": 21262881,
+      "sha256": "f9127516d4c0236e8109846188ee30efc22fc6e462d1e1fc2902bc939f5b79d6"
+    },
+    {
+      "path": "bengaluru_station_panel.png",
+      "bytes": 137535,
+      "sha256": "05cf33670dc1119e5fd2f70a71bca33f2b6ba82123e1bd691b87fb517442636f"
+    },
+    {
+      "path": "bengaluru_station_panel.svg",
+      "bytes": 52508,
+      "sha256": "5e52db3431ad6d7fb8e85fb400e002c6d16470993996eed764865a43b44dc1eb"
+    },
+    {
+      "path": "bengaluru_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "992ded84ff89bbcc3e4db8ad121e5419bf53fa68e52695cd880b88a3ab1b3776"
+    },
+    {
+      "path": "bengaluru_wind_lags.csv",
+      "bytes": 5543,
+      "sha256": "d0b0a002bc51c2044f57e36a49104bbc6ccd6acd583c7c338fe21fcfcf10e4cc"
+    },
+    {
+      "path": "chennai_IST quarters_old_diurnal.csv",
+      "bytes": 1890,
+      "sha256": "e6ae7e40e26c792f74d69af8953aeac32305f2358273ae61e7a67a709ef3a2c6"
+    },
+    {
+      "path": "chennai_IST quarters_recent_diurnal.csv",
+      "bytes": 1893,
+      "sha256": "6f609060d478cd57d227ec0e66e71088dbf90e135e29d2c7b551a80fbdc9632c"
+    },
+    {
+      "path": "chennai_alignment_diurnal.png",
+      "bytes": 315271,
+      "sha256": "c69a2353b45d73e7841171f29e9120ddf54c0ff8808e3d1b97881b02b15cbdbb"
+    },
+    {
+      "path": "chennai_alignment_diurnal.svg",
+      "bytes": 106004,
+      "sha256": "1fd64ad87d16178b91b3398f744f1a605dc1e5ffa46a67a9ae69f9528419be47"
+    },
+    {
+      "path": "chennai_hourly.pkl",
+      "bytes": 5587575,
+      "sha256": "b9927514489c98698cfe9e2449b4ffcebab8db68a8100527cea95ea79f006c4c"
+    },
+    {
+      "path": "chennai_legacy_old_diurnal.csv",
+      "bytes": 1887,
+      "sha256": "29220d9bdadbbc3c5168db386b10ea6adb627a9bcfc5f8da4bea798c26d4680f"
+    },
+    {
+      "path": "chennai_legacy_recent_diurnal.csv",
+      "bytes": 1900,
+      "sha256": "31e03c51cbc7e2b66676ea1a4b3fc2a2bf498d5f9154de676f9e66e00bb67489"
+    },
+    {
+      "path": "chennai_panel_hourly.pkl",
+      "bytes": 5565303,
+      "sha256": "bb269ef83f1b3ef9324cb7d2a4c9c1027b6654a27ae389a48b447fd44e394db7"
+    },
+    {
+      "path": "chennai_panel_raw_daily.csv",
+      "bytes": 113481,
+      "sha256": "c0cbd34d244d70a33dcde1ef8a1d33433e26b405d106e6d720b4a12c4cdb2204"
+    },
+    {
+      "path": "chennai_raw_daily.csv",
+      "bytes": 113923,
+      "sha256": "a0fa5c0c8c777af01cdc5dd27633e92ed4599a2cf36d32f488a3b62379c2e02c"
+    },
+    {
+      "path": "chennai_station_hours.pkl",
+      "bytes": 11996101,
+      "sha256": "fd36af79027141b051b677277ed8fcf32bc214aaee2e0c5fa8127ef298339d2c"
+    },
+    {
+      "path": "chennai_station_panel.png",
+      "bytes": 143217,
+      "sha256": "5361f2a30d4219817a0ce3a6513557fea83bbbba7bc7db951783aa7352184a79"
+    },
+    {
+      "path": "chennai_station_panel.svg",
+      "bytes": 51779,
+      "sha256": "94d0a4779d89aeb3fe4b42c282cc6506543055dbfda4d3ed8cbea8455d9e6132"
+    },
+    {
+      "path": "chennai_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "4fc251e5e6dea170d18024936d932d209e59c990c5ad1625bdd20cc067151783"
+    },
+    {
+      "path": "chennai_wind_lags.csv",
+      "bytes": 5424,
+      "sha256": "9413d50ed13b8459712eba0113d0ab7eb950915a778eeec0124c2be135ed8766"
+    },
+    {
+      "path": "delhi_IST quarters_old_diurnal.csv",
+      "bytes": 1907,
+      "sha256": "47a4b10de08a73ad2dedd89dc54bddb01574ebb46a0e7f3332b900bf4552e416"
+    },
+    {
+      "path": "delhi_IST quarters_recent_diurnal.csv",
+      "bytes": 1899,
+      "sha256": "8c269f7a2b93804fa6c3526e7e2c79d108b0d1787718fa0dc266cde0013d2be6"
+    },
+    {
+      "path": "delhi_alignment_diurnal.png",
+      "bytes": 300917,
+      "sha256": "48d507a1228f0e094e72bfee40c55bc99e25d9348afceb9c100722a701ca0898"
+    },
+    {
+      "path": "delhi_alignment_diurnal.svg",
+      "bytes": 106129,
+      "sha256": "b86b3770bec06b2c3a445c85406f116060bbbf8e351a765746ebaf7f4b8043df"
+    },
+    {
+      "path": "delhi_hourly.pkl",
+      "bytes": 5868663,
+      "sha256": "2ec1050615bc56e7c118e4b1c7806161057204785017bddf1ecd43e3f3cc5558"
+    },
+    {
+      "path": "delhi_legacy_old_diurnal.csv",
+      "bytes": 1907,
+      "sha256": "47a4b10de08a73ad2dedd89dc54bddb01574ebb46a0e7f3332b900bf4552e416"
+    },
+    {
+      "path": "delhi_legacy_recent_diurnal.csv",
+      "bytes": 1903,
+      "sha256": "bf2356e34e3248dd998c845ac721e30edfd11b0a731f6116e2349c5aba85aa29"
+    },
+    {
+      "path": "delhi_panel_hourly.pkl",
+      "bytes": 5868663,
+      "sha256": "a2d6f37e0771076b7eb9f7252fb8fa31fee3d2c3f925164bca3a9cdf5f8d0966"
+    },
+    {
+      "path": "delhi_panel_raw_daily.csv",
+      "bytes": 119104,
+      "sha256": "5aa253e53526c6c52e477f1a6b20417f4251f3ea5f0ce2cc58703c73b1f7e6c5"
+    },
+    {
+      "path": "delhi_raw_daily.csv",
+      "bytes": 119082,
+      "sha256": "6a2676c7a32f9732c4d48c0019db136746e6ac91752623f4ff0f58c408b43be7"
+    },
+    {
+      "path": "delhi_station_hours.pkl",
+      "bytes": 92381968,
+      "sha256": "1152bf27baf843236458145349a715b03424f33dd24c1597e82f1cbfc11a9997"
+    },
+    {
+      "path": "delhi_station_panel.png",
+      "bytes": 134922,
+      "sha256": "2f2d8ea4925bfaa478cdf47f614d8ed88b24560504611f24f369ffc97fe00279"
+    },
+    {
+      "path": "delhi_station_panel.svg",
+      "bytes": 50551,
+      "sha256": "0520ac3462d8b8c9705279faf4e1bc7c4750867b4d9b65d6bbbcd83180945cd2"
+    },
+    {
+      "path": "delhi_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "ea438e06836c8aaabf9170c8283abf50f15d38e45db3b3a6d9b31947b72b053c"
+    },
+    {
+      "path": "delhi_wind_lags.csv",
+      "bytes": 5132,
+      "sha256": "bd2f29a7caaf1e35d316a86c7d00229f976d8c89dff0bfb93f2e8a1ff0084976"
+    },
+    {
+      "path": "fixed_panels.json",
+      "bytes": 2138,
+      "sha256": "a3584c645ae87ca36c91e4d8590429fa1c9c8030ebc19c03f249f8c3a66e8d0d"
+    },
+    {
+      "path": "hyderabad_IST quarters_old_diurnal.csv",
+      "bytes": 1897,
+      "sha256": "e557bc6527ff2c4cdd42692c8cb134b2345fc3e58c325f7e6fa38c2abc7c8d59"
+    },
+    {
+      "path": "hyderabad_IST quarters_recent_diurnal.csv",
+      "bytes": 1900,
+      "sha256": "81ac138daa493c90eb57347a1391bace0c40ab40ad7a459453dab6d58d918cbb"
+    },
+    {
+      "path": "hyderabad_alignment_diurnal.png",
+      "bytes": 313711,
+      "sha256": "02c386dd105cc1fc6175becfe02c1021193dde202f91e4100ed565c9e660ca57"
+    },
+    {
+      "path": "hyderabad_alignment_diurnal.svg",
+      "bytes": 106414,
+      "sha256": "6ebbcc12d7998376d2a99d1d904c9654c1ff840bb83c63402809a1bcc3cfeadf"
+    },
+    {
+      "path": "hyderabad_hourly.pkl",
+      "bytes": 5578263,
+      "sha256": "0d154c3b738c90a647bd35f2aaa3cbc07f270357d37b3cea3eaddb99912cfd46"
+    },
+    {
+      "path": "hyderabad_legacy_old_diurnal.csv",
+      "bytes": 1891,
+      "sha256": "cab7f4f9b2b2ebee367bfd1cb7a2fa552bc212120eb368febe5291ef518045f0"
+    },
+    {
+      "path": "hyderabad_legacy_recent_diurnal.csv",
+      "bytes": 1894,
+      "sha256": "0566652cc298512e7ce251746633875df8f0ed6ee9f32ba9f5247465f594b486"
+    },
+    {
+      "path": "hyderabad_panel_hourly.pkl",
+      "bytes": 5577975,
+      "sha256": "b628463ead9e4dc0a9ca5250402158e866b6d0cb344fea2ab572bb9090a05802"
+    },
+    {
+      "path": "hyderabad_panel_raw_daily.csv",
+      "bytes": 114327,
+      "sha256": "8c70c67144483f285d5305c0a360c4bc52e33d71446ae284545327e8c4ad9838"
+    },
+    {
+      "path": "hyderabad_raw_daily.csv",
+      "bytes": 114502,
+      "sha256": "86c67156896c7f5352bbc74486af77950585a2822489738979f0dcc8bcb24287"
+    },
+    {
+      "path": "hyderabad_sanity.json",
+      "bytes": 3980,
+      "sha256": "94b8fb269dffee6da7129eb60c6f3c69598f263c146afea8e3932c01dcf00853"
+    },
+    {
+      "path": "hyderabad_station_hours.pkl",
+      "bytes": 23780174,
+      "sha256": "c38a80c1581a43476cc908f702c8c7f8b3140caceaf9fd11755abb1bf4184b86"
+    },
+    {
+      "path": "hyderabad_station_panel.png",
+      "bytes": 131386,
+      "sha256": "1e9b0dbd8f2f567ba3524b248e07da022905e06dbee8d444c05390ab60078e3d"
+    },
+    {
+      "path": "hyderabad_station_panel.svg",
+      "bytes": 51371,
+      "sha256": "e29563cecc69c92309d227491391112cb9a267cd215e0b697c0fce4b48521dad"
+    },
+    {
+      "path": "hyderabad_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "3f931ce3e20f6c01ccf609af3978e91badf95e881f46a64b82c39929703e088e"
+    },
+    {
+      "path": "hyderabad_wind_lags.csv",
+      "bytes": 5560,
+      "sha256": "f87a61b1a797c3a318c0e8918f47ee016baee7cd2258c947b3141e3ae6da0517"
+    },
+    {
+      "path": "inputs.json",
+      "bytes": 25723,
+      "sha256": "61b8b5c6b86f12fa42cc8a622f8c54bbd8e517813170d45cd621a271fe5a81c3"
+    },
+    {
+      "path": "jaipur_IST quarters_old_diurnal.csv",
+      "bytes": 1897,
+      "sha256": "573d9baab06c1e2996db6d39f9a85ddc31e9b62c74b06e50acbd32150b75a48a"
+    },
+    {
+      "path": "jaipur_alignment_diurnal.png",
+      "bytes": 189098,
+      "sha256": "ab6952851204330c27434fa3d8bd671a62cf568054204c7c3b3e8f8ee0e8560f"
+    },
+    {
+      "path": "jaipur_alignment_diurnal.svg",
+      "bytes": 76283,
+      "sha256": "60f9e6144e86c295843ae9f2461e091b3db2bf919e03c8631b46168ba2cad498"
+    },
+    {
+      "path": "jaipur_hourly.pkl",
+      "bytes": 2000535,
+      "sha256": "eec264fbd30a26ee2355c0c1430d6e65c49e67788cd56f1c19baa1ca66eeecfa"
+    },
+    {
+      "path": "jaipur_legacy_old_diurnal.csv",
+      "bytes": 1902,
+      "sha256": "fd60d6048f6357c555581bde78aef426b7d2df0304d953ccbf970bffdff2d010"
+    },
+    {
+      "path": "jaipur_raw_daily.csv",
+      "bytes": 87897,
+      "sha256": "be670bb295b705d18261982aeda105081efdefdb7dfab90e0c1401b819fde81a"
+    },
+    {
+      "path": "jaipur_station_hours.pkl",
+      "bytes": 2645289,
+      "sha256": "68b99b2be0b10ab594f3c8cafa5787ea306dd9bfcd76077ad531ac16e0462eec"
+    },
+    {
+      "path": "jaipur_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "17b56bc602846569b000cae22845f8ab4f4697c411f116eb082eb87e7e72df1b"
+    },
+    {
+      "path": "jaipur_wind_lags.csv",
+      "bytes": 2574,
+      "sha256": "daec25e765f5237083e7c8c8ca267a167738b7c52ee7380507b37d3ceb640b02"
+    },
+    {
+      "path": "kanpur_IST quarters_old_diurnal.csv",
+      "bytes": 1907,
+      "sha256": "9feacb9fa73e263a28b07c2fe8d592fb18becea91a32df3f0ed06868b4352d76"
+    },
+    {
+      "path": "kanpur_alignment_diurnal.png",
+      "bytes": 190686,
+      "sha256": "5d809a03e14aac707fa9a58bf5a491747ca85a695cf69469902ef3eaf7f14a2e"
+    },
+    {
+      "path": "kanpur_alignment_diurnal.svg",
+      "bytes": 78151,
+      "sha256": "d30bd395fb7ac4e62031056bd3e4f8fc23f2af29019b40e1cf94d045c0ca4303"
+    },
+    {
+      "path": "kanpur_hourly.pkl",
+      "bytes": 3601623,
+      "sha256": "a20f3eae6d18b376dca9dc2bc85edb9c487df6dda084bdd92d1b7316414aa62b"
+    },
+    {
+      "path": "kanpur_legacy_old_diurnal.csv",
+      "bytes": 1899,
+      "sha256": "54005ccb87c0bbfa6f081dd4c95a3896c592ff7031e1fc3120f8cac0c6413cb1"
+    },
+    {
+      "path": "kanpur_raw_daily.csv",
+      "bytes": 96296,
+      "sha256": "4df1d0dc134a859856042d66e95266f163ccd7a523fd5993f2ffdb32087cf180"
+    },
+    {
+      "path": "kanpur_station_hours.pkl",
+      "bytes": 1801988,
+      "sha256": "42c35228932c0d65a0446270ce31a9ba35042c7eb7fa54dead0db57d3f563f0c"
+    },
+    {
+      "path": "kanpur_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "78367fb6a6d02eb2d4eda29cd611d057a2f249cdb83132ebd324d55e29f6010e"
+    },
+    {
+      "path": "kanpur_wind_lags.csv",
+      "bytes": 2571,
+      "sha256": "fc8c487d26e22ccca461f8b711932eb926326299a7a76ab73d45caa69b2da974"
+    },
+    {
+      "path": "kolkata_IST quarters_old_diurnal.csv",
+      "bytes": 1877,
+      "sha256": "9b3fbc8f8b44229f00c84dbc649fcb2243dc0e1da4b8b2b01011cfbee801ed8a"
+    },
+    {
+      "path": "kolkata_IST quarters_recent_diurnal.csv",
+      "bytes": 1899,
+      "sha256": "6f2e3a569e03f2e492cf5ce3f57aa169aeb95f46dbcc436c981d8648083d31fb"
+    },
+    {
+      "path": "kolkata_alignment_diurnal.png",
+      "bytes": 307105,
+      "sha256": "ea16e5e3fb4c81bbf0ff7a8754b82e348642301f51178564faefcefd80b1a863"
+    },
+    {
+      "path": "kolkata_alignment_diurnal.svg",
+      "bytes": 108765,
+      "sha256": "c0d8da74945720020b535828f6e4733df298eda0f8bfc4773664ff75773ae6ab"
+    },
+    {
+      "path": "kolkata_hourly.pkl",
+      "bytes": 2997495,
+      "sha256": "2e69ad2504173ae1c3ed3bb5aeddf13005a259499ecbbd254d335c3f52e68500"
+    },
+    {
+      "path": "kolkata_legacy_old_diurnal.csv",
+      "bytes": 1878,
+      "sha256": "0eadd54d10d62c551f8fba90c4f43bdfd2c9d2f7afff18e7428181cb49c24969"
+    },
+    {
+      "path": "kolkata_legacy_recent_diurnal.csv",
+      "bytes": 1898,
+      "sha256": "ae471bc8cf62f5d824500fc8f8dee243b0f383de7f1b2e144fcf79342bfc8da7"
+    },
+    {
+      "path": "kolkata_panel_hourly.pkl",
+      "bytes": 2997495,
+      "sha256": "2e69ad2504173ae1c3ed3bb5aeddf13005a259499ecbbd254d335c3f52e68500"
+    },
+    {
+      "path": "kolkata_panel_raw_daily.csv",
+      "bytes": 95893,
+      "sha256": "968a60490da1d3263824973d25b290add63813d9a64987d841aa8fa4065f50f8"
+    },
+    {
+      "path": "kolkata_raw_daily.csv",
+      "bytes": 95893,
+      "sha256": "968a60490da1d3263824973d25b290add63813d9a64987d841aa8fa4065f50f8"
+    },
+    {
+      "path": "kolkata_station_hours.pkl",
+      "bytes": 10157910,
+      "sha256": "5110db6c32fd86a48829439ef8b095db9a540b35dd37668ca9267b85d32ec93d"
+    },
+    {
+      "path": "kolkata_station_panel.png",
+      "bytes": 89572,
+      "sha256": "611f00005177f33f06e6c0134ffe5409fbf5eff1a50445563d9f8affc37754de"
+    },
+    {
+      "path": "kolkata_station_panel.svg",
+      "bytes": 50553,
+      "sha256": "ffba056a5c34c3c5ea1272c7761d9129e4ce95dd864f25f3efa554a0141ba18e"
+    },
+    {
+      "path": "kolkata_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "82fa44ce529f33a4292b59ea8903944d9d27534d6d398318111218229fb6c28c"
+    },
+    {
+      "path": "kolkata_wind_lags.csv",
+      "bytes": 5322,
+      "sha256": "266acefc634bcc5e389134479f1b31ddbd9b8047245c60509c3da7759eb2605c"
+    },
+    {
+      "path": "lucknow_IST quarters_old_diurnal.csv",
+      "bytes": 1905,
+      "sha256": "d8f5d13473312cd14852c56a99869c1481bb3ccdedb01e9f2f00daa62b6fca14"
+    },
+    {
+      "path": "lucknow_alignment_diurnal.png",
+      "bytes": 181997,
+      "sha256": "035fbf3cb8900395f1bcf4040f99e901378490d89215ff74370e96327d892d7a"
+    },
+    {
+      "path": "lucknow_alignment_diurnal.svg",
+      "bytes": 77071,
+      "sha256": "7ce47b864e78a2d2a8efe110225c44fac6bcd45df425f75120751e18b048b19f"
+    },
+    {
+      "path": "lucknow_hourly.pkl",
+      "bytes": 3841911,
+      "sha256": "95d33775f4156ea3ae7375b46dc62cfe36ab8144864cdbb75ed0531ef7983f36"
+    },
+    {
+      "path": "lucknow_legacy_old_diurnal.csv",
+      "bytes": 1905,
+      "sha256": "d8f5d13473312cd14852c56a99869c1481bb3ccdedb01e9f2f00daa62b6fca14"
+    },
+    {
+      "path": "lucknow_raw_daily.csv",
+      "bytes": 101149,
+      "sha256": "8413ab3b07a072b5e89240e0df36675249c41348feffd398aeb1e3b1d7ac34f1"
+    },
+    {
+      "path": "lucknow_station_hours.pkl",
+      "bytes": 4358809,
+      "sha256": "0c3c6cc80e482557bebc1826b773d383caf14b0ee648b8e348cd0e15f04d6d51"
+    },
+    {
+      "path": "lucknow_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "85b4ec4e2937de825a6d7e23d2c531310e7ab9254e1582150742a16faf12f9f6"
+    },
+    {
+      "path": "lucknow_wind_lags.csv",
+      "bytes": 2621,
+      "sha256": "403f2cca996068f15e9c52ee0c116791993fa6e7245a03cab21f0e14fb2cafba"
+    },
+    {
+      "path": "mumbai_IST quarters_old_diurnal.csv",
+      "bytes": 1894,
+      "sha256": "93549754715de4b0ffa0d5e967f5a6348ab9d5bba479710125c14bf42421ca8f"
+    },
+    {
+      "path": "mumbai_IST quarters_recent_diurnal.csv",
+      "bytes": 1871,
+      "sha256": "ea15c03088172cc408355a7a2c9b47b6cfb63f1294ce6da242595c2e32cd8adf"
+    },
+    {
+      "path": "mumbai_alignment_diurnal.png",
+      "bytes": 331326,
+      "sha256": "b699de878a58d4d1fdbdfd0f64465d6c0499ff4e84fcbfc0ca17ee6ce1b288fb"
+    },
+    {
+      "path": "mumbai_alignment_diurnal.svg",
+      "bytes": 106068,
+      "sha256": "668ca29c99a0c39797695fd0cb55fc0f51bd163309d16587937f30b9fcdcf545"
+    },
+    {
+      "path": "mumbai_hourly.pkl",
+      "bytes": 5379543,
+      "sha256": "c0597b4b441a6f59e44ef9424716603d7ec75bcf44525bd693354425b811e79a"
+    },
+    {
+      "path": "mumbai_legacy_old_diurnal.csv",
+      "bytes": 1895,
+      "sha256": "72283c7406d331fba614be3d95927d55ecbdb982637adab0f627aa3bd91ccace"
+    },
+    {
+      "path": "mumbai_legacy_recent_diurnal.csv",
+      "bytes": 1880,
+      "sha256": "424be5a30db32a23c8d24c2696927eacc8aec2af9fc425bc01424b0f80a014eb"
+    },
+    {
+      "path": "mumbai_panel_hourly.pkl",
+      "bytes": 2171511,
+      "sha256": "678f4e70369acafe47adb49ea664aedab8ce6701bebaf27ab4830fb412962b6d"
+    },
+    {
+      "path": "mumbai_panel_raw_daily.csv",
+      "bytes": 90313,
+      "sha256": "3616d295680ed5dfeb604b91a3008d7d53e73737d26071128d241d348e228a0e"
+    },
+    {
+      "path": "mumbai_raw_daily.csv",
+      "bytes": 112237,
+      "sha256": "4a68d24524f35d63902d968bea373b2b094a6be44adf913272f02088681c617e"
+    },
+    {
+      "path": "mumbai_station_hours.pkl",
+      "bytes": 30452815,
+      "sha256": "1ecaa0881b524fbc60b82d3c9334ff0f6568039f97e8cce540263d112f5c8fd5"
+    },
+    {
+      "path": "mumbai_station_panel.png",
+      "bytes": 129897,
+      "sha256": "03fcfd9f446ceb36b95aba59db061c76d1849ca79372d12ea73892d447b965cc"
+    },
+    {
+      "path": "mumbai_station_panel.svg",
+      "bytes": 50701,
+      "sha256": "6c3c06b83addd659a90d78c5713ae4f62415db88402e1da6d8a039615e2359cc"
+    },
+    {
+      "path": "mumbai_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "07d258f8a19c2ab2884226ecc0c8eca0067d5988dacbd094a545f92e3e422bdf"
+    },
+    {
+      "path": "mumbai_wind_lags.csv",
+      "bytes": 5258,
+      "sha256": "5ecf538ea6bec60f16b60257aede854ed25aacaf9e3dfd4c8fbf78394a71b33f"
+    },
+    {
+      "path": "patna_IST quarters_old_diurnal.csv",
+      "bytes": 1896,
+      "sha256": "20febb4909afae521a8c58c8e0c8edfb57b6d6fb2bc9a2d4c168d2aefbc8a955"
+    },
+    {
+      "path": "patna_alignment_diurnal.png",
+      "bytes": 179374,
+      "sha256": "840d78c36eaf3efd127e0c0452f5dfcfa6afb31f64ea6384e99ce20a685300ff"
+    },
+    {
+      "path": "patna_alignment_diurnal.svg",
+      "bytes": 74121,
+      "sha256": "2d8877fd5c9a909d1124451e33de3a51e34283b2ab3a40158db24589d239a89f"
+    },
+    {
+      "path": "patna_hourly.pkl",
+      "bytes": 2762679,
+      "sha256": "ff8d2948ecc52f729ae169beaab236f04db260c40422e4ff25ba9bccfcdad55c"
+    },
+    {
+      "path": "patna_legacy_old_diurnal.csv",
+      "bytes": 1883,
+      "sha256": "82c2a8a185b81f924c4c3b326105dfaa6fcdfe7e9f08d9c86ca0896e6e279a7d"
+    },
+    {
+      "path": "patna_raw_daily.csv",
+      "bytes": 91064,
+      "sha256": "218e0ad415c08682850be49e3143b1de284e246f8ccac49588e9cb9101516b7b"
+    },
+    {
+      "path": "patna_station_hours.pkl",
+      "bytes": 1407216,
+      "sha256": "dfcf83102ed1d1b7013a67a8d884fb1a89d1272df1edeeb0f157da41669d4a75"
+    },
+    {
+      "path": "patna_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "a4392f613d04f37a1b9acea29bb9a2e42a6e8b8841a5c992883833b8212dcc23"
+    },
+    {
+      "path": "patna_wind_lags.csv",
+      "bytes": 2519,
+      "sha256": "3c76ae39819a952344cbb54aba4e7ccd0cb6539594c9f9353672f337b67687b0"
+    },
+    {
+      "path": "pune_IST quarters_recent_diurnal.csv",
+      "bytes": 1898,
+      "sha256": "9cdd76f41b584e944bfc17eb11468619793c9d112c3f31d9ad18b8c87afc329b"
+    },
+    {
+      "path": "pune_alignment_diurnal.png",
+      "bytes": 183981,
+      "sha256": "4639aff6dd248f0f9a5de04caf0c16b0e081c9599c6e84197c8283728ab03224"
+    },
+    {
+      "path": "pune_alignment_diurnal.svg",
+      "bytes": 75864,
+      "sha256": "7dc016f0c62965dfb509a55a38e9c08b13b617f4a54c597d9bef1580c6c68ae0"
+    },
+    {
+      "path": "pune_hourly.pkl",
+      "bytes": 1685559,
+      "sha256": "1275ce203eae5dba1050504b20cfc5d0d4e659187e1972a2fa7612dc21993c42"
+    },
+    {
+      "path": "pune_legacy_recent_diurnal.csv",
+      "bytes": 1898,
+      "sha256": "e85f3442efa0fbc99719627f23efb3892eb0a78e73d51439c567f1c8857533e0"
+    },
+    {
+      "path": "pune_raw_daily.csv",
+      "bytes": 86414,
+      "sha256": "a5ec2756b763222bd135f1f43601f8563a7df4b28d62718476cb9e7ee8ed9384"
+    },
+    {
+      "path": "pune_station_hours.pkl",
+      "bytes": 4720924,
+      "sha256": "2c81c6c6195c81b49a39943031da25d852ce80817af19586a9f0d9de684dda76"
+    },
+    {
+      "path": "pune_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "a4b835507e3fcdc7a832d627f2406878c965f34dbb0dcbc77b2a9336e4f618b6"
+    },
+    {
+      "path": "pune_wind_lags.csv",
+      "bytes": 2643,
+      "sha256": "4edabe18075dd6986cc2058c1d9c5a9d41016a38ff8ab510fc8a27ffb3fab737"
+    },
+    {
+      "path": "station_geography.csv",
+      "bytes": 25745,
+      "sha256": "5c944abe044852fa761d8e29df356ab8a42f499fe37c96d8ce2c65585efb2f5d"
+    },
+    {
+      "path": "stations_by_year.csv",
+      "bytes": 67101,
+      "sha256": "6d2e3fc0c4a07208f1a26cf4115bf4b4a905d15cdcbf86aad94391e867cbe8e8"
+    },
+    {
+      "path": "weather_grids.json",
+      "bytes": 2055,
+      "sha256": "2738fd2fb7a326dc5bf9ab7e854aff72065276d84003ba1439855207c967de4f"
+    },
+    {
+      "path": "weather_nulls.csv",
+      "bytes": 8457,
+      "sha256": "832f770214d65ebb7882edae9fa13edbedf8eeea6defc48cfb77e3f8f5c8a824"
+    }
+  ],
+  "error_message": ""
+}

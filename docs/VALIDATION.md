@@ -703,3 +703,62 @@ predefined meteorological-normalisation readiness screen. Descriptive datasets
 are available, but RF normalisation needs further scientific validation before
 Phase 3B relies on it. Phase 3B questions, forecasts, RAG, simulators and dashboards
 were not implemented.
+
+## Phase 3A2: corrected deweathering verification (2026-10-08)
+
+All commands ran in the web container from `D:\EnviroInsights-India`.
+Corrected diagnostic data run **6** and full model run **7** succeeded. Legacy
+run **2**, literal-clock diagnostic run **4**, failed initial diagnostic run **3**
+and interrupted provisional model run **5** remain available for the audit.
+
+| Check | Actual result |
+| --- | --- |
+| Full pytest | 117 passed, 1 warning in 30.49s; all 14 original test files unchanged |
+| Ruff | All checks passed; 147 files already formatted |
+| Django checks/migrations | No issues (0 silenced); no changes detected |
+| Production deploy check | System check identified no issues (0 silenced) |
+| Schema | spectacular --validate --fail-on-warn completed successfully |
+| Health | HTTP 200; every database/extension/Redis/Celery check true |
+| Model grid | All 12 cities, all eight frozen variants; six all-station passes |
+| Shared reference | Same seeded 300 joint pooled-weather draws for both eras; hashes stored |
+| Measurement preservation | 16,266,240 rows; record hash 695864490642684660 unchanged |
+| Frozen protocol | SHA256 09d869e72551b31af0368b0d89a5c91510e8ecd65e6ce53605d33a704b827977 unchanged |
+| Gap/future targets | No deweathered series rows in 2020-2023 or 2026 |
+| Live API | Latest summary/series/coverage use run 7; explicit run=2 still works |
+| Artifact preservation | Runs 2-7 manifests validated against actual bytes and file lists |
+
+The existing netCDF4/NumPy ndarray-size RuntimeWarning remains visible; no warning
+filter or test weakening was introduced. The new tests check positive/negative
+known lags, whole-week/embargo isolation, pooled-donor reproducibility, correct
+IST quarter bins, verified publisher-clock decoding, revised API selection with
+legacy access, and interruption failure/manifests.
+
+Real diagnostic findings, a/b/c validation, model ablations, seasonal bias,
+readiness and conditional bootstrap intervals are in
+[PHASE3A2.md](results/PHASE3A2.md). Passing models do not establish instrument
+accuracy or causal effects. All-station readiness passes: Delhi, Hyderabad,
+Kanpur, Lucknow, Mumbai and Pune, for their observed eligible periods. Bengaluru
+qualifies only on its seven-station fixed panel; its all-station historical
+screen fails. Mumbai's matched panel lacks eligible years in both periods.
+Kolkata and Patna retain monthly-bias failures despite high overall R2.
+
+Hyderabad 2025 has 0 all-station city-average days above 60 ug/m3 (daily maximum
+53.0306); the six-station fixed panel has 53 (maximum 77.6869). Changing station
+composition is consequential. Published integer ranges/repeats remain a source
+quality limitation and were not fabricated away.
+
+Failures and corrections: the first diagnostic attempt expected a cache-manifest
+`bytes` field, while cache metadata uses `size_bytes`; actual file size now comes
+from the cached file. Provisional fits were stopped after independent same-site
+records proved IST clocks were labelled UTC; the derived -5.5-hour conversion
+was then verified in all seven recent cities. A report reader initially failed
+on blank Timestamp rows; it now excludes those rows consistently with ingestion.
+A final audit initially confused fitted complete-case rows with raw hourly rows:
+Delhi has 61,118 raw rows, including five without weather, versus 61,113 fitted
+hours. The corrected audit compares the default dataframe directly to run 7.
+These corrections changed neither the original tests nor the frozen thresholds.
+
+Exact stdout and proof JSON/CSV/figures are archived under
+`data/results/7/verification/` and `data/results/7/diagnostics/`. The manifest
+records compute, hourly-supplement and export revisions separately. No Phase 3B
+research question has been started.

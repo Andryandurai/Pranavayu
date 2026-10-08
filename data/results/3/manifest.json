@@ -1,0 +1,166 @@
+{
+  "run": 3,
+  "name": "phase3a2-data",
+  "status": "failed",
+  "started_at": "2026-10-08T16:47:04.218920+00:00",
+  "finished_at": "2026-10-08T16:47:53.518619+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2026-10-07"
+  ],
+  "git_commit": "d70b40d17ed757b9f668e82ddcc98a6d06f4ed81",
+  "parameters": {
+    "clock_shift_hours": 0,
+    "protocol": {
+      "frozen_at": "2026-10-08T16:29:51.054711+00:00",
+      "baseline_run": 2,
+      "seed": 42,
+      "n_trees": 100,
+      "max_depth": 12,
+      "min_samples_leaf": 12,
+      "max_features": 0.7,
+      "cv_folds": 5,
+      "cv_week_timezone": "Asia/Kolkata",
+      "cv_embargo_hours": 24,
+      "normalisation_draws": 300,
+      "bootstrap_draws": 500,
+      "criteria": {
+        "daily_oof_r2_min_each_period": 0.5,
+        "absolute_nmb_percent_max_each_period": 10,
+        "absolute_month_nmb_percent_max_each_period": 20,
+        "minimum_days_month_each_period": 20,
+        "minimum_weeks_each_period": 26
+      },
+      "variants": [
+        {
+          "name": "hourly_trend_pooled_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "hourly_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_no_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_trend_separate_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_pooled_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "daily_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_no_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_separate_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        }
+      ],
+      "selection": "Per city, maximum mean period-specific daily OOF R2 on common valid days across eight fixed variants; tie by listed order. Evaluate readiness on all usable selected-design OOF days, regardless of whether it passes.",
+      "normalisation": "Identical joint complete observed weather/seasonal donor draws pooled across 2015-2019 and 2024-2025 per city. Hold period and within-period trend fixed; no trend bridges the gap.",
+      "normalised_intervals": "500 year/seven-calendar-day block resamples of normalised daily values with centred week-CV daily residuals added for conditional target-variability uncertainty. No model-parameter or station-network uncertainty.",
+      "timestamps": "Never choose a source-clock shift to improve scores. Require source or cross-provider evidence. Rebin cached quarters to IST hours without rewriting original observations."
+    },
+    "git_state": "versioned",
+    "code_sha256": "42cba57b8376d96952f4d15f9299cda40b09b47c3ef58ac15e9cf809e33598b3",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "files": [
+    {
+      "path": "ahmedabad_IST quarters_old_diurnal.csv",
+      "bytes": 1887,
+      "sha256": "5ae38518cac4a2a7f135978884f24979df6f5d7a37b1eebc52e95429637e6015"
+    },
+    {
+      "path": "ahmedabad_alignment_diurnal.png",
+      "bytes": 164172,
+      "sha256": "0092ab815afd8a0ea3fb316e5c3cb57e6d5bdd315961cab49cce7d95725f38ce"
+    },
+    {
+      "path": "ahmedabad_alignment_diurnal.svg",
+      "bytes": 75516,
+      "sha256": "0b8cff9f0134971c3985d6178894411fe6db77647243c0d72ed61bd682c966ba"
+    },
+    {
+      "path": "ahmedabad_hourly.pkl",
+      "bytes": 2867991,
+      "sha256": "e524c0477c2116219c49409de74d572a84e8602e44808172486bdbcdc42469b1"
+    },
+    {
+      "path": "ahmedabad_legacy_old_diurnal.csv",
+      "bytes": 1893,
+      "sha256": "22d4c0e913b391ad3319c54d54614d8fcf9d51d1d0db8e2e6ebbe103e520b6ec"
+    },
+    {
+      "path": "ahmedabad_raw_daily.csv",
+      "bytes": 92388,
+      "sha256": "25ee5e8db08991ae85674405fa41d5a3c060a2f5c1824d1e5d822fe34b6c54f8"
+    },
+    {
+      "path": "ahmedabad_station_hours.pkl",
+      "bytes": 1435092,
+      "sha256": "543152b22b495a96dbc1705e380d41adcbb340784c5f2cc4b8e6ccadd9ca1cc4"
+    },
+    {
+      "path": "ahmedabad_weather.pkl",
+      "bytes": 8245734,
+      "sha256": "18fea976a1d02ab0df793d4f38b2a50a2ec56ef672be3af1586bb0ecbc03ea70"
+    },
+    {
+      "path": "ahmedabad_wind_lags.csv",
+      "bytes": 2722,
+      "sha256": "5837e9c91e95a448a5ef4e2ba67e551beff75071d3d4ef3729347e8358b20aaf"
+    },
+    {
+      "path": "station_geography.csv",
+      "bytes": 25745,
+      "sha256": "5c944abe044852fa761d8e29df356ab8a42f499fe37c96d8ce2c65585efb2f5d"
+    },
+    {
+      "path": "weather_grids.json",
+      "bytes": 2055,
+      "sha256": "2738fd2fb7a326dc5bf9ab7e854aff72065276d84003ba1439855207c967de4f"
+    }
+  ],
+  "error_message": "KeyError: 'bytes'"
+}
