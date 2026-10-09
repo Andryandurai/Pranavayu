@@ -80,9 +80,12 @@ class OpenCitySource(AirSource):
 
                     with path.open(encoding="utf-8-sig", newline="") as stream:
                         fields = next(csv.reader(stream))
-                    canonical = IngestionRun.objects.filter(
-                        source__slug="opencity", params__timestamp_clock_version=CLOCK_VERSION
-                    ).exists()
+                    canonical = (
+                        self.run.params.get("timestamp_clock_version") == CLOCK_VERSION
+                        or IngestionRun.objects.filter(
+                            source__slug="opencity", params__timestamp_clock_version=CLOCK_VERSION
+                        ).exists()
+                    )
                     if canonical and "Timestamp" in fields:
                         raise SourceUnavailable(
                             "Unverified new publisher clock; approve its evidence first"

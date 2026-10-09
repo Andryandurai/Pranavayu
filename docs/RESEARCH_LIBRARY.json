@@ -1,0 +1,68 @@
+[
+  {
+    "key": "ncap_city_list",
+    "url": "https://cpcb.gov.in/uploads/Non-Attainment_Cities.pdf",
+    "path": "data/raw/research_library/ncap_city_list.pdf",
+    "bytes": 68473,
+    "sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985"
+  },
+  {
+    "key": "ncap_2023_official",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=1909910&lang=2&reg=48",
+    "path": "data/raw/research_library/ncap_2023_official.html",
+    "bytes": 1384755,
+    "sha256": "c9695e5c11e851341a9f9880489465dbe82a8b41b9583514aa61227ed403773f"
+  },
+  {
+    "key": "ncap_2024_update",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2078363&lang=2&reg=48",
+    "path": "data/raw/research_library/ncap_2024_update.html",
+    "bytes": 815902,
+    "sha256": "a5030643ea05a1a543826116af8ae78ecc5b4b0c65e06e37d496221bd8796fb2"
+  },
+  {
+    "key": "ncap_2026_update",
+    "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2288316&lang=1&reg=48",
+    "path": "data/raw/research_library/ncap_2026_update.html",
+    "bytes": 94194,
+    "sha256": "c714511b919390806d6b82ad8326c632c4519fc89cf1b11bfbcc6e84c6c2ac21"
+  },
+  {
+    "key": "grange_2018",
+    "url": "https://acp.copernicus.org/articles/18/6223/2018/acp-18-6223-2018.pdf",
+    "path": "data/raw/research_library/grange_2018.pdf",
+    "bytes": 1318053,
+    "sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536"
+  },
+  {
+    "key": "who_2021",
+    "url": "https://www.who.int/publications/i/item/9789240034228/",
+    "path": "data/raw/research_library/who_2021.html",
+    "bytes": 91324,
+    "sha256": "e57b3246f0073bd4591d7f5daef646eae8503ae68a3da30b521e884b992d1b82"
+  },
+  {
+    "key": "cpcb_aqi",
+    "url": "https://cpcb.nic.in/National-Air-Quality-Index/",
+    "path": "data/raw/research_library/cpcb_aqi.html",
+    "bytes": 340648,
+    "sha256": "4482aaa549a7554936c54dbd74578c4de0996151b6454086c1de1b3ce36f7a1b"
+  },
+  {
+    "key": "ncap_apex",
+    "url": "https://prana.cpcb.gov.in/ncapDashboard/download_public_portal_file/Minutes_of_National_Apex_Committee_meeting.pdf",
+    "path": "data/raw/research_library/ncap_apex.pdf",
+    "bytes": 2330242,
+    "sha256": "42507a6f3d53f84fdf7156dfdda44821934c37c5cc93dad664aa9eab45aca21e"
+  },
+  {
+    "key": "shi_2021",
+    "url": "https://pure-oai.bham.ac.uk/ws/files/114238854/eabd6696.full.pdf",
+    "path": "data/raw/research_library/shi_2021.pdf",
+    "bytes": 1333242,
+    "sha256": "ecf631432be24828f8991819ee93957eb1ed1723362a57546f6c4f129adedc8c",
+    "title": "Abrupt but smaller than expected changes in surface air quality attributable to COVID-19 lockdowns",
+    "doi": "10.1126/sciadv.abd6696",
+    "excluded_wrong_initial_pmc": "PMC7809156"
+  }
+]

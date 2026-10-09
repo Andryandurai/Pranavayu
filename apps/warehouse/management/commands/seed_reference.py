@@ -44,7 +44,9 @@ class Command(BaseCommand):
                     "name": name,
                     "state": state,
                     "location": Point(longitude, latitude, srid=4326),
-                    "is_ncap_nonattainment": True,
+                    # CPCB's 131-city list marks Chennai as a million-plus city,
+                    # explicitly outside the non-attainment classification.
+                    "is_ncap_nonattainment": name != "Chennai",
                 },
             )
         self.stdout.write(

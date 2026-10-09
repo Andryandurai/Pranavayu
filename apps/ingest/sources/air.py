@@ -223,6 +223,14 @@ class AirSource(Source):
     def load_csv(self, path, *, registry=None, quarter=False, metadata=None):
         from apps.ingest.quality import aggregate_quarters, quarter_variation
 
+        if (
+            self.slug == "opencity"
+            and (metadata or {}).get("published_clock_timezone") == "Asia/Kolkata"
+        ):
+            from apps.ingest.clocks import CLOCK_VERSION
+
+            self.run.params["timestamp_clock_version"] = CLOCK_VERSION
+
         path, asset = self.local_asset(path, **(metadata or {}))
         cities = {name_key(c.name): c for c in City.objects.all()}
         registry_by_id = {r["station_id"]: r for r in registry or []}

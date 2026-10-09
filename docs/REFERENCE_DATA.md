@@ -49,9 +49,11 @@ reference location for curator review.
 | Patna | BR | 25.5941 | 85.1376 | [Map](https://www.openstreetmap.org/#map=12/25.5941/85.1376) |
 | Jaipur | RJ | 26.9124 | 75.7873 | [Map](https://www.openstreetmap.org/#map=12/26.9124/75.7873) |
 
-Initial NCAP flags follow the [CPCB list of non-attainment cities](https://cpcb.nic.in/uploads/non-attainment_cities.pdf)
+Initial NCAP flags follow the [CPCB city list](https://cpcb.gov.in/uploads/Non-Attainment_Cities.pdf)
 and [PRANA's list of 131 cities](https://prana.cpcb.gov.in/ncapDashboard/download_public_portal_file/Minutes_of_National_Apex_Committee_meeting_march_15th.pdf),
 including Bengaluru under its earlier Bangalore name. These are reference snapshots;
+the CPCB PDF footnote explicitly excludes starred million-plus cities from the
+non-attainment classification. Chennai is starred, so its seed flag is false.
 the flag is not evidence of a current measured violation. Curators should revisit
 classification and geographic identity before policy-impact research.
 

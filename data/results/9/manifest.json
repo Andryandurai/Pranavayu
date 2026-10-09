@@ -1,0 +1,164 @@
+{
+  "run": 9,
+  "name": "phase3b-data",
+  "status": "success",
+  "started_at": "2026-10-09T03:05:44.931230+00:00",
+  "finished_at": "2026-10-09T03:08:24.541807+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "13c3528b0285bcb4edae740ed49644a70c43a655",
+  "parameters": {
+    "parent_data_run": 8,
+    "clock_version": "opencity-ist-clock-v1",
+    "git_state": "versioned",
+    "code_sha256": "8ed854d0f4f1adc83e0f45de15fb55e7299c42ed7f120a184b037e1b4d896260",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2"
+    }
+  },
+  "files": [
+    {
+      "path": "ahmedabad_raw_daily.csv",
+      "bytes": 87628,
+      "sha256": "2ab98a06f8dbe8d12c3a69e8446ca74aa81db68fdb769c572ac90e72fe6c1618"
+    },
+    {
+      "path": "ahmedabad_raw_monthly.csv",
+      "bytes": 3013,
+      "sha256": "2995039afff944dc2c121618a4ec0d5823000cb50a800bb94aa29ad3688d77c3"
+    },
+    {
+      "path": "analysis_coverage.csv",
+      "bytes": 35628,
+      "sha256": "aa5420498b72bc786814d4f041fe3dc88596a79341e2c8d816b1fdece20a0806"
+    },
+    {
+      "path": "bengaluru_raw_daily.csv",
+      "bytes": 110612,
+      "sha256": "233a265e894a9f2e9a3cc062226a58490df299eaa6cade93e2ae536c7b1fbac3"
+    },
+    {
+      "path": "bengaluru_raw_monthly.csv",
+      "bytes": 3683,
+      "sha256": "4a23c446abd86cd352194ddefdc9552d585df85eed875e00b5cc9f01393efa93"
+    },
+    {
+      "path": "canonical_equivalence.json",
+      "bytes": 982,
+      "sha256": "b6a71d054acffbf5d0e0f1a55f799d26c6afde8b015d83528561745f724c7397"
+    },
+    {
+      "path": "chennai_raw_daily.csv",
+      "bytes": 109106,
+      "sha256": "88b82c94c19d78a81a483818a3d6e0d05f4d05b02d357f232fce710f777d82e8"
+    },
+    {
+      "path": "chennai_raw_monthly.csv",
+      "bytes": 3721,
+      "sha256": "c921ee0dc237e7c15eadf519160d5da4ff0739e468701896569a0abdbd8bb88e"
+    },
+    {
+      "path": "delhi_raw_daily.csv",
+      "bytes": 114361,
+      "sha256": "19fe14f2a60e459386a806a8a797936617482ba928c0673694919a375498c351"
+    },
+    {
+      "path": "delhi_raw_monthly.csv",
+      "bytes": 3824,
+      "sha256": "4ca20e16f724840b55d7957d8febc33d20749c58c5d79d8cc5d4e585f82eb6b7"
+    },
+    {
+      "path": "hyderabad_raw_daily.csv",
+      "bytes": 109760,
+      "sha256": "c4bcb2d9752b335727bf27635601decd3d2f6f4953673286582a4f77e9bf6d6c"
+    },
+    {
+      "path": "hyderabad_raw_monthly.csv",
+      "bytes": 3713,
+      "sha256": "05b8c3232692674baa9c9ecd1c696b2f3948cec8250f0ee5ff12eee978d66b19"
+    },
+    {
+      "path": "jaipur_raw_daily.csv",
+      "bytes": 83141,
+      "sha256": "e44473e1fdb7dfb3b14c6f7f518bb27b69cba534988f530245a95f26d63127ed"
+    },
+    {
+      "path": "jaipur_raw_monthly.csv",
+      "bytes": 2771,
+      "sha256": "edb60b73ee0b1060334539f8868d3e60c44295fc43c0ec4878e156793d172a80"
+    },
+    {
+      "path": "kanpur_raw_daily.csv",
+      "bytes": 91536,
+      "sha256": "8769ba9612894c9b8ee5488e22ec17a33926a0dfc7e2419120bbe736f16d223c"
+    },
+    {
+      "path": "kanpur_raw_monthly.csv",
+      "bytes": 3178,
+      "sha256": "8c41524499ab89692a367077348c77857c7efe9e9d62d7fe860aaac8813adc99"
+    },
+    {
+      "path": "kolkata_raw_daily.csv",
+      "bytes": 91126,
+      "sha256": "628eb12e1d0d5b4ad432e2cddf9bc4a2b637eb9b8a69bdd469ae9d728dc0a5ee"
+    },
+    {
+      "path": "kolkata_raw_monthly.csv",
+      "bytes": 3054,
+      "sha256": "c45b591cabb1d0817815738ceb48670b65dcc8aae3f19d454450a016d31537da"
+    },
+    {
+      "path": "lucknow_raw_daily.csv",
+      "bytes": 96434,
+      "sha256": "8353ef7a984b45198ab657c78cda5f7d74deef0c0d20e8e367f8eb9456ef79fe"
+    },
+    {
+      "path": "lucknow_raw_monthly.csv",
+      "bytes": 3265,
+      "sha256": "a5098e02e84b768b6bf6266979a823fb36e59596edfc66bab58f5b3229658e42"
+    },
+    {
+      "path": "mumbai_raw_daily.csv",
+      "bytes": 107469,
+      "sha256": "a908bce614c81880ee84fc371413d1a510e4b3fae749bda0d520af3a84211ea0"
+    },
+    {
+      "path": "mumbai_raw_monthly.csv",
+      "bytes": 3651,
+      "sha256": "b2df486063bf0d75e127485184f6223ea22a2bd0035c80d6354d869f8de547a0"
+    },
+    {
+      "path": "ncap_official_verification.json",
+      "bytes": 4572,
+      "sha256": "94313be1f0a75b5e79a4e87a34070165eb1d23eb70accee74934a7c8263b9ee8"
+    },
+    {
+      "path": "patna_raw_daily.csv",
+      "bytes": 86304,
+      "sha256": "864661c15077697f598ad874c7427c7d5bea585bab1a4b897787fb4798f2e539"
+    },
+    {
+      "path": "patna_raw_monthly.csv",
+      "bytes": 2882,
+      "sha256": "e3f68670e6d599afcf1618243167ac75ca7ac48706528b5103af4de7a5580ce3"
+    },
+    {
+      "path": "pune_raw_daily.csv",
+      "bytes": 81679,
+      "sha256": "8f3a21256718d875fe569fa052a21386e0504c2455e4a4bd268e624165268001"
+    },
+    {
+      "path": "pune_raw_monthly.csv",
+      "bytes": 2723,
+      "sha256": "9150426bdb93db8f57d63408a8686feef2aabb0a3453bdb422c3e496545fa8e1"
+    }
+  ],
+  "error_message": ""
+}

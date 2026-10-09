@@ -51,3 +51,31 @@ def test_stored_clock_repair_preserves_values_and_is_idempotent(tmp_path, settin
     run.refresh_from_db()
     assert run.params["timestamp_clock_version"] == CLOCK_VERSION
     assert published_ist_to_utc("2024-01-01T00:00:00+0000") == row.observed_at
+
+
+@pytest.mark.django_db
+def test_verified_ingestion_uses_native_ist_hour_bins(tmp_path, settings):
+    from apps.ingest.http import RawCache
+    from apps.ingest.sources.opencity import OpenCitySource
+
+    call_command("seed_reference", verbosity=0)
+    settings.RAW_DATA_ROOT = tmp_path
+    source = OpenCitySource(cache=RawCache(root=tmp_path))
+    source.run = IngestionRunFactory(source=source.source)
+    path = tmp_path / "quarters.csv"
+    header = "Timestamp,Station ID,Station Name,City,Latitude,Longitude,PM2.5 (ug/m3)\n"
+    path.write_text(
+        header
+        + "".join(
+            f"2024-01-01T02:{minute:02d}:00+0000,clock-site,Clock site,Delhi,28.6,77.2,{value}\n"
+            for minute, value in [(0, 10), (15, 20), (30, 30), (45, 40)]
+        )
+    )
+    metadata = {"published_clock_timezone": "Asia/Kolkata"}
+    source.load_csv(path, quarter=True, metadata=metadata)
+    assert source.run.params["timestamp_clock_version"] == CLOCK_VERSION
+    row = Reading.objects.get(station__external_id="clock-site")
+    assert row.observed_at == datetime(2023, 12, 31, 20, 30, tzinfo=UTC)
+    assert (row.value, row.raw_value) == (25, 25)
+    source.load_csv(path, quarter=True, metadata=metadata)
+    assert Reading.objects.filter(station__external_id="clock-site").count() == 1

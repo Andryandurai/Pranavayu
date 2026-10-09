@@ -234,8 +234,9 @@ def prepare_data(clock_shift_hours=-5.5):
             timestamp_types=timestamp_types,
             concentration_storage=(
                 "Database timestamps are UTC timestamptz. Historical XKDR clocks are IST. "
-                "Raw OpenCity UTC labels are retained as published; independently verified "
-                "IST wall clocks are converted to UTC in this versioned analysis."
+                "Version-marked OpenCity ingestion runs already store canonical UTC timestamps; "
+                "only unmarked legacy runs are decoded in analysis. Raw CSV labels remain "
+                "unchanged for provenance. See the Phase 3B stored-clock audit."
             ),
             weather_timezone="UTC request, utc_offset_seconds=0 validated",
             method_fix=(

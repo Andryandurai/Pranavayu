@@ -6,6 +6,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.routers import DefaultRouter
 
 from apps.analytics.api import CoverageView, SeriesView, SummaryView
+from apps.analytics.research_api import ComparisonsView, NCAPView, RQ2View
 from apps.core.views import HealthView
 from apps.dashboard.views import HomeView
 from apps.ingest.api import CompletenessView, FireView, ReadingView, WeatherView
@@ -25,6 +26,9 @@ urlpatterns = [
     path("api/fires/", FireView.as_view(), name="fires"),
     path("api/completeness/", CompletenessView.as_view(), name="completeness"),
     path("api/analytics/coverage/", CoverageView.as_view(), name="analytics-coverage"),
+    path("api/analytics/rq2/<slug:slug>/", RQ2View.as_view(), name="analytics-rq2"),
+    path("api/analytics/ncap/", NCAPView.as_view(), name="analytics-ncap"),
+    path("api/analytics/comparisons/", ComparisonsView.as_view(), name="analytics-comparisons"),
     path(
         "api/analytics/city/<slug:slug>/summary/", SummaryView.as_view(), name="analytics-summary"
     ),

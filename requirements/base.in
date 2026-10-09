@@ -18,3 +18,5 @@ netCDF4>=1.7,<2
 pandas>=2.3,<3
 scikit-learn>=1.7,<2
 matplotlib>=3.10,<4
+shap==0.52.0
+statsmodels==0.15.0

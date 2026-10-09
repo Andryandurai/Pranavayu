@@ -28,7 +28,16 @@ def code_metadata():
             if path.suffix in {".py", ".in", ".txt"}:
                 digest.update(str(path.relative_to(settings.BASE_DIR)).encode())
                 digest.update(path.read_bytes())
-    packages = ["Django", "numpy", "pandas", "scikit-learn", "scipy", "matplotlib"]
+    packages = [
+        "Django",
+        "numpy",
+        "pandas",
+        "scikit-learn",
+        "scipy",
+        "matplotlib",
+        "shap",
+        "statsmodels",
+    ]
     return commit, {
         "git_state": "versioned" if commit else "no Git repository; commit unavailable",
         "code_sha256": digest.hexdigest(),
