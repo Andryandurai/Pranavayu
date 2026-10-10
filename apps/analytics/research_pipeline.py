@@ -24,6 +24,7 @@ from .research_uncertainty import bootstrap_normalisations, comparison_intervals
 from .revised_deweather import eligible_frame, panel_coverage
 
 matplotlib.use("Agg")
+import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 
@@ -63,11 +64,19 @@ def comparison_plot(city, cohorts, output):
                 )
                 monthly = monthly.assign(date=pd.to_datetime(monthly.date)).set_index("date")
                 calendar = pd.date_range(f"{first}-01-01", f"{last}-12-01", freq="MS")
-                ax.plot(calendar, monthly.value.reindex(calendar), label=f"{cohort} {label}")
+                values = monthly.value.reindex(calendar)
+                if values.notna().any():
+                    ax.plot(calendar, values, label=f"{cohort.replace('_', ' ')} {label}")
         ax.set_xlim(pd.Timestamp(f"{first}-01-01"), pd.Timestamp(f"{last}-12-31"))
         ax.set_ylabel("PM2.5 (ug/m3)")
         ax.set_title(f"{city.name}, {first}–{last}")
-        ax.legend(fontsize=8)
+        locator = mdates.AutoDateLocator(minticks=3, maxticks=7)
+        ax.xaxis.set_major_locator(locator)
+        ax.xaxis.set_major_formatter(mdates.ConciseDateFormatter(locator))
+        if ax.get_legend_handles_labels()[0]:
+            ax.legend(fontsize=8)
+        else:
+            ax.text(0.5, 0.5, "No eligible observed data", transform=ax.transAxes, ha="center")
     fig.tight_layout()
     for extension in ["png", "svg"]:
         fig.savefig(output / f"{city.slug}_network_comparison.{extension}", dpi=150)

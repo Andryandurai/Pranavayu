@@ -897,6 +897,7 @@ listed in PHASE3A2 are cited. Source files and SHA-256 values are catalogued in
     )
     (output / "report_export.json").write_text(json.dumps(report_meta, indent=2))
     manifest = json.loads((output / "manifest.json").read_text())
+    manifest["parameters"] = run.parameters
     manifest["report_export"] = report_meta
     manifest["files"] = [
         dict(
@@ -904,7 +905,7 @@ listed in PHASE3A2 are cited. Source files and SHA-256 values are catalogued in
             bytes=p.stat().st_size,
             sha256=hashlib.sha256(p.read_bytes()).hexdigest(),
         )
-        for p in sorted(output.iterdir())
+        for p in sorted(output.rglob('*'))
         if p.is_file() and p.name != "manifest.json"
     ]
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2))

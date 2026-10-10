@@ -762,3 +762,107 @@ Exact stdout and proof JSON/CSV/figures are archived under
 `data/results/7/verification/` and `data/results/7/diagnostics/`. The manifest
 records compute, hourly-supplement and export revisions separately. No Phase 3B
 research question has been started.
+
+## Phase 3B live verification — 10 October 2026
+
+Phase 3B is now complete on `D:\EnviroInsights-India`. The successful publication
+is **AnalysisRun 19**; city runs are **10, 12, 13, 14, 15, 16 and 17**. Run 11 is
+retained as a failed GAM attempt; Run 18 is the preceding publication before
+seasonal and matched-network supplements. Run 7 and its 414 artifacts remain
+unchanged. This section supersedes the earlier statement that Phase 3B had not
+started. The paper is [PHASE3B.md](results/PHASE3B.md).
+
+The stored-clock audit is IngestionRun **87**. It corrected **14,787,584** rows;
+the total remained **16,266,240**, with identical value/quality/ingestion-link
+hash **767228030051878155** before and after. The repeat command returned:
+
+```text
+status: already canonical
+corrected_rows: 0
+version: opencity-ist-clock-v1
+```
+
+DataRun 8 reconstructs diagnostics from canonical storage without a second shift.
+Its 12 city hourly frames exactly match Run 6. DataRun 9 rebuilds all pollutant
+tables; all 12 PM2.5 hourly series match frozen Run 7 within 1e-12. Cached raw
+values and first ingestion links were preserved. The clock tests include a
+Timescale chunk-boundary move and real quarter ingestion into native IST bins.
+
+Actual final verification output:
+
+```text
+125 passed, 16 warnings in 20.85s
+All checks passed!
+167 files already formatted
+System check identified no issues (0 silenced).
+No changes detected
+```
+
+OpenAPI generation with `spectacular --validate --fail-on-warn` exited 0 without
+warnings. The original 15 test source/support files are unchanged; all original
+117 tests are included in the passing suite. The 16 visible warnings comprise
+the existing netCDF4/NumPy ndarray-size warning, three SHAP/matplotlib pending
+deprecations, and twelve pandas/NumPy generic timedelta deprecations in the new
+week-isolation fixture. No warning filter or weakened assertion was introduced.
+
+Live HTTP checks returned:
+
+| Request | HTTP | Key result |
+| --- | --- | --- |
+| `/api/health/` | 200 | Database, PostGIS 3.6.4, Timescale 2.30.2, vector 0.8.7, Redis and Celery all true |
+| `/api/analytics/rq2/delhi/` | 200 | Research run 19; both networks and explicit nested gates |
+| `/api/analytics/rq2/bengaluru/` | 200 | Fixed panel is the main cohort; all-station output descriptive only |
+| `/api/analytics/rq2/chennai/` | 200 | Descriptive only |
+| `/api/analytics/ncap/` | 200 | PM2.5 proxy; official compliance false/not assessed |
+| `/api/analytics/comparisons/` | 200 | Run 19 weather-adjusted descriptive comparisons |
+
+The read-only API regression also verifies POST 405 and invalid query 400.
+All six compose services are running; db and Redis are healthy. Docker reports
+Linux engine **29.8.2**. Host database port remains **5433** and Redis **6380**.
+
+Nine validated Run 7 cohorts have **180 actual refit replicates**, comprising
+**300 fitted forests** because separate-era replicates fit two forests. All
+cohorts retain 20 refit daily CSVs, parameters, seeds and sampled-index hashes.
+The whole-week nested CV, frozen eight-model grid and readiness thresholds are
+unchanged. Main-cohort nested gates pass all observed eras only for Lucknow,
+Mumbai and Bengaluru's fixed panel. Delhi recent, Hyderabad old, Kanpur old and
+Pune recent retain failures; the report does not loosen the criteria.
+
+Meaningful failures and fixes are recorded in
+[PHASE3B_IMPLEMENTATION_FIXES.md](results/PHASE3B_IMPLEMENTATION_FIXES.md):
+
+- Cross-chunk bulk UPDATE failed a Timescale constraint and rolled back; the
+  atomic partition-aware repair and its boundary test pass.
+- The user pause rolled back the unfinished repair; the complete resumed audit
+  committed once and reruns change zero rows.
+- New fixtures caught NumPy string labels and bootstrap index/date-accessor
+  defects; the implementation was corrected without changing original tests.
+- Run 11 failed on a held-out 115.4 mm rainfall value outside GAM spline support.
+  A documented flat boundary extension retains observations and records clipping
+  counts. The exact Gaussian fixture also exposed statsmodels' separation error;
+  its equivalent penalised least-squares fallback passes the unchanged assertions.
+- The live RQ2 endpoint initially returned 500 due to duplicate city keyword
+  metadata; dictionary merging was fixed, the fixture strengthened, and all live
+  GETs above reran successfully.
+- Docker's interrupted dependency build failed after the engine connection ended;
+  Desktop was started, the build succeeded and all services use the rebuilt image.
+
+On matched network dates, Delhi's fixed-panel long-run normalised change is
+**−17.591985246475744 µg/m³**, with refit/block 95% interval
+**[−35.071142907974696, 1.6623174839119734]**. The interval includes zero.
+The calendar-2017/2018 proxy is unavailable for Bengaluru's fixed panel (2017
+ineligible), Mumbai (2018 ineligible), Kanpur/Lucknow (no recent targets), and
+Pune (no historical baseline). Missing years remain missing.
+
+Source verification corrected Chennai's non-attainment flag: the official CPCB
+PDF marks it as a million-plus participant outside the non-attainment list.
+The seven eligible cities are unstarred entries. Recent PM10 is context only.
+BS-VI attribution and crop-fire estimates are deferred for the stated missing
+data; no forecasts, RAG, simulator or dashboards were implemented.
+
+Exact command logs, HTTP checks, preservation checks and integrity outputs are
+archived in `data/results/19/verification/`; manifests retain their hashes.
+The long model process's launch revision is recorded separately from per-record
+on-disk revisions in `compute_provenance.json`, and report export provenance is
+stored separately. The existing scheduled weather ingestion added later 2026
+weather cache manifests; frozen 2015–2019/2024–2025 research snapshots are unchanged.
