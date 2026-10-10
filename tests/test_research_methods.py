@@ -54,6 +54,20 @@ def test_sen_and_mann_kendall_known_monotone_and_ties():
     assert constant["slope_per_year"] == 0
 
 
+def test_gam_extreme_predictor_uses_documented_boundary_extension():
+    from apps.analytics.research_models import GAMRegressor
+
+    x = pd.DataFrame({"precipitation_mm": np.linspace(0, 20, 100)})
+    model = GAMRegressor().fit(x, x.precipitation_mm.to_numpy() * 2 + 30)
+    extreme = pd.DataFrame({"precipitation_mm": [200.0]})
+    prediction = model.predict(extreme)
+    assert np.isfinite(prediction).all()
+    assert model.prediction_support["clipped_rows"] == 1
+    boundary = model.bounds[0, 1] * model.scale[0] + model.mean[0]
+    np.testing.assert_allclose(prediction, model.predict([[boundary]]))
+    assert extreme.precipitation_mm.iloc[0] == 200.0
+
+
 def test_nested_weeks_and_outer_embargo_are_excluded_from_inner_fits():
     times = pd.Series(pd.date_range("2019-01-01", periods=24 * 120, freq="h", tz="UTC"))
     assignment = week_partition(times)

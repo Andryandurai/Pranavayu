@@ -250,7 +250,8 @@ Actual results, figures, model performance and limitations are in
 figures are local under `data/results/<run_id>/`; only `manifest.json` is eligible
 for Git. The descriptive comparisons are not causal effects. Models use observed,
 complete-case hours only and a blocked holdout; they do not forecast or bridge
-2020–2023. Phase 3B research, forecasting, RAG, simulators and dashboards are deferred.
+2020–2023. Phase 3B uses the corrected snapshot described below. Forecasting, RAG,
+simulators and dashboards remain deferred.
 
 ## Phase 3A2: corrected deweathering method
 
@@ -280,9 +281,10 @@ descriptive and does not change selection, thresholds or normalised values.
 Independent same-site comparisons in all seven recent cities establish that the
 OpenCity exports' `+0000` labels contain IST wall clocks. The corrected analysis
 converts those clocks to UTC, reuses the audited native IST four-quarter means,
-and joins UTC weather at IST-hour midpoints. Raw files and warehouse observations
-retain the published labels for provenance. Use corrected `CityHourly`/series
-for aligned PM2.5 work; raw warehouse times require the versioned correction.
+and joins UTC weather at IST-hour midpoints. Phase 3B has now moved the verified
+fix into ingestion and stored UTC timestamps. Raw CSV labels remain unchanged
+for provenance; clock-version markers prevent applying the shift twice.
+Archived runs 2 and 7 retain their original versioned results.
 `diagnose_deweathering --clock-shift-hours 0` reproduces the literal-UTC sensitivity
 case, rebuilding quarter bins across UTC-hour boundaries. It is not the corrected
 default. See [PHASE3A2_CLOCK_PROOF.json](docs/results/PHASE3A2_CLOCK_PROOF.json).
@@ -293,4 +295,58 @@ with `?run=2`. Phase 3A2 stores PM2.5 diagnostics and series; use the legacy ful
 run explicitly for other pollutants and its older descriptive metrics. Read the
 [actual diagnostic report](docs/results/PHASE3A2.md) before using normalisation:
 passing execution or random-hour fitting does not mean passing readiness, and
-normalised bootstrap intervals exclude model-refit and network uncertainty.
+its original normalised bootstrap intervals exclude model-refit and network uncertainty.
+
+## Phase 3B: observed-data research
+
+The timestamp repair is an idempotent management command. It retains raw values,
+quality flags, original ingestion links and cached publisher files. The bulk repair
+uses partition-aware routing when a timestamp crosses a Timescale chunk boundary.
+New OpenCity exports require verified clock evidence before canonical ingestion.
+The corrected warehouse timestamps are safe for direct UTC reads; forecasting is
+not implemented in this phase.
+
+```powershell
+.\scripts\dev.ps1 manage correct_stored_clocks
+# Existing canonical diagnostic/data snapshots: 8 and 9.
+.\scripts\dev.ps1 manage run_phase3b --diagnostic-run 8 --stored-run 9
+# Use the completed research-run ID printed by the command.
+.\scripts\dev.ps1 manage export_phase3b_report --run <research-run-id>
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+If rebuilding snapshots, run `diagnose_deweathering`, then
+`rebuild_research_tables --diagnostic-run <new-diagnostic-id>` and use the returned
+IDs. The table rebuild checks PM2.5 equivalence against frozen Run 7 and verifies
+NCAP reference flags against the retained official library document.
+
+Run one research command at a time. Completed city runs with the same frozen
+protocol/data IDs are reused after an interruption. Each city records nested
+whole-week validation, a weather-only RF/GAM comparison, 20 actual bootstrap model
+refits, seasonal exact SHAP/ALE, monthly trend tests and descriptive comparisons.
+Bengaluru uses its fixed panel; unsupported panels and years remain unavailable.
+Both eras use the same pooled reference weather. Research outputs include refit
+series, sampled-index hashes, CSV tables, models, figures and manifests under
+`data/results/<run_id>/`.
+
+Read-only endpoints publish only completed full Phase 3B research runs:
+
+- `/api/analytics/rq2/delhi/`
+- `/api/analytics/ncap/`
+- `/api/analytics/comparisons/`
+
+They accept `?run=<id>` for a completed research run. Other cities are labelled
+descriptive only. NCAP outputs are explicitly a **PM2.5 proxy for NCAP progress**,
+with official compliance marked **not assessed**. Missing historic PM10 and the
+fiscal/calendar baseline mismatch prevent official compliance conclusions.
+Chennai participates as a million-plus city but is outside the non-attainment
+classification in the verified CPCB list; its reference flag is corrected.
+
+The paper and actual research results are in
+[docs/results/PHASE3B.md](docs/results/PHASE3B.md). Primary reference documents and
+their download hashes are catalogued in
+[docs/RESEARCH_LIBRARY.md](docs/RESEARCH_LIBRARY.md). Weekly interpolation skill is
+not forecasting validation, and weather-adjusted changes do not identify policy
+effects. BS-VI attribution needs the missing intervening concentrations; crop-fire
+analysis is deferred pending FIRMS data.

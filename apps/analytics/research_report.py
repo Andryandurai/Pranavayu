@@ -7,12 +7,19 @@ from pathlib import Path
 import matplotlib
 import pandas as pd
 
-from .diagnostic_report import fmt, table
+from .diagnostic_report import fmt as base_fmt
+from .diagnostic_report import table
 from .lifecycle import code_metadata
 from .models import AnalysisRun
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+
+
+def fmt(value, places=4):
+    if isinstance(value, float) and 0 < abs(value) < 10 ** (-places):
+        return f"{value:.{places}g}"
+    return base_fmt(value, places)
 
 
 def change_cell(comparison, kind):
@@ -166,6 +173,28 @@ def export_research_report(run_id):
     main = main[
         [row.cohort == results[row.city]["main_cohort"] for row in main.itertuples()]
     ].copy()
+    main["region"] = main.city.map(
+        lambda city: (
+            "Indo-Gangetic plain" if city in ["delhi", "kanpur", "lucknow"] else "Coastal/southern"
+        )
+    )
+    regions = (
+        main.groupby(["region", "period"])
+        .agg(
+            cities=("city", "nunique"),
+            median_weather_r2=("weather_only_r2", "median"),
+            median_nested_r2=("nested_r2", "median"),
+        )
+        .reset_index()
+    )
+    regions.to_csv(output / "region_comparison.csv", index=False)
+    region_table = table(
+        ["Group", "Era", "Cities", "Median weather-only R²", "Median full nested R²"],
+        [
+            [r.region, r.period, r.cities, fmt(r.median_weather_r2), fmt(r.median_nested_r2)]
+            for r in regions.itertuples()
+        ],
+    )
     fig, ax = plt.subplots(figsize=(12, 5))
     positions = list(range(len(main)))
     for offset, (column, label) in zip(
@@ -482,6 +511,9 @@ over 12 angular sectors and corrects circular closure when all sectors have supp
 Empty/constant bins stay unestimated. Gaussian statsmodels GAMs use cubic B-splines,
 df=6 and alpha=10, training-only scaling and knots with a fixed five-standard-deviation
 support extension. No penalty tuning follows results. Their weather-only daily CV
+uses a flat boundary extension for predictors beyond this support, preserving
+the actual observations; per-feature clipping counts are recorded. Run 11's Delhi
+GAM failed on 115.4 mm held-out daily rain before this implementation guard.
 uses the same outer weeks. GAM/forest ALE shape agreement is a rank correlation on
 shared supported ranges; an hourly forest versus daily GAM is a frequency-different
 cross-check. Calendar omission and interactions can explain disagreements.
@@ -509,6 +541,12 @@ Weather-only RF R² expresses held-week predictive skill conditional on the obse
 era and network. Negative values, if present, are retained. IGP cities (Delhi,
 Kanpur, Lucknow) and coastal/southern cities are compared in the same table, without
 pooling their concentrations or treating seven selected cities as a regional sample.
+
+{region_table}
+
+Group medians are unweighted descriptions of the eligible city/era samples.
+The recent IGP group has only Delhi, whereas Kanpur and Lucknow lack recent data;
+differences are not a balanced regional comparison.
 
 {driver_table}
 

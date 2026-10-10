@@ -126,6 +126,10 @@ class GAMRegressor:
         bounds = [
             dict(lower_bound=float(a.min() - 5), upper_bound=float(a.max() + 5)) for a in array.T
         ]
+        self.bounds = np.asarray([[b["lower_bound"], b["upper_bound"]] for b in bounds])
+        self.columns = (
+            list(x.columns) if hasattr(x, "columns") else list(range(np.asarray(x).shape[1]))
+        )
         smoother = BSplines(
             array, df=[6] * array.shape[1], degree=[3] * array.shape[1], knot_kwds=bounds
         )
@@ -143,11 +147,26 @@ class GAMRegressor:
         if self.result is None:
             return np.repeat(self.constant, len(array))
         array = (array[:, self.usable] - self.mean) / self.scale
+        outside = (array < self.bounds[:, 0]) | (array > self.bounds[:, 1])
+        self.prediction_support = dict(
+            clipped_rows=int(outside.any(axis=1).sum()),
+            clipped_features={
+                str(self.columns[i]): int(count)
+                for i, count in zip(np.flatnonzero(self.usable), outside.sum(axis=0), strict=True)
+                if count
+            },
+            rule="Flat extension outside fixed training spline support; "
+            "observed targets and stored weather unchanged",
+        )
+        array = np.clip(array, self.bounds[:, 0], self.bounds[:, 1])
         return self.result.predict(exog=np.ones((len(array), 1)), exog_smooth=array)
 
 
-def gam_prediction(x, y, train, test):
-    return GAMRegressor().fit(x.iloc[train], y[train]).predict(x.iloc[test])
+def gam_prediction(x, y, train, test, return_support=False):
+    model = GAMRegressor().fit(x.iloc[train], y[train])
+    prediction = model.predict(x.iloc[test])
+    support = getattr(model, "prediction_support", dict(clipped_rows=0, clipped_features={}))
+    return (prediction, support) if return_support else prediction
 
 
 def nested_validation(frame, weather, protocol, selected_config, city, cohort):
@@ -162,6 +181,7 @@ def nested_validation(frame, weather, protocol, selected_config, city, cohort):
         inner_times = frame[week_labels(frame.observed_at).isin(allowed)].observed_at
         inner = week_partition(inner_times, protocol["inner_folds"], protocol["seed"] + fold + 1)
         print(f"Nested CV {city}/{cohort}: outer {fold + 1}/{protocol['outer_folds']}", flush=True)
+        gam_support = []
         with threadpool_limits(limits=1):
             name, quality = choose_inner(prepared, inner, allowed, held)
             rows, x, config = prepared[name]
@@ -199,9 +219,10 @@ def nested_validation(frame, weather, protocol, selected_config, city, cohort):
                 gt = wt if period is None else wt[w_periods[wt] == period]
                 gs = ws if period is None else ws[w_periods[ws] == period]
                 if len(gt) >= 24 and len(gs):
-                    g_predictions[gs] = gam_prediction(
-                        weather_x, weather_rows.value.to_numpy(), gt, gs
+                    g_predictions[gs], support = gam_prediction(
+                        weather_x, weather_rows.value.to_numpy(), gt, gs, return_support=True
                     )
+                    gam_support.append(dict(period=period or "pooled", **support))
             weather_predictions.append(daily_predictions(weather_rows, w_predictions, "daily"))
             gam_predictions.append(daily_predictions(weather_rows, g_predictions, "daily"))
         choices.append(
@@ -211,6 +232,7 @@ def nested_validation(frame, weather, protocol, selected_config, city, cohort):
                 inner_scores=quality,
                 held_weeks=sorted(held),
                 training_weeks=sorted(allowed),
+                gam_prediction_support=gam_support,
             )
         )
     full = pd.concat(full_predictions, ignore_index=True).sort_values("date")
