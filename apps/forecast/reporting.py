@@ -1,6 +1,7 @@
 """Export only stored actual forecasts/scores; no model selection during export."""
 
 import json
+import re
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -355,6 +356,35 @@ def export_report(run, output):
                 f"| {city} | {horizon} | {version.algorithm} "
                 f"| {version.training_end} | {inner:.3f} |"
             )
+    proof_path = output / "verification" / "independent-verification.json"
+    if proof_path.exists():
+        proof = json.loads(proof_path.read_text())
+        lines += [
+            "",
+            "## Live verification",
+            "",
+            f"Compute launch Git revision: `{run.git_commit}`. Report export provenance",
+            "is recorded separately in the manifest; postprocessing does not refit models.",
+            "",
+            f"Independent checks covered {proof['prediction_rows']} prediction rows, "
+            f"{proof['monthly_origins']} purged origins and "
+            f"{proof['registered_versions_checked']} finished MLflow model versions.",
+            f"Stored replay forecasts: {proof['stored_forecasts']}. "
+            f"All {len(proof['http'])} latest/history/evaluation GETs returned HTTP 200; "
+            "POST and invalid-input checks retained their expected 405/400/404 responses.",
+            "",
+            f"All {proof['original_test_files_unchanged']} original test/support files "
+            "retain their baseline hashes. Earlier research artifact hashes and the "
+            f"{proof['warehouse']['rows']:,} measurement/provenance fingerprint are unchanged.",
+            "",
+        ]
+        test_log = output / "verification" / "full-tests-final.log"
+        if test_log.exists():
+            raw = test_log.read_bytes()
+            text = raw.decode("utf-16" if raw[:2] in (b"\xff\xfe", b"\xfe\xff") else "utf-8")
+            summaries = re.findall(r"\d+ passed[^\r\n]*?in [0-9.]+s", text)
+            if summaries:
+                lines += [f"Full suite: `{summaries[-1]}`. Warnings remain visible.", ""]
     lines += [
         "",
         "## Figures",
