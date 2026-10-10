@@ -1,0 +1,373 @@
+{
+  "run": 15,
+  "name": "phase3b-city",
+  "status": "success",
+  "started_at": "2026-10-10T11:00:34.929473+00:00",
+  "finished_at": "2026-10-10T11:04:23.367083+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "3f9ec4ad4ab5e26bc44087066b2b1df127501308",
+  "parameters": {
+    "city": "lucknow",
+    "diagnostic_run": 8,
+    "stored_run": 9,
+    "baseline_run": 7,
+    "protocol": {
+      "frozen_at": "2026-10-08T18:47:04.530980+00:00",
+      "baseline_run": 7,
+      "eligible_cities": [
+        "delhi",
+        "hyderabad",
+        "kanpur",
+        "lucknow",
+        "mumbai",
+        "pune",
+        "bengaluru"
+      ],
+      "bengaluru": "fixed panel only",
+      "outer_folds": 3,
+      "inner_folds": 3,
+      "embargo_hours": 24,
+      "seed": 20261009,
+      "variants": [
+        {
+          "name": "hourly_trend_pooled_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "hourly_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_no_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_trend_separate_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_pooled_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "daily_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_no_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_separate_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        }
+      ],
+      "unchanged_readiness": {
+        "daily_oof_r2_min_each_period": 0.5,
+        "absolute_nmb_percent_max_each_period": 10,
+        "absolute_month_nmb_percent_max_each_period": 20,
+        "minimum_days_month_each_period": 20,
+        "minimum_weeks_each_period": 26
+      },
+      "refits": 20,
+      "bootstrap_unit": "whole IST weeks within year and observed period, with replacement; fixed Run 7 structure",
+      "comparison_interval": "mixture of 20 actual refitted normalisations and 500 year/seven-day observed daily block resamples, with centred nested OOF residuals; pooled weather joint 300 common donors per city/refit",
+      "baseline_ncap": "both calendar 2017 and 2018 required; recent both 2024 and 2025 required; PM2.5 proxy, no official compliance",
+      "seasons": {
+        "winter": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "pre_monsoon": [
+          3,
+          4,
+          5
+        ],
+        "monsoon": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "explanations": "exact tree-path-dependent TreeSHAP; 30 complete days per era/season, whole hourly days when hourly target; aggregate signed contributions per day before mean absolute; grouped circular wind direction; ALE 12 quantile bins / 12 angular sectors",
+      "gam": "Gaussian statsmodels GLMGam, cubic B-splines df=6 for nonconstant continuous predictors, fixed alpha=10; explicit circular sine/cosine; same outer weeks; no post-result penalty tuning",
+      "interpretation": "associations, predictive weather-only R2 is not causal variance decomposition; no causal policy claims; no forecasts/RAG/simulator/dashboard"
+    },
+    "git_state": "versioned",
+    "code_sha256": "8d877871b359f67f5d5fe06807b5462415c9400ede28b068cdc2ed4ed623d3d9",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2",
+      "shap": "0.52.0",
+      "statsmodels": "0.15.0"
+    }
+  },
+  "files": [
+    {
+      "path": "lucknow_ale.csv",
+      "bytes": 63648,
+      "sha256": "ee7fe181ee5083821d8b82d68af76d556e9cbbddc560310753671915cdd58f9b"
+    },
+    {
+      "path": "lucknow_deweathered_daily.csv",
+      "bytes": 89938,
+      "sha256": "b7495f50fc663286f7003cd7fe817b67cfd29edf2568f00f8fe9284ff3403d91"
+    },
+    {
+      "path": "lucknow_deweathered_monthly.csv",
+      "bytes": 2985,
+      "sha256": "ff90c22b1002e4f9b9347860bb453911d80b23d1d78439eb0d717d2d5725afa1"
+    },
+    {
+      "path": "lucknow_explanations.json",
+      "bytes": 15162,
+      "sha256": "6bc53c488f58c00c9bb7a2d1eb90c1e809dd161e5ec3985b23d13c24cea782fe"
+    },
+    {
+      "path": "lucknow_gam_agreement.csv",
+      "bytes": 1241,
+      "sha256": "62e1b6537c365129043ebab837586cb729c70f9115db9c68a98c23f33d20c317"
+    },
+    {
+      "path": "lucknow_nested_cv.json",
+      "bytes": 22413,
+      "sha256": "6c45a0e6f7523ee274d0c1988480cd039dd86d47ddf70eae8f7a4a6aec1a9e83"
+    },
+    {
+      "path": "lucknow_nested_oof.csv",
+      "bytes": 236737,
+      "sha256": "0d92ad2b9d48e4bf3394dce0ba0871cd545da65ce2bcae698d9e3f12107e8086"
+    },
+    {
+      "path": "lucknow_network_comparison.png",
+      "bytes": 103500,
+      "sha256": "cd9ebe11bc6f47447550c3ca0ad861bebf46efbd7ecfe2ed02649fd2afa8c28d"
+    },
+    {
+      "path": "lucknow_network_comparison.svg",
+      "bytes": 51687,
+      "sha256": "b945d7c4d278cabbfec87fcb8174d2b55b15bccbcfd4a35e89b6dcfe8cc46fb7"
+    },
+    {
+      "path": "lucknow_old_monsoon_ale.png",
+      "bytes": 275517,
+      "sha256": "1baa0b7a0e402f2beb7e8fdf5b3af4192bd6e45ad72a8515d6bd171fc22e6e61"
+    },
+    {
+      "path": "lucknow_old_monsoon_ale.svg",
+      "bytes": 133703,
+      "sha256": "64a3df18cb88c3a55d115694b37fad22cdf1b6fa42801bbffbc49d3538af8b8b"
+    },
+    {
+      "path": "lucknow_old_monsoon_daily_shap.csv",
+      "bytes": 8328,
+      "sha256": "9ef39f9885fe1d1fc239359561015ee8c743ff911e11d35289b8dda4eb08e944"
+    },
+    {
+      "path": "lucknow_old_pre_monsoon_ale.png",
+      "bytes": 280387,
+      "sha256": "a10aec99863541ba332c20653392218a5f8776ebf2655b3deedf897a56972e50"
+    },
+    {
+      "path": "lucknow_old_pre_monsoon_ale.svg",
+      "bytes": 130171,
+      "sha256": "2af0ef6673f4a3879de73f66d77365ee20190695d14841ac5f39f08180ddde7f"
+    },
+    {
+      "path": "lucknow_old_pre_monsoon_daily_shap.csv",
+      "bytes": 8266,
+      "sha256": "26c68a09fe75e0a5cd587791806521e705aaaaebcfe7fdaa8d9c46ffe7133aa6"
+    },
+    {
+      "path": "lucknow_old_weather_gam.joblib",
+      "bytes": 3839014,
+      "sha256": "c37e51d138e55b8667c518cc53988b788eb4eaf3f43cdd5951640305573be022"
+    },
+    {
+      "path": "lucknow_old_winter_ale.png",
+      "bytes": 279643,
+      "sha256": "cdb0cd59cdf1c76c4dc99dbac096e154a0eb72435b6546630c478d569de88764"
+    },
+    {
+      "path": "lucknow_old_winter_ale.svg",
+      "bytes": 131831,
+      "sha256": "856372dba0ccb40c62dcc9fe5e5bd4d8d5ba7bf658a99f43f8887c4bf945baab"
+    },
+    {
+      "path": "lucknow_old_winter_daily_shap.csv",
+      "bytes": 8176,
+      "sha256": "afce7bbc9485180c62acd3ffa46b29392a54e6851d5cb2789e0d0a2f8abc3f01"
+    },
+    {
+      "path": "lucknow_raw_daily.csv",
+      "bytes": 56115,
+      "sha256": "1c9422410332e4c35e6cbbf8c5690c95b63b95270572c28a9e867f390c4f6700"
+    },
+    {
+      "path": "lucknow_refit_00_daily.csv",
+      "bytes": 49262,
+      "sha256": "e2491592b5fc0564a2ea156ae808ed4faab424869a4f6204a109440e314d4727"
+    },
+    {
+      "path": "lucknow_refit_01_daily.csv",
+      "bytes": 49211,
+      "sha256": "89d7f00cf5596eb1a44d1f5e10e59133e1fa2234d79dc6c6a71b516792e4434a"
+    },
+    {
+      "path": "lucknow_refit_02_daily.csv",
+      "bytes": 49253,
+      "sha256": "f06027a6b16723a708fdf454fb854d5fa7a008d7573a0117291404f3cde4485f"
+    },
+    {
+      "path": "lucknow_refit_03_daily.csv",
+      "bytes": 49229,
+      "sha256": "d904b9b8d805b8f1a5453b41d56c68b4317539e4a22a9072bcea525c2c057b1a"
+    },
+    {
+      "path": "lucknow_refit_04_daily.csv",
+      "bytes": 49186,
+      "sha256": "f8bbff0a8b0ee20b953d6f894431cc6d7252f2c76356ba73c6f534bc99fdc48a"
+    },
+    {
+      "path": "lucknow_refit_05_daily.csv",
+      "bytes": 49312,
+      "sha256": "1f43523f87879fe71f6b518ca586f73e054c8a1c47e88214eb9f3c318209366a"
+    },
+    {
+      "path": "lucknow_refit_06_daily.csv",
+      "bytes": 49168,
+      "sha256": "03d908267534ee867c724eb7ec67770e2a66a87d184beb0a1a2a54debaea5b83"
+    },
+    {
+      "path": "lucknow_refit_07_daily.csv",
+      "bytes": 49068,
+      "sha256": "d722d1721c7908dc3ea15f035be56f9ee3434ffde12b408bb9bcda677568dbb4"
+    },
+    {
+      "path": "lucknow_refit_08_daily.csv",
+      "bytes": 49196,
+      "sha256": "1c0f91ccb5535692aac0ef7748946f3a7c6a9f495ad9a879716bb6465b420122"
+    },
+    {
+      "path": "lucknow_refit_09_daily.csv",
+      "bytes": 49261,
+      "sha256": "5e14bbaf6ebc90196c2c2e3f21dbd884cdc894d12619bc6a99da6ad07e534db6"
+    },
+    {
+      "path": "lucknow_refit_10_daily.csv",
+      "bytes": 49222,
+      "sha256": "385c6e52f66da14e4a7ca2e9a69ba6267ca8b97ea0ec897c4dd7254422748653"
+    },
+    {
+      "path": "lucknow_refit_11_daily.csv",
+      "bytes": 49222,
+      "sha256": "f7c62958eb387342a3e042241269e82e0c2038ead4a6d536630bad0307be5e28"
+    },
+    {
+      "path": "lucknow_refit_12_daily.csv",
+      "bytes": 49194,
+      "sha256": "07fe91943ab5a8a1d97c7de6e6f6e1aa75e9fce97c106e619e318ea079bcd6cf"
+    },
+    {
+      "path": "lucknow_refit_13_daily.csv",
+      "bytes": 49280,
+      "sha256": "73175835d4227be4f8002fed9c7ccd2df97e2a6284ca29f4b439123c23d25d05"
+    },
+    {
+      "path": "lucknow_refit_14_daily.csv",
+      "bytes": 49271,
+      "sha256": "52bfdb26c729abfb7646fc47b090902b69526fb1acfb358bd31f75392d807e17"
+    },
+    {
+      "path": "lucknow_refit_15_daily.csv",
+      "bytes": 49251,
+      "sha256": "36df5feb9d4047b672464e0cc6b6d44233979c07da62505dc96d73244b6e9d81"
+    },
+    {
+      "path": "lucknow_refit_16_daily.csv",
+      "bytes": 49281,
+      "sha256": "7d25fc31b9246541885ee125bb39962ae1468859221cb721e27225302bf8fd19"
+    },
+    {
+      "path": "lucknow_refit_17_daily.csv",
+      "bytes": 49184,
+      "sha256": "a1fb8f0f4fbcbd4d576c47d9a2ca2e215979aa839bbc98f9f194088e6b136191"
+    },
+    {
+      "path": "lucknow_refit_18_daily.csv",
+      "bytes": 49213,
+      "sha256": "6af9579f0cec43732752ac29e8a30c36357eeb9d8646d4b42e7b31b834048010"
+    },
+    {
+      "path": "lucknow_refit_19_daily.csv",
+      "bytes": 49270,
+      "sha256": "c0ddc39ab5cb65c683825cd5a816e69c330320d9043c801d56c25268566b6ee4"
+    },
+    {
+      "path": "lucknow_refit_draws.npz",
+      "bytes": 197012,
+      "sha256": "04927fe20a044a84d27f9dd853231dfa9e4a4bebd0800cd90b1f626cf7d985a3"
+    },
+    {
+      "path": "lucknow_refit_metadata.json",
+      "bytes": 18192,
+      "sha256": "345234b20cde2f3ac38daeb76439c9b18660b35166b4d7ab14ca22697849120b"
+    },
+    {
+      "path": "lucknow_research.json",
+      "bytes": 41389,
+      "sha256": "f34106e97cba873c54ef275aec0ecb32bf662dcd3bbb6a932bd9b02d0e6bae04"
+    },
+    {
+      "path": "lucknow_shap_summary.csv",
+      "bytes": 3141,
+      "sha256": "e3cf0109c2f349583702bb0e1f610e17d6ca05b581feb927012dee6a3663fa3e"
+    },
+    {
+      "path": "outer_weeks.json",
+      "bytes": 5192,
+      "sha256": "35ca452a6986dc28783b78852112f47685a280b7316604ef8dcffe4e57e211db"
+    },
+    {
+      "path": "research.json",
+      "bytes": 48499,
+      "sha256": "a0a53e629a853abe214b993944e36d0e8088e2326e8a546042f7e502b9fad693"
+    }
+  ],
+  "error_message": ""
+}

@@ -1,0 +1,373 @@
+{
+  "run": 14,
+  "name": "phase3b-city",
+  "status": "success",
+  "started_at": "2026-10-10T10:59:25.344176+00:00",
+  "finished_at": "2026-10-10T11:00:33.646738+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "3f9ec4ad4ab5e26bc44087066b2b1df127501308",
+  "parameters": {
+    "city": "kanpur",
+    "diagnostic_run": 8,
+    "stored_run": 9,
+    "baseline_run": 7,
+    "protocol": {
+      "frozen_at": "2026-10-08T18:47:04.530980+00:00",
+      "baseline_run": 7,
+      "eligible_cities": [
+        "delhi",
+        "hyderabad",
+        "kanpur",
+        "lucknow",
+        "mumbai",
+        "pune",
+        "bengaluru"
+      ],
+      "bengaluru": "fixed panel only",
+      "outer_folds": 3,
+      "inner_folds": 3,
+      "embargo_hours": 24,
+      "seed": 20261009,
+      "variants": [
+        {
+          "name": "hourly_trend_pooled_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "hourly_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_no_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_trend_separate_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_pooled_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "daily_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_no_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_separate_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        }
+      ],
+      "unchanged_readiness": {
+        "daily_oof_r2_min_each_period": 0.5,
+        "absolute_nmb_percent_max_each_period": 10,
+        "absolute_month_nmb_percent_max_each_period": 20,
+        "minimum_days_month_each_period": 20,
+        "minimum_weeks_each_period": 26
+      },
+      "refits": 20,
+      "bootstrap_unit": "whole IST weeks within year and observed period, with replacement; fixed Run 7 structure",
+      "comparison_interval": "mixture of 20 actual refitted normalisations and 500 year/seven-day observed daily block resamples, with centred nested OOF residuals; pooled weather joint 300 common donors per city/refit",
+      "baseline_ncap": "both calendar 2017 and 2018 required; recent both 2024 and 2025 required; PM2.5 proxy, no official compliance",
+      "seasons": {
+        "winter": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "pre_monsoon": [
+          3,
+          4,
+          5
+        ],
+        "monsoon": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "explanations": "exact tree-path-dependent TreeSHAP; 30 complete days per era/season, whole hourly days when hourly target; aggregate signed contributions per day before mean absolute; grouped circular wind direction; ALE 12 quantile bins / 12 angular sectors",
+      "gam": "Gaussian statsmodels GLMGam, cubic B-splines df=6 for nonconstant continuous predictors, fixed alpha=10; explicit circular sine/cosine; same outer weeks; no post-result penalty tuning",
+      "interpretation": "associations, predictive weather-only R2 is not causal variance decomposition; no causal policy claims; no forecasts/RAG/simulator/dashboard"
+    },
+    "git_state": "versioned",
+    "code_sha256": "8d877871b359f67f5d5fe06807b5462415c9400ede28b068cdc2ed4ed623d3d9",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2",
+      "shap": "0.52.0",
+      "statsmodels": "0.15.0"
+    }
+  },
+  "files": [
+    {
+      "path": "kanpur_ale.csv",
+      "bytes": 61609,
+      "sha256": "c23d6c0d1b6e00434cc9f036085849c8e8cdc03d578b2a5b39f70542692f12ff"
+    },
+    {
+      "path": "kanpur_deweathered_daily.csv",
+      "bytes": 69076,
+      "sha256": "5e726696896edb985b63cc5860022fd79e12cc634626b3c7d965ab9f77f19b47"
+    },
+    {
+      "path": "kanpur_deweathered_monthly.csv",
+      "bytes": 2425,
+      "sha256": "52561c5e09f71022caed77eff0dbf1613a7dd19b8f7bb49403ed556c9df9600e"
+    },
+    {
+      "path": "kanpur_explanations.json",
+      "bytes": 13259,
+      "sha256": "075d2c3e6b29f6f1d10bd8158c136303e63ae5f17c34a702a410e99e60e7c929"
+    },
+    {
+      "path": "kanpur_gam_agreement.csv",
+      "bytes": 1140,
+      "sha256": "c7eff48183170fc5698ae17cc3f99c563e33943b1547f4673e4dac8323edd553"
+    },
+    {
+      "path": "kanpur_nested_cv.json",
+      "bytes": 20066,
+      "sha256": "3cc7d5e5cc7f2b0918beee6fc5563619030026c206844d5627dcf5d98310875e"
+    },
+    {
+      "path": "kanpur_nested_oof.csv",
+      "bytes": 178947,
+      "sha256": "e4917cfa5fc3779260598b15dcc971d515614f2097fce31ca65189312d38d54e"
+    },
+    {
+      "path": "kanpur_network_comparison.png",
+      "bytes": 88291,
+      "sha256": "834455ab62a5d6a2aaeb19742f66dff376e600953821f0bba047acd196f28a6b"
+    },
+    {
+      "path": "kanpur_network_comparison.svg",
+      "bytes": 51795,
+      "sha256": "7ad2cbc9ef86bee784121c1b743e7254e675e4735364e9594776b888d7cac2ab"
+    },
+    {
+      "path": "kanpur_old_monsoon_ale.png",
+      "bytes": 255626,
+      "sha256": "50041d945e79ef983de0c4c175a009fce1f5ab1373127fb969490aeb5d083996"
+    },
+    {
+      "path": "kanpur_old_monsoon_ale.svg",
+      "bytes": 113643,
+      "sha256": "e0ef881a028bce50d6aca5cdb295193c3e2c55d836d4766416d4ead30857dadd"
+    },
+    {
+      "path": "kanpur_old_monsoon_daily_shap.csv",
+      "bytes": 6989,
+      "sha256": "0d9b4f4ebeab8f7230a7e2f87b7a006a1449ee67eafd9c168a65dab949f2abfb"
+    },
+    {
+      "path": "kanpur_old_pre_monsoon_ale.png",
+      "bytes": 267496,
+      "sha256": "58554461dbe1618113562443f042ee9137b815fcba28421073d13fc76cea3cf1"
+    },
+    {
+      "path": "kanpur_old_pre_monsoon_ale.svg",
+      "bytes": 119060,
+      "sha256": "871c4c7cdb6e49bec899e365ce786acfe2b345ae6ec81551f33916b3095f35d3"
+    },
+    {
+      "path": "kanpur_old_pre_monsoon_daily_shap.csv",
+      "bytes": 6969,
+      "sha256": "096edb940bc755b8e43bc3ddea35249ec68254baf8391d3b54462113cde8cca8"
+    },
+    {
+      "path": "kanpur_old_weather_gam.joblib",
+      "bytes": 2690532,
+      "sha256": "d6848d05875eb6cd497e1dc5ee497785e651e254f85dd04be82c2d95a05ddcb8"
+    },
+    {
+      "path": "kanpur_old_winter_ale.png",
+      "bytes": 271830,
+      "sha256": "5b15e7cb4f53757aca7199b6cdbcdae8ea97f09a211b7eea9b5640e8de67fb6f"
+    },
+    {
+      "path": "kanpur_old_winter_ale.svg",
+      "bytes": 117835,
+      "sha256": "ba866cb9007566418463aa02d012fc7e645796de766c3838dfce4258a107a98c"
+    },
+    {
+      "path": "kanpur_old_winter_daily_shap.csv",
+      "bytes": 6868,
+      "sha256": "a2f37280f146527cc5ce7b1a756a73db2f26e46a2da765302d4d05dbfaf30598"
+    },
+    {
+      "path": "kanpur_raw_daily.csv",
+      "bytes": 41477,
+      "sha256": "a67fedfa4c463e06d828990af071f6c83737e749bd18aadbde08b70c1db2c4ac"
+    },
+    {
+      "path": "kanpur_refit_00_daily.csv",
+      "bytes": 38455,
+      "sha256": "88b8fe05362186fb065c0ee2e855e9b158e78aac8cb69cb5accc1c599b926aef"
+    },
+    {
+      "path": "kanpur_refit_01_daily.csv",
+      "bytes": 38419,
+      "sha256": "ac8c1ccdd87a0e4d5e8da960f7fc1bf0b7af5342178ee3e3e2d7db69143978a7"
+    },
+    {
+      "path": "kanpur_refit_02_daily.csv",
+      "bytes": 38323,
+      "sha256": "6f5d69124bcfae312ff6a3949e62aee91bf8f6ea22844adac5ed00e9ecc29a64"
+    },
+    {
+      "path": "kanpur_refit_03_daily.csv",
+      "bytes": 38206,
+      "sha256": "33c395a6e8ce25bd6faccf24a68c3aebc1a18ad2d8b9ae85bc51c294e9b7aad8"
+    },
+    {
+      "path": "kanpur_refit_04_daily.csv",
+      "bytes": 38375,
+      "sha256": "847c716b05eb99c45555d607f966d939a53a39ec948b6e96717739bd724d5e7e"
+    },
+    {
+      "path": "kanpur_refit_05_daily.csv",
+      "bytes": 38017,
+      "sha256": "2b5def4900e8ea3264d76424e231c9d092e67a52e8e2da5626b42de1ae20bd54"
+    },
+    {
+      "path": "kanpur_refit_06_daily.csv",
+      "bytes": 38344,
+      "sha256": "cf6636ff32e17eb940811b2d304c9a14ad8bf4a182820e7c7ac588a593256550"
+    },
+    {
+      "path": "kanpur_refit_07_daily.csv",
+      "bytes": 38318,
+      "sha256": "b2963fae8fd4b6ce4363287ea99840518606944560f3754a9255bcbe755dda03"
+    },
+    {
+      "path": "kanpur_refit_08_daily.csv",
+      "bytes": 38273,
+      "sha256": "8dc9e0738591957541ca01b8d67683a203d1f988f25bf25299cdd4a78c8cc3dc"
+    },
+    {
+      "path": "kanpur_refit_09_daily.csv",
+      "bytes": 38320,
+      "sha256": "23bc429e1045c291814edf17fa5c9f3d327471bfcc8081d4528028d34bab935f"
+    },
+    {
+      "path": "kanpur_refit_10_daily.csv",
+      "bytes": 38378,
+      "sha256": "4e7ee16c69c3b11c5b8f7323c00fb3d186c9c17467a11fc129b28282330e98b3"
+    },
+    {
+      "path": "kanpur_refit_11_daily.csv",
+      "bytes": 38450,
+      "sha256": "1ff821bc2024be59bda80d8e30cf5350c89765f932ab604fe77f666852c636b3"
+    },
+    {
+      "path": "kanpur_refit_12_daily.csv",
+      "bytes": 38442,
+      "sha256": "42e543fe3f3797a385ab1502abffddfd1a787b6f319f1bddf707bfc83f42ac7b"
+    },
+    {
+      "path": "kanpur_refit_13_daily.csv",
+      "bytes": 38421,
+      "sha256": "5b9403a5ebcabfc50547b2ea742cbc82e28d119f722d91b79abdd7383a6ba651"
+    },
+    {
+      "path": "kanpur_refit_14_daily.csv",
+      "bytes": 38399,
+      "sha256": "83c896fb11cbdbdf6e602a3590e0622a4f06ddbbe3f4436054034a1a842caf24"
+    },
+    {
+      "path": "kanpur_refit_15_daily.csv",
+      "bytes": 38308,
+      "sha256": "813eb802d996edecec9f800aadc4cd603360f46d76daa49e691496c11e8f92c7"
+    },
+    {
+      "path": "kanpur_refit_16_daily.csv",
+      "bytes": 38319,
+      "sha256": "58e081eaf2e38dfaf59bba874acc56a89832dc6ce95a1209b6969b0e9232c0a7"
+    },
+    {
+      "path": "kanpur_refit_17_daily.csv",
+      "bytes": 38062,
+      "sha256": "c1e89aa27d92a8543a52b4c7422c3171356b02bd4f3594256f85bdf607f829aa"
+    },
+    {
+      "path": "kanpur_refit_18_daily.csv",
+      "bytes": 38388,
+      "sha256": "49193c66c367a1748ea350ec136890d1655df4cc4769c31ccfab8713f731c8c2"
+    },
+    {
+      "path": "kanpur_refit_19_daily.csv",
+      "bytes": 38366,
+      "sha256": "449728ba48384f1b77d9fd2b9ed95c8eac0119fe066bd6c0bae146507f9a2fae"
+    },
+    {
+      "path": "kanpur_refit_draws.npz",
+      "bytes": 53689,
+      "sha256": "291056de457f7a08192b642bf0d7588be4d0a4fb62e41ae5174d03cbe975e3a9"
+    },
+    {
+      "path": "kanpur_refit_metadata.json",
+      "bytes": 18152,
+      "sha256": "b575cd87e247080644823e993ad7bec2efa356e4e7f6c020c89302f86c8e3f35"
+    },
+    {
+      "path": "kanpur_research.json",
+      "bytes": 36845,
+      "sha256": "a5a53892bcd55da56a045ed9a1df812a3a54aa6d13cfff15e2e5224f908f4437"
+    },
+    {
+      "path": "kanpur_shap_summary.csv",
+      "bytes": 2653,
+      "sha256": "2d5e9250a0ecc4e5348ebf655fed6479f452123a187880e927f578412808fb61"
+    },
+    {
+      "path": "outer_weeks.json",
+      "bytes": 4436,
+      "sha256": "b63291fada00ec615c87479e9186c37c511893cc95f3e9fdf10543ad3d5f05f7"
+    },
+    {
+      "path": "research.json",
+      "bytes": 43220,
+      "sha256": "48ba863f2c8cf0a1a6fe773013069bf85ed142f4cd53d0630362064ea277dc51"
+    }
+  ],
+  "error_message": ""
+}

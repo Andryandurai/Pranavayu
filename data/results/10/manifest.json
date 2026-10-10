@@ -1,0 +1,373 @@
+{
+  "run": 10,
+  "name": "phase3b-city",
+  "status": "success",
+  "started_at": "2026-10-10T10:21:26.961383+00:00",
+  "finished_at": "2026-10-10T10:23:04.135985+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "e854f71947d4f9bfcbf05042f64ab1a054b04ce8",
+  "parameters": {
+    "city": "pune",
+    "diagnostic_run": 8,
+    "stored_run": 9,
+    "baseline_run": 7,
+    "protocol": {
+      "frozen_at": "2026-10-08T18:47:04.530980+00:00",
+      "baseline_run": 7,
+      "eligible_cities": [
+        "delhi",
+        "hyderabad",
+        "kanpur",
+        "lucknow",
+        "mumbai",
+        "pune",
+        "bengaluru"
+      ],
+      "bengaluru": "fixed panel only",
+      "outer_folds": 3,
+      "inner_folds": 3,
+      "embargo_hours": 24,
+      "seed": 20261009,
+      "variants": [
+        {
+          "name": "hourly_trend_pooled_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "hourly_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_no_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_trend_separate_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_pooled_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "daily_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_no_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_separate_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        }
+      ],
+      "unchanged_readiness": {
+        "daily_oof_r2_min_each_period": 0.5,
+        "absolute_nmb_percent_max_each_period": 10,
+        "absolute_month_nmb_percent_max_each_period": 20,
+        "minimum_days_month_each_period": 20,
+        "minimum_weeks_each_period": 26
+      },
+      "refits": 20,
+      "bootstrap_unit": "whole IST weeks within year and observed period, with replacement; fixed Run 7 structure",
+      "comparison_interval": "mixture of 20 actual refitted normalisations and 500 year/seven-day observed daily block resamples, with centred nested OOF residuals; pooled weather joint 300 common donors per city/refit",
+      "baseline_ncap": "both calendar 2017 and 2018 required; recent both 2024 and 2025 required; PM2.5 proxy, no official compliance",
+      "seasons": {
+        "winter": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "pre_monsoon": [
+          3,
+          4,
+          5
+        ],
+        "monsoon": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "explanations": "exact tree-path-dependent TreeSHAP; 30 complete days per era/season, whole hourly days when hourly target; aggregate signed contributions per day before mean absolute; grouped circular wind direction; ALE 12 quantile bins / 12 angular sectors",
+      "gam": "Gaussian statsmodels GLMGam, cubic B-splines df=6 for nonconstant continuous predictors, fixed alpha=10; explicit circular sine/cosine; same outer weeks; no post-result penalty tuning",
+      "interpretation": "associations, predictive weather-only R2 is not causal variance decomposition; no causal policy claims; no forecasts/RAG/simulator/dashboard"
+    },
+    "git_state": "versioned",
+    "code_sha256": "dd6b47ad4fa9088505647bb01a27880413fb401c6319987b75669eed484f9ee1",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2",
+      "shap": "0.52.0",
+      "statsmodels": "0.15.0"
+    }
+  },
+  "files": [
+    {
+      "path": "outer_weeks.json",
+      "bytes": 2231,
+      "sha256": "905bcfb46930ef1929332d7618e47ec15c7b7d6f6705f9c4b685cc8f61056b54"
+    },
+    {
+      "path": "pune_ale.csv",
+      "bytes": 64382,
+      "sha256": "f5af7d5ca676ae2176442885b665a3e92e165e0c8fb4a13f3a5f4d150470885b"
+    },
+    {
+      "path": "pune_deweathered_daily.csv",
+      "bytes": 39438,
+      "sha256": "fdcbc0d57b2df6d75ef4010d0f8180d8beb10eedeb24b8105ffe1cfd8ecf823f"
+    },
+    {
+      "path": "pune_deweathered_monthly.csv",
+      "bytes": 1344,
+      "sha256": "f661a152e6418d9d822e648a482f663d7c682283f283e0c21c53eb1d1e6567d5"
+    },
+    {
+      "path": "pune_explanations.json",
+      "bytes": 12810,
+      "sha256": "e86927612ab4555c4ae584808c48b069c86caf283ee088f00744fc75f000f216"
+    },
+    {
+      "path": "pune_gam_agreement.csv",
+      "bytes": 1199,
+      "sha256": "19a2c1328c922283d4f5a182eaa2efe2be664da969ccdfe3a837441e3348606a"
+    },
+    {
+      "path": "pune_nested_cv.json",
+      "bytes": 12289,
+      "sha256": "4db3c7aed8172980147fc3efc40f152da2d171970fe1038bde9308dd7192ab77"
+    },
+    {
+      "path": "pune_nested_oof.csv",
+      "bytes": 90705,
+      "sha256": "04ebc3507c1664fbc6b259e4d428f90476a3436f6c25803b5f609712078f28f7"
+    },
+    {
+      "path": "pune_network_comparison.png",
+      "bytes": 85340,
+      "sha256": "348dc007682eaa2c2ddc72cb4802993336cb5b43c50f7f1a316526332a0cb030"
+    },
+    {
+      "path": "pune_network_comparison.svg",
+      "bytes": 50887,
+      "sha256": "5ee3f350018a5e5fd0c1d31a5823d2f756be5cc9c1bbdb7dedb731656ed4e55a"
+    },
+    {
+      "path": "pune_raw_daily.csv",
+      "bytes": 25823,
+      "sha256": "97699b0929cbae979e087f16192940347df836636d08a15431e0241b167ae2e9"
+    },
+    {
+      "path": "pune_recent_monsoon_ale.png",
+      "bytes": 248248,
+      "sha256": "914fb1789641034b58d434c0629a9844fda3efa414049851439c46bfa13caa67"
+    },
+    {
+      "path": "pune_recent_monsoon_ale.svg",
+      "bytes": 111020,
+      "sha256": "b3fa03c9bc45eddfcfbf58c000ec3bcada905a8b529111a9d3719b13812b777f"
+    },
+    {
+      "path": "pune_recent_monsoon_daily_shap.csv",
+      "bytes": 7098,
+      "sha256": "33a39b62fbb7874a2ca8c9dc0385d7a9ada65f270986e3db1461757d9eafef50"
+    },
+    {
+      "path": "pune_recent_pre_monsoon_ale.png",
+      "bytes": 246315,
+      "sha256": "8bcb291e6d844357a7f77a7d6c7d94c50cf9f2cb8a0dc3d291738c34df9a70c0"
+    },
+    {
+      "path": "pune_recent_pre_monsoon_ale.svg",
+      "bytes": 108463,
+      "sha256": "04ad39f2ae4e2f98bb8e25fa1a4bcde1e322c22f0ba7715c6f230307d2d00b53"
+    },
+    {
+      "path": "pune_recent_pre_monsoon_daily_shap.csv",
+      "bytes": 6931,
+      "sha256": "bd741a37d5ba37e80853126ff2a73984a5cfa86c05efe295cd92a3d045c330cc"
+    },
+    {
+      "path": "pune_recent_weather_gam.joblib",
+      "bytes": 1560665,
+      "sha256": "eb4e7bd40c881d93ebfdd5f99d6113e1c1b436d115cb66b9b2252762ab5fbf89"
+    },
+    {
+      "path": "pune_recent_winter_ale.png",
+      "bytes": 277805,
+      "sha256": "540d1079af73802cb03bdc0a9b945021aecf2584869d9ad6a368f4cc3ca1b6a8"
+    },
+    {
+      "path": "pune_recent_winter_ale.svg",
+      "bytes": 123432,
+      "sha256": "bde1b47c98765d799c8ca33ffdbc30d477d6d969e501b95c53a5ffb77ef0e537"
+    },
+    {
+      "path": "pune_recent_winter_daily_shap.csv",
+      "bytes": 6848,
+      "sha256": "03a05b5e9d23d47a29f29c9c56f49c65d61384953d589b3403863354d6088678"
+    },
+    {
+      "path": "pune_refit_00_daily.csv",
+      "bytes": 21481,
+      "sha256": "5bdf690d3c671f38020e0557981e3bd4455ca14ded9ba28073778b44720d991e"
+    },
+    {
+      "path": "pune_refit_01_daily.csv",
+      "bytes": 21479,
+      "sha256": "a03188891891a90633ca139b484522d7bdf5700d9a25b903c1c10abd4ad79d76"
+    },
+    {
+      "path": "pune_refit_02_daily.csv",
+      "bytes": 21344,
+      "sha256": "e546bc7efaad31ad5ad4a96c7bc2efc1ae38ce38d0c1fdcb04200f7c5bcc23cc"
+    },
+    {
+      "path": "pune_refit_03_daily.csv",
+      "bytes": 21416,
+      "sha256": "9cc887330689dbb4a983dd95727fc00a51a934bda676183e5717ff20bc9d1212"
+    },
+    {
+      "path": "pune_refit_04_daily.csv",
+      "bytes": 21235,
+      "sha256": "e2ced1e96bfb828ebea352fcfb1b556aafdf7337f2467725ed09f53f2f5afbfd"
+    },
+    {
+      "path": "pune_refit_05_daily.csv",
+      "bytes": 21403,
+      "sha256": "e067fe4512e40b94525241433e1b157219e61faae571477657e2553df9b1f768"
+    },
+    {
+      "path": "pune_refit_06_daily.csv",
+      "bytes": 21240,
+      "sha256": "471f17d786b748c72a5ec916da49bb608c30c7a94753bc02692f1b7f517738c6"
+    },
+    {
+      "path": "pune_refit_07_daily.csv",
+      "bytes": 21325,
+      "sha256": "4ed037896a5802e3225411e5fa59b67b2acd295574eea65cb5d1d35eb53ed0fd"
+    },
+    {
+      "path": "pune_refit_08_daily.csv",
+      "bytes": 21437,
+      "sha256": "f1feec401df15eef2d426de2d567b14c07b2e96bce56a3a700815bb01de3683d"
+    },
+    {
+      "path": "pune_refit_09_daily.csv",
+      "bytes": 21369,
+      "sha256": "6e6cbad35ad33d8c9832d577dff2f8659900f5511ff3ed9ece4e2b73e0c7528e"
+    },
+    {
+      "path": "pune_refit_10_daily.csv",
+      "bytes": 21404,
+      "sha256": "0b3f22a1d2258c3e12858f0a37e7218f08d5d8e68d1fe30164a6c922a293e76b"
+    },
+    {
+      "path": "pune_refit_11_daily.csv",
+      "bytes": 21404,
+      "sha256": "d04c2e5dcdc875277fe080468924a64a7ee71effb14040054d1e86a2d01c837c"
+    },
+    {
+      "path": "pune_refit_12_daily.csv",
+      "bytes": 21314,
+      "sha256": "5b1217badd77e212acaf70743ee0c35ca191d127462a92027d62d110952d6e3f"
+    },
+    {
+      "path": "pune_refit_13_daily.csv",
+      "bytes": 21348,
+      "sha256": "95b70b0073d1c7b2c506594893199aaf402978c184f54aef649a776406ab6c7e"
+    },
+    {
+      "path": "pune_refit_14_daily.csv",
+      "bytes": 21332,
+      "sha256": "2c8473d258f3d5484695223e7e907142321ba7293f2105ab1be503af3f0e8cbe"
+    },
+    {
+      "path": "pune_refit_15_daily.csv",
+      "bytes": 21357,
+      "sha256": "639c42f2148d5213f34be057a118a0c133a4589e42c63399887ef04c1188dd72"
+    },
+    {
+      "path": "pune_refit_16_daily.csv",
+      "bytes": 21355,
+      "sha256": "a46daf7c18610093a4e0adc4064b7e61148ec6885066ab0a0cbc1ea9b3dfd4b1"
+    },
+    {
+      "path": "pune_refit_17_daily.csv",
+      "bytes": 21345,
+      "sha256": "d8bad96adc57b37faa82cfdb07a35ab5230d8862c52489d62a6ef421041c8027"
+    },
+    {
+      "path": "pune_refit_18_daily.csv",
+      "bytes": 21385,
+      "sha256": "48fbacb752b8f434c5799a55c4080153edbdbbf082f444687e1c635299624a04"
+    },
+    {
+      "path": "pune_refit_19_daily.csv",
+      "bytes": 21392,
+      "sha256": "5ce820ebd66506cd5ea4ee87ba671e96f19280c8d38d8df773715bff14d2e5ae"
+    },
+    {
+      "path": "pune_refit_draws.npz",
+      "bytes": 23169,
+      "sha256": "6deb53921c2bd503ead33906c46fbd0af92f9c899cf6219a993edeb8b99a3372"
+    },
+    {
+      "path": "pune_refit_metadata.json",
+      "bytes": 18132,
+      "sha256": "60fe8d87ab7cc7359d006ec8a8140ac9927dfcddda7fb52600169fc4caffd2a4"
+    },
+    {
+      "path": "pune_research.json",
+      "bytes": 28240,
+      "sha256": "01daee6d5fac6cef5857b5f3aa972bd51f396a07f2bd161329ef1febc373e679"
+    },
+    {
+      "path": "pune_shap_summary.csv",
+      "bytes": 2664,
+      "sha256": "52001b5eb16728e178b520b30b9ee3bcb9a68f30bfe377eb9486df11a625ea8e"
+    },
+    {
+      "path": "research.json",
+      "bytes": 33371,
+      "sha256": "84dfc6dae48ea0bda7d2c5dbf2a096baf0bf1031e5c3f59a8f087bd12facd704"
+    }
+  ],
+  "error_message": ""
+}

@@ -1,0 +1,428 @@
+{
+  "run": 16,
+  "name": "phase3b-city",
+  "status": "success",
+  "started_at": "2026-10-10T11:04:25.251124+00:00",
+  "finished_at": "2026-10-10T11:09:06.855087+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "3f9ec4ad4ab5e26bc44087066b2b1df127501308",
+  "parameters": {
+    "city": "mumbai",
+    "diagnostic_run": 8,
+    "stored_run": 9,
+    "baseline_run": 7,
+    "protocol": {
+      "frozen_at": "2026-10-08T18:47:04.530980+00:00",
+      "baseline_run": 7,
+      "eligible_cities": [
+        "delhi",
+        "hyderabad",
+        "kanpur",
+        "lucknow",
+        "mumbai",
+        "pune",
+        "bengaluru"
+      ],
+      "bengaluru": "fixed panel only",
+      "outer_folds": 3,
+      "inner_folds": 3,
+      "embargo_hours": 24,
+      "seed": 20261009,
+      "variants": [
+        {
+          "name": "hourly_trend_pooled_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "hourly_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_no_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_trend_separate_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_pooled_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "daily_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_no_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_separate_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        }
+      ],
+      "unchanged_readiness": {
+        "daily_oof_r2_min_each_period": 0.5,
+        "absolute_nmb_percent_max_each_period": 10,
+        "absolute_month_nmb_percent_max_each_period": 20,
+        "minimum_days_month_each_period": 20,
+        "minimum_weeks_each_period": 26
+      },
+      "refits": 20,
+      "bootstrap_unit": "whole IST weeks within year and observed period, with replacement; fixed Run 7 structure",
+      "comparison_interval": "mixture of 20 actual refitted normalisations and 500 year/seven-day observed daily block resamples, with centred nested OOF residuals; pooled weather joint 300 common donors per city/refit",
+      "baseline_ncap": "both calendar 2017 and 2018 required; recent both 2024 and 2025 required; PM2.5 proxy, no official compliance",
+      "seasons": {
+        "winter": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "pre_monsoon": [
+          3,
+          4,
+          5
+        ],
+        "monsoon": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "explanations": "exact tree-path-dependent TreeSHAP; 30 complete days per era/season, whole hourly days when hourly target; aggregate signed contributions per day before mean absolute; grouped circular wind direction; ALE 12 quantile bins / 12 angular sectors",
+      "gam": "Gaussian statsmodels GLMGam, cubic B-splines df=6 for nonconstant continuous predictors, fixed alpha=10; explicit circular sine/cosine; same outer weeks; no post-result penalty tuning",
+      "interpretation": "associations, predictive weather-only R2 is not causal variance decomposition; no causal policy claims; no forecasts/RAG/simulator/dashboard"
+    },
+    "git_state": "versioned",
+    "code_sha256": "8d877871b359f67f5d5fe06807b5462415c9400ede28b068cdc2ed4ed623d3d9",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2",
+      "shap": "0.52.0",
+      "statsmodels": "0.15.0"
+    }
+  },
+  "files": [
+    {
+      "path": "mumbai_ale.csv",
+      "bytes": 113421,
+      "sha256": "c498cdb0be38800fdef8850f2290d4b3f2d5e388396e0c8f7af4e4898c47d8e4"
+    },
+    {
+      "path": "mumbai_deweathered_daily.csv",
+      "bytes": 114421,
+      "sha256": "2640c454b25d65ffee6e5d0ea2feb4a114ff48c6a1740bf2d835a75db25ae34e"
+    },
+    {
+      "path": "mumbai_deweathered_monthly.csv",
+      "bytes": 3839,
+      "sha256": "f511b80cf9c1aa31d05b02f05093601a9faa6728ccb09eda886b332d363776d6"
+    },
+    {
+      "path": "mumbai_explanations.json",
+      "bytes": 26419,
+      "sha256": "65cd65ec7c09c65fb03fcf9d4b8833d9de9fb7e5d9eb3ea00646a2d1106bd2d5"
+    },
+    {
+      "path": "mumbai_gam_agreement.csv",
+      "bytes": 2099,
+      "sha256": "20709bab67ec40895219e3f0ed7f74da0ed76c6eb290d0ea4e1827686d6aa006"
+    },
+    {
+      "path": "mumbai_nested_cv.json",
+      "bytes": 27563,
+      "sha256": "b1c57992f68298190c54b3a8775a5d6276ecc4d2e8d5154b8a3a5a9406840eb4"
+    },
+    {
+      "path": "mumbai_nested_oof.csv",
+      "bytes": 301378,
+      "sha256": "7811a8a8345ccf0c6210cf891c99fe4492509f0304b4ea347d775f5dade1596d"
+    },
+    {
+      "path": "mumbai_network_comparison.png",
+      "bytes": 148503,
+      "sha256": "03dfc8316b53ff1fa74097a46aacb2b85b4d9af0463d10d9ab3a39f7ba8ff509"
+    },
+    {
+      "path": "mumbai_network_comparison.svg",
+      "bytes": 58747,
+      "sha256": "e5935381ffd7670aec26e010f0896331c3f45fea1076c5a807cf10159de5a625"
+    },
+    {
+      "path": "mumbai_old_monsoon_ale.png",
+      "bytes": 254863,
+      "sha256": "b26ad29292062b6c731a49a763f7f30c5d6913eaa153f25c3e382a7ea6dfb10f"
+    },
+    {
+      "path": "mumbai_old_monsoon_ale.svg",
+      "bytes": 117158,
+      "sha256": "aebfff92dd6a1fda226d11ddaa04fbe16e24a5f253cffddc9968cdd3473a929f"
+    },
+    {
+      "path": "mumbai_old_monsoon_daily_shap.csv",
+      "bytes": 7680,
+      "sha256": "1001ba01dfd3e5caf4a03cbc3a8baab4cca4eee734fea7df66e80bc0551625ed"
+    },
+    {
+      "path": "mumbai_old_pre_monsoon_ale.png",
+      "bytes": 235043,
+      "sha256": "567d444dab23e5bb8461d56c278fb64cf02b06fb33453335f3ffbb5fd9ca05a9"
+    },
+    {
+      "path": "mumbai_old_pre_monsoon_ale.svg",
+      "bytes": 111426,
+      "sha256": "6d5a37825c98db7da9f7ac59b4ca41428acf2fef0c00cc254e919d6377ab3281"
+    },
+    {
+      "path": "mumbai_old_pre_monsoon_daily_shap.csv",
+      "bytes": 7643,
+      "sha256": "1ca5c4bf6fc6a154c2826c0b248fd5a5cfacd5fc8a586f0b5adddc89199d3d1d"
+    },
+    {
+      "path": "mumbai_old_weather_gam.joblib",
+      "bytes": 2823440,
+      "sha256": "a5792761050beb1b5dd27f52f1b4f4eb9ca9f29ba164f8ab170da0e658dc3023"
+    },
+    {
+      "path": "mumbai_old_winter_ale.png",
+      "bytes": 241914,
+      "sha256": "b79c669642af27801f46bb7a6d3877b08cbfd063624b0f72b7502305fedad878"
+    },
+    {
+      "path": "mumbai_old_winter_ale.svg",
+      "bytes": 115744,
+      "sha256": "0b66e412b788e497d841d96bd2335b4970c0b16f593f138dbaf0fc1f02fc11ba"
+    },
+    {
+      "path": "mumbai_old_winter_daily_shap.csv",
+      "bytes": 7540,
+      "sha256": "fc6c075c72b14b0afa0d0216b624585b76c4cda333cbd50a1073cb3fac65a668"
+    },
+    {
+      "path": "mumbai_panel_raw_daily.csv",
+      "bytes": 25907,
+      "sha256": "5f264311b498ba1ddd039fd62866465d2cb0c0282388ff47fcc0bd623f4f0822"
+    },
+    {
+      "path": "mumbai_raw_daily.csv",
+      "bytes": 71778,
+      "sha256": "265aeeb2152628f675035a658c8eb44d69f2476f0ff63e088c46ea693188a9d3"
+    },
+    {
+      "path": "mumbai_recent_monsoon_ale.png",
+      "bytes": 239698,
+      "sha256": "ca33e7403a4c2ba059fe18b78a1a76552a05a58f1938a487098f8e7c9cfce86f"
+    },
+    {
+      "path": "mumbai_recent_monsoon_ale.svg",
+      "bytes": 109662,
+      "sha256": "b9c8135435b675ec633c9122f021ab4af350dbc3ad4f51419da004c37fc0203c"
+    },
+    {
+      "path": "mumbai_recent_monsoon_daily_shap.csv",
+      "bytes": 7722,
+      "sha256": "466062b2f896efa2cca1f6d4fe9116c802c695aa323336e45db04b9eaea5afed"
+    },
+    {
+      "path": "mumbai_recent_pre_monsoon_ale.png",
+      "bytes": 256164,
+      "sha256": "a271cee9828c0210c084c72bcd9b0a3768c33ace19b83aaf24304abf01e76e71"
+    },
+    {
+      "path": "mumbai_recent_pre_monsoon_ale.svg",
+      "bytes": 121616,
+      "sha256": "a59225ec3c57ba84bbd33822f96bb8742af518418d44e959d26d07fc32e82386"
+    },
+    {
+      "path": "mumbai_recent_pre_monsoon_daily_shap.csv",
+      "bytes": 7667,
+      "sha256": "c25a64acd7e56047954676aea4b092c0bbd4d44d3710c08acf4c4b047702bc3f"
+    },
+    {
+      "path": "mumbai_recent_weather_gam.joblib",
+      "bytes": 1557097,
+      "sha256": "1559e37b57144a7809dd18a198bee2f30e3675c838dccab70aa379e8c7a9533f"
+    },
+    {
+      "path": "mumbai_recent_winter_ale.png",
+      "bytes": 250689,
+      "sha256": "d1d51ebb452be94b81c5be216130d0f76f7866557e609c740f3aa9634b107f3c"
+    },
+    {
+      "path": "mumbai_recent_winter_ale.svg",
+      "bytes": 116891,
+      "sha256": "4c32009bef9dc97d5bf5d93e741d3f66301d5e5e6839379a70feaabc884d013d"
+    },
+    {
+      "path": "mumbai_recent_winter_daily_shap.csv",
+      "bytes": 7613,
+      "sha256": "5286a0539fe6bf1a500fc9322cf516caa0e9df695759f89a982ba4cd747340f3"
+    },
+    {
+      "path": "mumbai_refit_00_daily.csv",
+      "bytes": 61665,
+      "sha256": "1b679c30554473b4a01af1dcb73c9263932ecd727467336b10562ebc6e158510"
+    },
+    {
+      "path": "mumbai_refit_01_daily.csv",
+      "bytes": 61695,
+      "sha256": "7b9008ef9eff9c65339ce9902c5a218d11eeaba041255ba93a6d3e6d765a5166"
+    },
+    {
+      "path": "mumbai_refit_02_daily.csv",
+      "bytes": 61726,
+      "sha256": "b67d723715662d1c00535e5be4416c1745307c063dba5146f0d248e7a443a67d"
+    },
+    {
+      "path": "mumbai_refit_03_daily.csv",
+      "bytes": 61842,
+      "sha256": "a7c483d2e46ea1446a4d59e5b934e22f54b8ad812dad6cc755577e7cfedff1d1"
+    },
+    {
+      "path": "mumbai_refit_04_daily.csv",
+      "bytes": 61709,
+      "sha256": "dd1433af2241ef02756d0629e3f490de49911a0beeb0da6ebab6e79311f6babb"
+    },
+    {
+      "path": "mumbai_refit_05_daily.csv",
+      "bytes": 61824,
+      "sha256": "5a54445c4e6a3d57b294ee69b477abcef46dfeeda32c5721ed1e3da7148f2bff"
+    },
+    {
+      "path": "mumbai_refit_06_daily.csv",
+      "bytes": 61685,
+      "sha256": "14f41110fbda6126b47c6affb7f2adcc6edc0e6d3bd1d99a4fc457fa1eddb906"
+    },
+    {
+      "path": "mumbai_refit_07_daily.csv",
+      "bytes": 61701,
+      "sha256": "5034c9860e6dad5e7e9d6697138d6eb0e57090b993616fad65169dac2b4f6dda"
+    },
+    {
+      "path": "mumbai_refit_08_daily.csv",
+      "bytes": 61626,
+      "sha256": "a564ad3c15bdc8cf8f84b964fe269513fbe68fd9e110c08fd44a32f995882e49"
+    },
+    {
+      "path": "mumbai_refit_09_daily.csv",
+      "bytes": 61703,
+      "sha256": "6c1eab9bd92d413607f783930299f0e4c360efc69bbf922116e831aa1e35e29c"
+    },
+    {
+      "path": "mumbai_refit_10_daily.csv",
+      "bytes": 61734,
+      "sha256": "7b15db2db394fb59d6bbf2e5907b76ecb658cb4ab36d1203486c3c3cac936340"
+    },
+    {
+      "path": "mumbai_refit_11_daily.csv",
+      "bytes": 61776,
+      "sha256": "bcc8eeef5b28787454cb89676f2c452db22cbafcb329ced6ed92dbccdb2fcd89"
+    },
+    {
+      "path": "mumbai_refit_12_daily.csv",
+      "bytes": 61704,
+      "sha256": "798502052c5781399feb0f2c77b8cedd335d9a1242156eebe55df2de247a46db"
+    },
+    {
+      "path": "mumbai_refit_13_daily.csv",
+      "bytes": 61680,
+      "sha256": "0d4bba3f598cc149c4275dba1cd4ca2aed651a18a5e02ea61d77cc8b446cadf6"
+    },
+    {
+      "path": "mumbai_refit_14_daily.csv",
+      "bytes": 61680,
+      "sha256": "f70a2a5c5dc6b325d01af31bd3dad3db53145202fea6883e9058a546c892c8c0"
+    },
+    {
+      "path": "mumbai_refit_15_daily.csv",
+      "bytes": 61677,
+      "sha256": "9e68cd8f879b078dbf3c8279d99dcf8ef63c1da0f99c510636eaf8098120cda4"
+    },
+    {
+      "path": "mumbai_refit_16_daily.csv",
+      "bytes": 61626,
+      "sha256": "b54f2b9e6e2849ad5666ef3e7682890683de6f265a36f2d29ca5e64853a345ab"
+    },
+    {
+      "path": "mumbai_refit_17_daily.csv",
+      "bytes": 61641,
+      "sha256": "eca58e93a46dfc1dd5db717d8ace7dda14a425ce0fa0cf14e7bd94bd81d99d9e"
+    },
+    {
+      "path": "mumbai_refit_18_daily.csv",
+      "bytes": 61721,
+      "sha256": "170b3757a6925470622f807c041d71cfe6441d1f51e0daa7f19726ff3c8237dc"
+    },
+    {
+      "path": "mumbai_refit_19_daily.csv",
+      "bytes": 61689,
+      "sha256": "83fd4104b9b8a33e3efa49d8d38dc00c7be66459366b33cd4e8da5c407ac347f"
+    },
+    {
+      "path": "mumbai_refit_draws.npz",
+      "bytes": 247861,
+      "sha256": "6bdff4c56cec7b374526eae4ec70d9ee11a84ae05589a0f585fbfc97ba8315a4"
+    },
+    {
+      "path": "mumbai_refit_metadata.json",
+      "bytes": 33992,
+      "sha256": "8cf2ac00f08e72c9b262c78bb670755047ee10b4bc4980f85c6df3d2b810ca8b"
+    },
+    {
+      "path": "mumbai_research.json",
+      "bytes": 61165,
+      "sha256": "9d8ad28411471c457d9c3a80325aa5d8a635a5721967b9aa07377076438a6e1c"
+    },
+    {
+      "path": "mumbai_shap_summary.csv",
+      "bytes": 5651,
+      "sha256": "fb348c9f1e04ac28dbfa2c3c83853aef9db344b73fbf8711c859d5242584faad"
+    },
+    {
+      "path": "outer_weeks.json",
+      "bytes": 8785,
+      "sha256": "c2706fa44dd9b891bbb3056ddb9e7cb4acda037e43f15f7aa8c2672a518aae21"
+    },
+    {
+      "path": "research.json",
+      "bytes": 71918,
+      "sha256": "245c1cb39b6476c734e9a3c733a04a69fcf3087faee8888fb43d42f3a5115064"
+    }
+  ],
+  "error_message": ""
+}

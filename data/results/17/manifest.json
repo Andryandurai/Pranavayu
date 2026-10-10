@@ -1,0 +1,428 @@
+{
+  "run": 17,
+  "name": "phase3b-city",
+  "status": "success",
+  "started_at": "2026-10-10T11:09:08.663687+00:00",
+  "finished_at": "2026-10-10T11:10:28.655910+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "3f9ec4ad4ab5e26bc44087066b2b1df127501308",
+  "parameters": {
+    "city": "bengaluru",
+    "diagnostic_run": 8,
+    "stored_run": 9,
+    "baseline_run": 7,
+    "protocol": {
+      "frozen_at": "2026-10-08T18:47:04.530980+00:00",
+      "baseline_run": 7,
+      "eligible_cities": [
+        "delhi",
+        "hyderabad",
+        "kanpur",
+        "lucknow",
+        "mumbai",
+        "pune",
+        "bengaluru"
+      ],
+      "bengaluru": "fixed panel only",
+      "outer_folds": 3,
+      "inner_folds": 3,
+      "embargo_hours": 24,
+      "seed": 20261009,
+      "variants": [
+        {
+          "name": "hourly_trend_pooled_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "hourly_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_no_trend_pooled_no_blh",
+          "target": "hourly",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "hourly_trend_separate_no_blh",
+          "target": "hourly",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_pooled_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": true
+        },
+        {
+          "name": "daily_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_no_trend_pooled_no_blh",
+          "target": "daily",
+          "trend": false,
+          "periods": "pooled",
+          "blh": false
+        },
+        {
+          "name": "daily_trend_separate_no_blh",
+          "target": "daily",
+          "trend": true,
+          "periods": "separate",
+          "blh": false
+        }
+      ],
+      "unchanged_readiness": {
+        "daily_oof_r2_min_each_period": 0.5,
+        "absolute_nmb_percent_max_each_period": 10,
+        "absolute_month_nmb_percent_max_each_period": 20,
+        "minimum_days_month_each_period": 20,
+        "minimum_weeks_each_period": 26
+      },
+      "refits": 20,
+      "bootstrap_unit": "whole IST weeks within year and observed period, with replacement; fixed Run 7 structure",
+      "comparison_interval": "mixture of 20 actual refitted normalisations and 500 year/seven-day observed daily block resamples, with centred nested OOF residuals; pooled weather joint 300 common donors per city/refit",
+      "baseline_ncap": "both calendar 2017 and 2018 required; recent both 2024 and 2025 required; PM2.5 proxy, no official compliance",
+      "seasons": {
+        "winter": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "pre_monsoon": [
+          3,
+          4,
+          5
+        ],
+        "monsoon": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "explanations": "exact tree-path-dependent TreeSHAP; 30 complete days per era/season, whole hourly days when hourly target; aggregate signed contributions per day before mean absolute; grouped circular wind direction; ALE 12 quantile bins / 12 angular sectors",
+      "gam": "Gaussian statsmodels GLMGam, cubic B-splines df=6 for nonconstant continuous predictors, fixed alpha=10; explicit circular sine/cosine; same outer weeks; no post-result penalty tuning",
+      "interpretation": "associations, predictive weather-only R2 is not causal variance decomposition; no causal policy claims; no forecasts/RAG/simulator/dashboard"
+    },
+    "git_state": "versioned",
+    "code_sha256": "4463d99639d19fd757631d5a079747d5d00a0b2c0425cfa7df44689b00001134",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2",
+      "shap": "0.52.0",
+      "statsmodels": "0.15.0"
+    }
+  },
+  "files": [
+    {
+      "path": "bengaluru_network_comparison.png",
+      "bytes": 144073,
+      "sha256": "c3ec3e12ccef9f9e8ae429ddf73abec548f5ae18328a57120ec33a9033cac1a9"
+    },
+    {
+      "path": "bengaluru_network_comparison.svg",
+      "bytes": 59541,
+      "sha256": "6daa83b47850a619cf7b45068a6f05046184c6fd2514e09689e5b5c5476d1dbf"
+    },
+    {
+      "path": "bengaluru_panel_ale.csv",
+      "bytes": 128916,
+      "sha256": "f67ae0f2798e0e56468d59c4b8ec133e0877b50f0b163f1d8f722297c477a168"
+    },
+    {
+      "path": "bengaluru_panel_deweathered_daily.csv",
+      "bytes": 92396,
+      "sha256": "6ffd83b61104ab64a1a1f536a79c8b02afbd9eb606d4a7ae21eca207a56d21f1"
+    },
+    {
+      "path": "bengaluru_panel_deweathered_monthly.csv",
+      "bytes": 3051,
+      "sha256": "a8f666e6640a60d2f1f7a900ab69cc0530c6bf3e7a3655650cc0c669d29063ca"
+    },
+    {
+      "path": "bengaluru_panel_explanations.json",
+      "bytes": 25040,
+      "sha256": "56719bc2c11fc52caeafba92c0724e64ee9ebb016f815fb1b5e08b25d9b780c2"
+    },
+    {
+      "path": "bengaluru_panel_gam_agreement.csv",
+      "bytes": 2297,
+      "sha256": "244d0e1f42c329915f68b68c228e480aaca8292005e019f445aeb360de221a48"
+    },
+    {
+      "path": "bengaluru_panel_nested_cv.json",
+      "bytes": 24605,
+      "sha256": "51ec8ea865d98ed612bc51e13a87250e27cc91648fe16e8e72d79d40cf2a1edd"
+    },
+    {
+      "path": "bengaluru_panel_nested_oof.csv",
+      "bytes": 247786,
+      "sha256": "ed1f1a29054f3eafa0d16a3aca54c1789cc0e3cc2f7f25abfe469622cffca7bb"
+    },
+    {
+      "path": "bengaluru_panel_old_monsoon_ale.png",
+      "bytes": 264102,
+      "sha256": "df2428ad58d127baf02f9c63bf40c95c6c09614c056acd5c09e172af3d43104b"
+    },
+    {
+      "path": "bengaluru_panel_old_monsoon_ale.svg",
+      "bytes": 117971,
+      "sha256": "d1fc5028ca1f1193a7fbb523ce6262fa7044d3963e30b5a2d3f88707dd9f1a85"
+    },
+    {
+      "path": "bengaluru_panel_old_monsoon_daily_shap.csv",
+      "bytes": 7064,
+      "sha256": "266e7a9dcecb03b9b64935c227f5a8558a1b716409646b0fe8bfd4b24085c822"
+    },
+    {
+      "path": "bengaluru_panel_old_pre_monsoon_ale.png",
+      "bytes": 270906,
+      "sha256": "30bf5d2a0e55189bf8357b3e74d86ac30723792296dc0f0c24219145a0e07ba5"
+    },
+    {
+      "path": "bengaluru_panel_old_pre_monsoon_ale.svg",
+      "bytes": 115922,
+      "sha256": "a54a6f90bcd3ffb784a5880fd5c1abc675a087f8c0358278ea55c21c5f1307d3"
+    },
+    {
+      "path": "bengaluru_panel_old_pre_monsoon_daily_shap.csv",
+      "bytes": 6973,
+      "sha256": "bc75f5965c9179580fb01400a3e2f4e7778fdeca8d53b3803f751445c4d35cd3"
+    },
+    {
+      "path": "bengaluru_panel_old_weather_gam.joblib",
+      "bytes": 2040868,
+      "sha256": "97fd2f11d8a3b670a2bf1c6c7291551e70bedc679afd439c51ecfdd720b8bef6"
+    },
+    {
+      "path": "bengaluru_panel_old_winter_ale.png",
+      "bytes": 262005,
+      "sha256": "1c118919026a16dcc438faf9b69e1f9d14fbdb42cc52347636d42594752f77d2"
+    },
+    {
+      "path": "bengaluru_panel_old_winter_ale.svg",
+      "bytes": 115207,
+      "sha256": "03e3d2c773b27633e9260fdd100baee54ac2c77eba974267eb9395789e1f6a55"
+    },
+    {
+      "path": "bengaluru_panel_old_winter_daily_shap.csv",
+      "bytes": 6991,
+      "sha256": "aded68c847d743adefcdf2fc3e558ba99f87efff3ee4e6837da934fca7a80604"
+    },
+    {
+      "path": "bengaluru_panel_raw_daily.csv",
+      "bytes": 59125,
+      "sha256": "eaf266854a8ded2d56c07be1367c44d6d2902c4e55c6957155f816e1a52a5273"
+    },
+    {
+      "path": "bengaluru_panel_recent_monsoon_ale.png",
+      "bytes": 258789,
+      "sha256": "6ec393255e02f01d23440d9b4ed38afc83e61c28e31912a607e11f5ba76f75ab"
+    },
+    {
+      "path": "bengaluru_panel_recent_monsoon_ale.svg",
+      "bytes": 116167,
+      "sha256": "e60f50608ef4d87e63d0c5c55601fd15f9a2621621a818cc6af9a9eab2cbf01a"
+    },
+    {
+      "path": "bengaluru_panel_recent_monsoon_daily_shap.csv",
+      "bytes": 7089,
+      "sha256": "02a4eed4dfa6693caa26da8c3c55dd8f27f466d079ab4981ba656eb2c863d75b"
+    },
+    {
+      "path": "bengaluru_panel_recent_pre_monsoon_ale.png",
+      "bytes": 265819,
+      "sha256": "9120d754bd2e57f576b3003ec6d229b49c6d9f49067717b9e2c717f98483cd9a"
+    },
+    {
+      "path": "bengaluru_panel_recent_pre_monsoon_ale.svg",
+      "bytes": 115707,
+      "sha256": "832fee98907d12b24649f70b79ba5c5f3b4ed079ce1925c548f9fd139511d82e"
+    },
+    {
+      "path": "bengaluru_panel_recent_pre_monsoon_daily_shap.csv",
+      "bytes": 6952,
+      "sha256": "c14e929f2ecb4991637b78c82c0e2da939152460b18cb9d020a1eb7d18cd8b2b"
+    },
+    {
+      "path": "bengaluru_panel_recent_weather_gam.joblib",
+      "bytes": 1547702,
+      "sha256": "e0535b82fedad3e916d7fd3e52f7fe3351603797da503b61b5e5d9fbe85f894e"
+    },
+    {
+      "path": "bengaluru_panel_recent_winter_ale.png",
+      "bytes": 273751,
+      "sha256": "3a4e3f8d4b2347347806e615fc2f6e51e86e29d07d5c94bfc6bfaf1d4fa42204"
+    },
+    {
+      "path": "bengaluru_panel_recent_winter_ale.svg",
+      "bytes": 119763,
+      "sha256": "fb4563c202d7814e857aea93091defeabd17eb5de4f89edb7736b8b67cc22ab6"
+    },
+    {
+      "path": "bengaluru_panel_recent_winter_daily_shap.csv",
+      "bytes": 6910,
+      "sha256": "3e4c96b373d77d2287e54f1f3479fa0329ee476b38460df089bfc548f23b31c5"
+    },
+    {
+      "path": "bengaluru_panel_refit_00_daily.csv",
+      "bytes": 50381,
+      "sha256": "69279afb488d811376ec8236d0a6d7183867fef945725d3542a9f5fa8e971b55"
+    },
+    {
+      "path": "bengaluru_panel_refit_01_daily.csv",
+      "bytes": 50072,
+      "sha256": "e07674761766b75d33d385d582172df2a9adcd46f4f2a19305a9221031b91c25"
+    },
+    {
+      "path": "bengaluru_panel_refit_02_daily.csv",
+      "bytes": 50217,
+      "sha256": "b885289fef81dc7f052aa6488bf0e1bd667a46e166ffd2e3e50b0b2567245b38"
+    },
+    {
+      "path": "bengaluru_panel_refit_03_daily.csv",
+      "bytes": 50087,
+      "sha256": "d30e4b980c898b8645a78de827a948a34d48f5374927d6ea42deae5e307f886b"
+    },
+    {
+      "path": "bengaluru_panel_refit_04_daily.csv",
+      "bytes": 50321,
+      "sha256": "bb3d4bc0160734386440535d1309b89e6e3a0e9daee2bb69ae8ef22dcfe74590"
+    },
+    {
+      "path": "bengaluru_panel_refit_05_daily.csv",
+      "bytes": 50261,
+      "sha256": "039172270fb3dfcf082c1abfd2246d83609bc9fafb2ae593380f3604d7b95876"
+    },
+    {
+      "path": "bengaluru_panel_refit_06_daily.csv",
+      "bytes": 50284,
+      "sha256": "5043a3c4800de3f66a943892b9c851ede33db2360e83a08600bd89b32b5e7d2e"
+    },
+    {
+      "path": "bengaluru_panel_refit_07_daily.csv",
+      "bytes": 50271,
+      "sha256": "c05fcd68743edeeb1b90b8336aba115614560f09a4343886b8ef7d2a8502a297"
+    },
+    {
+      "path": "bengaluru_panel_refit_08_daily.csv",
+      "bytes": 50287,
+      "sha256": "f99cb9adc84a5ee3554040cd97be805df8ee5ac0d1ab72733a1b41ee945a9010"
+    },
+    {
+      "path": "bengaluru_panel_refit_09_daily.csv",
+      "bytes": 50268,
+      "sha256": "1db8df9e629f5ada852d58fbbd686572b4187e2d7e3786382a0f1d9aa162398c"
+    },
+    {
+      "path": "bengaluru_panel_refit_10_daily.csv",
+      "bytes": 50221,
+      "sha256": "827b882f97aaca141ebc54be31f169f2cdb6c51e12575f90fcae27cf50362f87"
+    },
+    {
+      "path": "bengaluru_panel_refit_11_daily.csv",
+      "bytes": 50242,
+      "sha256": "d5869700e33607af7d14280af4729c00aa5676087c952027cff4093bb7c31caa"
+    },
+    {
+      "path": "bengaluru_panel_refit_12_daily.csv",
+      "bytes": 50075,
+      "sha256": "278c67e3ef26e104c528ad0781d889c965c86b7d6f94802c31443ef1e91cc22f"
+    },
+    {
+      "path": "bengaluru_panel_refit_13_daily.csv",
+      "bytes": 50128,
+      "sha256": "357e575ff98806242c3d1d67dfb72bd53db20a0085ede5a96f918116df4782fd"
+    },
+    {
+      "path": "bengaluru_panel_refit_14_daily.csv",
+      "bytes": 50178,
+      "sha256": "a4caa5fd7ac997518d01b383024b81eaf950ea28a91db43bc6dbd82982442087"
+    },
+    {
+      "path": "bengaluru_panel_refit_15_daily.csv",
+      "bytes": 50120,
+      "sha256": "23d10c5287c949bd2f09124774583b3be3b911eae024b069fb3c98b1bc5d0919"
+    },
+    {
+      "path": "bengaluru_panel_refit_16_daily.csv",
+      "bytes": 50275,
+      "sha256": "e315c97ea3cd796a735f1bed3c733443370b57cf17b73438f31a9e8df2a0e670"
+    },
+    {
+      "path": "bengaluru_panel_refit_17_daily.csv",
+      "bytes": 50132,
+      "sha256": "2d70625709d8e1865e0b902bc1583e4577bb1efbe6a36203eb520e5156b90b88"
+    },
+    {
+      "path": "bengaluru_panel_refit_18_daily.csv",
+      "bytes": 50147,
+      "sha256": "281069cc377e64774d048e16874c4175c4003df6bd0d11c9348fd42acea9cd92"
+    },
+    {
+      "path": "bengaluru_panel_refit_19_daily.csv",
+      "bytes": 50152,
+      "sha256": "ed42bdfdf4eb8fb003601aa95042ab97ddd2bcaef4914f4a7811725c71cc45b2"
+    },
+    {
+      "path": "bengaluru_panel_refit_draws.npz",
+      "bytes": 60624,
+      "sha256": "21cdfd6eb814f1ebea2f2d5861cfb6c1577888d6378a527ee0c3a99175db1eb9"
+    },
+    {
+      "path": "bengaluru_panel_refit_metadata.json",
+      "bytes": 33894,
+      "sha256": "82ee4854d9ba9382498144c156aa5ce36a694880ddac3b43668093ba6f8af746"
+    },
+    {
+      "path": "bengaluru_panel_research.json",
+      "bytes": 56574,
+      "sha256": "f3cf84cbe014a390015591cc5512996be080ecb9bc56db9781c25296fae9eeeb"
+    },
+    {
+      "path": "bengaluru_panel_shap_summary.csv",
+      "bytes": 5157,
+      "sha256": "12f500b674e256f70788bd075c69d2c73736c600e6619ce9a3609b8b2226f898"
+    },
+    {
+      "path": "bengaluru_raw_daily.csv",
+      "bytes": 82597,
+      "sha256": "4f4639973ad436497de2783c118a163b72467bbb0ca2a32dd0f8bd242af7fb9d"
+    },
+    {
+      "path": "outer_weeks.json",
+      "bytes": 12922,
+      "sha256": "18e3da58dddbb5660e6e06beb319fb1345d2fba518e3099b9c82d7b72758ba28"
+    },
+    {
+      "path": "research.json",
+      "bytes": 68248,
+      "sha256": "a48dca5a7eb4892f07920ccfd96336dd781be99e94fb70f1e4e88389aa04bba6"
+    }
+  ],
+  "error_message": ""
+}
