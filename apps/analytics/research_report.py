@@ -839,9 +839,11 @@ is reported until detections and coverage are ingested and audited.
 
 For Phase 4, the observed-period cohorts satisfying the unchanged nested screen are:
 {supported or "none"}. Additional nested-screen limitations are: {failed}.
-Prioritise recent Delhi/Mumbai/Hyderabad/Pune and Bengaluru's fixed panel only where
-their recent screen supports it; Kanpur/Lucknow have no recent concentration targets
-and need fresh observations before current forecasts. Candidate weather features
+Prioritise recent Hyderabad, Mumbai and Bengaluru's fixed panel for initial
+forecasting experiments, subject to fresh observations and rolling validation.
+Delhi and Pune require investigation of their recent monthly-bias failures first.
+Kanpur/Lucknow have no recent concentration targets and need fresh observations
+before current forecasts. Candidate weather features
 are the validated temperature, humidity, wind speed/direction, rain, pressure,
 cloud/solar fields and BLH only with reliable availability; retain calendar features,
 reassess local trend and consider lagged PM with leakage-safe training. Forecast
@@ -855,8 +857,12 @@ diagnostic 8 and canonical multi-pollutant 9. All inputs/results remain on D:.
 Fixed seeds, code hashes, package versions, original model weights, folds and refit
 training-index hashes are recorded. Child manifests retain CSVs, PNG/SVG figures,
 GAM objects, SHAP additivity errors and all 20 refit series.
-The original 117 tests were preserved; the pre-fit full suite passed 124 tests.
-Final test/lint/API outputs are recorded in VALIDATION.md after this export.
+The original 117 tests were preserved; the pre-fit full suite passed 124 tests,
+and the final full suite passed 125 tests with 16 visible warnings in 20.85 seconds.
+Ruff check and formatting pass for 167 files, Django check reports no issues,
+no migrations are pending, and OpenAPI validation exits 0 without warnings.
+All requested live research APIs and health return HTTP 200. Exact outputs and
+hash checks are archived under this run's verification/ directory and VALIDATION.md.
 
 ## References
 
