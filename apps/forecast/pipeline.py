@@ -2,12 +2,14 @@
 
 import hashlib
 import json
+import os
 import shutil
 
 import joblib
 import numpy as np
 import pandas as pd
 from django.conf import settings
+from threadpoolctl import threadpool_info
 
 from apps.analytics.descriptive import season
 from apps.analytics.lifecycle import analysis_run
@@ -89,6 +91,16 @@ def train_forecasters(cities=None):
         protocol_sha256=digest,
         baseline=19,
         diagnostic_data_run=8,
+        cpu_thread_environment={
+            key: os.environ.get(key)
+            for key in (
+                "OMP_NUM_THREADS",
+                "OPENBLAS_NUM_THREADS",
+                "MKL_NUM_THREADS",
+                "NUMEXPR_NUM_THREADS",
+            )
+        },
+        threadpools=threadpool_info(),
     ) as (run, output):
         shutil.copy2(protocol, output / "protocol.md")
         evidence = settings.BASE_DIR / ".tools" / "phase4-validation"

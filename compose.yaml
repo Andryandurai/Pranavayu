@@ -8,11 +8,15 @@ x-app: &app
       INSTALL_DEV: "true"
   image: enviroinsights-india:dev
   env_file: .env
-  environment:
+  environment: &app-environment
     DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
     RUFF_CACHE_DIR: /tmp/ruff-cache
     PYTEST_ADDOPTS: "-o cache_dir=/tmp/pytest-cache"
     MLFLOW_TRACKING_URI: http://mlflow:5000
+    OMP_NUM_THREADS: "1"
+    OPENBLAS_NUM_THREADS: "1"
+    MKL_NUM_THREADS: "1"
+    NUMEXPR_NUM_THREADS: "1"
   volumes:
     - .:/app
     - media:/app/media
@@ -27,6 +31,7 @@ services:
   mlflow:
     <<: *app
     environment:
+      <<: *app-environment
       DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
       MLFLOW_SERVER_ENABLE_JOB_EXECUTION: "false"
     command: ["mlflow", "server", "--host", "0.0.0.0", "--port", "5000", "--workers", "1", "--backend-store-uri", "sqlite:////app/data/mlflow/mlflow.db", "--artifacts-destination", "/app/data/mlflow/artifacts", "--allowed-hosts", "mlflow:5000,localhost:5000,127.0.0.1:5000"]
@@ -81,6 +86,7 @@ services:
   worker:
     <<: *app
     environment:
+      <<: *app-environment
       DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
       WAIT_FOR_MIGRATIONS: "1"
     command: ["celery", "-A", "enviroinsights", "worker", "--loglevel=INFO", "--concurrency=2", "--events"]
@@ -88,6 +94,7 @@ services:
   beat:
     <<: *app
     environment:
+      <<: *app-environment
       DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
       WAIT_FOR_MIGRATIONS: "1"
     command: ["celery", "-A", "enviroinsights", "beat", "--loglevel=INFO", "--scheduler=django_celery_beat.schedulers:DatabaseScheduler", "--pidfile=/tmp/celerybeat.pid"]
@@ -95,6 +102,7 @@ services:
   flower:
     <<: *app
     environment:
+      <<: *app-environment
       DJANGO_SETTINGS_MODULE: enviroinsights.settings.dev
       WAIT_FOR_MIGRATIONS: "1"
       FLOWER_BASIC_AUTH: ${FLOWER_BASIC_AUTH:?Set FLOWER_BASIC_AUTH in .env}
