@@ -866,3 +866,79 @@ The long model process's launch revision is recorded separately from per-record
 on-disk revisions in `compute_provenance.json`, and report export provenance is
 stored separately. The existing scheduled weather ingestion added later 2026
 weather cache manifests; frozen 2015–2019/2024–2025 research snapshots are unchanged.
+
+## Phase 4 live verification — 10 October 2026
+
+Phase 4 is complete on `D:\EnviroInsights-India`, as **AnalysisRun 21**.
+The full suite baseline for Phase 5 is **148 tests**. All 125 original tests
+remain passing; all 18 baseline test/support files retain their hashes.
+The actual report is [PHASE4.md](results/PHASE4.md).
+
+```text
+148 passed, 148 warnings in 29.25s
+System check identified no issues (0 silenced).
+No changes detected
+All checks passed!
+```
+
+Schema validation with `spectacular --validate --fail-on-warn` exits 0 without
+warnings. Visible full-suite warnings include SHAP/matplotlib deprecations,
+MLflow prediction-signature advice, the existing NumPy/netCDF binary-size warning,
+generic timedelta warnings in fixtures, and a synthetic SARIMAX convergence
+warning. No warning filter or weaker assertion was introduced.
+
+| Verification | Real result |
+| --- | --- |
+| Forecast migrations | `forecast.0001_initial` applied; no migration drift |
+| Real rolling evaluation | 7728 rows; 21 city/horizons; 294 origins including real/ideal weather |
+| Target support | 184/184 days, 2025-07-01 through 2025-12-31, for every city/horizon/weather variant |
+| MLflow registry | 147 finished registered versions independently checked |
+| Replay default | 21 forecasts issued 2025-12-31; stored rows 3864 → 3885 |
+| Replay repeat twice and real Celery task | Still 3885 rows; task `cefba66a-830e-48bb-9d36-cb3169ed6371` succeeded |
+| Public live weather | IngestionRun 98 success; 21 rows; task `632924ce-4a60-4636-8676-100ad7d6bb56` |
+| Keyed PM refresh | IngestionRun 100 skipped, zero inserts, `skipped: no key`; actual task `bd8e2414-4142-403d-92d1-5143f81c2559` succeeded |
+| HTTP | Health 200; 21 forecast GETs 200; POST 405, invalid input 400, unknown city 404 |
+| CAMS issued-vintage coverage | 0/93240 non-null hourly forecasts; explicitly skipped |
+| Preservation | 16,266,240 readings and fingerprint `767228030051878155` unchanged; Runs 7 and 19 artifact hashes unchanged |
+
+Final commands run inside `web`:
+
+```text
+python manage.py evaluate_forecasters --run 21
+python manage.py issue_forecasts
+python manage.py issue_forecasts --replay-date 2025-12-31  # twice
+python .tools/phase4-validation/verify.py --run 21
+python manage.py export_phase4_report --run 21
+```
+
+The actual source archive reload inserted 168 previously missing IST-boundary
+daily rows (IngestionRun 94); the repeat (96) inserted zero. BLH remains null
+in lead-offset forecasts. Historical Forecast API near-valid-time weather was
+probed and excluded from headline features; GFS Previous Runs lead-2/3/4 inputs
+have explicit availability bounds. Perfect-prognosis is separately labelled.
+
+Held-out policies losing to persistence: bengaluru h1, bengaluru h3, chennai h1, mumbai h1, mumbai h2, mumbai h3, pune h1, pune h2, pune h3.
+Negative skill and convergence warnings are retained. The report includes every
+model, horizon, event denominator, empirical interval coverage and monthly/seasonal
+bias. Delhi February/March and Pune May are outside the final six-month test;
+their earlier bias cannot be declared fixed by this evaluation.
+
+Missing implementation items completed before Phase 5: PM refresh before cutoff,
+all-horizon live-input checks with replay fallback, frozen operational calibration,
+measured-label preservation in SARIMAX history, and actual result/figure exports.
+The frozen forecast design and held-out selection rules are unchanged. See
+[PHASE4_IMPLEMENTATION_FIXES.md](results/PHASE4_IMPLEMENTATION_FIXES.md).
+
+Daily schedules are PM 23:35 IST, weather 23:40 and forecasts 00:10. Without an
+OpenAQ key, forecasts remain replay. Bengaluru also requires verified fixed-panel
+station correspondence. All seven compose services are running, with db/Redis/
+MLflow healthy. Host ports remain database 5433, Redis 6380 and MLflow 5000.
+
+AnalysisRun 20 is retained as failed after its numerical thread configuration
+was found inconsistent. Run 21 launched at Git `6b3f4b028d0b352b0f29763e8833b4372497f1b1`;
+the report export revision is recorded separately. The protocol SHA256 is
+`395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c` and all recorded numerical thread pools use one
+thread. Exact commands, outputs, HTTP/model checks and prior-failure evidence are
+under `data/results/21/verification/`, hashed by the manifest.
+
+Phase 5's queued request begins only after this completed verification.

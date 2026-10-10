@@ -26,6 +26,11 @@ Forecast versions and predictions reference their AnalysisRun and MLflow run.
 The MLflow service is available at `http://localhost:5000`; SQLite metadata and
 artifacts persist in `data/mlflow/` on D: and are ignored by Git.
 
+The completed [Phase 4 report](docs/results/PHASE4.md) uses AnalysisRun 21:
+7,728 real/ideal prediction rows, 147 registered versions and 148 passing tests.
+Nine city/horizon issued policies lose to persistence. Empirical intervals often
+undercover; read the measured tables before interpreting uncertainty or skill.
+
 Read-only endpoints are `/api/forecast/<city>/latest/`,
 `/api/forecast/<city>/history/?start=YYYY-MM-DD&end=YYYY-MM-DD` (inclusive target
 dates, at most 366 days), and `/api/forecast/<city>/evaluation/`. Latest/history

@@ -450,7 +450,7 @@ def plot_results(output, evaluations):
         for j in range(3):
             ax.text(j, i, f"{matrix[i, j]:.3f}", ha="center", va="center")
     fig.colorbar(im, ax=ax, label="1 − RMSE / persistence RMSE")
-    ax.set_title("Actual issued-policy skill; negative values lose to persistence")
+    ax.set_title("Issued-policy skill\nNegative values lose to persistence")
     fig.tight_layout()
     fig.savefig(output / "forecast_skill.png", dpi=150)
     plt.close(fig)

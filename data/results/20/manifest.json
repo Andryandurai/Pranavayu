@@ -1,0 +1,207 @@
+{
+  "run": 20,
+  "name": "phase4",
+  "status": "failed",
+  "started_at": "2026-10-10T12:40:17.394966+00:00",
+  "finished_at": "2026-10-10T12:43:21.339212+00:00",
+  "data_window": [
+    "2024-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "5b5f6addde7c6e43493abd16586446411b6adae9",
+  "parameters": {
+    "seed": 20261010,
+    "protocol_sha256": "395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c",
+    "baseline": 19,
+    "diagnostic_data_run": 8,
+    "git_state": "versioned",
+    "code_sha256": "b02b46d5a44f9e741a3e2144e6d64f1b7e165416588a7db1823d5719f9c697e1",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2",
+      "shap": "0.52.0",
+      "statsmodels": "0.15.0",
+      "lightgbm": "4.7.0",
+      "mlflow": "3.17.0",
+      "torch": "2.14.1+cpu",
+      "holidays": "0.106"
+    }
+  },
+  "files": [
+    {
+      "path": "archive-probes.json",
+      "bytes": 2041,
+      "sha256": "cbed781f50ea87320031ecb97278b685475e1c42fb72d74ef4ddbe01354423d2"
+    },
+    {
+      "path": "baseline-tests.json",
+      "bytes": 1748,
+      "sha256": "f8f3a8b94984a97edf809bf09b34f93e843523746b9c8976054a416473c65703"
+    },
+    {
+      "path": "cams-vintage-probe.json",
+      "bytes": 1851,
+      "sha256": "f81aa4ab29c947e25e1f8dfaa46cad59af157b9e5d3daf2c7432b280dc9ee02d"
+    },
+    {
+      "path": "delhi_phase3b_monthly_bias.csv",
+      "bytes": 1031,
+      "sha256": "d887a5c04d453e974889c51d7721998159f6bcbc3f404e49a823ba81e55bfa69"
+    },
+    {
+      "path": "delhi_phase3b_year_month_bias.csv",
+      "bytes": 1685,
+      "sha256": "be08f9d7579d1dba7fede44b6d04ead74cbefd6db48d60f2e13ac7e94a70b199"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-06_explanations.json",
+      "bytes": 942,
+      "sha256": "525d2cefdedd5665a5096ea387829e7c7e927405c3902208f4249971bd47c662"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-06_model.joblib",
+      "bytes": 765356,
+      "sha256": "c4e3919afce042150be83b5b8b82d6dea5cda137df73ede5f22f58da466c438b"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-06_predictions.csv",
+      "bytes": 1459,
+      "sha256": "53bec024919f85afb6081a81fd4620e00783aa8863e7073aa94e8ea3ffddd860"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-06_selection.json",
+      "bytes": 1676,
+      "sha256": "f368a53fee7f5ce979d62ae994731d79fdb2f787f171c53cc3ee4315d04cc95e"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-07_explanations.json",
+      "bytes": 29222,
+      "sha256": "d0041424e7d7f65d8671b8fe014ab30c5c151d645a0faeee0ed8700ab07df2cf"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-07_model.joblib",
+      "bytes": 673484,
+      "sha256": "bd17e3ce1bc686788598f4045aaa9c1c9c9e8dbe838dc65a232747ac57296317"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27358,
+      "sha256": "07b111c163fb6d80ba532f58647c1454fca9e4aeab796dd52f9ff9b0f3056f96"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-07_selection.json",
+      "bytes": 1673,
+      "sha256": "2deb72f9bec312614ca7e4c7d30cbeded62c94d46b97d4e675de4cd8524d17e1"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-08_explanations.json",
+      "bytes": 29313,
+      "sha256": "d5eb2e048fd4308d7d7455d61de7c3ab7fb4ecc52599b120c016d2717f5aa72f"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-08_model.joblib",
+      "bytes": 570236,
+      "sha256": "e7ea12f3b03ca52bffe6f28f7aa406a0ff4f2811dc8fdcd79ee8449c5f3fefc1"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25875,
+      "sha256": "7ac5d4c415fa3de0db42798544f78a6f1afd1c1676be3e359f0ec2bc43343289"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-08_selection.json",
+      "bytes": 1667,
+      "sha256": "20832851d0c338de25cfd28ada9d4cbe9c81bfb0bc7899c3101b201782d41f1e"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26415,
+      "sha256": "66ebf4d8b8520e3c4c0f4c77190b0dd02b08dccb7acbd33ed417b3aba1b1a9f6"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-09_selection.json",
+      "bytes": 1670,
+      "sha256": "a79ceaef3b12695cc0a17afadf6e19252ca4d60d66b1fb35a31042751df9bef9"
+    },
+    {
+      "path": "prior-bias.json",
+      "bytes": 14344,
+      "sha256": "58ccba3c33c56f17396775ba01f4c8bee6aa89fe8b04cc1cba1a553624310661"
+    },
+    {
+      "path": "prior_bias/delhi_chosen_design_prior_bias.csv",
+      "bytes": 380,
+      "sha256": "6f316457bcb736629f7117522b23e1244143c78ecee64b675e3494fc033a3fa8"
+    },
+    {
+      "path": "prior_bias/delhi_month_prior_bias.csv",
+      "bytes": 1500,
+      "sha256": "67d00f89dcf8d293c89101981cf78754788d0af58ae78013c973c7d0aaf71e30"
+    },
+    {
+      "path": "prior_bias/delhi_monthly_design_support.csv",
+      "bytes": 1574,
+      "sha256": "2f6afad6ab0a86f6f67e31af511bf434acab0d138d1c5dcfc7d1a4c33b6cf4ad"
+    },
+    {
+      "path": "prior_bias/delhi_prior_monthly_bias.png",
+      "bytes": 105965,
+      "sha256": "642629665e918107f9a6f14897f509c9fdc7e2dfb7429e0a3ea451159b827c1b"
+    },
+    {
+      "path": "prior_bias/delhi_year_month_prior_bias.csv",
+      "bytes": 3037,
+      "sha256": "1865cbf1093dff1f5fe3f076c79cf0832f19633ff3f97f9dde47de4f65282e92"
+    },
+    {
+      "path": "prior_bias/prior_bias_findings.json",
+      "bytes": 25575,
+      "sha256": "636eb89b0bba9828547ee4d3a0baa1b3417952b9059fad6d0375f0ff3b408840"
+    },
+    {
+      "path": "prior_bias/pune_chosen_design_prior_bias.csv",
+      "bytes": 378,
+      "sha256": "d52dadc5c35e81478ed79876271652d723e80930e5a0c4995d6afa513a62cf08"
+    },
+    {
+      "path": "prior_bias/pune_month_prior_bias.csv",
+      "bytes": 1497,
+      "sha256": "1e5970068cda68ac2dfe11905aadf19d4e07a155c0a3e4094ce7fe554bc56ac2"
+    },
+    {
+      "path": "prior_bias/pune_monthly_design_support.csv",
+      "bytes": 1434,
+      "sha256": "8ea2e12df7497e77423e0558f652d8cb56182adab59596b20f889adfbd85ac55"
+    },
+    {
+      "path": "prior_bias/pune_prior_monthly_bias.png",
+      "bytes": 96046,
+      "sha256": "2279fa9d7d61a22ef7cb411a06782cfeb185e310a993f5b3ef2e931a3878c125"
+    },
+    {
+      "path": "prior_bias/pune_year_month_prior_bias.csv",
+      "bytes": 3019,
+      "sha256": "a723e751b1131e0275597759180a5d39986b618b9471c197c4de60fd25bfd268"
+    },
+    {
+      "path": "protocol.md",
+      "bytes": 5991,
+      "sha256": "395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c"
+    },
+    {
+      "path": "pune_phase3b_monthly_bias.csv",
+      "bytes": 1029,
+      "sha256": "145143509507bf9bc577a446894571553389ecf92ff87d07c0a99d49f0741392"
+    },
+    {
+      "path": "pune_phase3b_year_month_bias.csv",
+      "bytes": 1700,
+      "sha256": "551dc19e3162e170382922be13ef58d9c82d4ad93b8abbbe70f89bef3719710f"
+    }
+  ],
+  "error_message": "KeyboardInterrupt: "
+}
