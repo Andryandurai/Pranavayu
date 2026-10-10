@@ -69,6 +69,8 @@ REDIS_URL = env("REDIS_URL", default="redis://redis:6379/0")
 HEALTH_CHECK_TIMEOUT = env.float("HEALTH_CHECK_TIMEOUT", default=2.0)
 ADMIN_COUNT_CAP = env.int("ADMIN_COUNT_CAP", default=10000)
 RAW_DATA_ROOT = BASE_DIR / "data" / "raw"
+MLFLOW_TRACKING_URI = env("MLFLOW_TRACKING_URI", default="http://mlflow:5000")
+FORECAST_CITIES = ("hyderabad", "mumbai", "bengaluru", "delhi", "pune", "chennai", "kolkata")
 INGEST_HTTP_TIMEOUT = env.int("INGEST_HTTP_TIMEOUT", default=120)
 INGEST_HTTP_ATTEMPTS = env.int("INGEST_HTTP_ATTEMPTS", default=4)
 INGEST_BATCH_SIZE = env.int("INGEST_BATCH_SIZE", default=2000)

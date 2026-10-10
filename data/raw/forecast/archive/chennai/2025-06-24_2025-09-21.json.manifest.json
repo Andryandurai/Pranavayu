@@ -1,0 +1,21 @@
+{
+  "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=13.0827&longitude=80.2707&start_date=2025-06-24&end_date=2025-09-21&hourly=temperature_2m_previous_day2%2Crelative_humidity_2m_previous_day2%2Cwind_speed_10m_previous_day2%2Cwind_direction_10m_previous_day2%2Cprecipitation_previous_day2%2Ccloud_cover_previous_day2%2Csurface_pressure_previous_day2%2Cboundary_layer_height_previous_day2%2Ctemperature_2m_previous_day3%2Crelative_humidity_2m_previous_day3%2Cwind_speed_10m_previous_day3%2Cwind_direction_10m_previous_day3%2Cprecipitation_previous_day3%2Ccloud_cover_previous_day3%2Csurface_pressure_previous_day3%2Cboundary_layer_height_previous_day3%2Ctemperature_2m_previous_day4%2Crelative_humidity_2m_previous_day4%2Cwind_speed_10m_previous_day4%2Cwind_direction_10m_previous_day4%2Cprecipitation_previous_day4%2Ccloud_cover_previous_day4%2Csurface_pressure_previous_day4%2Cboundary_layer_height_previous_day4&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "ffbf0dccd6eba1080eb39896b24cea177443fd67ab107bde66ab1e7b44ca4c20",
+  "path": "forecast/archive/chennai/2025-06-24_2025-09-21.json",
+  "sha256": "ceb4e6fafc1ada4ca74f9fd0f80674e0d1e9cb023e6c749f0d72cea9ab35b21b",
+  "size_bytes": 287741,
+  "retrieved_at": "2026-10-10T12:03:01.306324+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "chennai",
+    "model": "gfs_global",
+    "mode": "archive",
+    "lead_days": [
+      2,
+      3,
+      4
+    ],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

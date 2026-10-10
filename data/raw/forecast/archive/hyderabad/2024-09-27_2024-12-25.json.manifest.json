@@ -1,0 +1,21 @@
+{
+  "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=17.385&longitude=78.4867&start_date=2024-09-27&end_date=2024-12-25&hourly=temperature_2m_previous_day2%2Crelative_humidity_2m_previous_day2%2Cwind_speed_10m_previous_day2%2Cwind_direction_10m_previous_day2%2Cprecipitation_previous_day2%2Ccloud_cover_previous_day2%2Csurface_pressure_previous_day2%2Cboundary_layer_height_previous_day2%2Ctemperature_2m_previous_day3%2Crelative_humidity_2m_previous_day3%2Cwind_speed_10m_previous_day3%2Cwind_direction_10m_previous_day3%2Cprecipitation_previous_day3%2Ccloud_cover_previous_day3%2Csurface_pressure_previous_day3%2Cboundary_layer_height_previous_day3%2Ctemperature_2m_previous_day4%2Crelative_humidity_2m_previous_day4%2Cwind_speed_10m_previous_day4%2Cwind_direction_10m_previous_day4%2Cprecipitation_previous_day4%2Ccloud_cover_previous_day4%2Csurface_pressure_previous_day4%2Cboundary_layer_height_previous_day4&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "f6dd80e7ee1e67ebc588357aaac88957e958d3b7345e86c6df11c0ed5dba1690",
+  "path": "forecast/archive/hyderabad/2024-09-27_2024-12-25.json",
+  "sha256": "4f84cfffdd96c0d81df8fd9a08c4f07670bc02064b82a68abd873c69251cbf06",
+  "size_bytes": 273903,
+  "retrieved_at": "2026-10-10T12:04:51.607348+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "hyderabad",
+    "model": "gfs_global",
+    "mode": "archive",
+    "lead_days": [
+      2,
+      3,
+      4
+    ],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

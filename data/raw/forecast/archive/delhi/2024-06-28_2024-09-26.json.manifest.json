@@ -1,0 +1,21 @@
+{
+  "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=28.6139&longitude=77.209&start_date=2024-06-28&end_date=2024-09-26&hourly=temperature_2m_previous_day2%2Crelative_humidity_2m_previous_day2%2Cwind_speed_10m_previous_day2%2Cwind_direction_10m_previous_day2%2Cprecipitation_previous_day2%2Ccloud_cover_previous_day2%2Csurface_pressure_previous_day2%2Cboundary_layer_height_previous_day2%2Ctemperature_2m_previous_day3%2Crelative_humidity_2m_previous_day3%2Cwind_speed_10m_previous_day3%2Cwind_direction_10m_previous_day3%2Cprecipitation_previous_day3%2Ccloud_cover_previous_day3%2Csurface_pressure_previous_day3%2Cboundary_layer_height_previous_day3%2Ctemperature_2m_previous_day4%2Crelative_humidity_2m_previous_day4%2Cwind_speed_10m_previous_day4%2Cwind_direction_10m_previous_day4%2Cprecipitation_previous_day4%2Ccloud_cover_previous_day4%2Csurface_pressure_previous_day4%2Cboundary_layer_height_previous_day4&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "9f1f55664cc7a4270e5e6113c4364a5cff83fe5ef41e9e532373978e99792789",
+  "path": "forecast/archive/delhi/2024-06-28_2024-09-26.json",
+  "sha256": "5ed9b444741c74b4f3387a8e3a4eb85993595472411a3372c2f719c53c47ee6b",
+  "size_bytes": 280767,
+  "retrieved_at": "2026-10-10T12:09:50.941486+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "delhi",
+    "model": "gfs_global",
+    "mode": "archive",
+    "lead_days": [
+      2,
+      3,
+      4
+    ],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

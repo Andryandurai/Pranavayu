@@ -1,0 +1,21 @@
+{
+  "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=18.5204&longitude=73.8567&start_date=2024-09-26&end_date=2024-12-25&hourly=temperature_2m_previous_day2%2Crelative_humidity_2m_previous_day2%2Cwind_speed_10m_previous_day2%2Cwind_direction_10m_previous_day2%2Cprecipitation_previous_day2%2Ccloud_cover_previous_day2%2Csurface_pressure_previous_day2%2Cboundary_layer_height_previous_day2%2Ctemperature_2m_previous_day3%2Crelative_humidity_2m_previous_day3%2Cwind_speed_10m_previous_day3%2Cwind_direction_10m_previous_day3%2Cprecipitation_previous_day3%2Ccloud_cover_previous_day3%2Csurface_pressure_previous_day3%2Cboundary_layer_height_previous_day3%2Ctemperature_2m_previous_day4%2Crelative_humidity_2m_previous_day4%2Cwind_speed_10m_previous_day4%2Cwind_direction_10m_previous_day4%2Cprecipitation_previous_day4%2Ccloud_cover_previous_day4%2Csurface_pressure_previous_day4%2Cboundary_layer_height_previous_day4&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "e20736d67cebac02c5f4c7f899ae31ca77032fad6dfeb367463016932e5fdee8",
+  "path": "forecast/archive/pune/2024-09-26_2024-12-25.json",
+  "sha256": "40d75f418b880fba4c61d040c53824059c0e83f4e8474d0385f64d70ee7b26b0",
+  "size_bytes": 276699,
+  "retrieved_at": "2026-10-10T12:11:11.103971+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "pune",
+    "model": "gfs_global",
+    "mode": "archive",
+    "lead_days": [
+      2,
+      3,
+      4
+    ],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

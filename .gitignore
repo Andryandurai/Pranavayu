@@ -19,5 +19,6 @@ data/raw/**
 !data/raw/**/
 !data/raw/**/*.manifest.json
 data/results/**
+data/mlflow/
 !data/results/**/
 !data/results/**/manifest.json

@@ -1,0 +1,21 @@
+{
+  "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=12.9716&longitude=77.5946&start_date=2025-06-23&end_date=2025-09-21&hourly=temperature_2m_previous_day2%2Crelative_humidity_2m_previous_day2%2Cwind_speed_10m_previous_day2%2Cwind_direction_10m_previous_day2%2Cprecipitation_previous_day2%2Ccloud_cover_previous_day2%2Csurface_pressure_previous_day2%2Cboundary_layer_height_previous_day2%2Ctemperature_2m_previous_day3%2Crelative_humidity_2m_previous_day3%2Cwind_speed_10m_previous_day3%2Cwind_direction_10m_previous_day3%2Cprecipitation_previous_day3%2Ccloud_cover_previous_day3%2Csurface_pressure_previous_day3%2Cboundary_layer_height_previous_day3%2Ctemperature_2m_previous_day4%2Crelative_humidity_2m_previous_day4%2Cwind_speed_10m_previous_day4%2Cwind_direction_10m_previous_day4%2Cprecipitation_previous_day4%2Ccloud_cover_previous_day4%2Csurface_pressure_previous_day4%2Cboundary_layer_height_previous_day4&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "b828ee12512a31f7f41f44ff8cfa1f813c45d79e50766b6ef596b6c6a99ea8ed",
+  "path": "forecast/archive/bengaluru/2025-06-23_2025-09-21.json",
+  "sha256": "53e51bed36d53b1014d55bc017715b5a4e9ea08cf29c54e4f5dcd58ebeaedeed",
+  "size_bytes": 284250,
+  "retrieved_at": "2026-10-10T12:09:20.833840+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "bengaluru",
+    "model": "gfs_global",
+    "mode": "archive",
+    "lead_days": [
+      2,
+      3,
+      4
+    ],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

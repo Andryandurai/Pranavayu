@@ -1,0 +1,12 @@
+{
+  "url": "https://historical-forecast-api.open-meteo.com/v1/forecast?latitude=17.385&longitude=78.487&start_date=2025-07-01&end_date=2025-07-02&timezone=UTC&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation%2Ccloud_cover%2Csurface_pressure%2Cboundary_layer_height&models=gfs_global&wind_speed_unit=ms",
+  "request_sha256": "b6ff1293c98df7bab3a301738efdd7b307ec5908142d4371a12f9d22ec2838bd",
+  "path": "forecast/probes/historical.json",
+  "sha256": "7b221801a62c864f9988bee0e97169e6f4b753305d11b4a22fa02e9a9d4bd388",
+  "size_bytes": 3368,
+  "retrieved_at": "2026-10-10T11:57:28.252948+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "purpose": "Phase4 source availability probe"
+  }
+}

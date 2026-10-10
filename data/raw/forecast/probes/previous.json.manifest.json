@@ -1,0 +1,12 @@
+{
+  "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=17.385&longitude=78.487&start_date=2025-07-01&end_date=2025-07-02&timezone=UTC&hourly=temperature_2m_previous_day2%2Crelative_humidity_2m_previous_day2%2Cwind_speed_10m_previous_day2%2Cwind_direction_10m_previous_day2%2Cprecipitation_previous_day2%2Ccloud_cover_previous_day2%2Csurface_pressure_previous_day2%2Cboundary_layer_height_previous_day2%2Ctemperature_2m_previous_day3%2Crelative_humidity_2m_previous_day3%2Cwind_speed_10m_previous_day3%2Cwind_direction_10m_previous_day3%2Cprecipitation_previous_day3%2Ccloud_cover_previous_day3%2Csurface_pressure_previous_day3%2Cboundary_layer_height_previous_day3%2Ctemperature_2m_previous_day4%2Crelative_humidity_2m_previous_day4%2Cwind_speed_10m_previous_day4%2Cwind_direction_10m_previous_day4%2Cprecipitation_previous_day4%2Ccloud_cover_previous_day4%2Csurface_pressure_previous_day4%2Cboundary_layer_height_previous_day4&models=gfs_global&wind_speed_unit=ms",
+  "request_sha256": "a0dc0bd5e91c39b910127292c0abbd642495e2f969495871c4dd3abd97e37bf3",
+  "path": "forecast/probes/previous.json",
+  "sha256": "ebc5ccc403cefa87502d0c113f68843380ec3d25b48b2e263577ed3c3d186ecc",
+  "size_bytes": 8185,
+  "retrieved_at": "2026-10-10T11:57:27.245404+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "purpose": "Phase4 source availability probe"
+  }
+}

@@ -4,17 +4,42 @@
 #
 #    pip-compile --output-file=requirements/base.txt requirements/base.in
 #
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+aiohappyeyeballs==2.7.1
+    # via aiohttp
+aiohttp==3.14.4
+    # via mlflow
+aiosignal==1.4.0
+    # via aiohttp
+alembic==1.20.0
+    # via mlflow
 amqp==5.4.1
     # via kombu
+annotated-doc==0.0.5
+    # via fastapi
+annotated-types==0.8.0
+    # via pydantic
+anyio==4.15.1
+    # via
+    #   mlflow-skinny
+    #   starlette
 asgiref==3.12.1
     # via django
 attrs==26.1.0
     # via
+    #   aiohttp
     #   ecmwf-datastores-client
     #   jsonschema
     #   referencing
 billiard==4.3.1
     # via celery
+blinker==1.9.0
+    # via flask
+cachetools==7.2.1
+    # via
+    #   mlflow-skinny
+    #   mlflow-tracing
 cdsapi==0.7.7
     # via -r requirements/base.in
 celery==5.6.3
@@ -27,6 +52,8 @@ certifi==2026.7.22
     # via
     #   netcdf4
     #   requests
+cffi==2.1.1
+    # via cryptography
 cftime==1.6.6
     # via netcdf4
 charset-normalizer==3.5.2
@@ -37,6 +64,9 @@ click==8.5.0
     #   click-didyoumean
     #   click-plugins
     #   click-repl
+    #   flask
+    #   mlflow-skinny
+    #   uvicorn
 click-didyoumean==0.3.1
     # via celery
 click-plugins==1.1.1.2
@@ -46,13 +76,22 @@ click-repl==0.4.1
 cloudpickle==3.1.2
     # via
     #   joblib
+    #   mlflow-skinny
     #   shap
 contourpy==1.4.0
     # via matplotlib
 cron-descriptor==1.4.5
     # via django-celery-beat
+cryptography==50.0.2
+    # via
+    #   google-auth
+    #   mlflow
 cycler==0.12.1
     # via matplotlib
+databricks-sdk==0.151.0
+    # via
+    #   mlflow-skinny
+    #   mlflow-tracing
 django==5.2.18
     # via
     #   -r requirements/base.in
@@ -80,28 +119,79 @@ djangorestframework==3.18.3
     #   drf-spectacular
 djangorestframework-gis==1.3.0
     # via -r requirements/base.in
+docker==7.2.0
+    # via mlflow
 drf-spectacular==0.30.0
     # via -r requirements/base.in
 ecmwf-datastores-client==0.5.3
     # via cdsapi
 et-xmlfile==2.0.0
     # via openpyxl
+fastapi==0.143.0
+    # via mlflow-skinny
+filelock==4.1.0
+    # via torch
+flask==3.1.3
+    # via
+    #   flask-cors
+    #   mlflow
+flask-cors==6.0.5
+    # via mlflow
 flower==2.0.1
     # via -r requirements/base.in
 fonttools==4.66.1
     # via matplotlib
 formulaic==1.2.2
     # via statsmodels
+frozenlist==1.8.0
+    # via
+    #   aiohttp
+    #   aiosignal
+fsspec==2026.9.0
+    # via torch
+gitdb==4.0.12
+    # via gitpython
+gitpython==3.2.0
+    # via mlflow-skinny
+google-auth==2.61.0
+    # via databricks-sdk
+graphene==3.4.3
+    # via mlflow
+graphql-core==3.2.13
+    # via
+    #   graphene
+    #   graphql-relay
+graphql-relay==3.2.0
+    # via graphene
 gunicorn==25.3.0
+    # via
+    #   -r requirements/base.in
+    #   mlflow
+h11==0.16.0
+    # via uvicorn
+holidays==0.106
     # via -r requirements/base.in
+huey==3.4.0
+    # via mlflow
 humanize==4.16.0
     # via flower
 idna==3.20
-    # via requests
+    # via
+    #   anyio
+    #   requests
+    #   yarl
+importlib-metadata==9.0.1
+    # via mlflow-skinny
 inflection==0.5.1
     # via drf-spectacular
 interface-meta==2.0.1
     # via formulaic
+itsdangerous==2.2.0
+    # via flask
+jinja2==3.1.6
+    # via
+    #   flask
+    #   torch
 joblib==1.6.0
     # via scikit-learn
 jsonschema==4.26.0
@@ -112,20 +202,47 @@ kiwisolver==1.5.1
     # via matplotlib
 kombu==5.6.2
     # via celery
+lightgbm==4.7.0
+    # via -r requirements/base.in
 llvmlite==0.50.0
     # via
     #   numba
     #   shap
+mako==1.4.3
+    # via alembic
+markupsafe==3.0.4
+    # via
+    #   flask
+    #   jinja2
+    #   mako
+    #   werkzeug
 matplotlib==3.11.2
+    # via
+    #   -r requirements/base.in
+    #   mlflow
+mlflow==3.17.0
     # via -r requirements/base.in
+mlflow-skinny==3.17.0
+    # via mlflow
+mlflow-tracing==3.17.0
+    # via mlflow
+mpmath==1.3.0
+    # via sympy
+multidict==6.9.1
+    # via
+    #   aiohttp
+    #   yarl
 multiurl==0.3.9
     # via ecmwf-datastores-client
 narwhals==2.26.0
     # via
     #   formulaic
+    #   lightgbm
     #   scikit-learn
 netcdf4==1.7.4
     # via -r requirements/base.in
+networkx==3.7
+    # via torch
 numba==0.68.0
     # via shap
 numpy==2.5.3
@@ -133,7 +250,9 @@ numpy==2.5.3
     #   cftime
     #   contourpy
     #   formulaic
+    #   lightgbm
     #   matplotlib
+    #   mlflow
     #   netcdf4
     #   numba
     #   pandas
@@ -141,21 +260,43 @@ numpy==2.5.3
     #   scikit-learn
     #   scipy
     #   shap
+    #   skops
     #   statsmodels
 openpyxl==3.1.5
     # via -r requirements/base.in
+opentelemetry-api==1.45.1
+    # via
+    #   fastapi
+    #   mlflow-skinny
+    #   mlflow-tracing
+    #   opentelemetry-sdk
+    #   opentelemetry-semantic-conventions
+opentelemetry-proto==1.45.1
+    # via
+    #   mlflow-skinny
+    #   mlflow-tracing
+opentelemetry-sdk==1.45.1
+    # via
+    #   mlflow-skinny
+    #   mlflow-tracing
+opentelemetry-semantic-conventions==0.66b1
+    # via opentelemetry-sdk
 packaging==26.3
     # via
     #   gunicorn
     #   kombu
     #   matplotlib
+    #   mlflow-skinny
+    #   mlflow-tracing
     #   patsy
     #   shap
+    #   skops
     #   statsmodels
 pandas==2.3.3
     # via
     #   -r requirements/base.in
     #   formulaic
+    #   mlflow
     #   shap
     #   statsmodels
 patsy==1.0.3
@@ -164,14 +305,41 @@ pgvector==0.5.0
     # via -r requirements/base.in
 pillow==12.3.0
     # via matplotlib
+prettytable==3.18.0
+    # via skops
 prometheus-client==0.26.0
     # via flower
 prompt-toolkit==3.0.53
     # via click-repl
+propcache==0.5.4
+    # via
+    #   aiohttp
+    #   yarl
+protobuf==6.33.6
+    # via
+    #   databricks-sdk
+    #   mlflow-skinny
+    #   mlflow-tracing
+    #   opentelemetry-proto
 psycopg[binary]==3.3.6
     # via -r requirements/base.in
 psycopg-binary==3.3.6
     # via psycopg
+pyarrow==25.0.1
+    # via mlflow
+pyasn1==0.6.4
+    # via pyasn1-modules
+pyasn1-modules==0.4.2
+    # via google-auth
+pycparser==3.11
+    # via cffi
+pydantic==2.14.0
+    # via
+    #   fastapi
+    #   mlflow-skinny
+    #   mlflow-tracing
+pydantic-core==2.50.0
+    # via pydantic
 pyparsing==3.3.3
     # via matplotlib
 python-crontab==3.4.0
@@ -179,16 +347,22 @@ python-crontab==3.4.0
 python-dateutil==2.9.0.post0
     # via
     #   celery
+    #   graphene
+    #   holidays
     #   matplotlib
     #   multiurl
     #   pandas
+python-dotenv==1.2.4
+    # via mlflow-skinny
 pytz==2026.5
     # via
     #   flower
     #   multiurl
     #   pandas
 pyyaml==6.0.3
-    # via drf-spectacular
+    # via
+    #   drf-spectacular
+    #   mlflow-skinny
 redis==7.4.1
     # via -r requirements/base.in
 referencing==0.37.0
@@ -199,7 +373,10 @@ requests==2.34.2
     # via
     #   -r requirements/base.in
     #   cdsapi
+    #   databricks-sdk
+    #   docker
     #   ecmwf-datastores-client
+    #   mlflow-skinny
     #   multiurl
 rpds-py==2026.9.1
     # via
@@ -208,25 +385,48 @@ rpds-py==2026.9.1
 scikit-learn==1.9.1
     # via
     #   -r requirements/base.in
+    #   mlflow
     #   shap
+    #   skops
 scipy==1.18.1
     # via
     #   formulaic
+    #   lightgbm
+    #   mlflow
     #   scikit-learn
     #   shap
+    #   skops
     #   statsmodels
 shap==0.52.0
     # via -r requirements/base.in
 six==1.17.0
     # via python-dateutil
+skops==0.16.0
+    # via mlflow
 slicer==0.0.8
     # via shap
+smmap==5.0.3
+    # via gitdb
+sqlalchemy==2.1.4
+    # via
+    #   alembic
+    #   mlflow
 sqlparse==0.6.0
-    # via django
+    # via
+    #   django
+    #   mlflow-skinny
+starlette==1.7.0
+    # via
+    #   fastapi
+    #   mlflow-skinny
 statsmodels==0.15.0
     # via -r requirements/base.in
+sympy==1.14.0
+    # via torch
 threadpoolctl==3.7.0
     # via scikit-learn
+torch==2.14.1+cpu
+    # via -r requirements/base.in
 tornado==6.5.10
     # via flower
 tqdm==4.70.1
@@ -236,11 +436,31 @@ tqdm==4.70.1
     #   shap
 typing-extensions==4.16.0
     # via
+    #   aiohttp
+    #   aiosignal
+    #   alembic
+    #   anyio
     #   click-repl
     #   ecmwf-datastores-client
+    #   fastapi
     #   formulaic
+    #   graphene
+    #   mlflow-skinny
+    #   opentelemetry-api
+    #   opentelemetry-sdk
+    #   opentelemetry-semantic-conventions
     #   psycopg
+    #   pydantic
+    #   pydantic-core
     #   referencing
+    #   sqlalchemy
+    #   starlette
+    #   torch
+    #   typing-inspection
+typing-inspection==0.4.4
+    # via
+    #   fastapi
+    #   pydantic
 tzdata==2026.5
     # via
     #   django-celery-beat
@@ -251,13 +471,31 @@ tzlocal==5.4.4
 uritemplate==4.2.0
     # via drf-spectacular
 urllib3==2.8.0
-    # via requests
+    # via
+    #   databricks-sdk
+    #   docker
+    #   requests
+uvicorn==0.54.0
+    # via mlflow-skinny
 vine==5.1.0
     # via
     #   amqp
     #   celery
     #   kombu
 wcwidth==0.9.2
-    # via prompt-toolkit
+    # via
+    #   prettytable
+    #   prompt-toolkit
+werkzeug==3.1.9
+    # via
+    #   flask
+    #   flask-cors
 wrapt==2.5.0
     # via formulaic
+yarl==1.25.1
+    # via aiohttp
+zipp==4.1.1
+    # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

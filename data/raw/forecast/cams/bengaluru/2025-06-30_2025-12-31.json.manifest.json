@@ -1,0 +1,19 @@
+{
+  "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=12.9716&longitude=77.5946&start_date=2025-06-30&end_date=2025-12-31&hourly=pm2_5_previous_day2%2Cpm2_5_previous_day3%2Cpm2_5_previous_day4&domains=cams_global&timezone=UTC",
+  "request_sha256": "a3de9a34e14edfc07599a862f873e4a86dc818ced07309c7874f099443658295",
+  "path": "forecast/cams/bengaluru/2025-06-30_2025-12-31.json",
+  "sha256": "b8a767bc6f674eaf360ec5a29cec9d53a747e28634b0a881324f70fc4f3286c4",
+  "size_bytes": 151348,
+  "retrieved_at": "2026-10-10T12:27:57.377416+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "bengaluru",
+    "domain": "cams_global",
+    "purpose": "Actual evaluation-period issue-vintage availability audit",
+    "lead_days": [
+      2,
+      3,
+      4
+    ]
+  }
+}

@@ -9,6 +9,7 @@ from apps.analytics.api import CoverageView, SeriesView, SummaryView
 from apps.analytics.research_api import ComparisonsView, NCAPView, RQ2View
 from apps.core.views import HealthView
 from apps.dashboard.views import HomeView
+from apps.forecast.api import EvaluationView, HistoryView, LatestView
 from apps.ingest.api import CompletenessView, FireView, ReadingView, WeatherView
 from apps.warehouse.views import CityViewSet, PollutantViewSet, StationViewSet
 
@@ -21,6 +22,11 @@ urlpatterns = [
     path("", HomeView.as_view(), name="home"),
     path("admin/", admin.site.urls),
     path("api/health/", HealthView.as_view(), name="health"),
+    path("api/forecast/<slug:slug>/latest/", LatestView.as_view(), name="forecast-latest"),
+    path("api/forecast/<slug:slug>/history/", HistoryView.as_view(), name="forecast-history"),
+    path(
+        "api/forecast/<slug:slug>/evaluation/", EvaluationView.as_view(), name="forecast-evaluation"
+    ),
     path("api/readings/", ReadingView.as_view(), name="readings"),
     path("api/weather/", WeatherView.as_view(), name="weather"),
     path("api/fires/", FireView.as_view(), name="fires"),

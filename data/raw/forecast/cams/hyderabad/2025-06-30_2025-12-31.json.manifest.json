@@ -1,0 +1,19 @@
+{
+  "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=17.385&longitude=78.4867&start_date=2025-06-30&end_date=2025-12-31&hourly=pm2_5_previous_day2%2Cpm2_5_previous_day3%2Cpm2_5_previous_day4&domains=cams_global&timezone=UTC",
+  "request_sha256": "19d1f7e1b863635e4837b25d57cf5c1ca2ea011f1b150c78cf904080b7ebb330",
+  "path": "forecast/cams/hyderabad/2025-06-30_2025-12-31.json",
+  "sha256": "205508c6925de5dd838285e717150fdf1596f8d57a46a77b485cefea9ca8e7fe",
+  "size_bytes": 151347,
+  "retrieved_at": "2026-10-10T12:28:00.460192+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "hyderabad",
+    "domain": "cams_global",
+    "purpose": "Actual evaluation-period issue-vintage availability audit",
+    "lead_days": [
+      2,
+      3,
+      4
+    ]
+  }
+}

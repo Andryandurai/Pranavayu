@@ -1,0 +1,12 @@
+{
+  "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=17.385&longitude=78.487&start_date=2025-07-01&end_date=2025-07-02&timezone=UTC&hourly=pm2_5&domains=cams_global",
+  "request_sha256": "7bad748446bb9fd95b09c4c6c51d04f6a4076acde7003e5bd520c6868d56cfe5",
+  "path": "forecast/probes/cams.json",
+  "sha256": "12324cafc0140f32a534e63355613c8c7d764d7015a88a684eade2e5cf8043f6",
+  "size_bytes": 1355,
+  "retrieved_at": "2026-10-10T11:57:29.615966+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "purpose": "Phase4 source availability probe"
+  }
+}

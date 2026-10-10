@@ -1,5 +1,32 @@
 # Phase 2 data sources
 
+## Phase 4 forecast inputs
+
+The canonical concentration timestamps were repaired in Phase 3B, superseding
+the earlier stored-clock caveats below. Phase 4 uses hash-verified raw Run 8
+2024–2025 snapshots; it never uses deweathered concentrations as inputs.
+
+Weather comes from [Open-Meteo Previous Runs](https://open-meteo.com/en/docs/previous-runs-api),
+explicit GFS Global, UTC, m/s. The related requested
+[Historical Forecast endpoint](https://open-meteo.com/en/docs/historical-forecast-api)
+was fetched as a diagnostic, but its stitched near-valid-time values do not meet
+issue-vintage rules. For horizon h, Phase 4 uses h+1-day offsets and a documented
+conservative availability bound with a 12-hour publication margin. This relies
+on provider lead semantics and a latency assumption rather than exact archived
+publication timestamps. Missing BLH stays null and is excluded from predictors.
+
+`fetch_historical_forecasts` uses the existing RawCache/RawAsset/IngestionRun
+framework. Daily ForecastWeather records are distinct from WeatherObservation
+and retain request hashes, lead/bound semantics, source asset and run. Cache files
+are under `data/raw/forecast/`, with overlapping UTC request windows to retain
+whole IST days. Live public weather uses the same source framework and actual
+retrieval availability. See [PHASE4_PROTOCOL.md](results/PHASE4_PROTOCOL.md).
+
+A real 2025 CAMS PM2.5 valid-time response was retrieved from the Air Quality API;
+the API does not document a retrievable 2025 issue-vintage archive. It is retained
+as a source probe and cannot be treated as a leakage-safe forecast benchmark.
+OpenAQ remains keyed and unverified live; lack of a key invokes explicit replay.
+
 The active project is `D:\EnviroInsights-India`; containers read it at `/app`.
 Inputs live in `data/raw/`. Only adjacent `*.manifest.json` files are eligible
 for version control. Manifests record URL, retrieval time, bytes, SHA256,

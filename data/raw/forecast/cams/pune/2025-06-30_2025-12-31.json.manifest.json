@@ -1,0 +1,19 @@
+{
+  "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=18.5204&longitude=73.8567&start_date=2025-06-30&end_date=2025-12-31&hourly=pm2_5_previous_day2%2Cpm2_5_previous_day3%2Cpm2_5_previous_day4&domains=cams_global&timezone=UTC",
+  "request_sha256": "9f6307cbe3b97cb4a54114004757bf1c86c86a6361d2e6bcaeb071b3d4cd0d24",
+  "path": "forecast/cams/pune/2025-06-30_2025-12-31.json",
+  "sha256": "4213c3cbe3b183a73584cebcab508e2ddae9deda928b20fa2e6cf30bfcac61c4",
+  "size_bytes": 151347,
+  "retrieved_at": "2026-10-10T12:28:02.843874+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "pune",
+    "domain": "cams_global",
+    "purpose": "Actual evaluation-period issue-vintage availability audit",
+    "lead_days": [
+      2,
+      3,
+      4
+    ]
+  }
+}

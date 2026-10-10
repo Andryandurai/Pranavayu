@@ -1,0 +1,19 @@
+{
+  "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=28.6139&longitude=77.209&start_date=2025-06-30&end_date=2025-12-31&hourly=pm2_5_previous_day2%2Cpm2_5_previous_day3%2Cpm2_5_previous_day4&domains=cams_global&timezone=UTC",
+  "request_sha256": "8f8b6d3f1f48e3d597c2adbb37ca2d13c0cad2580f84cdc4e5ebeb1d6ac30b5c",
+  "path": "forecast/cams/delhi/2025-06-30_2025-12-31.json",
+  "sha256": "dac4fc7f85a0b905439ff0fc7e23fdffe06b7c83af056b8b69577979be88e5b3",
+  "size_bytes": 151351,
+  "retrieved_at": "2026-10-10T12:27:59.373394+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "delhi",
+    "domain": "cams_global",
+    "purpose": "Actual evaluation-period issue-vintage availability audit",
+    "lead_days": [
+      2,
+      3,
+      4
+    ]
+  }
+}

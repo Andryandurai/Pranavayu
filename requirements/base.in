@@ -20,3 +20,8 @@ scikit-learn>=1.7,<2
 matplotlib>=3.10,<4
 shap==0.52.0
 statsmodels==0.15.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+lightgbm==4.7.0
+mlflow==3.17.0
+torch==2.14.1+cpu
+holidays==0.106

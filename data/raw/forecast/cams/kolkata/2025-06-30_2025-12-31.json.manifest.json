@@ -1,0 +1,19 @@
+{
+  "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=22.5726&longitude=88.3639&start_date=2025-06-30&end_date=2025-12-31&hourly=pm2_5_previous_day2%2Cpm2_5_previous_day3%2Cpm2_5_previous_day4&domains=cams_global&timezone=UTC",
+  "request_sha256": "f08c5c575a51339266d28ba5ab777c7cf3a712c790c5d28c10504c89de406e10",
+  "path": "forecast/cams/kolkata/2025-06-30_2025-12-31.json",
+  "sha256": "582d653a5f45cca50c4d0efe4b0f3a71b9a2239f973b90302bbd11988ca73986",
+  "size_bytes": 151352,
+  "retrieved_at": "2026-10-10T12:28:01.182724+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "kolkata",
+    "domain": "cams_global",
+    "purpose": "Actual evaluation-period issue-vintage availability audit",
+    "lead_days": [
+      2,
+      3,
+      4
+    ]
+  }
+}

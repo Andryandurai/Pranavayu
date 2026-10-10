@@ -1,5 +1,45 @@
 # EnviroInsights-India
 
+Phase 4 forecasting commands run from `D:\EnviroInsights-India` in the web
+container. Forecasts are daily city PM2.5, issued at end-of-day IST for t+1–t+3.
+They explicitly use replay mode until an OpenAQ key and fresh complete-day
+observations are available. Bengaluru uses its seven-site fixed panel.
+
+```powershell
+.\scripts\dev.ps1 up
+.\scripts\dev.ps1 migrate
+.\scripts\dev.ps1 manage fetch_historical_forecasts
+.\scripts\dev.ps1 manage train_forecasters
+.\scripts\dev.ps1 manage evaluate_forecasters
+.\scripts\dev.ps1 manage issue_forecasts
+.\scripts\dev.ps1 manage issue_forecasts --replay-date 2025-12-31
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+Read the frozen [forecast protocol](docs/results/PHASE4_PROTOCOL.md) and
+[Delhi/Pune bias investigation](docs/results/PHASE4_BIAS.md). After training,
+`export_phase4_report --run <id>` exports `docs/results/PHASE4.md` and actual
+figures/tables under `data/results/<id>/`. Evaluation scores come from saved
+monthly rolling predictions, with observed-weather perfect-prognosis kept separate.
+Forecast versions and predictions reference their AnalysisRun and MLflow run.
+The MLflow service is available at `http://localhost:5000`; SQLite metadata and
+artifacts persist in `data/mlflow/` on D: and are ignored by Git.
+
+Read-only endpoints are `/api/forecast/<city>/latest/`,
+`/api/forecast/<city>/history/?start=YYYY-MM-DD&end=YYYY-MM-DD` (inclusive target
+dates, at most 366 days), and `/api/forecast/<city>/evaluation/`. Latest/history
+include replay/live mode, three horizons, bounds, PM2.5 category, model version
+and top five conditional SHAP drivers. The category is the PM2.5 subindex,
+not overall CPCB AQI. Evaluation never serves perfect-prognosis as headline skill.
+
+The public daily weather task caches forecasts before day-end IST. Daily issuance
+uses the latest completed day; absent a key or fresh issue-time readings, it
+replays the latest archived day. Add `OPENAQ_API_KEY` only to ignored `.env`
+and recreate containers to enable keyed ingestion. Historical publication delays,
+missing forecast BLH, station changes and seasonal interval calibration remain
+limitations; see the protocol and generated report before using predictions.
+
 The active Windows checkout is `D:\EnviroInsights-India`. Docker's registered WSL
 VM is at `D:\DockerDesktopData\main`, and its image/container/volume data disk is
 at `D:\DockerDesktopData\disk`. Compatibility junctions at the former Docker

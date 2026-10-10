@@ -1,0 +1,19 @@
+{
+  "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=19.076&longitude=72.8777&start_date=2025-06-30&end_date=2025-12-31&hourly=pm2_5_previous_day2%2Cpm2_5_previous_day3%2Cpm2_5_previous_day4&domains=cams_global&timezone=UTC",
+  "request_sha256": "ce7039ea13ab5f0c8c227e68251ff665ab8b5f9ea4a24a7b9b09b128ae25a3ec",
+  "path": "forecast/cams/mumbai/2025-06-30_2025-12-31.json",
+  "sha256": "d8f221d444e8978b9fd6c3dbac1cc450ed097a97a57d53e67e3713394faca8a7",
+  "size_bytes": 151350,
+  "retrieved_at": "2026-10-10T12:28:02.225018+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "mumbai",
+    "domain": "cams_global",
+    "purpose": "Actual evaluation-period issue-vintage availability audit",
+    "lead_days": [
+      2,
+      3,
+      4
+    ]
+  }
+}

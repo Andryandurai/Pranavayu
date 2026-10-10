@@ -1,0 +1,19 @@
+{
+  "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=13.0827&longitude=80.2707&start_date=2025-06-30&end_date=2025-12-31&hourly=pm2_5_previous_day2%2Cpm2_5_previous_day3%2Cpm2_5_previous_day4&domains=cams_global&timezone=UTC",
+  "request_sha256": "3c2dfa7d629433ee43fd6de70b7422fd414b4ad8b0f2bee170b798e528d82188",
+  "path": "forecast/cams/chennai/2025-06-30_2025-12-31.json",
+  "sha256": "8c54354ad23a53164df515586cb7fd29a5f2e17a48fd9e998237e082a964547c",
+  "size_bytes": 151351,
+  "retrieved_at": "2026-10-10T12:27:58.327978+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "chennai",
+    "domain": "cams_global",
+    "purpose": "Actual evaluation-period issue-vintage availability audit",
+    "lead_days": [
+      2,
+      3,
+      4
+    ]
+  }
+}

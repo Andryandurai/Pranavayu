@@ -37,6 +37,10 @@ def code_metadata():
         "matplotlib",
         "shap",
         "statsmodels",
+        "lightgbm",
+        "mlflow",
+        "torch",
+        "holidays",
     ]
     return commit, {
         "git_state": "versioned" if commit else "no Git repository; commit unavailable",
