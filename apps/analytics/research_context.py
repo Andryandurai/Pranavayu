@@ -6,10 +6,11 @@ import re
 from pathlib import Path
 
 import pandas as pd
+from django.db import connection
 
 from apps.warehouse.models import City
 
-from .aggregation import analysis_dataframe, build_tables
+from .aggregation import aggregate_daily, analysis_dataframe, build_tables
 from .lifecycle import analysis_run
 from .models import CityCoverage, CitySeries
 
@@ -119,3 +120,51 @@ def pm10_context(run_id, city):
             )
         )
     return records
+
+
+def panel_pm10_context(city, diagnostic_run):
+    panels = json.loads(Path(f"data/results/{diagnostic_run}/fixed_panels.json").read_text())
+    sites = next(row["common_sites"] for row in panels if row["city"] == city.slug)
+    if not sites:
+        return dict(status="unavailable", reason="No matched physical station IDs")
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """WITH station_hours AS (
+          SELECT r.station_id,r.observed_at,avg(r.value) AS value
+          FROM warehouse_reading r JOIN warehouse_station s ON s.id=r.station_id
+          LEFT JOIN analytics_stationeligibility e ON e.station_id=s.id
+          WHERE s.city_id=%s AND s.external_id=ANY(%s)
+          AND r.pollutant_id=(SELECT id FROM warehouse_pollutant WHERE code='pm10')
+          AND r.observed_at>='2023-12-31 18:30+00' AND r.observed_at<'2025-12-31 18:30+00'
+          AND r.quality_flag='ok' AND r.value IS NOT NULL
+          AND coalesce(e.excluded_from_city,false)=false
+          GROUP BY r.station_id,r.observed_at)
+          SELECT observed_at,avg(value) FROM station_hours
+          GROUP BY observed_at ORDER BY observed_at""",
+            [city.pk, sites],
+        )
+        rows = cursor.fetchall()
+    frame = pd.DataFrame(rows, columns=["observed_at", "value"])
+    if not frame.empty:
+        frame["observed_at"] = pd.to_datetime(frame.observed_at, utc=True)
+    daily = aggregate_daily(
+        frame, pd.Timestamp("2024-01-01").date(), pd.Timestamp("2025-12-31").date()
+    )
+    records = []
+    for year, group in daily.groupby(pd.to_datetime(daily.date).dt.year):
+        valid = group.value.dropna()
+        records.append(
+            dict(
+                year=int(year),
+                status="recent context only" if len(valid) else "unavailable",
+                mean_pm10=float(valid.mean()) if len(valid) else None,
+                valid_days=len(valid),
+                eligible=bool(
+                    len(valid) / len(group) >= 0.75
+                    and group.valid_count.sum() / (24 * len(group)) >= 0.75
+                ),
+                baseline_pm10_available=False,
+                is_official_compliance_result=False,
+            )
+        )
+    return dict(status="observed context", station_ids=sites, records=records)

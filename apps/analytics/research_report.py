@@ -49,24 +49,63 @@ def export_research_report(run_id):
         [],
         [],
     )
+    seasonal, paired_network, pm10_network = [], [], []
     images = []
     for city in protocol["eligible_cities"]:
         item = results[city]
         child = children[city]
+        seasonal.extend(dict(city=city, **r) for r in item.get("seasonal_validation", []))
+        for row in item.get("recent_pm10_network", {}).get("fixed_panel", {}).get("records", []):
+            pm10_network.append(dict(city=city, cohort="fixed_panel", **row))
+        pm10_network.extend(
+            dict(city=city, cohort="all_stations", **row) for row in item["recent_pm10"]
+        )
+        paired = item.get("network_matched_comparisons", {})
+        for cohort, comparisons in paired.get("cohorts", {}).items():
+            for name, comparison in comparisons.items():
+                if comparison["status"] == "descriptive":
+                    for kind in ["raw", "normalised"]:
+                        paired_network.append(
+                            dict(
+                                city=city,
+                                cohort=cohort,
+                                comparison=name,
+                                kind=kind,
+                                matched_days=paired["days"],
+                                **comparison[kind],
+                            )
+                        )
         for cohort, result in item["cohorts"].items():
             if "nested_validation" not in result:
-                metrics.append(
-                    dict(
-                        city=city,
-                        cohort=cohort,
-                        period="unavailable",
-                        scope=result["scope"],
-                        run7_r2=None,
-                        nested_r2=None,
-                        weather_only_r2=None,
-                        gam_weather_r2=None,
+                rejected_gate = result.get("readiness_run7")
+                rejected_periods = rejected_gate["periods"] if rejected_gate else []
+                if rejected_periods:
+                    for rejected in rejected_periods:
+                        metrics.append(
+                            dict(
+                                city=city,
+                                cohort=cohort,
+                                period=rejected["period"],
+                                scope=result["scope"],
+                                run7_r2=rejected["r2"],
+                                nested_r2=None,
+                                weather_only_r2=None,
+                                gam_weather_r2=None,
+                            )
+                        )
+                if not rejected_periods:
+                    metrics.append(
+                        dict(
+                            city=city,
+                            cohort=cohort,
+                            period="unavailable",
+                            scope=result["scope"],
+                            run7_r2=None,
+                            nested_r2=None,
+                            weather_only_r2=None,
+                            gam_weather_r2=None,
+                        )
                     )
-                )
                 for row in result.get("annual", []):
                     network.append(dict(city=city, cohort=cohort, **row))
                 continue
@@ -131,7 +170,14 @@ def export_research_report(run_id):
                     status=proxy["status"],
                     raw=change_cell(proxy, "raw"),
                     normalised=change_cell(proxy, "normalised"),
-                    reason=proxy.get("reason", ""),
+                    reason=(
+                        proxy.get("reason", "")
+                        + (
+                            f"; available years {proxy['available_years']}"
+                            if "available_years" in proxy
+                            else ""
+                        )
+                    ),
                     refits=result["refits"],
                 )
             )
@@ -165,6 +211,9 @@ def export_research_report(run_id):
             gam_agreement=gam,
             comparisons=changes,
             forecast_support=forecast,
+            seasonal_validation=seasonal,
+            paired_network=paired_network,
+            pm10_network=pm10_network,
         ).items()
     }
     for name, frame in frames.items():
@@ -259,6 +308,43 @@ def export_research_report(run_id):
         [
             [r[k] for k in ["city", "cohort", "period", "season", "top3", "sampled_days"]]
             for r in drivers
+        ],
+    )
+    seasonal_table = table(
+        ["City", "Cohort", "Era", "Season", "Model", "Daily R²", "Days"],
+        [
+            [r["city"], r["cohort"], r["period"], r["season"], r["model"], fmt(r["r2"], 4), r["n"]]
+            for r in seasonal
+            if r["cohort"] == results[r["city"]]["main_cohort"]
+        ],
+    )
+    paired_table = table(
+        ["City", "Cohort", "Comparison", "Series", "Matched days", "Change %, 95% CI"],
+        [
+            [
+                r["city"],
+                r["cohort"],
+                r["comparison"],
+                r["kind"],
+                r["matched_days"],
+                f"{fmt(r['percent_change'], 4)} [{fmt(r['ci95_percent'][0], 4)}, "
+                f"{fmt(r['ci95_percent'][1], 4)}]",
+            ]
+            for r in paired_network
+        ],
+    )
+    pm10_network_table = table(
+        ["City", "Cohort", "Year", "PM10 mean", "Valid days", "Eligible"],
+        [
+            [
+                r["city"],
+                r["cohort"],
+                r["year"],
+                fmt(r.get("mean_pm10"), 4),
+                r.get("valid_days", "—"),
+                r.get("eligible", "—"),
+            ]
+            for r in pm10_network
         ],
     )
     proxy_table = table(
@@ -480,7 +566,10 @@ rules. Fold-specific designs, held weeks, support and scores are retained in CSV
 ### Normalisation and uncertainty
 
 Both eras use the SAME pooled joint observed reference weather from 2015–2019 and
-2024–2025, including weather without concentration targets. Local trend is held
+2024–2025, including weather without concentration targets. Day-of-year, hour and
+weekday are resampled jointly with weather; only explicit local trend and period
+indicator are held. This adjusts seasonal/calendar information as well as weather,
+and cannot isolate a purely physical meteorological change. Local trend is held
 within each era and never bridges 2020–2023. Each cohort uses 20 actual forest refits
 on whole observed IST weeks resampled with replacement within year/era (boundary
 weeks contain their observed year fragments), with fixed structure and seeds.
@@ -511,10 +600,10 @@ over 12 angular sectors and corrects circular closure when all sectors have supp
 Empty/constant bins stay unestimated. Gaussian statsmodels GAMs use cubic B-splines,
 df=6 and alpha=10, training-only scaling and knots with a fixed five-standard-deviation
 support extension. No penalty tuning follows results. Their weather-only daily CV
-uses a flat boundary extension for predictors beyond this support, preserving
+uses the same outer weeks and a flat boundary extension beyond this support, preserving
 the actual observations; per-feature clipping counts are recorded. Run 11's Delhi
 GAM failed on 115.4 mm held-out daily rain before this implementation guard.
-uses the same outer weeks. GAM/forest ALE shape agreement is a rank correlation on
+GAM/forest ALE shape agreement is a rank correlation on
 shared supported ranges; an hourly forest versus daily GAM is a frequency-different
 cross-check. Calendar omission and interactions can explain disagreements.
 
@@ -550,6 +639,11 @@ differences are not a balanced regional comparison.
 
 {driver_table}
 
+{seasonal_table}
+
+Seasonal R² uses all supported outer-fold days rather than the SHAP subsample.
+It can be negative within a low-variance season even when annual skill is high.
+
 Top-three magnitudes are daily mean absolute SHAP in µg/m³, not percentages of
 variance. The full per-feature signed/magnitude table and seasonal ALE curves are
 under each child run. High SHAP magnitude does not establish an independent driver.
@@ -573,6 +667,8 @@ Recent PM10 is context only. Missing historical PM10, fiscal/calendar mismatch a
 station/source changes prevent an official compliance comparison.
 
 {pm10_table}
+
+{pm10_network_table}
 
 ### Within-era monthly trends
 
@@ -600,6 +696,12 @@ stored timestamp repair. It is a network-composition sensitivity, not a correcte
 unit conversion. Legacy integer-heavy station exports and unverified calibration
 history remain source limitations. Full annual means, maxima and exceedances are
 in `network_annual.csv`; a panel with inadequate coverage is explicitly descriptive.
+
+{paired_table}
+
+The paired-network sensitivity additionally intersects the two cohorts' supported
+OOF dates and uses those same dates in both raw and normalised comparisons.
+This separates a changing network from unequal comparison-date support.
 
 {chr(10).join(images)}
 

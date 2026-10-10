@@ -112,6 +112,8 @@ class GAMRegressor:
     def fit(self, x, y):
         import statsmodels.api as sm
         from statsmodels.gam.api import BSplines, GLMGam
+        from statsmodels.gam.generalized_additive_model import penalized_wls
+        from statsmodels.tools.sm_exceptions import PerfectSeparationError
 
         array = np.asarray(x, dtype=float)
         self.usable = np.ptp(array, axis=0) > 1e-8
@@ -133,32 +135,52 @@ class GAMRegressor:
         smoother = BSplines(
             array, df=[6] * array.shape[1], degree=[3] * array.shape[1], knot_kwds=bounds
         )
-        self.result = GLMGam(
+        gam = GLMGam(
             y,
             exog=np.ones((len(y), 1)),
             smoother=smoother,
             alpha=[10] * array.shape[1],
             family=sm.families.Gaussian(),
-        ).fit()
+        )
+        self.exact_linear_params = None
+        self.smoother = smoother
+        try:
+            self.result = gam.fit()
+        except PerfectSeparationError:
+            # Gaussian identity-link PIRLS is this same penalised least-squares
+            # system. statsmodels misclassifies an exact Gaussian fit as separation.
+            self.exact_linear_params = penalized_wls(
+                np.asarray(y), gam.exog, gam.penal.penalty_matrix(alpha=gam.alpha), np.ones(len(y))
+            ).params
+            self.result = None
         return self
 
     def predict(self, x):
         array = np.asarray(x, dtype=float)
-        if self.result is None:
+        if self.result is None and not self.usable.any():
             return np.repeat(self.constant, len(array))
         array = (array[:, self.usable] - self.mean) / self.scale
-        outside = (array < self.bounds[:, 0]) | (array > self.bounds[:, 1])
+        bounds = getattr(self, "bounds", None)
+        if bounds is None:
+            bounds = np.asarray(
+                [[s.knots[0], s.knots[-1]] for s in self.result.model.smoother.smoothers]
+            )
+        columns = getattr(self, "columns", list(range(len(self.usable))))
+        outside = (array < bounds[:, 0]) | (array > bounds[:, 1])
         self.prediction_support = dict(
             clipped_rows=int(outside.any(axis=1).sum()),
             clipped_features={
-                str(self.columns[i]): int(count)
+                str(columns[i]): int(count)
                 for i, count in zip(np.flatnonzero(self.usable), outside.sum(axis=0), strict=True)
                 if count
             },
             rule="Flat extension outside fixed training spline support; "
             "observed targets and stored weather unchanged",
         )
-        array = np.clip(array, self.bounds[:, 0], self.bounds[:, 1])
+        array = np.clip(array, bounds[:, 0], bounds[:, 1])
+        if getattr(self, "exact_linear_params", None) is not None:
+            basis = np.column_stack([np.ones(len(array)), self.smoother.transform(array)])
+            return basis @ self.exact_linear_params
         return self.result.predict(exog=np.ones((len(array), 1)), exog_smooth=array)
 
 

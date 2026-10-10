@@ -15,9 +15,10 @@ from .aggregation import aggregate_daily, aggregate_monthly
 from .lifecycle import analysis_run
 from .model_diagnostics import period_labels, readiness
 from .models import AnalysisRun, CityCoverage, CityMetric
-from .research_context import pm10_context
+from .research_context import panel_pm10_context, pm10_context
 from .research_explain import explain_models
 from .research_models import nested_validation, week_partition
+from .research_network import matched_network_comparisons, seasonal_validation
 from .research_stats import trend_test
 from .research_uncertainty import bootstrap_normalisations, comparison_intervals
 from .revised_deweather import eligible_frame, panel_coverage
@@ -266,6 +267,14 @@ def publish_research(child_ids, diagnostic_run, stored_run, protocol):
         for child in children:
             item = child.results
             city = City.objects.get(slug=item["city"])
+            item["network_matched_comparisons"] = matched_network_comparisons(
+                child, protocol["seed"]
+            )
+            item["recent_pm10_network"] = dict(
+                all_stations=item["recent_pm10"],
+                fixed_panel=panel_pm10_context(city, diagnostic_run),
+            )
+            item["seasonal_validation"] = seasonal_validation(child)
             results[city.slug] = item
             for name, payload in [
                 ("rq2", item),
@@ -291,6 +300,8 @@ def publish_research(child_ids, diagnostic_run, stored_run, protocol):
                             for key, value in item["cohorts"].items()
                         },
                         recent_pm10=item["recent_pm10"],
+                        recent_pm10_network=item["recent_pm10_network"],
+                        network_matched_comparisons=item["network_matched_comparisons"],
                     ),
                 ),
             ]:

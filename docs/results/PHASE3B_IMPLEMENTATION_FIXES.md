@@ -24,6 +24,11 @@ penalties to improve reported scores.
 - Pune's successful Run 10 preceded this guard and encountered no spline-domain
   failure. Its results remain versioned with its original code hash. Any subsequent
   run records the new guard's support diagnostics.
+- The new boundary regression fixture exposed statsmodels' perfect-separation
+  exception on an exact Gaussian linear fit. Gaussian identity-link fitting now
+  falls back only for that exception to the same penalised least-squares system
+  used by its PIRLS solver. The unchanged fixture checks the actual boundary rule;
+  model penalties and nondegenerate fits are unchanged.
 
 The exploratory GAM cross-check must not be treated as independently calibrated
 for weather extremes beyond the observed training support.
