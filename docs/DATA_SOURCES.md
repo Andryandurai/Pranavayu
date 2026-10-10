@@ -32,7 +32,8 @@ Inputs live in `data/raw/`. Only adjacent `*.manifest.json` files are eligible
 for version control. Manifests record URL, retrieval time, bytes, SHA256,
 request digest and provider metadata. Changed requests/responses retain older
 inputs under distinct filenames. `RawAsset` records the source/download run.
-There is currently no Git repository: eligible files are prepared, not committed.
+The active checkout is versioned in Git. Downloaded bodies remain ignored;
+only their manifests and implementation/documentation are tracked.
 
 | Source | Account | Licence / attribution | Command |
 | --- | --- | --- | --- |
@@ -121,9 +122,11 @@ Recent station CSVs contain 15-minute concentrations.
 Aggregate distinct 00/15/30/45 minute slots, requiring at least three nonnegative
 finite values. Otherwise retain a missing/negative hour. Duplicates do not meet
 the threshold. Raw hourly value is the mean of reported finite slots; original
-quarters remain in the raw input. No absent hours are filled. Recent timestamps
-explicitly say `+0000`; preserve that offset instead of reinterpreting it as
-naive IST. Confirm the provider convention before cross-source comparisons.
+quarters remain in the raw input. No absent hours are filled. The cached recent
+timestamps explicitly say `+0000`, but independent same-site comparisons verified
+that these particular exports contain IST wall clocks. Phase 3B's idempotent
+canonical-clock repair converts those stored keys to UTC once. Original file
+labels remain unchanged; arbitrary offset-labelled inputs are not reinterpreted.
 
 ## Weather
 
@@ -245,9 +248,9 @@ before exposure research; it is not a census or an observed headcount.
 
 Provider weather nulls remain NULL. BLH is missing for January–June 2024 across
 all cities, plus the final weather day; complete-case normalisation omits these
-targets. Concentration gaps in 2020–2023/2026 are not filled. OpenCity's explicit
-+0000 timestamps remain the stored convention and need independent verification
-before fine-scale cross-provider analyses.
+targets. Concentration gaps in 2020–2023/2026 are not filled. The earlier OpenCity
+clock concern was resolved by Phase 3A2's independent same-site verification and
+Phase 3B's canonical stored-clock repair, described below.
 
 Official central-government calendar links for all seven Diwali dates, the
 Grange/rmweather method, actual flag audit and model results are retained in
@@ -269,9 +272,12 @@ lineage is not established for every OpenCity export; the numeric/time matches
 provide the independent evidence. This supersedes the unresolved-clock limitation
 above for these cached exports. It does not justify changing arbitrary UTC data.
 
-The correction lives in versioned analytical timestamps. Raw source observations
-keep their original labels and provenance; directly joining them to weather
-without that correction is invalid. Open-Meteo requests/returned offsets remain
-UTC. Returned ERA5 grid coordinates are audited alongside requested city points.
+Phase 3A2 first applied the correction in versioned analytical timestamps.
+Phase 3B subsequently repaired 14,787,584 warehouse timestamp keys once in
+IngestionRun 87, retaining measurement values, flags and original ingestion links.
+Canonical warehouse timestamps can now be joined directly to UTC weather;
+applying the shift again is invalid. Cached source files retain their original
+labels and hashes. Open-Meteo requests/returned offsets remain UTC. Returned ERA5
+grid coordinates are audited alongside requested city points.
 Hyderabad's published integer ranges/repeated values and city-versus-station
 exceedances are documented without inventing an instrument or uncapping correction.
