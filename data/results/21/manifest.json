@@ -1,0 +1,4931 @@
+{
+  "run": 21,
+  "name": "phase4",
+  "status": "success",
+  "started_at": "2026-10-10T12:44:38.707517+00:00",
+  "finished_at": "2026-10-10T13:55:33.406048+00:00",
+  "data_window": [
+    "2024-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "6b3f4b028d0b352b0f29763e8833b4372497f1b1",
+  "parameters": {
+    "seed": 20261010,
+    "baseline": 19,
+    "versions": {
+      "shap": "0.52.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "torch": "2.14.1+cpu",
+      "Django": "5.2.18",
+      "mlflow": "3.17.0",
+      "pandas": "2.3.3",
+      "holidays": "0.106",
+      "lightgbm": "4.7.0",
+      "matplotlib": "3.11.2",
+      "statsmodels": "0.15.0",
+      "scikit-learn": "1.9.1"
+    },
+    "git_state": "versioned",
+    "code_sha256": "e8d5c4cdfff215a1a1e3388e173f28da45b9195c9fe186c6b79d6fa451c7c4cb",
+    "threadpools": [
+      {
+        "prefix": "libscipy_openblas",
+        "version": "0.3.31.dev",
+        "filepath": "/usr/local/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-5f890258.so",
+        "user_api": "blas",
+        "num_threads": 1,
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "threading_layer": "pthreads"
+      },
+      {
+        "prefix": "libgomp",
+        "version": null,
+        "filepath": "/usr/local/lib/python3.12/site-packages/scikit_learn.libs/libgomp-e985bcbb.so.1.0.0",
+        "user_api": "openmp",
+        "num_threads": 1,
+        "internal_api": "openmp"
+      },
+      {
+        "prefix": "libgomp",
+        "version": null,
+        "filepath": "/usr/local/lib/python3.12/site-packages/torch/lib/libgomp.so.1",
+        "user_api": "openmp",
+        "num_threads": 1,
+        "internal_api": "openmp"
+      },
+      {
+        "prefix": "libscipy_openblas",
+        "version": "0.3.34.106.0",
+        "filepath": "/usr/local/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+        "user_api": "blas",
+        "num_threads": 1,
+        "architecture": "Haswell",
+        "internal_api": "openblas",
+        "threading_layer": "pthreads"
+      }
+    ],
+    "report_export": {
+      "at": "2026-10-10T13:58:50.339095+00:00",
+      "git_commit": "dbf2c58e54e5320da2a3f3061476e4415b9dc9fb",
+      "git_state": "versioned",
+      "code_sha256": "73a922c03383b3da78eb3396ee963b831f1acf189bc75e80c2afab434904fa05",
+      "versions": {
+        "Django": "5.2.18",
+        "numpy": "2.5.3",
+        "pandas": "2.3.3",
+        "scikit-learn": "1.9.1",
+        "scipy": "1.18.1",
+        "matplotlib": "3.11.2",
+        "shap": "0.52.0",
+        "statsmodels": "0.15.0",
+        "lightgbm": "4.7.0",
+        "mlflow": "3.17.0",
+        "torch": "2.14.1+cpu",
+        "holidays": "0.106"
+      }
+    },
+    "protocol_sha256": "395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c",
+    "diagnostic_data_run": 8,
+    "cpu_thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    }
+  },
+  "files": [
+    {
+      "path": "PHASE4.md",
+      "bytes": 24352,
+      "sha256": "709ae8de9c17bc64c5c6da14c934269e94a6c84fbbc54a4823cdf06e2a8531ce"
+    },
+    {
+      "path": "archive-probes.json",
+      "bytes": 2041,
+      "sha256": "cbed781f50ea87320031ecb97278b685475e1c42fb72d74ef4ddbe01354423d2"
+    },
+    {
+      "path": "archived_weather_coverage.csv",
+      "bytes": 1058,
+      "sha256": "eadf857870ec748a338ff5383f5cbafaab1e0d27692bcdd5f742a8c1281aa111"
+    },
+    {
+      "path": "baseline-tests.json",
+      "bytes": 1748,
+      "sha256": "f8f3a8b94984a97edf809bf09b34f93e843523746b9c8976054a416473c65703"
+    },
+    {
+      "path": "bengaluru_forecast_evaluation.png",
+      "bytes": 330859,
+      "sha256": "e02e29df41cf448237a672853aa2fa3bb86c564cf37ab68e317422ea39dfaf0f"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-06_explanations.json",
+      "bytes": 943,
+      "sha256": "9f7360f8376839cf19d1834363a3bac89f28725155738e77fc7540f5bf869d10"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-06_model.joblib",
+      "bytes": 636092,
+      "sha256": "7d8337b8dfa4ca1eb0b78d30b99295da9d222eadf56e10258d2477ee89e68e6a"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-06_predictions.csv",
+      "bytes": 1412,
+      "sha256": "77cc466cbecd29b827447537722c1690916ec4501cdd4df80fa1793518b89831"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-06_selection.json",
+      "bytes": 1666,
+      "sha256": "9e36d0085a579d9473925920a700db95bcec5bd0f7abb4d027f749d8b7053709"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-07_explanations.json",
+      "bytes": 29049,
+      "sha256": "022281520f5bbfd009c6924b6fbc215e7ffad76063f15e9701b176f4adde9ade"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-07_model.joblib",
+      "bytes": 631948,
+      "sha256": "1371653c3608afd6beb3f8856567038d1566f56e2bfa81d9c085cc3167a69d60"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-07_predictions.csv",
+      "bytes": 25722,
+      "sha256": "f0fd1c9da66eef2ff224d66ae09ab207b874772004aa6c527a25388ee94e381f"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-07_selection.json",
+      "bytes": 1666,
+      "sha256": "e506fb65fe209889de4c9f39530d2ee4b42c53e10de9bed16a22f3f82041ae20"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-08_explanations.json",
+      "bytes": 29020,
+      "sha256": "519e91ee062b63d544e96e5426a4cd413b46140ec851711c1cdb9bd1ffc2ccf4"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-08_model.joblib",
+      "bytes": 702572,
+      "sha256": "efe4d2f57f2d90a8520a070ebb5a52d3e398b2b0e328183f78f33de73da8e95f"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27136,
+      "sha256": "5c9d7baf2b6d962c401d07225f109daedef7cf69368954ca27bdcf4e518bd906"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-08_selection.json",
+      "bytes": 1671,
+      "sha256": "e49b2daefeca393a474ac41835d2dd6163236de089145dbf514db197b7568902"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-09_explanations.json",
+      "bytes": 28099,
+      "sha256": "7a3c984b9bcaf2d16e51c84669c1067e44a46dc0d6d20a037c6ab4df1f1399a4"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-09_model.joblib",
+      "bytes": 585708,
+      "sha256": "789198b48b823c46c623aa813ab2bf3633ebe5319369528c76cb674fbcc5ba6b"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-09_predictions.csv",
+      "bytes": 24773,
+      "sha256": "f8b67f55ec5f58950371563e3d4c1472825ce8fadce89377706a4f9c0ea245cf"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-09_selection.json",
+      "bytes": 1665,
+      "sha256": "a79538fe4285458d2a5d24e1d795d7673bba07a976b798527cdb89cbbc9cb56e"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-10_explanations.json",
+      "bytes": 28812,
+      "sha256": "9a445a1ffafc2832cf620c5985a1df7c4f08807e93491d5a42ccf10d4b55c74a"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-10_model.joblib",
+      "bytes": 1990608,
+      "sha256": "bcfce9728dfc7936e1aaed2c993e4fba8ce1fd68f84b221f0141aea090fdb161"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27328,
+      "sha256": "44564ba37d365faabf228626eff627f657fc468253e234cb1a20cb7880e310fc"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-10_selection.json",
+      "bytes": 1669,
+      "sha256": "9d994d5f465670815a42cb5f12746c57144c4a4db57500312ad2422becfbe763"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-11_explanations.json",
+      "bytes": 25229,
+      "sha256": "4285bb237aacd57c5ab2ae418a940dd0939a7b1c55d03b77be3cc0e26e43bc5f"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-11_model.joblib",
+      "bytes": 572599,
+      "sha256": "96d2c894b8d0311a7d5f2e05d2d3e76c264001ba3432e3f9d9994185416dd0c2"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26265,
+      "sha256": "76c00d6ab29bf3caeae78f1edc4d3bb4bd1c8eee04da0401dc43186b88695405"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-11_selection.json",
+      "bytes": 1678,
+      "sha256": "26a240ff903af1b7092b9073a19057bd2e2af587db8d5d1700dd9645c25deb30"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-12_explanations.json",
+      "bytes": 25244,
+      "sha256": "ea719d88ba5e4875129b2c6fb85014548c255f19005bae483da2bb4ac7d3d4a4"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-12_model.joblib",
+      "bytes": 590279,
+      "sha256": "09072da764756b117aba9b8e72bad93f2c39e6a1718cdab042282cf0234cf336"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-12_predictions.csv",
+      "bytes": 26246,
+      "sha256": "14e268efbac1192465e2286db9a11961033df02a72f124d11240f732891bb8c4"
+    },
+    {
+      "path": "bengaluru_h1_archived_forecast_2025-12_selection.json",
+      "bytes": 1676,
+      "sha256": "83da54d87c3acd1f2f9aeedaf9b3eac345bd078da7d732650cac3a7f28f8ac4e"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 1430,
+      "sha256": "ceb301a43a8942c1e8638f94d682326f1022b5ae3c2f14fa4c5324326d42ab46"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1667,
+      "sha256": "53fbe40a51997fcd3c9f66a7bf00960b62cdc912dae16a45e1855614266621a9"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 26130,
+      "sha256": "44955b14fc8ba7d839aea2fe234663d6a6b0ca9f458add58dd76f27ce7b4c89d"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1664,
+      "sha256": "b27ef7bc3b397cbffa7bda47174f0f182680696cab8b48dd18da6fc08ca92050"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 25940,
+      "sha256": "e5667a652cb978fd30dde70e38a13b0367b916d4364b5ed5195f920d024a72b5"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1667,
+      "sha256": "1e852d17bfdc2290bd6b92bcdf3d6a31c4897698057271674c1eb5fb4aabb1f2"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25308,
+      "sha256": "cb890e6d9d6994280960279863e9a6cbe8f387b623829978fc8e4c11341843cc"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1668,
+      "sha256": "798727b7893eec075585ee6fe890f683aeff63b807d40774c259075d00723d9c"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27530,
+      "sha256": "1070f293e1802cdc101c834a410519563a1bd9bffd9fb2a1b150f471698890ef"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1674,
+      "sha256": "d4bbaeb45cf79cdaa9b6c8be7b2714f6902cba3a4ebe15807d846d1b006ce967"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26538,
+      "sha256": "c5d89e4ddcd701c833ab37a88cfca6d15537bfbe8ab95b15a0dd6aff215ed0bc"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1676,
+      "sha256": "200b556338eafe04d35d8740e3709f7a891d9e38064bcdc4b5899da39251b556"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 26583,
+      "sha256": "dd5d3df6c3051603dc1f8afb694fcbe415efe54191b958908d606b3aa435f237"
+    },
+    {
+      "path": "bengaluru_h1_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1676,
+      "sha256": "2fd83b201bac9e1fb19f8f30dc0c696a626b9686ba9a32372adf8eedc8b47ff9"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-06_explanations.json",
+      "bytes": 1830,
+      "sha256": "d5ebec0b24d7cd425f0291a4e89c61e908177732892ea8bbbcfe64849e5673d6"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-06_model.joblib",
+      "bytes": 1789200,
+      "sha256": "48662fe7b747fd719b5cf78d21e9e4d1e5c8947e87e6c7bc4f47ef8d67bf58c6"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-06_predictions.csv",
+      "bytes": 2330,
+      "sha256": "6b7c3611c17d19e7eef7f05615fe961d73266d45a22c3900c6aff91b5ad4a65f"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-06_selection.json",
+      "bytes": 1668,
+      "sha256": "28451eb647d60c3ba8565a198a5663fd7f4c11c312bd20fe8fbe23121ae1b2fc"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-07_explanations.json",
+      "bytes": 28779,
+      "sha256": "e39b0a2c1bcc4416d5a3da67df6950f83ff38e30afb8801e5a193634acb8d4c5"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-07_model.joblib",
+      "bytes": 1735072,
+      "sha256": "3539642db57840cc36c24718b93699bd246bf668aa44b1425af0f180bb481221"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27224,
+      "sha256": "c8483e71714da7e99dc120fa7cda8f696f1d497ae7582c42de370a484f9136af"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-07_selection.json",
+      "bytes": 1668,
+      "sha256": "2ca9c11dd575b895fbc1cf61df3de3e442694412839a514a5eb09ec519fba6c8"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-08_explanations.json",
+      "bytes": 26265,
+      "sha256": "7173acbb74e92483c71236ba9168c4dabfe2ef5ed0d23a3fbd94cdb7ff477427"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-08_model.joblib",
+      "bytes": 552573,
+      "sha256": "dd97412a4a69b5d6f900bd24e94d0ac0b89e4f09c6ef46dd924438cd150fafdb"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27130,
+      "sha256": "f6f3f754ebf312c50d20ac0642e01297b493d195bb7b1e976f37777a81e7db7a"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-08_selection.json",
+      "bytes": 1665,
+      "sha256": "3956ca1ee6b35f92a23a9ec23eeae87f2f468973720f145bbadf20288c5495fd"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-09_explanations.json",
+      "bytes": 27140,
+      "sha256": "eada0c432c1cd3328119cef18e7c1cc781319bd3c98dddee12026f5876252279"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-09_model.joblib",
+      "bytes": 1909680,
+      "sha256": "3d992ca68d905b1f443f42772fac9da8b0c9d9ae5fff5ee8ea5eadf7b78d4546"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26274,
+      "sha256": "233c090760ef0519263456f5ae5d10eebee0f0cefb125e150d37752c0b3137a2"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-09_selection.json",
+      "bytes": 1671,
+      "sha256": "5f3d61aa55e1b048ca7b268c4d79ac5cd8ba3fecdb8cba7a9246e125caf7fab8"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-10_explanations.json",
+      "bytes": 27812,
+      "sha256": "90cfe5665e26bf88f8adebb16561faaf7dad5865baf26280b5d1f36e2618e36b"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-10_model.joblib",
+      "bytes": 2062848,
+      "sha256": "e5db5e892d3ecfac651cfb3ca56d23592c804cb2d234f5e2a221bb8236f0ac1c"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27239,
+      "sha256": "b4ba7636ed7c6be5ba83ee4a1a0b4f5ce7d77c250e6f9972940370ee131f9854"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-10_selection.json",
+      "bytes": 1673,
+      "sha256": "c4e23e48b03a6caece44cb9b4b2142780ba4c7cbd24f07018912aecd1338d2d2"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-11_explanations.json",
+      "bytes": 28312,
+      "sha256": "81ca42d2aa50b142b0f48b946b4c3d0ae5d8062249f2c42126b81937e9539607"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-11_model.joblib",
+      "bytes": 582636,
+      "sha256": "65585b9a46d508bdcf4a1b9b923dd218b54f355794ff75d43df62116389a95c1"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-11_predictions.csv",
+      "bytes": 24855,
+      "sha256": "e1c7ce84ce82b7a9cceb3757031b6b8bc15df4b9a73b1624630ca2926bbfa9a2"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "d290eb5ae1456da9d1a3fd7d668aedf27bbaae0cb17ef82fd185c0f4273c3cf3"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-12_explanations.json",
+      "bytes": 24404,
+      "sha256": "de514535049ddeb147e36e0a9fb1229d529603269a1ba817260d0a2cbefc5d96"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-12_model.joblib",
+      "bytes": 583015,
+      "sha256": "c91e98b3b4435c7f5b93f5d1f2232e1341acfd6775fb3829c9b1663bb99454d5"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-12_predictions.csv",
+      "bytes": 25341,
+      "sha256": "81a3665c7ef088340d3d3563a40096e14afe84f48d4f694a8deb965f20146849"
+    },
+    {
+      "path": "bengaluru_h2_archived_forecast_2025-12_selection.json",
+      "bytes": 1675,
+      "sha256": "082ef0af2996d6ab5da543ddc3373a192fdacdba71defa594d97c20cb0e70c12"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 2240,
+      "sha256": "b60a8373055731e427c521207243e93500d3e9622a8f802bfe4cab9107be0264"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1667,
+      "sha256": "95e7bc2bfdfd9f0fc720db639735d66e476ceefa3aba48e3dc804067a15bb76c"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27572,
+      "sha256": "0c38aee66cec37ab270b65507be85eb8876d067eb439688675a768eaf655fb43"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1669,
+      "sha256": "85787cc1a13579ad38f6f53726dd545613240aacb8bee4f4461126f904682c8d"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27316,
+      "sha256": "45d605939b5b5b8280a4e131e76fadd8b90dddc9f1c138e0c04f5387e1149d59"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1662,
+      "sha256": "168d7ac273fc7ef797073291eebe27ad426545a6431ae022b63d3964f760fb53"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 26785,
+      "sha256": "acb61424bdd4102ec2b83cbae1cb6298a24cd84826a38b1c932a511769a061db"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1672,
+      "sha256": "ceb316f122b4df16d534667ece687be5725e493184c7ebb2a9a43951603cb967"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27550,
+      "sha256": "631c8d67c481af5a0752dbb60675b10ef0ee115494ccd166e32d107879d0f67d"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1672,
+      "sha256": "fe5b14d08561943549fab4774421867ba4e940551dd6adb7ac90286f619ad9d1"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26450,
+      "sha256": "34b192d46e118eb77e38ebea3e479321d8561999654781d02af23c6114673b59"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1671,
+      "sha256": "814694ad40093678f1e0cda37795a44427de7309570516f141d9c1c986aee9d8"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25660,
+      "sha256": "85af73504e509ae5d4caaf1b3defeea09b9af6d8f9c62965d143f6b03149d27f"
+    },
+    {
+      "path": "bengaluru_h2_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1675,
+      "sha256": "f560130b4ff9096ee6604e155bde4595bce633d203f62f4c31e0a8ce48d58c22"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-06_explanations.json",
+      "bytes": 2862,
+      "sha256": "722aae84f282679d7e39501938cb847eab0541e40865564286557337ae98d7ac"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-06_model.joblib",
+      "bytes": 567484,
+      "sha256": "11cbe2e65177afd68acd2be614c8af79c4a583cb8143e7392295dcd225918b08"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-06_predictions.csv",
+      "bytes": 3065,
+      "sha256": "8049f9532e951767053cc66dad76739ba2d142940513d7c0877ff1f5c109a13b"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-06_selection.json",
+      "bytes": 1668,
+      "sha256": "8f8aabf6fd10c81b9a7698cb8a2e8dce70da2548852328e3e8e627b6bb719714"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-07_explanations.json",
+      "bytes": 29357,
+      "sha256": "f541275e34167f2d368af34e16e190b732da9543ca96765af0641c7cdfc2cb06"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-07_model.joblib",
+      "bytes": 628579,
+      "sha256": "8e4a95443011029cae21d5e367bb8044f50ff5e07f050c15d3d4977e80ceb556"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-07_predictions.csv",
+      "bytes": 25739,
+      "sha256": "9f86d7cfb6bd1aa01d2bea398cf36695aab087d1dc82540cdf2d34db466fff4d"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-07_selection.json",
+      "bytes": 1668,
+      "sha256": "993cfe65e418df9f160066c4fcc51283dabffeef8db003b185a46bffe50476a9"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-08_explanations.json",
+      "bytes": 26255,
+      "sha256": "97ab7c2e167f60e7a1ad28813cdb2a6be5cff5c975dda60b8a31bd4975805419"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-08_model.joblib",
+      "bytes": 568301,
+      "sha256": "c4c5d49c898e4693789e5a7c3ec2d1b9c8906c4a2654dc4051634230f660ecff"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27073,
+      "sha256": "cb5dca9b906d8aacc5e4a47d5235182b40d381c5b26b7d2b408b1788eb38e6dd"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-08_selection.json",
+      "bytes": 1664,
+      "sha256": "75f6205d365af0b423e39881b2c1fe22a5843242d59b6f9053e1c6ba8a95d40a"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-09_explanations.json",
+      "bytes": 27148,
+      "sha256": "1a07f510d0406eb24019c30a46ccf9749d5d67cce9d14dbed82fcd6d88c3f260"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-09_model.joblib",
+      "bytes": 1921520,
+      "sha256": "62bde58a72d338eb3b3f0211bf0ffea80186811b50e559872f0c553f8f91edb6"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26364,
+      "sha256": "ebd07ee360a944d000b69e34e8f1c9f6e50e4284d162f7c06f7a32d98edd20a9"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-09_selection.json",
+      "bytes": 1672,
+      "sha256": "db9da6a6be4f9af88e5b8c16b4951bfa98960bb875361fa0a80ffceb8a9eb99e"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-10_explanations.json",
+      "bytes": 27801,
+      "sha256": "d3541e8461192f7ae0796de28861fa255e938090754bcfe02598dfcc60a47f50"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-10_model.joblib",
+      "bytes": 2000528,
+      "sha256": "c79ae8a52fbb409e72445ca7f3564fdf0bb40240f662f3e29fcd0adf1c30a21b"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27194,
+      "sha256": "108fbd29e606a1739ab481a17c591f8a79bc447d7adc46ce0aaf5abfb760013e"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-10_selection.json",
+      "bytes": 1673,
+      "sha256": "237b782e48f18d323138b10cddcd8e43b5660407c278a6a4c3c50c2e8279d422"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-11_explanations.json",
+      "bytes": 25355,
+      "sha256": "2be39b5f475af00b860eba305fcc5a33bdca33588cc48dad3da3877f20e6dcf3"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-11_model.joblib",
+      "bytes": 672525,
+      "sha256": "12a66fe263f91f07098d368ba1b921d34437786c9e851415fc0ad8c7df5c16b6"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26093,
+      "sha256": "458b1f45252cdc5216d4aaf38834f47acff6d8886d9e89463512ad709e591d08"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-11_selection.json",
+      "bytes": 1670,
+      "sha256": "6af1eada9611e261382c9562192ac3c1635cdf88da0fda11d59e764865ea15c8"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-12_explanations.json",
+      "bytes": 23563,
+      "sha256": "ac40ed8cb4518d4f45f8befaa05a7e92a3fd8601f7193a201e60314c05a58742"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-12_model.joblib",
+      "bytes": 677911,
+      "sha256": "b96a75bf5c12ff1ad9f0629dae9c413037dc73e5cd5941e8c04297af4f3f1b3e"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-12_predictions.csv",
+      "bytes": 24514,
+      "sha256": "f9728fd550de5ba87ed9ab26a7ec2113b46f175bc897222a4eb6e6b0db1b66a6"
+    },
+    {
+      "path": "bengaluru_h3_archived_forecast_2025-12_selection.json",
+      "bytes": 1677,
+      "sha256": "01ad3838a0c1a9b3a50e2679d171273080f7fff155a2cf940ce9889bedf14ed8"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 3085,
+      "sha256": "9af1afa5c2c128ce71669ec1d11616ba24cf3fa532702094a03babef3e793c44"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1667,
+      "sha256": "c30bfcd1e2f8744ce35e7624984a4cbffac9570c9162729d551a2cfe2335605f"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27475,
+      "sha256": "da8a25ed8f5c2e13c179a3327af4925cf6fdd8a6e34993b1dc8de49c45b2782e"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1669,
+      "sha256": "35d8b1e855e0d1d045cf7b434aec4360a89ee22aea91fcf8346b95788d7b3846"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27331,
+      "sha256": "ba0040d6da0f702771ad746cc71b81f11b227121370fe3d7a920d08f19d649eb"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1667,
+      "sha256": "91a2445a39b79d8577b3cd72c1cd6eb689c04c6e458d021f85f7379c21646d49"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25354,
+      "sha256": "164338d39b6a37c1a1505fda1aba9824ecf18cae9e9919c900404ac503a23f05"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1672,
+      "sha256": "7d45d9deddbb23461d5e481e2d7b8750dff0718b5dca8c2d027befb6b22c1cd2"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27545,
+      "sha256": "2dd7dd1790a50285e5e788c6f49bca020f887909b20aba32b3cd94afab8b783b"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1671,
+      "sha256": "caa608593402388446fb305fb3d45d0b3638b5d0816d4edf0bec11f435281ab9"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26494,
+      "sha256": "a51ce37afa3a593452d82be30e6c087e92f5f0535ef943b75062acdead4bd6eb"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1678,
+      "sha256": "16ab1c89cbda86da0e3f443c031e05d2094b239950ac17f4462ca30b0f88dcf5"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 24731,
+      "sha256": "3d0c5edfa81e7947c86468d37c46ac85286290ddbc05fdfe3c403ecfb9a639b1"
+    },
+    {
+      "path": "bengaluru_h3_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1674,
+      "sha256": "2be7582b054bb52fe13cea96698a794ff748135ab95b90a2a952f1a86c0ab5b6"
+    },
+    {
+      "path": "cams-vintage-probe.json",
+      "bytes": 1851,
+      "sha256": "f81aa4ab29c947e25e1f8dfaa46cad59af157b9e5d3daf2c7432b280dc9ee02d"
+    },
+    {
+      "path": "chennai_forecast_evaluation.png",
+      "bytes": 339174,
+      "sha256": "91bd4e5752196d53be6e0701734b902405076e17949ebda1d6922e1ae791c13c"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-06_explanations.json",
+      "bytes": 923,
+      "sha256": "78788b5164f88b9848c8d6a8536273e4e6b219c7fe06c5dea2c8c1bd655feb51"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-06_model.joblib",
+      "bytes": 2198862,
+      "sha256": "2ff09eeab7b968969126c629ef3ec947cb070bbcecc6672c8d7fca1c94749c21"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-06_predictions.csv",
+      "bytes": 1432,
+      "sha256": "156e009e8ed2c9187492ae6e8f88f638e35900732d6ca8a2db5beed7a387d56a"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-06_selection.json",
+      "bytes": 1665,
+      "sha256": "b4ce8972392fd285e277b48fcffc07d95ea7d86518f4dce294db1ce2f1c3e0ee"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-07_explanations.json",
+      "bytes": 29153,
+      "sha256": "d1b4b786624c4fb6e60fb74a985459acabee2bd7d1b44bb872fc8972fc164185"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-07_model.joblib",
+      "bytes": 2199838,
+      "sha256": "404f9f40faf566eb4e4d07ee4278c1e5d003972eecf4b85064c87892f39af97f"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27285,
+      "sha256": "683b97f5a684c65142a9fb3c7d0bf817dac983560ef9bacc5a9fdc10fd36dbfd"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-07_selection.json",
+      "bytes": 1668,
+      "sha256": "1932c442ea95aee00ab08e70f07dc0bd5e1a62ffb6577421fad9692286cc4cf6"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-08_explanations.json",
+      "bytes": 26118,
+      "sha256": "d08030b766922976b4325bee3c13fd2fa5ca7f98a841f9d4044424113ae19baa"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-08_model.joblib",
+      "bytes": 546341,
+      "sha256": "9841d32187ecc78d02487ed8176202b6d321aae15b0e879a19e997baa345917a"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27389,
+      "sha256": "8d26b7b22eedfdb03a34d05724ac439a45e448eae2122b98d8ace254f45e8259"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-08_selection.json",
+      "bytes": 1670,
+      "sha256": "93eafd86af4c9056dbe7fbb85970ba81e2ee1c0931b3d8a4e51420f38aab77ab"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-09_explanations.json",
+      "bytes": 27900,
+      "sha256": "f777f9baa3a9864d6303ccfcadae14688be066dc21ff49e8a2bc0bb59103e02f"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-09_model.joblib",
+      "bytes": 680970,
+      "sha256": "8674989161279b4886ecaeb2ab25fff1d9d0cf335a9858424b0e52877fb8ab64"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26272,
+      "sha256": "fb350c49b33a259188bd497efb9ff2af9b75b5c80fda1e3bbb1d15655645c86a"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-09_selection.json",
+      "bytes": 1666,
+      "sha256": "85b6f0683857e8947c62a6603cbe0bd6141d34b28cd35e46d08e647509af0bb1"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-10_explanations.json",
+      "bytes": 28964,
+      "sha256": "12cedb018c1dcf62efae2f706eb3f1e8365ad4bf0b06d43b9237f6f48b431c1e"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-10_model.joblib",
+      "bytes": 691690,
+      "sha256": "f91c0ddabac653d8223e3deaa6f0dff22383c1c8b002520956f0eafeb7060dc0"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27330,
+      "sha256": "440a43e6f3c7b539b88d0668e34e0b82c8f31f75d81cae3db92cb4e03135577c"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-10_selection.json",
+      "bytes": 1669,
+      "sha256": "8be72c1835421ced1341f420f28f6cabaf8b93dbf3135bb23d251b0a0be7bfa0"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-11_explanations.json",
+      "bytes": 25340,
+      "sha256": "31943a587eff7bfe7b66ba268cda307e0597bf78e4bb7f94f7015f7a11861778"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-11_model.joblib",
+      "bytes": 571755,
+      "sha256": "c2755e943fd7cb201bbd5d3d39e49f46b07421c8d9b0be4f3a8ba179b189dd20"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25775,
+      "sha256": "bd1fb59847f4207fc01207a74d5ba700e6ebc9b93cecbdeba3ad8783810b27a6"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-11_selection.json",
+      "bytes": 1665,
+      "sha256": "5b1f967083dd3379064364dd0dc2b4381796ba530c6c808d86b99e1ab26ca275"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-12_explanations.json",
+      "bytes": 27812,
+      "sha256": "a8b1daaa2424b3b7842aebf7a24104af1c039583c52e1bfb9aa2d5fb75563956"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-12_model.joblib",
+      "bytes": 589338,
+      "sha256": "763de8b699a2ed4b4f5d9e201df35279457b5f9cec9dab5e4e9fcc7b7da131b2"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-12_predictions.csv",
+      "bytes": 24088,
+      "sha256": "1a4b97dc013b51cf8f956554e3146e0632323ea2ea560504884564bc6608534d"
+    },
+    {
+      "path": "chennai_h1_archived_forecast_2025-12_selection.json",
+      "bytes": 1665,
+      "sha256": "22af1869d672cdfdca59a362ce9eda9a894eb3680f06cadbc114c07c2cd433ad"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 1448,
+      "sha256": "efc81dc6a3c4e0d7a503fb264f43bd1bcc92f85adaea7e2291a2b87426916ce7"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1665,
+      "sha256": "70c62ebc008b16129973c43d15ac99766c07deab1bd9617ce1a1eacdc20bd1be"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27542,
+      "sha256": "9f089ac3ecbf5e953b5795433f039e1c3b6a8374faf2f62faebf036574fda34c"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1667,
+      "sha256": "7d0b5206ea05b124fbeb49bae71f9bf8b00cd30acc8262951e6a8801cc8bfc03"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27712,
+      "sha256": "ef1bc6d63d9724996bc1916e0016e82a772bce5bada91858fae2aa799c221a9b"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1669,
+      "sha256": "5b1251bc48bb5698bc72300a9fc8888c494b2cc3ac797875e5edca83e72623ec"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 26600,
+      "sha256": "136f972162b232f259cd15be7333567fa8c56a4cd2f3d4e952e2e26626404c5a"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1672,
+      "sha256": "ff9a4c3922d36e208f805127f0d1733acc116c9bb315064574eede8f86dcb5de"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27644,
+      "sha256": "a5cdffc50879705acd63f2792a0bd12acee00803fdaa4ed97117db43d808ad6b"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1668,
+      "sha256": "705107cfef8afd5e4d7b9f956a6b32b7129b1ccd52aaac50a1ac1e04a6977be6"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26086,
+      "sha256": "3c058aba1c6e95a606a3198b5d3dc925966c22758e93a0386aacf6d28be2693e"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1665,
+      "sha256": "e50bf4aee6095f2f66ac510dccfa515502743be9db16aab541c9c6a520ceb7d7"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25779,
+      "sha256": "36894887b179af5b390edc3cc5624785ffcf9f9b9604d3fe7aec398e4fd522c3"
+    },
+    {
+      "path": "chennai_h1_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1670,
+      "sha256": "78a7171c9e8cf9b59efbf6affd5f00914c3f471db851cf22d24fcc6eadff82a7"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-06_explanations.json",
+      "bytes": 1884,
+      "sha256": "8e62b44efc9fd1181be16ff41113c3ec460ba50bd7872127150ca74f9c219531"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-06_model.joblib",
+      "bytes": 768954,
+      "sha256": "4279ecf174a25c0872eb7bd71b201b9fc3ec5d29d33184a5182f411524be97b6"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-06_predictions.csv",
+      "bytes": 2342,
+      "sha256": "67050b1b63ccf3d7892ca5dd62c519dcb2af058563e59d9eb3bfd351e6f38138"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-06_selection.json",
+      "bytes": 1670,
+      "sha256": "fd62fa82b1c4539d31678158115e738609d6d3516849999b816add5bfdc97475"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-07_explanations.json",
+      "bytes": 28927,
+      "sha256": "59f23ee97b997ffa873994858fd8187b1876643a92a8b0b73552d59f56be4134"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-07_model.joblib",
+      "bytes": 789962,
+      "sha256": "7d31073a8f591d99b3a767f2d1e3199a22ed3c9d3d2577cc91ef8e7d7ab2aaea"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27146,
+      "sha256": "e40ee3b60c8a7a0c5f4be7ecf2db09bb934845b49a32597c89e8cb3b2dcab7e7"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-07_selection.json",
+      "bytes": 1670,
+      "sha256": "3589e027f6ffbd0386a8160aba7ac8da7a902533ff49c250d30c45cf52f97c92"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-08_explanations.json",
+      "bytes": 29077,
+      "sha256": "ecc0a1b5916f7d5047fb118729bfd80bb0b9000d655d7ac0754c3b4ed1685f00"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-08_model.joblib",
+      "bytes": 581562,
+      "sha256": "57ed001bb32b76166771844413275fb4809e28cc32a6d063e8ba134478ed1b43"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25851,
+      "sha256": "de1dfae4b1152b2c862d6a6af62c05f3a6371ff336acab44b281e86f78c118fc"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-08_selection.json",
+      "bytes": 1661,
+      "sha256": "08c87bf9c4642be14415f9c48507752033f570ebf3116295ec76eed418c2f049"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-09_explanations.json",
+      "bytes": 28251,
+      "sha256": "b6a4775ee9595e4d2963d370b1fdc01f73b52223260344d20d398d008c305722"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-09_model.joblib",
+      "bytes": 569146,
+      "sha256": "804301a02db479cfd49f7325914ef1142cdeb363d6b799ff0860703fc9689577"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-09_predictions.csv",
+      "bytes": 24922,
+      "sha256": "242b3e2a494b168ed5fac5500c227ed4807de1e478c752ba2ffdb7117ad68a85"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-09_selection.json",
+      "bytes": 1662,
+      "sha256": "df8b282431fe3fb2e9c4521e861025a508da3f07b43e2fb0dc2bec75c2b126f0"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-10_explanations.json",
+      "bytes": 28867,
+      "sha256": "0845f936cd5a3f6ebfb80764fcd3d4a7b4e8c46357c46aa1b11b39bf0e55d121"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-10_model.joblib",
+      "bytes": 711530,
+      "sha256": "6d8f78a8480800769434b4127d88837a09134925709d3320e9d6f87c458cad69"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27290,
+      "sha256": "f17f8c1f405789bdabd410160baa9cc35289fe7370c4aec7b36b464f1db022a5"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-10_selection.json",
+      "bytes": 1671,
+      "sha256": "7d79c326ed3e39f2cd00fcab1adec3b9685e532d99fe96171295d8fb9afbe46c"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-11_explanations.json",
+      "bytes": 27824,
+      "sha256": "67f289a1b818d1fe40fce617627eb3f842487037e53c2c7da2cac90e918b92ef"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-11_model.joblib",
+      "bytes": 717466,
+      "sha256": "19d0fd309387d36b5d460a704cb32333abe78bcb2d7b4d7031f698b30f818b38"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25854,
+      "sha256": "bedbe9c94a1bc5fc90bd97c7b8d2ca30c8de66237e76cd0e3eade81aab839fa1"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-11_selection.json",
+      "bytes": 1672,
+      "sha256": "e8b0f674ffac547215ae95ad930f90386e1abfec672b1f00021ff1106c2e86cc"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-12_explanations.json",
+      "bytes": 26923,
+      "sha256": "aa24c36b77018fee298bbf70569b6e567c767ba8a4fd30436d1eac659a5c0d8f"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-12_model.joblib",
+      "bytes": 699978,
+      "sha256": "98a80d6644b1a4fea81ae560c94ac1c5d46a8e5dc8b4c33b22369db60b732657"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-12_predictions.csv",
+      "bytes": 23196,
+      "sha256": "083f8d6462d1ee3620c344d84921ac1fc8a1c1319c592e9151c7de3f4141d495"
+    },
+    {
+      "path": "chennai_h2_archived_forecast_2025-12_selection.json",
+      "bytes": 1663,
+      "sha256": "8028ec63fc7867724ebf048b317daf8bcd812d733a45f7c4aa394a9f6e999cd1"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 2298,
+      "sha256": "d503d20c0608e12fc12eaee7a1e5d9ad57cf445d55c13d810e32b3e96212d81d"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1666,
+      "sha256": "722261c70c4c5399b86f2eaf03374ad07af8dcb00fdbbbb4639c535cb0771d77"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27513,
+      "sha256": "28951fb66a6066dea071ac93f1977a582a7cc75671bb014fbaa6862cc40ac394"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1666,
+      "sha256": "a88614d9671b5845ffb983079c2159d5a56314a3cad6a22ee03ac592cfae5f8d"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27684,
+      "sha256": "b36e55d4d15d5007da6a198ef134650f2ff1c3f78e79ce397a56b89490a63626"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1671,
+      "sha256": "1dbfe8753a0c549835ad7a4e1f2fb13784e4e311ba8897ff9da8ae17b7e3c432"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 26491,
+      "sha256": "ebb2f653f36aec9dbcc5a9b374ed6aa41e5653bb354e4d5af1c3590942a8713e"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1668,
+      "sha256": "918a4e2feb9a3e6087bfb20f924421926e5a95e9b84cdd278e47ca699e9ed2a5"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27696,
+      "sha256": "0d951956857e5461f93201cf268bd1ea2aec730ded700bd73b496d5c0be06680"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1672,
+      "sha256": "02b26984c7e8ac534643802019a371388d6ab34eb539892ba4e770f549152983"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26066,
+      "sha256": "efc28b34111315a91038408fb24cc96db102beb7dbccf9ce1563c2f3afcd93ef"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1668,
+      "sha256": "e167ee7de0ba98a5ffe000d213d636cc023b6c6d858bea40a06de6dac6b85513"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 24858,
+      "sha256": "8206b8823e99451cca6772fc26127289ea9c82ab12cb30f47177d71896f31318"
+    },
+    {
+      "path": "chennai_h2_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1665,
+      "sha256": "083b6859ba09279f48d2f799a5b965084b5edffcf9c40b7bd2030b273312caf0"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-06_explanations.json",
+      "bytes": 2852,
+      "sha256": "029242a714a34039aebe7d27196765d04409423b7a560edf01ea661f9b511faa"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-06_model.joblib",
+      "bytes": 768906,
+      "sha256": "d81c15eb6d39cfc7bfd701e19421fc4d9bc8d8d657879f92a6c356abc2dd7bae"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-06_predictions.csv",
+      "bytes": 3172,
+      "sha256": "0ae20a8eafcce8076b3d1069a8d28dbe2c25856b19c07e89311fe7112d2f8666"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-06_selection.json",
+      "bytes": 1669,
+      "sha256": "65884896eac76a0b2933e553060399608ae91057ee7834605bc30f67efcc6962"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-07_explanations.json",
+      "bytes": 29289,
+      "sha256": "8a8b19eb473509b1ff6ef3a6d9c2fa33fdd1dee8cddfccc10bc9d24ee3d5c9ca"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-07_model.joblib",
+      "bytes": 787441,
+      "sha256": "ea4ab217009a788a5a29a0528517dd700f392c65317ef8fa43d6584ff8d68e04"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27106,
+      "sha256": "ec487cadebceba385f648fd189d02db9c0f3b287e2ffd87f603c6ac2ce6d829c"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-07_selection.json",
+      "bytes": 1667,
+      "sha256": "7b60fdb22404b046154cf5f8cb16a134714a7448f80f75761a7224b924e81f74"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-08_explanations.json",
+      "bytes": 28788,
+      "sha256": "a00f3974f7b92eeeab0a10c1b20b46a159f3603cdde54c83f2b14db862535ca3"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-08_model.joblib",
+      "bytes": 661466,
+      "sha256": "8bf0b150c994dc74aedc790f1e50337ff4d6aa821729fa886cc254c00c17f4c5"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25699,
+      "sha256": "3636f0dcffa69cd96b9743b8a3785a3363f9c89edb23220be279831eb2b8aa0f"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-08_selection.json",
+      "bytes": 1663,
+      "sha256": "364a719429f893fd9f78c9907a994c086cde6094082fdaa9f58f1531250a8868"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-09_explanations.json",
+      "bytes": 25287,
+      "sha256": "4639599e529ae5b5dc4f9cd0b596afc96a212ecd779583da4324c031bb3b6bd3"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-09_model.joblib",
+      "bytes": 670181,
+      "sha256": "39071f9af1b0902fe55c3ce329f42f6e1b51345cd8ee449f732f8b899d4e1b8c"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26481,
+      "sha256": "09f085f2a5de6717b5ff9eca7f06b2ae94768c5aa7ae3b3b2f3f0d6c6dbf4287"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-09_selection.json",
+      "bytes": 1668,
+      "sha256": "d9d449924941b869b4fad0c62afc70d458893fdf4f8d5fb0f6fe60e7db80182f"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-10_explanations.json",
+      "bytes": 28505,
+      "sha256": "42c40d93393259c48679285cd716d7c0479c37a22bc09b51993d03e8a071e1c0"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-10_model.joblib",
+      "bytes": 581130,
+      "sha256": "59d5bcb8d831a0326691e7b761a55f45512b96058606164a7c0fa57b23ef91ab"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-10_predictions.csv",
+      "bytes": 25935,
+      "sha256": "0c1609444b419e5b290fab698ff1a1b9591a1f7bf07269b56a8202352dee7b83"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-10_selection.json",
+      "bytes": 1665,
+      "sha256": "f05c0593c3bcc0f67a392873c8cd6cf577c648e941eda69bd7f020863c69e853"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-11_explanations.json",
+      "bytes": 28010,
+      "sha256": "11afd83b279249b8947c329a2668471056db5395795028993c3c3d56282b9074"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-11_model.joblib",
+      "bytes": 701050,
+      "sha256": "94ec3ee09c6fba43df9ab76379488867b86cf52cafccc117e401e5f8b4cb61f7"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25098,
+      "sha256": "8d8238bb1202eebeea4730c1c641b604644946a84cc1e9e653b738c3174eb28a"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "8bc8d42cfe3a7cad7d9325ca587ed268ae52dff08b0612e6809c47e9d23db2c3"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-12_explanations.json",
+      "bytes": 26098,
+      "sha256": "760dff568882543d1d9bb93a98ea100ac8ef72c868d44da292828725f29b29a8"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-12_model.joblib",
+      "bytes": 836826,
+      "sha256": "594bf027d0c05ccbd0e2ee1b5401b72527babe47ab6fd38bdcdef3aa2f5d89ff"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-12_predictions.csv",
+      "bytes": 23706,
+      "sha256": "49d5b6e5523ec96b8911581da4f545a8915ca154ed870972cbd0c42176c15f27"
+    },
+    {
+      "path": "chennai_h3_archived_forecast_2025-12_selection.json",
+      "bytes": 1668,
+      "sha256": "986a7f26ff1fd7f0c70a83bbb091c26e461ed9f79d1f2827ee073bb24e9ef869"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 3125,
+      "sha256": "a23fc60bfe252eb8e791c7789a3e584cc00a7a142dd8f20d03676f3e527b8a15"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1667,
+      "sha256": "5131e037b54c2b539213e6fbc15608d6ec584c3a992fe102e69a970ded2cb4fb"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27285,
+      "sha256": "8f198ab0e607bf8d650af814b54c6a06ac1b2f0bfe51620d392cf0ffd04294f6"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1663,
+      "sha256": "e966c5f95035ebae2e30aacb55dd9c83c1b182cdd8cf505732c23d5788a1f717"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 26094,
+      "sha256": "68b6c39f337023cb7035bb099adfd35c215d8f3ee8e09f43c36388496e0afb68"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1659,
+      "sha256": "fcac2c9570e694d07f45f34d44137e92d7ce21ac4332b2007a3981b93a054568"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25036,
+      "sha256": "61bcb1bbc1b4c422e1a338a0adacdd91034b0cda25552c4a591ea17dec96637a"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1662,
+      "sha256": "b49a3b240148716aa998e4ac3e2d174c3fa2dad8cfac0db0bb3c39f505d40e34"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27605,
+      "sha256": "2d3095b56d81a13b8b6d352fba0f633c841a9224b89410cbd903755bfca778bf"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1669,
+      "sha256": "2a8b01197703ad8a5e0c299a70e90197d3d76bdecef5fd8cd39f5efa8a544703"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26021,
+      "sha256": "90b51d21bcc8538cd93614564e51a0e042b565ef3c21a1b59c5d322b98a4aeb0"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1670,
+      "sha256": "ad6a0f3d54e97bbbffa1e017307be4e9f2b1ea6972b1698e3111bd034a227901"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 22727,
+      "sha256": "9471e5ddeb5c6bad8a3b86b59e198dc509c4ae2b0ee2373fbc58f57aa7ac534f"
+    },
+    {
+      "path": "chennai_h3_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1662,
+      "sha256": "baedc5ab70fa391495b060a125d92d8f6873ae50dbfc8f93456d2403ef468e3b"
+    },
+    {
+      "path": "delhi_forecast_evaluation.png",
+      "bytes": 303011,
+      "sha256": "3f73238d39dcd69f1d79745948d60e1aea8c432c43de8197b720a4669ed61809"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-06_explanations.json",
+      "bytes": 941,
+      "sha256": "d7d337cb2a77dd7997263d5208d0b700e2e4d545778853834981f29b995f00a7"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-06_model.joblib",
+      "bytes": 535944,
+      "sha256": "c4289697f3ccfe41470463a2c1bc1ac19449d4bf292fdfc7e2c01e4947398ecc"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-06_predictions.csv",
+      "bytes": 1420,
+      "sha256": "eb0052bb5809c866858242c57b0c02879be62a22257ae1561d2c7e3cc8159b86"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-06_selection.json",
+      "bytes": 1668,
+      "sha256": "2710a58017c03628a7859555dfb3c60b23dad65a8ac6a70112350fe772e2b934"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-07_explanations.json",
+      "bytes": 28987,
+      "sha256": "e7a7fcf4bee58614f724f56d598992f4068b0d18848b1d7c3a38edcca0842045"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-07_model.joblib",
+      "bytes": 585064,
+      "sha256": "eee06bf7d3db2b6b82f42d69ed2f6bc2fd15f32fcca4515d98d27a2c437dde99"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-07_predictions.csv",
+      "bytes": 25530,
+      "sha256": "b3c8e12c981014892b15ecec1f912e82808871726d0ad2a8395eabfd4eee2006"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-07_selection.json",
+      "bytes": 1670,
+      "sha256": "30bdf644168d1e7e385ea80fc84f487e05a4d726fd2206634e83776e3b61be45"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-08_explanations.json",
+      "bytes": 29083,
+      "sha256": "98040ef4c27a5c60aafc952aa83aca300e3e4ddabb40ba787d9b43924bce6bfa"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-08_model.joblib",
+      "bytes": 592840,
+      "sha256": "cd516b301489b02bbb5bbd430247ad182919d32c93c0afb6f3e9134c23eeef68"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25461,
+      "sha256": "4574b086ef09fe716b7d78464cafe7dafa528ad9f2999c694c59e4a66b81c3e4"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-08_selection.json",
+      "bytes": 1667,
+      "sha256": "181c432b95f10352dd36e621e25ef979881a3c28fd100276faa31e9c835a5efd"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-09_explanations.json",
+      "bytes": 28112,
+      "sha256": "2218ecbf25bac3c6080a01b0ec69d539fe8a6ddb365abab2b3e958322c0effbd"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-09_model.joblib",
+      "bytes": 599416,
+      "sha256": "e12b6256194fafeb6c34b47fea08e24f375c3a38ff88fbbf72ac568e9d87c3da"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-09_predictions.csv",
+      "bytes": 24942,
+      "sha256": "3764a206287248bd7990b509ae7cb33c8f8e1f137a365573065f9d362f33d2bc"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-09_selection.json",
+      "bytes": 1670,
+      "sha256": "548fdfea7578c2c6069edcfee4881df3d0b2bf54750e85316eafbf1c9638ebe5"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-10_explanations.json",
+      "bytes": 29101,
+      "sha256": "02324dfdfd456c4dfbc44ad1a02c9368c0909c8e389cd98c1cbead50192c2461"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-10_model.joblib",
+      "bytes": 665448,
+      "sha256": "94dc5e0ba5f46a6f5ef824d9a2fc7aaeb602b07c4f338d5d7d7be258295aa8d1"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27092,
+      "sha256": "758c2f6d52a213f3868436793bbf53c2caadf0750f4eb7fdff4d0edc9d9b54b7"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-10_selection.json",
+      "bytes": 1671,
+      "sha256": "d8125329e88b1c77d9734fa097ab29bb25dcf1b513987ca44292d9b527f88424"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-11_explanations.json",
+      "bytes": 28035,
+      "sha256": "f4b73487f109836de66bc5b6cc1b9f75d3dd246612e2e37070c31556e50a4ee8"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-11_model.joblib",
+      "bytes": 628376,
+      "sha256": "9fc9e889ba14cb4d084f47f790c672df5740885165f534c68682ee89018447cf"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-11_predictions.csv",
+      "bytes": 24875,
+      "sha256": "515d16a4871b3af2f64084f2216d49f38b2136a31e3ab8565a09c2c48ec711b0"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-11_selection.json",
+      "bytes": 1663,
+      "sha256": "73dbe73c2875a5b0858d7e613e93d2688bc332cc3e020855ab2e72effc7b06fc"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-12_explanations.json",
+      "bytes": 27996,
+      "sha256": "01b676d03196cc134928c96ccb2dbf49313bdd9f0ee5e28f5a1df46129fc8957"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-12_model.joblib",
+      "bytes": 556472,
+      "sha256": "74d3096b0dbdd53b040b305ec393ab46020d6c788ebcbbc8667a40adb32f3f2e"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-12_predictions.csv",
+      "bytes": 24911,
+      "sha256": "615a58e81829b8683445f8172e74eb1c855de5a5f12979c4986b9a81966a5d2d"
+    },
+    {
+      "path": "delhi_h1_archived_forecast_2025-12_selection.json",
+      "bytes": 1664,
+      "sha256": "a56f8f8bed1a0e17868549c1e1c5b426e44fd28637ead34f894b2df2288f64f5"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 1446,
+      "sha256": "17ef348f03ed5d3127d0e95e172fd937a2091dbbd425f9c5675460d0ee5ea385"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1674,
+      "sha256": "8593557f2f8ca9ff868b0a3bd1df44cc8fe96b64659fc7098290f04597e719ef"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27175,
+      "sha256": "f7285a8e7b38789addbd905c64e9c0284bc8829c6d4247cf7e4c4c34bb91edae"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1674,
+      "sha256": "63c72505d4d5ad62d709895f43ab287e66beb50cf84d82d49cd939574cd98053"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 25688,
+      "sha256": "c071e3cdecea410e5afde4ddbb6c96c32366aebe27b3a6a3f2e01a17fc6d855f"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1668,
+      "sha256": "82802dc1255f3698c544510d540316a5385bb282a8bd878abac30ec5bcb05f03"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25167,
+      "sha256": "917b575841620debbd0574261d6c0e82a149dcc2912d2bb80f93a52fcf749326"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1670,
+      "sha256": "0a00b2261ba04e7bfbffa1beda7481f9eea60e5bf44507f1a596f4724d42f950"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 26041,
+      "sha256": "90d259af1ecd5129f550de000a50554b8eae8ef351f11c5bfe3b28a3d529d9f2"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1665,
+      "sha256": "5bb8a2a5eba092c1e1d0f0f366b056c4a8abcf6715bdca22ba19234a2608c673"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26508,
+      "sha256": "d2121fccceffb852cb10c79fbe0944e37cfe23c795778cbe729da7701f129863"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1671,
+      "sha256": "380a927ee316bf37ff5af86a1a5c56ceaf990f1eb072361b26fe606133b9054a"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25235,
+      "sha256": "2b4d0637d8592f0030378501b20239cda00eca187f6d2cf4dd780609d894cd27"
+    },
+    {
+      "path": "delhi_h1_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1663,
+      "sha256": "d98c3746f0b138640b5ccfe0069ea415fc1e391bd6c7d690c6a9261777170de8"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-06_explanations.json",
+      "bytes": 1873,
+      "sha256": "7d36726323b66fee51debdb0b61d159de34fb450e2205153d0b026d7d6939373"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-06_model.joblib",
+      "bytes": 632744,
+      "sha256": "8f0fea404d3ccdcb68865366b7aca300ec3f6a8d3a08e41a8f204cb7dd00696c"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-06_predictions.csv",
+      "bytes": 2204,
+      "sha256": "3895d40409e59f177d3c877495063cd64846ae4729a6a82370d04e8e24288e25"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-06_selection.json",
+      "bytes": 1669,
+      "sha256": "aa728b26c36d5aeb65c2eeb40cd334952687c0eb5bc2d31eaf58586b0b5a0bd1"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-07_explanations.json",
+      "bytes": 29119,
+      "sha256": "31de03c5c3454463aefa983a41c84cf6b5b490f61bcc575458562d8eb3605585"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-07_model.joblib",
+      "bytes": 630712,
+      "sha256": "70164ccf3ba031314a9dd2ac711de2f406646bf21c3fd564106e392143ae08a2"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-07_predictions.csv",
+      "bytes": 25472,
+      "sha256": "61c6e11fcd351a2920c3550494701052ecb97a1318320259c3fab3c2b89d6814"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-07_selection.json",
+      "bytes": 1670,
+      "sha256": "8d9aa64754ec8c303ee6ab3260c7d372ae80d6096df6eb063b0bcc4f4efc2de7"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-08_explanations.json",
+      "bytes": 29167,
+      "sha256": "58e74b3258b16798638f9650c3427040841d0810e7209a42181ea1ba8a3c1fa8"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-08_model.joblib",
+      "bytes": 656968,
+      "sha256": "d8bdfe2e919eaec1a1a6868b3d923e66bf73c769b48055cf1d5e4454f9350fe3"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25558,
+      "sha256": "e47b4d4dff0a313e0a3896080edb61f624335577e37fd5eeb1c27333dd98ff3a"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-08_selection.json",
+      "bytes": 1667,
+      "sha256": "4d4ad5965f9f89320b5b827208b5a446004b16f8d5bdcf8749753e3bafe8fb50"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-09_explanations.json",
+      "bytes": 28128,
+      "sha256": "bd611432c5b2fa4fc0d6331b5539341a452e0d7fc630ba1ebd83d3709c10248e"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-09_model.joblib",
+      "bytes": 659384,
+      "sha256": "974e292ef0ccdc94fabf074f82a9e430e5bed144a32a1bda8dd643ac1c92ac29"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-09_predictions.csv",
+      "bytes": 24821,
+      "sha256": "098d3ba88a9e6007f28ac84cd408e5eeca58ca1fea9238af107035873111f057"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-09_selection.json",
+      "bytes": 1668,
+      "sha256": "1e3286f0cd809cf595177099fe067844dcd2e79428f862d3112bce79a781de14"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-10_explanations.json",
+      "bytes": 28998,
+      "sha256": "d7739329bf9a20e884da66dd988739155dbd58af449184def0087319fa15ce11"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-10_model.joblib",
+      "bytes": 682552,
+      "sha256": "8929e669db3c93c47bd9496e520b7084940774f008671e015d017a625211cf50"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27029,
+      "sha256": "bb879f99ebb2504f51dfa9d07f1d40162473f32b192302ac544ab7ec7d209788"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-10_selection.json",
+      "bytes": 1675,
+      "sha256": "2296acd25edcfae59dd0ffd62b32801aeb9f3d3993786a5f3523ea0a2b14c33c"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-11_explanations.json",
+      "bytes": 25348,
+      "sha256": "777024eef4308d2515c4286e0119faf76ca115b1d678415d3987cc0fd5593520"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-11_model.joblib",
+      "bytes": 670217,
+      "sha256": "4149d917af20a5840f3e3361511c90721250f7da6770ee2d4a80f248188772e0"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26157,
+      "sha256": "3515c5e76db2482c6ec911315232717039f58f429110c154b25f113826ef03f7"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "bce7a5b1d4c9ad4cd109a1417fc2e2888a6271ef0b7f1c5b6aa418f17433adea"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-12_explanations.json",
+      "bytes": 24531,
+      "sha256": "94a0f98dc9fdc2f5ded1157fe2ef634f0736687cacecef5f02022cbca14541ab"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-12_model.joblib",
+      "bytes": 564473,
+      "sha256": "fc6fc41ef5657d14255c175d7794966a67bed8f546eb43f52da5e1b97591ac7b"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-12_predictions.csv",
+      "bytes": 25521,
+      "sha256": "71a346cec53f01fdd0c4f3c074d8501286b617452e1fda821f4a3020cc5ec943"
+    },
+    {
+      "path": "delhi_h2_archived_forecast_2025-12_selection.json",
+      "bytes": 1666,
+      "sha256": "5535bfbaa4522f387bb66f9b6ec99711e57ac50aed74cc4c996dd66e7bfeea2d"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 2328,
+      "sha256": "69eccf29b3c60abba2babac65a4c38730e4d5cd285dc35f3bce7311a09659ad0"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1672,
+      "sha256": "f90e1bb6983df285499b116d6dcd9d90942e1f20339552dbcc36e1d193762283"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27244,
+      "sha256": "76c6dec25e74e7adfa13de38764d4bb98513bad3ce7baf587abcbf96caa6a5b5"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1669,
+      "sha256": "ea9e4e8e04631859c3506a4f761be7bb62b15dd7b18d64107fc8ec790fc0d3a9"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27102,
+      "sha256": "ef268aa1ef9dd62c7dc0e23b80af3c9954fd45c18bf8995ab5b7bc72a389c464"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1671,
+      "sha256": "5ca4a7b3d75257adde8fd7f66860a63ac5ae9a794cff53275d5083a27d0d0f25"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25198,
+      "sha256": "2de898a53ca6b751724371a0ed5dd2c9e3f8e2ca80b18b1f5cd06a0ab32ba5e2"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1663,
+      "sha256": "bd02ea249e2c77683248799ec623f3656605600f3b1f97e2b4e8c249221697ee"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 26039,
+      "sha256": "29f3998f507d6105e600f3708089349895e29673567397a1731fbb124017b7f5"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1669,
+      "sha256": "3e7dc5fa5c05e405f70f2be635f67435115fd2b4afc2f7bc977cc6f3fdae2f50"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26512,
+      "sha256": "dc3a01a01e3478e1dba2f3214440139d05541ef4e5df24cf4e180eb2cbc0d42c"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1672,
+      "sha256": "50887c8b3d0fdd1e2964714d0e87646bad8101220fd7e1d0631827cc48c4ebd1"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25713,
+      "sha256": "3bfd908191b50c51629358d98fb74d0f5b4505221af9935bf3d390da68cdd76b"
+    },
+    {
+      "path": "delhi_h2_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1667,
+      "sha256": "1f1d669396fa424c996f450446ae71e2a9335e6b7d5804c9006100340267fe8e"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-06_explanations.json",
+      "bytes": 2776,
+      "sha256": "e95d84a51f18882a678189d426c74a6e2e0e00553ac57e106f569c1da820b141"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-06_model.joblib",
+      "bytes": 743928,
+      "sha256": "c6c32201cfcb6283bb1c24f5b98525790f3d67ab61593821ed22c5a51772d21b"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-06_predictions.csv",
+      "bytes": 3178,
+      "sha256": "346e0c373b6234bc6f20eebb4905e257fbf0150dd26e593a4632a314dfc72cb5"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-06_selection.json",
+      "bytes": 1674,
+      "sha256": "3a16acff777c924174fa9b9a70360359ff75d02a886ccbf05d5c81f1ba39dbce"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-07_explanations.json",
+      "bytes": 28702,
+      "sha256": "3635cae7aeaaa1ed62843bfcf98d5578a2386b9dba9cdcb608bdaccc40a57a08"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-07_model.joblib",
+      "bytes": 749775,
+      "sha256": "e6cdf2bb4baafda0b74f9f313a0b6439591fb2e3fa4b2e27212662cea50745bd"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-07_predictions.csv",
+      "bytes": 26771,
+      "sha256": "fd92ae04501b93fedd30377adebc30ead14e80ce34e4016b94ec7152207d392d"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-07_selection.json",
+      "bytes": 1675,
+      "sha256": "60c84c5527a10f7a011eeed2c22ab77a0aca1827dc440414f92eb7483899344e"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-08_explanations.json",
+      "bytes": 29108,
+      "sha256": "9f0405cc470cfa111472f6ede740607f536bd42d98bbd8597dc5fe99fb51012e"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-08_model.joblib",
+      "bytes": 563224,
+      "sha256": "64b2485d9460be2000b227ee67fa1e3c72a6b19b4de360172f263fac31de7e4d"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25458,
+      "sha256": "121f0cca4193ee8fd2d7b0de3d12b04b7086098b260624c509ac71236d0f91a9"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-08_selection.json",
+      "bytes": 1665,
+      "sha256": "c83cc41d7ad7bdb696a30f1f953952b2a1632ad7a7f4910915d1d40d552a08c9"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-09_explanations.json",
+      "bytes": 28014,
+      "sha256": "b114c878418766dcc65614723f99c40131681087e9ae68a34f105394ecb84c81"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-09_model.joblib",
+      "bytes": 568776,
+      "sha256": "058d2192f58cf1ce807aac3bc38d1ad408d6b26b2b20678fc047176f8904f988"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-09_predictions.csv",
+      "bytes": 24776,
+      "sha256": "41d4a329f94c6ca87857c23da819f938660cd24f9393096bfbbd3e896cd5324d"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-09_selection.json",
+      "bytes": 1669,
+      "sha256": "41fa75fb266fe3d77a0031f5a87c3cac5ffd03bbb2014ed2489e5904812b4937"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-10_explanations.json",
+      "bytes": 28359,
+      "sha256": "bd7b9af0893967d450211407c5d6fd30b579e6d52fcb488b9f5af4663cbf7366"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-10_model.joblib",
+      "bytes": 698040,
+      "sha256": "73c4749c627631e8875582776b83d7b96f0dd3784bd2726dc78ee31b47cff5b2"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-10_predictions.csv",
+      "bytes": 26992,
+      "sha256": "e1dbc5908345dd9312666152a9ca6cb50523d63dc477cb5e1e10b20e8a9abd0d"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-10_selection.json",
+      "bytes": 1677,
+      "sha256": "5200b9fb4f2ec0412ceffe17613cf97f8347e92f435245f85b55f186fa23b1b6"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-11_explanations.json",
+      "bytes": 25344,
+      "sha256": "b63691872115b7e41089c48917c0730e22a850e8422f30087011f38f51b66fd2"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-11_model.joblib",
+      "bytes": 570089,
+      "sha256": "6e6fc16fc36f11af63fe3579a4c701900a7aed28ff5c7cb85c67b2f0f4a8d1a2"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25683,
+      "sha256": "892b0b64060c7b9a0e7b806e8279ba608dc8b132bfddbc27caecf954ea71eeb0"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-11_selection.json",
+      "bytes": 1665,
+      "sha256": "9d0fba6761c7fa9144e1d17ce41938df186b5c63fddae93c032db09be6563ef9"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-12_explanations.json",
+      "bytes": 23685,
+      "sha256": "385be1c132b899f05dd161b36145045db413aeb33c9574d8bc9732475ef273a3"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-12_model.joblib",
+      "bytes": 559017,
+      "sha256": "0422f233e28d31f05352a81ee5c2bddc2f2a58221c60371612f4520e32aeddd6"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-12_predictions.csv",
+      "bytes": 24543,
+      "sha256": "04a06aa99507fa6e4ee2bc531471451fe72d884cbb744a47d7cf8a2275c57015"
+    },
+    {
+      "path": "delhi_h3_archived_forecast_2025-12_selection.json",
+      "bytes": 1668,
+      "sha256": "4bd644debfc3e34722e744bf4c0fd97625fd1a14a2123c5cbcc8879163b9b197"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 3129,
+      "sha256": "c6b000dd341184c529f957931a31e962cc2d4add2ceb1abf02174aaa337984fb"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1674,
+      "sha256": "0403586ac7d2c2c6b9d8c3b1f16f86362246efcfbffd500e70c90e5ad407893e"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27064,
+      "sha256": "7c81ec021f465a8adb6dc12aa0b960c543b3fe779de8640a8006920f29823d5c"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1668,
+      "sha256": "318fa1954dd6d34b62dcc38cf0c0769389c052800890c1a3465ea443dc1c4e6a"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27072,
+      "sha256": "ae05ec7422f1fb3d870d171e138553d10fb1fd73ae402110945e102e26bb01a6"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1670,
+      "sha256": "527972b310571d31b973f0442022b0a9740cc7cb84f0de607dfe1ec771c7a4c2"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25196,
+      "sha256": "12574d6aa507cc79ace3d122fc0f9ada9551d0ef3393a017a32b50dc5c272483"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1668,
+      "sha256": "d86eb21ab2fdac6e9f0fec73836a69f22a2e0dc4c3d879a46998c237095ef5b9"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 26057,
+      "sha256": "49555db70a7558d43e1bedc2584c92b0d8556ffb67cdee8e429661f4d1777a95"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1671,
+      "sha256": "1456d4e1053cf6cf43aaaec0bf61a3d4733e651755c20c50e0703cebc9c5ed69"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 24591,
+      "sha256": "d801c44dcfc113b6dd905f6efbd3bc149156885f41baeb6448e10a98f2ad2f30"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1663,
+      "sha256": "ee1e83f3d62ec693442473568c11ad7127fdaa54204a85570fd6094fb9f10d88"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 24431,
+      "sha256": "4baf729e80b0fe1f1285f11ab815859a8a7fff7637ffb0ea85d96954d23a9b53"
+    },
+    {
+      "path": "delhi_h3_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1665,
+      "sha256": "aa9699adad002db115b22053936503b912ba14342669c43744ab6c595a308572"
+    },
+    {
+      "path": "delhi_phase3b_monthly_bias.csv",
+      "bytes": 1031,
+      "sha256": "d887a5c04d453e974889c51d7721998159f6bcbc3f404e49a823ba81e55bfa69"
+    },
+    {
+      "path": "delhi_phase3b_year_month_bias.csv",
+      "bytes": 1685,
+      "sha256": "be08f9d7579d1dba7fede44b6d04ead74cbefd6db48d60f2e13ac7e94a70b199"
+    },
+    {
+      "path": "forecast_skill.png",
+      "bytes": 69246,
+      "sha256": "4323ee1b7bd594279ad6938a8367e27d3022501a40a2d426eabef98bc949de9d"
+    },
+    {
+      "path": "hyderabad_forecast_evaluation.png",
+      "bytes": 368945,
+      "sha256": "700a4c3704a4ccc270a656949a092ee7f426efedbfaf1d7be51440209bb5e314"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-06_explanations.json",
+      "bytes": 942,
+      "sha256": "525d2cefdedd5665a5096ea387829e7c7e927405c3902208f4249971bd47c662"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-06_model.joblib",
+      "bytes": 765356,
+      "sha256": "c4e3919afce042150be83b5b8b82d6dea5cda137df73ede5f22f58da466c438b"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-06_predictions.csv",
+      "bytes": 1459,
+      "sha256": "53bec024919f85afb6081a81fd4620e00783aa8863e7073aa94e8ea3ffddd860"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-06_selection.json",
+      "bytes": 1676,
+      "sha256": "f368a53fee7f5ce979d62ae994731d79fdb2f787f171c53cc3ee4315d04cc95e"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-07_explanations.json",
+      "bytes": 29222,
+      "sha256": "d0041424e7d7f65d8671b8fe014ab30c5c151d645a0faeee0ed8700ab07df2cf"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-07_model.joblib",
+      "bytes": 673484,
+      "sha256": "bd17e3ce1bc686788598f4045aaa9c1c9c9e8dbe838dc65a232747ac57296317"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27358,
+      "sha256": "07b111c163fb6d80ba532f58647c1454fca9e4aeab796dd52f9ff9b0f3056f96"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-07_selection.json",
+      "bytes": 1673,
+      "sha256": "2deb72f9bec312614ca7e4c7d30cbeded62c94d46b97d4e675de4cd8524d17e1"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-08_explanations.json",
+      "bytes": 29313,
+      "sha256": "d5eb2e048fd4308d7d7455d61de7c3ab7fb4ecc52599b120c016d2717f5aa72f"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-08_model.joblib",
+      "bytes": 570236,
+      "sha256": "64441301c4f70a41006d32e831062a83be034a52a3abc835d9639c830263b9dc"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25875,
+      "sha256": "7ac5d4c415fa3de0db42798544f78a6f1afd1c1676be3e359f0ec2bc43343289"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-08_selection.json",
+      "bytes": 1667,
+      "sha256": "20832851d0c338de25cfd28ada9d4cbe9c81bfb0bc7899c3101b201782d41f1e"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-09_explanations.json",
+      "bytes": 28122,
+      "sha256": "7ae94680bc038d79682657040b0baf62b2258fcbb118df5bbd4158765ff5b506"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-09_model.joblib",
+      "bytes": 1907968,
+      "sha256": "b4418fb25d81f213d9d38163de6013622a3cbccf92bd408f2f8f855feb760520"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26415,
+      "sha256": "66ebf4d8b8520e3c4c0f4c77190b0dd02b08dccb7acbd33ed417b3aba1b1a9f6"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-09_selection.json",
+      "bytes": 1670,
+      "sha256": "a79ceaef3b12695cc0a17afadf6e19252ca4d60d66b1fb35a31042751df9bef9"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-10_explanations.json",
+      "bytes": 28537,
+      "sha256": "32ac2d9f84abc1a13f4996f3e3a3e9dc1460f53c4736b4528b27de4e08ff406b"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-10_model.joblib",
+      "bytes": 2068960,
+      "sha256": "377b6d91fe51e1c69bc5e4c6ce8e3c3b92e4a15ab79dba98ff4ecdffe983d879"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27087,
+      "sha256": "6766f323b9ec233d8300267894d0494568cf6741b9740601075c8a6d29525489"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-10_selection.json",
+      "bytes": 1673,
+      "sha256": "41fa2a0e758e9f0fb65a7bef39e7d38768e6accc23a59b0a9a3e8423013d7ce4"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-11_explanations.json",
+      "bytes": 27747,
+      "sha256": "fb9b407eb12c1574d0f4e93fd8fd2cc4440d0d40f1a4dfc72861ec1291b11676"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-11_model.joblib",
+      "bytes": 2057696,
+      "sha256": "f084cfb5cb03089f943663a110974a77b1d2a2b6112db0df0d112e0434e21646"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26245,
+      "sha256": "028ce9a1920750d77b1fe7b03f5972787782574b7bce39a41d00a3d8664a4c0d"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-11_selection.json",
+      "bytes": 1670,
+      "sha256": "267a42f4ae8aa5e6f7ab9e6be4603ed3e35fc210e2ae6458e9dd5b82a84fd8ca"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-12_explanations.json",
+      "bytes": 27984,
+      "sha256": "12a6a9c9390b2a5b0d4c05ce5bf738045400b21509cc6ceae65a2a4c605407ef"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-12_model.joblib",
+      "bytes": 2137760,
+      "sha256": "c2e1c6bfe4b6a12fca3d3c9daadde53ae00396c219b18279deb36331bee31754"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-12_predictions.csv",
+      "bytes": 25988,
+      "sha256": "fa46e7366f0273a90ccc33a97e33fe0a9e9b0c972d63954f81a98740d9be4a65"
+    },
+    {
+      "path": "hyderabad_h1_archived_forecast_2025-12_selection.json",
+      "bytes": 1666,
+      "sha256": "cf54e44bdf1175d711bd7ce26bd4334cc01e9baaf3eeee2d53bb40d2e2cee74e"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 1444,
+      "sha256": "8f88554910c22473a85dbce276a39c83f9a4ef72aaf8baa37eedb4e6d2baf9c3"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1671,
+      "sha256": "8210ec1769ca001197121863b857e36399e09bd495b4a91dce7c0f895fac7342"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27810,
+      "sha256": "e87d4387f5037babb3aad64f0c4c713de61172d6f811550ca14d1f75073e386b"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1673,
+      "sha256": "a8e6697f9edeb8fae6b60eea12be8e40e6b7ea20232fea53fb280a2050043854"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27651,
+      "sha256": "1a0f40fc40051c5842f894d055bf3ee39da26db999c38632ba16284d3528ecff"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1674,
+      "sha256": "df26176963b0a790f17ebba115d3ebb3db9e21ffe423d0b1a67ab37792a6ae25"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 26731,
+      "sha256": "aa647d0084f319b1b77afa411169c0aba21006769a9416de06df0b9de01f0c30"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1669,
+      "sha256": "8e182d46234c45f5f7ef9578f72b37d09cbc90f807518fd0485370fe7c7671f0"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27514,
+      "sha256": "e2763c1342dc34ab95540738aef9f32c0d2c26f6bad0a5b2b2da2e7ebf37eba5"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1674,
+      "sha256": "8c32e2dd3a0819169dfde34fd176cda0ed92ca63e96ec1f8e09a72f4eddcdfe2"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26492,
+      "sha256": "1f97da52bdc41518deaebded2e426ff4cf84977d0f6bac81f99b15d45d5806fd"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1668,
+      "sha256": "76a2160f3166b6c8d43e05d4601d9801d72b453ed9a2a049835a6758140364e9"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 26113,
+      "sha256": "792080676a87772bc7af6dfb85acabfe664d27d77c886e5ddf67293f1c885d5b"
+    },
+    {
+      "path": "hyderabad_h1_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1670,
+      "sha256": "f200991309f8810000d20cc8a0fbf85c7b49c4f543c7bb82215acf8e5b7f8270"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-06_explanations.json",
+      "bytes": 1865,
+      "sha256": "aed2398ce342a318e1089c4e9fac6630e837b650bdbe5540eccb5cbb212a0bc3"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-06_model.joblib",
+      "bytes": 697884,
+      "sha256": "164cc941146b2d7da18271825889b1abb977f8a111cd68ee6c96cdae2c20080f"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-06_predictions.csv",
+      "bytes": 2313,
+      "sha256": "a755f4a21cb1478f8a4a3eee884207d2d6927b492c4ff1a20164cebbddf9f041"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-06_selection.json",
+      "bytes": 1667,
+      "sha256": "e90d8e77e13a93cab91680658c76990d0f779f8b8bdf0f0ed0b1bacd66df38f0"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-07_explanations.json",
+      "bytes": 29269,
+      "sha256": "404ab688f7d47478756c51aa08eac685144aca6155e9fa670546b6dc8d8c9606"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-07_model.joblib",
+      "bytes": 702956,
+      "sha256": "1c4359f380622a336412ea07fab9a38b77d14a52f522b4a23341da7a5edf3039"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27501,
+      "sha256": "0e9726675bfcdb94e61bc909ff27ee8d01a683f7d87bf78f4ebf9716164ae32f"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-07_selection.json",
+      "bytes": 1671,
+      "sha256": "aae795ba438b6bdd3468f009926fe3b413ca155bb502bcf35cf096bd36af4811"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-08_explanations.json",
+      "bytes": 29263,
+      "sha256": "e7f51609f8edb32bd987c6ada807a6a10e1991253eeee261845ee54f25e58151"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-08_model.joblib",
+      "bytes": 2257328,
+      "sha256": "7c85f47500b5fbaa396c9b600ddcf18ad02b62a9886739dd630a2f3ed51bb6a8"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27214,
+      "sha256": "f91ea5a4bb668a26fe5093757b525a7011d6f3f2ebbcaf98839f91e987d77913"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-08_selection.json",
+      "bytes": 1673,
+      "sha256": "9058db8e771fbf0b83ae6ddaebd05f21e7d6881ae604f11a1b50bf46c3ba15d5"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-09_explanations.json",
+      "bytes": 28357,
+      "sha256": "c864c83994bb780bbc1a5db083fe4ea4100cf66bcae32f5b398df50448e20eb7"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-09_model.joblib",
+      "bytes": 591772,
+      "sha256": "dff59db99ce9d7b616c90d4e8248d37065d477019de0dfc3cee48bfc84fc3927"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-09_predictions.csv",
+      "bytes": 24953,
+      "sha256": "84b5db7b5d058784ce24b0ab0440aada7f727093487b87b4b028db4d7c79980f"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-09_selection.json",
+      "bytes": 1663,
+      "sha256": "b6a8b28da66f283c22b9b4c6cdefc9d5067bd50d569f7d204bfa4af3057b82bc"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-10_explanations.json",
+      "bytes": 28391,
+      "sha256": "5273623c5f24ba0cc70e5826d9ddccf063853cfb088790a009c4c2c8f2905b37"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-10_model.joblib",
+      "bytes": 2006992,
+      "sha256": "e615b958651daee991af59db5866112fd4aa0cc14d84d4df7f4f7a05b8fd4176"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27167,
+      "sha256": "7be851d74df3a1a5d2cf75756aadaaaa184eac462ecc7e2ffeb051570e08e1ff"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-10_selection.json",
+      "bytes": 1671,
+      "sha256": "73de0af8c5ac67f9735aeb8777b4c1e8907e8387f59c439b79a2527e9d65c988"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-11_explanations.json",
+      "bytes": 27675,
+      "sha256": "2be27554c8542778ddf7a42cdf3fb068971dcacdea1cf54ead04fc235fd34bbc"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-11_model.joblib",
+      "bytes": 2075520,
+      "sha256": "ecfe92cee029b80f10d1e94585f7f43e4274cd2d1030790ec67732bd9d72ba59"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26296,
+      "sha256": "fb9480b71703bd7f418bc9ec02caf6396ab599878243630293e8c12139256c14"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-11_selection.json",
+      "bytes": 1672,
+      "sha256": "550ce76e157024a2ac9570bc70953d8027a8e029ea1912007ec6830661982c69"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-12_explanations.json",
+      "bytes": 27205,
+      "sha256": "10fb9efedf4e3982a56afd722cb7debc432f6e2d8ea4ecb3e6103098d31ac6b8"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-12_model.joblib",
+      "bytes": 2665904,
+      "sha256": "c5cff58f4c59a99bd9262d0ff9cdd9bf942a38d47a58bb7469a4c1e2297f2146"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-12_predictions.csv",
+      "bytes": 25332,
+      "sha256": "1a53fbace65fa405253900b68320b4fd8928cacd2e1065aa7c9b2efd6dd5f833"
+    },
+    {
+      "path": "hyderabad_h2_archived_forecast_2025-12_selection.json",
+      "bytes": 1670,
+      "sha256": "fcf0d9a8198bcf59764964d19384e8d4383f1f420815ffa8a86fe99a600f7af1"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 2320,
+      "sha256": "5b17023c78782de05c08f3e5c8cb4b2c603799b3db55a8432058dc54d7f72b4b"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1670,
+      "sha256": "b43d9921e08152f7926202cf1010a495f2c2426929a643975ccd47cc10507f2f"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27792,
+      "sha256": "21d7fb516f9e5631d43ab7b8585b0179fb19c59865586fd3e355af7fddd5ea10"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1670,
+      "sha256": "ea00f6090cc350c41b195a14eb1e36e9e8699fa12abb37f31014a883572614ff"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27611,
+      "sha256": "8b67ac18d9b326009f5feef2b85400fe11566b7a617e1fb259fcf7c0d1085d4d"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1667,
+      "sha256": "59d2abebfec444be0397d9632d08ac9cde7864be0bdbe7457a332ea41f2e24a7"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 26721,
+      "sha256": "cce7e899ca39530a2e6353618767b8593d7e351179ff90135e0ff77703b5030a"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1665,
+      "sha256": "d7fe1569ded3cce10873a231b7ff9094b90ee3804522f7b5c37b0fe37987683c"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 26013,
+      "sha256": "971a7d7c444938ad80d020e7b89c44c5483887f68d3075427dd1d68a37d81e75"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1668,
+      "sha256": "1fe85639d951bd5988f827b6bcd9c666d5f816a03832fde2494ea208c9a6db31"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26541,
+      "sha256": "27ff352de2183b4fa262bd4a782e4b1196f7845dc442931417a3a773b42d3eb3"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "49af1861ba1d21b366efd677aa36c8f1a51e53b4d46dc1c3e5f54059724f6a80"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25302,
+      "sha256": "5f09be4ad6b2858e4ff3c894726c610118cc3c82c6642a267a10d2dd0e1b6676"
+    },
+    {
+      "path": "hyderabad_h2_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1668,
+      "sha256": "f3671619ba1ef1056f5f46fdc1eff27ff9b69664944bb884cb7254b82b0b277d"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-06_explanations.json",
+      "bytes": 2788,
+      "sha256": "5d8a39d2224c27fb7771227703068a7970631d2813f3a4d3c5bf45905177ea4f"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-06_model.joblib",
+      "bytes": 2201360,
+      "sha256": "5dea4e273959df40f7955d42c9ab9593fe9831e2ae5c57e19bc6e7c8f0995e0b"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-06_predictions.csv",
+      "bytes": 3229,
+      "sha256": "cc6ad5b279110395d960708e2acbc6db04b07a28c1361321892c43213bb1f30e"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-06_selection.json",
+      "bytes": 1667,
+      "sha256": "f22b94b975c151cd9f33777e7c36b84b47b2da2d3d0ed8441775bcda168cd19e"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-07_explanations.json",
+      "bytes": 29169,
+      "sha256": "44acf3585ed97e5fc73cf698f4e23e0564bc2275ec893f189a137969f4499cc6"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-07_model.joblib",
+      "bytes": 2229943,
+      "sha256": "a8cd35a91ec2fcaadf4a34e690cf2247df24f9b74725ee4c73428f3fc71ddd06"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27321,
+      "sha256": "c2c0878199ef0ded78426a56eeb486aeddc46f34f48a86d6d0d76a1abedf7d15"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-07_selection.json",
+      "bytes": 1670,
+      "sha256": "503cf4c9e9c49564eb5d1af2fb421e7e3f41c505838f0eb777374704df19d8ce"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-08_explanations.json",
+      "bytes": 28832,
+      "sha256": "a0fe30616b0dbca8fb1784cd31fbcb59c59d3089cfd2785fc5ac4e63210b99ab"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-08_model.joblib",
+      "bytes": 2341792,
+      "sha256": "22a8d99888ecd76b429f493864501db4c62f1e0f16c55cf7d4cc921143d086a6"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27224,
+      "sha256": "a2958f857b63bba53ce7853ee86ffd25afe826a1f376c200b8ecdcfd7bceea50"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-08_selection.json",
+      "bytes": 1670,
+      "sha256": "94eeb8e87ab1c8b6e5e5ae537b2ccf13c72e0c8bb85710245e332bd4e67cae48"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-09_explanations.json",
+      "bytes": 27834,
+      "sha256": "38096234d431067dfeba90f1ab424bdfd840ee1bedbdadb8ea1eb824f3e0a6e6"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-09_model.joblib",
+      "bytes": 2353952,
+      "sha256": "74317d0d5c41e13304745d95bc68d32010aaa44e0cb37f682b6acc5d37570d28"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26441,
+      "sha256": "82d0700d44885b5ac1beca0e909247df4ccc0af471d674661daed8c26dcc89f0"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-09_selection.json",
+      "bytes": 1666,
+      "sha256": "b43d061915c2be595b0eb0f54e10fa6bc413b97ccf89ededc924919ff5d65d59"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-10_explanations.json",
+      "bytes": 28505,
+      "sha256": "7075796912cb1c235193a2b5dd0b31d21b30d4d8d15cdadaca81455474a10825"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-10_model.joblib",
+      "bytes": 2457808,
+      "sha256": "ab8f066614d47c3dd3d4c6daf23ed2684862234b6c30a53dcb963e760c401088"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27247,
+      "sha256": "19328c141354cbbbc7b2b5d13f5502cdb49b9862ff60feed287261fad2bec023"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-10_selection.json",
+      "bytes": 1669,
+      "sha256": "2f495112efebfe847cfe95c48a20cf9d6c84ee16240bac45cdafbb6369b55783"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-11_explanations.json",
+      "bytes": 27927,
+      "sha256": "56ba1d6cbb0fe4312ea71813a6d2ce5a71e31a4a02ca6f9f246f17075980c3ba"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-11_model.joblib",
+      "bytes": 2567376,
+      "sha256": "a93f61742d8e8138822c6b1f9acfb314c3d3265e1a421f876c6c50d34b07ad43"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26341,
+      "sha256": "dac0462b46eef561b2fbb1f6dff6e9ec887b259a2f589f6881086220e41c0080"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-11_selection.json",
+      "bytes": 1667,
+      "sha256": "1ce113923ee307b38968729285e6a563cff2ddcfec4dbcf93925f0a6dd89f7a8"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-12_explanations.json",
+      "bytes": 25885,
+      "sha256": "be6d9ba4a47052b66978c1376d34640b11401e73bd75e7429f93d73b41ff5582"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-12_model.joblib",
+      "bytes": 2154032,
+      "sha256": "8bb21089b3257ba49f4335d455751f6a5cce30a093bc3d12ea6554fdb1d1ffed"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-12_predictions.csv",
+      "bytes": 24415,
+      "sha256": "76bd1cb0904e92cc18c8d4ebec9f26d65850bcf7751863c8f89232bd2b96d838"
+    },
+    {
+      "path": "hyderabad_h3_archived_forecast_2025-12_selection.json",
+      "bytes": 1668,
+      "sha256": "fedc4e0585282dbbcd2f8643797f8f16d0285b5d0657720ed2ea305308065496"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 3207,
+      "sha256": "0823a1b74d03992deaae6d90aeb713af87b69871f66113c715a77c3a867e605e"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1674,
+      "sha256": "233567ece61f813570d7080b57a5e3aac159c927393de890fbd5a362f75ea58b"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27796,
+      "sha256": "80b07aea5bca50f087d25ea704a1ba7b10fae1cc64810816610683c681b14957"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1670,
+      "sha256": "1413c09a2ff7049a39bd144ffd2518f59b8ee0760d33df351c3e97426fd6eb0d"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27640,
+      "sha256": "313971d97fd0f79233ee6e574fe2c0431328aca5440b90b0a8eebe2635abf23c"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1671,
+      "sha256": "eb5ac4cc46e23515bea704bb7124e6bdd313a442d3b4add7235d5e65350570dd"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25323,
+      "sha256": "1744f8b4de0c1cf767f71f5bc6c94293209ee23a0848ab7b2e0dd5f0d481c745"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1663,
+      "sha256": "299f94817ab0a4e5637926b0fee937f813397c443425235c59a783e0dbd126f7"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 26013,
+      "sha256": "5693b465e2b9894a09d24850c3e3ea0f4f5b6fb12771feec4261df1077b055c0"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1664,
+      "sha256": "91239aadd0b896743be40743be10def071abcafb24923da2949f24dc0775e324"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26507,
+      "sha256": "d6dd5c30a7391f381c004dc14b400444d1e5d757558180210c33403c000758bc"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1667,
+      "sha256": "327fd3b8e65d8c88d3bfff25e0f65ec44972aa3ac77e10e77bcef5247a301032"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 24426,
+      "sha256": "4e95339459cc8280efc01bda0923e3b7c6717372ee2c09fa5697bdb34ec30392"
+    },
+    {
+      "path": "hyderabad_h3_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1668,
+      "sha256": "c9f6756c4cdc3cb83bbe92d028e1e477cbcf8129b72d15bfcd902248d1fa2d20"
+    },
+    {
+      "path": "input_provenance.json",
+      "bytes": 7292,
+      "sha256": "058ebe6616f8b0822f74a76a85c4edc4c734ec9e50d6005df8bd6d140c8502b3"
+    },
+    {
+      "path": "kolkata_forecast_evaluation.png",
+      "bytes": 329851,
+      "sha256": "4b8509badcf3877953b605a952a8d9e7ebeef6c663eac9b3c5db44bebdbe1e21"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-06_explanations.json",
+      "bytes": 947,
+      "sha256": "2a35d98f960048dbcc113c07becc383db033010c13fe3425a96c2f0b6b4bce1e"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-06_model.joblib",
+      "bytes": 740938,
+      "sha256": "98a8e178c2ebe95a7bbbc4416a684f262f32cb42f935deca57425af4028f79cb"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-06_predictions.csv",
+      "bytes": 1497,
+      "sha256": "b1c5b79100f2b7ddbbb9f13ef4384c742248e6bbd504cbcaa3d68422cac7422f"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-06_selection.json",
+      "bytes": 1671,
+      "sha256": "23c0b3a71df0f5161c192735527f322eab43f29fe5e59bc2ce56d4b84ed96bef"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-07_explanations.json",
+      "bytes": 29006,
+      "sha256": "34b33db44b1e58ef88d9a82fb013b8eaf25e6b56f2ea8fc243d6280f835dcfbf"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-07_model.joblib",
+      "bytes": 741786,
+      "sha256": "3cf38141e2cbdfad8266dbe2cecbb4a50e5ad86c86fb964a77fd68e7fac8b36f"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27193,
+      "sha256": "61616fc082519e3c5a84c3093b331052daccb3cf53934aff7fb3a632bd1855f1"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-07_selection.json",
+      "bytes": 1669,
+      "sha256": "17beb69017073e18e35dc54fb428d571a8f3f0017301e67f1f90e3ba965d959e"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-08_explanations.json",
+      "bytes": 29035,
+      "sha256": "ac8b6e5f6d21095f3f804e7ad02a98df566d4482194164e78adb7aba3a505439"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-08_model.joblib",
+      "bytes": 668506,
+      "sha256": "3c9ec11bc569e4df16f1f5908134b5d4dcfd70e0b37619dff171473cb77cec73"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27252,
+      "sha256": "4376fa4e139bcefd2b65f49d23930622e6662fdb9688b836a427b505bee667f6"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-08_selection.json",
+      "bytes": 1668,
+      "sha256": "83f0d7a6b96af2c1388c6e27da5d4d9b38b6810b5c23dd81485d92eb87c30ef3"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-09_explanations.json",
+      "bytes": 28295,
+      "sha256": "fdb2f00d0a0068f861fc647509cc142546e23385d415f5b5072135852b0564a3"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-09_model.joblib",
+      "bytes": 661274,
+      "sha256": "c4c4b3ee03f32b2cb336056e80d33a589091e59b213666da312a400623cd7e71"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26535,
+      "sha256": "ba15e750517fdda0af948d39d5e63b293e83930ae2bccff779442ee7ea5b23b3"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-09_selection.json",
+      "bytes": 1668,
+      "sha256": "35102b3edb98afe3f2c3b1275ae49da05a922d5b363e4ca30becb5d701a7ef93"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-10_explanations.json",
+      "bytes": 29081,
+      "sha256": "b31a9ce8ea7c238c02a27092c18a0d33508f3b21b7d83e7773e04cbc2796639e"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-10_model.joblib",
+      "bytes": 665834,
+      "sha256": "0c150e20687449f085e1f43049a697397184889a6551b57f918cddfc4a95d7dd"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27072,
+      "sha256": "298409f23b27facf8f5d308c00dac4c178cd016230e5d8fbe591166985bfe73b"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-10_selection.json",
+      "bytes": 1665,
+      "sha256": "238eccd6580aed0d27f6a0c2960656c4ade73d94ac3d439df64fe594a62245a9"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-11_explanations.json",
+      "bytes": 28096,
+      "sha256": "fa8bdc279b0c24f931177ff449381f3c815aac0a8a9aa9e381e972b8f0359ed0"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-11_model.joblib",
+      "bytes": 661258,
+      "sha256": "53778d2bce381582c968064648e10b6f67863a4efb6f498ceec7287177916770"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25968,
+      "sha256": "d353204432319bf0ccb37411f84f2e01fb70f5c35b4ed3414e28250f3f6ae7c4"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-11_selection.json",
+      "bytes": 1671,
+      "sha256": "a0ff1947fac58fefd1f9d172bd84676a4d306c7367b3acd399f0bc464f0701b5"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-12_explanations.json",
+      "bytes": 28010,
+      "sha256": "a107f49f20ec82e8cc9bf7512b929dc1eb0e41892aae75651a9152610239dc31"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-12_model.joblib",
+      "bytes": 547306,
+      "sha256": "8a5f9a2d50a5f3800b1b3b4e879380c18241ab186a2d88a586a3155183a0b438"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-12_predictions.csv",
+      "bytes": 24673,
+      "sha256": "239d867ccdfb513a9a24b5dfdb4f50f8c536ec68de50728dbc74520f7a2aea0e"
+    },
+    {
+      "path": "kolkata_h1_archived_forecast_2025-12_selection.json",
+      "bytes": 1664,
+      "sha256": "1a932025da62a882347dbb89636c5265e52caf68d2609206dff9dbb665cfbdd2"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 1413,
+      "sha256": "5a81cc71f0835adbfc87007a8fa8a8abb30bc26e8eb8c51bc09d50929b6ea7ba"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1663,
+      "sha256": "21c2771518d33ea11eb2a0f4482692840eaf1b1eebeb742d508c452cf3601c53"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 25998,
+      "sha256": "8cba1452fa9d74ceda99a73cfc503b0d53bf87363168c2f8de9728c370affba7"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1667,
+      "sha256": "ea060fc711ebfe26097ba2b971db01f5b15771b571e562a9f8d384f5312865da"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 26019,
+      "sha256": "cdec6fd647d3879d1bb61645b0e72f7324407748d4e46ab5c9861d752d86c67d"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1663,
+      "sha256": "4813b8faaaa02b08896d7e54cb53b963c3223e2dfe50ae2738145142684ce1e5"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 26846,
+      "sha256": "0b7bb320d2ab3c08560ba28fc3d0b3476d8bb928f06c9720dae4b1c1d0e2c95d"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1669,
+      "sha256": "6a9843c9f5594aeb738ffe7266f93ebc1f34ab101d18d7490e5ff32408e7e526"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27417,
+      "sha256": "49f1d94f3fd7226afd888d80db5cfada678e53df3784c0b062dafba8fbd4a159"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1667,
+      "sha256": "c25d9a8ad7a8a6b1b70089bba9d0dc329971b1bc62e2fa929fd98e0d884cafe7"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26216,
+      "sha256": "5162efa5fe005dd25eccc4d4412f6455156cbd4548bdb396850b835b04907bf3"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "09434a41570fc4c9df7f03604b2624ae20226b5d4726cb30da2cf9737b68b727"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 26481,
+      "sha256": "11f14f659453c7fbb27e355eace831fdd51a1ae14400accb2081ea07a77a85d1"
+    },
+    {
+      "path": "kolkata_h1_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1677,
+      "sha256": "06cc8dfe18c8b648edb354494a10be6adc151fdad145f065a7c2365cbe0a4904"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-06_explanations.json",
+      "bytes": 1888,
+      "sha256": "ba2cb621f6790253263de40bad54a2b3e5748a540ede1cb7d84039ad253101f4"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-06_model.joblib",
+      "bytes": 753834,
+      "sha256": "372cd35c1f09bf4b2a4ff761e226b7eab38b5ff5e9d6b2b689851b0586f8ba1b"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-06_predictions.csv",
+      "bytes": 2338,
+      "sha256": "544b1263c93e4080b1318480a3125e4f0e16d296509bfbcba0b24eb424810ae2"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-06_selection.json",
+      "bytes": 1672,
+      "sha256": "5ddcae2b7d454d9f4218500086ae2087e9f90cc461dc840c8ba6adece799c2b1"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-07_explanations.json",
+      "bytes": 29189,
+      "sha256": "90cd9e686e78a677d0d15a8b526e9ddf46af772d1cfc20bf1295e97e02124181"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-07_model.joblib",
+      "bytes": 675546,
+      "sha256": "24446541bf844fd80f31b76aa3cada5a0a34d272c4c845b8f7b90739f2c0eb08"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27113,
+      "sha256": "8fb5f3c061605e712be65c2ca8813a87f572f08d991733b2a57a9a8f9d16fe51"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-07_selection.json",
+      "bytes": 1670,
+      "sha256": "7e17e8c42226fcda0bbcbb570aaeb2a9563ea8af3e9c9ee2388d8ac5bf74e475"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-08_explanations.json",
+      "bytes": 29090,
+      "sha256": "efd2ceadbd3776f7fa5ae66850222a969fdc11001abdd613d1d9f071733be928"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-08_model.joblib",
+      "bytes": 550442,
+      "sha256": "5e244c463009a062c7759752545b39a6f21cc99e360b8b401b3da516cd9c0f6b"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25699,
+      "sha256": "c8f99aabfe1dbaf3cc7df29db1f3b03acf1a68874ed8e91f1833eff32e554ee2"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-08_selection.json",
+      "bytes": 1665,
+      "sha256": "4b5633945a510c0bd0e3711e2baad69c1481e6db14a0be9ed51995e6a274666b"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-09_explanations.json",
+      "bytes": 28185,
+      "sha256": "a243604c6093dc76a3a278f140b5eb9c85b29fcf777569aad6442e446030d1be"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-09_model.joblib",
+      "bytes": 557770,
+      "sha256": "3af8f12d7388659ba1c9899f2b5497d72631db84e5a9ef16a19480f42de07b8f"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-09_predictions.csv",
+      "bytes": 25012,
+      "sha256": "0239892fbb9c2eb4eba6b90863fb1af9184c9ea5d05768654d27e23c45c633c9"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-09_selection.json",
+      "bytes": 1663,
+      "sha256": "e2aa6e2271094bdab43668d21700663ec5da83073a934d3724c9df5a465976e0"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-10_explanations.json",
+      "bytes": 28822,
+      "sha256": "9f2719dbd0afe03c0337bf8510000cf8d251d0b76b0060f099900949c3a3e152"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-10_model.joblib",
+      "bytes": 633770,
+      "sha256": "1fbb77e68e09541b9883742ecd3ee5683a703e3c5626cdf7ceafeacf5e50b4d2"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-10_predictions.csv",
+      "bytes": 25630,
+      "sha256": "5404b76ddb3e841c87810291fe7d833da899d576349e5854bd26975711ff8098"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-10_selection.json",
+      "bytes": 1664,
+      "sha256": "0719fd0bf908a3dcb288b840723e5fc92001fd184b6eefb42a8c070d71e0c4c3"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-11_explanations.json",
+      "bytes": 28000,
+      "sha256": "0c1f3f827c2424993e0ceefc82ff1d81e7d8ec68a41387ca84ca3f729a472e54"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-11_model.joblib",
+      "bytes": 641018,
+      "sha256": "2fbc7867667df0ad23bbe2aaa9d4930d3eb13564fca3fe5d9f4577eeff462b1c"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-11_predictions.csv",
+      "bytes": 24461,
+      "sha256": "cf89db33d9411bee1bca3f8449243ae6d544013e1b8510afa7ce13e36e61a691"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-11_selection.json",
+      "bytes": 1662,
+      "sha256": "f27383f89377ea55bb8cc4ce7f926b5259b0be0332baccf69f3785337d40c2cb"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-12_explanations.json",
+      "bytes": 27151,
+      "sha256": "ba4b77c3e82fd7ce6c566a3a646c55d4b11c824e880d96f0e3d5608cc21532b4"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-12_model.joblib",
+      "bytes": 571706,
+      "sha256": "120a15badb96161f76874fc9f98295928ca7ffcde6a7efe831b8af1dc0b80f31"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-12_predictions.csv",
+      "bytes": 23445,
+      "sha256": "fea431f214b53522859842d327f3c8cf6872e35670fc202907049d28cec17ff1"
+    },
+    {
+      "path": "kolkata_h2_archived_forecast_2025-12_selection.json",
+      "bytes": 1667,
+      "sha256": "e2a93b26f89b5fb8e63ca75fec136f7e0bce7f8d64c6d3c3c84955db99acd58b"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 2221,
+      "sha256": "20a60454a2e08592901f3c22585767dfe896bac6d1e7dd334426ab1690ed4aaf"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1666,
+      "sha256": "5fecfa35302ffaf15b308ce81d36a3c91ddd389c7c7b6610a52a95eea81fc5a2"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 25972,
+      "sha256": "96ac2f1fc6a70037cf3e2246a1bbc2297dcb18a0371ee0804e1cedce40ffda1f"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1665,
+      "sha256": "d30c0a6df277b37b04c4f9db35632b97559979273f6c30cfb34ab738e8a0a457"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 25995,
+      "sha256": "85c79cd00a57ab3540ee488534c85aaff5cebeac6001eb56d90955d686d1d023"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1666,
+      "sha256": "f10b7868c6303935a458be46afcb1f2e63632cd82d0c79bd07537b26ac39da0f"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25335,
+      "sha256": "cd178b555e51e488bf7184c7c9e1e1a93cb8516222d32b2979d23b829df5453e"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1661,
+      "sha256": "8a2ec1c8b17d1d0d487c429a1d1edb1c1b22c9e013dde2063e3efba360f9222e"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 25939,
+      "sha256": "60112a445918716fa35bb9770040d807b426f578e035c724c64ee9843718016b"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1663,
+      "sha256": "9226a9e115712079bdf0fdb314f546e18459b4200da84f3ff2bb5b24ed4d3da0"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 24784,
+      "sha256": "90624976fbb6398e93065321e871340da8c0c659cfceb41bb4ef003dcc4d4fc6"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1665,
+      "sha256": "c557c0588b596990dfd76462f2288e22c4d80e2b63a434939888a8d6ed2bea5f"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25636,
+      "sha256": "acbff0f9aa7118f2f3ea9f9ce0063461842bcbbda6efcf4f2a7b6384b969311c"
+    },
+    {
+      "path": "kolkata_h2_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1673,
+      "sha256": "158aec30c2a25ebf17738b799d14cf6109a634e747af7b3682fc34c4e58269ef"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-06_explanations.json",
+      "bytes": 2848,
+      "sha256": "156d5a7b57c7d1980da225603c683bfb5996eceb2c291be28b0e7b7d79fb8445"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-06_model.joblib",
+      "bytes": 551642,
+      "sha256": "d3699295f6ab150f3eb0266c98ff62c31b679420d43df9ec03711d2188b2f94a"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-06_predictions.csv",
+      "bytes": 3054,
+      "sha256": "6c50586cce0204a58f69a72220ce447681f944db84d9b37a0c773999e62fc0c4"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-06_selection.json",
+      "bytes": 1669,
+      "sha256": "5c4772369da89a185625d42075ef28b57a3abdc2426e20b8c26fc701a1c6ccca"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-07_explanations.json",
+      "bytes": 29426,
+      "sha256": "c596e55a80bdd581e5eeed3ab2040f6348fe730fa16b9fad9ff0278c9fcc3d17"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-07_model.joblib",
+      "bytes": 552833,
+      "sha256": "871a5c08ee3f56729e8959c076e87932b4b43d04c6f8648b48430ee7598024fa"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-07_predictions.csv",
+      "bytes": 25599,
+      "sha256": "f655fc0399f0c2efded1f6c6bd63884a38cc35906c15d22d349fb0159fed1a0a"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-07_selection.json",
+      "bytes": 1670,
+      "sha256": "60f12505528173648eb56aee74af99c66ac767784e9b6e48c9ee15e555a3fed8"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-08_explanations.json",
+      "bytes": 29443,
+      "sha256": "5c0a883890f51f31400b968114a49264d5c6fe3e9adabb343c12ebcdce768e13"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-08_model.joblib",
+      "bytes": 615226,
+      "sha256": "4f258e269cb6acda1ece20362996923d241e564891cd4cc96665b65143305afd"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25768,
+      "sha256": "74d53d6514816beb001b9c0367217fa2c8620dec476a2cf5304f77b98c60cf15"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-08_selection.json",
+      "bytes": 1664,
+      "sha256": "67745ef3db55b9688449b6b03f902ad0c3942b573bfee6cb46a293891264cde2"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-09_explanations.json",
+      "bytes": 28522,
+      "sha256": "89fc6e652f5d52aea0869e1941ea943a1bdfe2ffb6f339a63b87473eb2f03f09"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-09_model.joblib",
+      "bytes": 554506,
+      "sha256": "045fd6572625d3ea5bb04b8543046340156c811126cb16c226bd3f1e61537e73"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-09_predictions.csv",
+      "bytes": 25042,
+      "sha256": "aa6ec84bb0697baea3f3eff73ce7e6921c8435547673fa8544e2ae0cee955eca"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-09_selection.json",
+      "bytes": 1664,
+      "sha256": "af0aef77ebb5858410af8240855a0756c616e7986b97e03d4a32e5e29f005dab"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-10_explanations.json",
+      "bytes": 25679,
+      "sha256": "4f5c19d8b067afce3bddd629c1d07952b678ed1529b6c8c765ebf3a9dc1332fa"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-10_model.joblib",
+      "bytes": 617045,
+      "sha256": "17b144db96d4898aeb2211d7028cce69ac936e36a7ef420d37d18c4a19bfa8f9"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27284,
+      "sha256": "949c0c70ac30e58b4c02efe7c9437ef0fe86d24492f169321d70138adf95e065"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-10_selection.json",
+      "bytes": 1673,
+      "sha256": "a0939dc4e559ee857925c01919d260de3a58cb50a8f760f901e1fe09c523826f"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-11_explanations.json",
+      "bytes": 28139,
+      "sha256": "84c339e6d561dc8176e5e18d8a38b9d7f14f0627454dc8b8dd9c19933524e1e2"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-11_model.joblib",
+      "bytes": 680602,
+      "sha256": "e957b4df4ed6e8a59559198176235d9edf6d2d36750dcab4b900b9a91dea3318"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26029,
+      "sha256": "2679bbabdb3a9330745e7a1bfd13d84d76c53a994662d4457a61c788e4f6351b"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "12ef33b3f25192e1573e816b7dd65458d90031030d0122878a06168a7b25ee07"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-12_explanations.json",
+      "bytes": 26351,
+      "sha256": "587e6ae38b5df51a662eac8c6245c8181c1b673d4c9d22a0eed2a0e2c4fc0597"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-12_model.joblib",
+      "bytes": 654122,
+      "sha256": "360f3055bef1341eceeb592937909973d20cbaae7752d191b037dfb24c3f841a"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-12_predictions.csv",
+      "bytes": 23092,
+      "sha256": "ab37f5d8a60e99996acf37ae5bf2919d3ee57b8b4dd90da75ddb7db94c1b141e"
+    },
+    {
+      "path": "kolkata_h3_archived_forecast_2025-12_selection.json",
+      "bytes": 1663,
+      "sha256": "ae6301421e681393227bd89b14d72b03956df916088e8c8d57c235ee7cfa76f4"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 3019,
+      "sha256": "2c388280c29b31effeacd315f3d24f9533a67e41e63d9d303d39b1e9dee4f9b3"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1666,
+      "sha256": "59eaf9494f3c8fd212b142f108343dbdf85074bdc390990ed3f787e43a1a4539"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 25957,
+      "sha256": "13f6599014a9e60a56dfa8bfaa386a25cea66860a38b73027dd7679d9781e53a"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1664,
+      "sha256": "3f523c0a4ff5a09095eaf3a6b08788f6de3818573214407d16e4f38b2927522e"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 25928,
+      "sha256": "7d187cffd6ab93d8736b791bc57597e2cad429623a3b6112f7246e1962943d70"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1663,
+      "sha256": "24b9453f653667cfe3fc8bc60e6474bd1169bdbc1302dc71d92568446563c3c3"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25334,
+      "sha256": "7313cf8da9a568212b5235e7231ad78b28ff7796ff18f2dc7d5fbeb82f1d9ed6"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1661,
+      "sha256": "c310172148f408764a87254a2b99f7704bc7322e98fd070e6d1ffbdef39bf05c"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27546,
+      "sha256": "7bcf9a231eff3fc5fec9c53294ebb8f994464a5e52303398b9b6499b34117c60"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1673,
+      "sha256": "11ecc2c3a1178d556ef5a760f72aab9f7fab89b7fb2fd3a11ab5889d93e3ab41"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 24777,
+      "sha256": "68ee8866aa3b5bd8e880acac60f4bdfaa8cd720097b99e2b5ea7a859a49223b9"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1663,
+      "sha256": "25073687be0139d01b86d507a4850202c45fb145bd0b43e0a005dd57cad11b16"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 24770,
+      "sha256": "c8b1d5347d1764bd9a7e6c2517470b886ee52fcb88bf177b845c6d41fa6394cd"
+    },
+    {
+      "path": "kolkata_h3_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1668,
+      "sha256": "27505c57736fe3bdc233316dfdcad2807e33d412b370bd8cf6263a05c4fbb7d9"
+    },
+    {
+      "path": "live-weather-proof.json",
+      "bytes": 568,
+      "sha256": "b992a68b71534dace77cb25d01633a2dc07cfc2d1767d5c6f40a2386d34efbf7"
+    },
+    {
+      "path": "model_comparison.csv",
+      "bytes": 64178,
+      "sha256": "ef3ddf1831494ffbad92d1a1c5346de8a74e4fe66b0e213bf20e73bb3e596f85"
+    },
+    {
+      "path": "mumbai_forecast_evaluation.png",
+      "bytes": 302698,
+      "sha256": "85749db56b6f6084374b307e54b8e123da0b19fa73706a95158a7ba4cf8f1041"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-06_explanations.json",
+      "bytes": 936,
+      "sha256": "895cf6577a3954060a84b6c66562abf73db5979756dd780a7d9b65511f900809"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-06_model.joblib",
+      "bytes": 655273,
+      "sha256": "491001f9f459159ef5265096343d83479c193dbae96a7c0eebe2c2957f676823"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-06_predictions.csv",
+      "bytes": 1454,
+      "sha256": "682e43216731256b463b020ff84269e9b8df45d1e5ba0fe45d5b16b1f4d80d79"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-06_selection.json",
+      "bytes": 1672,
+      "sha256": "6e1e3d1e2078c13f52b83a892d6074494d39199b98dfea7b20c834dd8e880c98"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-07_explanations.json",
+      "bytes": 29134,
+      "sha256": "29dfcb2d8c0796d530d8c25b8ed32f7ba4a372cb3929f93184c451d257c713eb"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-07_model.joblib",
+      "bytes": 655385,
+      "sha256": "adb1d6255d0911e0e83f263436efcc22c73ffcbd401c829f400669e56e0e8557"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27461,
+      "sha256": "6d0664ce9c7500d0f48b856100610cfad31460b865fd012c6d136e6e807edfc0"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-07_selection.json",
+      "bytes": 1669,
+      "sha256": "372a573e55609b09c7a77233545b06019221838492f3c9003b4e06b9a766a6b2"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-08_explanations.json",
+      "bytes": 29214,
+      "sha256": "a0a51600d8552e15f9209136b486d0cfc638530ba4503d637dcf1f48c6202fa1"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-08_model.joblib",
+      "bytes": 1852733,
+      "sha256": "0919a0fd77d37537024be0e64b924dbe2f1e25fbf6e41b9639997160b9cf3115"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27414,
+      "sha256": "eb238900c09e560bbbee54a065dd4ff11ed2fe54512798f44320aabbddfc9ea8"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-08_selection.json",
+      "bytes": 1664,
+      "sha256": "98bf6b0ca65e074533c582ca4c3a4ad5cc426e5d4e348bf48fa0efe550819374"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-09_explanations.json",
+      "bytes": 28294,
+      "sha256": "1f1dd814deec0236319b95cdde08016e581cfceb7784b5f51b727a2d9cb34b08"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-09_model.joblib",
+      "bytes": 610585,
+      "sha256": "8197dcfaa537b888511d66f9ced96c2e5a3d28c4b88d5874fa9b71724003e6bc"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-09_predictions.csv",
+      "bytes": 25291,
+      "sha256": "f1fcf6eff70872c47ea90913db68eeb559ca3ce29f90f6b29e8068cc4bc5d76b"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-09_selection.json",
+      "bytes": 1663,
+      "sha256": "f3f091e04a66317c91f2eeae39f66f8b2a92037fc13473a87cc26dded17e00de"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-10_explanations.json",
+      "bytes": 26223,
+      "sha256": "8c662647fa0cf208cd389768233e674f04f2e4a44193857f34b3a86319b05b12"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-10_model.joblib",
+      "bytes": 538522,
+      "sha256": "bbf1c806f61164841c0eff5072226296592cc009053b399aa3ea7205316c17ab"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27197,
+      "sha256": "48f1b6e87a57a89a058e20989c7831ef206b1fa0f85fa75d528b5b6600f1439a"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-10_selection.json",
+      "bytes": 1664,
+      "sha256": "0951264baefb42b88a8d43daabdaf1d0cd834530b87079acf10d203d2cb60e5f"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-11_explanations.json",
+      "bytes": 25214,
+      "sha256": "e5899a300bf7e9d748ffaa78bf571808e0e0de2df53b69b947429b019a8026ad"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-11_model.joblib",
+      "bytes": 618100,
+      "sha256": "b181b753daf5adf132bc3744802d468ff9479fd9915d8060a739d4308473acbe"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26089,
+      "sha256": "fce7762db9c6261f5576528c9ddd066766fc617d4ecff10a583f382d587004cf"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-11_selection.json",
+      "bytes": 1677,
+      "sha256": "496742e28f7583e6b56ea4605ad824ddef600f316dd698915bf3fd11bbeec4c8"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-12_explanations.json",
+      "bytes": 28077,
+      "sha256": "6eecd74103a320d6aa055da856914ce375c52b22b75575733922c7f21ceb9b4a"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-12_model.joblib",
+      "bytes": 681737,
+      "sha256": "420bb9709d730af4249b8cc1f3bbc91483f8b838e607341c822aa97c0600f8d7"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-12_predictions.csv",
+      "bytes": 25956,
+      "sha256": "a65ad22fda69dd9c58f86c7c70e8811eee5a37f8201f5ef3c39a2b0bbe3b6e48"
+    },
+    {
+      "path": "mumbai_h1_archived_forecast_2025-12_selection.json",
+      "bytes": 1675,
+      "sha256": "41be2e8bd53d51cdd5730eb562cf91ded076f38ea0f0c6c11400aeab7841782c"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 1414,
+      "sha256": "c8a0a6c27e7b2164433dedb6e600df2714776161fcd2769de13a7eb97ad4439e"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1661,
+      "sha256": "abe3f8b24283fe4755c1dcb3654a613c9d70d31e57b4c5b9d4b939b7c0b50291"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 26214,
+      "sha256": "8326bf2cf3d4ca06ab262e27c7dee5fb1e1a000df03e5498a6cb0b3b0086f4f6"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1665,
+      "sha256": "a046925886e0c5fe365596f3863a6cd3c06390fcd1869bc5d78d7deb9dfb8a51"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 26225,
+      "sha256": "95d4dc73e285f73302d1974b4b9f708f46299038be356edde292723b93048f01"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1662,
+      "sha256": "98ce24a91b9a4dfb66bc804b9e039e14f0603a4d3c486750ee4e6f59aecddf22"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25520,
+      "sha256": "2b926effd775607bc3e438934a373fdd195fe92857ca86249b618d697f82c643"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1662,
+      "sha256": "b7384809c82ecd253043ba813236c607cef44d0f90515b7087f7e45af6b66bef"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27325,
+      "sha256": "fdcb1c6ee0b438fb85b25c5edb7d3e9b811b7b4f3b7d38657bba352c05be0bd3"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1668,
+      "sha256": "7bc23dfca5ac360a27659cf9ddaac9cfed48867b73c4e1ef171c34cdd6cefcd9"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26101,
+      "sha256": "69382929957a9ef2cfdd9f520cbdf9eb50b20df720cbb728b77fa2a72a1b64ce"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1677,
+      "sha256": "e8164b071c54f72baa9a1e46dacb5f253174a9a208fb603e11758322371e133f"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 26157,
+      "sha256": "ce0e5ab1919ad6bfa64c74d8987e36bf609f617b80c7c33542d14771e54779ea"
+    },
+    {
+      "path": "mumbai_h1_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1671,
+      "sha256": "b49ee4860347570ca837ef2bb02166ac4ef118e4a92e03940bfe12294da60e20"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-06_explanations.json",
+      "bytes": 1859,
+      "sha256": "c8f1aa0c367b77de95bef19060bad42046dc516e49973e2b235f4d18b8966faa"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-06_model.joblib",
+      "bytes": 609673,
+      "sha256": "5e0823efc03d19f1fdc02543ade453b31060a61377f41aaeb266561d84f4020e"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-06_predictions.csv",
+      "bytes": 2195,
+      "sha256": "616e969bd8ae32b5c5c08f7ef1ba19843740fbfa46996546efb9c18c5f07c51c"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-06_selection.json",
+      "bytes": 1665,
+      "sha256": "760a6235d6a55097fdde8334cb190452c33ba3552577d4cc0a9a64f1151a7f5d"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-07_explanations.json",
+      "bytes": 29112,
+      "sha256": "6db961fc87485706b26eff34f5167b5898eb670027c528882cdab75dfc20b15a"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-07_model.joblib",
+      "bytes": 1783773,
+      "sha256": "04e8615eb3315f8bda4d36193e20e3aade31e8900a6a4d9b59f8252f1e7e75b2"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27148,
+      "sha256": "c375d5e5b2040018e063a9558a1c659dd7a1725212643199476b8c56869cff32"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-07_selection.json",
+      "bytes": 1667,
+      "sha256": "bcfdb55ec6989a8fd387c769c600de65779fa931a3a858c461bd0a4b9b3ba15f"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-08_explanations.json",
+      "bytes": 29188,
+      "sha256": "79a3f9c88747bbf0d4023ba31e8aa05b946a54cbccca87ee03f759c6de8cf0a2"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-08_model.joblib",
+      "bytes": 1816813,
+      "sha256": "6ae908689db0aa97491d742aab5fe4b1d10353bc8479bd2a6a0ec90f8ae9ad52"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27376,
+      "sha256": "a06a27a97a0cd083012f93d6acfec6540ab337f8dc2a2c9e1fa8043fb63e5992"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-08_selection.json",
+      "bytes": 1662,
+      "sha256": "f788f1050d9f0d579ab47fecccf2dbd6a7b070aa561f6e51e1a5c14e1576b878"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-09_explanations.json",
+      "bytes": 25449,
+      "sha256": "fa7cc0b22427f3cd87cc13dfdd980dcd40a9d9af9361d4dfbd76ba2fa7d79f3c"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-09_model.joblib",
+      "bytes": 616010,
+      "sha256": "af18a0bdd1ca13e75439797c2600343d0484bc563013e7bdb6cfb68172f558b9"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26582,
+      "sha256": "5869a7b8c5177cf1636b7417221fa1138734bd46c7ad0ad79a39be208a741a2e"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-09_selection.json",
+      "bytes": 1663,
+      "sha256": "5c5609e4f273fe636b4e9740a014747d7b70b1ac7c44fb699ef148302346a1e1"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-10_explanations.json",
+      "bytes": 26221,
+      "sha256": "8b58e38f3c2320aed5ec61588d13d513f8e1fc922b7ceb8acee7e87a5b2bf74d"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-10_model.joblib",
+      "bytes": 549178,
+      "sha256": "a87cf5acef6dbc1023ecbb5d9bca95bd5a00b46490514592ade0092d42a03dfe"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27161,
+      "sha256": "021c8f81b0bb2a36c5367ec9b40d1babc327758d59d696b01d01cbe16df448ef"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-10_selection.json",
+      "bytes": 1666,
+      "sha256": "9cc44f17707af41f43ce1027fa208af375c35f821eb64b638f0b144a9452dc47"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-11_explanations.json",
+      "bytes": 25211,
+      "sha256": "f5365d32fba303924e862f70842582034709b02eb0a4a0f0cd400bac02b9ef86"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-11_model.joblib",
+      "bytes": 550244,
+      "sha256": "2485a90d086299e1d2f453d1692b2f9eac02c8271e28308f3b3fff4ab64566f0"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-11_predictions.csv",
+      "bytes": 26049,
+      "sha256": "6d8f5e816865d2e39969d84da089b3585c1302efe458c0cbd9ca12d5948e8428"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-11_selection.json",
+      "bytes": 1667,
+      "sha256": "a81e8a8b2afe0b0741e1f4fbb1d6b348b9fad2c9d3930af7090f964fdbddcc27"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-12_explanations.json",
+      "bytes": 24403,
+      "sha256": "b4e4244649b5f5fdfc2ab8ee8f9797443d622135c9370fd2dc02d4887bf46bc1"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-12_model.joblib",
+      "bytes": 653988,
+      "sha256": "0a7cd9c576b3f422193fcd0e9f0d386a8a0dbff5d32d8b3fad45fba27ce64430"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-12_predictions.csv",
+      "bytes": 25224,
+      "sha256": "589d1c1db98df7dd55e079595851482fd4c210f7b09bd68763d94ed3fc3e71af"
+    },
+    {
+      "path": "mumbai_h2_archived_forecast_2025-12_selection.json",
+      "bytes": 1671,
+      "sha256": "19a56500cc3bda564940bf8f873cd04d4ff7f5ebf73c5a8fe0a568c18b72e471"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 2241,
+      "sha256": "8d027c560f1e49fa0f4e0538d1c033f38420a7589807916642ebb603252ed657"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1662,
+      "sha256": "17ae99f69deb63a53bca0880feedbca57daf446b3329af39225dea36762fc1e0"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 26103,
+      "sha256": "4d9c83877598042670fdf8230a32eda3e8b8a3da2bb9cee7cf378efd295f2650"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1664,
+      "sha256": "a3149b881bce3fca252913b0359cd2297e78ae5bf92ebded6f9ca5854b64420a"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27638,
+      "sha256": "83d725ad099654d1ed26eeeef89155b42d266ae4e4620d7c3d18b248c90cd7d4"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1664,
+      "sha256": "4f35d575a9a2cb4bb426e1acb01fa2afe8522fc781a0f7aabe7a74174c5a0d07"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 26905,
+      "sha256": "59c041bb57e75f43dacd7cf30aea426497225513dcc561d0e7ca6938a81ae538"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1664,
+      "sha256": "ecb99c62958cca39e717fa7b31d53de99f0153bb88d31998c1313d993301062c"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27331,
+      "sha256": "fa58fe1d311c50515be45a848bd21003aef199f7ace40a1089b8d011ae4a8799"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1664,
+      "sha256": "ca7be42515f3bb7b658435964fac3e0974c2cae09352739b3f5cb5b133b126bd"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26067,
+      "sha256": "aac28af68affadd117de0cf59690bde23aca0da437683b08a80f130dbae52b0e"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1672,
+      "sha256": "dc129f205fcfaf00280a8531586fed8238f71b095a2ac910745036184114bf37"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25293,
+      "sha256": "142c05fc1eead5285028ad6656d4d37d45bfad6dd1eb730c74cfebbc4fe20b80"
+    },
+    {
+      "path": "mumbai_h2_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1668,
+      "sha256": "ef50299fe3c3c24265717ffbc6a35a3e7714209ee840a65f50151d520cd9c3fa"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-06_explanations.json",
+      "bytes": 2834,
+      "sha256": "4ccc6b151998b1ebb343af995ae05a76efd46529d29c12ea3fb601505a74ce77"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-06_model.joblib",
+      "bytes": 554457,
+      "sha256": "4acf777186996c974c105e36b2ef4a61cc1c1e9d6e447a41240cd99dea746ae5"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-06_predictions.csv",
+      "bytes": 3067,
+      "sha256": "d390510582c0f193b565ed393461f74b8a74d5c34064565efd9a25d19b7b3293"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-06_selection.json",
+      "bytes": 1664,
+      "sha256": "ab03f699aaa6610cdd4c7fd0769262222994158f929082b5a848baf131e2a756"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-07_explanations.json",
+      "bytes": 29119,
+      "sha256": "72df48727c14ca3062e4146a786bff02f59534b652289008ba30584f2d169a09"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-07_model.joblib",
+      "bytes": 666448,
+      "sha256": "15c896effa7ed02a9d4ca959007871fe248bdf4df076b19b3115ae079c2471d6"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-07_predictions.csv",
+      "bytes": 26860,
+      "sha256": "347cbac9bb9977d56ea7ab4e851f8a768d263001174646a8fa15d598ca930158"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-07_selection.json",
+      "bytes": 1669,
+      "sha256": "e3a4de25b39dfbed2affaa5ff8abb90db5a72b320a4d9cf0612407aa35510dbb"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-08_explanations.json",
+      "bytes": 29163,
+      "sha256": "50cd4db71cfcf8d7147b0bb1140e62c767cb60bbd1477a167d35a4decfb6267b"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-08_model.joblib",
+      "bytes": 1861069,
+      "sha256": "2c104a5b858c584ecfbee0d49df6bd05cae4d62bcc048c74cd7a8c214b88e865"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27412,
+      "sha256": "58ad9531969d1749b03322341ffd380c0b08467ed1af51a79329173d374592ed"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-08_selection.json",
+      "bytes": 1667,
+      "sha256": "caed25495e3e5aa92297f887e698e4d60a396834c2c8837c4c0e148183da2f1c"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-09_explanations.json",
+      "bytes": 25449,
+      "sha256": "7b816c211be81c2b2114bc6da2f2ab66ee5a5c5b917023fd96d2b2a35331b00d"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-09_model.joblib",
+      "bytes": 609610,
+      "sha256": "ad5eda24b9d3562dc31bdff412e1133c88ff435b694ee4ca15e8c8f840df0ac7"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26488,
+      "sha256": "64d5101cdd46c1ef1f766c785ec01ed71df9fce5f9ff4b5d1e4be129d87e84b6"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-09_selection.json",
+      "bytes": 1664,
+      "sha256": "97cebce4eac4a9f0b555d4e528dd8608eddb78afb3b5ac686872f60fbb266165"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-10_explanations.json",
+      "bytes": 26221,
+      "sha256": "abb8bdac180a9b36d02a5636fd6ffb17e9eaada4ad71d15ae82c05906b4bf34d"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-10_model.joblib",
+      "bytes": 616202,
+      "sha256": "ba4bcbfc1a8d92cfb46d5e3e2ffcdcaf3a00683f30c4abd9d7d7d03c4e4a307b"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-10_predictions.csv",
+      "bytes": 27088,
+      "sha256": "9e734839e4d77d4f279c304cbd6b278324e31882977517e9d5b13c54bb4e9689"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-10_selection.json",
+      "bytes": 1659,
+      "sha256": "7d7b79029cbfd5c648290ceedd6a6ff15da2a7a3e797cdaa41b73a218fd839e9"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-11_explanations.json",
+      "bytes": 25346,
+      "sha256": "724edfbbc852cca2285c4c6677eba17d0f9ee4fa69b59d11c984ef72136c1b0f"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-11_model.joblib",
+      "bytes": 562042,
+      "sha256": "39e3a9df263eebef8477689d9e23a29e3aa69912d672fc9f5e907bba12b7443a"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25605,
+      "sha256": "a02656e86d58489a76ad990559be55b228e9985ead06a0e8c6d6d29a7f542e80"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "f6616f021f53cb8dc4b9e0d55c87a64fa846052b51fa7b1291d61e1b6a33b860"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-12_explanations.json",
+      "bytes": 23561,
+      "sha256": "ef9348a60ae5461efb50901d7e0e8e1f1b17d54b5815270d71670287decb27f1"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-12_model.joblib",
+      "bytes": 566964,
+      "sha256": "2b6d90e99827cc3797b0f3e14a4ee2c15e5461def063f8cc8b52767b0ead717e"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-12_predictions.csv",
+      "bytes": 24047,
+      "sha256": "f4afec5d1c2ede2eee102782177887f07250c37b454be56ea098bb713055bf97"
+    },
+    {
+      "path": "mumbai_h3_archived_forecast_2025-12_selection.json",
+      "bytes": 1672,
+      "sha256": "be1689792631e5cca566be1bdde21d76739cebda1e68604707a7eb04524d0079"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 3080,
+      "sha256": "4d03254c5435cc469cc27b2f6355d192321e5c57a94e2cf9e959ae72e52fd03d"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1666,
+      "sha256": "63fa030acb3472dcc53e286f46fbcdf7535e91e36d1df2957de4a25ce5288a2f"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 26167,
+      "sha256": "ff7cbb51aa402e302d15664a5d2ec9081e0941c047f01f0d45e1fbabbd933ebb"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1659,
+      "sha256": "65af061171e71c6d8a6589e1aab568806107504f1994398d0947a26e9346b832"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27593,
+      "sha256": "e5d95337104e1714a458ab7e11ae2058127f3521bfc6de398b49580c755140af"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1659,
+      "sha256": "e45035ae8edbdd42798699df3530c260e1f8ef9ef4ed35c4036aeb6410b81195"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 26805,
+      "sha256": "7116737373d6c1ef5adcd9cb0e6745cdeee7e162d0e233df09e5bda2b70754a8"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1664,
+      "sha256": "c929aedc7b065798227f550ed5db05f92c2352a0c392b9028c9e70b7ac7ae0e4"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27359,
+      "sha256": "43d2a24d7468f0ddda4a8d94172665e6c699b45297a5e8ea0b5683e60f93d1a1"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1662,
+      "sha256": "9f90a199aaefbd7a8f51bfbc7027b1c78588c0bc12dc62e9b2e68ea37f66ec80"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 25256,
+      "sha256": "527d355a27d765401bed9aad1faa85f74c4823074df7a518b20037d7c5cacfbf"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "d72ae3460c9c5a038571f44b3a263af4551fcafb9121d0a9f97c8f8b07e0bb86"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 22714,
+      "sha256": "7dc71c52cdbdf5cee8bac9e7cd797e804b68b93cab02a449a460bdedd3c3919f"
+    },
+    {
+      "path": "mumbai_h3_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1665,
+      "sha256": "997e1e64f2d4329e05f33b818b7cf4ee9fa094d4cccc6513058266933e8a9587"
+    },
+    {
+      "path": "phase4_results.json",
+      "bytes": 265347,
+      "sha256": "9d403c7dae44fc04dce4b9856fa31b9e1f7ae9ea6bc8f75517ecb06386183e7d"
+    },
+    {
+      "path": "predictions.csv",
+      "bytes": 6623547,
+      "sha256": "dae234afd779d753b2647685983831bd3e3c728610d2cfacec445307e7571be0"
+    },
+    {
+      "path": "prior-bias.json",
+      "bytes": 14344,
+      "sha256": "58ccba3c33c56f17396775ba01f4c8bee6aa89fe8b04cc1cba1a553624310661"
+    },
+    {
+      "path": "prior_bias/delhi_chosen_design_prior_bias.csv",
+      "bytes": 380,
+      "sha256": "6f316457bcb736629f7117522b23e1244143c78ecee64b675e3494fc033a3fa8"
+    },
+    {
+      "path": "prior_bias/delhi_month_prior_bias.csv",
+      "bytes": 1500,
+      "sha256": "67d00f89dcf8d293c89101981cf78754788d0af58ae78013c973c7d0aaf71e30"
+    },
+    {
+      "path": "prior_bias/delhi_monthly_design_support.csv",
+      "bytes": 1574,
+      "sha256": "2f6afad6ab0a86f6f67e31af511bf434acab0d138d1c5dcfc7d1a4c33b6cf4ad"
+    },
+    {
+      "path": "prior_bias/delhi_prior_monthly_bias.png",
+      "bytes": 105965,
+      "sha256": "642629665e918107f9a6f14897f509c9fdc7e2dfb7429e0a3ea451159b827c1b"
+    },
+    {
+      "path": "prior_bias/delhi_year_month_prior_bias.csv",
+      "bytes": 3037,
+      "sha256": "1865cbf1093dff1f5fe3f076c79cf0832f19633ff3f97f9dde47de4f65282e92"
+    },
+    {
+      "path": "prior_bias/prior_bias_findings.json",
+      "bytes": 25575,
+      "sha256": "636eb89b0bba9828547ee4d3a0baa1b3417952b9059fad6d0375f0ff3b408840"
+    },
+    {
+      "path": "prior_bias/pune_chosen_design_prior_bias.csv",
+      "bytes": 378,
+      "sha256": "d52dadc5c35e81478ed79876271652d723e80930e5a0c4995d6afa513a62cf08"
+    },
+    {
+      "path": "prior_bias/pune_month_prior_bias.csv",
+      "bytes": 1497,
+      "sha256": "1e5970068cda68ac2dfe11905aadf19d4e07a155c0a3e4094ce7fe554bc56ac2"
+    },
+    {
+      "path": "prior_bias/pune_monthly_design_support.csv",
+      "bytes": 1434,
+      "sha256": "8ea2e12df7497e77423e0558f652d8cb56182adab59596b20f889adfbd85ac55"
+    },
+    {
+      "path": "prior_bias/pune_prior_monthly_bias.png",
+      "bytes": 96046,
+      "sha256": "2279fa9d7d61a22ef7cb411a06782cfeb185e310a993f5b3ef2e931a3878c125"
+    },
+    {
+      "path": "prior_bias/pune_year_month_prior_bias.csv",
+      "bytes": 3019,
+      "sha256": "a723e751b1131e0275597759180a5d39986b618b9471c197c4de60fd25bfd268"
+    },
+    {
+      "path": "protocol.md",
+      "bytes": 5991,
+      "sha256": "395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c"
+    },
+    {
+      "path": "pune_forecast_evaluation.png",
+      "bytes": 313038,
+      "sha256": "ab0367703a4aedabd775527c884b06eed479f4ed9bb989dc908340214fb0ed80"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-06_explanations.json",
+      "bytes": 926,
+      "sha256": "d20685b371eca6bbeb613661dd5517023f7e4b2e7fcc0eb4163963e94d26cb8b"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-06_model.joblib",
+      "bytes": 2174667,
+      "sha256": "1b31fd456a025263b1513691093c27b517f97299ebce255fbfd7c73b3df4bc81"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-06_predictions.csv",
+      "bytes": 1446,
+      "sha256": "3b80f467864abd4acf761afcdcd4c63dac25e38e15ad79b9b30a300251c95e98"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-06_selection.json",
+      "bytes": 1665,
+      "sha256": "647d6b8508d10ca4c8e7527bac18b03249d5857f4f278ebc92b2d091631fdb35"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-07_explanations.json",
+      "bytes": 28950,
+      "sha256": "d5ac042bff69e65f103fd8a0fba2826a4ac77d6e545572b6a0357ba7dbb427b9"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-07_model.joblib",
+      "bytes": 2106347,
+      "sha256": "e3c2156ac856b4fccdc5564fd80ff719daa6629bb1fb3fd5cb3aa131d4f3f56a"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27103,
+      "sha256": "75400bc0a7fa8bf70f89d7dcecd4e171496dc950cd6b62c2a2b49d279d1ca018"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-07_selection.json",
+      "bytes": 1663,
+      "sha256": "54d6fc80f597ec599ca29ae3ecab7db213c680e0bd24df10ee75b513f2cf4188"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-08_explanations.json",
+      "bytes": 29059,
+      "sha256": "b179aaeb37207309755e3523d86c8e1d4fbff39ae985263c521987d102ad567a"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-08_model.joblib",
+      "bytes": 661095,
+      "sha256": "58f783c6ae54ff323e22d37332358a1d62ba5242f1068752671392b2de4ff166"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27110,
+      "sha256": "4e704cf7455b85178d72096029e400e4e58eda8dc892653bf6f3c2ca1b664c47"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-08_selection.json",
+      "bytes": 1670,
+      "sha256": "340b4161c6b3b0044d2d7df8dd0a17408dc92dec75cdc9f21b6b5e57ea903f54"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-09_explanations.json",
+      "bytes": 28140,
+      "sha256": "074fb3a2fea618de1c7a7ff974b9cb31f44dcc61b340d26066365bc60814a63f"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-09_model.joblib",
+      "bytes": 779367,
+      "sha256": "a0da8b19b33da6ef7851fe0a4275d6ad8573096bcaebf0f5533f3ba966270764"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26151,
+      "sha256": "f393fdbe0ba443a20fd8b6cda4d6f53319adf392364df1cad27a70babd1f783d"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-09_selection.json",
+      "bytes": 1668,
+      "sha256": "47abf928c391b825cd2e0154e8e9d2a1060cf68ae067f01008c4a01ee499e075"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-10_explanations.json",
+      "bytes": 28757,
+      "sha256": "ec54552d9237baeef6312497b8c221eabda2844903b9bffd4ffd79529fcd94ae"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-10_model.joblib",
+      "bytes": 2506395,
+      "sha256": "bc59f85a6a6144ccd5fe0a14ba24bff602a7ceb7dd360b1030a171a4277ee6dd"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-10_predictions.csv",
+      "bytes": 26882,
+      "sha256": "06334367075a7c6696a608be697320e7a39564a676d2a84426d2595c0d465b47"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-10_selection.json",
+      "bytes": 1667,
+      "sha256": "646f91975750093a06b112e5ea53922b52bb01a666290a67d62956275a2ad679"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-11_explanations.json",
+      "bytes": 25214,
+      "sha256": "b60a6533519e498912ff5e20b9e783ddda376ee3b5ae4a2e9bb7f3ee98cf91ef"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-11_model.joblib",
+      "bytes": 540370,
+      "sha256": "86cb57ffe794c0146adb091950a45019e916738eb482493f1cad2093fd9b97e7"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25895,
+      "sha256": "d7c4a97fe72cc47b7e570a0847feb62cc6375a2e23342087f5e3f254711a898a"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-11_selection.json",
+      "bytes": 1673,
+      "sha256": "1d268876d97609f20b02ea4ea4e5a10b2ef5a2364fbfac123d56aa938f7e0ae3"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-12_explanations.json",
+      "bytes": 27871,
+      "sha256": "0c6f9642f0995b13fc21e018c1113a6677a326e667015a5884d22b72d8ee4e19"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-12_model.joblib",
+      "bytes": 679543,
+      "sha256": "cd9189098bcf6921d56a04e009a0bb4630f9d3932034d937885c32ba4ea4155c"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-12_predictions.csv",
+      "bytes": 25742,
+      "sha256": "c664829527ac0f0ae8f184d720fa08066fdcbdb7f9683b9d49592487a1bdb63d"
+    },
+    {
+      "path": "pune_h1_archived_forecast_2025-12_selection.json",
+      "bytes": 1673,
+      "sha256": "b3bf8b05503ea107ac4a4195f7c2b2945bcaeec1c5f8c4dce1129cff60d1dc19"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 1455,
+      "sha256": "0d40d1ffb8d0a971d2d6a5ab33330e977ab972fb0e3ed4e0c97643bdff1844a4"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1663,
+      "sha256": "6238969232a1dcabb0d9537e3eb2d96c7221717c05282ecaf9ab4c305a06622b"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27455,
+      "sha256": "35efd16a27645a5298aa4ffa22de69d830b75944c4be3d10940a506b5c3268ef"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1667,
+      "sha256": "4ee5b50961c5a1f5947712da85385b43145aa6e464c412c94a70304e8a357763"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 27387,
+      "sha256": "439bb0288b13706d0ff11a94f8fda27893bb13c7dd251d6dbabfa8f5f550c754"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1669,
+      "sha256": "49fb3b4f020c5c836b3254fd30a770cedc7de4e7034f17ce24c0a411f2354f68"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25198,
+      "sha256": "48b9b7433be2b3b360796bb0e4e020565f59f9a990155cdd292e4c9b1a346539"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1660,
+      "sha256": "46c41ba530177615317d288d5426c237e7c36081ac4d00f732b5faa6b1c2d7fd"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 25667,
+      "sha256": "c60b698920a530f82f7c146d69c74e428493a6916f92ff8743efeb053089be1b"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1658,
+      "sha256": "398e2207c06832587954aff8abd6b9b272cbeca466428715e1aff70c68659c74"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26099,
+      "sha256": "b923d5108a4cd7a82c87d3cd5c5546e37bb6286a385c0ff8015d406ebe64c588"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1673,
+      "sha256": "329d86fabf5d3a3e003b11f1c70da3ed83a9e5137869f3b35bda8ccf0c6477fa"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25926,
+      "sha256": "7c1a017ded64763b4aa5f1d9f94d2ccc610f20b4e6b097680d7c89b54063f04b"
+    },
+    {
+      "path": "pune_h1_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1673,
+      "sha256": "e5516da290ba41321861eed96b6d8920cc0949af1772e4383ab9a716127bac61"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-06_explanations.json",
+      "bytes": 1887,
+      "sha256": "050d368d198ec16d332f4eda9e27dd332dcd6760bf2ba2258978d29eadc153ab"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-06_model.joblib",
+      "bytes": 1785723,
+      "sha256": "8329b729e894e2980267bab307fa4ef89f87c86d3de1e7ca1ee4ce1f9d7f8f48"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-06_predictions.csv",
+      "bytes": 2326,
+      "sha256": "f6816bdbff89e3aa1a964902fd2bd676b89bd50647289411d790e29e659ea07a"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-06_selection.json",
+      "bytes": 1668,
+      "sha256": "4fe68e755e7c17cf14a9479d0a565c318bfdd334f24b484eac4315553f7eda55"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-07_explanations.json",
+      "bytes": 29178,
+      "sha256": "c06ca89367c47f34c3ff509391d4b0b7091abd8cca8b2516fec43f22a03e60ab"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-07_model.joblib",
+      "bytes": 1780411,
+      "sha256": "c88a4a0428238f6e09bca07f5da3aff9a5ad3cf7a018de49777ae0445602ece4"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-07_predictions.csv",
+      "bytes": 27023,
+      "sha256": "98c89dbac93dc206862709e2c80b26bcc913daddc3ee9f295aa62c83e82eea2e"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-07_selection.json",
+      "bytes": 1667,
+      "sha256": "3cedded54bb5ee3ce0865a925acd94838483108f397914213a8bf97c5fc92e7c"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-08_explanations.json",
+      "bytes": 29043,
+      "sha256": "5787a498341744e733d10fab5237a65dd720a83df117543c6e8b3e71f6695f3a"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-08_model.joblib",
+      "bytes": 1811819,
+      "sha256": "7f431651bb4652cb13c70e878ecc64ce68b9e40efcfd65318aa9d897911ad96e"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-08_predictions.csv",
+      "bytes": 27019,
+      "sha256": "3c1d070af746f0ab0ff2f062bebc7f749b56b523571aceb2bded99dd3b540663"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-08_selection.json",
+      "bytes": 1664,
+      "sha256": "57b81f01630100e3a90289cd6f4d0c828328ab772b6c201b3853bdc2880890d4"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-09_explanations.json",
+      "bytes": 28144,
+      "sha256": "89c2279305ba7ff0fa110ebf7510e2cc31181d3e75e89822919a30c904f3bba5"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-09_model.joblib",
+      "bytes": 796679,
+      "sha256": "d4657bdce7426b3e2ec47bea092c3dda4c94e4191532ec2a4a4de1759773dba5"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-09_predictions.csv",
+      "bytes": 26369,
+      "sha256": "96cd06680152ce12dd44d745d90309e891769593ff924549a4c989d4b11522af"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-09_selection.json",
+      "bytes": 1665,
+      "sha256": "b80eb5029440e2e9c7e7f2600c38426b9ecdf2c130c025adeb27e97359bccabd"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-10_explanations.json",
+      "bytes": 28906,
+      "sha256": "a5f47eba2143a43984798feebf08a1876865e1e9a74c51c83bf659bf139b9769"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-10_model.joblib",
+      "bytes": 684775,
+      "sha256": "a3d35622f49cca8fac3102782445c8912f1bb72f5a0e740acb39f0db3aa4c642"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-10_predictions.csv",
+      "bytes": 26875,
+      "sha256": "097d47d8e39d3a227102d86fc957ad9077ed4508458bcfd0d5657fc7a7d9ae1f"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-10_selection.json",
+      "bytes": 1666,
+      "sha256": "9f953312baa00cb60839358d99c48c44d623de058ab7f73fa9c668c6173d9775"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-11_explanations.json",
+      "bytes": 27826,
+      "sha256": "fd412fd398987a11f0218082452e37204de418059e9ba897a0a823bbca633f28"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-11_model.joblib",
+      "bytes": 677831,
+      "sha256": "f7eee6307d7c4efa1d6e8ddac3e02c9f7c8da822d6eeba74b74980ea8d5fc372"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25872,
+      "sha256": "eb239998104f3bbf53148def21edc58a146f65f1f53b4f5c7da0b64b5bd8119c"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-11_selection.json",
+      "bytes": 1669,
+      "sha256": "90e3b5960074d18cae9521fe41e2b1098656531595a5baf79289331efcd6dc18"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-12_explanations.json",
+      "bytes": 26943,
+      "sha256": "ded8e2485f77c48a5f1a863f80decd72e96ebcfe5ae365470535c24ffadbab3b"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-12_model.joblib",
+      "bytes": 816887,
+      "sha256": "6260c128a52c0b646c3fcd32695dc1c52a6315819e742812f3b701750bea9625"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-12_predictions.csv",
+      "bytes": 25071,
+      "sha256": "bfeb75355d92338f4fa4d430d21dce40b2d9f2d3f00f2d2dd4136c30693bd156"
+    },
+    {
+      "path": "pune_h2_archived_forecast_2025-12_selection.json",
+      "bytes": 1672,
+      "sha256": "c2c60b4a55c9288a5bcd539e64141f336399aee1a9b99c5b91454d7a2d12569b"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 2324,
+      "sha256": "4d58cd3fc80ec5e77db40bf248ea59f102ea14d95e23c525a7a02783a76b2db0"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1662,
+      "sha256": "f367e439dd8431b488bae9ebfb73e175e572cdcd05f05c16adc8006548110574"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27399,
+      "sha256": "9328601d63869486f96df71b46568f32df6f612130f66b1b2bb5adf29ce0175d"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1662,
+      "sha256": "58e30bbe2cc279674c7120dff2a5266e83c63977e7bdccd145a53b74797b6729"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 25823,
+      "sha256": "5a6b520605c18241ef3d54bf66a3e60812b37f063967093d3ada49b4ab7bd892"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1660,
+      "sha256": "ea441e3cce425d9332a456d89e274cd868f5124e6a9d77cdc3de614beb86789f"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25167,
+      "sha256": "a59572f2b6a2a81809fd8efb9a608cec05661143a9b3824643d1c51971a99fd6"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1661,
+      "sha256": "fe9c9b0464280f2928d7cea07639c9ea491260b3dfb4f1f5de49e48768e755d7"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 25694,
+      "sha256": "445a729fabeec5ecccbffd1f42a1f8eed43a75db7486ef4f9c27b9353538f878"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1659,
+      "sha256": "d51a09f271d8be3f3ec07552636fc0f84cf873e09ea5e9c5590d5a3177b0454a"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 25974,
+      "sha256": "797cc61f82d354c9e43221864288eb5e9dc89ebd851d295046ad527414555ae0"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1667,
+      "sha256": "f7430834d023f4c35726c7b25b6eec630a4fc85ebd15b40d8b65bfe77762a741"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 25053,
+      "sha256": "679eea7c233a97f8c5ad1ef537d2bafa8c1bec5a30aad951d71536a848688235"
+    },
+    {
+      "path": "pune_h2_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1668,
+      "sha256": "6aa47dda08bb748c44e110de858de134d9b4c197bfc466b58566fc3ee7e84513"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-06_explanations.json",
+      "bytes": 2772,
+      "sha256": "bcc3e675d347e74dd01f85126e80ad02a59189f0e33ade5d4626e3f6d0999f48"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-06_model.joblib",
+      "bytes": 1735819,
+      "sha256": "d5c2c65b7683653ae5778957526d62c72e5c6a56337446a78332076fe2ab4951"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-06_predictions.csv",
+      "bytes": 3107,
+      "sha256": "1c0eaa99f70eea9242625cec9fdd391397c19f8d7571cccd0f7ca48c83e93b81"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-06_selection.json",
+      "bytes": 1670,
+      "sha256": "ad05e8076986cb7a8d028e8f34fecd006c1f6c00fde9bf91fd1bb4acddc3be41"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-07_explanations.json",
+      "bytes": 29153,
+      "sha256": "9fdd466ea7a14d753f3d8ae8dde73af9b95cf743b8fb89945de7127debdd700e"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-07_model.joblib",
+      "bytes": 2136706,
+      "sha256": "5623b18321c25235c3151f042dd31be8c537481ad6dba26dadcb6e462f921e88"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-07_predictions.csv",
+      "bytes": 26995,
+      "sha256": "a1456ac3b905af05848164d92d841d7b38629eb45ac5dc602f5ac988350dd897"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-07_selection.json",
+      "bytes": 1668,
+      "sha256": "e063af191d9f6d9a722b7170b81ea2769e48fd739beb69326343b6937959907e"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-08_explanations.json",
+      "bytes": 29019,
+      "sha256": "8eeb1dad3322db981f1279d1dd45a688ee195429a798e9b6c0e3feb43d62d3f5"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-08_model.joblib",
+      "bytes": 622855,
+      "sha256": "482cb90ae0164dfabfe47e03b5a10144825275e375bc4766c2e56bec8baae8b5"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-08_predictions.csv",
+      "bytes": 25587,
+      "sha256": "d844d2b926f02fdf2bc15cd9951bcb354f49ef2df1021176ff468451e9739611"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-08_selection.json",
+      "bytes": 1662,
+      "sha256": "02fcd697ed7e9efc27534442cddbeb7acfa6a1a9070930721ba833e863d29e0d"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-09_explanations.json",
+      "bytes": 28117,
+      "sha256": "0b630e1994ba28120e77b4400a8d49fd363c8068f76f4c335199686eb58cbc60"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-09_model.joblib",
+      "bytes": 636647,
+      "sha256": "e69c019a9780595b62ab3a71aa8c37ef7e39f8a0298b73a7e2131ed60fd73c0b"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-09_predictions.csv",
+      "bytes": 24635,
+      "sha256": "8bc214665bc3a4298011de3e8b3df39a3321b908718733ae9d3aa5784139e0d5"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-09_selection.json",
+      "bytes": 1661,
+      "sha256": "8497b1a4c871ab03a0bda8ec9f1d6e2bf626d546c9808c4f17fccc07aaed2e34"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-10_explanations.json",
+      "bytes": 28820,
+      "sha256": "11b4f048602ab967d98d7d1586f9aecf22cbfa53b856d31fa072ef45bd405864"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-10_model.joblib",
+      "bytes": 694631,
+      "sha256": "4e0ed52f49735f11d7f6a3407e9468dd7333dc4644a0769a3797060962f70aed"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-10_predictions.csv",
+      "bytes": 26904,
+      "sha256": "0c5eaec4e525d1a4123a26b37760a2eadf2531d117198ed4569037caba2c445f"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-10_selection.json",
+      "bytes": 1664,
+      "sha256": "1783c206294caf000cbf28d82d6d1aba1f953650985ba46fed5b8e48b799847a"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-11_explanations.json",
+      "bytes": 27825,
+      "sha256": "5305214367b2579073d61177a2280dd00905b140f36d8648f39b9c85e1f6f2c4"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-11_model.joblib",
+      "bytes": 688599,
+      "sha256": "ba1a01c3e1edf006b660243fe0b630220be2727677380f97b8912747e546b0a1"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-11_predictions.csv",
+      "bytes": 25726,
+      "sha256": "6340bf38ba8b2e4f066e728ea09a3f508535f309e7dc30b848dd9595c6c228dd"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-11_selection.json",
+      "bytes": 1665,
+      "sha256": "ea61e036c7d269ac5f4862a2cc0b65a59e0bbd24908f527e0236905661e494d5"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-12_explanations.json",
+      "bytes": 25934,
+      "sha256": "0b97139b3e055a6b32cc0685687e9930500f4869d4fcd6a60bda106e4db677fa"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-12_model.joblib",
+      "bytes": 828103,
+      "sha256": "499d3375832eb381ccca23cdc36b4effc9f2eca9028f64c588d2c2f8db65823a"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-12_predictions.csv",
+      "bytes": 24168,
+      "sha256": "952c603ee98f22feca1e096a23a3b0bebde9dfaa37f1771f949ad4eecd8e552f"
+    },
+    {
+      "path": "pune_h3_archived_forecast_2025-12_selection.json",
+      "bytes": 1666,
+      "sha256": "864ecdf5445bd94eb2e1d362ad0a3dc5f3cb82887da34cf63716d0a5fc5b57ef"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-06_predictions.csv",
+      "bytes": 3163,
+      "sha256": "585f3f22597e603e02e4a0c8e4d6a0380a0e43c39937c7e35261589f53bffa1c"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-06_selection.json",
+      "bytes": 1671,
+      "sha256": "4e5462f6eaac59d9f819ea512b76dc0455b634fa14a7c72a661c5d9a2974a59d"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-07_predictions.csv",
+      "bytes": 27224,
+      "sha256": "52611ff742173e3e19e0d98fea9d807b47443ea12207a1f41dafab503c95e6a8"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-07_selection.json",
+      "bytes": 1667,
+      "sha256": "f72690228863ee86e9e358b36332897078abbb0cfdadb0c814b3dfb1ae7abfe7"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-08_predictions.csv",
+      "bytes": 25841,
+      "sha256": "87f3614608358e2271dd815c0583b5a2edf7f97a92f8eea620451569892f7e8f"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-08_selection.json",
+      "bytes": 1661,
+      "sha256": "1eb50f80640a598dcfe96d6a64f6d38dcd92e22cfb2aa08cc6e198297dfc7d97"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-09_predictions.csv",
+      "bytes": 25153,
+      "sha256": "1c1df4b0bb38cb189d5a8859331fabc87a641f5473204daf70629859239d76dc"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-09_selection.json",
+      "bytes": 1659,
+      "sha256": "86d60f32459f14286d1943383fcfe7c3dc738d2ffc90a5d49568adddfbf67e78"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-10_predictions.csv",
+      "bytes": 27135,
+      "sha256": "82164cf492a57bf465ab513f58dee0ddc2df266283887a0017e093aaaeab2431"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-10_selection.json",
+      "bytes": 1665,
+      "sha256": "9c6b5faa7ed107bb4bc1910cda00c03edab2996ac3fa034d87f41a2cd126957d"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-11_predictions.csv",
+      "bytes": 26007,
+      "sha256": "82abbfd92fdf31ef4152075eabbe8faf9673a06c90cae0663e8f121822be846f"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-11_selection.json",
+      "bytes": 1666,
+      "sha256": "617ecb4dd4527c316265f4faf8f032a3a1d20dfbd56052f66b7cab6e3b6aef79"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-12_predictions.csv",
+      "bytes": 24217,
+      "sha256": "194ae8309c8af99fd58ba891c9dc523f979a4dd199b68b0c08a29cfedf4f7172"
+    },
+    {
+      "path": "pune_h3_perfect_prognosis_2025-12_selection.json",
+      "bytes": 1669,
+      "sha256": "9c7257fd9c1fe38ebbf511cfd85d889bdaf4c78b6c9d19ceecfe1dd2104593e6"
+    },
+    {
+      "path": "pune_phase3b_monthly_bias.csv",
+      "bytes": 1029,
+      "sha256": "145143509507bf9bc577a446894571553389ecf92ff87d07c0a99d49f0741392"
+    },
+    {
+      "path": "pune_phase3b_year_month_bias.csv",
+      "bytes": 1700,
+      "sha256": "551dc19e3162e170382922be13ef58d9c82d4ad93b8abbbe70f89bef3719710f"
+    },
+    {
+      "path": "seasonal_errors.csv",
+      "bytes": 68193,
+      "sha256": "fe210d4dbe4d81a53a5bae6b83c696a783f9f4267ace7ad413a4c32ac98f2104"
+    },
+    {
+      "path": "split_audit.json",
+      "bytes": 537357,
+      "sha256": "d2c9a7fb523c427e29c6662fffe9687e0ba9ead701d707c5d4a4232bb3ee786f"
+    },
+    {
+      "path": "verification/archive-probes.json",
+      "bytes": 2041,
+      "sha256": "cbed781f50ea87320031ecb97278b685475e1c42fb72d74ef4ddbe01354423d2"
+    },
+    {
+      "path": "verification/baseline-tests.json",
+      "bytes": 1748,
+      "sha256": "f8f3a8b94984a97edf809bf09b34f93e843523746b9c8976054a416473c65703"
+    },
+    {
+      "path": "verification/cams-vintage-probe.json",
+      "bytes": 1851,
+      "sha256": "f81aa4ab29c947e25e1f8dfaa46cad59af157b9e5d3daf2c7432b280dc9ee02d"
+    },
+    {
+      "path": "verification/compose-final.log",
+      "bytes": 2684,
+      "sha256": "120fb288e554afbdfa66044ff75f25117b8473864f27045461bfab2b7e265641"
+    },
+    {
+      "path": "verification/compose-up.log",
+      "bytes": 4472,
+      "sha256": "d47e53c1e89d8e46b787fd14bebf380a59bfd84a2ce1914a40cd01f23908ff64"
+    },
+    {
+      "path": "verification/delhi_phase3b_monthly_bias.csv",
+      "bytes": 1031,
+      "sha256": "d887a5c04d453e974889c51d7721998159f6bcbc3f404e49a823ba81e55bfa69"
+    },
+    {
+      "path": "verification/delhi_phase3b_year_month_bias.csv",
+      "bytes": 1685,
+      "sha256": "be08f9d7579d1dba7fede44b6d04ead74cbefd6db48d60f2e13ac7e94a70b199"
+    },
+    {
+      "path": "verification/docker-build.log",
+      "bytes": 202716,
+      "sha256": "c157ea063d71f1da89f91a3ebf6ee5e7bb0f664597f6b3a8539515c77985814a"
+    },
+    {
+      "path": "verification/evaluation-final.log",
+      "bytes": 398,
+      "sha256": "cdc7bbd129b362fec05f1d117e99e84ec82716125e48f72c1731276cb770a806"
+    },
+    {
+      "path": "verification/final-source-coverage.log",
+      "bytes": 35160,
+      "sha256": "8afc6f00a104d20346169a4c14d812f9cd6523ae574d091804a25eb38992dee1"
+    },
+    {
+      "path": "verification/finalization.log",
+      "bytes": 39966,
+      "sha256": "4e20eda05dd6e8acad6a9e324509982de072f26baaeaba9cfd840c9c3144e6b0"
+    },
+    {
+      "path": "verification/finalize.py",
+      "bytes": 3973,
+      "sha256": "55b1624b344ecd4fcfa03c9e9c70066a45581663da2ad3ed6a56460890d144f0"
+    },
+    {
+      "path": "verification/forecast-ingestion.log",
+      "bytes": 44156,
+      "sha256": "325d86795f16d8417ee7afe591f0247192a43d02f571cf66019604032b27caf3"
+    },
+    {
+      "path": "verification/forecast-tests.log",
+      "bytes": 6820,
+      "sha256": "f08d13739c2f592a3487b30fa76924707eb73eabac4b0b38e3c56956745df719"
+    },
+    {
+      "path": "verification/full-tests-final.log",
+      "bytes": 12626,
+      "sha256": "f23be4b6fcba4b513016e533bf44341bd70196de4607817c938bc6cc9b2d4e58"
+    },
+    {
+      "path": "verification/health-final.json",
+      "bytes": 504,
+      "sha256": "dc100fad3b8c1b6c6d87e1d2285a4a23abd5ef98e80a849e06c838851a89c74b"
+    },
+    {
+      "path": "verification/independent-verification.json",
+      "bytes": 2749,
+      "sha256": "c1c1e9d3e11b56a7face004482cdb5c2209ad853415e6307c4a981ad3cdbcd17"
+    },
+    {
+      "path": "verification/independent-verification.log",
+      "bytes": 3104,
+      "sha256": "1c2b35d1ce0b68feb94295d8cd96cc501022ef6f516805d94133c8742ae48c06"
+    },
+    {
+      "path": "verification/lint-final.log",
+      "bytes": 100,
+      "sha256": "2bc88295f1f16db5c81a848f46565bae74af84dfbfeaaecd77e7f01394965e75"
+    },
+    {
+      "path": "verification/live-weather-proof.json",
+      "bytes": 568,
+      "sha256": "b992a68b71534dace77cb25d01633a2dc07cfc2d1767d5c6f40a2386d34efbf7"
+    },
+    {
+      "path": "verification/live-weather.log",
+      "bytes": 904,
+      "sha256": "10d13766ae16178010b18dedb32509e5ac1b4254645a8ba9f7aa16e165797621"
+    },
+    {
+      "path": "verification/mlflow-latency.json",
+      "bytes": 158,
+      "sha256": "33e2e8a0758cbc34b7f76cef7c3fbbe3b6212399c10011fff720c193fb430910"
+    },
+    {
+      "path": "verification/operational-tests.log",
+      "bytes": 5034,
+      "sha256": "87df22d7a7255e42fbe5bebc25b7270c26d2d900ffc11e699fbceab682676786"
+    },
+    {
+      "path": "verification/operations-tests-final.log",
+      "bytes": 5034,
+      "sha256": "019a97ff0c0c74d559313543969b59e9f13c88671975d19b8749dddc1d69499a"
+    },
+    {
+      "path": "verification/pm-refresh-proof.json",
+      "bytes": 822,
+      "sha256": "643a2db11dac53c40f5efe8593a7fc0f094fdfbc08e321647b1d1d79747554f1"
+    },
+    {
+      "path": "verification/pm-refresh-proof.log",
+      "bytes": 1712,
+      "sha256": "18d08b1ad1e24ba10ca8af66f0876c7424656c965092ef843500b702ea4fc022"
+    },
+    {
+      "path": "verification/pre-fit-audit.log",
+      "bytes": 8720,
+      "sha256": "2136120f5ba53d1d8d33d1fadb2e7c543bc35a60e08d34bfa29e9db849e783d8"
+    },
+    {
+      "path": "verification/pre-fit-tests-rerun.log",
+      "bytes": 8350,
+      "sha256": "8f0dfe313ae7394216d5fbb79bc5d939dee89f809115b9a6e322fa860c2ff98e"
+    },
+    {
+      "path": "verification/pre-fit-tests.log",
+      "bytes": 49544,
+      "sha256": "83ab09ef67f9a5ad3517c0f87e595a9bf0f487c29c05b8f57288105cffe02276"
+    },
+    {
+      "path": "verification/preservation-proof.json",
+      "bytes": 242,
+      "sha256": "61430a8b546d491b1358ecb2081696a974012049777448b8718b6a0373270239"
+    },
+    {
+      "path": "verification/preservation.log",
+      "bytes": 290,
+      "sha256": "0803c2b0fc36d6ac7edb5151b6a4dcf36ab96efdfb6d601d6fb9c9cea1070353"
+    },
+    {
+      "path": "verification/prior-bias.json",
+      "bytes": 14344,
+      "sha256": "58ccba3c33c56f17396775ba01f4c8bee6aa89fe8b04cc1cba1a553624310661"
+    },
+    {
+      "path": "verification/probe.py",
+      "bytes": 3445,
+      "sha256": "51c3ffaed2ad38dcde90313cc3a8c0697b3bc54120252fbef37aa15685ca63bc"
+    },
+    {
+      "path": "verification/protocol-preservation.log",
+      "bytes": 3176,
+      "sha256": "e3b842cf09d0a6c5f5d7dfcc84e949a351b79af6e6ed0edf2a8c74e4c87cc8ee"
+    },
+    {
+      "path": "verification/pune_phase3b_monthly_bias.csv",
+      "bytes": 1029,
+      "sha256": "145143509507bf9bc577a446894571553389ecf92ff87d07c0a99d49f0741392"
+    },
+    {
+      "path": "verification/pune_phase3b_year_month_bias.csv",
+      "bytes": 1700,
+      "sha256": "551dc19e3162e170382922be13ef58d9c82d4ad93b8abbbe70f89bef3719710f"
+    },
+    {
+      "path": "verification/record_validation.py",
+      "bytes": 6072,
+      "sha256": "56efaa9e4166d30952c489e07e31b8425d16b6b640073af71aa3eab4b225d36d"
+    },
+    {
+      "path": "verification/replay-default.log",
+      "bytes": 14516,
+      "sha256": "56351a2a296fd3a5dc6e761b6aea6f8fb05240e351541d21883929bcc0d468e2"
+    },
+    {
+      "path": "verification/replay-explicit-1.log",
+      "bytes": 14516,
+      "sha256": "56351a2a296fd3a5dc6e761b6aea6f8fb05240e351541d21883929bcc0d468e2"
+    },
+    {
+      "path": "verification/replay-explicit-2.log",
+      "bytes": 14516,
+      "sha256": "56351a2a296fd3a5dc6e761b6aea6f8fb05240e351541d21883929bcc0d468e2"
+    },
+    {
+      "path": "verification/replay-proof.json",
+      "bytes": 14267,
+      "sha256": "fd21c8d414ef55595f289524f8845df3028cfcceda4ef67f62c681044c29c2c6"
+    },
+    {
+      "path": "verification/report-export.log",
+      "bytes": 57,
+      "sha256": "3ba26a3a992ec02c47ed42f2a5684b2866b1076a4bbcfef8daa5671e1df50365"
+    },
+    {
+      "path": "verification/schema-final.log",
+      "bytes": 61664,
+      "sha256": "6c4ec405e4de425e85251669970a3a3f00ada4bc10f1e4247cf5152ddc787192"
+    },
+    {
+      "path": "verification/training-single-thread.log",
+      "bytes": 1691998,
+      "sha256": "7c856e5daf10167fc1681e377c902cf7e73c4e18d0aada56ce6ec2e4ed051f27"
+    },
+    {
+      "path": "verification/training.log",
+      "bytes": 37744,
+      "sha256": "a376538d1931336455b85c4b0f7ff8fe0b4b0fea92b0593ad6e46a80389d92b6"
+    },
+    {
+      "path": "verification/verify.py",
+      "bytes": 6483,
+      "sha256": "43df0360f13ff7833a2efcabbb91816f1c380c3064bf3d25593cdb3027961938"
+    },
+    {
+      "path": "verification/worker-restart.log",
+      "bytes": 818,
+      "sha256": "79caeea7c1b051c8f3cb2e1ec58d2294c2063d11336070b925d331809dfcb3c8"
+    }
+  ],
+  "error_message": ""
+}
