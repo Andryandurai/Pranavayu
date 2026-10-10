@@ -1,0 +1,17 @@
+{
+  "url": "https://api.open-meteo.com/v1/forecast?latitude=22.5726&longitude=88.3639&start_date=2026-10-10&end_date=2026-10-14&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation%2Ccloud_cover%2Csurface_pressure%2Cboundary_layer_height&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "13e8a191d2f71e46c735546254543b0264f1f961ef6e4d3ff3c2c98c820be1fb",
+  "path": "forecast/live/kolkata/2026-10-10_2026-10-14.json",
+  "sha256": "c0ab3db7462a5c3f86936b1251367bf297368f405b9e9da47fcc9a385fdfd2a9",
+  "size_bytes": 7494,
+  "retrieved_at": "2026-10-10T12:42:06.900182+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "kolkata",
+    "model": "gfs_global",
+    "mode": "live",
+    "lead_days": [],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

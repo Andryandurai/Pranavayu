@@ -255,3 +255,29 @@ the foundational hypertables and their reversible migration unchanged. See
     weather/calendar reference, holding explicit period and within-era trend.
     Calendar gaps never become targets. Fixed panels match physical CPCB IDs
     across source-specific station identities, with coverage checked separately.
+
+26. **Canonical clock repair in Phase 3B:** the verified OpenCity IST conversion
+    is now applied once to warehouse timestamp keys, with an idempotent source
+    clock marker and audit run. Measurement values, flags and ingestion links are
+    preserved. Frozen earlier derived snapshots remain unchanged.
+27. **Forecast weather:** `ForecastWeather` stores city, issue and target date,
+    horizon, archive/live mode, lead offset, availability bound, 24-hour coverage,
+    weather features and source/run/raw-asset provenance. Uniqueness is per
+    city/issue/horizon/mode. Observed reanalysis remains a separate input used
+    only in the explicit perfect-prognosis experiment.
+28. **Forecast versions and results:** `ForecastModelVersion` references an
+    AnalysisRun, city/horizon, cohort, algorithm, fit label dates, first available
+    issue date, training-only selection/calibration metadata, weights path and
+    MLflow run/registry version. `Forecast` references that version, with issue/
+    target dates, mode, point, nested 80/95% bounds, PM2.5 category, top-five
+    drivers and feature-availability provenance. Uniqueness includes the model
+    version, preserving prior outputs. `ForecastEvaluation` holds one full
+    evaluation JSON per run/city/horizon, including all models, interval/event
+    scores and the separately labelled perfect-prognosis comparison.
+29. **Operational forecast inputs:** completed-day PM must have been ingested
+    before issue-end. Seven-day lag support and forecast weather must be complete
+    at all three horizons; otherwise issuance uses labelled archival replay.
+    Saved conformal radii are immutable during issuance. SARIMAX can assimilate
+    measured past labels across days missing weather, but never future labels.
+    Forecast migrations depend on existing analytics/ingest/warehouse tables and
+    do not modify the foundational hypertables or observation values.

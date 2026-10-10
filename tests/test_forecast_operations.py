@@ -71,6 +71,7 @@ def test_actual_issue_pipeline_replays_without_key(monkeypatch, tmp_path):
                 "calibration": calibration,
                 "background": training,
                 "chosen": "persistence",
+                "selection": {"radius80": 3.0, "radius95": 4.0},
             },
             path,
         )
@@ -94,6 +95,25 @@ def test_actual_issue_pipeline_replays_without_key(monkeypatch, tmp_path):
     assert all(r["mode"] == "replay" and r["issued_for_date"] == str(issued) for r in result)
     assert Forecast.objects.filter(mode="replay", issued_for_date=issued).count() == 3
     assert all(len(f.top_drivers) == 5 for f in Forecast.objects.all())
+    # A keyed source with only today's observations still lacks the required lags.
+    import pandas as pd
+
+    completed = timezone.localdate() - timedelta(days=1)
+    fresh_hourly = pd.DataFrame(
+        {
+            "observed_at": pd.date_range(
+                pd.Timestamp(completed, tz="Asia/Kolkata"), periods=24, freq="h"
+            ),
+            "value": np.repeat(20.0, 24),
+            "station_count": np.repeat(1, 24),
+        }
+    )
+    monkeypatch.setenv("OPENAQ_API_KEY", "fixture-only-not-used-for-network")
+    monkeypatch.setattr(operations, "operational_hourly", lambda *a: fresh_hourly)
+    with override_settings(FORECAST_CITIES=(city.slug,)):
+        fallback = operations.issue_forecasts()
+    assert all(r["mode"] == "replay" and r["fallback_reason"] for r in fallback)
+    assert Forecast.objects.count() == 3
 
 
 def test_sarimax_state_never_assimilates_future_target_labels():
@@ -110,3 +130,91 @@ def test_sarimax_state_never_assimilates_future_target_labels():
     contaminated = rows.copy()
     contaminated.loc[contaminated.target_date > issued, "y"] = 99999
     np.testing.assert_allclose(model.predict(test, contaminated), before, rtol=0, atol=1e-12)
+
+
+def test_live_state_uses_frozen_calibration_and_preserves_measured_labels():
+    import pandas as pd
+
+    from apps.forecast.estimators import SarimaxModel
+    from apps.forecast.operations import observed_history, operational_intervals
+
+    class StateModel(SarimaxModel):
+        def predict(self, rows, history=None):
+            assert rows.index.min() == pd.Timestamp("2026-10-10")
+            return np.repeat(20.0, len(rows))
+
+    class Quantile:
+        def __init__(self, value):
+            self.value = value
+
+        def predict(self, rows):
+            return np.repeat(self.value, len(rows))
+
+    calibration = pd.DataFrame({"y": np.linspace(15, 25, 60)})
+    test = pd.DataFrame(index=[pd.Timestamp("2026-10-10")])
+    bundle = {
+        "model": StateModel((1, 0, 0), 3),
+        "calibration": calibration,
+        "selection": {"radius80": 3.0, "radius95": 5.0},
+        "quantiles": {
+            "0.025": Quantile(10),
+            "0.1": Quantile(12),
+            "0.9": Quantile(28),
+            "0.975": Quantile(30),
+        },
+    }
+    result, info = operational_intervals(bundle, test, pd.DataFrame())
+    assert result["lower80"][0] == 17 and result["upper80"][0] == 23
+    assert result["lower95"][0] == 15 and result["upper95"][0] == 25
+    assert info["calibration_n"] == 60
+    _, daily, records = feature_fixture()
+    rows = make_features(daily, records, 3).drop(pd.Timestamp("2024-01-20"))
+    history = observed_history(daily, rows, 3)
+    assert history.loc["2024-01-20", "y"] == daily.loc["2024-01-23", "value"]
+    assert pd.isna(history.loc["2024-01-20", "pm_t"])
+
+
+def test_daily_pm_refresh_includes_current_day_and_ten_day_lag_history(monkeypatch):
+    from datetime import UTC, datetime
+    from types import SimpleNamespace
+
+    from apps.forecast import operations
+
+    instant = datetime(2026, 10, 10, 18, 5, tzinfo=UTC)
+    called = {}
+
+    class Source:
+        def execute(self, action, **kwargs):
+            called.update(action=action, **kwargs)
+            return SimpleNamespace(status="success")
+
+    monkeypatch.setattr(operations, "OpenAQSource", Source)
+    monkeypatch.setattr(operations.timezone, "now", lambda: instant)
+    assert operations.refresh_live_pm().status == "success"
+    assert called == {
+        "action": "load",
+        "start": (instant - timedelta(days=10)).isoformat(),
+        "end": instant.isoformat(),
+    }
+
+
+@pytest.mark.django_db
+def test_daily_forecast_schedules_refresh_pm_before_issue_cutoff():
+    from django_celery_beat.models import PeriodicTask
+
+    from apps.forecast.tasks import configure_schedules
+
+    configure_schedules()
+    configure_schedules()
+    tasks = PeriodicTask.objects.filter(
+        name__in=["Forecast PM inputs daily", "Forecast weather daily", "PM2.5 forecasts daily"]
+    )
+    assert tasks.count() == 3
+    expected = {
+        "Forecast PM inputs daily": ("23", "35"),
+        "Forecast weather daily": ("23", "40"),
+        "PM2.5 forecasts daily": ("0", "10"),
+    }
+    for task in tasks:
+        assert (task.crontab.hour, task.crontab.minute) == expected[task.name]
+        assert str(task.crontab.timezone) == "Asia/Kolkata"

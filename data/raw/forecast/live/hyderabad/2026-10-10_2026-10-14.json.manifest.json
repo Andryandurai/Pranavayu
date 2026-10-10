@@ -1,0 +1,17 @@
+{
+  "url": "https://api.open-meteo.com/v1/forecast?latitude=17.385&longitude=78.4867&start_date=2026-10-10&end_date=2026-10-14&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation%2Ccloud_cover%2Csurface_pressure%2Cboundary_layer_height&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "a49f480ec390fa869f0b49827480f38a52a4b0b9c43380394e540c1491d5415d",
+  "path": "forecast/live/hyderabad/2026-10-10_2026-10-14.json",
+  "sha256": "50b16f8f8709bd9ff16ae74754452631186ba8640ec7878b349cfd5260a8369e",
+  "size_bytes": 7257,
+  "retrieved_at": "2026-10-10T12:42:06.145624+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "hyderabad",
+    "model": "gfs_global",
+    "mode": "live",
+    "lead_days": [],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

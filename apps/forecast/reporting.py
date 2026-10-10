@@ -8,6 +8,8 @@ import numpy as np
 import pandas as pd
 from django.conf import settings
 
+from .models import ForecastModelVersion
+
 matplotlib.use("Agg")
 
 
@@ -308,9 +310,70 @@ def export_report(run, output):
         "[CPCB technical AQI report](https://www.cpcb.gov.in/displaypdf.php?id=bmF0aW9uYWwtYWlyLXF1YWxpdHktaW5kZXgvRklOQUwtUkVQT1JUX0FRSV8ucGRm).",
         "",
     ]
+    lines += ["", "## Additional reproducibility evidence", ""]
+    cams = result["cams"].get("coverage", [])
+    if cams:
+        lines += [
+            f"CAMS: {sum(r['non_null_hours'] for r in cams)} non-null values out of "
+            f"{sum(r['hours'] for r in cams)} requested lead-forecast hours; "
+            f"IngestionRun {result['cams']['ingestion_run']}.",
+            "",
+        ]
+    splits = json.loads((output / "split_audit.json").read_text())
+    trials = [c for s in splits for c in s["settings"].get("sarimax", {}).get("candidates", [])]
+    nonconverged = sum(c.get("converged") is False for c in trials)
+    lines += [
+        f"SARIMAX tuning convergence: {nonconverged} of {len(trials)} recorded candidates "
+        "did not converge within the fixed iteration limit. These flags and warnings "
+        "remain visible; finite predictions do not prove a stable fitted likelihood.",
+        "",
+        "SARIMAX SHAP describes current exogenous terms conditional on the filtered "
+        "known history; it does not allocate the dynamic past-state contribution. "
+        "Correlated feature attributions and this conditioning limit interpretation.",
+        "",
+        "Archived weather deliberately uses older leads than the latest live forecast. "
+        "The deployment weather distribution can differ; live skill is unverified.",
+        "",
+        "The latest registered selections below use inner tuning, not final test scores. "
+        "Their rolling test score is the full monthly-selected policy above.",
+        "",
+        "| City | Horizon | Latest selected algorithm | Fit label end | Inner RMSE |",
+        "| --- | --- | --- | --- | --- |",
+    ]
+    for city in sorted(set(e["city"] for e in real)):
+        for horizon in (1, 2, 3):
+            version = (
+                ForecastModelVersion.objects.filter(
+                    analysis_run=run, city__slug=city, horizon=horizon
+                )
+                .order_by("-available_from", "-pk")
+                .first()
+            )
+            selection = version.validation_metrics["selection"]
+            inner = selection["tuning_rmse"][version.algorithm]
+            lines.append(
+                f"| {city} | {horizon} | {version.algorithm} "
+                f"| {version.training_end} | {inner:.3f} |"
+            )
+    lines += [
+        "",
+        "## Figures",
+        "",
+        f"![Issued-policy skill](../../data/results/{run.pk}/forecast_skill.png)",
+        "",
+    ]
+    for city in sorted(set(e["city"] for e in real)):
+        lines.append(
+            f"[{city.title()} observed/issued forecasts and 95% intervals]"
+            f"(../../data/results/{run.pk}/{city}_forecast_evaluation.png)"
+        )
+    lines.append("")
     text = "\n".join(lines)
     (settings.BASE_DIR / "docs" / "results" / "PHASE4.md").write_text(text, encoding="utf-8")
-    (output / "PHASE4.md").write_text(text, encoding="utf-8")
+    mirror = text.replace("(PHASE4_PROTOCOL.md)", "(protocol.md)")
+    mirror = mirror.replace("(PHASE4_BIAS.md)", "(../../../docs/results/PHASE4_BIAS.md)")
+    mirror = mirror.replace(f"(../../data/results/{run.pk}/", "(")
+    (output / "PHASE4.md").write_text(mirror, encoding="utf-8")
     plot_results(output, real)
     return result
 

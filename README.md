@@ -33,9 +33,15 @@ include replay/live mode, three horizons, bounds, PM2.5 category, model version
 and top five conditional SHAP drivers. The category is the PM2.5 subindex,
 not overall CPCB AQI. Evaluation never serves perfect-prognosis as headline skill.
 
-The public daily weather task caches forecasts before day-end IST. Daily issuance
-uses the latest completed day; absent a key or fresh issue-time readings, it
-replays the latest archived day. Add `OPENAQ_API_KEY` only to ignored `.env`
+The daily PM refresh runs at 23:35 IST and requests ten days of readings through
+the current instant. Public forecast weather is refreshed at 23:40 IST; issuance
+runs at 00:10 IST for the latest completed day. Absent a key, fresh issue-time
+readings, complete lag inputs or weather, it replays the latest archived day.
+Only readings ingested before that day's cutoff enter live inputs. Saved training
+calibration radii are retained when issuing forecasts. Bengaluru additionally
+requires verified source station IDs matching its fixed panel; a provider's
+different station IDs do not establish that correspondence.
+Add `OPENAQ_API_KEY` only to ignored `.env`
 and recreate containers to enable keyed ingestion. Historical publication delays,
 missing forecast BLH, station changes and seasonal interval calibration remain
 limitations; see the protocol and generated report before using predictions.

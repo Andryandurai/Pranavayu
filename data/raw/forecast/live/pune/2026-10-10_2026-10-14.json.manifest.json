@@ -1,0 +1,17 @@
+{
+  "url": "https://api.open-meteo.com/v1/forecast?latitude=18.5204&longitude=73.8567&start_date=2026-10-10&end_date=2026-10-14&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation%2Ccloud_cover%2Csurface_pressure%2Cboundary_layer_height&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "89d0d8931ee711b6eb2591cbda75c9e36baecb72f98f18d04a5eccb8703fa867",
+  "path": "forecast/live/pune/2026-10-10_2026-10-14.json",
+  "sha256": "1777014e7284b196ba677a8beb94cc4119afdd51b7d9f620542d9a78c540f127",
+  "size_bytes": 7327,
+  "retrieved_at": "2026-10-10T12:42:08.156419+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "pune",
+    "model": "gfs_global",
+    "mode": "live",
+    "lead_days": [],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

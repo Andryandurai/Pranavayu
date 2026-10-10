@@ -1,0 +1,17 @@
+{
+  "url": "https://api.open-meteo.com/v1/forecast?latitude=13.0827&longitude=80.2707&start_date=2026-10-10&end_date=2026-10-14&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation%2Ccloud_cover%2Csurface_pressure%2Cboundary_layer_height&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "107c887cd3d768c8cb89a79677f1ef2bbbee20cd42e2e5a384c6aededc242d42",
+  "path": "forecast/live/chennai/2026-10-10_2026-10-14.json",
+  "sha256": "c1b30056e64a83fb3731624b1c3d35c9876dc756eaa6195c4a4016cf459c51ab",
+  "size_bytes": 7528,
+  "retrieved_at": "2026-10-10T12:42:04.964622+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "chennai",
+    "model": "gfs_global",
+    "mode": "live",
+    "lead_days": [],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

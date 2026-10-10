@@ -1,0 +1,17 @@
+{
+  "url": "https://api.open-meteo.com/v1/forecast?latitude=28.6139&longitude=77.209&start_date=2026-10-10&end_date=2026-10-14&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation%2Ccloud_cover%2Csurface_pressure%2Cboundary_layer_height&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "022049b71e75c01372bc679d3f3e77d05852a66aa093cfb56e5caae3d41b5be9",
+  "path": "forecast/live/delhi/2026-10-10_2026-10-14.json",
+  "sha256": "716f3e42f0f52904cf5a4aa26d65806cf92b9cae3415df8374e4e987810d586e",
+  "size_bytes": 7333,
+  "retrieved_at": "2026-10-10T12:42:05.557785+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "delhi",
+    "model": "gfs_global",
+    "mode": "live",
+    "lead_days": [],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

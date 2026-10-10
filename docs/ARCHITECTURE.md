@@ -122,3 +122,30 @@ or readiness. `diagnostic_report` exports the measured figures/tables separately
 The result manifest distinguishes compute, supplement and export revisions.
 Only successful full `phase3a`/`phase3a2` runs become the read-only API default;
 diagnostic data and failed provisional results remain available for the audit.
+
+## Phase 4 forecasting
+
+`apps/forecast/` reads the canonical raw concentration snapshot and immutable
+lead-offset forecast weather. Monthly expanding-origin experiments fit point,
+quantile and small recurrent models with separate purged tuning/calibration
+segments. A versioned AnalysisRun retains predictions, split audits, input hashes,
+metrics and conditional SHAP explanations. MLflow tracks every algorithm/origin
+and registers each selected city/horizon version; SQLite metadata and artifact
+files persist under `data/mlflow/` on D:. The frozen method is in
+[PHASE4_PROTOCOL.md](results/PHASE4_PROTOCOL.md).
+
+ForecastWeather retains archive/live mode, issue/target dates, availability bounds
+and raw-asset links. ForecastModelVersion connects weights and MLflow identifiers
+to training dates and the AnalysisRun. Forecast stores three horizons, nested
+80/95% uncertainty bounds, the PM2.5 subindex category, mode, drivers and feature
+availability. ForecastEvaluation stores the complete archived-weather comparison.
+The read-only latest/history/evaluation endpoints select only a successful full
+forecasting run; running and failed experiments do not become defaults.
+
+Celery refreshes ten days of keyed PM at 23:35 IST, public forecast weather at
+23:40, and issues at 00:10 for the completed day. Readings must have finished
+ingestion before issue-end. Missing keys or incomplete live features select
+explicit replay; no observations are manufactured. Operational uncertainty uses
+the frozen training calibration radii, and SARIMAX state masks all future target
+labels. Historic publication latency and changes in station/weather support remain
+limitations rather than being hidden by service readiness.

@@ -1,0 +1,17 @@
+{
+  "url": "https://api.open-meteo.com/v1/forecast?latitude=19.076&longitude=72.8777&start_date=2026-10-10&end_date=2026-10-14&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation%2Ccloud_cover%2Csurface_pressure%2Cboundary_layer_height&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "b2575c9566dd08855d83f123da7da1166591591b4e917287ef2aac65c3ec2b35",
+  "path": "forecast/live/mumbai/2026-10-10_2026-10-14.json",
+  "sha256": "385499b282d26bca7388cce8d0004ea49b25c18dba5d208ef96fc082ab100ecf",
+  "size_bytes": 7386,
+  "retrieved_at": "2026-10-10T12:42:07.347999+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "mumbai",
+    "model": "gfs_global",
+    "mode": "live",
+    "lead_days": [],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}

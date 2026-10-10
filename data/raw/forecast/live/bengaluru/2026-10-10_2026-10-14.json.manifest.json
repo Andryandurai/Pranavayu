@@ -1,0 +1,17 @@
+{
+  "url": "https://api.open-meteo.com/v1/forecast?latitude=12.9716&longitude=77.5946&start_date=2026-10-10&end_date=2026-10-14&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation%2Ccloud_cover%2Csurface_pressure%2Cboundary_layer_height&models=gfs_global&timezone=UTC&wind_speed_unit=ms",
+  "request_sha256": "f968ca62ae6f04d76e67a754a6054a2c37bdce011116eacc33d0ee8e8adabc45",
+  "path": "forecast/live/bengaluru/2026-10-10_2026-10-14.json",
+  "sha256": "471850c71012190ad13c63ea29c9b7814cfa8627fb5042615f46407efd662287",
+  "size_bytes": 7401,
+  "retrieved_at": "2026-10-10T12:42:04.017722+00:00",
+  "content_type": "application/json; charset=utf-8",
+  "metadata": {
+    "city": "bengaluru",
+    "model": "gfs_global",
+    "mode": "live",
+    "lead_days": [],
+    "publication_margin_hours": 12,
+    "source_docs": "https://open-meteo.com/en/docs/previous-runs-api"
+  }
+}
