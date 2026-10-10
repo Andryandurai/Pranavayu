@@ -1,0 +1,435 @@
+{
+  "run": 19,
+  "name": "phase3b",
+  "status": "success",
+  "started_at": "2026-10-10T11:11:08.238383+00:00",
+  "finished_at": "2026-10-10T11:11:16.591907+00:00",
+  "data_window": [
+    "2015-01-01",
+    "2025-12-31"
+  ],
+  "git_commit": "e32d6dd1506f158caad1733f9356fb33dd29d25f",
+  "parameters": {
+    "data_run": 9,
+    "protocol": {
+      "gam": "Gaussian statsmodels GLMGam, cubic B-splines df=6 for nonconstant continuous predictors, fixed alpha=10; explicit circular sine/cosine; same outer weeks; no post-result penalty tuning",
+      "seed": 20261009,
+      "refits": 20,
+      "seasons": {
+        "winter": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "monsoon": [
+          6,
+          7,
+          8,
+          9
+        ],
+        "pre_monsoon": [
+          3,
+          4,
+          5
+        ]
+      },
+      "variants": [
+        {
+          "blh": true,
+          "name": "hourly_trend_pooled_blh",
+          "trend": true,
+          "target": "hourly",
+          "periods": "pooled"
+        },
+        {
+          "blh": false,
+          "name": "hourly_trend_pooled_no_blh",
+          "trend": true,
+          "target": "hourly",
+          "periods": "pooled"
+        },
+        {
+          "blh": false,
+          "name": "hourly_no_trend_pooled_no_blh",
+          "trend": false,
+          "target": "hourly",
+          "periods": "pooled"
+        },
+        {
+          "blh": false,
+          "name": "hourly_trend_separate_no_blh",
+          "trend": true,
+          "target": "hourly",
+          "periods": "separate"
+        },
+        {
+          "blh": true,
+          "name": "daily_trend_pooled_blh",
+          "trend": true,
+          "target": "daily",
+          "periods": "pooled"
+        },
+        {
+          "blh": false,
+          "name": "daily_trend_pooled_no_blh",
+          "trend": true,
+          "target": "daily",
+          "periods": "pooled"
+        },
+        {
+          "blh": false,
+          "name": "daily_no_trend_pooled_no_blh",
+          "trend": false,
+          "target": "daily",
+          "periods": "pooled"
+        },
+        {
+          "blh": false,
+          "name": "daily_trend_separate_no_blh",
+          "trend": true,
+          "target": "daily",
+          "periods": "separate"
+        }
+      ],
+      "bengaluru": "fixed panel only",
+      "frozen_at": "2026-10-08T18:47:04.530980+00:00",
+      "inner_folds": 3,
+      "outer_folds": 3,
+      "baseline_run": 7,
+      "explanations": "exact tree-path-dependent TreeSHAP; 30 complete days per era/season, whole hourly days when hourly target; aggregate signed contributions per day before mean absolute; grouped circular wind direction; ALE 12 quantile bins / 12 angular sectors",
+      "baseline_ncap": "both calendar 2017 and 2018 required; recent both 2024 and 2025 required; PM2.5 proxy, no official compliance",
+      "embargo_hours": 24,
+      "bootstrap_unit": "whole IST weeks within year and observed period, with replacement; fixed Run 7 structure",
+      "interpretation": "associations, predictive weather-only R2 is not causal variance decomposition; no causal policy claims; no forecasts/RAG/simulator/dashboard",
+      "eligible_cities": [
+        "delhi",
+        "hyderabad",
+        "kanpur",
+        "lucknow",
+        "mumbai",
+        "pune",
+        "bengaluru"
+      ],
+      "comparison_interval": "mixture of 20 actual refitted normalisations and 500 year/seven-day observed daily block resamples, with centred nested OOF residuals; pooled weather joint 300 common donors per city/refit",
+      "unchanged_readiness": {
+        "minimum_weeks_each_period": 26,
+        "daily_oof_r2_min_each_period": 0.5,
+        "minimum_days_month_each_period": 20,
+        "absolute_nmb_percent_max_each_period": 10,
+        "absolute_month_nmb_percent_max_each_period": 20
+      }
+    },
+    "versions": {
+      "shap": "0.52.0",
+      "numpy": "2.5.3",
+      "scipy": "1.18.1",
+      "Django": "5.2.18",
+      "pandas": "2.3.3",
+      "matplotlib": "3.11.2",
+      "statsmodels": "0.15.0",
+      "scikit-learn": "1.9.1"
+    },
+    "git_state": "versioned",
+    "child_runs": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      10,
+      17
+    ],
+    "code_sha256": "4463d99639d19fd757631d5a079747d5d00a0b2c0425cfa7df44689b00001134",
+    "baseline_run": 7,
+    "diagnostic_run": 8,
+    "protocol_sha256": "5c12d51c3ba9320be25d90363f910af10e0e06f38f806b0eefba82221ae0c732",
+    "model_process_provenance": {
+      "note": "The long model process loaded its implementations at launch; per-child revisions describe files on disk at record creation. Later changes add Gaussian exact-fit guard and reporting/network summaries, without changing fitted forest math. Pune Run 10 is a separate preceding process with its own provenance.",
+      "model_pipeline_launch_run": 12,
+      "loaded_model_pipeline_git_commit": "0392e75b2d18590ec6e0a9f2cf023455e2166f65",
+      "loaded_model_pipeline_code_sha256": "e3981fea70a0d14ae7efa4da977fe6f48ccda7cf0ff954789db548af88a863f9"
+    }
+  },
+  "files": [
+    {
+      "path": "PHASE3B.md",
+      "bytes": 48581,
+      "sha256": "8b89bbbb2151f860d69ab93beb3a69e2ce9ec0af32cd5eec306cd62108291c7b"
+    },
+    {
+      "path": "bengaluru_network_comparison.png",
+      "bytes": 139778,
+      "sha256": "e111048692ff82f821cda25f2d81a6e6953690f70aba750dbbd589e519d750e1"
+    },
+    {
+      "path": "bengaluru_network_comparison.svg",
+      "bytes": 51648,
+      "sha256": "5c8f8047089c7afdf46ff923dd1d07b1e3a3b0eadde447b44ba559dd9e072e45"
+    },
+    {
+      "path": "comparisons.csv",
+      "bytes": 4431,
+      "sha256": "cacbb65688a2171aafee487547e2d24810ee37132b0a92c77b4565f2d59b29f6"
+    },
+    {
+      "path": "compute_provenance.json",
+      "bytes": 545,
+      "sha256": "9b0668ef656a2cc15162d522f46040f799342911f7c1ec9221792e56bcd11965"
+    },
+    {
+      "path": "delhi_network_comparison.png",
+      "bytes": 153482,
+      "sha256": "122fb101da007746aa583b5ccd11da48cb443d88619ccb4d9531cf5efc34164e"
+    },
+    {
+      "path": "delhi_network_comparison.svg",
+      "bytes": 57598,
+      "sha256": "9756477ccf5d61af32b083c1155b09e50a261c7780c987ece17c8ed1e62e2cda"
+    },
+    {
+      "path": "forecast_support.csv",
+      "bytes": 684,
+      "sha256": "a0e2acaddf17ceafaff9c5142605da6e3535c9059a2721530c83fc694c229228"
+    },
+    {
+      "path": "gam_agreement.csv",
+      "bytes": 24035,
+      "sha256": "e79aa52e7134969b9ab477065536d73801eb5b4173207292ae4c765223355be3"
+    },
+    {
+      "path": "hyderabad_network_comparison.png",
+      "bytes": 153058,
+      "sha256": "607446ed74d2e3d0216b8329108eb240926d920a47a6fd2bb95840df5452f8cd"
+    },
+    {
+      "path": "hyderabad_network_comparison.svg",
+      "bytes": 58648,
+      "sha256": "ce567c2b3fa7ee90557dd9593ea2ef564b02783857a9b7bef787212af662bcf7"
+    },
+    {
+      "path": "kanpur_network_comparison.png",
+      "bytes": 80901,
+      "sha256": "4f8469c7d116f469c84cbcfc754f07308e7472e7b234b95027f0cef409de05ff"
+    },
+    {
+      "path": "kanpur_network_comparison.svg",
+      "bytes": 42704,
+      "sha256": "df4fed1f74cc0776696959d64334132217e7a02ec490c16e9d2cdf11e692b1f3"
+    },
+    {
+      "path": "lucknow_network_comparison.png",
+      "bytes": 95516,
+      "sha256": "2ebee028d48239770f6bc3198b0e783335e4abcfaabdc92aeacbfc69a6ddf154"
+    },
+    {
+      "path": "lucknow_network_comparison.svg",
+      "bytes": 43141,
+      "sha256": "71fe161a85fc63d95b5ba7db8b7153d344025b4e77034e28f9f66a8af0e1d9e6"
+    },
+    {
+      "path": "mumbai_network_comparison.png",
+      "bytes": 134907,
+      "sha256": "17ef2af73286eff61f8685eedf58cc42fb62a0e2fb269bdb568323ebc6972863"
+    },
+    {
+      "path": "mumbai_network_comparison.svg",
+      "bytes": 49481,
+      "sha256": "e62dc5950a56d7c7b3860a691fdb537d86029ce4442566cf422cd0d48e4242e1"
+    },
+    {
+      "path": "ncap_proxy.csv",
+      "bytes": 1156,
+      "sha256": "0caca3249b5b4792191192f81922bd60f39dd1125fd2de9f2c1a15c593ac4e55"
+    },
+    {
+      "path": "network_annual.csv",
+      "bytes": 3981,
+      "sha256": "e3cb9103e07baf239a17de859fd3bf725809afac5db55da9bc7e99f098590ea6"
+    },
+    {
+      "path": "observed_years.csv",
+      "bytes": 1011,
+      "sha256": "3d59afbe353fb271ec5bec45f133b541efc4c475c7d47cea61fded23d8608c6b"
+    },
+    {
+      "path": "paired_network.csv",
+      "bytes": 3551,
+      "sha256": "a1bdce3d50566442b25a572b7bc4f48ed0830e9a5174850c4382d7e249015a90"
+    },
+    {
+      "path": "phase3b_results.json",
+      "bytes": 663445,
+      "sha256": "07a3c41ebe796f9e5bcd98ccb2cede3e33019d4acc95409f97129498343a6d87"
+    },
+    {
+      "path": "pm10_network.csv",
+      "bytes": 1923,
+      "sha256": "323c335b295ec3390d60e3426094d5085e00defb9b42270775d9a5155adf7dfa"
+    },
+    {
+      "path": "pune_network_comparison.png",
+      "bytes": 77064,
+      "sha256": "7ceb10140d63526ea720ddf9f84918630fc4b189affe13aed1d2009bbee9aaed"
+    },
+    {
+      "path": "pune_network_comparison.svg",
+      "bytes": 42242,
+      "sha256": "c76656a075d8195d3544453b821585a3967ec1b52bbd2bcd345afe5fd24931c7"
+    },
+    {
+      "path": "region_comparison.csv",
+      "bytes": 312,
+      "sha256": "ed1c9df65b4d3e55bc6f8a76cee415cae82de2e44cfd582b653cc65555778121"
+    },
+    {
+      "path": "report_export.json",
+      "bytes": 495,
+      "sha256": "1798870462d39bc424c68f3af3f0e075242f1d5a3972456c4a8ba3b220591921"
+    },
+    {
+      "path": "seasonal_drivers.csv",
+      "bytes": 5169,
+      "sha256": "4ed021954c9a4875d03f09f3baf037858ed9959c40d303734cba5a84f7b2d84e"
+    },
+    {
+      "path": "seasonal_validation.csv",
+      "bytes": 17002,
+      "sha256": "083dca8a9f0dde3c75f7275d432af7bdb8320feb84d4a99cd4c314b2f27f64c2"
+    },
+    {
+      "path": "trends.csv",
+      "bytes": 4744,
+      "sha256": "05eddc8633b53cd21447b5278e5771ad4c144e6c29ed311e6c25a4a203c7f723"
+    },
+    {
+      "path": "validation.csv",
+      "bytes": 3147,
+      "sha256": "524151f37641cc5cac51b16441cfba5c39c41132e80e7cc106378929642c0215"
+    },
+    {
+      "path": "verification/dependency-build-resume.log",
+      "bytes": 67820,
+      "sha256": "37565863ac2fe6ea4aaa9b1d5e5ddc6c51fa03eb454bfff335ebc91ce09fbcb0"
+    },
+    {
+      "path": "verification/final-lint.log",
+      "bytes": 100,
+      "sha256": "1b4f7f869e125024d781caac50971b350a149b60e67b2cb901b7ffce83fc451e"
+    },
+    {
+      "path": "verification/final-services.log",
+      "bytes": 2294,
+      "sha256": "4c554cba0f9199fe8812543f4cc366a5b7b83588bc095ec1c0e450fd68cfc07e"
+    },
+    {
+      "path": "verification/final-system.log",
+      "bytes": 142,
+      "sha256": "157ad8e20262f61336065efc14202ace1da7594e6f855d1b3ff91cbd7446989e"
+    },
+    {
+      "path": "verification/final-tests.log",
+      "bytes": 4234,
+      "sha256": "55d053fb0d967b5d799a8d5ee599645cd9a4ebed076772513d416a911cc3a4f6"
+    },
+    {
+      "path": "verification/live-api.json",
+      "bytes": 754,
+      "sha256": "0b324abbb3092819a3ad45c7fd44f19325e304734921a9ad95f0f73960fd0893"
+    },
+    {
+      "path": "verification/manifest_integrity.json",
+      "bytes": 1092,
+      "sha256": "f64d54d9e446913c75ddec9cb19c9cd965d52218ce01607021de1ecb2a7ee486"
+    },
+    {
+      "path": "verification/post-fix-tests.log",
+      "bytes": 4234,
+      "sha256": "4fff13c533a4590fd91eb5e0323543b02fc06c62dd67fa19252543de402f626b"
+    },
+    {
+      "path": "verification/pre-fit-tests.log",
+      "bytes": 4270,
+      "sha256": "c23df16d900d76688fafdc6294ae40295e83f5a181ebbe5a6909695808f48d7f"
+    },
+    {
+      "path": "verification/preservation.json",
+      "bytes": 152,
+      "sha256": "31f73ee267297dfe379ecdfbb1266913d426b56010e9d6216aba25d74466e1c7"
+    },
+    {
+      "path": "verification/refit_counts.json",
+      "bytes": 1112,
+      "sha256": "6956746116dee7f73e5fb57a08e3af1eee02caa7a358b071687220cdc3b83de4"
+    },
+    {
+      "path": "verification/research-all-rerun.log",
+      "bytes": 39784,
+      "sha256": "f412e1297a4aef385f21b051400ae1b930ba612ffc89eba2f31f05c0a1d1103c"
+    },
+    {
+      "path": "verification/research-all.log",
+      "bytes": 7812,
+      "sha256": "e0fb6517b5682796d9e44d7a4426302a2b11578f0fc9fef591d9da54f65b2449"
+    },
+    {
+      "path": "verification/research-final-publication.log",
+      "bytes": 260,
+      "sha256": "c48f4eb6b39a6443d1d9c17784877445392c083f6e976b40ee354648d47f8190"
+    },
+    {
+      "path": "verification/research-pune.log",
+      "bytes": 4538,
+      "sha256": "6eba6b6fd86c1a88a9dc1cc51c9ed5b6d08eb747ba2852cdf817d82209207068"
+    },
+    {
+      "path": "verification/stored-clock-resume.log",
+      "bytes": 22530,
+      "sha256": "05dbe7d7598efaf487ffd66ec43346d16a5d282bf884364b670526884bf0de9e"
+    },
+    {
+      "path": "verification/stored-data-rebuild.log",
+      "bytes": 11226,
+      "sha256": "f8884ed68b572db92b7d6d3bc1b0dedac46d7d43c120fe1ae02fa103a748e1c5"
+    },
+    {
+      "path": "verification/stored-tables.log",
+      "bytes": 264,
+      "sha256": "78f4fc2dafda320c3c51b15ffc39450fa59604dc9b7acab5d150fd963ab5003d"
+    },
+    {
+      "path": "verification/warehouse_preservation.json",
+      "bytes": 76,
+      "sha256": "032cdab8d63ffc3093bc10c522152379d03505e6e0cb016700adcbe9d372688d"
+    },
+    {
+      "path": "weather_validation.png",
+      "bytes": 74040,
+      "sha256": "07dfb3bd4dff3f59028359f5487eaec4877270349d89978e67591c518f9f22a3"
+    },
+    {
+      "path": "weather_validation.svg",
+      "bytes": 52409,
+      "sha256": "a2e41918f48eb25dad3e1ff25e1affdb878dc42e0cb233028975b3c9fbd64c8b"
+    }
+  ],
+  "error_message": "",
+  "report_export": {
+    "run": 19,
+    "git_commit": "a1578e4c4ecd420c9c1494151ce43522b368a086",
+    "git_state": "versioned",
+    "code_sha256": "95d9e3f8d835ea9d63f447feb39ebf658944f2c820819cfab047520a8eb5c6b2",
+    "versions": {
+      "Django": "5.2.18",
+      "numpy": "2.5.3",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.18.1",
+      "matplotlib": "3.11.2",
+      "shap": "0.52.0",
+      "statsmodels": "0.15.0"
+    },
+    "report_sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b"
+  }
+}
