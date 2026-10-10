@@ -49,7 +49,7 @@ def export_research_report(run_id):
         [],
         [],
     )
-    seasonal, paired_network, pm10_network = [], [], []
+    seasonal, paired_network, pm10_network, observed_years = [], [], [], []
     images = []
     for city in protocol["eligible_cities"]:
         item = results[city]
@@ -76,6 +76,14 @@ def export_research_report(run_id):
                             )
                         )
         for cohort, result in item["cohorts"].items():
+            observed_years.append(
+                dict(
+                    city=city,
+                    cohort=cohort,
+                    eligible_years=[r["year"] for r in result.get("annual", [])],
+                    scope=result["scope"],
+                )
+            )
             if "nested_validation" not in result:
                 rejected_gate = result.get("readiness_run7")
                 rejected_periods = rejected_gate["periods"] if rejected_gate else []
@@ -214,6 +222,7 @@ def export_research_report(run_id):
             seasonal_validation=seasonal,
             paired_network=paired_network,
             pm10_network=pm10_network,
+            observed_years=observed_years,
         ).items()
     }
     for name, frame in frames.items():
@@ -332,6 +341,26 @@ def export_research_report(run_id):
             ]
             for r in paired_network
         ],
+    )
+    preferred_delhi = [
+        r for r in paired_network if r["city"] == "delhi" and r["comparison"] == "long_run"
+    ]
+    preferred_delhi_table = table(
+        ["Cohort", "Series", "Matched days", "Change µg/m³", "Refit/block 95% CI"],
+        [
+            [
+                r["cohort"],
+                r["kind"],
+                r["matched_days"],
+                fmt(r["difference"], 4),
+                f"[{fmt(r['ci95_difference'][0], 4)}, {fmt(r['ci95_difference'][1], 4)}]",
+            ]
+            for r in preferred_delhi
+        ],
+    )
+    years_table = table(
+        ["City", "Cohort", "Eligible observed calendar years", "Scope"],
+        [[r["city"], r["cohort"], str(r["eligible_years"]), r["scope"]] for r in observed_years],
     )
     pm10_network_table = table(
         ["City", "Cohort", "Year", "PM10 mean", "Valid days", "Eligible"],
@@ -511,6 +540,8 @@ data/results/{run.parameters["diagnostic_run"]}/.
 
 {panel_table}
 
+{years_table}
+
 Other cities remain descriptive: Ahmedabad, Chennai, Jaipur, Kolkata and Patna.
 Bengaluru all-station modelling remains unapproved. Panels without eligible years
 or a passing validated model are shown as descriptive/unavailable; they are not
@@ -681,6 +712,11 @@ across the gap.
 ### Delhi long-run weather-adjusted change
 
 {difference_table}
+
+{preferred_delhi_table}
+
+The first table uses each cohort's own OOF support. The second is the preferred
+network comparison: both cohorts use exactly the same supported calendar dates.
 
 The long-run baseline is the eligible 2015–2019 observations, distinct from the
 2017–2018 proxy baseline. Normalised intervals incorporate the new refits; raw and
