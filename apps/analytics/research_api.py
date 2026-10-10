@@ -31,7 +31,7 @@ class RQ2View(APIView):
         metric = CityMetric.objects.filter(run=run, city__slug=slug, name="rq2").first()
         if metric is None:
             raise NotFound("No research result for this city")
-        return Response(dict(run=run.pk, city=slug, **metric.result))
+        return Response({**metric.result, "run": run.pk, "city": slug})
 
 
 class ResearchListView(APIView):

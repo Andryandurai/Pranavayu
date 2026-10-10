@@ -61,7 +61,9 @@ def comparison_plot(city, cohorts, output):
                     pd.Timestamp(f"{first}-01-01").date(),
                     pd.Timestamp(f"{last}-12-31").date(),
                 )
-                ax.plot(pd.to_datetime(monthly.date), monthly.value, label=f"{cohort} {label}")
+                monthly = monthly.assign(date=pd.to_datetime(monthly.date)).set_index("date")
+                calendar = pd.date_range(f"{first}-01-01", f"{last}-12-01", freq="MS")
+                ax.plot(calendar, monthly.value.reindex(calendar), label=f"{cohort} {label}")
         ax.set_xlim(pd.Timestamp(f"{first}-01-01"), pd.Timestamp(f"{last}-12-31"))
         ax.set_ylabel("PM2.5 (ug/m3)")
         ax.set_title(f"{city.name}, {first}–{last}")

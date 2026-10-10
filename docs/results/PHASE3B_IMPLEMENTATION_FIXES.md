@@ -32,3 +32,8 @@ penalties to improve reported scores.
 
 The exploratory GAM cross-check must not be treated as independently calibrated
 for weather extremes beyond the observed training support.
+
+The live RQ2 API initially returned HTTP 500 because the response constructor
+passed `city` both explicitly and from the saved result dictionary. It now merges
+the dictionary and sets the canonical response metadata once. The regression
+fixture includes the real result's city field; live GETs are rechecked after the fix.

@@ -25,7 +25,9 @@ def test_ncap_is_a_read_only_proxy_and_failed_runs_are_not_published():
             "cohorts": {},
         },
     )
-    CityMetric.objects.create(run=run, city=city, name="rq2", result={"scope": "fixed panel only"})
+    CityMetric.objects.create(
+        run=run, city=city, name="rq2", result={"city": city.slug, "scope": "fixed panel only"}
+    )
     client = APIClient()
     response = client.get("/api/analytics/ncap/")
     assert response.status_code == 200

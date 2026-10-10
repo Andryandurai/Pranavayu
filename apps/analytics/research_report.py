@@ -7,10 +7,13 @@ from pathlib import Path
 import matplotlib
 import pandas as pd
 
+from apps.warehouse.models import City
+
 from .diagnostic_report import fmt as base_fmt
 from .diagnostic_report import table
 from .lifecycle import code_metadata
 from .models import AnalysisRun
+from .research_pipeline import comparison_plot
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -204,9 +207,24 @@ def export_research_report(run_id):
                                 **comparison[kind],
                             )
                         )
+        plot_frames = {}
+        for cohort, record in item["cohorts"].items():
+            prefix = record.get(
+                "artifacts_prefix", city + ("_panel" if cohort == "fixed_panel" else "")
+            )
+            data = {}
+            for label, name in [("raw", "raw"), ("normalised", "deweathered")]:
+                file = Path("data/results") / str(child.pk) / f"{prefix}_{name}_daily.csv"
+                if file.exists():
+                    frame = pd.read_csv(file)
+                    frame["date"] = pd.to_datetime(frame.date).dt.date
+                    data[label] = frame
+            if data:
+                plot_frames[cohort] = data
+        comparison_plot(City.objects.get(slug=city), plot_frames, output)
         images.append(
             f"![{city} station-network sensitivity]"
-            f"(../../data/results/{child.pk}/{city}_network_comparison.png)"
+            f"(../../data/results/{run.pk}/{city}_network_comparison.png)"
         )
     frames = {
         name: pd.DataFrame(rows)
@@ -235,6 +253,23 @@ def export_research_report(run_id):
         lambda city: (
             "Indo-Gangetic plain" if city in ["delhi", "kanpur", "lucknow"] else "Coastal/southern"
         )
+    )
+    passed_cities = [
+        city
+        for city in protocol["eligible_cities"]
+        if results[city]["cohorts"][results[city]["main_cohort"]]
+        .get("nested_readiness", {})
+        .get("passed")
+    ]
+    fail_cities = [city for city in protocol["eligible_cities"] if city not in passed_cities]
+    performance_summary = (
+        f"Weather-only daily held-week R² ranged from "
+        f"{fmt(float(main.weather_only_r2.min()), 4)} to "
+        f"{fmt(float(main.weather_only_r2.max()), 4)} across approved city/era cohorts. "
+        f"The unchanged nested screen passed all observed eras in {len(passed_cities)} "
+        f"of {len(protocol['eligible_cities'])} main cohorts: {', '.join(passed_cities)}. "
+        f"At least one era failed in {', '.join(fail_cities)}; "
+        "those failures are retained rather than weakening criteria."
     )
     regions = (
         main.groupby(["region", "period"])
@@ -514,6 +549,13 @@ changes are descriptive, with shared pooled weather and refit/block intervals.
 NCAP compliance cannot be evaluated because the historic PM10 baseline is absent.
 BS-VI attribution and crop-fire results are not estimated.
 
+{performance_summary}
+
+On identical network-comparison dates, Delhi's fixed-panel weather-adjusted
+long-run interval spans zero after model-refit uncertainty is included. Only
+Delhi and Hyderabad have the eligible years for the requested 2017–2018 proxy;
+Hyderabad's older nested validation remains a limitation on its normalised comparison.
+
 ## Introduction
 
 Weather and changing station composition can distort comparisons of measured PM2.5.
@@ -652,6 +694,8 @@ significance interpretation. They are not a trend across the observation gap.
 
 ### RQ2: predictive meteorological associations
 
+{performance_summary}
+
 {assessment}
 
 ![Daily paired validation](../../data/results/{run.pk}/weather_validation.png)
@@ -667,6 +711,14 @@ pooling their concentrations or treating seven selected cities as a regional sam
 Group medians are unweighted descriptions of the eligible city/era samples.
 The recent IGP group has only Delhi, whereas Kanpur and Lucknow lack recent data;
 differences are not a balanced regional comparison.
+
+Driver allocations vary across settings and periods. Delhi's weather SHAP leaders
+include temperature, wind and pressure; Lucknow's retained BLH is prominent outside
+the monsoon as well as pressure; Mumbai emphasises rain/pressure and older wind
+direction; Pune emphasises humidity and wind direction; Bengaluru's fixed panel
+shifts from humidity/wind speed in the old period to wind direction/rain recently.
+Hyderabad's network change also changes recent driver allocations. These statements
+describe the ranked results below, not independent physical causal effects.
 
 {driver_table}
 
@@ -693,6 +745,14 @@ stored in DataRun 9. The APIs explicitly return `is_official_compliance_result=f
 and `official_compliance_assessment="not assessed"`.
 
 {proxy_table}
+
+The eligible baseline/recent comparison exists only for Delhi and Hyderabad.
+Delhi's raw and normalised proxy intervals span zero. Hyderabad's estimates are
+negative under this bootstrap, but its old-era nested failure, especially on the
+fixed panel, weakens a model-based progress interpretation. Bengaluru's approved
+fixed panel lacks eligible 2017 observations; its failed all-station model is not
+used to fill that baseline. Mumbai lacks an eligible 2018; Kanpur and Lucknow lack
+recent targets; Pune lacks the historic baseline. Missing comparisons remain missing.
 
 Recent PM10 is context only. Missing historical PM10, fiscal/calendar mismatch and
 station/source changes prevent an official compliance comparison.
