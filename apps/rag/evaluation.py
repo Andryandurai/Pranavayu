@@ -419,12 +419,14 @@ def audit_answer(result):
                 and chunk.page_start == reference["page_start"]
                 and chunk.document.sha256 == reference["sha256"]
             )
-            sources[reference["label"]] = chunk.text if valid else ""
+            sources.setdefault(reference["label"], []).append(chunk.text if valid else "")
         else:
             tool = next(
                 (t for t in result["tool_results"] if t["citation"]["id"] == reference["id"]), None
             )
-            sources[reference["label"]] = data_evidence(tool, "E1")["text"] if tool else ""
+            sources.setdefault(reference["label"], []).append(
+                data_evidence(tool, "E1")["text"] if tool else ""
+            )
     audit = {
         "sentences": 0,
         "supported_sentences": 0,
@@ -449,10 +451,19 @@ def audit_answer(result):
         for sentence in sentences:
             supported = []
             for label in labels:
-                source = sources.get(label, "")
-                valid = normalized(sentence) in normalized(source) and numeric_tokens(
-                    sentence
-                ).issubset(numeric_tokens(source))
+                candidates = sources.get(label, [])
+                # Human citations identify a page/section, which can contain
+                # several retrieved chunks. Require valid identities for every
+                # associated reference and exact support in at least one chunk.
+                valid = (
+                    bool(candidates)
+                    and all(candidates)
+                    and any(
+                        normalized(sentence) in normalized(source)
+                        and numeric_tokens(sentence).issubset(numeric_tokens(source))
+                        for source in candidates
+                    )
+                )
                 audit["citation_uses"] += 1
                 audit["correct_citation_uses"] += int(valid)
                 supported.append(valid)

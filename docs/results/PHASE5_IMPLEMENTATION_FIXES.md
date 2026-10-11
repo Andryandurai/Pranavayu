@@ -41,3 +41,48 @@ evaluation. It does not replace the final metrics and validation report.
 - The evaluator separately audits emitted sentences/citation uses against stored
   chunk text and actual tool evidence, rather than assigning an assumed perfect
   citation score. Data expectations are frozen once, including nulls and scope.
+- The AVX2 host has no AVX512 FP16/BF16 instructions. Float16 worked but was slow;
+  before evaluation, inference changed to float32. Cache namespaces and stored
+  fingerprints include precision and sequence length, so earlier vectors are
+  not mixed into the final index. The two-text cold/warm probe measured
+  24.2308/3.0209 seconds. Two later direct uncached calls on actual source chunks
+  returned identical 1024-vectors at the same batch positions, maximum difference
+  0.0; the verification artifact retains timings and unit norms.
+- Parser 3 rejects single-column false tables: underlined IIT Kanpur prose had
+  moved chemical subscripts into separate cells. Three affected authored
+  questions were retained and their source text restored. Output-compatible
+  parser-2 sources received a recorded compatibility upgrade; affected sources
+  were reparsed before freezing. The parsed corpus is 7,194 chunks, including
+  1,115 IIT Kanpur and 1,843 TERI-ARAI chunks. No scored question was replaced.
+- PRANA's `WestBengal.pdf` contains the Kolkata-specific government action plan.
+  Corrected the source title and city metadata after inspecting the actual body.
+  Its ambiguous publication year remains null.
+- A final visual inspection of the AQI report's physical page 2 found a signed
+  2015 foreword. The October 2014 text refers to its draft launch. Corrected the
+  catalogue, manifest, Document year and all 197 chunk year tags to 2015; retained
+  the requested 2014 separately. Source bytes, embeddings, chunk IDs and the
+  frozen evaluation SHA256 are unchanged. The source-audit artifact records
+  the evidence and checks.
+- Raw data-tool citations exposed an actual HTTP 404 for successful data snapshot
+  Run 9. Analytics now permits explicit successful Phase 3A2 data snapshots while
+  preserving its completed full-run default. The regression test passes; all
+  seven dataset links in the real HTTP proof returned 200 on rerun.
+- Before freezing, numeric scoring was corrected to compare numeric values by
+  displayed field, with canonical Decimal representations. It reports recall,
+  precision, cell exactness, available-data coverage and missing-data abstention
+  separately; it does not treat an empty answer as numerically perfect.
+- Scientific confidence intervals and footnotes use brackets in actual source
+  text. Internal evidence citations now match explicit E-number aliases, and
+  the independent final audit matches actual emitted citation labels. Native
+  scientific brackets are preserved rather than treated as invented citations.
+- The final audit initially mapped a human page citation to a single chunk.
+  Multiple chunks on the same page share that label, so later entries overwrote
+  earlier source text and could falsely reject supported claims. It now checks
+  all associated references for valid identity and requires exact support in at
+  least one cited chunk for that label. A new regression also proves that an
+  invalid identity cannot be hidden by another valid chunk. This correction
+  precedes the first benchmark; questions and thresholds are unchanged.
+- The full container suite first passed as **182 passed, 149 warnings in 56.47s**.
+  After adding the same-page audit regression, it reran as **183 passed,
+  149 warnings in 71.47s**, retaining all 148 baseline tests and the hashes of all
+  20 original test/support files. All 35 new RAG cases pass. No warning was silenced.

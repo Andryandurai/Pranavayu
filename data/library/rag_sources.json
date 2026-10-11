@@ -21,13 +21,15 @@
     "key": "cpcb_aqi_2014",
     "title": "National Air Quality Index (CPCB technical report)",
     "category": "standard",
-    "year": 2014,
+    "year": 2015,
     "url": "https://smartnet.niua.org/sites/default/files/resources/Air%20Quality%20Index.pdf",
     "alternatives": [
       "https://www.cpcb.gov.in/displaypdf.php?id=bmF0aW9uYWwtYWlyLXF1YWxpdHktaW5kZXgvRklOQUwtUkVQT1JUX0FRSV8ucGRm"
     ],
     "format": "pdf",
-    "licence_note": "CPCB report; retain attribution. NIUA is a public institutional mirror."
+    "licence_note": "CPCB final technical report; retain attribution. Signed 2015 foreword on physical page 2; the requested 2014 refers to the draft launch. Public institutional/government access does not establish an open reuse licence.",
+    "requested_year": 2014,
+    "identity_note": "The supplied final AQI report has a signed 2015 foreword on physical PDF page 2. October 2014 in its text is the draft launch, not a verified publication date for this final body."
   },
   {
     "key": "swachh_vayu_2023",

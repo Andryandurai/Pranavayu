@@ -71,6 +71,13 @@ citations use explicit E-number aliases. Each cited claim still requires exact
 source text and numeric support. Final citation auditing matches the actual
 emitted reference labels and re-reads the stored source rows.
 
+Before the first benchmark, the emitted-citation audit was corrected for several
+retrieved chunks sharing one human page/section label. Every associated reference
+must have valid document/hash/page/retrieval identity, and a claim must occur
+exactly in at least one cited chunk for that label. The regression checks both
+valid same-page claims and an invalid identity. Questions, gold IDs, relevance
+thresholds and retrieval designs are unchanged.
+
 - Use validated named data tools. Raw analysis values cite their actual data run;
   normalised values cite their model run; research/forecast results cite their
   own successful AnalysisRun and model version. Never relabel raw Run 9 as Run 19.
