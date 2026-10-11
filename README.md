@@ -401,3 +401,71 @@ their download hashes are catalogued in
 not forecasting validation, and weather-adjusted changes do not identify policy
 effects. BS-VI attribution needs the missing intervening concentrations; crop-fire
 analysis is deferred pending FIRMS data.
+
+## Phase 5: cited research assistant
+
+Open [Ask](http://localhost:8000/ask/) for a minimal question box, provider badge
+and clickable source citations. Literature answers quote retrieved evidence;
+data answers use eight validated, read-only tools. Missing evidence produces an
+explicit refusal. Current forecasts are identified as live or archival replay.
+Read [PHASE5.md](docs/results/PHASE5.md) for measured performance and corpus limits.
+
+```powershell
+.\scripts\dev.ps1 up
+.\scripts\dev.ps1 migrate
+.\scripts\dev.ps1 manage download_rag_library
+.\scripts\dev.ps1 manage prepare_rag_models
+.\scripts\dev.ps1 manage ingest_rag_library
+# Submit selected registered documents to the real Celery worker:
+.\scripts\dev.ps1 manage ingest_rag_library --enqueue --ids 1
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+Public bodies are hash-addressed under `data/raw/rag/`; Git retains only the
+manifest and source specifications. Download failures are explicit, not empty
+documents. The BGE encoder/reranker weights and deterministic computation caches
+persist on D: under `data/models/`. The internal `rag-models` service serializes
+CPU inference with one model loaded at a time. Parsing and completed embedding
+batches survive an interrupted command. Unchanged content with the same parser
+version is a no-op; an incompatible parser fix requires an explicitly versioned
+index rebuild. After upgrading ingestion code, restart the Celery worker before
+submitting new tasks so it imports the current parser.
+
+Upload and tag a PDF at `/admin/rag/document/add/` to queue ingestion after the
+database commit. Existing PDF bodies cannot be replaced; a changed file is a new
+SHA256 revision. HTML and Markdown have actual section citations and logical
+text pages; PDF citations use physical file pages, not printed-page labels.
+
+`LLM_PROVIDER=auto` selects configured Anthropic, OpenAI, enabled Ollama, then
+extractive. Optional remote providers require both their API key and model name
+in `.env`; see `.env.example`. Extractive works without keys. This machine does
+not meet the requested 12 GB free-container condition for Ollama, so its optional
+`llm` profile is disabled. Do not download a local LLM without rechecking memory.
+
+API examples:
+
+```json
+POST /api/rag/ask/
+{"question":"What was the annual mean PM2.5 in Delhi in 2025?"}
+
+POST /api/rag/explain/
+{"context_type":"forecast","payload":{"city":"delhi"}}
+
+POST /api/rag/explain/
+{"context_type":"scenario","payload":{"question":"What assumptions does AERMOD use?","scenario_id":"example"}}
+```
+
+`ask` accepts optional filters `category`, `year_min`, `year_max`, `city` (seeded
+slug). `GET /api/rag/documents/` lists sources and ingestion status;
+`GET /api/rag/documents/<id>/page/<n>/` exposes stored page text and provenance.
+Explain payloads select evidence; supplied scenario/chart values are not verified
+measurements or simulation results. Phase 6 must validate its actual scenario
+outputs before using them as numerical evidence. This phase builds no simulator.
+
+The checked-in `data/eval/rag_eval.jsonl` has frozen real-source and database
+expectations. `evaluate_rag` resumes saved question/provider results under
+`data/results/rag-phase5/` and logs them to MLflow's `rag` experiment. Do not
+overwrite frozen questions in response to poor scores. `build_rag_eval` refuses
+to overwrite an existing evaluation file; its input is the authored question
+catalogue, with exact source excerpts verified against real stored chunks.

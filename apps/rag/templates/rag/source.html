@@ -1,0 +1,10 @@
+{% extends "dashboard/base.html" %}
+{% block title %}{{ page.document.title }}{% endblock %}
+{% block content %}
+<p><a href="{% url 'rag-ask-page' %}">Back to Ask</a></p>
+<h1>{{ page.document.title }}</h1>
+<p>{% if page.is_logical_page %}Unpaginated source · logical text view{% else %}PDF page {{ page.page_number }}{% endif %}{% if page.is_ocr %} · OCR text{% endif %}</p>
+{% if page.document.source_url %}<p><a href="{{ page.document.source_url }}" target="_blank" rel="noopener">Original source</a></p>{% endif %}
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere">{{ page.text }}</pre>
+{% for table in page.tables %}<pre style="white-space:pre-wrap">{{ table.text }}</pre>{% endfor %}
+{% endblock %}

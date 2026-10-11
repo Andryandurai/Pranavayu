@@ -1,0 +1,14 @@
+{
+  "built_at": "2026-10-11T01:50:50.548878+00:00",
+  "sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+  "authored_sha256": "080c6436eef5fe69dfbbbba44b19f67a361cd87652e82cebe4bfa22fd6c73f1d",
+  "count": 120,
+  "counts": {
+    "literature": 80,
+    "data": 30,
+    "unanswerable": 10
+  },
+  "gold_policy": "All same-document chunks containing the authored exact source excerpt",
+  "number_policy": "Match numeric values by their displayed field to frozen actual data-tool cells. Report numeric recall, precision and cell exactness separately from answer coverage. Unavailable-data questions require refusal and have no invented numeric target.",
+  "retrieval_policy": "Known-gold hit@k and fraction-of-known-gold recall@k; MRR through 40"
+}

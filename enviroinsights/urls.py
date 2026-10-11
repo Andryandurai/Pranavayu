@@ -11,6 +11,8 @@ from apps.core.views import HealthView
 from apps.dashboard.views import HomeView
 from apps.forecast.api import EvaluationView, HistoryView, LatestView
 from apps.ingest.api import CompletenessView, FireView, ReadingView, WeatherView
+from apps.rag.api import AskView, DocumentsView, ExplainView, PageView
+from apps.rag.views import AskPage, SourcePage
 from apps.warehouse.views import CityViewSet, PollutantViewSet, StationViewSet
 
 router = DefaultRouter()
@@ -21,6 +23,20 @@ router.register("pollutants", PollutantViewSet)
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
     path("admin/", admin.site.urls),
+    path("ask/", AskPage.as_view(), name="rag-ask-page"),
+    path(
+        "rag/documents/<int:document_id>/page/<int:page_number>/",
+        SourcePage.as_view(),
+        name="rag-source-page",
+    ),
+    path("api/rag/ask/", AskView.as_view(), name="rag-ask"),
+    path("api/rag/explain/", ExplainView.as_view(), name="rag-explain"),
+    path("api/rag/documents/", DocumentsView.as_view(), name="rag-documents"),
+    path(
+        "api/rag/documents/<int:document_id>/page/<int:page_number>/",
+        PageView.as_view(),
+        name="rag-page",
+    ),
     path("api/health/", HealthView.as_view(), name="health"),
     path("api/forecast/<slug:slug>/latest/", LatestView.as_view(), name="forecast-latest"),
     path("api/forecast/<slug:slug>/history/", HistoryView.as_view(), name="forecast-history"),

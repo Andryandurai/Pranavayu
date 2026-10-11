@@ -1,0 +1,978 @@
+{
+  "ncap_progress_2024": {
+    "key": "ncap_progress_2024",
+    "title": "Swachh Vayu Diwas: India's Commitment to Clean Air (PIB, 24 September 2024)",
+    "category": "policy",
+    "requested_url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/sep/doc2024924400701.pdf",
+    "year": 2024,
+    "licence_note": "Government publication; retain PIB attribution. No broader reuse licence assumed.",
+    "attempts": [
+      {
+        "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/sep/doc2024924400701.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:06:36.356059+00:00",
+        "http_status": 200,
+        "resolved_url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/sep/doc2024924400701.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 1,
+    "path": "data/raw/rag/ncap_progress_2024-0dfbd3bc2dbeb5d7.pdf",
+    "sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65",
+    "size_bytes": 994205,
+    "source_url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/sep/doc2024924400701.pdf",
+    "retrieved_at": "2026-10-10T14:06:46.256594+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "naaqs": {
+    "key": "naaqs",
+    "title": "National Ambient Air Quality Status & Trends 2019 (includes NAAQS notification)",
+    "category": "standard",
+    "requested_url": "https://cpcb.nic.in/upload/NAAQS_2019.pdf",
+    "year": 2020,
+    "licence_note": "CPCB government report, foreword dated 18 September 2020; 2019 is the monitoring year. Includes 2009 NAAQS standards/notification; this is not a standalone 2009 notification.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/upload/NAAQS_2019.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:06:46.319706+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/upload/NAAQS_2019.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 2,
+    "path": "data/raw/rag/naaqs-8fd0d426bad2213f.pdf",
+    "sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243",
+    "size_bytes": 15295581,
+    "source_url": "https://cpcb.gov.in/upload/NAAQS_2019.pdf",
+    "retrieved_at": "2026-10-10T14:06:58.434357+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "cpcb_aqi_2014": {
+    "key": "cpcb_aqi_2014",
+    "title": "National Air Quality Index (CPCB technical report)",
+    "category": "standard",
+    "requested_url": "https://smartnet.niua.org/sites/default/files/resources/Air%20Quality%20Index.pdf",
+    "year": 2014,
+    "licence_note": "CPCB report; retain attribution. NIUA is a public institutional mirror.",
+    "attempts": [
+      {
+        "url": "https://smartnet.niua.org/sites/default/files/resources/Air%20Quality%20Index.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:06:58.570205+00:00",
+        "error": "ConnectionError: HTTPSConnectionPool(host='smartnet.niua.org', port=443): Max retries exceeded with url: /sites/default/files/resources/Air%20Quality%20Index.pdf (Caused by NewConnectionError(\"HTTPSConnection(host='smartnet.niua.org', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      },
+      {
+        "url": "https://smartnet.niua.org/sites/default/files/resources/Air%20Quality%20Index.pdf",
+        "attempt": 2,
+        "at": "2026-10-10T14:07:19.657250+00:00",
+        "error": "ConnectionError: HTTPSConnectionPool(host='smartnet.niua.org', port=443): Max retries exceeded with url: /sites/default/files/resources/Air%20Quality%20Index.pdf (Caused by NewConnectionError(\"HTTPSConnection(host='smartnet.niua.org', port=443): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      },
+      {
+        "url": "https://www.cpcb.gov.in/displaypdf.php?id=bmF0aW9uYWwtYWlyLXF1YWxpdHktaW5kZXgvRklOQUwtUkVQT1JUX0FRSV8ucGRm",
+        "attempt": 1,
+        "at": "2026-10-10T14:07:40.760279+00:00",
+        "http_status": 200,
+        "resolved_url": "https://www.cpcb.gov.in/displaypdf.php?id=bmF0aW9uYWwtYWlyLXF1YWxpdHktaW5kZXgvRklOQUwtUkVQT1JUX0FRSV8ucGRm"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 3,
+    "path": "data/raw/rag/cpcb_aqi_2014-d2b0fd754a8f9fb3.pdf",
+    "sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37",
+    "size_bytes": 1414492,
+    "source_url": "https://www.cpcb.gov.in/displaypdf.php?id=bmF0aW9uYWwtYWlyLXF1YWxpdHktaW5kZXgvRklOQUwtUkVQT1JUX0FRSV8ucGRm",
+    "retrieved_at": "2026-10-10T14:07:43.238266+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "swachh_vayu_2023": {
+    "key": "swachh_vayu_2023",
+    "title": "Swachh Vayu Survekshan 2023 results",
+    "category": "policy",
+    "requested_url": "https://prana.cpcb.gov.in/assets/pdf/Swachh_Vayu_Survekshan_2023_Result.pdf",
+    "year": 2023,
+    "licence_note": "CPCB government results; retain attribution. No broader reuse licence assumed.",
+    "attempts": [
+      {
+        "url": "https://prana.cpcb.gov.in/assets/pdf/Swachh_Vayu_Survekshan_2023_Result.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:07:43.302051+00:00",
+        "http_status": 200,
+        "resolved_url": "https://prana.cpcb.gov.in/assets/pdf/Swachh_Vayu_Survekshan_2023_Result.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 4,
+    "path": "data/raw/rag/swachh_vayu_2023-e2c5abc26d0115c4.pdf",
+    "sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87",
+    "size_bytes": 436359,
+    "source_url": "https://prana.cpcb.gov.in/assets/pdf/Swachh_Vayu_Survekshan_2023_Result.pdf",
+    "retrieved_at": "2026-10-10T14:07:44.876912+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "who_2021": {
+    "key": "who_2021",
+    "title": "WHO global air quality guidelines (2021)",
+    "category": "health",
+    "requested_url": "https://iris.who.int/handle/10665/345329",
+    "year": 2021,
+    "licence_note": "WHO publication. Record the actual licence printed in the downloaded guideline.",
+    "attempts": [
+      {
+        "url": "https://iris.who.int/handle/10665/345329",
+        "attempt": 1,
+        "at": "2026-10-10T14:07:44.911918+00:00",
+        "http_status": 200,
+        "resolved_url": "https://iris.who.int/items/5b0ca7ab-830a-44b8-b99f-4ee743b4d7b2"
+      },
+      {
+        "url": "https://iris.who.int/handle/10665/345329",
+        "attempt": 1,
+        "at": "2026-10-10T16:10:45.278422+00:00",
+        "http_status": 200,
+        "resolved_url": "https://iris.who.int/items/5b0ca7ab-830a-44b8-b99f-4ee743b4d7b2"
+      },
+      {
+        "url": "https://apps.who.int/iris/bitstream/handle/10665/345329/9789240034228-eng.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:11:00.355271+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://apps.who.int/iris/bitstream/handle/10665/345329/9789240034228-eng.pdf",
+        "attempt": 2,
+        "at": "2026-10-10T16:11:15.448368+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://iris.who.int/handle/10665/345329",
+        "attempt": 1,
+        "at": "2026-10-10T16:17:33.084807+00:00",
+        "http_status": 200,
+        "resolved_url": "https://iris.who.int/items/5b0ca7ab-830a-44b8-b99f-4ee743b4d7b2"
+      },
+      {
+        "url": "https://iris.who.int/bitstream/handle/10665/345329/9789240034228-eng.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:17:51.453598+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://iris.who.int/bitstream/handle/10665/345329/9789240034228-eng.pdf",
+        "attempt": 2,
+        "at": "2026-10-10T16:18:05.552706+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://iris.who.int/handle/10665/345329",
+        "attempt": 1,
+        "at": "2026-10-10T17:08:26.650488+00:00",
+        "http_status": 200,
+        "resolved_url": "https://iris.who.int/items/5b0ca7ab-830a-44b8-b99f-4ee743b4d7b2"
+      },
+      {
+        "url": "https://apps.who.int/iris/bitstream/handle/10665/345329/9789240034228-eng.pdf?sequence=1&isAllowed=y",
+        "attempt": 1,
+        "at": "2026-10-10T17:08:44.105028+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://apps.who.int/iris/bitstream/handle/10665/345329/9789240034228-eng.pdf?sequence=1&isAllowed=y",
+        "attempt": 2,
+        "at": "2026-10-10T17:09:00.129111+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://iris.who.int/bitstream/handle/10665/345329/9789240034228-eng.pdf?sequence=1%2526isAllowed%3Dy",
+        "attempt": 1,
+        "at": "2026-10-10T17:09:15.811646+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://iris.who.int/bitstream/handle/10665/345329/9789240034228-eng.pdf?sequence=1%2526isAllowed%3Dy",
+        "attempt": 2,
+        "at": "2026-10-10T17:09:28.224199+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      }
+    ],
+    "status": "unavailable",
+    "error": "ValueError: Both attempts failed for https://iris.who.int/bitstream/handle/10665/345329/9789240034228-eng.pdf?sequence=1%2526isAllowed%3Dy",
+    "sha256": null,
+    "size_bytes": null,
+    "path": null
+  },
+  "ncap_city_list": {
+    "key": "ncap_city_list",
+    "title": "CPCB list of non-attainment and million-plus cities",
+    "category": "policy",
+    "requested_url": "https://cpcb.gov.in/uploads/Non-Attainment_Cities.pdf",
+    "year": null,
+    "licence_note": "CPCB government list; preserve footnotes and distinction between participant types.",
+    "attempts": [],
+    "reused_verified_cache": "data/raw/research_library/ncap_city_list.pdf",
+    "status": "downloaded",
+    "document_id": 5,
+    "path": "data/raw/rag/ncap_city_list-6c6cd88161d4784a.pdf",
+    "sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985",
+    "size_bytes": 68473,
+    "source_url": "https://cpcb.gov.in/uploads/Non-Attainment_Cities.pdf",
+    "retrieved_at": "2026-10-10T14:08:01.046377+00:00",
+    "format": "pdf",
+    "reused_cache": true
+  },
+  "aermod": {
+    "key": "aermod",
+    "title": "AERMOD Model Formulation, EPA-454/B-26-003 (July 2026)",
+    "category": "dispersion",
+    "requested_url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+    "year": 2026,
+    "licence_note": "US EPA technical publication; retain attribution and the actual document revision.",
+    "attempts": [
+      {
+        "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:08:01.093985+00:00",
+        "http_status": 200,
+        "resolved_url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 6,
+    "path": "data/raw/rag/aermod-2552f49db15ad0c2.pdf",
+    "sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8",
+    "size_bytes": 2152987,
+    "source_url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+    "retrieved_at": "2026-10-10T14:08:41.802529+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "iit_kanpur_delhi_2016": {
+    "key": "iit_kanpur_delhi_2016",
+    "title": "Comprehensive Study on Air Pollution and Green House Gases in Delhi (IIT Kanpur)",
+    "category": "source_apportionment",
+    "requested_url": "https://home.iitk.ac.in/~mukesh/Publications/DPCC_2016_SA%20study%20IIT%20Kanpur%20report_Comprehensive%20Study%20on%20Air%20Pollution%20and%20Green%20House%20Gases%20(GHGs)%20in%20Delhi.pdf",
+    "year": 2016,
+    "licence_note": "Public IIT Kanpur/DPCC report, January 2016. Printed copyright 2015: all rights reserved and reproduction requires permission. Public access is not an open reuse licence.",
+    "attempts": [
+      {
+        "url": "https://home.iitk.ac.in/~mukesh/Publications/DPCC_2016_SA%20study%20IIT%20Kanpur%20report_Comprehensive%20Study%20on%20Air%20Pollution%20and%20Green%20House%20Gases%20(GHGs)%20in%20Delhi.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:08:41.861528+00:00",
+        "http_status": 200,
+        "resolved_url": "https://home.iitk.ac.in/~mukesh/Publications/DPCC_2016_SA%20study%20IIT%20Kanpur%20report_Comprehensive%20Study%20on%20Air%20Pollution%20and%20Green%20House%20Gases%20(GHGs)%20in%20Delhi.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 7,
+    "path": "data/raw/rag/iit_kanpur_delhi_2016-d03b06f219615455.pdf",
+    "sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1",
+    "size_bytes": 12739362,
+    "source_url": "https://home.iitk.ac.in/~mukesh/Publications/DPCC_2016_SA%20study%20IIT%20Kanpur%20report_Comprehensive%20Study%20on%20Air%20Pollution%20and%20Green%20House%20Gases%20(GHGs)%20in%20Delhi.pdf",
+    "retrieved_at": "2026-10-10T14:08:45.756610+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "teri_arai_2018": {
+    "key": "teri_arai_2018",
+    "title": "Source apportionment and air quality management study: Delhi NCR (TERI-ARAI)",
+    "category": "source_apportionment",
+    "requested_url": "https://www.teriin.org/sites/default/files/2018-08/Report_SA_AQM-Delhi-NCR_0.pdf",
+    "year": 2018,
+    "licence_note": "TERI/ARAI public report; cite authors. No open licence assumed.",
+    "attempts": [
+      {
+        "url": "https://www.teriin.org/sites/default/files/2018-08/Report_SA_AQM-Delhi-NCR_0.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:08:45.869528+00:00",
+        "http_status": 200,
+        "resolved_url": "https://www.teriin.org/sites/default/files/2018-08/Report_SA_AQM-Delhi-NCR_0.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 8,
+    "path": "data/raw/rag/teri_arai_2018-d7e8f189691f21f5.pdf",
+    "sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5",
+    "size_bytes": 32939055,
+    "source_url": "https://www.teriin.org/sites/default/files/2018-08/Report_SA_AQM-Delhi-NCR_0.pdf",
+    "retrieved_at": "2026-10-10T14:08:54.759839+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "cse_review": {
+    "key": "cse_review",
+    "title": "Restoring Air Quality through Source Apportionment Analysis (Mukesh Sharma, CSE workshop presentation, 4 June 2019)",
+    "category": "source_apportionment",
+    "requested_url": "https://cdn.cseindia.org/attachments/0.12136100_1560416301_Restoring-Air-Quality-through-Source-Apportionment-Analysis.pdf",
+    "year": 2019,
+    "licence_note": "CSE publication; cite authors. No open licence assumed.",
+    "attempts": [
+      {
+        "url": "https://cdn.cseindia.org/attachments/0.12136100_1560416301_Restoring-Air-Quality-through-Source-Apportionment-Analysis.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:08:54.946435+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cdn.cseindia.org/attachments/0.12136100_1560416301_Restoring-Air-Quality-through-Source-Apportionment-Analysis.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 9,
+    "path": "data/raw/rag/cse_review-45bdb0aae419f7d6.pdf",
+    "sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0",
+    "size_bytes": 3172653,
+    "source_url": "https://cdn.cseindia.org/attachments/0.12136100_1560416301_Restoring-Air-Quality-through-Source-Apportionment-Analysis.pdf",
+    "retrieved_at": "2026-10-10T14:08:57.062505+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "cusworth_2018": {
+    "key": "cusworth_2018",
+    "title": "Quantifying the influence of agricultural fires in northwest India on urban air pollution in Delhi, India",
+    "category": "source_apportionment",
+    "requested_url": "https://iopscience.iop.org/article/10.1088/1748-9326/aab303/pdf",
+    "year": 2018,
+    "licence_note": "CC BY 3.0 as printed in the article; retain authors, title, journal and DOI.",
+    "attempts": [
+      {
+        "url": "https://iopscience.iop.org/article/10.1088/1748-9326/aab303/pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:08:57.136658+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://iopscience.iop.org/article/10.1088/1748-9326/aab303/pdf",
+        "attempt": 2,
+        "at": "2026-10-10T14:08:58.976741+00:00",
+        "http_status": 200,
+        "error": "ValueError: Response is not a PDF"
+      },
+      {
+        "url": "https://projects.iq.harvard.edu/files/acmg/files/cusworth_2018_india.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:09:00.739874+00:00",
+        "http_status": 403,
+        "error": "HTTPError: 403 Client Error: Forbidden for url: https://projects.iq.harvard.edu/files/acmg/files/cusworth_2018_india.pdf"
+      },
+      {
+        "url": "https://projects.iq.harvard.edu/files/acmg/files/cusworth_2018_india.pdf",
+        "attempt": 2,
+        "at": "2026-10-10T14:09:01.041625+00:00",
+        "http_status": 403,
+        "error": "HTTPError: 403 Client Error: Forbidden for url: https://projects.iq.harvard.edu/files/acmg/files/cusworth_2018_india.pdf"
+      },
+      {
+        "url": "https://acmg.seas.harvard.edu/publications/2018/cusworth_2018_india.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:18:18.388630+00:00",
+        "http_status": 404,
+        "error": "HTTPError: 404 Client Error: Not Found for url: https://acmg.seas.harvard.edu/publications/2018/cusworth_2018_india.pdf"
+      },
+      {
+        "url": "https://acmg.seas.harvard.edu/publications/2018/cusworth_2018_india.pdf",
+        "attempt": 2,
+        "at": "2026-10-10T16:18:21.007056+00:00",
+        "http_status": 404,
+        "error": "HTTPError: 404 Client Error: Not Found for url: https://acmg.seas.harvard.edu/publications/2018/cusworth_2018_india.pdf"
+      }
+    ],
+    "status": "unavailable",
+    "error": "ValueError: Both attempts failed for https://acmg.seas.harvard.edu/publications/2018/cusworth_2018_india.pdf",
+    "sha256": null,
+    "size_bytes": null,
+    "path": null
+  },
+  "grange_2018": {
+    "key": "grange_2018",
+    "title": "Random forest meteorological normalisation models for Swiss PM10 trend analysis",
+    "category": "methods",
+    "requested_url": "https://acp.copernicus.org/articles/18/6223/2018/acp-18-6223-2018.pdf",
+    "year": 2018,
+    "licence_note": "Open-access ACP article; retain CC BY author/publisher attribution.",
+    "attempts": [],
+    "reused_verified_cache": "data/raw/research_library/grange_2018.pdf",
+    "status": "downloaded",
+    "document_id": 10,
+    "path": "data/raw/rag/grange_2018-444fddb853547c39.pdf",
+    "sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536",
+    "size_bytes": 1318053,
+    "source_url": "https://acp.copernicus.org/articles/18/6223/2018/acp-18-6223-2018.pdf",
+    "retrieved_at": "2026-10-10T14:09:01.242399+00:00",
+    "format": "pdf",
+    "reused_cache": true
+  },
+  "shi_2021": {
+    "key": "shi_2021",
+    "title": "Abrupt but smaller than expected changes in surface air quality attributable to COVID-19 lockdowns",
+    "category": "methods",
+    "requested_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7806219",
+    "year": 2021,
+    "licence_note": "Science Advances open-access article; preserve actual licence and attribution.",
+    "attempts": [
+      {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7806219",
+        "attempt": 1,
+        "at": "2026-10-10T14:09:01.284179+00:00",
+        "http_status": 200,
+        "resolved_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7806219/"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 11,
+    "path": "data/raw/rag/shi_2021-b388e47e296d890d.html",
+    "sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c",
+    "size_bytes": 230083,
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7806219/",
+    "retrieved_at": "2026-10-10T14:09:02.623357+00:00",
+    "format": "html",
+    "reused_cache": false
+  },
+  "venter_2020": {
+    "key": "venter_2020",
+    "title": "COVID-19 lockdowns cause global air pollution declines (Venter et al., preprint)",
+    "category": "methods",
+    "requested_url": "https://www.medrxiv.org/content/10.1101/2020.04.10.20060673.full.pdf",
+    "year": 2020,
+    "licence_note": "Preprint; retain version and licence printed on the actual file. Not substituted with a later article.",
+    "attempts": [
+      {
+        "url": "https://www.medrxiv.org/content/10.1101/2020.04.10.20060673.full.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:09:02.673756+00:00",
+        "http_status": 403,
+        "error": "HTTPError: 403 Client Error: Forbidden for url: https://www.medrxiv.org/content/10.1101/2020.04.10.20060673.full.pdf"
+      },
+      {
+        "url": "https://www.medrxiv.org/content/10.1101/2020.04.10.20060673.full.pdf",
+        "attempt": 2,
+        "at": "2026-10-10T14:09:02.789591+00:00",
+        "http_status": 403,
+        "error": "HTTPError: 403 Client Error: Forbidden for url: https://www.medrxiv.org/content/10.1101/2020.04.10.20060673.full.pdf"
+      },
+      {
+        "url": "https://www.medrxiv.org/content/10.1101/2020.04.10.20060673v1.full.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:18:22.469879+00:00",
+        "http_status": 403,
+        "error": "HTTPError: 403 Client Error: Forbidden for url: https://www.medrxiv.org/content/10.1101/2020.04.10.20060673v1.full.pdf"
+      },
+      {
+        "url": "https://www.medrxiv.org/content/10.1101/2020.04.10.20060673v1.full.pdf",
+        "attempt": 2,
+        "at": "2026-10-10T16:18:22.671013+00:00",
+        "http_status": 403,
+        "error": "HTTPError: 403 Client Error: Forbidden for url: https://www.medrxiv.org/content/10.1101/2020.04.10.20060673v1.full.pdf"
+      }
+    ],
+    "status": "unavailable",
+    "error": "ValueError: Both attempts failed for https://www.medrxiv.org/content/10.1101/2020.04.10.20060673v1.full.pdf",
+    "sha256": null,
+    "size_bytes": null,
+    "path": null
+  },
+  "gbd_india_2021": {
+    "key": "gbd_india_2021",
+    "title": "Health and economic impact of air pollution in the states of India: GBD 2019",
+    "category": "health",
+    "requested_url": "https://www.econ.umd.edu/sites/www.econ.umd.edu/files/pubs/GBD%20India%202019.pdf",
+    "year": 2021,
+    "licence_note": "Lancet Planetary Health 2021 issue, published online 22 December 2020; institutional author copy. Preserve printed licence and attribution.",
+    "attempts": [
+      {
+        "url": "https://www.econ.umd.edu/sites/www.econ.umd.edu/files/pubs/GBD%20India%202019.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T14:09:02.928471+00:00",
+        "http_status": 200,
+        "resolved_url": "https://www.econ.umd.edu/sites/www.econ.umd.edu/files/pubs/GBD%20India%202019.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 12,
+    "path": "data/raw/rag/gbd_india_2021-311aeb3737c18fc2.pdf",
+    "sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35",
+    "size_bytes": 1808410,
+    "source_url": "https://www.econ.umd.edu/sites/www.econ.umd.edu/files/pubs/GBD%20India%202019.pdf",
+    "retrieved_at": "2026-10-10T14:09:07.664701+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "berkeley_equivalence": {
+    "key": "berkeley_equivalence",
+    "title": "Air Pollution and Cigarette Equivalence (Berkeley Earth)",
+    "category": "health",
+    "requested_url": "https://berkeleyearth.org/air-pollution-and-cigarette-equivalence",
+    "year": null,
+    "licence_note": "Berkeley Earth educational explanation; attribute organisation. Population-risk analogy, not personal clinical advice.",
+    "attempts": [
+      {
+        "url": "https://berkeleyearth.org/air-pollution-and-cigarette-equivalence",
+        "attempt": 1,
+        "at": "2026-10-10T14:09:07.716209+00:00",
+        "http_status": 500,
+        "error": "HTTPError: 500 Server Error: Internal Server Error for url: https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/"
+      },
+      {
+        "url": "https://berkeleyearth.org/air-pollution-and-cigarette-equivalence",
+        "attempt": 2,
+        "at": "2026-10-10T14:09:08.952350+00:00",
+        "http_status": 500,
+        "error": "HTTPError: 500 Server Error: Internal Server Error for url: https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/"
+      },
+      {
+        "url": "https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/",
+        "attempt": 1,
+        "at": "2026-10-10T16:18:22.976013+00:00",
+        "http_status": 500,
+        "error": "HTTPError: 500 Server Error: Internal Server Error for url: https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/"
+      },
+      {
+        "url": "https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/",
+        "attempt": 2,
+        "at": "2026-10-10T16:18:24.042697+00:00",
+        "http_status": 500,
+        "error": "HTTPError: 500 Server Error: Internal Server Error for url: https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/"
+      }
+    ],
+    "status": "unavailable",
+    "error": "ValueError: Both attempts failed for https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/",
+    "sha256": null,
+    "size_bytes": null,
+    "path": null
+  },
+  "project_phase3a": {
+    "key": "project_phase3a",
+    "title": "EnviroInsights-India Phase 3A results (legacy method)",
+    "category": "project_results",
+    "requested_url": null,
+    "year": 2026,
+    "licence_note": "Internal project results; legacy clock/method explicitly superseded by Phase 3A2/3B.",
+    "attempts": [],
+    "status": "downloaded",
+    "document_id": 13,
+    "path": "data/raw/rag/project_phase3a-1d634da86704d7d9.md",
+    "sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c",
+    "size_bytes": 27793,
+    "source_url": "project:docs/results/PHASE3A.md",
+    "retrieved_at": "2026-10-10T14:09:09.969544+00:00",
+    "format": "markdown",
+    "reused_cache": false
+  },
+  "project_phase3a2": {
+    "key": "project_phase3a2",
+    "title": "EnviroInsights-India Phase 3A2 results",
+    "category": "project_results",
+    "requested_url": null,
+    "year": 2026,
+    "licence_note": "Internal project results; cite AnalysisRun and unchanged readiness gates.",
+    "attempts": [],
+    "status": "downloaded",
+    "document_id": 14,
+    "path": "data/raw/rag/project_phase3a2-0b98e1d3b7a99200.md",
+    "sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f",
+    "size_bytes": 41811,
+    "source_url": "project:docs/results/PHASE3A2.md",
+    "retrieved_at": "2026-10-10T14:09:10.024085+00:00",
+    "format": "markdown",
+    "reused_cache": false
+  },
+  "project_phase3b": {
+    "key": "project_phase3b",
+    "title": "EnviroInsights-India Phase 3B results",
+    "category": "project_results",
+    "requested_url": null,
+    "year": 2026,
+    "licence_note": "Internal project results, AnalysisRun 19; predictive associations and PM2.5 proxy, not causal compliance.",
+    "attempts": [],
+    "status": "downloaded",
+    "document_id": 15,
+    "path": "data/raw/rag/project_phase3b-f16dee4f7eeaa0ab.md",
+    "sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b",
+    "size_bytes": 48687,
+    "source_url": "project:docs/results/PHASE3B.md",
+    "retrieved_at": "2026-10-10T14:09:10.080429+00:00",
+    "format": "markdown",
+    "reused_cache": false
+  },
+  "project_phase4": {
+    "key": "project_phase4",
+    "title": "EnviroInsights-India Phase 4 results",
+    "category": "project_results",
+    "requested_url": null,
+    "year": 2026,
+    "licence_note": "Internal project results, AnalysisRun 21; preserve replay, skill and coverage limitations.",
+    "attempts": [],
+    "status": "downloaded",
+    "document_id": 16,
+    "path": "data/raw/rag/project_phase4-24b658f3014760cb.md",
+    "sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2",
+    "size_bytes": 24513,
+    "source_url": "project:docs/results/PHASE4.md",
+    "retrieved_at": "2026-10-10T14:09:10.136516+00:00",
+    "format": "markdown",
+    "reused_cache": false
+  },
+  "project_sources": {
+    "key": "project_sources",
+    "title": "EnviroInsights-India data sources and provenance",
+    "category": "project_results",
+    "requested_url": null,
+    "year": 2026,
+    "licence_note": "Internal project provenance; historical sections are superseded by the recorded canonical clock repair.",
+    "attempts": [],
+    "status": "downloaded",
+    "document_id": 17,
+    "path": "data/raw/rag/project_sources-9ef7854680f42f90.md",
+    "sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7",
+    "size_bytes": 18804,
+    "source_url": "project:docs/DATA_SOURCES.md",
+    "retrieved_at": "2026-10-10T14:09:10.185600+00:00",
+    "format": "markdown",
+    "reused_cache": false
+  },
+  "city_plan_ahmedabad": {
+    "key": "city_plan_ahmedabad",
+    "title": "Ahmedabad clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Ahmedabad.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Ahmedabad.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:11:30.437254+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Ahmedabad.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 18,
+    "path": "data/raw/rag/city_plan_ahmedabad-a4bdc7f7249bcfb4.pdf",
+    "sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac",
+    "size_bytes": 1004069,
+    "source_url": "https://cpcb.gov.in/Actionplan/Ahmedabad.pdf",
+    "retrieved_at": "2026-10-10T16:11:33.211546+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "city_plan_bengaluru": {
+    "key": "city_plan_bengaluru",
+    "title": "Bengaluru clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Bengaluru.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Bengaluru.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:11:33.411328+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Bengaluru.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 19,
+    "path": "data/raw/rag/city_plan_bengaluru-952d87bdd911430a.pdf",
+    "sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860",
+    "size_bytes": 8450642,
+    "source_url": "https://cpcb.gov.in/Actionplan/Bengaluru.pdf",
+    "retrieved_at": "2026-10-10T16:11:40.963955+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "city_plan_delhi": {
+    "key": "city_plan_delhi",
+    "title": "Delhi clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Delhi.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Delhi.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:11:41.519029+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Delhi.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 20,
+    "path": "data/raw/rag/city_plan_delhi-036d9ae4d7edbdb0.pdf",
+    "sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1",
+    "size_bytes": 25053490,
+    "source_url": "https://cpcb.gov.in/Actionplan/Delhi.pdf",
+    "retrieved_at": "2026-10-10T16:11:54.753992+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "city_plan_hyderabad": {
+    "key": "city_plan_hyderabad",
+    "title": "Hyderabad clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Hyderabad.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Hyderabad.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:11:55.417077+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Hyderabad.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 21,
+    "path": "data/raw/rag/city_plan_hyderabad-76fdc9c13823ee89.pdf",
+    "sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919",
+    "size_bytes": 21059012,
+    "source_url": "https://cpcb.gov.in/Actionplan/Hyderabad.pdf",
+    "retrieved_at": "2026-10-10T16:12:07.039836+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "city_plan_jaipur": {
+    "key": "city_plan_jaipur",
+    "title": "Jaipur clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Jaipur.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Jaipur.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:12:07.303046+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Jaipur.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 22,
+    "path": "data/raw/rag/city_plan_jaipur-75524fd0fb40809b.pdf",
+    "sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc",
+    "size_bytes": 285931,
+    "source_url": "https://cpcb.gov.in/Actionplan/Jaipur.pdf",
+    "retrieved_at": "2026-10-10T16:12:08.752603+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "city_plan_kanpur": {
+    "key": "city_plan_kanpur",
+    "title": "Kanpur clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Kanpur.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Kanpur.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:12:09.137826+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Kanpur.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 23,
+    "path": "data/raw/rag/city_plan_kanpur-0b9bc75e783ec8eb.pdf",
+    "sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89",
+    "size_bytes": 165907,
+    "source_url": "https://cpcb.gov.in/Actionplan/Kanpur.pdf",
+    "retrieved_at": "2026-10-10T16:12:09.946176+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "city_plan_lucknow": {
+    "key": "city_plan_lucknow",
+    "title": "Lucknow clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Lucknow.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Lucknow.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:12:10.027276+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Lucknow.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 24,
+    "path": "data/raw/rag/city_plan_lucknow-cc494816d5de7169.pdf",
+    "sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0",
+    "size_bytes": 148009,
+    "source_url": "https://cpcb.gov.in/Actionplan/Lucknow.pdf",
+    "retrieved_at": "2026-10-10T16:12:11.062693+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "city_plan_mumbai": {
+    "key": "city_plan_mumbai",
+    "title": "Mumbai clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Mumbai.pdf",
+    "year": 2019,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Mumbai.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:12:11.174189+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Mumbai.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 25,
+    "path": "data/raw/rag/city_plan_mumbai-e5c6071776d636bb.pdf",
+    "sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce",
+    "size_bytes": 2697860,
+    "source_url": "https://cpcb.gov.in/Actionplan/Mumbai.pdf",
+    "retrieved_at": "2026-10-10T16:12:14.759337+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "city_plan_patna": {
+    "key": "city_plan_patna",
+    "title": "Patna clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Patna.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Patna.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:12:14.993026+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Patna.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 26,
+    "path": "data/raw/rag/city_plan_patna-e150d7ccd6765b31.pdf",
+    "sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928",
+    "size_bytes": 1996189,
+    "source_url": "https://cpcb.gov.in/Actionplan/Patna.pdf",
+    "retrieved_at": "2026-10-10T16:12:20.364902+00:00",
+    "format": "pdf",
+    "reused_cache": false
+  },
+  "city_plan_pune": {
+    "key": "city_plan_pune",
+    "title": "Pune clean air action plan (Draft / Revised R1)",
+    "category": "city_plan",
+    "requested_url": "https://cpcb.nic.in/Actionplan/Pune.pdf",
+    "year": null,
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year.",
+    "attempts": [
+      {
+        "url": "https://cpcb.nic.in/Actionplan/Pune.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:12:20.543797+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/Pune.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 27,
+    "path": "data/raw/rag/city_plan_pune-a3940dff35cfa8c5.pdf",
+    "sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc",
+    "size_bytes": 1774520,
+    "source_url": "https://cpcb.gov.in/Actionplan/Pune.pdf",
+    "retrieved_at": "2026-10-10T16:12:24.255128+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "city_plan_chennai": {
+    "key": "city_plan_chennai",
+    "title": "Revised Action Plan for Chennai Urban Agglomeration (October 2021)",
+    "category": "city_plan",
+    "requested_url": "https://www.tnpcb.gov.in/PDF/Information/technical/ActionplanChn.pdf",
+    "year": 2021,
+    "licence_note": "Official state pollution-control-board alternative; PRANA static list had no individual link. Preserve cover date and government attribution.",
+    "attempts": [
+      {
+        "url": "https://www.tnpcb.gov.in/PDF/Information/technical/ActionplanChn.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:18:25.110926+00:00",
+        "http_status": 200,
+        "resolved_url": "https://www.tnpcb.gov.in/PDF/Information/technical/ActionplanChn.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 28,
+    "path": "data/raw/rag/city_plan_chennai-7bbe4c626f4a17e3.pdf",
+    "sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2",
+    "size_bytes": 5261470,
+    "source_url": "https://www.tnpcb.gov.in/PDF/Information/technical/ActionplanChn.pdf",
+    "retrieved_at": "2026-10-10T16:18:37.010061+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "2026-10-10: actual cover/foreword inspected"
+  },
+  "city_plan_kolkata": {
+    "key": "city_plan_kolkata",
+    "title": "Comprehensive Air Quality Action Plan for Kolkata (Government of West Bengal; PRANA copy)",
+    "category": "city_plan",
+    "requested_url": "https://www.wbpcb.gov.in/writereaddata/files/Comprehensive%20Air%20Quality%20Action%20Plan%20Kolkata.pdf",
+    "year": null,
+    "licence_note": "Official state pollution-control-board alternative; PRANA static list had no individual link. Preserve cover date and government attribution.",
+    "attempts": [
+      {
+        "url": "https://www.wbpcb.gov.in/writereaddata/files/Comprehensive%20Air%20Quality%20Action%20Plan%20Kolkata.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T16:18:37.410705+00:00",
+        "error": "SSLError: HTTPSConnectionPool(host='www.wbpcb.gov.in', port=443): Max retries exceeded with url: /writereaddata/files/Comprehensive%20Air%20Quality%20Action%20Plan%20Kolkata.pdf (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
+      },
+      {
+        "url": "https://www.wbpcb.gov.in/writereaddata/files/Comprehensive%20Air%20Quality%20Action%20Plan%20Kolkata.pdf",
+        "attempt": 2,
+        "at": "2026-10-10T16:18:45.929975+00:00",
+        "error": "SSLError: HTTPSConnectionPool(host='www.wbpcb.gov.in', port=443): Max retries exceeded with url: /writereaddata/files/Comprehensive%20Air%20Quality%20Action%20Plan%20Kolkata.pdf (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
+      },
+      {
+        "url": "https://cpcb.nic.in/Actionplan/West%20Bengal.pdf",
+        "attempt": 1,
+        "at": "2026-10-10T17:09:42.456945+00:00",
+        "http_status": 200,
+        "resolved_url": "https://cpcb.gov.in/Actionplan/West%20Bengal.pdf"
+      }
+    ],
+    "status": "downloaded",
+    "document_id": 29,
+    "path": "data/raw/rag/city_plan_kolkata-d97393dfafa17724.pdf",
+    "sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0",
+    "size_bytes": 6793753,
+    "source_url": "https://cpcb.gov.in/Actionplan/West%20Bengal.pdf",
+    "retrieved_at": "2026-10-10T17:09:45.805627+00:00",
+    "format": "pdf",
+    "reused_cache": false,
+    "identity_audited": "Actual 40-page PDF is Kolkata-specific despite the West Bengal filename. Cover includes 31 December 2018 and an August 2019 court-context reference; publication year left null."
+  }
+}

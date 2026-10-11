@@ -30,7 +30,14 @@ def query_run(request):
     params = query.validated_data
     rows = AnalysisRun.objects.filter(status="success", name__in=["phase3a", "phase3a2"])
     if "run" in params:
-        rows = rows.filter(pk=params["run"])
+        # RAG citations name canonical data snapshots explicitly. Keep automatic
+        # defaults on completed full analyses, while allowing these read-only
+        # source snapshots to be inspected by their actual run ID.
+        rows = AnalysisRun.objects.filter(
+            status="success",
+            name__in=["phase3a", "phase3a2", "phase3a2-data", "phase3b-data"],
+            pk=params["run"],
+        )
     run = rows.order_by("-id").first()
     if run is None:
         raise NotFound("No completed Phase 3A analysis run")

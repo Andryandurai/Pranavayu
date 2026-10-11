@@ -1,0 +1,360 @@
+[
+  {
+    "key": "ncap_progress_2024",
+    "title": "Swachh Vayu Diwas: India's Commitment to Clean Air (PIB, 24 September 2024)",
+    "category": "policy",
+    "year": 2024,
+    "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/sep/doc2024924400701.pdf",
+    "format": "pdf",
+    "licence_note": "Government publication; retain PIB attribution. No broader reuse licence assumed."
+  },
+  {
+    "key": "naaqs",
+    "title": "National Ambient Air Quality Status & Trends 2019 (includes NAAQS notification)",
+    "category": "standard",
+    "year": 2020,
+    "url": "https://cpcb.nic.in/upload/NAAQS_2019.pdf",
+    "format": "pdf",
+    "licence_note": "CPCB government report, foreword dated 18 September 2020; 2019 is the monitoring year. Includes 2009 NAAQS standards/notification; this is not a standalone 2009 notification."
+  },
+  {
+    "key": "cpcb_aqi_2014",
+    "title": "National Air Quality Index (CPCB technical report)",
+    "category": "standard",
+    "year": 2014,
+    "url": "https://smartnet.niua.org/sites/default/files/resources/Air%20Quality%20Index.pdf",
+    "alternatives": [
+      "https://www.cpcb.gov.in/displaypdf.php?id=bmF0aW9uYWwtYWlyLXF1YWxpdHktaW5kZXgvRklOQUwtUkVQT1JUX0FRSV8ucGRm"
+    ],
+    "format": "pdf",
+    "licence_note": "CPCB report; retain attribution. NIUA is a public institutional mirror."
+  },
+  {
+    "key": "swachh_vayu_2023",
+    "title": "Swachh Vayu Survekshan 2023 results",
+    "category": "policy",
+    "year": 2023,
+    "url": "https://prana.cpcb.gov.in/assets/pdf/Swachh_Vayu_Survekshan_2023_Result.pdf",
+    "format": "pdf",
+    "licence_note": "CPCB government results; retain attribution. No broader reuse licence assumed."
+  },
+  {
+    "key": "who_2021",
+    "title": "WHO global air quality guidelines (2021)",
+    "category": "health",
+    "year": 2021,
+    "url": "https://iris.who.int/handle/10665/345329",
+    "format": "html",
+    "find_pdf": true,
+    "licence_note": "WHO publication. Record the actual licence printed in the downloaded guideline.",
+    "alternatives": [
+      "https://apps.who.int/iris/bitstream/handle/10665/345329/9789240034228-eng.pdf",
+      "https://iris.who.int/bitstream/handle/10665/345329/9789240034228-eng.pdf",
+      "https://apps.who.int/iris/bitstream/handle/10665/345329/9789240034228-eng.pdf?sequence=1&isAllowed=y",
+      "https://iris.who.int/bitstream/handle/10665/345329/9789240034228-eng.pdf?sequence=1%2526isAllowed%3Dy"
+    ],
+    "alternative_format": "pdf"
+  },
+  {
+    "key": "ncap_city_list",
+    "title": "CPCB list of non-attainment and million-plus cities",
+    "category": "policy",
+    "year": null,
+    "url": "https://cpcb.gov.in/uploads/Non-Attainment_Cities.pdf",
+    "format": "pdf",
+    "reuse_path": "data/raw/research_library/ncap_city_list.pdf",
+    "licence_note": "CPCB government list; preserve footnotes and distinction between participant types."
+  },
+  {
+    "key": "aermod",
+    "title": "AERMOD Model Formulation, EPA-454/B-26-003 (July 2026)",
+    "category": "dispersion",
+    "year": 2026,
+    "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+    "format": "pdf",
+    "licence_note": "US EPA technical publication; retain attribution and the actual document revision."
+  },
+  {
+    "key": "iit_kanpur_delhi_2016",
+    "title": "Comprehensive Study on Air Pollution and Green House Gases in Delhi (IIT Kanpur)",
+    "category": "source_apportionment",
+    "year": 2016,
+    "city": "delhi",
+    "url": "https://home.iitk.ac.in/~mukesh/Publications/DPCC_2016_SA%20study%20IIT%20Kanpur%20report_Comprehensive%20Study%20on%20Air%20Pollution%20and%20Green%20House%20Gases%20(GHGs)%20in%20Delhi.pdf",
+    "format": "pdf",
+    "licence_note": "Public IIT Kanpur/DPCC report, January 2016. Printed copyright 2015: all rights reserved and reproduction requires permission. Public access is not an open reuse licence."
+  },
+  {
+    "key": "teri_arai_2018",
+    "title": "Source apportionment and air quality management study: Delhi NCR (TERI-ARAI)",
+    "category": "source_apportionment",
+    "year": 2018,
+    "city": "delhi",
+    "url": "https://www.teriin.org/sites/default/files/2018-08/Report_SA_AQM-Delhi-NCR_0.pdf",
+    "format": "pdf",
+    "licence_note": "TERI/ARAI public report; cite authors. No open licence assumed."
+  },
+  {
+    "key": "cse_review",
+    "title": "Restoring Air Quality through Source Apportionment Analysis (Mukesh Sharma, CSE workshop presentation, 4 June 2019)",
+    "category": "source_apportionment",
+    "year": 2019,
+    "url": "https://cdn.cseindia.org/attachments/0.12136100_1560416301_Restoring-Air-Quality-through-Source-Apportionment-Analysis.pdf",
+    "format": "pdf",
+    "licence_note": "CSE publication; cite authors. No open licence assumed."
+  },
+  {
+    "key": "cusworth_2018",
+    "title": "Quantifying the influence of agricultural fires in northwest India on urban air pollution in Delhi, India",
+    "category": "source_apportionment",
+    "year": 2018,
+    "city": "delhi",
+    "doi": "10.1088/1748-9326/aab303",
+    "url": "https://iopscience.iop.org/article/10.1088/1748-9326/aab303/pdf",
+    "alternatives": [
+      "https://projects.iq.harvard.edu/files/acmg/files/cusworth_2018_india.pdf",
+      "https://acmg.seas.harvard.edu/publications/2018/cusworth_2018_india.pdf"
+    ],
+    "format": "pdf",
+    "licence_note": "CC BY 3.0 as printed in the article; retain authors, title, journal and DOI."
+  },
+  {
+    "key": "grange_2018",
+    "title": "Random forest meteorological normalisation models for Swiss PM10 trend analysis",
+    "category": "methods",
+    "year": 2018,
+    "doi": "10.5194/acp-18-6223-2018",
+    "url": "https://acp.copernicus.org/articles/18/6223/2018/acp-18-6223-2018.pdf",
+    "format": "pdf",
+    "reuse_path": "data/raw/research_library/grange_2018.pdf",
+    "licence_note": "Open-access ACP article; retain CC BY author/publisher attribution."
+  },
+  {
+    "key": "shi_2021",
+    "title": "Abrupt but smaller than expected changes in surface air quality attributable to COVID-19 lockdowns",
+    "category": "methods",
+    "year": 2021,
+    "doi": "10.1126/sciadv.abd6696",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7806219",
+    "alternatives": [
+      "https://pure-oai.bham.ac.uk/ws/files/114238854/eabd6696.full.pdf"
+    ],
+    "format": "html",
+    "alternative_format": "pdf",
+    "licence_note": "Science Advances open-access article; preserve actual licence and attribution."
+  },
+  {
+    "key": "venter_2020",
+    "title": "COVID-19 lockdowns cause global air pollution declines (Venter et al., preprint)",
+    "category": "methods",
+    "year": 2020,
+    "url": "https://www.medrxiv.org/content/10.1101/2020.04.10.20060673.full.pdf",
+    "format": "pdf",
+    "licence_note": "Preprint; retain version and licence printed on the actual file. Not substituted with a later article.",
+    "alternatives": [
+      "https://www.medrxiv.org/content/10.1101/2020.04.10.20060673v1.full.pdf"
+    ]
+  },
+  {
+    "key": "gbd_india_2021",
+    "title": "Health and economic impact of air pollution in the states of India: GBD 2019",
+    "category": "health",
+    "year": 2021,
+    "url": "https://www.econ.umd.edu/sites/www.econ.umd.edu/files/pubs/GBD%20India%202019.pdf",
+    "format": "pdf",
+    "licence_note": "Lancet Planetary Health 2021 issue, published online 22 December 2020; institutional author copy. Preserve printed licence and attribution."
+  },
+  {
+    "key": "berkeley_equivalence",
+    "title": "Air Pollution and Cigarette Equivalence (Berkeley Earth)",
+    "category": "health",
+    "year": null,
+    "url": "https://berkeleyearth.org/air-pollution-and-cigarette-equivalence",
+    "format": "html",
+    "licence_note": "Berkeley Earth educational explanation; attribute organisation. Population-risk analogy, not personal clinical advice.",
+    "alternatives": [
+      "https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/"
+    ]
+  },
+  {
+    "key": "project_phase3a",
+    "title": "EnviroInsights-India Phase 3A results (legacy method)",
+    "category": "project_results",
+    "year": 2026,
+    "project_path": "docs/results/PHASE3A.md",
+    "format": "markdown",
+    "licence_note": "Internal project results; legacy clock/method explicitly superseded by Phase 3A2/3B."
+  },
+  {
+    "key": "project_phase3a2",
+    "title": "EnviroInsights-India Phase 3A2 results",
+    "category": "project_results",
+    "year": 2026,
+    "project_path": "docs/results/PHASE3A2.md",
+    "format": "markdown",
+    "licence_note": "Internal project results; cite AnalysisRun and unchanged readiness gates."
+  },
+  {
+    "key": "project_phase3b",
+    "title": "EnviroInsights-India Phase 3B results",
+    "category": "project_results",
+    "year": 2026,
+    "project_path": "docs/results/PHASE3B.md",
+    "format": "markdown",
+    "licence_note": "Internal project results, AnalysisRun 19; predictive associations and PM2.5 proxy, not causal compliance."
+  },
+  {
+    "key": "project_phase4",
+    "title": "EnviroInsights-India Phase 4 results",
+    "category": "project_results",
+    "year": 2026,
+    "project_path": "docs/results/PHASE4.md",
+    "format": "markdown",
+    "licence_note": "Internal project results, AnalysisRun 21; preserve replay, skill and coverage limitations."
+  },
+  {
+    "key": "project_sources",
+    "title": "EnviroInsights-India data sources and provenance",
+    "category": "project_results",
+    "year": 2026,
+    "project_path": "docs/DATA_SOURCES.md",
+    "format": "markdown",
+    "licence_note": "Internal project provenance; historical sections are superseded by the recorded canonical clock repair."
+  },
+  {
+    "key": "city_plan_ahmedabad",
+    "title": "Ahmedabad clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": null,
+    "city": "ahmedabad",
+    "url": "https://cpcb.nic.in/Actionplan/Ahmedabad.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_bengaluru",
+    "title": "Bengaluru clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": null,
+    "city": "bengaluru",
+    "url": "https://cpcb.nic.in/Actionplan/Bengaluru.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_delhi",
+    "title": "Delhi clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": null,
+    "city": "delhi",
+    "url": "https://cpcb.nic.in/Actionplan/Delhi.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_hyderabad",
+    "title": "Hyderabad clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": null,
+    "city": "hyderabad",
+    "url": "https://cpcb.nic.in/Actionplan/Hyderabad.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_jaipur",
+    "title": "Jaipur clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": null,
+    "city": "jaipur",
+    "url": "https://cpcb.nic.in/Actionplan/Jaipur.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_kanpur",
+    "title": "Kanpur clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": null,
+    "city": "kanpur",
+    "url": "https://cpcb.nic.in/Actionplan/Kanpur.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_lucknow",
+    "title": "Lucknow clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": null,
+    "city": "lucknow",
+    "url": "https://cpcb.nic.in/Actionplan/Lucknow.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_mumbai",
+    "title": "Mumbai clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": 2019,
+    "city": "mumbai",
+    "url": "https://cpcb.nic.in/Actionplan/Mumbai.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_patna",
+    "title": "Patna clean air action plan (CPCB/PRANA)",
+    "category": "city_plan",
+    "year": null,
+    "city": "patna",
+    "url": "https://cpcb.nic.in/Actionplan/Patna.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_pune",
+    "title": "Pune clean air action plan (Draft / Revised R1)",
+    "category": "city_plan",
+    "year": null,
+    "city": "pune",
+    "url": "https://cpcb.nic.in/Actionplan/Pune.pdf",
+    "format": "pdf",
+    "discovered_from": "https://prana.cpcb.gov.in/main.6a00e160652117cb0afa.js",
+    "licence_note": "Official CPCB action plan linked by PRANA; retain government attribution and actual cover year."
+  },
+  {
+    "key": "city_plan_chennai",
+    "title": "Revised Action Plan for Chennai Urban Agglomeration (October 2021)",
+    "category": "city_plan",
+    "year": 2021,
+    "city": "chennai",
+    "url": "https://www.tnpcb.gov.in/PDF/Information/technical/ActionplanChn.pdf",
+    "format": "pdf",
+    "discovered_from": "https://tnpcb.gov.in/technicalreports.php",
+    "licence_note": "Official state pollution-control-board alternative; PRANA static list had no individual link. Preserve cover date and government attribution."
+  },
+  {
+    "key": "city_plan_kolkata",
+    "title": "Comprehensive Air Quality Action Plan for Kolkata (Government of West Bengal; PRANA copy)",
+    "category": "city_plan",
+    "year": null,
+    "city": "kolkata",
+    "url": "https://www.wbpcb.gov.in/writereaddata/files/Comprehensive%20Air%20Quality%20Action%20Plan%20Kolkata.pdf",
+    "format": "pdf",
+    "discovered_from": "https://www.wbpcb.gov.in/html/index.htm",
+    "licence_note": "Official state pollution-control-board alternative; PRANA static list had no individual link. Preserve cover date and government attribution.",
+    "alternatives": [
+      "https://cpcb.nic.in/Actionplan/West%20Bengal.pdf"
+    ],
+    "alternative_note": "Actual 40-page PDF is Kolkata-specific despite the West Bengal filename. Cover includes 31 December 2018 and an August 2019 court-context reference; publication year left null."
+  }
+]

@@ -1,0 +1,17 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %}Ask · EnviroInsights-India{% endblock %}
+{% block content %}
+<h1>Ask the research library</h1>
+<p>Answers use cited documents and the project's recorded results.</p>
+<form method="post" hx-post="{% url 'rag-ask-page' %}" hx-target="#answer" hx-indicator="#working">
+  {% csrf_token %}
+  <label for="question">Question</label>
+  <textarea id="question" name="question" rows="3" maxlength="2000" required style="display:block;width:100%;max-width:52rem"></textarea>
+  <button type="submit">Ask</button>
+  <span id="working" class="htmx-indicator">Finding evidence…</span>
+</form>
+<div id="answer" aria-live="polite">{% include "rag/answer.html" %}</div>
+<script src="{% static 'rag/htmx.min.js' %}" defer></script>
+<style>.htmx-indicator{opacity:0}.htmx-request .htmx-indicator,.htmx-request.htmx-indicator{opacity:1}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+{% endblock %}

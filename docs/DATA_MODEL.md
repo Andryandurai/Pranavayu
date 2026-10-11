@@ -281,3 +281,25 @@ the foundational hypertables and their reversible migration unchanged. See
     measured past labels across days missing weather, but never future labels.
     Forecast migrations depend on existing analytics/ingest/warehouse tables and
     do not modify the foundational hypertables or observation values.
+
+30. **RAG document revisions:** existing Document SHA256 remains unique. New
+    fields record local source path/format, bytes, retrieval time, ingestion state,
+    error and versioned parser/encoder metadata. PDF uploads use the media volume;
+    hash-addressed public PDF/HTML/Markdown bodies use `data/raw/rag/` on D:.
+    `project_results` is a distinct category. Missing downloads stay in the
+    manifest and have no fabricated document body/hash.
+31. **Physical and logical pages:** DocumentPage is unique on document/page number,
+    with stored source text, sections, Markdown tables, OCR flag and logical-page
+    flag. PDF indices are one-based physical file pages. HTML/Markdown remain
+    unpaginated and cite actual section headings, even though their text endpoint
+    exposes one explicitly logical page. Empty physical PDF pages are retained.
+32. **RAG chunks:** existing DocumentChunk uniqueness, page-range constraint,
+    1024-dimensional nullable VectorField, cosine HNSW and English FTS GIN remain.
+    Metadata stores source SHA256, category/year, seeded city/pollutant mentions,
+    table flag and logical-page flag. Parser versions distinguish incompatible
+    index rebuilds; pending NULL vectors support batch resume without reparsing.
+33. **Stored answers:** Query retains question, validated filters, route, retrieved
+    chunk IDs, validated tool results/provenance, answer, citation objects, provider,
+    latency and verification/removal/refusal details. Dataset citations reference
+    the actual AnalysisRun and parameters, with forecast model version IDs.
+    Client scenario/chart numbers are context rather than trusted evidence.

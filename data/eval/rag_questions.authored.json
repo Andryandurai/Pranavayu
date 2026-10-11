@@ -1,0 +1,662 @@
+{
+  "literature": [
+    {
+      "question": "On which date is the International Day of Clean Air for Blue Skies celebrated?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "September 7 is celebrated as International Day of Clean Air for Blue Skies."
+    },
+    {
+      "question": "What was the clean air day theme quoted in the September 2024 PIB note?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "theme being \"Invest in #CleanAirNow.\""
+    },
+    {
+      "question": "Where was Swachh Vayu Diwas celebrated in September 2024?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "September 7, 2024, in Jaipur this year"
+    },
+    {
+      "question": "How many NCAP cities had declining air pollution in the 2024 PIB progress note?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "with air pollution levels declining in 95 cities."
+    },
+    {
+      "question": "Which baseline fiscal year did PIB use for the reported PM10 reductions?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "compared to the baseline year of 2017-18"
+    },
+    {
+      "question": "What revised PM10 target and deadline does the PIB NCAP note state?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "Target has been revised to achieve reduction in PM10 level up to 40%"
+    },
+    {
+      "question": "What amount was earmarked for NCAP cities through FY 2025-26?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "Rs. 19,614.44 crores have been earmarked to 131 cities"
+    },
+    {
+      "question": "What does the name PRANA stand for in the NCAP implementation note?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "the Portal for Regulation of Air Pollution in Non-Attainment Cities"
+    },
+    {
+      "question": "Which source sectors do the NCAP city action plans target?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "Soil & Road Dust, Vehicles, Domestic Fuel, MSW Burning"
+    },
+    {
+      "question": "How many urban forests or parks does Nagar Van Yojana envisage creating?",
+      "source": "ncap_progress_2024",
+      "source_excerpt": "creating 1000 Nagar Vans / Nagar Vatika in Cities"
+    },
+    {
+      "question": "What monitoring year is analysed in the supplied CPCB air quality status report?",
+      "source": "naaqs",
+      "source_excerpt": "The present report contains ambient air quality data for the calendar year 2019"
+    },
+    {
+      "question": "How many stations and cities were in the NAMP network described by the report foreword?",
+      "source": "naaqs",
+      "source_excerpt": "network comprising 804 ambient air quality monitoring stations covering 344 cities/towns"
+    },
+    {
+      "question": "What annual PM2.5 standard is shown in the CPCB report summary?",
+      "source": "naaqs",
+      "source_excerpt": "PM2.5=40 µg/m3 (Residential / industrial / rural / other areas)"
+    },
+    {
+      "question": "How many site measurements are required for the NAAQS annual arithmetic mean?",
+      "source": "naaqs",
+      "source_excerpt": "Annual Arithmetic mean of minimum 104 measurements in a year"
+    },
+    {
+      "question": "What allowance for exceeding short-term limits is stated in the standards annexure?",
+      "source": "naaqs",
+      "source_excerpt": "2% of the time, they may exceed the limits but not on two consecutive days of monitoring."
+    },
+    {
+      "question": "What is the public communication purpose of the CPCB National Air Quality Index?",
+      "source": "cpcb_aqi_2014",
+      "source_excerpt": "AQI is a tool to disseminate information on air quality in qualitative terms"
+    },
+    {
+      "question": "When was the draft Indian AQI launched for public comments?",
+      "source": "cpcb_aqi_2014",
+      "source_excerpt": "The draft AQI was launched in October 2014 for seeking public comments."
+    },
+    {
+      "question": "What are the six categories in the CPCB National AQI scheme?",
+      "source": "cpcb_aqi_2014",
+      "source_excerpt": "six AQI categories, namely Good, Satisfactory, Moderately polluted, Poor, Very Poor, and Severe."
+    },
+    {
+      "question": "How many pollutants does the National AQI consider?",
+      "source": "cpcb_aqi_2014",
+      "source_excerpt": "The AQI considers eight pollutants for which"
+    },
+    {
+      "question": "What does an AQI sub-index function represent?",
+      "source": "cpcb_aqi_2014",
+      "source_excerpt": "Sub-index function represents the relationship between pollutant concentration Xi and corresponding sub-index Ii."
+    },
+    {
+      "question": "How many Swiss monitoring sites were modelled in the Grange meteorological normalisation study?",
+      "source": "grange_2018",
+      "source_excerpt": "for 31 air quality monitoring sites in Switzerland"
+    },
+    {
+      "question": "Which pollutant and time aggregation did Grange use as the dependent variable?",
+      "source": "grange_2018",
+      "source_excerpt": "Daily PM10 observations were used as the pollutant of in-"
+    },
+    {
+      "question": "What observation years were included in Grange et al. 2018?",
+      "source": "grange_2018",
+      "source_excerpt": "Obser- vations between 1997 and 2016 were used"
+    },
+    {
+      "question": "How does bagging sample training observations in the Grange random forest description?",
+      "source": "grange_2018",
+      "source_excerpt": "Bagging refers to randomly sampling observations with replacement from the training set"
+    },
+    {
+      "question": "What condition did Grange generally require of a monitoring record for trend analysis?",
+      "source": "grange_2018",
+      "source_excerpt": "PM10 observations needed to be unbroken for at least ﬁve years."
+    },
+    {
+      "question": "Where did Grange obtain the surface meteorological observations?",
+      "source": "grange_2018",
+      "source_excerpt": "Integrated Surface Database (ISD)"
+    },
+    {
+      "question": "What range of R-squared values was reported for the Swiss PM10 random forests?",
+      "source": "grange_2018",
+      "source_excerpt": "R2 values ranged from 54 to 71 %"
+    },
+    {
+      "question": "Which trend estimator did Grange use after meteorological normalisation?",
+      "source": "grange_2018",
+      "source_excerpt": "The Theil–Sen es- timator accounting for autocorrelation was used at the 95 %"
+    },
+    {
+      "question": "How many cities were evaluated in Shi et al. 2021?",
+      "source": "shi_2021",
+      "source_excerpt": "concentrations arising from these emission changes in 11 cities globally"
+    },
+    {
+      "question": "What NO2 reductions attributable to lockdown did Shi report after deweathering?",
+      "source": "shi_2021",
+      "source_excerpt": "at reductions of 10 to 50%."
+    },
+    {
+      "question": "What happened to ozone after lockdown in the Shi analysis?",
+      "source": "shi_2021",
+      "source_excerpt": "O 3 increased by 2 to 30% (except for London)"
+    },
+    {
+      "question": "In which cities did PM2.5 increase despite reductions in most cities studied by Shi?",
+      "source": "shi_2021",
+      "source_excerpt": "PM 2.5 concentrations decreased in most cities studied but increased in London and Paris."
+    },
+    {
+      "question": "Why does Shi recommend sophisticated analysis of intervention impacts?",
+      "source": "shi_2021",
+      "source_excerpt": "true air quality improvements were notably more limited than some earlier reports or observational data suggested."
+    },
+    {
+      "question": "Which three air pollution exposure components did the GBD India economic study estimate?",
+      "source": "gbd_india_2021",
+      "source_excerpt": "ambient particulate matter pollution, household air pollution, and ambient ozone pollution"
+    },
+    {
+      "question": "How many deaths in India in 2019 were attributed to air pollution in the GBD study?",
+      "source": "gbd_india_2021",
+      "source_excerpt": "Findings 1·67 million (95% uncertainty interval 1·42–1·92) deaths were attributable to air pollution in India in 2019"
+    },
+    {
+      "question": "What proportion of total Indian deaths was attributed to air pollution in GBD 2019?",
+      "source": "gbd_india_2021",
+      "source_excerpt": "accounting for 17·8% (15·8–19·5) of the total deaths in the country."
+    },
+    {
+      "question": "What total economic loss and GDP share did the GBD India paper estimate?",
+      "source": "gbd_india_2021",
+      "source_excerpt": "This total loss of $36·8 billion (27·4–47·7) was 1·36% of India’s gross domestic product (GDP)."
+    },
+    {
+      "question": "Which state or territory had the highest per-capita economic loss in the GBD India study?",
+      "source": "gbd_india_2021",
+      "source_excerpt": "Delhi had the highest per-capita economic loss due to air pollution, followed by Haryana"
+    },
+    {
+      "question": "What two components make up a disability-adjusted life-year in the GBD methods?",
+      "source": "gbd_india_2021",
+      "source_excerpt": "DALY is a composite metric that combines the years of life lost due to premature death (YLLs) and the years lived with disability (YLDs)."
+    },
+    {
+      "question": "How does the cost-of-illness method divide direct and indirect economic costs?",
+      "source": "gbd_india_2021",
+      "source_excerpt": "direct costs of health care as well as indirect costs"
+    },
+    {
+      "question": "Why does the GBD India paper recommend state-specific control strategies?",
+      "source": "gbd_india_2021",
+      "source_excerpt": "investments in state-specific air pollution control strategies are needed"
+    },
+    {
+      "question": "What type of plume model is AERMOD?",
+      "source": "aermod",
+      "source_excerpt": "AERMOD is a steady-state plume model."
+    },
+    {
+      "question": "What concentration distribution does AERMOD assume in the stable boundary layer?",
+      "source": "aermod",
+      "source_excerpt": "assumes the concentration distribution to be Gaussian in both the vertical and horizontal."
+    },
+    {
+      "question": "How is the convective vertical concentration distribution represented in AERMOD?",
+      "source": "aermod",
+      "source_excerpt": "the vertical distribution is described with a bi-Gaussian probability density function"
+    },
+    {
+      "question": "What does the AERMAP terrain preprocessor do?",
+      "source": "aermod",
+      "source_excerpt": "both characterizes the terrain and generates receptor grids"
+    },
+    {
+      "question": "Which boundary-layer parameters does AERMET calculate from meteorology and surface characteristics?",
+      "source": "aermod",
+      "source_excerpt": "mixing height, friction velocity, etc."
+    },
+    {
+      "question": "Which rural, urban and terrain settings are within AERMOD scope?",
+      "source": "aermod",
+      "source_excerpt": "applicable to rural and urban areas, flat and complex terrain"
+    },
+    {
+      "question": "What source types does the AERMOD model overview include?",
+      "source": "aermod",
+      "source_excerpt": "point, area, volume, buoyant line, and mobile sources"
+    },
+    {
+      "question": "What model did AERMOD replace on the EPA regulatory platform?",
+      "source": "aermod",
+      "source_excerpt": "AERMOD serves as a complete replacement for ISC3."
+    },
+    {
+      "question": "What is the purpose of receptor modelling in the IIT Kanpur Delhi study?",
+      "source": "iit_kanpur_delhi_2016",
+      "source_excerpt": "Perform receptor modeling to establish the source-receptor linkages for PM in ambient air"
+    },
+    {
+      "question": "Which sampling seasons were used in the IIT Kanpur Delhi study?",
+      "source": "iit_kanpur_delhi_2016",
+      "source_excerpt": "winter (2013-14) and summer (2014)."
+    },
+    {
+      "question": "What fraction of summer PM10 was crustal material in the IIT Kanpur Delhi study?",
+      "source": "iit_kanpur_delhi_2016",
+      "source_excerpt": "The crustal component (Si + Al + Fe + Ca) accounts for about 40 percent"
+    },
+    {
+      "question": "Which sources does the IIT Kanpur study associate with summer crustal PM10?",
+      "source": "iit_kanpur_delhi_2016",
+      "source_excerpt": "soil and road dust and airborne flyash are the major sources of PM10 pollution in summer."
+    },
+    {
+      "question": "How much of summer PM10 was secondary particles in the IIT Kanpur analysis?",
+      "source": "iit_kanpur_delhi_2016",
+      "source_excerpt": "account for about 13 percent of total PM10"
+    },
+    {
+      "question": "Which precursor gases form secondary particles in the IIT Kanpur discussion?",
+      "source": "iit_kanpur_delhi_2016",
+      "source_excerpt": "reaction of precursor gases (SO2, NOx and NH3)"
+    },
+    {
+      "question": "What is potassium used to indicate in the IIT Kanpur Delhi study?",
+      "source": "iit_kanpur_delhi_2016",
+      "source_excerpt": "Potassium is an indicator of biomass burning"
+    },
+    {
+      "question": "What were the five major components of the IIT Kanpur study?",
+      "source": "iit_kanpur_delhi_2016",
+      "source_excerpt": "This study has five major components"
+    },
+    {
+      "question": "How did TERI-ARAI use chemically speciated samples to estimate source contributions?",
+      "source": "teri_arai_2018",
+      "source_excerpt": "speciated samples along with source profiles were fed into the receptor model"
+    },
+    {
+      "question": "How were the TERI-ARAI dispersion model concentrations validated?",
+      "source": "teri_arai_2018",
+      "source_excerpt": "The modelled concentrations were compared with actual observations for validation."
+    },
+    {
+      "question": "How many NCR locations were sampled in the TERI-ARAI monitoring exercise?",
+      "source": "teri_arai_2018",
+      "source_excerpt": "20 representative locations (9 in Delhi City, 4 in Uttar Pradesh, 7 in Haryana)"
+    },
+    {
+      "question": "Why did TERI-ARAI include a chemical transport model?",
+      "source": "teri_arai_2018",
+      "source_excerpt": "account for chemical reactivity and long range transport of pollutants"
+    },
+    {
+      "question": "For which year were independently derived receptor and dispersion source contributions compared by TERI-ARAI?",
+      "source": "teri_arai_2018",
+      "source_excerpt": "two approaches (receptor and dispersion) for the year 2016"
+    },
+    {
+      "question": "Why does the Phase 3B report decline to assess official NCAP compliance?",
+      "source": "project_phase3b",
+      "source_excerpt": "NCAP compliance cannot be evaluated because the historic PM10 baseline is absent."
+    },
+    {
+      "question": "Which main city cohorts passed every observed-era nested readiness screen in Phase 3B?",
+      "source": "project_phase3b",
+      "source_excerpt": "lucknow, mumbai, bengaluru"
+    },
+    {
+      "question": "What concentration periods are missing from the Phase 3B archive?",
+      "source": "project_phase3b",
+      "source_excerpt": "There are no 2020–2023 concentrations, no historical NO2"
+    },
+    {
+      "question": "How many valid native IST hours are needed for a city daily target in the research methods?",
+      "source": "project_phase3b",
+      "source_excerpt": "days require 18 hours, months 75% of calendar days"
+    },
+    {
+      "question": "What split design and embargo does Phase 3B nested cross-validation use?",
+      "source": "project_phase3b",
+      "source_excerpt": "three outer and three inner folds of whole Monday-start IST weeks"
+    },
+    {
+      "question": "What common weather reference is used for old and recent eras in Phase 3B?",
+      "source": "project_phase3b",
+      "source_excerpt": "Both eras use the SAME pooled joint observed reference weather"
+    },
+    {
+      "question": "Why are TreeSHAP allocations not interpreted as causal effects in Phase 3B?",
+      "source": "project_phase3b",
+      "source_excerpt": "not causal effects or an additive partition of R²."
+    },
+    {
+      "question": "What does the Delhi fixed-panel long-run interval imply after model-refit uncertainty is included?",
+      "source": "project_phase3b",
+      "source_excerpt": "Delhi's fixed-panel weather-adjusted long-run interval spans zero"
+    },
+    {
+      "question": "At what issue time and horizons are the Phase 4 forecasts defined?",
+      "source": "project_phase4",
+      "source_excerpt": "Forecasts target t+1/t+2/t+3 at end-of-day t IST."
+    },
+    {
+      "question": "Why was boundary-layer height excluded from the forecast predictors?",
+      "source": "project_phase4",
+      "source_excerpt": "BLH is excluded because lead-offset archive values are null"
+    },
+    {
+      "question": "Why was stitched Historical Forecast weather excluded from the headline features?",
+      "source": "project_phase4",
+      "source_excerpt": "because it stitches near-valid-time forecasts."
+    },
+    {
+      "question": "How does Phase 4 prevent SARIMAX assimilating future target labels?",
+      "source": "project_phase4",
+      "source_excerpt": "future target labels are masked."
+    },
+    {
+      "question": "What condition must the LSTM satisfy to be selectable in Phase 4?",
+      "source": "project_phase4",
+      "source_excerpt": "LSTM is selectable only if tuning RMSE beats LightGBM."
+    },
+    {
+      "question": "How is RMSE skill defined in the Phase 4 evaluation?",
+      "source": "project_phase4",
+      "source_excerpt": "RMSE skill is 1−RMSE/RMSE_persistence."
+    },
+    {
+      "question": "Does the Phase 4 evaluation select algorithms from held-out scores?",
+      "source": "project_phase4",
+      "source_excerpt": "the evaluation itself never selects a model from held-out scores."
+    },
+    {
+      "question": "What are the concentration publication-time limitations of the forecast backtest?",
+      "source": "project_phase4",
+      "source_excerpt": "Historical concentration publication times are also unavailable;"
+    },
+    {
+      "question": "How are absent optional ingestion credentials represented in source ingestion runs?",
+      "source": "project_sources",
+      "source_excerpt": "missing credentials create clean skipped runs."
+    },
+    {
+      "question": "What does the WorldPop update mean for historical population exposure interpretation?",
+      "source": "project_sources",
+      "source_excerpt": "2025 modelled alpha estimate"
+    }
+  ],
+  "data": [
+    {
+      "question": "What was the annual mean PM2.5 in delhi in 2024?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "delhi",
+        "year": 2024
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in hyderabad in 2024?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "hyderabad",
+        "year": 2024
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in mumbai in 2024?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "mumbai",
+        "year": 2024
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in bengaluru in 2024?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "bengaluru",
+        "year": 2024
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in pune in 2024?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "pune",
+        "year": 2024
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in delhi in 2025?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "delhi",
+        "year": 2025
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in hyderabad in 2025?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "hyderabad",
+        "year": 2025
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in mumbai in 2025?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "mumbai",
+        "year": 2025
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in bengaluru in 2025?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "bengaluru",
+        "year": 2025
+      }
+    },
+    {
+      "question": "What was the annual mean PM2.5 in pune in 2025?",
+      "tool": "city_annual_mean",
+      "parameters": {
+        "city": "pune",
+        "year": 2025
+      }
+    },
+    {
+      "question": "How many days had PM2.5 above 60 in delhi in 2025?",
+      "tool": "exceedance_days",
+      "parameters": {
+        "city": "delhi",
+        "year": 2025,
+        "threshold": 60.0
+      }
+    },
+    {
+      "question": "How many days had PM2.5 above 60 in hyderabad in 2025?",
+      "tool": "exceedance_days",
+      "parameters": {
+        "city": "hyderabad",
+        "year": 2025,
+        "threshold": 60.0
+      }
+    },
+    {
+      "question": "How many days had PM2.5 above 60 in mumbai in 2025?",
+      "tool": "exceedance_days",
+      "parameters": {
+        "city": "mumbai",
+        "year": 2025,
+        "threshold": 60.0
+      }
+    },
+    {
+      "question": "How many days had PM2.5 above 60 in bengaluru in 2025?",
+      "tool": "exceedance_days",
+      "parameters": {
+        "city": "bengaluru",
+        "year": 2025,
+        "threshold": 60.0
+      }
+    },
+    {
+      "question": "How many days had PM2.5 above 60 in pune in 2025?",
+      "tool": "exceedance_days",
+      "parameters": {
+        "city": "pune",
+        "year": 2025,
+        "threshold": 60.0
+      }
+    },
+    {
+      "question": "Show raw monthly PM2.5 in delhi during 2025.",
+      "tool": "city_monthly_series",
+      "parameters": {
+        "city": "delhi",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "kind": "raw"
+      }
+    },
+    {
+      "question": "Show deweathered monthly PM2.5 in hyderabad during 2025.",
+      "tool": "city_monthly_series",
+      "parameters": {
+        "city": "hyderabad",
+        "start": "2025-01-01",
+        "end": "2026-01-01",
+        "kind": "deweathered"
+      }
+    },
+    {
+      "question": "Show raw monthly PM2.5 in mumbai during 2024.",
+      "tool": "city_monthly_series",
+      "parameters": {
+        "city": "mumbai",
+        "start": "2024-01-01",
+        "end": "2025-01-01",
+        "kind": "raw"
+      }
+    },
+    {
+      "question": "What is the NCAP proxy comparison for delhi?",
+      "tool": "ncap_proxy_comparison",
+      "parameters": {
+        "city": "delhi"
+      }
+    },
+    {
+      "question": "What is the NCAP proxy comparison for hyderabad?",
+      "tool": "ncap_proxy_comparison",
+      "parameters": {
+        "city": "hyderabad"
+      }
+    },
+    {
+      "question": "What are the RQ2 weather drivers in lucknow in winter?",
+      "tool": "rq2_drivers",
+      "parameters": {
+        "city": "lucknow",
+        "season": "winter"
+      }
+    },
+    {
+      "question": "What are the RQ2 weather drivers in bengaluru in monsoon?",
+      "tool": "rq2_drivers",
+      "parameters": {
+        "city": "bengaluru",
+        "season": "monsoon"
+      }
+    },
+    {
+      "question": "What are the RQ2 weather drivers in mumbai in winter?",
+      "tool": "rq2_drivers",
+      "parameters": {
+        "city": "mumbai",
+        "season": "winter"
+      }
+    },
+    {
+      "question": "Show the latest replay forecast for delhi.",
+      "tool": "latest_forecast",
+      "parameters": {
+        "city": "delhi"
+      }
+    },
+    {
+      "question": "Show the latest replay forecast for hyderabad.",
+      "tool": "latest_forecast",
+      "parameters": {
+        "city": "hyderabad"
+      }
+    },
+    {
+      "question": "Show the latest replay forecast for bengaluru.",
+      "tool": "latest_forecast",
+      "parameters": {
+        "city": "bengaluru"
+      }
+    },
+    {
+      "question": "What is forecast skill for delhi at horizon 1?",
+      "tool": "forecast_skill",
+      "parameters": {
+        "city": "delhi",
+        "horizon": 1
+      }
+    },
+    {
+      "question": "What is forecast skill for bengaluru at horizon 3?",
+      "tool": "forecast_skill",
+      "parameters": {
+        "city": "bengaluru",
+        "horizon": 3
+      }
+    },
+    {
+      "question": "What is the data coverage for kanpur?",
+      "tool": "data_coverage",
+      "parameters": {
+        "city": "kanpur"
+      }
+    },
+    {
+      "question": "What is the data coverage for chennai?",
+      "tool": "data_coverage",
+      "parameters": {
+        "city": "chennai"
+      }
+    }
+  ],
+  "unanswerable": [
+    "What was the annual mean PM2.5 in Delhi in 2022?",
+    "What was the annual mean PM2.5 in Mumbai in 2021?",
+    "What was the annual mean PM2.5 in Hyderabad in 2023?",
+    "Show the raw monthly PM2.5 in Delhi during 2020.",
+    "How many days had PM2.5 above 60 in Kanpur in 2025?",
+    "Show the latest forecast for Jaipur.",
+    "What is forecast skill for Lucknow at horizon 2?",
+    "What was the annual mean PM2.5 in Bengaluru in 2030?",
+    "What is the exact PM2.5 concentration measured on Mars yesterday?",
+    "Which winning lottery numbers will be drawn tomorrow?"
+  ]
+}

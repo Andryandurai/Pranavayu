@@ -12,3 +12,5 @@ staticfiles
 *.pyc
 data/raw
 data/results
+data/models
+data/mlflow

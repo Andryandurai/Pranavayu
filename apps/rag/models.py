@@ -9,6 +9,14 @@ from apps.core.models import TimeStampedModel
 
 
 class Document(TimeStampedModel):
+    class Status(models.TextChoices):
+        DOWNLOADED = "downloaded", "Downloaded"
+        PARSING = "parsing", "Parsing"
+        PARSED = "parsed", "Parsed"
+        EMBEDDING = "embedding", "Embedding"
+        READY = "ready", "Ready"
+        FAILED = "failed", "Failed"
+
     class Category(models.TextChoices):
         POLICY = "policy", "Policy"
         STANDARD = "standard", "Standard"
@@ -17,6 +25,7 @@ class Document(TimeStampedModel):
         METHODS = "methods", "Methods"
         HEALTH = "health", "Health"
         CITY_PLAN = "city_plan", "City plan"
+        PROJECT_RESULTS = "project_results", "Project results"
         OTHER = "other", "Other"
 
     title = models.CharField(max_length=500)
@@ -27,6 +36,7 @@ class Document(TimeStampedModel):
     licence_note = models.TextField(blank=True)
     file = models.FileField(
         upload_to="documents/%Y/%m/",
+        blank=True,
         validators=[FileExtensionValidator(allowed_extensions=["pdf"])],
     )
     sha256 = models.CharField(
@@ -36,6 +46,13 @@ class Document(TimeStampedModel):
     )
     page_count = models.PositiveIntegerField(null=True, blank=True)
     parsed_at = models.DateTimeField(null=True, blank=True)
+    source_path = models.CharField(max_length=1000, blank=True)
+    source_format = models.CharField(max_length=10, default="pdf")
+    size_bytes = models.PositiveBigIntegerField(null=True, blank=True)
+    retrieved_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=20, choices=Status, default=Status.DOWNLOADED)
+    error_message = models.TextField(blank=True)
+    ingestion_metadata = models.JSONField(default=dict, blank=True)
 
     class Meta:
         ordering = ["title", "pk"]
@@ -88,3 +105,36 @@ class DocumentChunk(TimeStampedModel):
         return (
             f"{self.document_id}: chunk {self.chunk_index}, pp. {self.page_start}-{self.page_end}"
         )
+
+
+class DocumentPage(TimeStampedModel):
+    document = models.ForeignKey(Document, on_delete=models.CASCADE, related_name="pages")
+    page_number = models.PositiveIntegerField()
+    text = models.TextField()
+    sections = models.JSONField(default=list, blank=True)
+    tables = models.JSONField(default=list, blank=True)
+    is_ocr = models.BooleanField(default=False)
+    is_logical_page = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["document_id", "page_number"]
+        constraints = [
+            models.UniqueConstraint(fields=["document", "page_number"], name="rag_page_unique"),
+            models.CheckConstraint(condition=Q(page_number__gte=1), name="rag_page_positive"),
+        ]
+
+
+class Query(TimeStampedModel):
+    question = models.TextField()
+    filters = models.JSONField(default=dict)
+    route = models.CharField(max_length=12)
+    retrieved_ids = models.JSONField(default=list)
+    tool_calls = models.JSONField(default=list)
+    answer = models.TextField()
+    citations = models.JSONField(default=list)
+    provider = models.CharField(max_length=20)
+    latency_ms = models.PositiveIntegerField(default=0)
+    verification = models.JSONField(default=dict)
+
+    class Meta:
+        ordering = ["-pk"]

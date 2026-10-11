@@ -30,6 +30,7 @@ annotated-doc==0.0.5
     # via
     #   -r requirements/base.txt
     #   fastapi
+    #   typer
 annotated-types==0.8.0
     # via
     #   -r requirements/base.txt
@@ -37,6 +38,7 @@ annotated-types==0.8.0
 anyio==4.15.1
     # via
     #   -r requirements/base.txt
+    #   httpx
     #   mlflow-skinny
     #   starlette
 asgiref==3.12.1
@@ -50,6 +52,8 @@ attrs==26.1.0
     #   ecmwf-datastores-client
     #   jsonschema
     #   referencing
+beautifulsoup4==4.15.0
+    # via -r requirements/base.txt
 billiard==4.3.1
     # via
     #   -r requirements/base.txt
@@ -74,6 +78,8 @@ celery==5.6.3
 certifi==2026.7.22
     # via
     #   -r requirements/base.txt
+    #   httpcore
+    #   httpx
     #   netcdf4
     #   requests
 cffi==2.1.1
@@ -89,6 +95,7 @@ cftime==1.6.6
 charset-normalizer==3.5.2
     # via
     #   -r requirements/base.txt
+    #   pdfminer-six
     #   requests
 click==8.5.0
     # via
@@ -98,6 +105,7 @@ click==8.5.0
     #   click-plugins
     #   click-repl
     #   flask
+    #   huggingface-hub
     #   mlflow-skinny
     #   uvicorn
 click-didyoumean==0.3.1
@@ -131,6 +139,7 @@ cryptography==50.0.2
     #   -r requirements/base.txt
     #   google-auth
     #   mlflow
+    #   pdfminer-six
 cycler==0.12.1
     # via
     #   -r requirements/base.txt
@@ -198,6 +207,7 @@ fastapi==0.143.0
 filelock==4.1.0
     # via
     #   -r requirements/base.txt
+    #   huggingface-hub
     #   python-discovery
     #   torch
     #   virtualenv
@@ -228,6 +238,7 @@ frozenlist==1.8.0
 fsspec==2026.9.0
     # via
     #   -r requirements/base.txt
+    #   huggingface-hub
     #   torch
 gitdb==4.0.12
     # via
@@ -261,13 +272,32 @@ gunicorn==25.3.0
 h11==0.16.0
     # via
     #   -r requirements/base.txt
+    #   httpcore
     #   uvicorn
+hf-xet==1.7.0
+    # via
+    #   -r requirements/base.txt
+    #   huggingface-hub
 holidays==0.106
     # via -r requirements/base.txt
+httpcore==1.0.9
+    # via
+    #   -r requirements/base.txt
+    #   httpx
+httpx==0.28.1
+    # via
+    #   -r requirements/base.txt
+    #   huggingface-hub
 huey==3.4.0
     # via
     #   -r requirements/base.txt
     #   mlflow
+huggingface-hub==1.33.0
+    # via
+    #   -r requirements/base.txt
+    #   sentence-transformers
+    #   tokenizers
+    #   transformers
 humanize==4.16.0
     # via
     #   -r requirements/base.txt
@@ -278,6 +308,7 @@ idna==3.20
     # via
     #   -r requirements/base.txt
     #   anyio
+    #   httpx
     #   requests
     #   yarl
 importlib-metadata==9.0.1
@@ -334,6 +365,10 @@ mako==1.4.3
     # via
     #   -r requirements/base.txt
     #   alembic
+markdown-it-py==4.2.0
+    # via
+    #   -r requirements/base.txt
+    #   rich
 markupsafe==3.0.4
     # via
     #   -r requirements/base.txt
@@ -345,6 +380,10 @@ matplotlib==3.11.2
     # via
     #   -r requirements/base.txt
     #   mlflow
+mdurl==0.1.2
+    # via
+    #   -r requirements/base.txt
+    #   markdown-it-py
 mlflow==3.17.0
     # via -r requirements/base.txt
 mlflow-skinny==3.17.0
@@ -401,9 +440,11 @@ numpy==2.5.3
     #   patsy
     #   scikit-learn
     #   scipy
+    #   sentence-transformers
     #   shap
     #   skops
     #   statsmodels
+    #   transformers
 openpyxl==3.1.5
     # via -r requirements/base.txt
 opentelemetry-api==1.45.1
@@ -432,6 +473,7 @@ packaging==26.3
     # via
     #   -r requirements/base.txt
     #   gunicorn
+    #   huggingface-hub
     #   kombu
     #   matplotlib
     #   mlflow-skinny
@@ -441,6 +483,7 @@ packaging==26.3
     #   shap
     #   skops
     #   statsmodels
+    #   transformers
     #   virtualenv
 pandas==2.3.3
     # via
@@ -453,12 +496,19 @@ patsy==1.0.3
     # via
     #   -r requirements/base.txt
     #   statsmodels
+pdfminer-six==20260107
+    # via
+    #   -r requirements/base.txt
+    #   pdfplumber
+pdfplumber==0.11.10
+    # via -r requirements/base.txt
 pgvector==0.5.0
     # via -r requirements/base.txt
 pillow==12.3.0
     # via
     #   -r requirements/base.txt
     #   matplotlib
+    #   pdfplumber
 platformdirs==4.12.3
     # via virtualenv
 pluggy==1.6.0
@@ -522,11 +572,20 @@ pydantic-core==2.50.0
     #   -r requirements/base.txt
     #   pydantic
 pygments==2.21.0
-    # via pytest
+    # via
+    #   -r requirements/base.txt
+    #   pytest
+    #   rich
+pymupdf==1.28.2
+    # via -r requirements/base.txt
 pyparsing==3.3.3
     # via
     #   -r requirements/base.txt
     #   matplotlib
+pypdfium2==5.14.0
+    # via
+    #   -r requirements/base.txt
+    #   pdfplumber
 pytest==9.1.1
     # via
     #   -r requirements/dev.in
@@ -562,9 +621,11 @@ pyyaml==6.0.3
     # via
     #   -r requirements/base.txt
     #   drf-spectacular
+    #   huggingface-hub
     #   mlflow-skinny
     #   pre-commit
     #   responses
+    #   transformers
 redis==7.4.1
     # via -r requirements/base.txt
 referencing==0.37.0
@@ -572,6 +633,10 @@ referencing==0.37.0
     #   -r requirements/base.txt
     #   jsonschema
     #   jsonschema-specifications
+regex==2026.9.29
+    # via
+    #   -r requirements/base.txt
+    #   transformers
 requests==2.34.2
     # via
     #   -r requirements/base.txt
@@ -584,6 +649,10 @@ requests==2.34.2
     #   responses
 responses==0.26.3
     # via -r requirements/dev.in
+rich==15.0.0
+    # via
+    #   -r requirements/base.txt
+    #   typer
 rpds-py==2026.9.1
     # via
     #   -r requirements/base.txt
@@ -591,10 +660,15 @@ rpds-py==2026.9.1
     #   referencing
 ruff==0.16.10
     # via -r requirements/dev.in
+safetensors==0.8.0
+    # via
+    #   -r requirements/base.txt
+    #   transformers
 scikit-learn==1.9.1
     # via
     #   -r requirements/base.txt
     #   mlflow
+    #   sentence-transformers
     #   shap
     #   skops
 scipy==1.18.1
@@ -604,11 +678,18 @@ scipy==1.18.1
     #   lightgbm
     #   mlflow
     #   scikit-learn
+    #   sentence-transformers
     #   shap
     #   skops
     #   statsmodels
+sentence-transformers==6.1.0
+    # via -r requirements/base.txt
 shap==0.52.0
     # via -r requirements/base.txt
+shellingham==1.5.4
+    # via
+    #   -r requirements/base.txt
+    #   typer
 six==1.17.0
     # via
     #   -r requirements/base.txt
@@ -625,6 +706,10 @@ smmap==5.0.3
     # via
     #   -r requirements/base.txt
     #   gitdb
+soupsieve==3.0
+    # via
+    #   -r requirements/base.txt
+    #   beautifulsoup4
 sqlalchemy==2.1.4
     # via
     #   -r requirements/base.txt
@@ -650,8 +735,15 @@ threadpoolctl==3.7.0
     # via
     #   -r requirements/base.txt
     #   scikit-learn
+tokenizers==0.23.3
+    # via
+    #   -r requirements/base.txt
+    #   sentence-transformers
+    #   transformers
 torch==2.14.1+cpu
-    # via -r requirements/base.txt
+    # via
+    #   -r requirements/base.txt
+    #   sentence-transformers
 tornado==6.5.10
     # via
     #   -r requirements/base.txt
@@ -660,8 +752,19 @@ tqdm==4.70.1
     # via
     #   -r requirements/base.txt
     #   cdsapi
+    #   huggingface-hub
     #   multiurl
+    #   sentence-transformers
     #   shap
+    #   transformers
+transformers==5.19.0
+    # via
+    #   -r requirements/base.txt
+    #   sentence-transformers
+typer==0.27.3
+    # via
+    #   -r requirements/base.txt
+    #   transformers
 typing-extensions==4.16.0
     # via
     #   -r requirements/base.txt
@@ -669,11 +772,13 @@ typing-extensions==4.16.0
     #   aiosignal
     #   alembic
     #   anyio
+    #   beautifulsoup4
     #   click-repl
     #   ecmwf-datastores-client
     #   fastapi
     #   formulaic
     #   graphene
+    #   huggingface-hub
     #   mlflow-skinny
     #   opentelemetry-api
     #   opentelemetry-sdk
@@ -682,6 +787,7 @@ typing-extensions==4.16.0
     #   pydantic
     #   pydantic-core
     #   referencing
+    #   sentence-transformers
     #   sqlalchemy
     #   starlette
     #   torch

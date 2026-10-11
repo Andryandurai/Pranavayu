@@ -149,3 +149,42 @@ explicit replay; no observations are manufactured. Operational uncertainty uses
 the frozen training calibration radii, and SARIMAX state masks all future target
 labels. Historic publication latency and changes in station/weather support remain
 limitations rather than being hidden by service readiness.
+
+## Phase 5 evidence flow
+
+`apps/rag/library.py` downloads public PDF/HTML and snapshots the five internal
+results/provenance documents. SHA256-addressed bodies, real retrieval times,
+licence notes and failed attempts are recorded in the retained manifest.
+No body means no invented Document row or hash. Curator PDF uploads share the
+same ingestion pipeline via an after-commit Celery task.
+
+PyMuPDF physical pages, pdfplumber Markdown tables and Tesseract OCR feed a
+versioned section parser. Native tables are excluded from prose heading detection;
+OCR typography is not trusted as a section detector. BGE-token windows retain
+page ranges and source sections, with 100-token overlap and shorter section tails.
+Document-level advisory locks prevent concurrent ingestion of the same revision;
+each completed embedding batch persists independently for resume.
+
+The internal `rag-models` HTTP service loads one pinned CPU BGE model at a time.
+The encoder produces normalized 1024-vectors; the reranker scores the top 40 RRF
+candidates. Query/passage/pair computation caches include model revisions and
+content hashes. pgvector cosine HNSW and indexed English full-text retrieval
+remain in PostgreSQL. Metadata filters apply before ranking; missing model
+service connectivity is recorded and permits an explicit keyword fallback.
+
+Transparent rules select literature/data/mixed routes and eight named data tools.
+Parameter serializers reject unknown fields/cities, bad date windows, nonfinite
+thresholds and out-of-range horizons. Tool results retain their actual data,
+normalisation, research or forecasting run and model IDs. No raw SQL is exposed.
+Provider order is configured Anthropic/OpenAI/Ollama/extractive. The generator
+receives evidence only. The verifier requires each cited source to contain the
+claim and its numbers; unsupported lines are removed and empty evidence refuses.
+This conservative exact-text check is not a semantic entailment or medical-validity
+classifier. Query rows retain answers, retrieval IDs, calls, latency and checks.
+
+DRF exposes ask/explain/library/page endpoints. Django templates and vendored HTMX
+provide the minimal Ask page with escaped text and clickable citations. Explain
+context never promotes unverified client numbers into evidence. Frozen human-
+authored questions and DB expectations drive four retrieval comparisons and
+available-provider answer evaluation, independently auditing emitted claims
+against stored source text. Actual metrics/artifacts are logged to MLflow `rag`.

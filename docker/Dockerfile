@@ -5,7 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends binutils gdal-bin git libgdal32 libgeos-c1v5 libproj25 libpq5 libgomp1 \
+    && apt-get install -y --no-install-recommends binutils gdal-bin git libgdal32 libgeos-c1v5 libproj25 libpq5 libgomp1 tesseract-ocr tesseract-ocr-eng \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
