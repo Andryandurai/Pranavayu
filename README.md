@@ -1,5 +1,9 @@
 # EnviroInsights-India
 
+Phase 5 adds the [cited research assistant](#phase-5-cited-research-assistant),
+available at [Ask](http://localhost:8000/ask/). It uses real document passages
+and recorded project results, with extractive answers available without API keys.
+
 Phase 4 forecasting commands run from `D:\EnviroInsights-India` in the web
 container. Forecasts are daily city PM2.5, issued at end-of-day IST for t+1–t+3.
 They explicitly use replay mode until an OpenAQ key and fresh complete-day
@@ -301,8 +305,9 @@ Actual results, figures, model performance and limitations are in
 figures are local under `data/results/<run_id>/`; only `manifest.json` is eligible
 for Git. The descriptive comparisons are not causal effects. Models use observed,
 complete-case hours only and a blocked holdout; they do not forecast or bridge
-2020–2023. Phase 3B uses the corrected snapshot described below. Forecasting, RAG,
-simulators and dashboards remain deferred.
+2020–2023. Phase 3B uses the corrected snapshot described below. Forecasting and
+RAG were deferred at the Phase 3A handoff and are covered in the later phase
+sections. Simulators and dashboards remain deferred.
 
 ## Phase 3A2: corrected deweathering method
 
@@ -409,6 +414,11 @@ and clickable source citations. Literature answers quote retrieved evidence;
 data answers use eight validated, read-only tools. Missing evidence produces an
 explicit refusal. Current forecasts are identified as live or archival replay.
 Read [PHASE5.md](docs/results/PHASE5.md) for measured performance and corpus limits.
+
+Verified corpus: 29 actual document bodies (24 public and five internal),
+7,194 indexed chunks and four unavailable requests. The full suite passes
+183 tests; the frozen 120-question evaluation is logged in MLflow's `rag`
+experiment. No generative provider ran on this machine.
 
 ```powershell
 .\scripts\dev.ps1 up

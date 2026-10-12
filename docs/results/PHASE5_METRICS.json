@@ -1,0 +1,705 @@
+{
+  "completed_at": "2026-10-12T09:52:59.930123+00:00",
+  "evaluation_freeze": {
+    "built_at": "2026-10-11T01:50:50.548878+00:00",
+    "sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "authored_sha256": "080c6436eef5fe69dfbbbba44b19f67a361cd87652e82cebe4bfa22fd6c73f1d",
+    "count": 120,
+    "counts": {
+      "literature": 80,
+      "data": 30,
+      "unanswerable": 10
+    },
+    "gold_policy": "All same-document chunks containing the authored exact source excerpt",
+    "number_policy": "Match numeric values by their displayed field to frozen actual data-tool cells. Report numeric recall, precision and cell exactness separately from answer coverage. Unavailable-data questions require refusal and have no invented numeric target.",
+    "retrieval_policy": "Known-gold hit@k and fraction-of-known-gold recall@k; MRR through 40"
+  },
+  "corpus": [
+    {
+      "pk": 6,
+      "sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8",
+      "page_count": 179,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 3,
+        "library_key": "aermod",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8",
+        "requested_url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 11,
+      "sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c",
+      "page_count": 1,
+      "ingestion_metadata": {
+        "doi": "10.1126/sciadv.abd6696",
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "shi_2021",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": true,
+        "parsed_sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c",
+        "requested_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7806219",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 18,
+      "sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac",
+      "page_count": 21,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "city_plan_ahmedabad",
+        "project_path": null,
+        "declared_city": "ahmedabad",
+        "logical_pages": false,
+        "parsed_sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Ahmedabad.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 19,
+      "sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860",
+      "page_count": 23,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 23,
+        "library_key": "city_plan_bengaluru",
+        "project_path": null,
+        "declared_city": "bengaluru",
+        "logical_pages": false,
+        "parsed_sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Bengaluru.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 5,
+      "sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985",
+      "page_count": 4,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "ncap_city_list",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985",
+        "requested_url": "https://cpcb.gov.in/uploads/Non-Attainment_Cities.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 29,
+      "sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0",
+      "page_count": 40,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 18,
+        "library_key": "city_plan_kolkata",
+        "project_path": null,
+        "declared_city": "kolkata",
+        "logical_pages": false,
+        "parsed_sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0",
+        "requested_url": "https://www.wbpcb.gov.in/writereaddata/files/Comprehensive%20Air%20Quality%20Action%20Plan%20Kolkata.pdf",
+        "identity_audit": "Actual 40-page PDF is Kolkata-specific despite the West Bengal filename. Cover includes 31 December 2018 and an August 2019 court-context reference; publication year left null.",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 7,
+      "sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1",
+      "page_count": 334,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 1,
+        "library_key": "iit_kanpur_delhi_2016",
+        "project_path": null,
+        "declared_city": "delhi",
+        "logical_pages": false,
+        "parsed_sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1",
+        "requested_url": "https://home.iitk.ac.in/~mukesh/Publications/DPCC_2016_SA%20study%20IIT%20Kanpur%20report_Comprehensive%20Study%20on%20Air%20Pollution%20and%20Green%20House%20Gases%20(GHGs)%20in%20Delhi.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 20,
+      "sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1",
+      "page_count": 84,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 84,
+        "library_key": "city_plan_delhi",
+        "project_path": null,
+        "declared_city": "delhi",
+        "logical_pages": false,
+        "parsed_sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Delhi.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 13,
+      "sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c",
+      "page_count": 1,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "project_phase3a",
+        "project_path": "docs/results/PHASE3A.md",
+        "declared_city": null,
+        "logical_pages": true,
+        "parsed_sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c",
+        "requested_url": null,
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 14,
+      "sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f",
+      "page_count": 1,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "project_phase3a2",
+        "project_path": "docs/results/PHASE3A2.md",
+        "declared_city": null,
+        "logical_pages": true,
+        "parsed_sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f",
+        "requested_url": null,
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 15,
+      "sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b",
+      "page_count": 1,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "project_phase3b",
+        "project_path": "docs/results/PHASE3B.md",
+        "declared_city": null,
+        "logical_pages": true,
+        "parsed_sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b",
+        "requested_url": null,
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 16,
+      "sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2",
+      "page_count": 1,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "project_phase4",
+        "project_path": "docs/results/PHASE4.md",
+        "declared_city": null,
+        "logical_pages": true,
+        "parsed_sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2",
+        "requested_url": null,
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 17,
+      "sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7",
+      "page_count": 1,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "project_sources",
+        "project_path": "docs/DATA_SOURCES.md",
+        "declared_city": null,
+        "logical_pages": true,
+        "parsed_sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7",
+        "requested_url": null,
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 12,
+      "sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35",
+      "page_count": 14,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "gbd_india_2021",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35",
+        "requested_url": "https://www.econ.umd.edu/sites/www.econ.umd.edu/files/pubs/GBD%20India%202019.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 21,
+      "sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919",
+      "page_count": 57,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 57,
+        "library_key": "city_plan_hyderabad",
+        "project_path": null,
+        "declared_city": "hyderabad",
+        "logical_pages": false,
+        "parsed_sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Hyderabad.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 22,
+      "sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc",
+      "page_count": 10,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 1,
+        "library_key": "city_plan_jaipur",
+        "project_path": null,
+        "declared_city": "jaipur",
+        "logical_pages": false,
+        "parsed_sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Jaipur.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 23,
+      "sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89",
+      "page_count": 10,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "city_plan_kanpur",
+        "project_path": null,
+        "declared_city": "kanpur",
+        "logical_pages": false,
+        "parsed_sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Kanpur.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 24,
+      "sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0",
+      "page_count": 10,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "city_plan_lucknow",
+        "project_path": null,
+        "declared_city": "lucknow",
+        "logical_pages": false,
+        "parsed_sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Lucknow.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 25,
+      "sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce",
+      "page_count": 92,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "city_plan_mumbai",
+        "project_path": null,
+        "declared_city": "mumbai",
+        "logical_pages": false,
+        "parsed_sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Mumbai.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 3,
+      "sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37",
+      "page_count": 58,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 3,
+        "library_key": "cpcb_aqi_2014",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37",
+        "requested_url": "https://smartnet.niua.org/sites/default/files/resources/Air%20Quality%20Index.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "publication_year_evidence": "The supplied final AQI report has a signed 2015 foreword on physical PDF page 2. October 2014 in its text is the draft launch, not a verified publication date for this final body."
+      }
+    },
+    {
+      "pk": 2,
+      "sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243",
+      "page_count": 164,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 3,
+        "library_key": "naaqs",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243",
+        "requested_url": "https://cpcb.nic.in/upload/NAAQS_2019.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 26,
+      "sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928",
+      "page_count": 22,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 4,
+        "library_key": "city_plan_patna",
+        "project_path": null,
+        "declared_city": "patna",
+        "logical_pages": false,
+        "parsed_sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Patna.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 27,
+      "sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc",
+      "page_count": 38,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "city_plan_pune",
+        "project_path": null,
+        "declared_city": "pune",
+        "logical_pages": false,
+        "parsed_sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc",
+        "requested_url": "https://cpcb.nic.in/Actionplan/Pune.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    },
+    {
+      "pk": 10,
+      "sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536",
+      "page_count": 17,
+      "ingestion_metadata": {
+        "doi": "10.5194/acp-18-6223-2018",
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "grange_2018",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536",
+        "requested_url": "https://acp.copernicus.org/articles/18/6223/2018/acp-18-6223-2018.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 9,
+      "sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0",
+      "page_count": 53,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 10,
+        "library_key": "cse_review",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0",
+        "requested_url": "https://cdn.cseindia.org/attachments/0.12136100_1560416301_Restoring-Air-Quality-through-Source-Apportionment-Analysis.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 28,
+      "sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2",
+      "page_count": 137,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 8,
+        "library_key": "city_plan_chennai",
+        "project_path": null,
+        "declared_city": "chennai",
+        "logical_pages": false,
+        "parsed_sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2",
+        "requested_url": "https://www.tnpcb.gov.in/PDF/Information/technical/ActionplanChn.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 8,
+      "sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5",
+      "page_count": 560,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 7,
+        "library_key": "teri_arai_2018",
+        "project_path": null,
+        "declared_city": "delhi",
+        "logical_pages": false,
+        "parsed_sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5",
+        "requested_url": "https://www.teriin.org/sites/default/files/2018-08/Report_SA_AQM-Delhi-NCR_0.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 1,
+      "sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65",
+      "page_count": 11,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 1,
+        "library_key": "ncap_progress_2024",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65",
+        "requested_url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/sep/doc2024924400701.pdf",
+        "identity_audit": "2026-10-10: actual cover/foreword inspected",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+      }
+    },
+    {
+      "pk": 4,
+      "sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87",
+      "page_count": 9,
+      "ingestion_metadata": {
+        "doi": null,
+        "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+        "ocr_pages": 0,
+        "library_key": "swachh_vayu_2023",
+        "project_path": null,
+        "declared_city": null,
+        "logical_pages": false,
+        "parsed_sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87",
+        "requested_url": "https://prana.cpcb.gov.in/assets/pdf/Swachh_Vayu_Survekshan_2023_Result.pdf",
+        "parser_version": 3,
+        "embedding_model": "BAAI/bge-m3",
+        "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+        "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+      }
+    }
+  ],
+  "retrieval": {
+    "vector": {
+      "recall_at_5": 0.609375,
+      "recall_at_10": 0.690625,
+      "hit_at_5": 0.625,
+      "hit_at_10": 0.7125,
+      "mrr": 0.4596243102657576,
+      "seconds": 0.06993289818754497,
+      "questions": 80
+    },
+    "keyword": {
+      "recall_at_5": 0.678125,
+      "recall_at_10": 0.803125,
+      "hit_at_5": 0.7,
+      "hit_at_10": 0.8125,
+      "mrr": 0.5165074394267138,
+      "seconds": 0.1868041276124952,
+      "questions": 80
+    },
+    "hybrid": {
+      "recall_at_5": 0.715625,
+      "recall_at_10": 0.809375,
+      "hit_at_5": 0.7375,
+      "hit_at_10": 0.8375,
+      "mrr": 0.5984731465429995,
+      "seconds": 0.21304179618748192,
+      "questions": 80
+    },
+    "hybrid_rerank": {
+      "recall_at_5": 0.803125,
+      "recall_at_10": 0.884375,
+      "hit_at_5": 0.825,
+      "hit_at_10": 0.9,
+      "mrr": 0.6932707917082916,
+      "seconds": 67.48113634682497,
+      "questions": 80
+    }
+  },
+  "answers": {
+    "extractive": {
+      "questions": 120,
+      "citations": 464,
+      "citation_accuracy": 1.0,
+      "audited_citation_uses": 925,
+      "correct_citation_uses": 925,
+      "groundedness_before_removal": 1.0,
+      "groundedness_emitted": 1.0,
+      "emitted_sentences": 925,
+      "supported_emitted_sentences": 925,
+      "claims": 925,
+      "supported_claims": 925,
+      "removed_claims": 0,
+      "number_correctness": 1.0,
+      "numeric_precision": 1.0,
+      "numeric_cell_exactness": 1.0,
+      "correct_numeric_values": 669,
+      "expected_numeric_values": 669,
+      "extra_numeric_values": 0,
+      "available_data_questions": 30,
+      "missing_data_questions": 0,
+      "available_data_answer_rate": 1.0,
+      "missing_data_refusal_rate": null,
+      "displayed_row_exactness": 1.0,
+      "correct_data_rows": 491,
+      "expected_data_rows": 491,
+      "data_questions_exact": 1.0,
+      "correct_refusal_rate": 1.0,
+      "literature_answer_rate": 1.0,
+      "literature_gold_source_citation_rate": 0.8875,
+      "latency_seconds_mean": 1.6340416666666668,
+      "generation_fallbacks": 0
+    }
+  },
+  "files": {
+    "rag_eval.jsonl": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "retrieval.jsonl": "1774e8c430aef460f8e3fd4bedbdc88939e5e786612a94a6c2b2f7667a258c94",
+    "answers.jsonl": "10d9c0866be49f2e2e268af828bdb330af1b4fe29c44086fb6bb223a4696748e"
+  },
+  "metric_limitations": "Known-gold retrieval judgments are incomplete. Grounding uses exact-source verification, not independent semantic/clinical validity. Numeric scoring matches frozen displayed-field cells. Missing answers to available data score zero recall; unavailable-data refusals are reported separately. Gold source citation is not a semantic question-answer accuracy judgment.",
+  "mlflow_run_id": "2eb541abd6fe49f688d6a23d477f5227"
+}

@@ -86,3 +86,15 @@ evaluation. It does not replace the final metrics and validation report.
   After adding the same-page audit regression, it reran as **183 passed,
   149 warnings in 71.47s**, retaining all 148 baseline tests and the hashes of all
   20 original test/support files. All 35 new RAG cases pass. No warning was silenced.
+- The standalone execution-proof collector initially assumed the database vector
+  adapter returned a NumPy array; the installed adapter returned a Python list.
+  Replaced its `.tolist()` assumption with `list(...)`. The collector reran with
+  exit 0: all 29 inputs unchanged, 7,194 finite 1024-dimensional unit vectors,
+  usable HNSW/English GIN plans and unchanged Phase 4 counts. This changed the
+  verification helper, not the corpus or benchmark questions.
+
+- Final result archiving initially exited 1 because container Git rejected the
+  Windows bind mount `/app` as dubious ownership (Git exit 128). The provenance
+  read now uses `git -c safe.directory=/app rev-parse HEAD` for this trusted
+  command only; no global Git setting or application code changed. The rerun
+  result is recorded in VALIDATION and the archive ownership proof.

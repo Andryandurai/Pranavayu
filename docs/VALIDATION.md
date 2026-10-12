@@ -942,3 +942,233 @@ thread. Exact commands, outputs, HTTP/model checks and prior-failure evidence ar
 under `data/results/21/verification/`, hashed by the manifest.
 
 Phase 5's queued request begins only after this completed verification.
+
+## Phase 5 live verification — 11 October 2026
+
+Work runs from `D:\EnviroInsights-India`; tests run inside `web`, using the
+Compose database service rather than the Windows PostgreSQL installation.
+Phase 4's baseline is 148 passing tests. SHA256 checks confirm that all 20
+original test/support files are unchanged. The Phase 5 implementation adds
+35 test cases; no baseline assertion or warning filter was weakened.
+
+Actual commands and output:
+
+```text
+docker compose exec -T web pytest
+183 passed, 149 warnings in 71.47s (0:01:11)
+
+docker compose exec -T web ruff check .
+All checks passed!
+
+docker compose exec -T web ruff format --check .
+226 files already formatted
+
+docker compose exec -T web python manage.py check
+System check identified no issues (0 silenced).
+
+docker compose exec -T web python manage.py makemigrations --check --dry-run
+No changes detected
+
+docker compose exec -T web python manage.py check --deploy --settings=enviroinsights.settings.prod
+System check identified no issues (0 silenced).
+```
+
+OpenAPI schema validation also exits 0 without warnings. Test warnings remain
+visible: Django's future URL form scheme, three SHAP/matplotlib deprecations,
+MLflow signature/type-hint advice, the existing NumPy binary-size warning,
+NumPy timedelta fixture deprecations and synthetic SARIMAX nonconvergence.
+The binary-size warning was also recorded in Phase 4. Exact pytest output is
+retained in the validation log.
+
+All eight default services run: db, Redis, web, worker, beat, Flower, MLflow and
+the private CPU encoder service. db, Redis, MLflow and the encoder service are
+healthy. Database/Redis/web/MLflow ports remain loopback 5433/6380/8000/5000.
+Docker reports Linux containers; project/model/cache files remain on D:.
+
+| Live check | Actual output |
+| --- | --- |
+| Health | HTTP 200; database, Redis and Celery true; PostGIS 3.6.4, TimescaleDB 2.30.2, vector 0.8.7 |
+| Library listing | HTTP 200; 29 registered actual document bodies |
+| Data answers | Eight POST requests returned 200; seven answered with dataset citations, unavailable Delhi 2022 refused |
+| Citation URLs | All seven returned dataset links returned HTTP 200, including explicit raw snapshot Run 9 |
+| HTMX Ask form | Real CSRF-protected POST returned 200 with the actual Delhi value, extractive badge and clickable citation |
+| Input validation | Six malformed questions, filters and explanation contexts returned 400 |
+| Source page | JSON and HTML returned 200 with identical stored text; missing physical page returned 404 |
+| Local HTMX asset | HTTP 200; bytes match the vendored file, SHA256 d6fdc75f204e6bdefa99b69bf1e6d4ac69b8a364f77929f45c13476b4000f717 |
+| Real Celery ingestion | Task dac0f2e3-1494-40d7-9784-2f9785580893 succeeded; Document 23 ready, 129 vectors, parser 3 |
+| Complete corpus | 29 ready documents; 7,194 chunks and 7,194 stored embeddings |
+| Pages | 1,947 physical PDF pages, 6 logical unpaginated pages; 223 OCR pages |
+| Vector integrity | All dimensions 1024; unit norms range 0.9999998692963225–1.0000001804510361 |
+| Re-ingestion | All 29 actual SHA256-verified files: zero new chunks/vectors, all chunk IDs unchanged |
+| Source metadata | Every chunk's source SHA256, year and category match its Document |
+| Index usability | Actual EXPLAIN uses chunk_embedding_hnsw and chunk_text_fts_gin; enable_seqscan was disabled locally for these proofs |
+| Phase 4 preservation | Run 21 success; 147 versions, 3,885 forecasts; all 20 original test/support file hashes unchanged |
+
+The complete index was verified with exit 0 by
+`docker compose exec -T -e PYTHONPATH=/app web python .tools/phase5-validation/collect_final_proof.py`.
+Its first attempt assumed the vector adapter returned an array; the adapter
+returned a list. The collector was corrected and rerun successfully, without
+changing corpus text or vectors. Full actual plans and counts are retained in
+`verification/final-proof.json`.
+
+### Frozen evaluation and final API verification ? 12 October 2026
+
+Docker Desktop was unavailable at resume. It was started, then `docker compose
+up -d` restored all eight services without rebuilding, deleting volumes or
+re-embedding documents. Health returned 200 with every check true. The frozen
+benchmark resumed 151 saved retrieval records, including 37 complete questions;
+completed comparisons were retained. User pauses and resume dates are separate
+from the per-question timings.
+
+Actual commands (exit 0):
+
+```text
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase5-validation/evaluate_when_ready.py
+docker compose exec -T web python .tools/phase5-validation/http_complete_proofs.py
+Saved ten real HTTP answers and API/HTMX/source proofs.
+docker compose exec -T web ruff check .
+All checks passed!
+docker compose exec -T web ruff format --check .
+226 files already formatted
+```
+
+All four retrieval methods completed the same 80 literature questions (320
+saved records). Extractive completed all 120 questions. The following values
+are copied from the actual metrics artifact, not estimated:
+
+```json
+{
+  "completed_at": "2026-10-12T09:52:59.930123+00:00",
+  "retrieval": {
+    "vector": {
+      "recall_at_5": 0.609375,
+      "recall_at_10": 0.690625,
+      "hit_at_5": 0.625,
+      "hit_at_10": 0.7125,
+      "mrr": 0.4596243102657576,
+      "seconds": 0.06993289818754497,
+      "questions": 80
+    },
+    "keyword": {
+      "recall_at_5": 0.678125,
+      "recall_at_10": 0.803125,
+      "hit_at_5": 0.7,
+      "hit_at_10": 0.8125,
+      "mrr": 0.5165074394267138,
+      "seconds": 0.1868041276124952,
+      "questions": 80
+    },
+    "hybrid": {
+      "recall_at_5": 0.715625,
+      "recall_at_10": 0.809375,
+      "hit_at_5": 0.7375,
+      "hit_at_10": 0.8375,
+      "mrr": 0.5984731465429995,
+      "seconds": 0.21304179618748192,
+      "questions": 80
+    },
+    "hybrid_rerank": {
+      "recall_at_5": 0.803125,
+      "recall_at_10": 0.884375,
+      "hit_at_5": 0.825,
+      "hit_at_10": 0.9,
+      "mrr": 0.6932707917082916,
+      "seconds": 67.48113634682497,
+      "questions": 80
+    }
+  },
+  "answers": {
+    "extractive": {
+      "questions": 120,
+      "citations": 464,
+      "citation_accuracy": 1.0,
+      "audited_citation_uses": 925,
+      "correct_citation_uses": 925,
+      "groundedness_before_removal": 1.0,
+      "groundedness_emitted": 1.0,
+      "emitted_sentences": 925,
+      "supported_emitted_sentences": 925,
+      "claims": 925,
+      "supported_claims": 925,
+      "removed_claims": 0,
+      "number_correctness": 1.0,
+      "numeric_precision": 1.0,
+      "numeric_cell_exactness": 1.0,
+      "correct_numeric_values": 669,
+      "expected_numeric_values": 669,
+      "extra_numeric_values": 0,
+      "available_data_questions": 30,
+      "missing_data_questions": 0,
+      "available_data_answer_rate": 1.0,
+      "missing_data_refusal_rate": null,
+      "displayed_row_exactness": 1.0,
+      "correct_data_rows": 491,
+      "expected_data_rows": 491,
+      "data_questions_exact": 1.0,
+      "correct_refusal_rate": 1.0,
+      "literature_answer_rate": 1.0,
+      "literature_gold_source_citation_rate": 0.8875,
+      "latency_seconds_mean": 1.6340416666666668,
+      "generation_fallbacks": 0
+    }
+  },
+  "mlflow_run_id": "2eb541abd6fe49f688d6a23d477f5227"
+}
+```
+
+The frozen evaluation SHA256 remains
+`f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4`.
+The MLflow `rag` run is `2eb541abd6fe49f688d6a23d477f5227`.
+Recall is the fraction of all known gold chunks, hit is at least one gold
+chunk, and MRR searches through 40. The 925/925 citation uses and emitted
+sentences measure exact source-text support; they do not independently certify
+semantic relevance or completeness. All 669 expected numeric field values
+matched with no extra scored values. All 30 available-data questions answered;
+the 10-question unanswerable set was refused. Missing-data metric within the
+30 data questions is not applicable because all 30 were available.
+
+Query vectors were primed before timed retrieval. The mean 67.48113634682497-second
+reranking stage measures scoring the fused 40; answer-phase latency uses those
+cached scores. The additional actual AERMOD and Kolkata API requests took
+85.187 / 61.204 seconds. Both returned 200; all 16
+returned document citation links returned 200 and matched stored SHA256 and
+physical page. Supplied scenario value 999999 was absent from the answer.
+Eight known-gold top-10 misses remain: four absent from the fused candidates and
+four reranked below ten. The report describes their questions and the noisy OCR
+and relevance limits. Questions, thresholds and ranking weights were unchanged.
+
+The final report is [PHASE5.md](results/PHASE5.md); full metrics are in
+[PHASE5_METRICS.json](results/PHASE5_METRICS.json). Exact logs and structured
+proofs are retained under `data/results/rag-phase5/verification/`, with hashes
+in its result manifest and copies in the MLflow run. The implementation tested
+as 183 passing cases on 11 October is unchanged at evaluation commit `9b9c8a2`;
+final changes are documentation and verification artifacts.
+
+
+Windows' actual System event log records an idle sleep from
+2026-10-11T02:46:04.888622Z to 2026-10-11T03:50:41.329951Z (08:16–09:20 IST).
+Docker and the saved batch jobs survived; health returned 200 after wake.
+A temporary `ES_CONTINUOUS | ES_SYSTEM_REQUIRED` request covered the CPU
+jobs and was released on both the user pause and final completion. It changes no permanent power-plan setting and is released on pause or
+completion. Event evidence and the request/release record are retained as
+`verification/windows-sleep.json` and `verification/temporary-awake.json`.
+The API behavior is described in the [Windows execution-state documentation](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-setthreadexecutionstate).
+
+Logs are under `.tools/phase5-validation/`; structured live HTTP and Celery
+outputs are under `data/results/rag-phase5/verification/`. Download failures,
+source identity corrections and parser fixes are recorded in the library
+manifest and [PHASE5_IMPLEMENTATION_FIXES.md](results/PHASE5_IMPLEMENTATION_FIXES.md).
+
+Final archiving initially hit Git exit 128 because the Windows bind mount
+`/app` has different ownership inside the container. The read-only provenance
+command now uses the process-scoped `git -c safe.directory=/app rev-parse HEAD`;
+no global Git configuration changed. The actual rerun exited 0:
+
+```text
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase5-validation/archive_final_results.py
+{"mlflow_run_id": "2eb541abd6fe49f688d6a23d477f5227", "status": "FINISHED", "metrics_logged": 58, "reports": ["reports/PHASE5.md", "reports/PHASE5_IMPLEMENTATION_FIXES.md", "reports/PHASE5_METRICS.json", "reports/PHASE5_PROTOCOL.md", "reports/VALIDATION.md"], "hashed_result_files": 32}
+```
+
+An independent SHA256/byte-count check matched all 32 retained result files.
+The frozen evaluation file also matches its recorded SHA256. The temporary
+Windows sleep request is released; normal project services remain running.
