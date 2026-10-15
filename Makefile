@@ -17,7 +17,7 @@ shell:
 test:
 	$(COMPOSE) exec -T web python manage.py check --settings=enviroinsights.settings.test
 	$(COMPOSE) exec -T web python manage.py makemigrations --check --dry-run --settings=enviroinsights.settings.test
-	$(COMPOSE) exec -T web pytest --ds=enviroinsights.settings.test
+	$(COMPOSE) exec -T -e OLLAMA_ENABLED=false -e LLM_PROVIDER=extractive -e HYPOTHESIS_STORAGE_DIRECTORY=/tmp/hypothesis web pytest --ds=enviroinsights.settings.test
 
 lint:
 	$(COMPOSE) exec -T web ruff check .

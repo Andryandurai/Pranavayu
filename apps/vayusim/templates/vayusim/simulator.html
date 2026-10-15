@@ -1,0 +1,42 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %}VayuSim · EnviroInsights{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'dashboard/vendor/maplibre-gl.css' %}">
+<div class="page-heading"><div><p class="eyebrow">Source dispersion lab</p><h1>VayuSim</h1><p>Explore the hourly PM2.5 increment from the sources you specify.</p></div><div><span class="badge">Educational estimate</span><p><a href="#simulation-form" class="text-link">Set up your scenario ↓</a></p></div></div>
+<div class="simulation-layout">
+<form id="simulation-form" class="panel control-panel">
+ {% csrf_token %}
+ <h2>Your scenario</h2>
+ <label for="sim-city">City</label><select id="sim-city" name="city">{% for city in cities %}<option value="{{city.slug}}" {% if city.slug == 'delhi' %}selected{% endif %}>{{city.name}}</option>{% endfor %}</select>
+ <label for="sim-preset">Source family</label><select id="sim-preset" name="preset"></select><p id="preset-note" class="help">Enter source parameters explicitly. Presets do not assume a facility's emissions.</p>
+ <div class="field-pair"><div><label for="sim-lon">Longitude</label><input id="sim-lon" type="number" step="any" required></div><div><label for="sim-lat">Latitude</label><input id="sim-lat" type="number" step="any" required></div></div>
+ <p class="help">Click the map to place your source, or enter its coordinates.</p>
+ <div class="field-pair"><div><label for="sim-q">PM2.5 emission (g/s)</label><input id="sim-q" type="number" min="0" max="100000" step="any" required placeholder="Required"></div><div><label for="sim-height">Release height (m)</label><input id="sim-height" type="number" min="0" max="1000" step="any" required placeholder="Required"></div></div>
+ <div class="field-pair"><div><label for="sim-diameter">Stack diameter (m)</label><input id="sim-diameter" type="number" min="0" max="100" step="any" required placeholder="0 for no rise"></div><div><label for="sim-velocity">Exit velocity (m/s)</label><input id="sim-velocity" type="number" min="0" max="200" step="any" required placeholder="0 for no rise"></div></div>
+ <label for="sim-temperature">Exit temperature (K)</label><input id="sim-temperature" type="number" min="150" max="2000" step="any" required placeholder="Required">
+ <div id="extended-source" hidden>
+   <div class="field-pair"><div><label for="sim-width">Area width (m)</label><input id="sim-width" type="number" min="1" max="10000"></div><div><label for="sim-length">Area length (m)</label><input id="sim-length" type="number" min="1" max="10000"></div></div>
+   <div class="field-pair"><div><label for="sim-end-lon">Line end longitude</label><input id="sim-end-lon" type="number" step="any"></div><div><label for="sim-end-lat">Line end latitude</label><input id="sim-end-lat" type="number" step="any"></div></div>
+   <label for="sim-subdivisions">Subdivisions (1–20)</label><input id="sim-subdivisions" type="number" min="1" max="20">
+ </div>
+ <label for="sim-mode">Meteorology</label><select id="sim-mode"><option value="real">Archived city weather</option><option value="manual">Enter weather manually</option></select>
+ <label for="sim-hour">Date and hour (IST)</label><input id="sim-hour" type="datetime-local" step="3600" value="2025-01-15T12:00" required><p class="help">Archived coverage is mainly 2015–2019 and 2024–2025. A missing hour is reported as unavailable.</p>
+ <fieldset id="manual-weather" hidden><legend>Manual weather</legend>
+  <div class="field-pair"><div><label for="sim-wind">Wind at 10 m (m/s)</label><input id="sim-wind" type="number" min="0" max="100" step="any"></div><div><label for="sim-direction">Wind from (degrees)</label><input id="sim-direction" type="number" min="0" max="359.999" step="any"></div></div>
+  <div class="field-pair"><div><label for="sim-ambient">Air temperature (K)</label><input id="sim-ambient" type="number" min="150" max="350" step="any"></div><div><label for="sim-solar">Solar radiation (W/m²)</label><input id="sim-solar" type="number" min="0" max="1500" step="any"></div></div>
+  <div class="field-pair"><div><label for="sim-cloud">Cloud fraction (0–1)</label><input id="sim-cloud" type="number" min="0" max="1" step="any"></div><div><label for="sim-lid">Mixing height (m, optional)</label><input id="sim-lid" type="number" min="2" max="10000" step="any"></div></div>
+  <label for="sim-daytime">Time of day</label><select id="sim-daytime"><option value="day">Daytime</option><option value="night">Nighttime</option></select>
+ </fieldset>
+ <label for="sim-threshold">Additional threshold (µg/m³, optional)</label><input id="sim-threshold" type="number" min="0" max="10000" step="any">
+ <button id="sim-submit" type="submit" class="button">Run dispersion model <span aria-hidden="true">↗</span></button>
+ <p id="sim-status" role="status" aria-live="polite"></p>
+</form>
+<div class="simulation-results"><div class="map-shell"><div id="sim-map" role="region" aria-label="Scenario map" style="height:520px"></div><div class="map-caption">Click to place a source · 10 km × 10 km · 50 m grid</div></div>
+<section id="sim-summary" class="panel" aria-live="polite"><h2>From source to surroundings</h2><p>Place a source, enter its parameters and run a scenario. The map will show its modelled increment and exposure footprint.</p><p class="help">Station measurements represent the total from all sources. They remain separate from this model.</p></section>
+<section class="notice"><h3>Read the estimate in context</h3><p>Primary PM2.5 only. Flat terrain, no chemistry or deposition, no building downwash beyond stack-tip, and steady meteorology within each hour. Educational estimate; regulatory assessments require AERMOD.</p><p>Overlay uses CPCB category colours for visualisation. An hourly added concentration is not actual AQI.</p></section></div>
+</div>
+{{cities|json_script:"sim-cities"}}
+<script src="{% static 'dashboard/vendor/maplibre-gl.js' %}" defer></script>
+<script src="{% static 'vayusim/simulator.js' %}" defer></script>
+{% endblock %}

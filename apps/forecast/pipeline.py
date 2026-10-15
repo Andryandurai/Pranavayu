@@ -77,6 +77,32 @@ def save_forecasts(city, horizon, version, frame, drivers, mode="replay"):
             )
         )
     Forecast.objects.bulk_create(objects, ignore_conflicts=True)
+    if version.interval_policy:
+        # Reissued archival rows keep their original point, dates and model.
+        # Retain the original bounds as an audit trail; do not rewrite old runs.
+        for proposed in objects:
+            existing = Forecast.objects.get(
+                city=city,
+                issued_for_date=proposed.issued_for_date,
+                horizon=horizon,
+                mode=mode,
+                model_version=version,
+            )
+            provenance = dict(existing.feature_provenance)
+            provenance.setdefault(
+                "original_interval_bounds",
+                {
+                    key: getattr(existing, key)
+                    for key in ("lower80", "upper80", "lower95", "upper95")
+                },
+            )
+            provenance["interval_policy"] = version.interval_policy
+            for key in ("lower80", "upper80", "lower95", "upper95"):
+                setattr(existing, key, getattr(proposed, key))
+            existing.feature_provenance = provenance
+            existing.save(
+                update_fields=["lower80", "upper80", "lower95", "upper95", "feature_provenance"]
+            )
 
 
 def train_forecasters(cities=None):

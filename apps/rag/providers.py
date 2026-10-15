@@ -72,13 +72,20 @@ class Provider:
                 json={
                     "model": self.model,
                     "stream": False,
+                    "keep_alive": int(os.environ.get("OLLAMA_KEEP_ALIVE", "0")),
                     "messages": [
                         {"role": "system", "content": INSTRUCTIONS},
                         {"role": "user", "content": payload_text},
                     ],
-                    "options": {"temperature": 0, "seed": 20261010},
+                    "options": {
+                        "temperature": 0,
+                        "seed": 20261010,
+                        "num_ctx": 16384,
+                        "num_predict": 1600,
+                        "num_thread": 4,
+                    },
                 },
-                timeout=(10, 180),
+                timeout=(10, 900),
             )
             response.raise_for_status()
             return response.json()["message"]["content"]

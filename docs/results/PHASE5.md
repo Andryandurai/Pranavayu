@@ -457,3 +457,149 @@ Actual execution proofs:
 ## Phase 6 integration
 
 Call POST `/api/rag/explain/` with `context_type` chart, forecast or scenario and a validated `payload` containing city/question and optional scenario_id/parameters. Preserve citations, provider, verification, unavailable-data and replay flags. Supplied client numbers are context rather than verified project results. Scenario explanations currently use documented AERMOD assumptions; Phase 6 must validate actual simulation outputs before treating them as numerical evidence. No simulator or dashboard was built in this phase.
+
+
+## Phase 6A append: measured local Ollama provider
+
+The original Phase 5 extractive evaluation above and its 32 retained result
+artifacts are unchanged. This append records the separately executed provider-only
+evaluation after the requested Phase 6A interval and reranker changes. It does
+not replace the original metrics, frozen questions or expectations.
+
+Installed RAM was 16 GiB. The requested WSL limit is floor(0.6×16)=9GB.
+`.wslconfig` did not exist, so no previous settings needed backup. After the
+clean Docker/WSL restart, the measured available container memory was
+6,909,865,984 bytes against actual model 1,929,912,432 bytes+3 GiB headroom;
+the revised measured gate passes. No 12 GB-free rule is used for this run.
+
+The default is `qwen2.5:3b-instruct` via Ollama, Q4_K_M, digest
+`357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b`.
+Generation uses temperature 0, seed 20261010, context 16384, maximum 1600 output
+tokens, four CPU threads and keep_alive=0. Caches/model weights are on D:.
+Retrieval uses the dedicated resident reranker and the accepted 24-candidate
+policy. All 80 frozen literature questions were separately checked against 40:
+Recall10 .884375→.903125, a 1.875-point improvement, satisfying the prespecified
+maximum 1 point drop. This is a retrieval result, not answer accuracy.
+
+The completed evaluation has 80 literature, 30 data and 10 unanswerable questions.
+Its frozen SHA256 remains
+`f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4`.
+The command resumes saved completed answers after user pauses/Docker shutdowns;
+it does not regenerate completed questions or mix changed gold files.
+
+```powershell
+docker compose exec -T web python manage.py evaluate_rag --provider ollama --output data/results/rag-ollama-phase6a
+```
+
+Completed `2026-10-15T15:16:48.629771+00:00`. MLflow experiment `rag`, run `a70d7abfbf0149b8a4a1f78b8dad544b`.
+
+| Metric | Actual result |
+| --- | --- |
+| questions | 120 |
+| citations | 2 |
+| citation_accuracy | 1.0 |
+| audited_citation_uses | 2 |
+| correct_citation_uses | 2 |
+| groundedness_before_removal | 0.016666666666666666 |
+| groundedness_emitted | 1.0 |
+| emitted_sentences | 2 |
+| supported_emitted_sentences | 2 |
+| claims | 120 |
+| supported_claims | 2 |
+| removed_claims | 118 |
+| number_correctness | 0.0 |
+| numeric_precision | None |
+| numeric_cell_exactness | 0.0 |
+| correct_numeric_values | 0 |
+| expected_numeric_values | 669 |
+| extra_numeric_values | 0 |
+| available_data_questions | 30 |
+| missing_data_questions | 0 |
+| available_data_answer_rate | 0.0 |
+| missing_data_refusal_rate | None |
+| displayed_row_exactness | 0.0 |
+| correct_data_rows | 0 |
+| expected_data_rows | 491 |
+| data_questions_exact | 0.9 |
+| correct_refusal_rate | 1.0 |
+| literature_answer_rate | 0.025 |
+| literature_gold_source_citation_rate | 0.025 |
+| latency_seconds_mean | 80.76179166666667 |
+| generation_fallbacks | 0 |
+
+| Metric | Actual result |
+| --- | --- |
+| Latency median seconds | 63.62049999999999 |
+| Latency minimum seconds | 0.627 |
+| Latency maximum seconds | 230.725 |
+| Questions with nonempty evidence | 118 |
+| Questions with no evidence (generation skipped) | 2 |
+
+Latency is the actual whole answer path, including retrieval/cache behavior,
+model loading, CPU contention and brief inference-service pauses during test
+verification. It is not an isolated generation benchmark. Empty evidence returns
+a refusal without calling generation, even though the configured provider is
+recorded as Ollama. Generation fallbacks, if present, remain in the table.
+
+### Answer coverage and strict verification
+
+| Question type | Questions | Refused |
+| --- | --- | --- |
+| literature | 80 | 78 |
+| data | 30 | 30 |
+| unanswerable | 10 | 10 |
+
+| Metric | Actual result |
+| --- | --- |
+| citation_not_in_evidence | 103 |
+| sentence_not_supported_verbatim | 15 |
+
+These are the actual outcomes, including poor answer coverage. A supported-claim
+rate among retained text must not hide refusals. When no claims/citations remain,
+the relevant score is null, not an invented 100%. The model often omitted the
+supplied `[E#]` identifier or paraphrased text that the conservative verifier
+could not match exactly. The verifier, prompt, questions and thresholds were
+not loosened to make this provider pass. Exact-text support is not independent
+semantic correctness, relevance or completeness. This append does not claim
+that enabling the local model improved answer quality over extraction.
+
+### Frozen data snapshot drift
+
+Phase 6A selected different existing interval families and added interval-policy
+provenance. The frozen expected tool snapshots predate these changes. All 3,885
+original forecast rows and their point values were rechecked unchanged; 19 latest
+issuance rows had revised bounds. Thus some exact frozen tool comparisons can
+fail because actual evidence changed, rather than because the generator changed
+the stored number. The frozen score above is still reported unchanged.
+
+`data_questions_exact` measures full returned **tool-snapshot** agreement with
+the frozen object, not generated-answer accuracy or coverage. Interpret it with
+`available_data_answer_rate`, numeric correctness and displayed-row exactness.
+An unchanged database tool result can accompany a refused or incorrect answer.
+
+Tool snapshots differ for 3 data questions: D024, D025, D026.
+
+Supplementary comparison with the **actual returned evidence of each answer**, not a replacement gold set:
+
+| Metric | Actual result |
+| --- | --- |
+| questions_with_expected_tool | 30 |
+| missing_expected_tool_ids | [] |
+| correct_numeric_values | 0 |
+| expected_numeric_values | 669 |
+| extra_numeric_values | 0 |
+| number_correctness | 0.0 |
+| numeric_precision | None |
+| numeric_cell_exactness | 0.0 |
+| displayed_row_exactness | 0.0 |
+
+Per-question changed JSON paths and supplementary field-level scores are saved
+in `data/results/vayusim/verification/provider-supplement.json`. They distinguish
+frozen snapshot drift from fidelity to the actual values supplied to the model;
+they do not alter original questions/expected values or certify semantic QA.
+
+Provider answers, removal reasons, audit fields and actual tool evidence remain
+in `data/results/rag-ollama-phase6a/answers.jsonl`, with final `metrics.json` and
+SHA256 manifest. The compact report is [PHASE6A_METRICS.json](PHASE6A_METRICS.json).
+The [Phase 6A report](PHASE6A.md) records actual uncached reranker latency,
+including the slower after measurements, the scenario tool, UI and limitations.

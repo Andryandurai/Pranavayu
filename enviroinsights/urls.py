@@ -8,11 +8,12 @@ from rest_framework.routers import DefaultRouter
 from apps.analytics.api import CoverageView, SeriesView, SummaryView
 from apps.analytics.research_api import ComparisonsView, NCAPView, RQ2View
 from apps.core.views import HealthView
-from apps.dashboard.views import HomeView
+from apps.dashboard.views import ForecastPage, HomeView, LibraryPage, ResearchPage
 from apps.forecast.api import EvaluationView, HistoryView, LatestView
 from apps.ingest.api import CompletenessView, FireView, ReadingView, WeatherView
 from apps.rag.api import AskView, DocumentsView, ExplainView, PageView
 from apps.rag.views import AskPage, SourcePage
+from apps.vayusim.views import SimulatorPage
 from apps.warehouse.views import CityViewSet, PollutantViewSet, StationViewSet
 
 router = DefaultRouter()
@@ -22,6 +23,10 @@ router.register("pollutants", PollutantViewSet)
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
+    path("simulator/", SimulatorPage.as_view(), name="simulator"),
+    path("forecasts/", ForecastPage.as_view(), name="forecasts"),
+    path("research/", ResearchPage.as_view(), name="research"),
+    path("library/", LibraryPage.as_view(), name="library"),
     path("admin/", admin.site.urls),
     path("ask/", AskPage.as_view(), name="rag-ask-page"),
     path(
@@ -38,6 +43,7 @@ urlpatterns = [
         name="rag-page",
     ),
     path("api/health/", HealthView.as_view(), name="health"),
+    path("api/vayusim/", include("apps.vayusim.urls")),
     path("api/forecast/<slug:slug>/latest/", LatestView.as_view(), name="forecast-latest"),
     path("api/forecast/<slug:slug>/history/", HistoryView.as_view(), name="forecast-history"),
     path(

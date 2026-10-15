@@ -14,8 +14,7 @@ flowchart LR
 
 The arrows into ingestion describe a future boundary. Phase 1 creates the storage
 and task infrastructure, with a zero-row ping task, and downloads no observations.
-No connectors, forecasting, policy analytics, document parsing, embedding generation,
-retrieval, assistant, or plume simulator are implemented.
+Those capabilities were deferred in Phase1; the later sections describe delivered phases.
 
 | App | Phase 1 responsibility |
 | --- | --- |
@@ -40,7 +39,7 @@ See the upstream [HA image source](https://github.com/timescale/timescaledb-dock
 The health response returns 200 only when every dependency check passes and 503
 otherwise. Errors stay in server logs; credentials and stack traces are not returned
 to clients. This is a readiness probe, with per-network timeouts, rather than a
-cheap liveness endpoint. API endpoints permit public reads and reject writes.
+cheap liveness endpoint. Warehouse APIs permit public reads and reject writes.
 Reference APIs paginate at 100 items; GeoJSON page-size requests are capped at 100.
 
 The PostgreSQL, Redis and media named volumes survive normal `make down`. Docker
@@ -165,14 +164,17 @@ page ranges and source sections, with 100-token overlap and shorter section tail
 Document-level advisory locks prevent concurrent ingestion of the same revision;
 each completed embedding batch persists independently for resume.
 
-The internal `rag-models` HTTP service loads one pinned CPU BGE model at a time.
-The encoder produces normalized 1024-vectors; the reranker scores the top 40 RRF
-candidates. Query/passage/pair computation caches include model revisions and
+The internal `rag-models` HTTP service produces normalized1024-vectors and releases
+the embedding model after use. Reranking delegates to a dedicated single-slot
+Celery `rag-reranker` worker on queue `rag-rerank`; its pinned model stays resident.
+Top24 RRF candidates passed the frozen Recall@10 gate against40. Model revision,
+float32 and1024-token limits are unchanged. Query/passage/pair caches include revisions and
 content hashes. pgvector cosine HNSW and indexed English full-text retrieval
 remain in PostgreSQL. Metadata filters apply before ranking; missing model
 service connectivity is recorded and permits an explicit keyword fallback.
 
-Transparent rules select literature/data/mixed routes and eight named data tools.
+Transparent rules select literature/data/mixed routes. Eight original data tools
+and the new `vayusim_run(run_id)` tool are explicitly whitelisted.
 Parameter serializers reject unknown fields/cities, bad date windows, nonfinite
 thresholds and out-of-range horizons. Tool results retain their actual data,
 normalisation, research or forecasting run and model IDs. No raw SQL is exposed.
@@ -188,3 +190,43 @@ context never promotes unverified client numbers into evidence. Frozen human-
 authored questions and DB expectations drive four retrieval comparisons and
 available-provider answer evaluation, independently auditing emitted claims
 against stored source text. Actual metrics/artifacts are logged to MLflow `rag`.
+
+## Phase6A dispersion and presentation
+
+`apps/vayusim/physics/` imports NumPy only: stability tables, power-profile wind,
+Briggs rural/urban sigmas, stack-tip/buoyancy/momentum rise, ground/lid images and
+linear source superposition. Geographic adapters use pyproj AEQD; the receptor
+grid's affine rotates with transport direction (meteorological wind FROM+180°).
+Area midpoint lattices and line midpoint segments conserve entered total g/s.
+Their near-field discretisation and the100m–10km coefficient range are flagged.
+
+DRF strictly validates finite values, geometry, city, source type and grid size.
+The adapter reads warehouse weather at the IST hour midpoint's UTC instant;
+missing BLH uses the cited, explicitly illustrative CDM2 class relationship.
+WorldPop counts become geodesic-area densities before area-weighted warping;
+a separately warped support mask prevents inflating partial nodata cells.
+Exposure includes known population only. Nearby quality-OK, spatially eligible
+CPCB/OpenCity CPCB readings are labelled measured totals and never added.
+
+Scenario inputs, actual weather values/provenance, population asset hash and
+engine version form a canonical SHA256. Transaction advisory locks plus a unique
+hash prevent duplicate runs. Atomic float32 files live under
+`data/results/vayusim/<run_id>/`. Day mode stores24 summaries, marks missing
+hours unavailable, and defers grid/contour files until requested. A second
+advisory lock serialises concurrent lazy materialisation.
+Materialisation reads the run's hashed input/weather snapshot, so later edits
+to its Scenario cannot change the historical field. An unmaterialised old-engine
+run cannot be silently rebuilt by a different engine version.
+
+Run/header responses carry limitations, units, affine, WKT CRS, shape, byte order
+and image corners. Threshold masks become WGS84 GeoJSON polygons. The PNG uses
+CPCB PM2.5 category colours only; hourly increments are not actual AQI.
+Scenario explanation validates the stored run and supplies its values as dataset
+evidence alongside library passages. Client parameters remain unverified.
+
+Django templates serve the overview, forecast/research selectors, source library,
+assistant and simulator with shared responsive styling. MapLibre5.24.0 is vendored
+with its BSD licence; the map requests standard OSM tiles with visible attribution
+and normal browser caching, without tile prefetch or offline downloads. Scientific
+figures and saved results retain their original timestamps and caveats. Markdown
+answer tables render with raw HTML disabled and unsafe URL schemes rejected.

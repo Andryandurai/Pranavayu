@@ -1172,3 +1172,290 @@ docker compose exec -T -e PYTHONPATH=/app web python .tools/phase5-validation/ar
 An independent SHA256/byte-count check matched all 32 retained result files.
 The frozen evaluation file also matches its recorded SHA256. The temporary
 Windows sleep request is released; normal project services remain running.
+
+
+## Phase 6A and whole-site presentation verification (2026-10-15)
+
+Active checkout: `D:\EnviroInsights-India`; baseline `b5fa5bf`, 183 tests.
+No original tests or frozen Phase5 questions were modified. The final
+SHA256 check matches all41 original test/support/fixture files and all32
+original Phase5 result artifacts. See [PHASE6A](results/PHASE6A.md) for methods,
+measured comparisons, source citations, failures/fixes, Decisions and limitations.
+
+Docker Desktop was installed but stopped on resume; it was started and the
+existing Compose stack brought up. Docker29.8.2, Compose5.5.1, Linux containers.
+The project, models and Docker/WSL data remain on D:. Host5433 maps to db5432;
+the native Windows PostgreSQL service on5432 is left alone. Container commands
+use Compose service `db`; no host-native test database is substituted.
+
+Actual service snapshot (`docker compose ps --format json`):
+
+| Service | State | Health |
+| --- | --- | --- |
+| beat | running | no container healthcheck configured |
+| db | running | healthy |
+| flower | running | no container healthcheck configured |
+| mlflow | running | healthy |
+| ollama | running | healthy |
+| rag-models | running | healthy |
+| rag-reranker | running | healthy |
+| redis | running | healthy |
+| web | running | no container healthcheck configured |
+| worker | running | no container healthcheck configured |
+
+Actual `GET /api/health/` status 200:
+
+```json
+{
+  "ok": true,
+  "checks": {
+    "database": {
+      "ok": true
+    },
+    "extensions": {
+      "postgis": {
+        "ok": true,
+        "version": "3.6.4"
+      },
+      "timescaledb": {
+        "ok": true,
+        "version": "2.30.2"
+      },
+      "vector": {
+        "ok": true,
+        "version": "0.8.7"
+      }
+    },
+    "redis": {
+      "ok": true
+    },
+    "celery": {
+      "ok": true
+    }
+  }
+}
+```
+
+Executed in the web container after final engine changes:
+
+```powershell
+docker compose exec -T -e HYPOTHESIS_STORAGE_DIRECTORY=/tmp/hypothesis web pytest --ds=enviroinsights.settings.test
+```
+
+```text
+collected 242 items
+242 passed, 149 warnings in 39.09s
+```
+
+Earlier verification briefly paused Ollama, rag-models and rag-reranker and
+unpaused them in a `finally` block. The final full suite ran after provider
+evaluation finished, with normal services running. An earlier targeted test encountered
+Hypothesis's generation-speed health check during concurrent model inference.
+No assertions/health checks were weakened. With `/tmp` Hypothesis storage and
+inference paused, the targeted physics/API rerun reported53 passed in11.56s;
+the complete final suite passed above. The149 warnings remain visible:
+Django60 URL scheme, NumPy generic timedelta and statsmodels convergence.
+The preexisting netCDF4/NumPy ndarray-size warning, SHAP/matplotlib deprecations
+and MLflow type-hint warning are also retained. Each warning class is present
+in the original183-test baseline log; none was suppressed.
+
+Actual final command outputs (all exit0):
+
+```text
+ruff check .
+All checks passed!
+```
+
+```text
+ruff format --check .
+261 files already formatted
+```
+
+```text
+python manage.py check
+System check identified no issues (0 silenced).
+```
+
+```text
+python manage.py check --deploy --settings=enviroinsights.settings.prod
+System check identified no issues (0 silenced).
+```
+
+```text
+python manage.py makemigrations --check --dry-run
+No changes detected
+```
+
+```text
+python manage.py spectacular --validate --fail-on-warn --file /tmp/phase6a-schema.yml
+(no stdout/stderr; exit0)
+```
+
+
+Production deploy check produced no warnings (0silenced); none were suppressed.
+OpenAPI validated with `--fail-on-warn`; migration state has no drift.
+
+Migrations applied earlier in this phase:
+
+```text
+forecast.0002_forecastmodelversion_interval_policy ... OK
+vayusim.0001_initial ... OK
+```
+
+Step0 commands executed:
+
+```powershell
+docker compose exec -T web python manage.py select_forecast_intervals --run 21
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6a-validation/verify_intervals.py
+docker compose exec -T web python manage.py evaluate_rag --provider ollama --output data/results/rag-ollama-phase6a
+```
+
+Interval output:147 model versions,21 city/horizon policies,42 level choices,
+14 with no eligible method;3,885 oldrows retained, allpoint forecasts unchanged,
+19 latest bounds changed. No refit. The0.75/0.90 minimum coverage gates are
+unchanged; failures remain flagged. The policy is post-evaluation selection.
+
+Installed16GiB RAM gave `.wslconfig` memory=9GB. After the clean Docker/WSL
+restart, measured MemAvailable6,909,865,984 bytes exceeded model1,929,912,432
+bytes+3GiB headroom. Actual pulled Qwen2.5:3b-instruct digest is retained in
+`resume-memory-gate.json`. Its provider-only frozen evaluation is separate
+from the original extractive results.
+
+Final provider output:
+
+```json
+{
+  "completed_at": "2026-10-15T15:16:48.629771+00:00",
+  "answers": {
+    "ollama": {
+      "questions": 120,
+      "citations": 2,
+      "citation_accuracy": 1.0,
+      "audited_citation_uses": 2,
+      "correct_citation_uses": 2,
+      "groundedness_before_removal": 0.016666666666666666,
+      "groundedness_emitted": 1.0,
+      "emitted_sentences": 2,
+      "supported_emitted_sentences": 2,
+      "claims": 120,
+      "supported_claims": 2,
+      "removed_claims": 118,
+      "number_correctness": 0.0,
+      "numeric_precision": null,
+      "numeric_cell_exactness": 0.0,
+      "correct_numeric_values": 0,
+      "expected_numeric_values": 669,
+      "extra_numeric_values": 0,
+      "available_data_questions": 30,
+      "missing_data_questions": 0,
+      "available_data_answer_rate": 0.0,
+      "missing_data_refusal_rate": null,
+      "displayed_row_exactness": 0.0,
+      "correct_data_rows": 0,
+      "expected_data_rows": 491,
+      "data_questions_exact": 0.9,
+      "correct_refusal_rate": 1.0,
+      "literature_answer_rate": 0.025,
+      "literature_gold_source_citation_rate": 0.025,
+      "latency_seconds_mean": 80.76179166666667,
+      "generation_fallbacks": 0
+    }
+  },
+  "mlflow_run_id": "a70d7abfbf0149b8a4a1f78b8dad544b"
+}
+```
+
+Frozen question SHA256:
+`f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4`.
+Forecast expectations predate interval updates; their snapshot drift is
+reported separately. Strict aliases/exact-source verification remains unchanged.
+
+Top24 gate on80 frozen literature questions: Recall10 .884375→.903125,
+Recall5 .803125→.809375, MRR .6932707917→.7010148359. The maximum onepoint
+Recall10 drop criterion passes. Cache-assisted means40=5.121477811s,
+24=2.317789466s are not uncached timings. Actual uncached L001 before
+cold/warm40=80.36799/47.59473s; resident after40=246.86437/156.84292s,
+after embedding40=204.19029s, warm24=87.96909s. Different background load
+prevents a causal speed comparison; **no uncached improvement is claimed**.
+
+Actual final engine/data verification command:
+
+```powershell
+docker compose exec -T web python manage.py verify_vayusim
+```
+
+```text
+{"city":"delhi","run_id":62,"peak_ugm3":15.641839027404785}
+{"city":"mumbai","run_id":63,"peak_ugm3":11.536741256713867}
+{"city":"hyderabad","run_id":64,"peak_ugm3":18.990890502929688}
+```
+
+Actual engine-only benchmark (200×200,20 timed repetitions after one warmup,
+NumPy1thread, concurrent local-model evaluation active):
+
+```json
+{
+  "1": {
+    "median_ms": 6.127019500013375,
+    "min_ms": 5.588031000002047,
+    "max_ms": 7.398201000000881,
+    "repeats": 20
+  },
+  "20": {
+    "median_ms": 255.31281100001024,
+    "min_ms": 212.9954299999781,
+    "max_ms": 319.77631299992026,
+    "repeats": 20
+  },
+  "conditions": "200x200 float32 output; NumPy1 thread; other Docker services active; engine only; projection, population and artifacts excluded. Record concurrent CPU jobs separately."
+}
+```
+
+HTTP verification requested detail/shared/binary/header/PNG for allthree final
+runs, returning200 for all15 requests. Each default binary was160000 bytes.
+Delhi2025-01-15 dayPOST returned200,24/24 available hours; the first lazy
+grid-header request returned200 with materialised GeoJSON contours.
+
+Separate scenario evidence checks, invoked with the required project path:
+
+```powershell
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6a-validation/scenario_evaluation.py
+```
+
+```text
+V001 passed=True supported_claims=26/26 stored_values_exact=True
+V002 passed=True supported_claims=26/26 stored_values_exact=True
+V003 passed=True supported_claims=25/25 stored_values_exact=True
+V004 passed=True supported_claims=26/26 stored_values_exact=True
+V005 passed=True supported_claims=26/26 stored_values_exact=True
+```
+
+An additional real default-provider `POST /api/rag/explain/` returned HTTP200
+in405.516s with provider=ollama. Stored ScenarioRun64 tool values matched;
+fake client peak999999 was absent. Strict verification rejected the generated
+text for missing valid evidence aliases, yielding a refusal. No generation
+or retrieval error occurred. Complete response: `default-provider-explain.json`.
+
+These five separate checks use the extractive provider with keyword literature retrieval. They test
+stored-value integration, not independent generative answer quality. The five
+questions are separate from the immutable120-question Phase5 evaluation.
+
+Actual Playwright checks in Microsoft Edge:
+
+```text
+Overview, forecasts, research, library, ask, simulator:
+1440px: all6 HTTP200; horizontal overflow=false; JavaScript errors=[]
+390px: all6 HTTP200; horizontal overflow=false; JavaScript errors=[]
+Interactions:3 forecast cards,7 NCAP cards,no undefined labels,
+AERMOD filter1 document,example question filled,shared Hyderabad peak18.99,
+shared form city=hyderabad,hour=2025-11-15T20:00,Q=1,H=50; errors=[]
+Map: canvas=1, actual model summary and overlay; second identical run cached;
+JavaScript errors=[]
+```
+
+Source/algorithm issues and fixes (including fractional population support,
+original migration test ordering, standalone PYTHONPATH and repeated map-load
+wait) are recorded in PHASE6A. Full logs are retained under
+`.tools/phase6a-validation/`; structured proofs under
+`data/results/vayusim/verification/`. Final hashes in the results manifest
+identify retained artifacts; raw primary-source manifests retain URL/bytes/SHA256.

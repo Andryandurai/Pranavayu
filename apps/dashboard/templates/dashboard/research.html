@@ -1,0 +1,9 @@
+{% extends "dashboard/base.html" %}{% load static %}
+{% block title %}Research · EnviroInsights{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">LOOKING BEYOND THE WEATHER</p><h1>What has changed?</h1><p>Compare observed periods with a consistent station panel and shared reference weather. Every result keeps its readiness and data limitations.</p></div><span class="badge">Descriptive evidence</span></div>
+<section class="notice"><h3>Interpretation matters</h3><p>These comparisons do not identify a causal policy effect. The observation gap, changes in monitoring networks and weather-normalisation uncertainty limit interpretation. The NCAP view is a PM2.5 proxy; official fiscal-year PM10 compliance is not assessed.</p></section>
+<div class="toolbar section"><div><label for="research-kind">Comparison</label><select id="research-kind"><option value="comparisons">Old / recent observed periods</option><option value="ncap">NCAP PM2.5 proxy</option></select></div><div><label for="research-cohort">Station network</label><select id="research-cohort"><option value="fixed_panel">Fixed station panel</option><option value="all_stations">All stations · descriptive</option></select></div><p id="research-status" class="loading" role="status">Loading research results…</p></div>
+<div id="research-results" class="library-grid" aria-live="polite"></div>
+<script src="{% static 'dashboard/research.js' %}" defer></script>
+{% endblock %}

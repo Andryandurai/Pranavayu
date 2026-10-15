@@ -1,0 +1,2950 @@
+{
+  "verified_at": "2026-10-15T15:24:08.885196+00:00",
+  "workspace": "D:\\EnviroInsights-India",
+  "baseline_commit": "b5fa5bf37b4d16230bee8ef5fa389c73538725dc",
+  "tests": {
+    "passed": 242,
+    "warnings": 149,
+    "seconds": 39.09
+  },
+  "checks": [
+    {
+      "command": "ruff check .",
+      "exit_code": 0,
+      "output": "All checks passed!\n"
+    },
+    {
+      "command": "ruff format --check .",
+      "exit_code": 0,
+      "output": "261 files already formatted\n"
+    },
+    {
+      "command": "python manage.py check",
+      "exit_code": 0,
+      "output": "System check identified no issues (0 silenced).\n"
+    },
+    {
+      "command": "python manage.py check --deploy --settings=enviroinsights.settings.prod",
+      "exit_code": 0,
+      "output": "System check identified no issues (0 silenced).\n"
+    },
+    {
+      "command": "python manage.py makemigrations --check --dry-run",
+      "exit_code": 0,
+      "output": "No changes detected\n"
+    },
+    {
+      "command": "python manage.py spectacular --validate --fail-on-warn --file /tmp/phase6a-schema.yml",
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "integrity": {
+    "original_files_checked": 41,
+    "original_files_changed": [],
+    "phase5_result_files_checked": 32,
+    "phase5_result_files_changed": [],
+    "frozen_question_file": "data/eval/rag_eval.jsonl",
+    "frozen_question_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "matches_freeze": true
+  },
+  "point_preservation": {
+    "original_rows": 3885,
+    "retained_rows": 3885,
+    "changed_point_ids": [],
+    "current_total_forecasts": 3948
+  },
+  "interval_selection": {
+    "before_rows": 3885,
+    "after_rows": 3885,
+    "point_forecasts_unchanged": true,
+    "bounds_changed_rows": [
+      3928,
+      3929,
+      3930,
+      3931,
+      3932,
+      3933,
+      3934,
+      3935,
+      3936,
+      3938,
+      3939,
+      3940,
+      3941,
+      3942,
+      3943,
+      3944,
+      3945,
+      3947,
+      3948
+    ],
+    "coverage_gate_failures": [
+      {
+        "city": "bengaluru",
+        "horizon": 1,
+        "nominal": "80"
+      },
+      {
+        "city": "bengaluru",
+        "horizon": 1,
+        "nominal": "95"
+      },
+      {
+        "city": "bengaluru",
+        "horizon": 2,
+        "nominal": "80"
+      },
+      {
+        "city": "bengaluru",
+        "horizon": 2,
+        "nominal": "95"
+      },
+      {
+        "city": "bengaluru",
+        "horizon": 3,
+        "nominal": "80"
+      },
+      {
+        "city": "bengaluru",
+        "horizon": 3,
+        "nominal": "95"
+      },
+      {
+        "city": "chennai",
+        "horizon": 1,
+        "nominal": "80"
+      },
+      {
+        "city": "chennai",
+        "horizon": 2,
+        "nominal": "80"
+      },
+      {
+        "city": "chennai",
+        "horizon": 3,
+        "nominal": "80"
+      },
+      {
+        "city": "pune",
+        "horizon": 1,
+        "nominal": "80"
+      },
+      {
+        "city": "pune",
+        "horizon": 1,
+        "nominal": "95"
+      },
+      {
+        "city": "pune",
+        "horizon": 2,
+        "nominal": "80"
+      },
+      {
+        "city": "pune",
+        "horizon": 2,
+        "nominal": "95"
+      },
+      {
+        "city": "pune",
+        "horizon": 3,
+        "nominal": "80"
+      }
+    ]
+  },
+  "model_memory_gate": {
+    "memory": {
+      "MemTotal": 9373011968,
+      "MemAvailable": 6909865984
+    },
+    "model": {
+      "name": "qwen2.5:3b-instruct",
+      "model": "qwen2.5:3b-instruct",
+      "modified_at": "2026-10-14T17:30:36.3698982Z",
+      "size": 1929912432,
+      "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen2",
+        "families": [
+          "qwen2"
+        ],
+        "parameter_size": "3.1B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 32768,
+        "embedding_length": 2048,
+        "runner": "ggml"
+      },
+      "capabilities": [
+        "completion",
+        "tools"
+      ]
+    },
+    "headroom_bytes": 3221225472,
+    "gate": true
+  },
+  "host_environment": {
+    "captured_at": "2026-10-15T14:21:51.8140174Z",
+    "workspace": "D:\\EnviroInsights-India",
+    "cpu": {
+      "Name": "13th Gen Intel(R) Core(TM) i5-13420H",
+      "NumberOfCores": 8,
+      "NumberOfLogicalProcessors": 12
+    },
+    "os": {
+      "Caption": "Microsoft Windows 11 Home Single Language",
+      "Version": "10.0.26200"
+    },
+    "installed_memory_bytes": 17179869184,
+    "powershell": "5.1.26100.9711"
+  },
+  "warm_model_memory_gate": {
+    "captured_at": "2026-10-15T15:17:54.156264+00:00",
+    "memory": {
+      "MemTotal": 9373011968,
+      "MemAvailable": 5394948096,
+      "SwapTotal": 3221225472,
+      "SwapFree": 3165556736
+    },
+    "model_size_bytes": 1929912432,
+    "required_headroom_bytes": 3221225472,
+    "gate": true,
+    "conditions": "Inference complete, Qwen unloaded by keep_alive=0; reranker remains resident; normal Compose services running"
+  },
+  "rerank_gate": {
+    "evaluation_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "original_40_recall_at_10": 0.884375,
+    "metrics": {
+      "rerank_40": {
+        "recall_at_5": 0.803125,
+        "recall_at_10": 0.884375,
+        "hit_at_5": 0.825,
+        "hit_at_10": 0.9,
+        "mrr": 0.6932707917082916,
+        "seconds": 5.121477811050002,
+        "questions": 80
+      },
+      "rerank_24": {
+        "recall_at_5": 0.809375,
+        "recall_at_10": 0.903125,
+        "hit_at_5": 0.8375,
+        "hit_at_10": 0.9125,
+        "mrr": 0.7010148358585859,
+        "seconds": 2.317789466399995,
+        "questions": 80
+      }
+    },
+    "drop_from_original": -0.018749999999999933,
+    "gate_max_drop": 0.01,
+    "accepted": true,
+    "selected_candidates": 24,
+    "timing_note": "Measured cache-assisted retrieval; timing includes cache I/O, not a cold-inference benchmark"
+  },
+  "reranker_after": {
+    "question_id": "L001",
+    "chunk_ids": [
+      45552,
+      45553,
+      45570,
+      39792,
+      39796,
+      43520,
+      43893,
+      50876,
+      51250,
+      45554,
+      51158,
+      43958,
+      51152,
+      43861,
+      51126,
+      43913,
+      50947,
+      51399,
+      43951,
+      50842,
+      43544,
+      44023,
+      50463,
+      50948,
+      51205,
+      43533,
+      45585,
+      46012,
+      50464,
+      51265,
+      51683,
+      45567,
+      48206,
+      43519,
+      43974,
+      44792,
+      46021,
+      50923,
+      51170,
+      47471
+    ],
+    "resident_worker": true,
+    "stages": {
+      "cold40": {
+        "seconds": 246.864371333,
+        "server_seconds": 246.68083583499993,
+        "max_score_difference": 0.0,
+        "model_service": {
+          "ok": true,
+          "loaded": null,
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
+        }
+      },
+      "warm40": {
+        "seconds": 156.84292391400004,
+        "server_seconds": 156.59322999900007,
+        "max_score_difference": 0.0,
+        "model_service": {
+          "ok": true,
+          "loaded": null,
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
+        }
+      },
+      "embedding": {
+        "seconds": 224.398664682,
+        "server_seconds": 224.32234221599992,
+        "max_score_difference": null,
+        "model_service": {
+          "ok": true,
+          "loaded": null,
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
+        }
+      },
+      "after_embedding40": {
+        "seconds": 204.190291935,
+        "server_seconds": 204.14603838599987,
+        "max_score_difference": 0.0,
+        "model_service": {
+          "ok": true,
+          "loaded": null,
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
+        }
+      },
+      "warm24": {
+        "seconds": 87.96908802899998,
+        "server_seconds": 87.89074336299996,
+        "max_score_difference": 4.284083843231201e-08,
+        "model_service": {
+          "ok": true,
+          "loaded": null,
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e"
+        }
+      }
+    }
+  },
+  "physics": {
+    "engine_version": "gaussian-briggs-1.1.0",
+    "gaussian_examples": [
+      {
+        "example": "Turner Table7-4 z=0m",
+        "reference_ugm3": 278.0,
+        "actual_ugm3": 274.59242587296325,
+        "absolute_error_percent": 1.2257460888621452
+      },
+      {
+        "example": "Turner Table7-4 z=30m",
+        "reference_ugm3": 285.0,
+        "actual_ugm3": 283.0759483866468,
+        "absolute_error_percent": 0.675105829246736
+      },
+      {
+        "example": "Turner Table7-4 z=150m",
+        "reference_ugm3": 358.0,
+        "actual_ugm3": 356.3314215728553,
+        "absolute_error_percent": 0.4660833595376279
+      },
+      {
+        "example": "Cimbala Lesson06E PDF p3",
+        "reference_ugm3": 149300.0,
+        "actual_ugm3": 149314.35144810504,
+        "absolute_error_percent": 0.009612490358357206
+      }
+    ],
+    "briggs_formula_arithmetic": [
+      {
+        "environment": "rural",
+        "stability": "A",
+        "reference_m": [
+          209.762,
+          200.0
+        ],
+        "actual_m": [
+          209.7617696340303,
+          200.0
+        ],
+        "absolute_error_percent": [
+          0.00010982254636804356,
+          0.0
+        ]
+      },
+      {
+        "environment": "rural",
+        "stability": "B",
+        "reference_m": [
+          152.554,
+          120.0
+        ],
+        "actual_m": [
+          152.55401427929476,
+          120.0
+        ],
+        "absolute_error_percent": [
+          9.36015756014541e-06,
+          0.0
+        ]
+      },
+      {
+        "environment": "rural",
+        "stability": "D",
+        "reference_m": [
+          76.277,
+          37.947
+        ],
+        "actual_m": [
+          76.27700713964738,
+          37.94733192202055
+        ],
+        "absolute_error_percent": [
+          9.36015756014541e-06,
+          0.0008746989763386281
+        ]
+      },
+      {
+        "environment": "rural",
+        "stability": "F",
+        "reference_m": [
+          38.139,
+          12.308
+        ],
+        "actual_m": [
+          38.13850356982369,
+          12.307692307692307
+        ],
+        "absolute_error_percent": [
+          0.0013016339608040717,
+          0.002499937501565519
+        ]
+      },
+      {
+        "environment": "urban",
+        "stability": "A",
+        "reference_m": [
+          270.449,
+          339.411
+        ],
+        "actual_m": [
+          270.4493615131253,
+          339.4112549695428
+        ],
+        "absolute_error_percent": [
+          0.00013367145943465886,
+          7.512117841113053e-05
+        ]
+      },
+      {
+        "environment": "urban",
+        "stability": "D",
+        "reference_m": [
+          135.225,
+          122.788
+        ],
+        "actual_m": [
+          135.22468075656266,
+          122.78812270298408
+        ],
+        "absolute_error_percent": [
+          0.0002360831483305681,
+          9.993076204306561e-05
+        ]
+      },
+      {
+        "environment": "urban",
+        "stability": "F",
+        "reference_m": [
+          92.967,
+          50.596
+        ],
+        "actual_m": [
+          92.96696802013683,
+          50.59644256269407
+        ],
+        "absolute_error_percent": [
+          3.4399155790509894e-05,
+          0.0008746989763608326
+        ]
+      }
+    ]
+  },
+  "benchmarks": {
+    "1": {
+      "median_ms": 6.127019500013375,
+      "min_ms": 5.588031000002047,
+      "max_ms": 7.398201000000881,
+      "repeats": 20
+    },
+    "20": {
+      "median_ms": 255.31281100001024,
+      "min_ms": 212.9954299999781,
+      "max_ms": 319.77631299992026,
+      "repeats": 20
+    },
+    "conditions": "200x200 float32 output; NumPy1 thread; other Docker services active; engine only; projection, population and artifacts excluded. Record concurrent CPU jobs separately."
+  },
+  "real_examples": [
+    {
+      "run_id": 62,
+      "engine_version": "gaussian-briggs-1.1.0",
+      "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+      "stability_class": "C",
+      "summary": {
+        "label": "modelled increment from these sources only",
+        "unit": "µg/m³",
+        "peak_ugm3": 15.641839027404785,
+        "peak_location": [
+          77.20740208961043,
+          28.614645613799624
+        ],
+        "distance_to_peak_m": 176.77669529663723,
+        "distance_definition": "Nearest discretised source to peak receptor",
+        "area_above_km2": {
+          "1.0": 0.43,
+          "5.0": 0.07,
+          "15.0": 0.01,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "exposure": {
+          "available": true,
+          "label": "hourly added exposure; WorldPop 2025 modelled population",
+          "population_support_fraction": 0.913056536128173,
+          "population_support_scope": "Mean fraction of cell area with population data",
+          "partially_supported_cells": 1041,
+          "supported_population": 2184007.044221276,
+          "population_above": {
+            "1.0": 11787.140769547765,
+            "5.0": 1155.6531529877152,
+            "15.0": 114.68803561663515,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "population_weighted_mean_added_ugm3": 0.025989982134662266,
+          "missing_population_cells": 2949,
+          "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+        },
+        "weather": {
+          "wind_speed_ms": 3.26,
+          "wind_direction_deg": 126.0,
+          "temperature_k": 285.65,
+          "solar_radiation_wm2": 501.0,
+          "cloud_fraction": 0.71,
+          "daytime": true,
+          "mixing_height_m": 815.0,
+          "stability_class": "C"
+        },
+        "weather_provenance": {
+          "mode": "real",
+          "observation_id": "b4e0d1b2-5889-5daf-8dfb-e4e832111d96",
+          "observed_at_utc": "2025-01-15T07:00:00+00:00",
+          "ist_hour_start": "2025-01-15T12:00:00+05:30",
+          "source": "openmeteo",
+          "label": "City weather grid point; uniform over the scenario",
+          "mixing_height": {
+            "observed": true,
+            "value_m": 815.0,
+            "label": "Warehouse observation"
+          }
+        },
+        "population_provenance": {
+          "asset_id": 1137,
+          "year": 2025,
+          "sha256": "f5717c622d79052d4aacf0f67365165575855ba8059375b5d87ea655ed26fa53",
+          "url": "ftp://ftp.worldpop.org/GIS/Population/Global_2015_2030/R2025A/2025/IND/v1/100m/constrained/ind_pop_2025_CN_100m_R2025A_v1.tif",
+          "rationale": "2025 population estimate nearest the recent observation period; not a census or an exposure calculation."
+        },
+        "source_assumptions": [
+          {
+            "type": "point",
+            "location": [
+              77.209,
+              28.6139
+            ],
+            "emission_gs": 1.0,
+            "height_m": 50.0,
+            "diameter_m": 0.0,
+            "exit_velocity_ms": 0.0,
+            "exit_temperature_k": 293.15,
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "background": {
+          "label": "measured total (all sources)",
+          "unit": "µg/m³",
+          "ist_hour": "2025-01-15T12:00:00+05:30",
+          "stations": [
+            {
+              "station_id": 100,
+              "name": "Major Dhyan Chand National Stadium, Delhi - DPCC",
+              "location": [
+                77.237738,
+                28.611281
+              ],
+              "distance_km": 2.8255252508328472,
+              "value_ugm3": 257.0,
+              "samples": 1
+            },
+            {
+              "station_id": 97,
+              "name": "Lodhi Road, Delhi - IITM",
+              "location": [
+                77.2273074,
+                28.5918245
+              ],
+              "distance_km": 3.031873409713483,
+              "value_ugm3": 207.425,
+              "samples": 1
+            },
+            {
+              "station_id": 201,
+              "name": "Lodhi Road, Delhi - IMD",
+              "location": [
+                77.2273074,
+                28.5918245
+              ],
+              "distance_km": 3.031873409713483,
+              "value_ugm3": 169.5725,
+              "samples": 1
+            },
+            {
+              "station_id": 93,
+              "name": "ITO, Delhi - CPCB",
+              "location": [
+                77.24106,
+                28.628624
+              ],
+              "distance_km": 3.53447220980102,
+              "value_ugm3": 225.25,
+              "samples": 1
+            },
+            {
+              "station_id": 124,
+              "name": "Jawaharlal Nehru Stadium, Delhi - DPCC",
+              "location": [
+                77.233829,
+                28.58028
+              ],
+              "distance_km": 4.447684634258814,
+              "value_ugm3": 190.0,
+              "samples": 1
+            },
+            {
+              "station_id": 86,
+              "name": "Chandni Chowk, Delhi - IITM",
+              "location": [
+                77.227234,
+                28.656756
+              ],
+              "distance_km": 5.073320714978487,
+              "value_ugm3": 213.55,
+              "samples": 1
+            },
+            {
+              "station_id": 128,
+              "name": "R K Puram, Delhi - DPCC",
+              "location": [
+                77.186937,
+                28.563262
+              ],
+              "distance_km": 6.012851505929943,
+              "value_ugm3": 249.0,
+              "samples": 1
+            },
+            {
+              "station_id": 84,
+              "name": "Nehru Nagar, Delhi - DPCC",
+              "location": [
+                77.250515,
+                28.56789
+              ],
+              "distance_km": 6.5187439915027525,
+              "value_ugm3": 224.0,
+              "samples": 1
+            },
+            {
+              "station_id": 81,
+              "name": "Pusa, Delhi - IMD",
+              "location": [
+                77.146275,
+                28.639652
+              ],
+              "distance_km": 6.765193290456178,
+              "value_ugm3": 198.6275,
+              "samples": 1
+            },
+            {
+              "station_id": 202,
+              "name": "Pusa, Delhi - DPCC",
+              "location": [
+                77.146275,
+                28.639652
+              ],
+              "distance_km": 6.765193290456178,
+              "value_ugm3": 199.0,
+              "samples": 1
+            },
+            {
+              "station_id": 99,
+              "name": "North Campus, DU, Delhi - IMD",
+              "location": [
+                77.1585447,
+                28.6573814
+              ],
+              "distance_km": 6.896522565562356,
+              "value_ugm3": 287.59749999999997,
+              "samples": 1
+            },
+            {
+              "station_id": 130,
+              "name": "Sirifort, Delhi - CPCB",
+              "location": [
+                77.2159377,
+                28.5504249
+              ],
+              "distance_km": 7.06753938350818,
+              "value_ugm3": 264.1325,
+              "samples": 1
+            },
+            {
+              "station_id": 91,
+              "name": "Patparganj, Delhi - DPCC",
+              "location": [
+                77.287209,
+                28.623763
+              ],
+              "distance_km": 7.726107543359672,
+              "value_ugm3": 251.0,
+              "samples": 1
+            },
+            {
+              "station_id": 129,
+              "name": "Sri Aurobindo Marg, Delhi - DPCC",
+              "location": [
+                77.190156,
+                28.531346
+              ],
+              "distance_km": 9.333259412243121,
+              "value_ugm3": 147.75,
+              "samples": 1
+            },
+            {
+              "station_id": 107,
+              "name": "CRRI Mathura Road, Delhi - IMD",
+              "location": [
+                77.2735737,
+                28.5512005
+              ],
+              "distance_km": 9.391126065947825,
+              "value_ugm3": 168.0925,
+              "samples": 1
+            },
+            {
+              "station_id": 89,
+              "name": "Ashok Vihar, Delhi - DPCC",
+              "location": [
+                77.181665,
+                28.695381
+              ],
+              "distance_km": 9.417639920879319,
+              "value_ugm3": 320.0,
+              "samples": 1
+            },
+            {
+              "station_id": 92,
+              "name": "Punjabi Bagh, Delhi - DPCC",
+              "location": [
+                77.131023,
+                28.674045
+              ],
+              "distance_km": 10.127059865954392,
+              "value_ugm3": 348.0,
+              "samples": 1
+            },
+            {
+              "station_id": 87,
+              "name": "Wazirpur, Delhi - DPCC",
+              "location": [
+                77.165453,
+                28.699793
+              ],
+              "distance_km": 10.428061648172363,
+              "value_ugm3": 405.0,
+              "samples": 1
+            },
+            {
+              "station_id": 133,
+              "name": "IGI Airport (T3), Delhi - IMD",
+              "location": [
+                77.1180053,
+                28.5627763
+              ],
+              "distance_km": 10.551635641361715,
+              "value_ugm3": 209.8225,
+              "samples": 1
+            },
+            {
+              "station_id": 90,
+              "name": "Okhla Phase-2, Delhi - DPCC",
+              "location": [
+                77.271255,
+                28.530785
+              ],
+              "distance_km": 11.043135952467686,
+              "value_ugm3": 221.0,
+              "samples": 1
+            },
+            {
+              "station_id": 123,
+              "name": "Sonia Vihar, Delhi - DPCC",
+              "location": [
+                77.249485,
+                28.710508
+              ],
+              "distance_km": 11.415079275483766,
+              "value_ugm3": 295.0,
+              "samples": 1
+            },
+            {
+              "station_id": 83,
+              "name": "IHBAS, Dilshad Garden, Delhi - CPCB",
+              "location": [
+                77.3025234,
+                28.6811736
+              ],
+              "distance_km": 11.79811750825763,
+              "value_ugm3": 152.175,
+              "samples": 1
+            },
+            {
+              "station_id": 78,
+              "name": "Vivek Vihar, Delhi - DPCC",
+              "location": [
+                77.31526,
+                28.672342
+              ],
+              "distance_km": 12.242916640725564,
+              "value_ugm3": 342.25,
+              "samples": 1
+            },
+            {
+              "station_id": 98,
+              "name": "Burari Crossing, Delhi - IMD",
+              "location": [
+                77.2011573,
+                28.7256504
+              ],
+              "distance_km": 12.409036395438072,
+              "value_ugm3": 399.12,
+              "samples": 1
+            },
+            {
+              "station_id": 88,
+              "name": "Jahangirpuri, Delhi - DPCC",
+              "location": [
+                77.170633,
+                28.73282
+              ],
+              "distance_km": 13.703086152416418,
+              "value_ugm3": 643.0,
+              "samples": 1
+            },
+            {
+              "station_id": 82,
+              "name": "Dwarka-Sector 8, Delhi - DPCC ",
+              "location": [
+                77.0719006,
+                28.5710274
+              ],
+              "distance_km": 14.227741992316325,
+              "value_ugm3": 290.0,
+              "samples": 1
+            },
+            {
+              "station_id": 80,
+              "name": "Mundka, Delhi - DPCC",
+              "location": [
+                77.076574,
+                28.684678
+              ],
+              "distance_km": 15.13776620862511,
+              "value_ugm3": 459.0,
+              "samples": 1
+            },
+            {
+              "station_id": 134,
+              "name": "Rohini, Delhi - DPCC",
+              "location": [
+                77.11992,
+                28.732528
+              ],
+              "distance_km": 15.769310721705654,
+              "value_ugm3": 376.0,
+              "samples": 1
+            },
+            {
+              "station_id": 135,
+              "name": "NSIT Dwarka, Delhi - CPCB",
+              "location": [
+                77.0325413,
+                28.60909
+              ],
+              "distance_km": 17.26607111518095,
+              "value_ugm3": 183.45,
+              "samples": 1
+            },
+            {
+              "station_id": 79,
+              "name": "DTU, Delhi - CPCB",
+              "location": [
+                77.1112615,
+                28.7500499
+              ],
+              "distance_km": 17.859056333927636,
+              "value_ugm3": 258.7625,
+              "samples": 1
+            },
+            {
+              "station_id": 101,
+              "name": "Aya Nagar, Delhi - IMD",
+              "location": [
+                77.1099364,
+                28.4706914
+              ],
+              "distance_km": 18.598297489390518,
+              "value_ugm3": 163.975,
+              "samples": 1
+            },
+            {
+              "station_id": 103,
+              "name": "Alipur, Delhi - DPCC",
+              "location": [
+                77.15301,
+                28.815329
+              ],
+              "distance_km": 22.98508120961251,
+              "value_ugm3": 190.0,
+              "samples": 1
+            },
+            {
+              "station_id": 77,
+              "name": "Bawana, Delhi - DPCC",
+              "location": [
+                77.051074,
+                28.7762
+              ],
+              "distance_km": 23.70109341552434,
+              "value_ugm3": 349.5,
+              "samples": 1
+            }
+          ],
+          "note": "Independent context only; never added to the modelled increment"
+        },
+        "limitations": [
+          "Primary PM2.5 only; no secondary formation, chemistry or deposition",
+          "Flat terrain; no building downwash beyond stack-tip adjustment",
+          "Steady state within the hour; uniform city-grid meteorology",
+          "Educational estimate, not a regulatory assessment; use AERMOD for regulatory modelling",
+          "Hourly added exposure; not24-hour/annual exposure or actual CPCB AQI"
+        ],
+        "grid": {
+          "shape": [
+            200,
+            200
+          ],
+          "dtype": "float32",
+          "byte_order": "little",
+          "affine": [
+            -40.45084971874738,
+            29.389262614623647,
+            1106.1587104123732,
+            29.389262614623647,
+            40.45084971874738,
+            -6984.011233337102
+          ],
+          "crs": "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6326]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Azimuthal Equidistant\",ID[\"EPSG\",1125]],PARAMETER[\"Latitude of natural origin\",28.6139,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",77.209,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+          "corners": [
+            [
+              77.220303813045,
+              28.55088337664453
+            ],
+            [
+              77.13759471993033,
+              28.60390045787398
+            ],
+            [
+              77.19768268450865,
+              28.676915093711347
+            ],
+            [
+              77.28041878249086,
+              28.623861913571222
+            ]
+          ],
+          "receptor_height_m": 1.5,
+          "png_label": "CPCB category colours for visualisation only; hourly increment is not AQI"
+        },
+        "thresholds": [
+          1.0,
+          5.0,
+          15.0,
+          60.0,
+          120.0
+        ]
+      }
+    },
+    {
+      "run_id": 63,
+      "engine_version": "gaussian-briggs-1.1.0",
+      "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+      "stability_class": "C",
+      "summary": {
+        "label": "modelled increment from these sources only",
+        "unit": "µg/m³",
+        "peak_ugm3": 11.536741256713867,
+        "peak_location": [
+          72.87875409948171,
+          19.07724337796765
+        ],
+        "distance_to_peak_m": 176.77669529663748,
+        "distance_definition": "Nearest discretised source to peak receptor",
+        "area_above_km2": {
+          "1.0": 0.325,
+          "5.0": 0.035,
+          "15.0": 0.0,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "exposure": {
+          "available": true,
+          "label": "hourly added exposure; WorldPop 2025 modelled population",
+          "population_support_fraction": 0.9390462437130813,
+          "population_support_scope": "Mean fraction of cell area with population data",
+          "partially_supported_cells": 692,
+          "supported_population": 1294658.3942227834,
+          "population_above": {
+            "1.0": 5906.777275622714,
+            "5.0": 643.0847214835771,
+            "15.0": 0.0,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "population_weighted_mean_added_ugm3": 0.029133751121464574,
+          "missing_population_cells": 2095,
+          "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+        },
+        "weather": {
+          "wind_speed_ms": 4.42,
+          "wind_direction_deg": 227.0,
+          "temperature_k": 300.65,
+          "solar_radiation_wm2": 296.0,
+          "cloud_fraction": 1.0,
+          "daytime": true,
+          "mixing_height_m": 460.0,
+          "stability_class": "C"
+        },
+        "weather_provenance": {
+          "mode": "real",
+          "observation_id": "5ef24c0d-be1a-5cac-93a1-6632af1fd1f2",
+          "observed_at_utc": "2025-07-15T10:00:00+00:00",
+          "ist_hour_start": "2025-07-15T15:00:00+05:30",
+          "source": "openmeteo",
+          "label": "City weather grid point; uniform over the scenario",
+          "mixing_height": {
+            "observed": true,
+            "value_m": 460.0,
+            "label": "Warehouse observation"
+          }
+        },
+        "population_provenance": {
+          "asset_id": 1137,
+          "year": 2025,
+          "sha256": "f5717c622d79052d4aacf0f67365165575855ba8059375b5d87ea655ed26fa53",
+          "url": "ftp://ftp.worldpop.org/GIS/Population/Global_2015_2030/R2025A/2025/IND/v1/100m/constrained/ind_pop_2025_CN_100m_R2025A_v1.tif",
+          "rationale": "2025 population estimate nearest the recent observation period; not a census or an exposure calculation."
+        },
+        "source_assumptions": [
+          {
+            "type": "point",
+            "location": [
+              72.8777,
+              19.076
+            ],
+            "emission_gs": 1.0,
+            "height_m": 50.0,
+            "diameter_m": 0.0,
+            "exit_velocity_ms": 0.0,
+            "exit_temperature_k": 293.15,
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "background": {
+          "label": "measured total (all sources)",
+          "unit": "µg/m³",
+          "ist_hour": "2025-07-15T15:00:00+05:30",
+          "stations": [
+            {
+              "station_id": 189,
+              "name": "Kurla, Mumbai - MPCB",
+              "location": [
+                72.8888,
+                19.0863
+              ],
+              "distance_km": 1.6323433770921703,
+              "value_ugm3": 37.5725,
+              "samples": 1
+            },
+            {
+              "station_id": 172,
+              "name": "Chhatrapati Shivaji Intl. Airport (T2), Mumbai - MPCB",
+              "location": [
+                72.87462,
+                19.10078
+              ],
+              "distance_km": 2.7620598617435532,
+              "value_ugm3": 21.8,
+              "samples": 1
+            },
+            {
+              "station_id": 174,
+              "name": "Sion, Mumbai - MPCB",
+              "location": [
+                72.8746,
+                19.047
+              ],
+              "distance_km": 3.226631165896133,
+              "value_ugm3": 25.6325,
+              "samples": 1
+            },
+            {
+              "station_id": 186,
+              "name": "Kherwadi_Bandra East, Mumbai - MPCB",
+              "location": [
+                72.8456324,
+                19.0632143
+              ],
+              "distance_km": 3.659786231261417,
+              "value_ugm3": 15.265,
+              "samples": 1
+            },
+            {
+              "station_id": 187,
+              "name": "Bandra Kurla Complex, Mumbai - IITM",
+              "location": [
+                72.84643,
+                19.053536
+              ],
+              "distance_km": 4.124952245878587,
+              "value_ugm3": 70.38499999999999,
+              "samples": 1
+            },
+            {
+              "station_id": 177,
+              "name": "Chakala-Andheri East, Mumbai - IITM",
+              "location": [
+                72.86084,
+                19.11074
+              ],
+              "distance_km": 4.235046834947357,
+              "value_ugm3": 13.505,
+              "samples": 1
+            },
+            {
+              "station_id": 183,
+              "name": "Ghatkopar, Mumbai - BMC",
+              "location": [
+                72.920967,
+                19.083694
+              ],
+              "distance_km": 4.632454486936892,
+              "value_ugm3": 3.4575,
+              "samples": 1
+            },
+            {
+              "station_id": 170,
+              "name": "Chembur, Mumbai - MPCB",
+              "location": [
+                72.8954371,
+                19.0364585
+              ],
+              "distance_km": 4.7584917000307305,
+              "value_ugm3": 19.6775,
+              "samples": 1
+            },
+            {
+              "station_id": 175,
+              "name": "Shivaji Nagar, Mumbai - BMC",
+              "location": [
+                72.923356,
+                19.060498
+              ],
+              "distance_km": 5.102444237241403,
+              "value_ugm3": 21.645,
+              "samples": 1
+            },
+            {
+              "station_id": 168,
+              "name": "Deonar, Mumbai - IITM",
+              "location": [
+                72.923,
+                19.04946
+              ],
+              "distance_km": 5.600341552582218,
+              "value_ugm3": 2.515,
+              "samples": 1
+            },
+            {
+              "station_id": 188,
+              "name": "Vile Parle West, Mumbai - MPCB",
+              "location": [
+                72.83622,
+                19.10861
+              ],
+              "distance_km": 5.664278570150784,
+              "value_ugm3": 10.2725,
+              "samples": 1
+            },
+            {
+              "station_id": 178,
+              "name": "Powai, Mumbai - MPCB",
+              "location": [
+                72.915056,
+                19.1375
+              ],
+              "distance_km": 7.860976544477802,
+              "value_ugm3": 16.2,
+              "samples": 1
+            },
+            {
+              "station_id": 181,
+              "name": "Worli, Mumbai - MPCB",
+              "location": [
+                72.813993,
+                19.000083
+              ],
+              "distance_km": 10.751394920743415,
+              "value_ugm3": 37.01,
+              "samples": 1
+            },
+            {
+              "station_id": 182,
+              "name": "Siddharth Nagar-Worli, Mumbai - IITM",
+              "location": [
+                72.813993,
+                19.000083
+              ],
+              "distance_km": 10.751394920743415,
+              "value_ugm3": 19.39,
+              "samples": 1
+            },
+            {
+              "station_id": 165,
+              "name": "Byculla, Mumbai - BMC",
+              "location": [
+                72.838,
+                18.9767
+              ],
+              "distance_km": 11.759520360260073,
+              "value_ugm3": 8.477500000000001,
+              "samples": 1
+            },
+            {
+              "station_id": 173,
+              "name": "Mazgaon, Mumbai - IITM",
+              "location": [
+                72.84214,
+                18.96702
+              ],
+              "distance_km": 12.63080757988336,
+              "value_ugm3": 15.045,
+              "samples": 1
+            },
+            {
+              "station_id": 185,
+              "name": "Mulund West, Mumbai - MPCB",
+              "location": [
+                72.9419,
+                19.175
+              ],
+              "distance_km": 12.873141491172277,
+              "value_ugm3": 19.125,
+              "samples": 1
+            },
+            {
+              "station_id": 164,
+              "name": "Mindspace-Malad West, Mumbai - MPCB",
+              "location": [
+                72.8304069,
+                19.1878657
+              ],
+              "distance_km": 13.345087600631778,
+              "value_ugm3": 9.032499999999999,
+              "samples": 1
+            },
+            {
+              "station_id": 163,
+              "name": "Kandivali East, Mumbai - MPCB",
+              "location": [
+                72.8682,
+                19.2058
+              ],
+              "distance_km": 14.402767802950912,
+              "value_ugm3": 24.865000000000002,
+              "samples": 1
+            },
+            {
+              "station_id": 167,
+              "name": "Vasai West, Mumbai - MPCB",
+              "location": [
+                72.82204,
+                19.19709
+              ],
+              "distance_km": 14.627181146404613,
+              "value_ugm3": 18.825,
+              "samples": 1
+            },
+            {
+              "station_id": 204,
+              "name": "Malad West, Mumbai - IITM",
+              "location": [
+                72.82204,
+                19.19709
+              ],
+              "distance_km": 14.627181146404613,
+              "value_ugm3": 17.3925,
+              "samples": 1
+            },
+            {
+              "station_id": 180,
+              "name": "Kandivali West, Mumbai - BMC",
+              "location": [
+                72.831718,
+                19.215859
+              ],
+              "distance_km": 16.219653045341474,
+              "value_ugm3": 13.7075,
+              "samples": 1
+            },
+            {
+              "station_id": 184,
+              "name": "Borivali East, Mumbai - MPCB",
+              "location": [
+                72.86895,
+                19.23241
+              ],
+              "distance_km": 17.338086029690324,
+              "value_ugm3": 13.295,
+              "samples": 1
+            },
+            {
+              "station_id": 179,
+              "name": "Colaba, Mumbai - MPCB",
+              "location": [
+                72.82,
+                18.91
+              ],
+              "distance_km": 19.35326222707537,
+              "value_ugm3": 17.145,
+              "samples": 1
+            },
+            {
+              "station_id": 166,
+              "name": "Navy Nagar-Colaba, Mumbai - IITM",
+              "location": [
+                72.81332,
+                18.897756
+              ],
+              "distance_km": 20.862346686066296,
+              "value_ugm3": 16.6025,
+              "samples": 1
+            }
+          ],
+          "note": "Independent context only; never added to the modelled increment"
+        },
+        "limitations": [
+          "Primary PM2.5 only; no secondary formation, chemistry or deposition",
+          "Flat terrain; no building downwash beyond stack-tip adjustment",
+          "Steady state within the hour; uniform city-grid meteorology",
+          "Educational estimate, not a regulatory assessment; use AERMOD for regulatory modelling",
+          "Hourly added exposure; not24-hour/annual exposure or actual CPCB AQI"
+        ],
+        "grid": {
+          "shape": [
+            200,
+            200
+          ],
+          "dtype": "float32",
+          "byte_order": "little",
+          "affine": [
+            36.567685080958526,
+            34.09991800312493,
+            -7066.760308408344,
+            34.09991800312493,
+            -36.567685080958526,
+            246.77670778336005
+          ],
+          "crs": "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6326]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Azimuthal Equidistant\",ID[\"EPSG\",1125]],PARAMETER[\"Latitude of natural origin\",19.076,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",72.8777,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+          "corners": [
+            [
+              72.81055273450258,
+              19.078217153117297
+            ],
+            [
+              72.88004570232631,
+              19.139840852239637
+            ],
+            [
+              72.94484546932776,
+              19.07375839450772
+            ],
+            [
+              72.87535609384612,
+              19.01215867636916
+            ]
+          ],
+          "receptor_height_m": 1.5,
+          "png_label": "CPCB category colours for visualisation only; hourly increment is not AQI"
+        },
+        "thresholds": [
+          1.0,
+          5.0,
+          15.0,
+          60.0,
+          120.0
+        ]
+      }
+    },
+    {
+      "run_id": 64,
+      "engine_version": "gaussian-briggs-1.1.0",
+      "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+      "stability_class": "F",
+      "summary": {
+        "label": "modelled increment from these sources only",
+        "unit": "µg/m³",
+        "peak_ugm3": 18.990890502929688,
+        "peak_location": [
+          78.48084706920275,
+          17.381626454383973
+        ],
+        "distance_to_peak_m": 725.4309064273452,
+        "distance_definition": "Nearest discretised source to peak receptor",
+        "area_above_km2": {
+          "1.0": 3.76,
+          "5.0": 1.71,
+          "15.0": 0.08,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "exposure": {
+          "available": true,
+          "label": "hourly added exposure; WorldPop 2025 modelled population",
+          "population_support_fraction": 0.9602198779686332,
+          "population_support_scope": "Mean fraction of cell area with population data",
+          "partially_supported_cells": 300,
+          "supported_population": 1518670.328867529,
+          "population_above": {
+            "1.0": 66300.35740581078,
+            "5.0": 31704.40710443302,
+            "15.0": 1608.2626922309853,
+            "60.0": 0.0,
+            "120.0": 0.0
+          },
+          "population_weighted_mean_added_ugm3": 0.24528510337466117,
+          "missing_population_cells": 1443,
+          "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+        },
+        "weather": {
+          "wind_speed_ms": 2.06,
+          "wind_direction_deg": 61.0,
+          "temperature_k": 292.45,
+          "solar_radiation_wm2": 0.0,
+          "cloud_fraction": 0.0,
+          "daytime": false,
+          "mixing_height_m": 65.0,
+          "stability_class": "F"
+        },
+        "weather_provenance": {
+          "mode": "real",
+          "observation_id": "8bb76bdb-2830-572a-8e26-dca7c2937be6",
+          "observed_at_utc": "2025-11-15T15:00:00+00:00",
+          "ist_hour_start": "2025-11-15T20:00:00+05:30",
+          "source": "openmeteo",
+          "label": "City weather grid point; uniform over the scenario",
+          "mixing_height": {
+            "observed": true,
+            "value_m": 65.0,
+            "label": "Warehouse observation"
+          }
+        },
+        "population_provenance": {
+          "asset_id": 1137,
+          "year": 2025,
+          "sha256": "f5717c622d79052d4aacf0f67365165575855ba8059375b5d87ea655ed26fa53",
+          "url": "ftp://ftp.worldpop.org/GIS/Population/Global_2015_2030/R2025A/2025/IND/v1/100m/constrained/ind_pop_2025_CN_100m_R2025A_v1.tif",
+          "rationale": "2025 population estimate nearest the recent observation period; not a census or an exposure calculation."
+        },
+        "source_assumptions": [
+          {
+            "type": "point",
+            "location": [
+              78.4867,
+              17.385
+            ],
+            "emission_gs": 1.0,
+            "height_m": 50.0,
+            "diameter_m": 0.0,
+            "exit_velocity_ms": 0.0,
+            "exit_temperature_k": 293.15,
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "background": {
+          "label": "measured total (all sources)",
+          "unit": "µg/m³",
+          "ist_hour": "2025-11-15T20:00:00+05:30",
+          "stations": [
+            {
+              "station_id": 141,
+              "name": "New Malakpet, Hyderabad - TSPCB",
+              "location": [
+                78.50864,
+                17.37206
+              ],
+              "distance_km": 2.736259207287033,
+              "value_ugm3": 32.792500000000004,
+              "samples": 1
+            },
+            {
+              "station_id": 138,
+              "name": "Somajiguda, Hyderabad - TSPCB",
+              "location": [
+                78.457437,
+                17.417094
+              ],
+              "distance_km": 4.720671135244087,
+              "value_ugm3": 67.0925,
+              "samples": 1
+            },
+            {
+              "station_id": 151,
+              "name": "Zoo Park, Hyderabad - TSPCB",
+              "location": [
+                78.451437,
+                17.349694
+              ],
+              "distance_km": 5.414116167247238,
+              "value_ugm3": 75.0,
+              "samples": 1
+            },
+            {
+              "station_id": 143,
+              "name": "Sanathnagar, Hyderabad - TSPCB",
+              "location": [
+                78.4332152,
+                17.4559458
+              ],
+              "distance_km": 9.692395195102135,
+              "value_ugm3": 68.75,
+              "samples": 1
+            },
+            {
+              "station_id": 140,
+              "name": "Nacharam_TSIIC IALA, Hyderabad - TSPCB",
+              "location": [
+                78.569354,
+                17.429398
+              ],
+              "distance_km": 10.063414426376491,
+              "value_ugm3": 26.695,
+              "samples": 1
+            },
+            {
+              "station_id": 137,
+              "name": "ECIL Kapra, Hyderabad - TSPCB",
+              "location": [
+                78.566959,
+                17.470431
+              ],
+              "distance_km": 12.731985820908402,
+              "value_ugm3": 32.335,
+              "samples": 1
+            },
+            {
+              "station_id": 153,
+              "name": "Kokapet, Hyderabad - TSPCB",
+              "location": [
+                78.339194,
+                17.393559
+              ],
+              "distance_km": 15.7031070867282,
+              "value_ugm3": 28.3475,
+              "samples": 1
+            },
+            {
+              "station_id": 154,
+              "name": "Kompally Municipal Office, Hyderabad - TSPCB",
+              "location": [
+                78.486949,
+                17.544899
+              ],
+              "distance_km": 17.69673987620849,
+              "value_ugm3": 30.997500000000002,
+              "samples": 1
+            }
+          ],
+          "note": "Independent context only; never added to the modelled increment"
+        },
+        "limitations": [
+          "Primary PM2.5 only; no secondary formation, chemistry or deposition",
+          "Flat terrain; no building downwash beyond stack-tip adjustment",
+          "Steady state within the hour; uniform city-grid meteorology",
+          "Educational estimate, not a regulatory assessment; use AERMOD for regulatory modelling",
+          "Hourly added exposure; not24-hour/annual exposure or actual CPCB AQI"
+        ],
+        "grid": {
+          "shape": [
+            200,
+            200
+          ],
+          "dtype": "float32",
+          "byte_order": "little",
+          "affine": [
+            -43.730985356969796,
+            -24.24048101231684,
+            6797.146636928664,
+            -24.24048101231684,
+            43.730985356969796,
+            -1949.0504344652954
+          ],
+          "crs": "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"World Geodetic System 1984\",ELLIPSOID[\"WGS 84\",6378137,298.257223563,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6326]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Azimuthal Equidistant\",ID[\"EPSG\",1125]],PARAMETER[\"Latitude of natural origin\",17.385,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",78.4867,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+          "corners": [
+            [
+              78.55065738383017,
+              17.367378927919322
+            ],
+            [
+              78.46836487005635,
+              17.32358275016707
+            ],
+            [
+              78.4227303802806,
+              17.40260055492532
+            ],
+            [
+              78.50504736584817,
+              17.44641518818068
+            ]
+          ],
+          "receptor_height_m": 1.5,
+          "png_label": "CPCB category colours for visualisation only; hourly increment is not AQI"
+        },
+        "thresholds": [
+          1.0,
+          5.0,
+          15.0,
+          60.0,
+          120.0
+        ]
+      }
+    }
+  ],
+  "ollama": {
+    "completed_at": "2026-10-15T15:16:48.629771+00:00",
+    "evaluation_freeze": {
+      "built_at": "2026-10-11T01:50:50.548878+00:00",
+      "sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+      "authored_sha256": "080c6436eef5fe69dfbbbba44b19f67a361cd87652e82cebe4bfa22fd6c73f1d",
+      "count": 120,
+      "counts": {
+        "literature": 80,
+        "data": 30,
+        "unanswerable": 10
+      },
+      "gold_policy": "All same-document chunks containing the authored exact source excerpt",
+      "number_policy": "Match numeric values by their displayed field to frozen actual data-tool cells. Report numeric recall, precision and cell exactness separately from answer coverage. Unavailable-data questions require refusal and have no invented numeric target.",
+      "retrieval_policy": "Known-gold hit@k and fraction-of-known-gold recall@k; MRR through 40"
+    },
+    "corpus": [
+      {
+        "pk": 6,
+        "sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8",
+        "page_count": 179,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 3,
+          "library_key": "aermod",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8",
+          "requested_url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 11,
+        "sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c",
+        "page_count": 1,
+        "ingestion_metadata": {
+          "doi": "10.1126/sciadv.abd6696",
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "shi_2021",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": true,
+          "parsed_sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c",
+          "requested_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7806219",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 18,
+        "sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac",
+        "page_count": 21,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "city_plan_ahmedabad",
+          "project_path": null,
+          "declared_city": "ahmedabad",
+          "logical_pages": false,
+          "parsed_sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Ahmedabad.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 19,
+        "sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860",
+        "page_count": 23,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 23,
+          "library_key": "city_plan_bengaluru",
+          "project_path": null,
+          "declared_city": "bengaluru",
+          "logical_pages": false,
+          "parsed_sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Bengaluru.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 5,
+        "sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985",
+        "page_count": 4,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "ncap_city_list",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985",
+          "requested_url": "https://cpcb.gov.in/uploads/Non-Attainment_Cities.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 29,
+        "sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0",
+        "page_count": 40,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 18,
+          "library_key": "city_plan_kolkata",
+          "project_path": null,
+          "declared_city": "kolkata",
+          "logical_pages": false,
+          "parsed_sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0",
+          "requested_url": "https://www.wbpcb.gov.in/writereaddata/files/Comprehensive%20Air%20Quality%20Action%20Plan%20Kolkata.pdf",
+          "identity_audit": "Actual 40-page PDF is Kolkata-specific despite the West Bengal filename. Cover includes 31 December 2018 and an August 2019 court-context reference; publication year left null.",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 7,
+        "sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1",
+        "page_count": 334,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 1,
+          "library_key": "iit_kanpur_delhi_2016",
+          "project_path": null,
+          "declared_city": "delhi",
+          "logical_pages": false,
+          "parsed_sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1",
+          "requested_url": "https://home.iitk.ac.in/~mukesh/Publications/DPCC_2016_SA%20study%20IIT%20Kanpur%20report_Comprehensive%20Study%20on%20Air%20Pollution%20and%20Green%20House%20Gases%20(GHGs)%20in%20Delhi.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 20,
+        "sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1",
+        "page_count": 84,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 84,
+          "library_key": "city_plan_delhi",
+          "project_path": null,
+          "declared_city": "delhi",
+          "logical_pages": false,
+          "parsed_sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Delhi.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 13,
+        "sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c",
+        "page_count": 1,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "project_phase3a",
+          "project_path": "docs/results/PHASE3A.md",
+          "declared_city": null,
+          "logical_pages": true,
+          "parsed_sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c",
+          "requested_url": null,
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 14,
+        "sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f",
+        "page_count": 1,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "project_phase3a2",
+          "project_path": "docs/results/PHASE3A2.md",
+          "declared_city": null,
+          "logical_pages": true,
+          "parsed_sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f",
+          "requested_url": null,
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 15,
+        "sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b",
+        "page_count": 1,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "project_phase3b",
+          "project_path": "docs/results/PHASE3B.md",
+          "declared_city": null,
+          "logical_pages": true,
+          "parsed_sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b",
+          "requested_url": null,
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 16,
+        "sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2",
+        "page_count": 1,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "project_phase4",
+          "project_path": "docs/results/PHASE4.md",
+          "declared_city": null,
+          "logical_pages": true,
+          "parsed_sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2",
+          "requested_url": null,
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 17,
+        "sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7",
+        "page_count": 1,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "project_sources",
+          "project_path": "docs/DATA_SOURCES.md",
+          "declared_city": null,
+          "logical_pages": true,
+          "parsed_sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7",
+          "requested_url": null,
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 12,
+        "sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35",
+        "page_count": 14,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "gbd_india_2021",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35",
+          "requested_url": "https://www.econ.umd.edu/sites/www.econ.umd.edu/files/pubs/GBD%20India%202019.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 21,
+        "sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919",
+        "page_count": 57,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 57,
+          "library_key": "city_plan_hyderabad",
+          "project_path": null,
+          "declared_city": "hyderabad",
+          "logical_pages": false,
+          "parsed_sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Hyderabad.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 22,
+        "sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc",
+        "page_count": 10,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 1,
+          "library_key": "city_plan_jaipur",
+          "project_path": null,
+          "declared_city": "jaipur",
+          "logical_pages": false,
+          "parsed_sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Jaipur.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 23,
+        "sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89",
+        "page_count": 10,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "city_plan_kanpur",
+          "project_path": null,
+          "declared_city": "kanpur",
+          "logical_pages": false,
+          "parsed_sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Kanpur.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 24,
+        "sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0",
+        "page_count": 10,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "city_plan_lucknow",
+          "project_path": null,
+          "declared_city": "lucknow",
+          "logical_pages": false,
+          "parsed_sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Lucknow.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 25,
+        "sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce",
+        "page_count": 92,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "city_plan_mumbai",
+          "project_path": null,
+          "declared_city": "mumbai",
+          "logical_pages": false,
+          "parsed_sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Mumbai.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 3,
+        "sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37",
+        "page_count": 58,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 3,
+          "library_key": "cpcb_aqi_2014",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37",
+          "requested_url": "https://smartnet.niua.org/sites/default/files/resources/Air%20Quality%20Index.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "publication_year_evidence": "The supplied final AQI report has a signed 2015 foreword on physical PDF page 2. October 2014 in its text is the draft launch, not a verified publication date for this final body."
+        }
+      },
+      {
+        "pk": 2,
+        "sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243",
+        "page_count": 164,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 3,
+          "library_key": "naaqs",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243",
+          "requested_url": "https://cpcb.nic.in/upload/NAAQS_2019.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 26,
+        "sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928",
+        "page_count": 22,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 4,
+          "library_key": "city_plan_patna",
+          "project_path": null,
+          "declared_city": "patna",
+          "logical_pages": false,
+          "parsed_sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Patna.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 27,
+        "sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc",
+        "page_count": 38,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "city_plan_pune",
+          "project_path": null,
+          "declared_city": "pune",
+          "logical_pages": false,
+          "parsed_sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc",
+          "requested_url": "https://cpcb.nic.in/Actionplan/Pune.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      },
+      {
+        "pk": 10,
+        "sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536",
+        "page_count": 17,
+        "ingestion_metadata": {
+          "doi": "10.5194/acp-18-6223-2018",
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "grange_2018",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536",
+          "requested_url": "https://acp.copernicus.org/articles/18/6223/2018/acp-18-6223-2018.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 9,
+        "sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0",
+        "page_count": 53,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 10,
+          "library_key": "cse_review",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0",
+          "requested_url": "https://cdn.cseindia.org/attachments/0.12136100_1560416301_Restoring-Air-Quality-through-Source-Apportionment-Analysis.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 28,
+        "sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2",
+        "page_count": 137,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 8,
+          "library_key": "city_plan_chennai",
+          "project_path": null,
+          "declared_city": "chennai",
+          "logical_pages": false,
+          "parsed_sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2",
+          "requested_url": "https://www.tnpcb.gov.in/PDF/Information/technical/ActionplanChn.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 8,
+        "sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5",
+        "page_count": 560,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 7,
+          "library_key": "teri_arai_2018",
+          "project_path": null,
+          "declared_city": "delhi",
+          "logical_pages": false,
+          "parsed_sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5",
+          "requested_url": "https://www.teriin.org/sites/default/files/2018-08/Report_SA_AQM-Delhi-NCR_0.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 1,
+        "sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65",
+        "page_count": 11,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 1,
+          "library_key": "ncap_progress_2024",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65",
+          "requested_url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2024/sep/doc2024924400701.pdf",
+          "identity_audit": "2026-10-10: actual cover/foreword inspected",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024"
+        }
+      },
+      {
+        "pk": 4,
+        "sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87",
+        "page_count": 9,
+        "ingestion_metadata": {
+          "doi": null,
+          "parser": "PyMuPDF/pdfplumber/Tesseract/HTML/Markdown",
+          "ocr_pages": 0,
+          "library_key": "swachh_vayu_2023",
+          "project_path": null,
+          "declared_city": null,
+          "logical_pages": false,
+          "parsed_sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87",
+          "requested_url": "https://prana.cpcb.gov.in/assets/pdf/Swachh_Vayu_Survekshan_2023_Result.pdf",
+          "parser_version": 3,
+          "embedding_model": "BAAI/bge-m3",
+          "embedding_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+          "embedding_fingerprint": "5617a9f61b028005a4858fdac845db406aefb181:float32:maxlen1024",
+          "parser_compatibility_audit": "Version2->3: no single-column detected tables; identical algorithm output."
+        }
+      }
+    ],
+    "retrieval": {},
+    "answers": {
+      "ollama": {
+        "questions": 120,
+        "citations": 2,
+        "citation_accuracy": 1.0,
+        "audited_citation_uses": 2,
+        "correct_citation_uses": 2,
+        "groundedness_before_removal": 0.016666666666666666,
+        "groundedness_emitted": 1.0,
+        "emitted_sentences": 2,
+        "supported_emitted_sentences": 2,
+        "claims": 120,
+        "supported_claims": 2,
+        "removed_claims": 118,
+        "number_correctness": 0.0,
+        "numeric_precision": null,
+        "numeric_cell_exactness": 0.0,
+        "correct_numeric_values": 0,
+        "expected_numeric_values": 669,
+        "extra_numeric_values": 0,
+        "available_data_questions": 30,
+        "missing_data_questions": 0,
+        "available_data_answer_rate": 0.0,
+        "missing_data_refusal_rate": null,
+        "displayed_row_exactness": 0.0,
+        "correct_data_rows": 0,
+        "expected_data_rows": 491,
+        "data_questions_exact": 0.9,
+        "correct_refusal_rate": 1.0,
+        "literature_answer_rate": 0.025,
+        "literature_gold_source_citation_rate": 0.025,
+        "latency_seconds_mean": 80.76179166666667,
+        "generation_fallbacks": 0
+      }
+    },
+    "provider_only": true,
+    "files": {
+      "rag_eval.jsonl": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+      "answers.jsonl": "e9cdc22c035267448de460712e93bd1d2e987f44cf96310fe7cb4799ce8a18a8"
+    },
+    "metric_limitations": "Frozen expectations predate interval-policy updates. Report tool snapshot drift separately; exact citation audit is not independent semantic grading.",
+    "mlflow_run_id": "a70d7abfbf0149b8a4a1f78b8dad544b"
+  },
+  "browser": [
+    {
+      "name": "home",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "forecasts",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "research",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "library",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "ask",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "simulator",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "home",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "forecasts",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "research",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "library",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "ask",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "name": "simulator",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "errors": []
+    }
+  ],
+  "interactions": {
+    "forecast_cards": 3,
+    "research_cards": 7,
+    "research_undefined": false,
+    "filtered_library": 1,
+    "question_filled": "What was the annual mean PM2.5 in Delhi in 2025?",
+    "shared_peak": "Peak added PM2.5\n18.99 µg/m³",
+    "shared_form": {
+      "city": "hyderabad",
+      "hour": "2025-11-15T20:00",
+      "emission_gs": "1",
+      "height_m": "50"
+    },
+    "errors": []
+  },
+  "limitations": "Retrospective interval selection; incomplete gold; exact-source citation audit is not semantic grading; scenario sources hypothetical; hourly added exposure only.",
+  "provider_supplement": {
+    "questions_completed": 120,
+    "complete": true,
+    "provider_counts": {
+      "ollama": 120
+    },
+    "generation_errors": {},
+    "refusals": {
+      "literature": {
+        "questions": 80,
+        "refused": 78
+      },
+      "data": {
+        "questions": 30,
+        "refused": 30
+      },
+      "unanswerable": {
+        "questions": 10,
+        "refused": 10
+      }
+    },
+    "removed_claim_reasons": {
+      "citation_not_in_evidence": 103,
+      "sentence_not_supported_verbatim": 15
+    },
+    "data_tool_snapshot_drift": [
+      {
+        "id": "D024",
+        "tool": "latest_forecast",
+        "changed_paths": [
+          "/values/forecasts/0/feature_provenance/interval_policy",
+          "/values/forecasts/0/feature_provenance/original_interval_bounds",
+          "/values/forecasts/0/interval_policy",
+          "/values/forecasts/0/lower80",
+          "/values/forecasts/0/lower95",
+          "/values/forecasts/0/upper80",
+          "/values/forecasts/0/upper95",
+          "/values/forecasts/1/feature_provenance/interval_policy",
+          "/values/forecasts/1/feature_provenance/original_interval_bounds",
+          "/values/forecasts/1/interval_policy",
+          "/values/forecasts/1/lower80",
+          "/values/forecasts/1/lower95",
+          "/values/forecasts/1/upper80",
+          "/values/forecasts/1/upper95",
+          "/values/forecasts/2/feature_provenance/interval_policy",
+          "/values/forecasts/2/feature_provenance/original_interval_bounds",
+          "/values/forecasts/2/interval_policy",
+          "/values/forecasts/2/lower80",
+          "/values/forecasts/2/lower95",
+          "/values/forecasts/2/upper80",
+          "/values/forecasts/2/upper95"
+        ]
+      },
+      {
+        "id": "D025",
+        "tool": "latest_forecast",
+        "changed_paths": [
+          "/values/forecasts/0/feature_provenance/interval_policy",
+          "/values/forecasts/0/feature_provenance/original_interval_bounds",
+          "/values/forecasts/0/interval_policy",
+          "/values/forecasts/1/feature_provenance/interval_policy",
+          "/values/forecasts/1/feature_provenance/original_interval_bounds",
+          "/values/forecasts/1/interval_policy",
+          "/values/forecasts/1/lower80",
+          "/values/forecasts/1/lower95",
+          "/values/forecasts/1/upper80",
+          "/values/forecasts/1/upper95",
+          "/values/forecasts/2/feature_provenance/interval_policy",
+          "/values/forecasts/2/feature_provenance/original_interval_bounds",
+          "/values/forecasts/2/interval_policy",
+          "/values/forecasts/2/lower80",
+          "/values/forecasts/2/lower95",
+          "/values/forecasts/2/upper80",
+          "/values/forecasts/2/upper95"
+        ]
+      },
+      {
+        "id": "D026",
+        "tool": "latest_forecast",
+        "changed_paths": [
+          "/values/forecasts/0/feature_provenance/interval_policy",
+          "/values/forecasts/0/feature_provenance/original_interval_bounds",
+          "/values/forecasts/0/interval_policy",
+          "/values/forecasts/0/lower80",
+          "/values/forecasts/0/lower95",
+          "/values/forecasts/0/upper80",
+          "/values/forecasts/0/upper95",
+          "/values/forecasts/1/feature_provenance/interval_policy",
+          "/values/forecasts/1/feature_provenance/original_interval_bounds",
+          "/values/forecasts/1/interval_policy",
+          "/values/forecasts/1/lower80",
+          "/values/forecasts/1/lower95",
+          "/values/forecasts/1/upper80",
+          "/values/forecasts/1/upper95",
+          "/values/forecasts/2/feature_provenance/interval_policy",
+          "/values/forecasts/2/feature_provenance/original_interval_bounds",
+          "/values/forecasts/2/interval_policy",
+          "/values/forecasts/2/lower80",
+          "/values/forecasts/2/lower95",
+          "/values/forecasts/2/upper80",
+          "/values/forecasts/2/upper95"
+        ]
+      }
+    ],
+    "current_returned_evidence_scores": {
+      "questions_with_expected_tool": 30,
+      "missing_expected_tool_ids": [],
+      "correct_numeric_values": 0,
+      "expected_numeric_values": 669,
+      "extra_numeric_values": 0,
+      "number_correctness": 0.0,
+      "numeric_precision": null,
+      "numeric_cell_exactness": 0.0,
+      "displayed_row_exactness": 0.0,
+      "rows": [
+        {
+          "id": "D001",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D002",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D003",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D004",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D005",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D006",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D007",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D008",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D009",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D010",
+          "data_available": true,
+          "expected_numeric_values": 4,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 10
+        },
+        {
+          "id": "D011",
+          "data_available": true,
+          "expected_numeric_values": 5,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 5,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 11
+        },
+        {
+          "id": "D012",
+          "data_available": true,
+          "expected_numeric_values": 5,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 5,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 11
+        },
+        {
+          "id": "D013",
+          "data_available": true,
+          "expected_numeric_values": 5,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 5,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 11
+        },
+        {
+          "id": "D014",
+          "data_available": true,
+          "expected_numeric_values": 5,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 5,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 11
+        },
+        {
+          "id": "D015",
+          "data_available": true,
+          "expected_numeric_values": 5,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 5,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 11
+        },
+        {
+          "id": "D016",
+          "data_available": true,
+          "expected_numeric_values": 18,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 16,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 23
+        },
+        {
+          "id": "D017",
+          "data_available": true,
+          "expected_numeric_values": 20,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 17,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 24
+        },
+        {
+          "id": "D018",
+          "data_available": true,
+          "expected_numeric_values": 18,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 16,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 23
+        },
+        {
+          "id": "D019",
+          "data_available": true,
+          "expected_numeric_values": 110,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 9
+        },
+        {
+          "id": "D020",
+          "data_available": true,
+          "expected_numeric_values": 109,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 4,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 9
+        },
+        {
+          "id": "D021",
+          "data_available": true,
+          "expected_numeric_values": 12,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 6,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 13
+        },
+        {
+          "id": "D022",
+          "data_available": true,
+          "expected_numeric_values": 24,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 11,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 18
+        },
+        {
+          "id": "D023",
+          "data_available": true,
+          "expected_numeric_values": 24,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 11,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 18
+        },
+        {
+          "id": "D024",
+          "data_available": true,
+          "expected_numeric_values": 36,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 25,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 41
+        },
+        {
+          "id": "D025",
+          "data_available": true,
+          "expected_numeric_values": 36,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 25,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 41
+        },
+        {
+          "id": "D026",
+          "data_available": true,
+          "expected_numeric_values": 36,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 25,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 41
+        },
+        {
+          "id": "D027",
+          "data_available": true,
+          "expected_numeric_values": 38,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 21,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 26
+        },
+        {
+          "id": "D028",
+          "data_available": true,
+          "expected_numeric_values": 39,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 21,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 26
+        },
+        {
+          "id": "D029",
+          "data_available": true,
+          "expected_numeric_values": 43,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 11,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 12
+        },
+        {
+          "id": "D030",
+          "data_available": true,
+          "expected_numeric_values": 41,
+          "correct_numeric_values": 0,
+          "extra_numeric_values": 0,
+          "expected_numeric_cells": 11,
+          "exact_numeric_cells": 0,
+          "answered": false,
+          "correct_missing_data_refusal": false,
+          "correct_displayed_rows": 0,
+          "expected_displayed_rows": 12
+        }
+      ]
+    },
+    "interpretation": "Supplement only: original frozen scores remain mandatory and unchanged. Current-returned-evidence scores compare output with the actual tool values available to that answer, not with a changed gold file. Exact-source checks are not semantic QA grading."
+  }
+}

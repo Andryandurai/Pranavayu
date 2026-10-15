@@ -31,3 +31,5 @@ beautifulsoup4==4.15.0
 markdown-it-py==4.2.0
 sentence-transformers==6.1.0
 transformers==5.19.0
+pyproj==3.8.0
+rasterio==1.5.2

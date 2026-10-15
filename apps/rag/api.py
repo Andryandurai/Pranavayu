@@ -33,6 +33,7 @@ class ExplainPayload(StrictParameters):
     kind = serializers.ChoiceField(choices=["raw", "deweathered"], required=False)
     threshold = serializers.FloatField(min_value=0, max_value=1000, required=False)
     scenario_id = serializers.CharField(max_length=100, required=False)
+    run_id = serializers.IntegerField(min_value=1, required=False)
     parameters = serializers.DictField(required=False)
 
     validate_threshold = ExceedanceParameters.validate_threshold
@@ -68,6 +69,7 @@ class ExplainInput(serializers.Serializer):
             "kind",
             "threshold",
             "scenario_id",
+            "run_id",
             "parameters",
         }
         if set(value) - allowed:
@@ -106,7 +108,10 @@ class ExplainView(APIView):
                 payload.get("question")
                 or f"Explain the annual mean PM2.5 in {city} in {payload.get('year', '')}."
             )
-        result = ask(question)
+        tools = None
+        if kind == "scenario" and payload.get("run_id"):
+            tools = [{"tool": "vayusim_run", "parameters": {"run_id": payload["run_id"]}}]
+        result = ask(question, context_tool_calls=tools) if tools else ask(question)
         result["context_type"] = kind
         result["context_limitation"] = (
             "Client context selects evidence; supplied scenario/chart values "

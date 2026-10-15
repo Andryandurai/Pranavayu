@@ -14,6 +14,7 @@ from apps.warehouse.models import City
 from .data import load_hourly, make_features, raw_daily
 from .estimators import predict
 from .explain import top_drivers
+from .intervals import apply_interval_policy
 from .models import ForecastModelVersion, ForecastWeather
 from .pipeline import save_forecasts
 from .weather import ForecastWeatherSource, issue_end
@@ -179,6 +180,7 @@ def issue_forecasts(replay_date=None, cities=None):
             bundle = joblib.load(settings.BASE_DIR / version.artifact_path)
             history = observed_history(daily, rows, horizon)
             point, calibration_info = operational_intervals(bundle, test, history)
+            point = apply_interval_policy(point, version.interval_policy)
             for key, values in point.items():
                 test[key] = values
             drivers = top_drivers(bundle["model"], test, bundle["background"], history)
@@ -194,6 +196,7 @@ def issue_forecasts(replay_date=None, cities=None):
                     "point": float(test.prediction.iloc[0]),
                     "model_version": version.pk,
                     "calibration": calibration_info,
+                    "interval_policy": version.interval_policy,
                     "data": provenance,
                     "fallback_reason": fallback_reason,
                 }

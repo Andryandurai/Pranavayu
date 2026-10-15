@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 import re
 import time
 from pathlib import Path
@@ -198,6 +199,105 @@ def retrieval_scores(rows):
         }
         metrics[mode]["questions"] = len(selected)
     return metrics
+
+
+def evaluate_provider(path, folder, provider="ollama"):
+    """Resume one provider on the immutable set without repeating retrieval experiments."""
+    records, freeze = load_evaluation(path)
+    snapshot = list(
+        Document.objects.filter(status="ready").values(
+            "pk", "sha256", "page_count", "ingestion_metadata"
+        )
+    )
+    folder.mkdir(parents=True, exist_ok=True)
+    state = {
+        "eval_sha256": freeze["sha256"],
+        "corpus": snapshot,
+        "provider": provider,
+        "rerank_candidates": int(os.environ.get("RAG_RERANK_CANDIDATES", "40")),
+    }
+    state_path = folder / "evaluation-state.json"
+    if state_path.exists() and json.loads(state_path.read_text()) != state:
+        raise ValueError(
+            "Provider evaluation input/corpus/config changed; use a new results folder"
+        )
+    atomic_json(state_path, state)
+    for record in records:
+        if record["type"] == "literature":
+            if not Document.objects.filter(
+                pk=record["gold_document_id"], sha256=record["source_sha256"]
+            ).exists():
+                raise ValueError("Frozen gold source changed")
+            if DocumentChunk.objects.filter(pk__in=record["gold_chunk_ids"]).count() != len(
+                record["gold_chunk_ids"]
+            ):
+                raise ValueError("Frozen gold chunks changed")
+    answers_path = folder / "answers.jsonl"
+    answers = (
+        [json.loads(line) for line in answers_path.read_text().splitlines()]
+        if answers_path.exists()
+        else []
+    )
+    done = {row["id"] for row in answers}
+    with answers_path.open("a", encoding="utf-8") as stream:
+        for record in records:
+            if record["id"] in done:
+                continue
+            print(
+                json.dumps({"event": "provider_question_started", "id": record["id"]}), flush=True
+            )
+            result = ask(record["question"], record.get("filters"), provider=provider)
+            row = {
+                "id": record["id"],
+                "type": record["type"],
+                "requested_provider": provider,
+                **result,
+            }
+            row["audit"] = audit_answer(result)
+            if record["type"] == "data":
+                row["data_score"] = score_data_answer(record, result)
+                row["expected_rows"] = len(record["expected_table_rows"])
+                row["correct_rows"] = sum(
+                    normalized(expected) in normalized(result["answer"])
+                    for expected in record["expected_table_rows"]
+                )
+                row["tool_matches_frozen"] = any(
+                    actual == record["expected"] for actual in result["tool_results"]
+                )
+            elif record["type"] == "literature":
+                row["gold_source_cited"] = any(
+                    c.get("chunk_id") in record["gold_chunk_ids"] for c in result["citations"]
+                )
+            stream.write(json.dumps(row, ensure_ascii=False, default=str) + "\n")
+            stream.flush()
+            answers.append(row)
+            print(
+                json.dumps(
+                    {
+                        "event": "provider_question_finished",
+                        "id": record["id"],
+                        "provider": result["provider"],
+                        "latency_ms": result["latency_ms"],
+                    }
+                ),
+                flush=True,
+            )
+    result = {
+        "completed_at": timezone.now().isoformat(),
+        "evaluation_freeze": freeze,
+        "corpus": snapshot,
+        "retrieval": {},
+        "answers": answer_scores(answers),
+        "provider_only": True,
+        "files": {p.name: digest(p) for p in (path, answers_path)},
+        "metric_limitations": (
+            "Frozen expectations predate interval-policy updates. Report tool snapshot drift "
+            "separately; exact citation audit is not independent semantic grading."
+        ),
+    }
+    atomic_json(folder / "metrics.json", result)
+    log_mlflow(path, folder, result)
+    return result
 
 
 def evaluate(path, folder):

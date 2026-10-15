@@ -45,6 +45,7 @@ class ForecastModelVersion(TimeStampedModel):
     training_end = models.DateField()
     available_from = models.DateField()
     validation_metrics = models.JSONField(default=dict)
+    interval_policy = models.JSONField(default=dict)
     artifact_path = models.CharField(max_length=1000)
     analysis_run = models.ForeignKey("analytics.AnalysisRun", on_delete=models.PROTECT)
     cohort = models.CharField(max_length=30)

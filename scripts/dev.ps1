@@ -65,7 +65,9 @@ try {
                 '--settings=enviroinsights.settings.test')
             Invoke-Compose @('exec', '-T', 'web', 'python', 'manage.py', 'makemigrations',
                 '--check', '--dry-run', '--settings=enviroinsights.settings.test')
-            Invoke-Compose @('exec', '-T', 'web', 'pytest', '--ds=enviroinsights.settings.test')
+            Invoke-Compose @('exec', '-T', '-e', 'OLLAMA_ENABLED=false', '-e',
+                'LLM_PROVIDER=extractive', '-e', 'HYPOTHESIS_STORAGE_DIRECTORY=/tmp/hypothesis',
+                'web', 'pytest', '--ds=enviroinsights.settings.test')
         }
         'lint' {
             Invoke-Compose @('exec', '-T', 'web', 'ruff', 'check', '.')

@@ -16,6 +16,8 @@ erDiagram
     DataSource ||--o{ WeatherObservation : provides
     DataSource ||--o{ FireDetection : provides
     Document ||--o{ DocumentChunk : contains
+    City ||--o{ Scenario : locates
+    Scenario ||--o{ ScenarioRun : computes
 ```
 
 `State` stores unique project codes and optional WGS84 MultiPolygons. `District`
@@ -303,3 +305,36 @@ the foundational hypertables and their reversible migration unchanged. See
     latency and verification/removal/refusal details. Dataset citations reference
     the actual AnalysisRun and parameters, with forecast model version IDs.
     Client scenario/chart numbers are context rather than trusted evidence.
+
+
+## Phase6A scenarios
+
+`Scenario` stores name, protected city FK, WGS84 centre point, source JSON,
+manual/real weather mode, date-hour, receptor height, grid settings, complete
+validated input JSON, unique random share slug and creation time. It is a
+scenario specification, not a measured emission inventory.
+
+`ScenarioRun` has a protected Scenario FK, globally unique64-character inputs
+SHA256, stability class, flags, input/provenance JSON, summary JSON, grid path,
+engine version, actual compute milliseconds and creation time. The hash uses
+canonical numerical inputs (presentation name excluded), actual weather values,
+population asset hash and engine version. Identical requests return the original
+run and scenario. New engine versions retain earlier runs.
+
+Summaries include lattice peak/location/distance, threshold area, hourly known-
+population exposure and fractional support, weather/population provenance,
+source assumptions, separate measured station totals, limits and grid metadata.
+Day runs initially have no grid path/contours; they materialise under an advisory
+lock when the binary, header or overlay is requested. Files are little-endian
+float32; shape/affine/WKT CRS and lon/lat corners are served separately. The
+stored peak is a grid estimate, not an analytic continuous maximum.
+
+`ForecastModelVersion.interval_policy` records per-level interval choices,
+empirical coverage/gate, original evaluation run/window, adoption time and
+explicit post-evaluation selection. Point model versions are not refitted.
+Changed bounds retain their original values in Forecast feature provenance.
+
+Dataset citations for `vayusim_run` reference the actual ScenarioRun, input hash,
+engine version and read-only run endpoint. They do not reuse an AnalysisRun ID
+for a simulator run. The immutable Phase5 evaluation remains unchanged; the five
+scenario questions live in separate `data/eval/vayusim_eval.jsonl`.

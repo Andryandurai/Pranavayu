@@ -1,0 +1,10 @@
+{% extends "dashboard/base.html" %}{% load static %}
+{% block title %}City forecasts · EnviroInsights{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">THE CITY OUTLOOK</p><h1>Forecasts, with context.</h1><p>Daily PM2.5 for the next three target days of the latest stored issuance. Inspect the uncertainty and retrospective skill alongside each estimate.</p></div><span class="badge warning">Archived replay</span></div>
+<div class="toolbar"><div><label for="forecast-city">Choose a city</label><select id="forecast-city">{% for city in cities %}<option value="{{city.slug}}" {% if city.slug == 'delhi' %}selected{% endif %}>{{city.name}}</option>{% endfor %}</select></div><p id="forecast-status" class="loading" role="status">Loading stored forecasts…</p></div>
+<div id="forecast-cards" class="forecast-grid" aria-live="polite"></div>
+<section class="panel section"><h2>How well did the issued policy perform?</h2><p class="help">Monthly rolling evaluation with archived forecast weather. Negative skill loses to persistence. Selected interval coverage is retrospective; it does not guarantee future coverage.</p><div id="forecast-evaluation" class="table-wrap"></div></section>
+<section class="notice section"><h3>Read before using the forecast</h3><p>Replay forecasts use archived observations and their original issue dates. They are not a live forecast for today. Interval methods retain explicit coverage failures. SHAP describes conditional model associations, not causal sources. Categories represent the CPCB PM2.5 subindex, not overall AQI.</p></section>
+<script src="{% static 'dashboard/forecasts.js' %}" defer></script>
+{% endblock %}

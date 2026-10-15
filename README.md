@@ -1,5 +1,38 @@
 # EnviroInsights-India
 
+Phase6A adds **VayuSim**, an educational, source-specific Gaussian dispersion
+engine with archived weather, WorldPop2025 exposure, saved scenarios and a
+verification map. The website now has consistent desktop/mobile navigation:
+[Overview](http://localhost:8000/), [Forecasts](http://localhost:8000/forecasts/),
+[Research](http://localhost:8000/research/), [Library](http://localhost:8000/library/),
+[Ask](http://localhost:8000/ask/) and [VayuSim](http://localhost:8000/simulator/).
+Read [the Phase6A report](docs/results/PHASE6A.md) for actual verification and
+limitations. Forecast cards show archived replay dates; research comparisons
+do not establish causation or official NCAP compliance.
+
+VayuSim inputs are explicit scenario assumptions, not measured facility
+inventories. All five source-family presets require emission rate, release
+height, diameter, exit velocity and temperature where no defensible universal
+default was established. Real weather uses the UTC midpoint of the selected
+IST hour. Station totals stay separate from the modelled increment. The
+population calculation is **hourly added exposure**, with fractional raster
+support; missing population is not extrapolated across unknown area.
+
+The default grid is10km×10km at50m, with an AEQD CRS and a wind-rotated affine.
+`POST /api/vayusim/run/` returns summary, GeoJSON contours and binary/header/PNG
+URLs. `POST /api/vayusim/day/` uses a timezone-aware datetime to select an IST
+date and returns24 independent hourly summaries; missing hours remain
+unavailable, and grids are materialised on their first request. Share scenarios
+through `/simulator/?scenario=<slug>`. Explain uses a stored `run_id`; arbitrary
+client numbers never become verified evidence.
+
+The Windows test wrapper and Makefile force test settings, extractive answering
+and a `/tmp` Hypothesis cache, so enabling the local language model cannot make
+tests call it. Tests retain the real PostgreSQL and Celery integration. On this
+machine the measured memory gate enabled Qwen2.5:3b-instruct; source-model caches
+and all project data remain on D:. The assistant can take minutes on CPU and
+retains refusal, citation and replay limitations.
+
 Phase 5 adds the [cited research assistant](#phase-5-cited-research-assistant),
 available at [Ask](http://localhost:8000/ask/). It uses real document passages
 and recorded project results, with extractive answers available without API keys.

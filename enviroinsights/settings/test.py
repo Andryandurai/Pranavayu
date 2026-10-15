@@ -14,3 +14,9 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 # Deliberately use the real broker/worker, never eager mode for integration tests.
 CELERY_TASK_ALWAYS_EAGER = False
+
+# The production Ollama default must not make offline tests call a live model.
+os.environ["LLM_PROVIDER"] = "extractive"
+os.environ["OLLAMA_ENABLED"] = "false"
+# Hypothesis databases on the Windows bind mount can stall float generation.
+os.environ.setdefault("HYPOTHESIS_STORAGE_DIRECTORY", "/tmp/hypothesis")

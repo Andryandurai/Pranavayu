@@ -1,0 +1,7 @@
+{
+  "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101EO4F.TXT",
+  "bytes": 299172,
+  "sha256": "6aaee7465571d67986528a5f81b1090de23caace853e209b3a64534cde56a80d",
+  "section": "CDM2 Table5,p15 stability mixing ratios",
+  "note": "Primary source used for implementation; no coefficient fitted to outcomes"
+}

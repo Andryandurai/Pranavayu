@@ -15,6 +15,7 @@ class ForecastSerializer(serializers.ModelSerializer):
     algorithm = serializers.CharField(source="model_version.algorithm", read_only=True)
     cohort = serializers.CharField(source="model_version.cohort", read_only=True)
     mlflow_run_id = serializers.CharField(source="model_version.mlflow_run_id", read_only=True)
+    interval_policy = serializers.JSONField(source="model_version.interval_policy", read_only=True)
 
     class Meta:
         model = Forecast
@@ -36,6 +37,7 @@ class ForecastSerializer(serializers.ModelSerializer):
             "mlflow_run_id",
             "top_drivers",
             "feature_provenance",
+            "interval_policy",
         ]
 
 

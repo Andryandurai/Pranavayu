@@ -1,8 +1,11 @@
+{% load rag_render %}
 {% if error %}<p role="alert">{{ error }}</p>{% endif %}
 {% if result %}
-<p><strong>Provider: {{ result.provider }}</strong></p>
-<pre>{{ result.answer }}</pre>
+<div class="section-heading"><h2>Cited answer</h2><span class="badge">{{ result.provider|title }}</span></div>
+<div class="table-wrap">{{ result.answer|evidence_markdown }}</div>
+<details><summary class="help">Plain text answer</summary><pre>{{result.answer}}</pre></details>
 {% if result.citations %}
+<h3 class="section">Inspect the supporting evidence</h3>
 <ul>
   {% for citation in result.citations %}
   <li>

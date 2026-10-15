@@ -25,7 +25,9 @@ class StrictParameters(serializers.Serializer):
             raise serializers.ValidationError(
                 {"parameters": f"Unknown fields: {', '.join(sorted(unknown))}"}
             )
-        if any(isinstance(data.get(name), bool) for name in ("year", "horizon", "threshold")):
+        if any(
+            isinstance(data.get(name), bool) for name in ("year", "horizon", "threshold", "run_id")
+        ):
             raise serializers.ValidationError(
                 {"parameters": "Numeric parameters cannot be booleans"}
             )
@@ -376,7 +378,68 @@ def coverage(parameters):
     )
 
 
+class VayusimParameters(serializers.Serializer):
+    run_id = serializers.IntegerField(min_value=1)
+
+    def to_internal_value(self, data):
+        if (
+            not isinstance(data, dict)
+            or set(data) != {"run_id"}
+            or isinstance(data.get("run_id"), bool)
+        ):
+            raise serializers.ValidationError({"parameters": "Use only a positive integer run_id"})
+        return super().to_internal_value(data)
+
+
+def vayusim_run(parameters):
+    from django.shortcuts import get_object_or_404
+
+    from apps.vayusim.models import ScenarioRun
+
+    run = get_object_or_404(
+        ScenarioRun.objects.select_related("scenario__city"), pk=parameters["run_id"]
+    )
+    summary = run.summary
+    values = {
+        "status": "available",
+        "label": summary["label"],
+        "unit": summary["unit"],
+        "peak_ugm3": summary["peak_ugm3"],
+        "peak_location": summary["peak_location"],
+        "distance_to_peak_m": summary["distance_to_peak_m"],
+        "area_above_km2": summary["area_above_km2"],
+        "exposure": summary["exposure"],
+        "stability_class": run.stability_class,
+        "weather_provenance": summary["weather_provenance"],
+        "population_provenance": summary["population_provenance"],
+        "flags": run.flags,
+        "limitations": summary["limitations"],
+        "source_assumptions": summary["source_assumptions"],
+        "inputs_hash": run.inputs_hash,
+        "engine_version": run.engine_version,
+    }
+    citation = {
+        "id": f"dataset:vayusim_run:{run.pk}:{run.inputs_hash[:12]}",
+        "kind": "dataset",
+        "label": (
+            f"VayuSim run {run.pk}, {run.scenario.city.name}, {run.scenario.date_hour.isoformat()}"
+        ),
+        "scenario_run": run.pk,
+        "inputs_hash": run.inputs_hash,
+        "engine_version": run.engine_version,
+        "query_parameters": parameters,
+        "url": f"/api/vayusim/runs/{run.pk}/",
+    }
+    return {
+        "tool": "vayusim_run",
+        "parameters": {"city": run.scenario.city.slug, **parameters},
+        "values": values,
+        "citation": citation,
+    }
+
+
 TOOLS = {
+    "vayusim_run": (VayusimParameters, vayusim_run),
     "city_annual_mean": (AnnualParameters, annual),
     "city_monthly_series": (SeriesParameters, monthly),
     "exceedance_days": (ExceedanceParameters, exceedance),

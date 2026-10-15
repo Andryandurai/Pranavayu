@@ -1,4 +1,4 @@
-"""One serialized CPU inference process; never load the two large models together."""
+"""Embedding RPC; reranking is delegated to its dedicated resident Celery worker."""
 
 import ctypes
 import gc
@@ -105,18 +105,21 @@ class Handler(BaseHTTPRequestHandler):
                         convert_to_numpy=True,
                     )
                     result = {"vectors": vector.astype("float32").tolist()}
+                    # Release the encoder between requests to preserve LLM headroom.
+                    ACTIVE.update(kind=None, model=None)
+                    del model
+                    gc.collect()
+                    ctypes.CDLL("libc.so.6").malloc_trim(0)
                 else:
                     question = payload["question"]
                     if not isinstance(question, str) or not 1 <= len(question) <= 2000:
                         raise ValueError("Invalid question")
-                    model = load_model("rerank")
-                    values = model.predict(
-                        [(question, text) for text in texts],
-                        batch_size=2,
-                        show_progress_bar=False,
-                        convert_to_numpy=True,
-                    )
-                    result = {"scores": values.astype("float32").reshape(-1).tolist()}
+                    from .tasks import rerank_passages
+
+                    scores = rerank_passages.apply_async(
+                        args=[question, texts], queue="rag-rerank"
+                    ).get(timeout=900)
+                    result = {"scores": scores}
             result["seconds"] = time.monotonic() - started
             self.respond(200, result)
         except (ValueError, KeyError, TypeError) as exc:
@@ -127,4 +130,7 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
+    import django
+
+    django.setup()
     ThreadingHTTPServer(("0.0.0.0", 8090), Handler).serve_forever()

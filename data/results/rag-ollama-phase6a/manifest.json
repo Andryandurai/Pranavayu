@@ -1,0 +1,21 @@
+{
+  "archived_at": "2026-10-15T15:24:08.965977+00:00",
+  "complete": true,
+  "provider_only": true,
+  "frozen_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+  "mlflow_run_id": "a70d7abfbf0149b8a4a1f78b8dad544b",
+  "files": {
+    "answers.jsonl": {
+      "sha256": "e9cdc22c035267448de460712e93bd1d2e987f44cf96310fe7cb4799ce8a18a8",
+      "bytes": 212731
+    },
+    "evaluation-state.json": {
+      "sha256": "67ed72605489bf0ab4d255fc46d2c57d9cbafb82d0833c9b204e56c855d9d342",
+      "bytes": 27412
+    },
+    "metrics.json": {
+      "sha256": "ed24b3968b34b1f4c54d848c6dfa669b6d1f46e46adddcf5ddc27b82023cbddf",
+      "bytes": 29760
+    }
+  }
+}

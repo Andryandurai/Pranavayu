@@ -1,12 +1,31 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}EnviroInsights-India{% endblock %}</title>
+  <meta name="theme-color" content="#0b6557">
+  <meta name="description" content="Explore India's air quality through traceable observations, forecasts, cited research and educational dispersion scenarios.">
+  <link rel="stylesheet" href="{% static 'dashboard/site.css' %}">
+  {% block head %}{% endblock %}
 </head>
 <body>
-  <header><a href="{% url 'home' %}">EnviroInsights-India</a></header>
-  <main>{% block content %}{% endblock %}</main>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a href="{% url 'home' %}" class="brand" aria-label="EnviroInsights India home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M7 23C3 9 16 5 26 5c0 15-10 22-19 18Z" stroke="currentColor" stroke-width="2"/><path d="m8 25 14-14M14 19v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>EnviroInsights<small>INDIA · AIR QUALITY RESEARCH</small></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" hidden>Menu <span aria-hidden="true">⌄</span></button>
+    <nav id="site-navigation" class="primary-nav" aria-label="Main navigation">
+      <a href="{% url 'home' %}" {% if request.path == '/' %}aria-current="page"{% endif %}>Overview</a>
+      <a href="{% url 'forecasts' %}" {% if request.path == '/forecasts/' %}aria-current="page"{% endif %}>Forecasts</a>
+      <a href="{% url 'research' %}" {% if request.path == '/research/' %}aria-current="page"{% endif %}>Research</a>
+      <a href="{% url 'library' %}" {% if request.path == '/library/' %}aria-current="page"{% endif %}>Library</a>
+      <a href="{% url 'rag-ask-page' %}" {% if request.path == '/ask/' %}aria-current="page"{% endif %}>Ask</a>
+      <a class="nav-simulator" href="{% url 'simulator' %}" {% if request.path == '/simulator/' %}aria-current="page"{% endif %}>VayuSim <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <script>const navButton=document.querySelector('.nav-toggle'),siteHeader=document.querySelector('.site-header'),siteNavigation=document.getElementById('site-navigation');navButton.hidden=false;siteHeader.classList.add('nav-collapsed');navButton.addEventListener('click',()=>{const open=siteNavigation.classList.toggle('is-open');navButton.setAttribute('aria-expanded',String(open));});</script>
+  <main id="main" class="page-container">{% block content %}{% endblock %}</main>
+  <footer class="site-footer"><div><a class="footer-brand" href="{% url 'home' %}">EnviroInsights · India</a><p>Evidence you can inspect. Estimates you can question.</p></div><nav aria-label="Resources"><a href="{% url 'swagger-ui' %}">API documentation</a><a href="{% url 'health' %}">System health</a><a href="{% url 'admin:index' %}">Curator admin</a></nav><p class="help">Research and educational use. Historical results and replay forecasts retain their original dates.</p></footer>
 </body>
 </html>

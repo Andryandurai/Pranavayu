@@ -1,5 +1,7 @@
 """pgvector cosine + indexed English full-text ranking, RRF and pinned reranking."""
 
+import os
+
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from pgvector.django import CosineDistance
 from rest_framework import serializers
@@ -91,7 +93,9 @@ def citation(chunk):
     }
 
 
-def retrieve(question, filters=None, mode="hybrid_rerank", limit=8, models=None):
+def retrieve(
+    question, filters=None, mode="hybrid_rerank", limit=8, models=None, rerank_candidates=None
+):
     if mode not in {"vector", "keyword", "hybrid", "hybrid_rerank"}:
         raise ValueError("Unknown retrieval mode")
     filters = validate_filters(filters)
@@ -129,6 +133,10 @@ def retrieve(question, filters=None, mode="hybrid_rerank", limit=8, models=None)
         for chunk in selected:
             chunk.fusion_score = scores[chunk.pk]
     if mode == "hybrid_rerank" and selected:
+        candidates = int(rerank_candidates or os.environ.get("RAG_RERANK_CANDIDATES", "40"))
+        if not 10 <= candidates <= 40:
+            raise ValueError("Use 10–40 reranking candidates")
+        selected = selected[:candidates]
         scores = model.rerank(question, [chunk.text for chunk in selected])
         for chunk, score in zip(selected, scores, strict=True):
             chunk.rerank_score = float(score)

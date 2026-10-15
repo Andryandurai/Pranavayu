@@ -16,13 +16,18 @@ from .routing import route_question
 from .verification import REFUSAL, verify_answer
 
 
-def ask(question, filters=None, provider=None, retrieval=None, persist=True):
+def ask(
+    question, filters=None, provider=None, retrieval=None, persist=True, context_tool_calls=None
+):
     if not isinstance(question, str) or not 1 <= len(question.strip()) <= 2000:
         raise serializers.ValidationError("Use a nonempty question up to 2000 characters")
     question = question.strip()
     started = time.monotonic()
     filters = validate_filters(filters)
     route, planned = route_question(question)
+    if context_tool_calls:
+        planned = context_tool_calls
+        route = "mixed"
     evidence, tool_results, failures = [], [], []
     for call in planned:
         try:

@@ -31,6 +31,18 @@ x-app: &app
   restart: unless-stopped
 
 services:
+  rag-reranker:
+    <<: *app
+    environment:
+      <<: *app-environment
+      WAIT_FOR_MIGRATIONS: "1"
+    command: ["celery", "-A", "enviroinsights", "worker", "--pool=threads", "--concurrency=1", "--queues=rag-rerank", "--hostname=rag-rerank@%h", "--loglevel=INFO"]
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A enviroinsights inspect ping --destination=rag-rerank@$$HOSTNAME --timeout=5"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
   rag-models:
     <<: *app
     command: ["python", "-m", "apps.rag.encoder_service"]
@@ -48,6 +60,11 @@ services:
     ports:
       - "127.0.0.1:${OLLAMA_PORT:-11434}:11434"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 10s
+      retries: 30
 
   mlflow:
     <<: *app

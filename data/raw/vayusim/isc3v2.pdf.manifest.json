@@ -1,0 +1,7 @@
+{
+  "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf",
+  "bytes": 584135,
+  "sha256": "c34d6d7d7e1b109abcf182b24fc2bf3003a621d336c11cf6a8e8ccc5f057fe76",
+  "section": "EPA454/B95-003b,1995, pp1-5--1-11,1-32--1-33",
+  "note": "Primary source used for implementation; no coefficient fitted to outcomes"
+}
