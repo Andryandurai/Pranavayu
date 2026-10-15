@@ -151,6 +151,19 @@ limitations rather than being hidden by service readiness.
 
 ## Phase 5 evidence flow
 
+The user-facing capability is **extractive retrieval with verified citations**.
+The optional local Qwen generator failed answer-quality acceptance (2/80
+literature and 0/30 available-data answers retained in its completed evaluation).
+It remains an experimental configured provider, not a certified question-answering
+assistant. Exact citation support checks source text, not independent semantic
+correctness. The Phase 6A audit changes no prompts, provider configuration,
+frozen questions or relevance labels, and evaluates no additional language model.
+The final audit memory check also fails for the installed 3B model:
+4,103,503,872 available bytes versus 5,151,137,904 required. Earlier measurements
+passed; the precise cause of the lower final availability is unverified. Provider
+configuration remains unchanged for reproducibility; explicit extractive mode
+is available, and this audit does not clear new generation.
+
 `apps/rag/library.py` downloads public PDF/HTML and snapshots the five internal
 results/provenance documents. SHA256-addressed bodies, real retrieval times,
 licence notes and failed attempts are recorded in the retained manifest.
@@ -167,8 +180,13 @@ each completed embedding batch persists independently for resume.
 The internal `rag-models` HTTP service produces normalized1024-vectors and releases
 the embedding model after use. Reranking delegates to a dedicated single-slot
 Celery `rag-reranker` worker on queue `rag-rerank`; its pinned model stays resident.
-Top24 RRF candidates passed the frozen Recall@10 gate against40. Model revision,
-float32 and1024-token limits are unchanged. Query/passage/pair caches include revisions and
+Top24 RRF candidates passed the frozen Recall@10 gate against40. The audit isolates
+candidate competition with a shared fresh score vector per query and measures
+uncached cold/warm latency separately. Known-gold recall is measured before the
+unchanged 0.2 relevance floor and eight-passage output; it is not answer-quality
+acceptance. Near-tied ranks can move under small floating-point score differences,
+which are retained in the audit evidence. Model revision, float32 and1024-token
+limits are unchanged. Query/passage/pair caches include revisions and
 content hashes. pgvector cosine HNSW and indexed English full-text retrieval
 remain in PostgreSQL. Metadata filters apply before ranking; missing model
 service connectivity is recorded and permits an explicit keyword fallback.
@@ -223,6 +241,22 @@ and image corners. Threshold masks become WGS84 GeoJSON polygons. The PNG uses
 CPCB PM2.5 category colours only; hourly increments are not actual AQI.
 Scenario explanation validates the stored run and supplies its values as dataset
 evidence alongside library passages. Client parameters remain unverified.
+
+Run responses also derive `interpretation` from the run's retained input snapshot.
+Explicitly declared hypothetical examples are labelled `hypothetical 1 g/s source`;
+an emission rate of 1 alone does not establish that label. Disclosures explain
+linear Q scaling at fixed transport/release geometry and limit population values
+to the grid footprint and known raster support. This presentation metadata does
+not rewrite historical summaries or change numerical input hashes/engine version.
+The stable `highway` preset ID is displayed as road dust resuspension, citing
+AP-42 January 2011 §13.2.1.1 p.13.2.1-1 and §13.2.1.3 p.13.2.1-4. No exhaust,
+brake/tire or universal PM2.5 emission factor is supplied.
+
+The textbook audit distinguishes the Gaussian primitive, checked against the
+independently printed Cimbala PDF p.3 values, from Briggs coefficient arithmetic.
+The latter is a formula check only. Briggs rural-D and that lesson's Martin
+dispersion differ beyond the unchanged tolerances; no coefficients were fitted
+to erase that difference. See the full error table in the Phase 6A audit.
 
 Django templates serve the overview, forecast/research selectors, source library,
 assistant and simulator with shared responsive styling. MapLibre5.24.0 is vendored

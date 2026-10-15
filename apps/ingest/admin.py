@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db import models
 
 from .models import (
     BoundaryProvenance,
@@ -12,6 +13,7 @@ from .models import (
 
 @admin.register(DataSource)
 class DataSourceAdmin(admin.ModelAdmin):
+    formfield_overrides = {models.URLField: {"assume_scheme": "https"}}
     list_display = ["name", "slug", "access_method", "is_active", "url"]
     list_filter = ["access_method", "is_active"]
     search_fields = ["name", "slug", "description"]
@@ -39,6 +41,7 @@ class IngestionRunAdmin(admin.ModelAdmin):
 
 @admin.register(RawAsset)
 class RawAssetAdmin(admin.ModelAdmin):
+    formfield_overrides = {models.URLField: {"assume_scheme": "https"}}
     list_display = ["source", "path", "size_bytes", "sha256", "ingestion_run"]
     list_filter = ["source", "created_at"]
     search_fields = ["path", "sha256", "download_url"]

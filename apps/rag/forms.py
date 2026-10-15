@@ -5,10 +5,19 @@ from django import forms
 from .models import Document
 
 
+class SourceURLField(forms.URLField):
+    """Choose HTTPS for schemeless curator input without a transitional setting."""
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("assume_scheme", "https")
+        super().__init__(*args, **kwargs)
+
+
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ["title", "authors", "year", "category", "source_url", "licence_note", "file"]
+        field_classes = {"source_url": SourceURLField}
 
     def clean(self):
         cleaned = super().clean()

@@ -338,3 +338,17 @@ Dataset citations for `vayusim_run` reference the actual ScenarioRun, input hash
 engine version and read-only run endpoint. They do not reuse an AnalysisRun ID
 for a simulator run. The immutable Phase5 evaluation remains unchanged; the five
 scenario questions live in separate `data/eval/vayusim_eval.jsonl`.
+
+Phase 6A audit response metadata (`interpretation`) is derived from the retained
+ScenarioRun input snapshot, never an edited Scenario. It labels explicitly
+hypothetical unit-release examples, explains fixed-condition linear Q scaling,
+and limits population to the modelled footprint and known raster support.
+It does not change stored inputs, numerical summaries, hashes or engine versions.
+The `highway` preset ID is retained for compatibility but means road dust
+resuspension only; its required total segment PM2.5 emission rate stays null.
+No exhaust factor is stored or inferred. The RAG feature is described as
+extractive retrieval with verified citations; a stored provider name and valid
+citations do not constitute answer-quality certification.
+Memory eligibility is likewise a timestamped resource measurement, separate from
+Query/provider identity and answer quality. The final audit gate fails for the
+installed 3B model; no larger model is evaluated and no provider parameters change.

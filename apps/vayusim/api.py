@@ -16,7 +16,7 @@ from .artifacts import overlay_png
 from .models import Scenario, ScenarioRun
 from .presets import presets
 from .serializers import RunSerializer
-from .service import ensure_grid, run_response, run_scenario
+from .service import ensure_grid, interpretation, run_response, run_scenario
 from .weather import IST, background_stations
 
 
@@ -58,6 +58,7 @@ class GridView(APIView):
                     "limitations": run.summary["limitations"],
                     "flags": run.flags,
                     "contours": run.summary.get("contours"),
+                    "interpretation": interpretation(run.inputs),
                 }
             )
         if kind == "png":

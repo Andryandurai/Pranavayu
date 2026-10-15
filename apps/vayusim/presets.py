@@ -35,9 +35,18 @@ PRESETS = [
     },
     {
         "id": "highway",
-        "name": "Highway segment",
+        "name": "Road dust resuspension",
         "type": "line",
         "section": "AP42 Chapter13.2.1 Paved roads; resuspension only, not tailpipe exhaust",
+        "citation_url": (
+            "https://www.epa.gov/sites/default/files/2020-10/documents/13.2.1_paved_roads.pdf"
+        ),
+        "citation_pages": "13.2.1-1 and 13.2.1-4 (PDF pages 1 and 4), January 2011",
+        "limitation": (
+            "Resuspended paved-road dust only. Exhaust, brake wear and tire wear are excluded. "
+            "Enter the total primary PM2.5 g/s for the entire segment, not g/VKT or g/s/m. "
+            "No fleet-specific exhaust factor is established here."
+        ),
     },
 ]
 
@@ -49,10 +58,17 @@ def presets():
             **preset,
             "defaults": dict.fromkeys(fields),
             "required_parameters": fields,
-            "citations": [{"url": AP42, "section": preset["section"]}],
+            "citations": [
+                {
+                    "url": preset.get("citation_url", AP42),
+                    "section": preset["section"],
+                    **({"pages": preset["citation_pages"]} if "citation_pages" in preset else {}),
+                }
+            ],
             "note": (
                 "No universal source-backed facility values were established; enter explicit "
-                "assumptions. AP42 factors are not default PM2.5 rates."
+                "assumptions. AP42 factors are not default PM2.5 rates. "
+                + preset.get("limitation", "")
             ),
         }
         for preset in PRESETS

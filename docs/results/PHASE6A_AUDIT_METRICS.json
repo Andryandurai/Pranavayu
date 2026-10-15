@@ -1,0 +1,1835 @@
+{
+  "completed_at": "2026-10-15T17:39:03.670374+00:00",
+  "baseline_commit": "b5136b228120635c7a64fdc78980fca2cecff6f1",
+  "scope": "Phase6A audit only; Phase6B not started",
+  "physics": {
+    "references": {
+      "cimbala": {
+        "source_url": "https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf",
+        "source_sha256": "ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462",
+        "pdf_page": 3,
+        "reference_method": "Hand-transcribed from the page's handwritten solution, independently of engine output",
+        "x_m": 4850.0,
+        "q_gs": 110000.0,
+        "transport_wind_ms": 5.0,
+        "effective_height_m": 100.0,
+        "z_m": 0.0,
+        "sigma_y_m": 278.97,
+        "sigma_z_m": 87.51,
+        "concentration_ugm3": 149300.0,
+        "source_dispersion": "Martin; source meteorology is overcast, class D",
+        "scope": "Published-input Gaussian primitive validation; Briggs comparison must be reported separately"
+      },
+      "turner": {
+        "source_url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT",
+        "source_locator": "Chapter 7 Problem 9, Table 7-4; EPA HTML transcription",
+        "printed_page": null,
+        "printed_page_status": "unverified; paginated PDF fetch returned non-PDF HTML",
+        "classification": "formula check only until a physical source page is verified",
+        "x_m": 1000.0,
+        "q_gs": 151.0,
+        "transport_wind_ms": 4.0,
+        "effective_height_m": 150.0,
+        "sigma_y_m": 157.0,
+        "sigma_z_m": 110.0,
+        "rows": [
+          {
+            "z_m": 0.0,
+            "concentration_ugm3": 278.0
+          },
+          {
+            "z_m": 30.0,
+            "concentration_ugm3": 285.0
+          },
+          {
+            "z_m": 150.0,
+            "concentration_ugm3": 358.0
+          }
+        ]
+      },
+      "brune": {
+        "source_url": "https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm",
+        "source_locator": "Section 2.2.5, paragraph following Table 2.3; unpaginated",
+        "x_m": 1000.0,
+        "environment": "rural",
+        "stability": "B",
+        "claimed_briggs_sigma_y_m": 210.0,
+        "claimed_briggs_sigma_z_m": 120.0,
+        "classification": "Source inconsistency diagnostic; paragraph's sigma-y conflicts with its class-B table formula"
+      },
+      "tolerances": {
+        "sigma_relative": 0.05,
+        "concentration_relative": 0.1
+      }
+    },
+    "comparisons": [
+      {
+        "label": "Cimbala PDF p3: Gaussian with published Martin sigmas",
+        "reference": 149300.0,
+        "computed": 149314.35144810504,
+        "absolute_error_percent": 0.009612490358363684,
+        "tolerance_percent": 10.0,
+        "within_tolerance": true,
+        "classification": "textbook validation of Gaussian primitive only"
+      },
+      {
+        "label": "Cimbala PDF p3: Briggs rural-D sigma-y vs published Martin sigma-y",
+        "reference": 278.97,
+        "computed": 318.39665666654065,
+        "absolute_error_percent": 14.132937830784895,
+        "tolerance_percent": 5.0,
+        "within_tolerance": false,
+        "classification": "cross-parameterisation disagreement, not a calibration target"
+      },
+      {
+        "label": "Cimbala PDF p3: Briggs rural-D sigma-z vs published Martin sigma-z",
+        "reference": 87.51,
+        "computed": 101.16003892012024,
+        "absolute_error_percent": 15.598261821643511,
+        "tolerance_percent": 5.0,
+        "within_tolerance": false,
+        "classification": "cross-parameterisation disagreement, not a calibration target"
+      },
+      {
+        "label": "Cimbala PDF p3: Gaussian using Briggs rural-D sigmas",
+        "reference": 149300.0,
+        "computed": 133382.77184471727,
+        "absolute_error_percent": 10.66123788029654,
+        "tolerance_percent": 10.0,
+        "within_tolerance": false,
+        "classification": "cross-parameterisation disagreement, not a calibration target"
+      },
+      {
+        "label": "Turner Table7-4 z=0m",
+        "reference": 278.0,
+        "computed": 274.59242587296325,
+        "absolute_error_percent": 1.2257460888621414,
+        "tolerance_percent": 10.0,
+        "within_tolerance": true,
+        "classification": "formula check only; physical page unverified"
+      },
+      {
+        "label": "Turner Table7-4 z=30m",
+        "reference": 285.0,
+        "computed": 283.0759483866468,
+        "absolute_error_percent": 0.6751058292467318,
+        "tolerance_percent": 10.0,
+        "within_tolerance": true,
+        "classification": "formula check only; physical page unverified"
+      },
+      {
+        "label": "Turner Table7-4 z=150m",
+        "reference": 358.0,
+        "computed": 356.3314215728553,
+        "absolute_error_percent": 0.4660833595376322,
+        "tolerance_percent": 10.0,
+        "within_tolerance": true,
+        "classification": "formula check only; physical page unverified"
+      },
+      {
+        "label": "Brune paragraph class-B sigma-y",
+        "reference": 210.0,
+        "computed": 152.55401427929476,
+        "absolute_error_percent": 27.355231295573923,
+        "tolerance_percent": 5.0,
+        "within_tolerance": false,
+        "classification": "source paragraph/table inconsistency diagnostic"
+      },
+      {
+        "label": "Brune paragraph class-B sigma-z",
+        "reference": 120.0,
+        "computed": 120.0,
+        "absolute_error_percent": 0.0,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "source paragraph/table inconsistency diagnostic"
+      },
+      {
+        "label": "rural/A sigma-y at1km",
+        "reference": 209.762,
+        "computed": 209.7617696340303,
+        "absolute_error_percent": 0.00010982254636844392,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "rural/A sigma-z at1km",
+        "reference": 200.0,
+        "computed": 200.0,
+        "absolute_error_percent": 0.0,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "rural/B sigma-y at1km",
+        "reference": 152.554,
+        "computed": 152.55401427929476,
+        "absolute_error_percent": 9.360157557287651e-06,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "rural/B sigma-z at1km",
+        "reference": 120.0,
+        "computed": 120.0,
+        "absolute_error_percent": 0.0,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "rural/D sigma-y at1km",
+        "reference": 76.277,
+        "computed": 76.27700713964738,
+        "absolute_error_percent": 9.360157557287651e-06,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "rural/D sigma-z at1km",
+        "reference": 37.947,
+        "computed": 37.94733192202055,
+        "absolute_error_percent": 0.0008746989763348054,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "rural/F sigma-y at1km",
+        "reference": 38.139,
+        "computed": 38.13850356982369,
+        "absolute_error_percent": 0.0013016339608075756,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "rural/F sigma-z at1km",
+        "reference": 12.308,
+        "computed": 12.307692307692307,
+        "absolute_error_percent": 0.0024999375015699573,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "urban/A sigma-y at1km",
+        "reference": 270.449,
+        "computed": 270.4493615131253,
+        "absolute_error_percent": 0.00013367145942959306,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "urban/A sigma-z at1km",
+        "reference": 339.411,
+        "computed": 339.4112549695428,
+        "absolute_error_percent": 7.512117840108056e-05,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "urban/D sigma-y at1km",
+        "reference": 135.225,
+        "computed": 135.22468075656266,
+        "absolute_error_percent": 0.0002360831483318961,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "urban/D sigma-z at1km",
+        "reference": 122.788,
+        "computed": 122.78812270298408,
+        "absolute_error_percent": 9.993076203393776e-05,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "urban/F sigma-y at1km",
+        "reference": 92.967,
+        "computed": 92.96696802013683,
+        "absolute_error_percent": 3.439915579345148e-05,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      },
+      {
+        "label": "urban/F sigma-z at1km",
+        "reference": 50.596,
+        "computed": 50.59644256269407,
+        "absolute_error_percent": 0.00087469897635353,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "classification": "formula check only: rounded evaluation of same formula, no independently printed numerical reference"
+      }
+    ]
+  },
+  "reranker": {
+    "identity": {
+      "evaluation_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+      "computation_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e:float32:maxlen1024",
+      "batch_size": 2,
+      "seed": 20261010,
+      "cpu_threads": 4,
+      "corpus": [
+        {
+          "pk": 1,
+          "sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65"
+        },
+        {
+          "pk": 2,
+          "sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243"
+        },
+        {
+          "pk": 3,
+          "sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37"
+        },
+        {
+          "pk": 4,
+          "sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87"
+        },
+        {
+          "pk": 5,
+          "sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985"
+        },
+        {
+          "pk": 6,
+          "sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8"
+        },
+        {
+          "pk": 7,
+          "sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1"
+        },
+        {
+          "pk": 8,
+          "sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5"
+        },
+        {
+          "pk": 9,
+          "sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0"
+        },
+        {
+          "pk": 10,
+          "sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536"
+        },
+        {
+          "pk": 11,
+          "sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c"
+        },
+        {
+          "pk": 12,
+          "sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35"
+        },
+        {
+          "pk": 13,
+          "sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c"
+        },
+        {
+          "pk": 14,
+          "sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f"
+        },
+        {
+          "pk": 15,
+          "sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b"
+        },
+        {
+          "pk": 16,
+          "sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2"
+        },
+        {
+          "pk": 17,
+          "sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7"
+        },
+        {
+          "pk": 18,
+          "sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac"
+        },
+        {
+          "pk": 19,
+          "sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860"
+        },
+        {
+          "pk": 20,
+          "sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1"
+        },
+        {
+          "pk": 21,
+          "sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919"
+        },
+        {
+          "pk": 22,
+          "sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc"
+        },
+        {
+          "pk": 23,
+          "sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89"
+        },
+        {
+          "pk": 24,
+          "sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0"
+        },
+        {
+          "pk": 25,
+          "sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce"
+        },
+        {
+          "pk": 26,
+          "sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928"
+        },
+        {
+          "pk": 27,
+          "sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc"
+        },
+        {
+          "pk": 28,
+          "sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2"
+        },
+        {
+          "pk": 29,
+          "sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0"
+        }
+      ]
+    },
+    "questions": 80,
+    "metrics": {
+      "24": {
+        "recall_at_5": 0.809375,
+        "recall_at_10": 0.903125,
+        "mrr": 0.7010148358585859
+      },
+      "32": {
+        "recall_at_5": 0.803125,
+        "recall_at_10": 0.884375,
+        "mrr": 0.700181277056277
+      },
+      "40": {
+        "recall_at_5": 0.803125,
+        "recall_at_10": 0.884375,
+        "mrr": 0.6932707917082916
+      }
+    },
+    "fresh_40_mean_seconds": 63.42580055426258,
+    "note": "Every query freshly scored all 40 once without pair cache. K subsets share these fixed scores to isolate candidate competition; MRR is through K.",
+    "timing": {
+      "24": {
+        "identity": {
+          "evaluation_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+          "computation_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e:float32:maxlen1024",
+          "batch_size": 2,
+          "seed": 20261010,
+          "cpu_threads": 4,
+          "corpus": [
+            {
+              "pk": 1,
+              "sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65"
+            },
+            {
+              "pk": 2,
+              "sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243"
+            },
+            {
+              "pk": 3,
+              "sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37"
+            },
+            {
+              "pk": 4,
+              "sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87"
+            },
+            {
+              "pk": 5,
+              "sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985"
+            },
+            {
+              "pk": 6,
+              "sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8"
+            },
+            {
+              "pk": 7,
+              "sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1"
+            },
+            {
+              "pk": 8,
+              "sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5"
+            },
+            {
+              "pk": 9,
+              "sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0"
+            },
+            {
+              "pk": 10,
+              "sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536"
+            },
+            {
+              "pk": 11,
+              "sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c"
+            },
+            {
+              "pk": 12,
+              "sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35"
+            },
+            {
+              "pk": 13,
+              "sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c"
+            },
+            {
+              "pk": 14,
+              "sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f"
+            },
+            {
+              "pk": 15,
+              "sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b"
+            },
+            {
+              "pk": 16,
+              "sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2"
+            },
+            {
+              "pk": 17,
+              "sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7"
+            },
+            {
+              "pk": 18,
+              "sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac"
+            },
+            {
+              "pk": 19,
+              "sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860"
+            },
+            {
+              "pk": 20,
+              "sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1"
+            },
+            {
+              "pk": 21,
+              "sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919"
+            },
+            {
+              "pk": 22,
+              "sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc"
+            },
+            {
+              "pk": 23,
+              "sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89"
+            },
+            {
+              "pk": 24,
+              "sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0"
+            },
+            {
+              "pk": 25,
+              "sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce"
+            },
+            {
+              "pk": 26,
+              "sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928"
+            },
+            {
+              "pk": 27,
+              "sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc"
+            },
+            {
+              "pk": 28,
+              "sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2"
+            },
+            {
+              "pk": 29,
+              "sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0"
+            }
+          ]
+        },
+        "k": 24,
+        "query_id": "L001",
+        "candidate_ids": [
+          45552,
+          45553,
+          45570,
+          39792,
+          39796,
+          43520,
+          43893,
+          50876,
+          51250,
+          45554,
+          51158,
+          43958,
+          51152,
+          43861,
+          51126,
+          43913,
+          50947,
+          51399,
+          43951,
+          50842,
+          43544,
+          44023,
+          50463,
+          50948
+        ],
+        "rows": [
+          {
+            "state": "cold",
+            "seconds": 63.86151804200017,
+            "server_seconds": 63.846471598999415,
+            "scores": [
+              0.9998537302017212,
+              0.9971815347671509,
+              0.9959031939506531,
+              0.9946927428245544,
+              0.9743959903717041,
+              0.007045987527817488,
+              0.008000697009265423,
+              0.04482844099402428,
+              0.0030717579647898674,
+              0.021929927170276642,
+              4.409346729516983e-05,
+              0.02062900736927986,
+              4.5564243919216096e-05,
+              4.5564243919216096e-05,
+              0.0036779618822038174,
+              4.229744081385434e-05,
+              0.008586824871599674,
+              3.863895108224824e-05,
+              0.00074523885268718,
+              0.00014548184117302299,
+              0.05383514240384102,
+              0.013742364943027496,
+              7.350809028139338e-05,
+              0.006306560710072517
+            ]
+          },
+          {
+            "state": "warm",
+            "seconds": 31.741508175999115,
+            "server_seconds": 31.734776579000027,
+            "scores": [
+              0.9998537302017212,
+              0.9971815347671509,
+              0.9959031939506531,
+              0.9946927428245544,
+              0.9743959903717041,
+              0.007045987527817488,
+              0.008000697009265423,
+              0.04482844099402428,
+              0.0030717579647898674,
+              0.021929927170276642,
+              4.409346729516983e-05,
+              0.02062900736927986,
+              4.5564243919216096e-05,
+              4.5564243919216096e-05,
+              0.0036779618822038174,
+              4.229744081385434e-05,
+              0.008586824871599674,
+              3.863895108224824e-05,
+              0.00074523885268718,
+              0.00014548184117302299,
+              0.05383514240384102,
+              0.013742364943027496,
+              7.350809028139338e-05,
+              0.006306560710072517
+            ]
+          }
+        ],
+        "note": "Worker restarted immediately before this command. Cold model load, not cold OS disk cache. Both RPCs bypass pair score cache; query embedding is cached."
+      },
+      "32": {
+        "identity": {
+          "evaluation_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+          "computation_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e:float32:maxlen1024",
+          "batch_size": 2,
+          "seed": 20261010,
+          "cpu_threads": 4,
+          "corpus": [
+            {
+              "pk": 1,
+              "sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65"
+            },
+            {
+              "pk": 2,
+              "sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243"
+            },
+            {
+              "pk": 3,
+              "sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37"
+            },
+            {
+              "pk": 4,
+              "sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87"
+            },
+            {
+              "pk": 5,
+              "sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985"
+            },
+            {
+              "pk": 6,
+              "sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8"
+            },
+            {
+              "pk": 7,
+              "sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1"
+            },
+            {
+              "pk": 8,
+              "sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5"
+            },
+            {
+              "pk": 9,
+              "sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0"
+            },
+            {
+              "pk": 10,
+              "sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536"
+            },
+            {
+              "pk": 11,
+              "sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c"
+            },
+            {
+              "pk": 12,
+              "sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35"
+            },
+            {
+              "pk": 13,
+              "sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c"
+            },
+            {
+              "pk": 14,
+              "sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f"
+            },
+            {
+              "pk": 15,
+              "sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b"
+            },
+            {
+              "pk": 16,
+              "sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2"
+            },
+            {
+              "pk": 17,
+              "sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7"
+            },
+            {
+              "pk": 18,
+              "sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac"
+            },
+            {
+              "pk": 19,
+              "sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860"
+            },
+            {
+              "pk": 20,
+              "sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1"
+            },
+            {
+              "pk": 21,
+              "sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919"
+            },
+            {
+              "pk": 22,
+              "sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc"
+            },
+            {
+              "pk": 23,
+              "sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89"
+            },
+            {
+              "pk": 24,
+              "sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0"
+            },
+            {
+              "pk": 25,
+              "sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce"
+            },
+            {
+              "pk": 26,
+              "sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928"
+            },
+            {
+              "pk": 27,
+              "sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc"
+            },
+            {
+              "pk": 28,
+              "sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2"
+            },
+            {
+              "pk": 29,
+              "sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0"
+            }
+          ]
+        },
+        "k": 32,
+        "query_id": "L001",
+        "candidate_ids": [
+          45552,
+          45553,
+          45570,
+          39792,
+          39796,
+          43520,
+          43893,
+          50876,
+          51250,
+          45554,
+          51158,
+          43958,
+          51152,
+          43861,
+          51126,
+          43913,
+          50947,
+          51399,
+          43951,
+          50842,
+          43544,
+          44023,
+          50463,
+          50948,
+          51205,
+          43533,
+          45585,
+          46012,
+          50464,
+          51265,
+          51683,
+          45567
+        ],
+        "rows": [
+          {
+            "state": "cold",
+            "seconds": 76.97445576000064,
+            "server_seconds": 76.96346485899994,
+            "scores": [
+              0.9998537302017212,
+              0.9971815347671509,
+              0.9959031939506531,
+              0.9946927428245544,
+              0.9743959903717041,
+              0.007045981474220753,
+              0.008000697009265423,
+              0.04482844099402428,
+              0.0030717579647898674,
+              0.02192993275821209,
+              4.409346729516983e-05,
+              0.020629027858376503,
+              4.5564243919216096e-05,
+              4.5564243919216096e-05,
+              0.003677960252389312,
+              4.229744081385434e-05,
+              0.008586833253502846,
+              3.863895108224824e-05,
+              0.00074523885268718,
+              0.00014548184117302299,
+              0.05383504554629326,
+              0.013742364943027496,
+              7.350836676778272e-05,
+              0.006306560710072517,
+              2.5166958948830143e-05,
+              0.02636060304939747,
+              0.2500627636909485,
+              0.024481549859046936,
+              9.243241220247e-05,
+              3.502038089209236e-05,
+              0.00336820469237864,
+              0.0014469277812168002
+            ]
+          },
+          {
+            "state": "warm",
+            "seconds": 42.284033265999824,
+            "server_seconds": 42.279255674000524,
+            "scores": [
+              0.9998537302017212,
+              0.9971815347671509,
+              0.9959031939506531,
+              0.9946927428245544,
+              0.9743959903717041,
+              0.007045981474220753,
+              0.008000697009265423,
+              0.04482844099402428,
+              0.0030717579647898674,
+              0.02192993275821209,
+              4.409346729516983e-05,
+              0.020629027858376503,
+              4.5564243919216096e-05,
+              4.5564243919216096e-05,
+              0.003677960252389312,
+              4.229744081385434e-05,
+              0.008586833253502846,
+              3.863895108224824e-05,
+              0.00074523885268718,
+              0.00014548184117302299,
+              0.05383504554629326,
+              0.013742364943027496,
+              7.350836676778272e-05,
+              0.006306560710072517,
+              2.5166958948830143e-05,
+              0.02636060304939747,
+              0.2500627636909485,
+              0.024481549859046936,
+              9.243241220247e-05,
+              3.502038089209236e-05,
+              0.00336820469237864,
+              0.0014469277812168002
+            ]
+          }
+        ],
+        "note": "Worker restarted immediately before this command. Cold model load, not cold OS disk cache. Both RPCs bypass pair score cache; query embedding is cached."
+      },
+      "40": {
+        "identity": {
+          "evaluation_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+          "computation_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e:float32:maxlen1024",
+          "batch_size": 2,
+          "seed": 20261010,
+          "cpu_threads": 4,
+          "corpus": [
+            {
+              "pk": 1,
+              "sha256": "0dfbd3bc2dbeb5d79845ea7fdc79efa7b5501f9de905fdb8bbec30f09e06bd65"
+            },
+            {
+              "pk": 2,
+              "sha256": "8fd0d426bad2213f614da7217f8ab1a173f64091ad886a4aa822014d63fc6243"
+            },
+            {
+              "pk": 3,
+              "sha256": "d2b0fd754a8f9fb36919ec8d5a41e85a81b471dc4ebcf7831e3a1172aee8db37"
+            },
+            {
+              "pk": 4,
+              "sha256": "e2c5abc26d0115c494385a1f3345e4b340294d128a2b0161278d3a4452cd7c87"
+            },
+            {
+              "pk": 5,
+              "sha256": "6c6cd88161d4784ae355b86aa54a28ac9c818640fff781da0120b21471b0a985"
+            },
+            {
+              "pk": 6,
+              "sha256": "2552f49db15ad0c2728ab47f0806703578fb62511f3f7d28e732596c17f5c9d8"
+            },
+            {
+              "pk": 7,
+              "sha256": "d03b06f219615455274e4153120736d7d768b51f206342f761176f75b3dfe6a1"
+            },
+            {
+              "pk": 8,
+              "sha256": "d7e8f189691f21f5e7f497a4ec2ebb56709a0da62ae1f4c0cbb419d76e47f9f5"
+            },
+            {
+              "pk": 9,
+              "sha256": "45bdb0aae419f7d61e0715ebe06231e45649bfc48f4ebd60a94eab3ab92a0fa0"
+            },
+            {
+              "pk": 10,
+              "sha256": "444fddb853547c39f84a68332fe2e633a091949464bc5968067d0a26c78e0536"
+            },
+            {
+              "pk": 11,
+              "sha256": "b388e47e296d890d0a09472ea5eff86f7fd6618c208968b960a1aa1c13e1636c"
+            },
+            {
+              "pk": 12,
+              "sha256": "311aeb3737c18fc2f67ea97d6eda69a10da364d1d5b261e7795b7f1e4b31cd35"
+            },
+            {
+              "pk": 13,
+              "sha256": "1d634da86704d7d91d22e4c33ca06d7b589997bad9d991b4f38aec2c0e4a118c"
+            },
+            {
+              "pk": 14,
+              "sha256": "0b98e1d3b7a99200d49c137048fc01132c44711aeb2e03b9b348a60ba659c64f"
+            },
+            {
+              "pk": 15,
+              "sha256": "f16dee4f7eeaa0abc45e96e22c120819acfe074a41c9dc0e7698d9b4c939fa6b"
+            },
+            {
+              "pk": 16,
+              "sha256": "24b658f3014760cb2cec2a623df75ae34440003c874b86bcb55b7d39b3dfe7a2"
+            },
+            {
+              "pk": 17,
+              "sha256": "9ef7854680f42f90cdb7f3da49a6b863e4a228da0038f2a146386620a83038e7"
+            },
+            {
+              "pk": 18,
+              "sha256": "a4bdc7f7249bcfb4fc26cb0254c21ee03149635abaf4014d36747100825ca6ac"
+            },
+            {
+              "pk": 19,
+              "sha256": "952d87bdd911430afab3f68c557e5a7495e2652321e762fdf3c75f08cba16860"
+            },
+            {
+              "pk": 20,
+              "sha256": "036d9ae4d7edbdb0dad8bc65404766987aaca0d5bf06df151601505887bcbbb1"
+            },
+            {
+              "pk": 21,
+              "sha256": "76fdc9c13823ee8967bd689596efc94131149e732094dae4c7da27c9bdb4c919"
+            },
+            {
+              "pk": 22,
+              "sha256": "75524fd0fb40809bdbde30cceab22c3d0d5dd49c5881575668713297800f35dc"
+            },
+            {
+              "pk": 23,
+              "sha256": "0b9bc75e783ec8eb3e31485ca9b0d05b589441ea4f0310507b5e685dc9dfab89"
+            },
+            {
+              "pk": 24,
+              "sha256": "cc494816d5de7169ce77a8c58d38bac74e9b8b5a9de1658198474210b603e5d0"
+            },
+            {
+              "pk": 25,
+              "sha256": "e5c6071776d636bb7a3d92eeaaaa142f3fb79472dbe5cd12abc5d6e803241fce"
+            },
+            {
+              "pk": 26,
+              "sha256": "e150d7ccd6765b319cd0f4054ade5fe371279beda783ba1f51bb4b5d61f3a928"
+            },
+            {
+              "pk": 27,
+              "sha256": "a3940dff35cfa8c553448585864706edc7979632cf130dd6f07cc6a23cec8ccc"
+            },
+            {
+              "pk": 28,
+              "sha256": "7bbe4c626f4a17e3362acf7b39f8ab3d013eebf68ea9ad0889c743e6883c20c2"
+            },
+            {
+              "pk": 29,
+              "sha256": "d97393dfafa177243f7df651456865c0b18c53fc4f10e14a3bbe939fd99aeec0"
+            }
+          ]
+        },
+        "k": 40,
+        "query_id": "L001",
+        "candidate_ids": [
+          45552,
+          45553,
+          45570,
+          39792,
+          39796,
+          43520,
+          43893,
+          50876,
+          51250,
+          45554,
+          51158,
+          43958,
+          51152,
+          43861,
+          51126,
+          43913,
+          50947,
+          51399,
+          43951,
+          50842,
+          43544,
+          44023,
+          50463,
+          50948,
+          51205,
+          43533,
+          45585,
+          46012,
+          50464,
+          51265,
+          51683,
+          45567,
+          48206,
+          43519,
+          43974,
+          44792,
+          46021,
+          50923,
+          51170,
+          47471
+        ],
+        "rows": [
+          {
+            "state": "cold",
+            "seconds": 102.60953439500008,
+            "server_seconds": 102.56318947,
+            "scores": [
+              0.9998537302017212,
+              0.9971815347671509,
+              0.9959031939506531,
+              0.9946927428245544,
+              0.9743959903717041,
+              0.007045987527817488,
+              0.008000688627362251,
+              0.04482844099402428,
+              0.0030717579647898674,
+              0.021929914131760597,
+              4.409346729516983e-05,
+              0.020629050210118294,
+              4.5564243919216096e-05,
+              4.5564243919216096e-05,
+              0.0036779618822038174,
+              4.229744081385434e-05,
+              0.008586824871599674,
+              3.863902747980319e-05,
+              0.0007452385034412146,
+              0.00014548184117302299,
+              0.05383514240384102,
+              0.013742351904511452,
+              7.350836676778272e-05,
+              0.006306566763669252,
+              2.5166958948830143e-05,
+              0.026360584422945976,
+              0.2500622868537903,
+              0.02448153868317604,
+              9.243241220247e-05,
+              3.502038089209236e-05,
+              0.0033681984059512615,
+              0.0014469277812168002,
+              0.01380310021340847,
+              0.0022700615227222443,
+              3.445888796704821e-05,
+              2.4654815206304193e-05,
+              0.019342534244060516,
+              2.4654791559441946e-05,
+              0.014997579157352448,
+              0.034616123884916306
+            ]
+          },
+          {
+            "state": "warm",
+            "seconds": 52.454253896999944,
+            "server_seconds": 52.44106854399979,
+            "scores": [
+              0.9998537302017212,
+              0.9971815347671509,
+              0.9959031939506531,
+              0.9946927428245544,
+              0.9743959903717041,
+              0.007045987527817488,
+              0.008000688627362251,
+              0.04482844099402428,
+              0.0030717579647898674,
+              0.021929914131760597,
+              4.409346729516983e-05,
+              0.020629050210118294,
+              4.5564243919216096e-05,
+              4.5564243919216096e-05,
+              0.0036779618822038174,
+              4.229744081385434e-05,
+              0.008586824871599674,
+              3.863902747980319e-05,
+              0.0007452385034412146,
+              0.00014548184117302299,
+              0.05383514240384102,
+              0.013742351904511452,
+              7.350836676778272e-05,
+              0.006306566763669252,
+              2.5166958948830143e-05,
+              0.026360584422945976,
+              0.2500622868537903,
+              0.02448153868317604,
+              9.243241220247e-05,
+              3.502038089209236e-05,
+              0.0033681984059512615,
+              0.0014469277812168002,
+              0.01380310021340847,
+              0.0022700615227222443,
+              3.445888796704821e-05,
+              2.4654815206304193e-05,
+              0.019342534244060516,
+              2.4654791559441946e-05,
+              0.014997579157352448,
+              0.034616123884916306
+            ]
+          }
+        ],
+        "note": "Worker restarted immediately before this command. Cold model load, not cold OS disk cache. Both RPCs bypass pair score cache; query embedding is cached."
+      }
+    },
+    "probe_score_invariance": {
+      "24": {
+        "cold_warm_max_score_difference": 0.0,
+        "warm_prefix_max_difference_from_40": 4.284083843231201e-08
+      },
+      "32": {
+        "cold_warm_max_score_difference": 0.0,
+        "warm_prefix_max_difference_from_40": 4.76837158203125e-07
+      },
+      "40": {
+        "cold_warm_max_score_difference": 0.0,
+        "warm_prefix_max_difference_from_40": 0.0
+      }
+    },
+    "score_cache_audit": {
+      "queries": 80,
+      "queries_with_complete_old_pair_cache": 80,
+      "old_orders_reconstructed": 80,
+      "unchanged_top10_orders": 79,
+      "unchanged_top10_sets": 80,
+      "max_absolute_score_difference": 7.450580596923828e-08
+    },
+    "explanation": {
+      "historical": {
+        "queries": 80,
+        "all_restricted_orders_equal": true,
+        "all_subsets": true,
+        "gaining_queries": [
+          {
+            "id": "L025",
+            "restricted_40_order_equals_24": true,
+            "24_subset_of_40": true,
+            "delta_recall10": 1.0,
+            "gained_gold": [
+              50660
+            ],
+            "lost_gold": [],
+            "removed_higher_ranked_non_gold": [
+              50644,
+              50681
+            ]
+          },
+          {
+            "id": "L072",
+            "restricted_40_order_equals_24": true,
+            "24_subset_of_40": true,
+            "delta_recall10": 1.0,
+            "gained_gold": [
+              43818
+            ],
+            "lost_gold": [],
+            "removed_higher_ranked_non_gold": [
+              43545,
+              50687,
+              47410,
+              43796
+            ]
+          }
+        ],
+        "losing_queries": [
+          {
+            "id": "L023",
+            "restricted_40_order_equals_24": true,
+            "24_subset_of_40": true,
+            "delta_recall10": -0.5,
+            "gained_gold": [],
+            "lost_gold": [
+              50659
+            ],
+            "removed_higher_ranked_non_gold": []
+          }
+        ]
+      },
+      "label_limit": "Non-gold means not in the frozen incomplete known-gold labels; not proof of semantic irrelevance.",
+      "fresh": {
+        "queries": 80,
+        "all_fixed_score_restricted_orders_equal": true,
+        "historical_40_candidate_sets_unchanged": 80,
+        "historical_40_orders_unchanged": 76,
+        "historical_24_orders_unchanged": 77,
+        "gaining_queries": [
+          {
+            "id": "L025",
+            "same_40_candidate_set_as_historical": true,
+            "same_24_order_as_historical": true,
+            "same_40_order_as_historical": true,
+            "restricted_40_order_equals_24": true,
+            "delta_recall10": 1.0,
+            "gains": [
+              {
+                "gold_id": 50660,
+                "fixed_score": 0.0732894241809845,
+                "rank24": 10,
+                "rank40": 13,
+                "removed_non_gold_ahead": [
+                  {
+                    "chunk_id": 50644,
+                    "fixed_score": 0.26498523354530334,
+                    "rank40": 1
+                  },
+                  {
+                    "chunk_id": 50681,
+                    "fixed_score": 0.10567616671323776,
+                    "rank40": 10
+                  }
+                ]
+              }
+            ],
+            "lost_gold": [],
+            "exact_score_ties": 0
+          },
+          {
+            "id": "L072",
+            "same_40_candidate_set_as_historical": true,
+            "same_24_order_as_historical": true,
+            "same_40_order_as_historical": true,
+            "restricted_40_order_equals_24": true,
+            "delta_recall10": 1.0,
+            "gains": [
+              {
+                "gold_id": 43818,
+                "fixed_score": 0.07520218193531036,
+                "rank24": 9,
+                "rank40": 14,
+                "removed_non_gold_ahead": [
+                  {
+                    "chunk_id": 43545,
+                    "fixed_score": 0.6046100854873657,
+                    "rank40": 2
+                  },
+                  {
+                    "chunk_id": 50687,
+                    "fixed_score": 0.3064039945602417,
+                    "rank40": 5
+                  },
+                  {
+                    "chunk_id": 47410,
+                    "fixed_score": 0.18975983560085297,
+                    "rank40": 9
+                  },
+                  {
+                    "chunk_id": 43796,
+                    "fixed_score": 0.1807910054922104,
+                    "rank40": 10
+                  }
+                ]
+              }
+            ],
+            "lost_gold": [],
+            "exact_score_ties": 0
+          }
+        ],
+        "losing_queries": [
+          {
+            "id": "L023",
+            "same_40_candidate_set_as_historical": true,
+            "same_24_order_as_historical": false,
+            "same_40_order_as_historical": false,
+            "restricted_40_order_equals_24": true,
+            "delta_recall10": -0.5,
+            "gains": [],
+            "lost_gold": [
+              50659
+            ],
+            "exact_score_ties": 11
+          }
+        ],
+        "any_score_tie_queries": [
+          "L001",
+          "L009",
+          "L014",
+          "L015",
+          "L017",
+          "L020",
+          "L023",
+          "L050",
+          "L075",
+          "L079"
+        ]
+      }
+    },
+    "cause_proven": true,
+    "fresh_drop": -0.018749999999999933,
+    "legacy_drop": -0.018749999999999933,
+    "chosen_default": 24
+  },
+  "assistant": {
+    "environment": {
+      "captured_at": "2026-10-15T17:35:46.095413+00:00",
+      "installed_ram_bytes": 17179869184,
+      "installed_ram_source": "Actual Win32_PhysicalMemory Capacity sum in command 009-frozen-identities-health",
+      "os_usable_ram_bytes": 16852574208,
+      "os_usable_ram_source": "Actual Win32_ComputerSystem measurement in command 007-runtime-and-artifact-inventory",
+      "wslconfig_path": "C:\\Users\\Andry\\.wslconfig",
+      "wslconfig_exists": true,
+      "wslconfig_content": "[wsl2]\nmemory=9GB\n",
+      "backup_path": "C:\\Users\\Andry\\.wslconfig.phase6a-audit-20261015.bak",
+      "backup_exists": true,
+      "wslconfig_sha256": "d4f748ea8f222563e1beb8319e62496c62635ce052aa4dd380ee332b73375268",
+      "backup_sha256": "d4f748ea8f222563e1beb8319e62496c62635ce052aa4dd380ee332b73375268",
+      "backup_scope": "Current 9GB settings preserved during audit. No pre-Phase6A original file existed; no retrospective original backup is claimed.",
+      "health_http_status": 200,
+      "health": {
+        "ok": true,
+        "checks": {
+          "database": {
+            "ok": true
+          },
+          "extensions": {
+            "postgis": {
+              "ok": true,
+              "version": "3.6.4"
+            },
+            "timescaledb": {
+              "ok": true,
+              "version": "2.30.2"
+            },
+            "vector": {
+              "ok": true,
+              "version": "0.8.7"
+            }
+          },
+          "redis": {
+            "ok": true
+          },
+          "celery": {
+            "ok": true
+          }
+        }
+      },
+      "memory": {
+        "MemTotal": 9373011968,
+        "MemAvailable": 4103503872,
+        "SwapTotal": 3221225472,
+        "SwapFree": 3126157312
+      },
+      "installed_models": [
+        {
+          "name": "qwen2.5:3b-instruct",
+          "model": "qwen2.5:3b-instruct",
+          "modified_at": "2026-10-14T17:30:36.3698982Z",
+          "size": 1929912432,
+          "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+          "details": {
+            "parent_model": "",
+            "format": "gguf",
+            "family": "qwen2",
+            "families": [
+              "qwen2"
+            ],
+            "parameter_size": "3.1B",
+            "quantization_level": "Q4_K_M",
+            "context_length": 32768,
+            "embedding_length": 2048,
+            "runner": "ggml"
+          },
+          "capabilities": [
+            "completion",
+            "tools"
+          ]
+        }
+      ],
+      "qwen_3b_required_bytes": 5151137904,
+      "qwen_3b_gate": false,
+      "larger_model_evaluated": false,
+      "larger_model_decision": "Optional larger-model evaluation declined. Preserve provider/prompt configuration and report existing failed quality honestly."
+    },
+    "memory_history": {
+      "earlier": {
+        "captured_at": "2026-10-15T16:10:00.632544+00:00",
+        "available_bytes": 5415559168,
+        "required_bytes": 5151137904,
+        "gate": true
+      },
+      "final": {
+        "captured_at": "2026-10-15T17:35:46.095413+00:00",
+        "available_bytes": 4103503872,
+        "required_bytes": 5151137904,
+        "gate": false
+      },
+      "interpretation": "Resource gate varies with resident services and test/inference allocations. Cause of the lower final availability is unverified; no generation/model evaluation was performed by this audit."
+    },
+    "new_language_model_evaluations": 0,
+    "existing_qwen_metrics": {
+      "questions": 120,
+      "citations": 2,
+      "citation_accuracy": 1.0,
+      "audited_citation_uses": 2,
+      "correct_citation_uses": 2,
+      "groundedness_before_removal": 0.016666666666666666,
+      "groundedness_emitted": 1.0,
+      "emitted_sentences": 2,
+      "supported_emitted_sentences": 2,
+      "claims": 120,
+      "supported_claims": 2,
+      "removed_claims": 118,
+      "number_correctness": 0.0,
+      "numeric_precision": null,
+      "numeric_cell_exactness": 0.0,
+      "correct_numeric_values": 0,
+      "expected_numeric_values": 669,
+      "extra_numeric_values": 0,
+      "available_data_questions": 30,
+      "missing_data_questions": 0,
+      "available_data_answer_rate": 0.0,
+      "missing_data_refusal_rate": null,
+      "displayed_row_exactness": 0.0,
+      "correct_data_rows": 0,
+      "expected_data_rows": 491,
+      "data_questions_exact": 0.9,
+      "correct_refusal_rate": 1.0,
+      "literature_answer_rate": 0.025,
+      "literature_gold_source_citation_rate": 0.025,
+      "latency_seconds_mean": 80.76179166666667,
+      "generation_fallbacks": 0
+    },
+    "description": "extractive retrieval with verified citations",
+    "answer_quality_acceptance": "not passed"
+  },
+  "warnings": {
+    "before": {
+      "total": 149,
+      "project_originated": 2,
+      "third_party": 147,
+      "drf": 0,
+      "groups": [
+        {
+          "source": "Django / project URL-form configuration",
+          "category": "RemovedInDjango60Warning",
+          "message": "The default scheme will be changed from 'http' to 'https' in Django 6.0. Pass the forms.URLField.assume_scheme argument to silence this warning, or set the FORMS_URLFIELD_ASSUME_HTTPS transitional setting to True to opt into using 'https' as the new default scheme.",
+          "project_origin": true,
+          "reason": "Fixed with an explicit HTTPS URL form field and admin field overrides; no transitional setting or warning filter.",
+          "count": 1
+        },
+        {
+          "source": "MLflow / project model adapter",
+          "category": "UserWarning",
+          "message": "Add type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details.",
+          "project_origin": true,
+          "reason": "Fixed RegisteredForecaster.predict DataFrame input and ndarray return annotations; no warning filter.",
+          "count": 1
+        },
+        {
+          "source": "SHAP / matplotlib",
+          "category": "PendingDeprecationWarning",
+          "message": "The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.",
+          "project_origin": false,
+          "reason": "Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade.",
+          "count": 1
+        },
+        {
+          "source": "SHAP / matplotlib",
+          "category": "PendingDeprecationWarning",
+          "message": "The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.",
+          "project_origin": false,
+          "reason": "Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade.",
+          "count": 1
+        },
+        {
+          "source": "SHAP / matplotlib",
+          "category": "PendingDeprecationWarning",
+          "message": "The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.",
+          "project_origin": false,
+          "reason": "Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade.",
+          "count": 1
+        },
+        {
+          "source": "netCDF4 / NumPy",
+          "category": "RuntimeWarning",
+          "message": "numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject",
+          "project_origin": false,
+          "reason": "Error-mode trace identifies compiled netCDF4._netCDF4 import. Existing parser tests pass, but full ABI compatibility is unverified; retain visibly pending compatible wheel/rebuild.",
+          "count": 1
+        },
+        {
+          "source": "pandas / NumPy",
+          "category": "DeprecationWarning",
+          "message": "The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.",
+          "project_origin": false,
+          "reason": "Standalone pd.Timedelta(hours=1) reproduces the warning without project imports. Root is pandas 2.3.3 Cython conversion with NumPy 2.5.3. Original tests untouched; dependency upgrade/rebuild deferred, visible and unsuppressed.",
+          "count": 142
+        },
+        {
+          "source": "statsmodels",
+          "category": "ConvergenceWarning",
+          "message": "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+          "project_origin": false,
+          "reason": "SARIMAX maximum likelihood does not converge on the original 12-row synthetic state-leakage fixture. The adapter records the convergence flag in tuning metadata. Do not change frozen estimator iterations, edit the fixture or hide the warning.",
+          "count": 1
+        }
+      ]
+    },
+    "after": {
+      "total": 147,
+      "project_originated": 0,
+      "third_party": 147,
+      "drf": 0,
+      "groups": [
+        {
+          "source": "SHAP / matplotlib",
+          "category": "PendingDeprecationWarning",
+          "message": "The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.",
+          "project_origin": false,
+          "reason": "Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade.",
+          "count": 1
+        },
+        {
+          "source": "SHAP / matplotlib",
+          "category": "PendingDeprecationWarning",
+          "message": "The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.",
+          "project_origin": false,
+          "reason": "Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade.",
+          "count": 1
+        },
+        {
+          "source": "SHAP / matplotlib",
+          "category": "PendingDeprecationWarning",
+          "message": "The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.",
+          "project_origin": false,
+          "reason": "Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade.",
+          "count": 1
+        },
+        {
+          "source": "netCDF4 / NumPy",
+          "category": "RuntimeWarning",
+          "message": "numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject",
+          "project_origin": false,
+          "reason": "Error-mode trace identifies compiled netCDF4._netCDF4 import. Existing parser tests pass, but full ABI compatibility is unverified; retain visibly pending compatible wheel/rebuild.",
+          "count": 1
+        },
+        {
+          "source": "pandas / NumPy",
+          "category": "DeprecationWarning",
+          "message": "The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.",
+          "project_origin": false,
+          "reason": "Standalone pd.Timedelta(hours=1) reproduces the warning without project imports. Root is pandas 2.3.3 Cython conversion with NumPy 2.5.3. Original tests untouched; dependency upgrade/rebuild deferred, visible and unsuppressed.",
+          "count": 142
+        },
+        {
+          "source": "statsmodels",
+          "category": "ConvergenceWarning",
+          "message": "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+          "project_origin": false,
+          "reason": "SARIMAX maximum likelihood does not converge on the original 12-row synthetic state-leakage fixture. The adapter records the convergence flag in tuning metadata. Do not change frozen estimator iterations, edit the fixture or hide the warning.",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "run_id": 62,
+      "city": "delhi",
+      "label": "hypothetical 1 g/s source",
+      "peak_ugm3": 15.641839027404785,
+      "distance_to_peak_m": 176.77669529663723,
+      "exposure": {
+        "label": "hourly added exposure; WorldPop 2025 modelled population",
+        "population_support_fraction": 0.913056536128173,
+        "population_support_scope": "Mean fraction of cell area with population data",
+        "partially_supported_cells": 1041,
+        "supported_population": 2184007.044221276,
+        "population_above": {
+          "1.0": 11787.140769547765,
+          "5.0": 1155.6531529877152,
+          "15.0": 114.68803561663515,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "population_weighted_mean_added_ugm3": 0.025989982134662266,
+        "missing_population_cells": 2949,
+        "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+      },
+      "stability_class": "C",
+      "all_reported_numeric_values_match": true,
+      "fresh_compute": true,
+      "doubled_Q_peak_exactly_doubled": true,
+      "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45,
+      "http_status": 200,
+      "header_status": 200,
+      "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+      "interpretation": {
+        "sources": [
+          {
+            "label": "hypothetical 1 g/s source",
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "scaling": "For a single source at fixed weather, geometry, release parameters and grid, concentration and peak scale linearly with emission rate Q. For multiple sources, contributions add; peak scales linearly with a common multiplier on all rates. Population above a fixed concentration threshold does not scale linearly.",
+        "population_scope": "Population values are for the modelled grid footprint only, restricted to known raster support. They are not citywide exposure, a census or health impact estimates."
+      }
+    },
+    {
+      "run_id": 63,
+      "city": "mumbai",
+      "label": "hypothetical 1 g/s source",
+      "peak_ugm3": 11.536741256713867,
+      "distance_to_peak_m": 176.77669529663748,
+      "exposure": {
+        "label": "hourly added exposure; WorldPop 2025 modelled population",
+        "population_support_fraction": 0.9390462437130813,
+        "population_support_scope": "Mean fraction of cell area with population data",
+        "partially_supported_cells": 692,
+        "supported_population": 1294658.3942227834,
+        "population_above": {
+          "1.0": 5906.777275622714,
+          "5.0": 643.0847214835771,
+          "15.0": 0.0,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "population_weighted_mean_added_ugm3": 0.029133751121464574,
+        "missing_population_cells": 2095,
+        "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+      },
+      "stability_class": "C",
+      "all_reported_numeric_values_match": true,
+      "fresh_compute": true,
+      "doubled_Q_peak_exactly_doubled": true,
+      "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45,
+      "http_status": 200,
+      "header_status": 200,
+      "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+      "interpretation": {
+        "sources": [
+          {
+            "label": "hypothetical 1 g/s source",
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "scaling": "For a single source at fixed weather, geometry, release parameters and grid, concentration and peak scale linearly with emission rate Q. For multiple sources, contributions add; peak scales linearly with a common multiplier on all rates. Population above a fixed concentration threshold does not scale linearly.",
+        "population_scope": "Population values are for the modelled grid footprint only, restricted to known raster support. They are not citywide exposure, a census or health impact estimates."
+      }
+    },
+    {
+      "run_id": 64,
+      "city": "hyderabad",
+      "label": "hypothetical 1 g/s source",
+      "peak_ugm3": 18.990890502929688,
+      "distance_to_peak_m": 725.4309064273452,
+      "exposure": {
+        "label": "hourly added exposure; WorldPop 2025 modelled population",
+        "population_support_fraction": 0.9602198779686332,
+        "population_support_scope": "Mean fraction of cell area with population data",
+        "partially_supported_cells": 300,
+        "supported_population": 1518670.328867529,
+        "population_above": {
+          "1.0": 66300.35740581078,
+          "5.0": 31704.40710443302,
+          "15.0": 1608.2626922309853,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "population_weighted_mean_added_ugm3": 0.24528510337466117,
+        "missing_population_cells": 1443,
+        "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+      },
+      "stability_class": "F",
+      "all_reported_numeric_values_match": true,
+      "fresh_compute": true,
+      "doubled_Q_peak_exactly_doubled": true,
+      "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45,
+      "http_status": 200,
+      "header_status": 200,
+      "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+      "interpretation": {
+        "sources": [
+          {
+            "label": "hypothetical 1 g/s source",
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "scaling": "For a single source at fixed weather, geometry, release parameters and grid, concentration and peak scale linearly with emission rate Q. For multiple sources, contributions add; peak scales linearly with a common multiplier on all rates. Population above a fixed concentration threshold does not scale linearly.",
+        "population_scope": "Population values are for the modelled grid footprint only, restricted to known raster support. They are not citywide exposure, a census or health impact estimates."
+      }
+    }
+  ],
+  "browser": [
+    {
+      "width": 1440,
+      "status": 200,
+      "title": "Ask · EnviroInsights-India",
+      "heading": "Explore cited evidence.",
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "preset_name": "Road dust resuspension",
+      "preset_status": 200
+    },
+    {
+      "width": 390,
+      "status": 200,
+      "title": "Ask · EnviroInsights-India",
+      "heading": "Explore cited evidence.",
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "preset_name": "Road dust resuspension",
+      "preset_status": 200
+    }
+  ],
+  "frozen_identity": {
+    "before": {
+      "phase3a2": {
+        "files": 316,
+        "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+      },
+      "phase4": {
+        "files": 776,
+        "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+      },
+      "phase5": {
+        "files": 4,
+        "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+      },
+      "existing_tests": {
+        "files": 47,
+        "aggregate_sha256": "a93dc34f7ed9d7469f70a765dad8de26e8eed2b08563458da3563c973451e8a6"
+      },
+      "protocols": {
+        "files": 2,
+        "aggregate_sha256": "11448872580c317d228eeef2f89c54721b34a40cddf124db11b5223b0fb24c17"
+      },
+      "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+      "stage": "before",
+      "identical_to_before": null
+    },
+    "after": {
+      "phase3a2": {
+        "files": 316,
+        "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+      },
+      "phase4": {
+        "files": 776,
+        "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+      },
+      "phase5": {
+        "files": 4,
+        "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+      },
+      "existing_tests": {
+        "files": 47,
+        "aggregate_sha256": "a93dc34f7ed9d7469f70a765dad8de26e8eed2b08563458da3563c973451e8a6"
+      },
+      "protocols": {
+        "files": 2,
+        "aggregate_sha256": "11448872580c317d228eeef2f89c54721b34a40cddf124db11b5223b0fb24c17"
+      },
+      "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+      "stage": "after",
+      "identical_to_before": true
+    },
+    "protocols": [
+      {
+        "path": "docs/results/PHASE3A2_PROTOCOL.json",
+        "before_commit": "b5136b2",
+        "before_sha256": "09d869e72551b31af0368b0d89a5c91510e8ecd65e6ce53605d33a704b827977",
+        "after_sha256": "09d869e72551b31af0368b0d89a5c91510e8ecd65e6ce53605d33a704b827977",
+        "byte_identical": true
+      },
+      {
+        "path": "docs/results/PHASE4_PROTOCOL.md",
+        "before_commit": "b5136b2",
+        "before_sha256": "395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c",
+        "after_sha256": "395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c",
+        "byte_identical": true
+      },
+      {
+        "path": "docs/results/PHASE5_PROTOCOL.md",
+        "before_commit": "b5136b2",
+        "before_sha256": "d4872769cb454c79b83a275a0e3004384ef4ac5394bf633d2ab000cc4e0562a7",
+        "after_sha256": "d4872769cb454c79b83a275a0e3004384ef4ac5394bf633d2ab000cc4e0562a7",
+        "byte_identical": true
+      }
+    ]
+  },
+  "tests": {
+    "passed": 249,
+    "warnings": 147,
+    "seconds": 43.62,
+    "original_files_unchanged": 47
+  }
+}

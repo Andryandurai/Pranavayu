@@ -1,0 +1,47 @@
+{
+  "cimbala": {
+    "source_url": "https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf",
+    "source_sha256": "ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462",
+    "pdf_page": 3,
+    "reference_method": "Hand-transcribed from the page's handwritten solution, independently of engine output",
+    "x_m": 4850.0,
+    "q_gs": 110000.0,
+    "transport_wind_ms": 5.0,
+    "effective_height_m": 100.0,
+    "z_m": 0.0,
+    "sigma_y_m": 278.97,
+    "sigma_z_m": 87.51,
+    "concentration_ugm3": 149300.0,
+    "source_dispersion": "Martin; source meteorology is overcast, class D",
+    "scope": "Published-input Gaussian primitive validation; Briggs comparison must be reported separately"
+  },
+  "turner": {
+    "source_url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT",
+    "source_locator": "Chapter 7 Problem 9, Table 7-4; EPA HTML transcription",
+    "printed_page": null,
+    "printed_page_status": "unverified; paginated PDF fetch returned non-PDF HTML",
+    "classification": "formula check only until a physical source page is verified",
+    "x_m": 1000.0,
+    "q_gs": 151.0,
+    "transport_wind_ms": 4.0,
+    "effective_height_m": 150.0,
+    "sigma_y_m": 157.0,
+    "sigma_z_m": 110.0,
+    "rows": [
+      {"z_m": 0.0, "concentration_ugm3": 278.0},
+      {"z_m": 30.0, "concentration_ugm3": 285.0},
+      {"z_m": 150.0, "concentration_ugm3": 358.0}
+    ]
+  },
+  "brune": {
+    "source_url": "https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm",
+    "source_locator": "Section 2.2.5, paragraph following Table 2.3; unpaginated",
+    "x_m": 1000.0,
+    "environment": "rural",
+    "stability": "B",
+    "claimed_briggs_sigma_y_m": 210.0,
+    "claimed_briggs_sigma_z_m": 120.0,
+    "classification": "Source inconsistency diagnostic; paragraph's sigma-y conflicts with its class-B table formula"
+  },
+  "tolerances": {"sigma_relative": 0.05, "concentration_relative": 0.10}
+}

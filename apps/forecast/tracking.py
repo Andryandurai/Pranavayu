@@ -41,7 +41,7 @@ class RegisteredForecaster(mlflow.pyfunc.PythonModel):
     def __init__(self, model):
         self.model = model
 
-    def predict(self, context, model_input, params=None):
+    def predict(self, context, model_input: pd.DataFrame, params=None) -> np.ndarray:
         from .estimators import SarimaxModel
 
         if isinstance(self.model, SarimaxModel):

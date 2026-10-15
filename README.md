@@ -10,6 +10,13 @@ Read [the Phase6A report](docs/results/PHASE6A.md) for actual verification and
 limitations. Forecast cards show archived replay dates; research comparisons
 do not establish causation or official NCAP compliance.
 
+The audit distinguishes a published-input Gaussian check from independent Briggs
+validation. Rounded values derived from the Briggs formulas are **formula checks
+only**. The comparison with Cimbala's printed Martin sigmas exceeds the unchanged
+5% sigma and 10% concentration tolerances; no coefficients were tuned to hide it.
+Read the [full audit](docs/results/PHASE6A.md#phase-6a-audit) for references,
+discrepancies, reranker measurements and remaining limitations.
+
 VayuSim inputs are explicit scenario assumptions, not measured facility
 inventories. All five source-family presets require emission rate, release
 height, diameter, exit velocity and temperature where no defensible universal
@@ -17,6 +24,20 @@ default was established. Real weather uses the UTC midpoint of the selected
 IST hour. Station totals stay separate from the modelled increment. The
 population calculation is **hourly added exposure**, with fractional raster
 support; missing population is not extrapolated across unknown area.
+
+The audited examples each use a **hypothetical 1 g/s source**: Delhi (2025-01-15
+12:00 IST), Mumbai (2025-07-15 15:00 IST), and Hyderabad (2025-11-15 20:00 IST).
+Their peak increments are 15.641839, 11.536741 and 18.990891 µg/m³. For one source, at fixed
+weather, geometry, release parameters and grid, peak concentration scales
+linearly with emission rate Q. Population values cover the modelled footprint
+only and its known raster support; population above a fixed threshold does not
+scale linearly. These examples are not measured emission inventories.
+
+The stable preset ID `highway` now displays **Road dust resuspension**.
+[AP-42 13.2.1](https://www.epa.gov/sites/default/files/2020-10/documents/13.2.1_paved_roads.pdf),
+January 2011, printed pp.13.2.1-1 and 13.2.1-4, excludes exhaust, brake wear
+and tire wear from its road-dust equation. Enter total primary PM2.5 g/s for
+the complete segment; no exhaust factor or universal emission rate is supplied.
 
 The default grid is10km×10km at50m, with an AEQD CRS and a wind-rotated affine.
 `POST /api/vayusim/run/` returns summary, GeoJSON contours and binary/header/PNG
@@ -30,10 +51,20 @@ The Windows test wrapper and Makefile force test settings, extractive answering
 and a `/tmp` Hypothesis cache, so enabling the local language model cannot make
 tests call it. Tests retain the real PostgreSQL and Celery integration. On this
 machine the measured memory gate enabled Qwen2.5:3b-instruct; source-model caches
-and all project data remain on D:. The assistant can take minutes on CPU and
-retains refusal, citation and replay limitations.
+and all project data remain on D:. The product is **extractive retrieval with
+verified citations**. The experimental Qwen provider remains configured on this
+machine, takes minutes on CPU and has **not passed answer-quality acceptance**:
+its existing frozen evaluation retained only 2/80 literature answers and 0/30
+available-data answers. Exact support among those two retained answers does not
+establish useful question-answering quality. No prompt/provider tuning or new
+language-model evaluation was performed during the audit.
+The final audit measurement had 4,103,503,872 bytes available against the
+3B model's 5,151,137,904-byte memory requirement, so its **current memory gate
+also fails**. Earlier measurements passed; that eligibility varies with resident
+allocations. Use explicit extractive mode for evidence retrieval; the unchanged
+experimental local-provider configuration is not cleared for generation by this audit.
 
-Phase 5 adds the [cited research assistant](#phase-5-cited-research-assistant),
+Phase 5 adds [extractive retrieval with verified citations](#phase-5-extractive-retrieval-with-verified-citations),
 available at [Ask](http://localhost:8000/ask/). It uses real document passages
 and recorded project results, with extractive answers available without API keys.
 
@@ -440,18 +471,21 @@ not forecasting validation, and weather-adjusted changes do not identify policy
 effects. BS-VI attribution needs the missing intervening concentrations; crop-fire
 analysis is deferred pending FIRMS data.
 
-## Phase 5: cited research assistant
+## Phase 5: extractive retrieval with verified citations
 
 Open [Ask](http://localhost:8000/ask/) for a minimal question box, provider badge
-and clickable source citations. Literature answers quote retrieved evidence;
-data answers use eight validated, read-only tools. Missing evidence produces an
+and clickable source citations. In extractive mode, literature results quote
+retrieved evidence; data results use eight original validated, read-only tools
+plus Phase 6A's `vayusim_run` tool. Missing evidence produces an
 explicit refusal. Current forecasts are identified as live or archival replay.
 Read [PHASE5.md](docs/results/PHASE5.md) for measured performance and corpus limits.
 
 Verified corpus: 29 actual document bodies (24 public and five internal),
 7,194 indexed chunks and four unavailable requests. The full suite passes
-183 tests; the frozen 120-question evaluation is logged in MLflow's `rag`
-experiment. No generative provider ran on this machine.
+183 tests at its original handoff; the frozen 120-question evaluation is logged
+in MLflow's `rag` experiment. The later Phase 6A Qwen evaluation failed answer
+quality, as described above and in the Phase 6A audit. Retrieval and exact
+citation verification are distinct from semantic answer accuracy.
 
 ```powershell
 .\scripts\dev.ps1 up
@@ -469,7 +503,8 @@ Public bodies are hash-addressed under `data/raw/rag/`; Git retains only the
 manifest and source specifications. Download failures are explicit, not empty
 documents. The BGE encoder/reranker weights and deterministic computation caches
 persist on D: under `data/models/`. The internal `rag-models` service serializes
-CPU inference with one model loaded at a time. Parsing and completed embedding
+CPU embedding inference; a separate single-slot `rag-reranker` retains the
+pinned cross-encoder. Parsing and completed embedding
 batches survive an interrupted command. Unchanged content with the same parser
 version is a no-op; an incompatible parser fix requires an explicitly versioned
 index rebuild. After upgrading ingestion code, restart the Celery worker before
@@ -482,9 +517,13 @@ text pages; PDF citations use physical file pages, not printed-page labels.
 
 `LLM_PROVIDER=auto` selects configured Anthropic, OpenAI, enabled Ollama, then
 extractive. Optional remote providers require both their API key and model name
-in `.env`; see `.env.example`. Extractive works without keys. This machine does
-not meet the requested 12 GB free-container condition for Ollama, so its optional
-`llm` profile is disabled. Do not download a local LLM without rechecking memory.
+in `.env`; see `.env.example`. Extractive works without keys. Phase 6A enabled
+the `llm` profile and Qwen after measuring the revised model-size-plus-3-GiB
+memory gate. That resource check does not certify answer quality. Installed RAM
+is 16 GiB, with `[wsl2] memory=9GB` in `%UserProfile%\.wslconfig`. The audit
+preserved that file at `C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`.
+No pre-Phase-6A file existed to back up; this is a backup of the current settings,
+not a fabricated original. See [the audit](docs/results/PHASE6A.md#phase-6a-audit).
 
 API examples:
 
@@ -504,7 +543,8 @@ slug). `GET /api/rag/documents/` lists sources and ingestion status;
 `GET /api/rag/documents/<id>/page/<n>/` exposes stored page text and provenance.
 Explain payloads select evidence; supplied scenario/chart values are not verified
 measurements or simulation results. Phase 6 must validate its actual scenario
-outputs before using them as numerical evidence. This phase builds no simulator.
+outputs before using them as numerical evidence. Phase 6A now supplies the
+read-only `vayusim_run(run_id)` tool for actual stored simulation results.
 
 The checked-in `data/eval/rag_eval.jsonl` has frozen real-source and database
 expectations. `evaluate_rag` resumes saved question/provider results under

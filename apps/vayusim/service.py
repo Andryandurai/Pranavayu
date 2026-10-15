@@ -243,4 +243,37 @@ def run_response(run, cached=False):
         "grid_header_url": prefix + ".json",
         "overlay_url": prefix + ".png",
         "limitations": run.summary["limitations"],
+        "interpretation": interpretation(run.inputs),
+    }
+
+
+def interpretation(inputs):
+    """Presentation disclosures from the retained input snapshot, including old runs."""
+    sources = []
+    for source in inputs["sources"]:
+        kind = (
+            "hypothetical"
+            if source.get("assumptions", "")
+            .casefold()
+            .startswith(("declared hypothetical", "hypothetical "))
+            else "user-specified"
+        )
+        sources.append(
+            {
+                "label": f"{kind} {source['emission_gs']:g} g/s source",
+                "assumptions": source.get("assumptions", ""),
+            }
+        )
+    return {
+        "sources": sources,
+        "scaling": (
+            "For a single source at fixed weather, geometry, release parameters and grid, "
+            "concentration and peak scale linearly with emission rate Q. For multiple sources, "
+            "contributions add; peak scales linearly with a common multiplier on all rates. "
+            "Population above a fixed concentration threshold does not scale linearly."
+        ),
+        "population_scope": (
+            "Population values are for the modelled grid footprint only, restricted to known "
+            "raster support. They are not citywide exposure, a census or health impact estimates."
+        ),
     }
