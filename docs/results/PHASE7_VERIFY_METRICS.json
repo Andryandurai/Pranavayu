@@ -1,0 +1,558 @@
+{
+  "recorded_at": "2026-10-16T07:51:54.787612+00:00",
+  "baseline_commit": "83be5f498450ba69e0956079d2ea6be7c40f2e8b",
+  "definition_changed": false,
+  "equivalence": {
+    "absolute_tolerance_ugm3": 1e-10,
+    "relative_tolerance": 0,
+    "results": [
+      {
+        "city": "bengaluru",
+        "horizon": 1,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 0.0,
+        "equivalent": true
+      },
+      {
+        "city": "bengaluru",
+        "horizon": 3,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 0.0,
+        "equivalent": true
+      },
+      {
+        "city": "chennai",
+        "horizon": 1,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 0.0,
+        "equivalent": true
+      },
+      {
+        "city": "mumbai",
+        "horizon": 1,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 3.552713678800501e-15,
+        "equivalent": true
+      },
+      {
+        "city": "mumbai",
+        "horizon": 2,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 3.552713678800501e-15,
+        "equivalent": true
+      },
+      {
+        "city": "mumbai",
+        "horizon": 3,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 3.552713678800501e-15,
+        "equivalent": true
+      },
+      {
+        "city": "pune",
+        "horizon": 1,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 1.4210854715202004e-14,
+        "equivalent": true
+      },
+      {
+        "city": "pune",
+        "horizon": 2,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 1.4210854715202004e-14,
+        "equivalent": true
+      },
+      {
+        "city": "pune",
+        "horizon": 3,
+        "sample_issue_dates": [
+          "2025-07-15",
+          "2025-09-15",
+          "2025-12-15"
+        ],
+        "maximum_absolute_difference": 0.0,
+        "maximum_csv_roundtrip_difference": 1.4210854715202004e-14,
+        "equivalent": true
+      }
+    ]
+  },
+  "definitions": [
+    {
+      "file": "apps/forecast/estimators.py",
+      "line": 50,
+      "quote": "if self.name == \"persistence\":"
+    },
+    {
+      "file": "apps/forecast/estimators.py",
+      "line": 51,
+      "quote": "return rows.pm_t.to_numpy()"
+    },
+    {
+      "file": "apps/forecast/data.py",
+      "line": 42,
+      "quote": "def raw_daily(hourly, start=\"2024-01-01\", end=\"2025-12-31\"):"
+    },
+    {
+      "file": "apps/forecast/data.py",
+      "line": 50,
+      "quote": "daily[name] = daily.value.shift(lag)"
+    },
+    {
+      "file": "apps/forecast/data.py",
+      "line": 164,
+      "quote": "\"persistence_value\": float(row.pm_t),"
+    },
+    {
+      "file": "apps/forecast/data.py",
+      "line": 141,
+      "quote": "return rows.dropna(subset=[*FEATURES, *[f\"seq_{i}\" for i in range(7)]])"
+    },
+    {
+      "file": "apps/analytics/aggregation.py",
+      "line": 13,
+      "quote": "\"\"\"Calendar days in IST; 18 distinct valid hour bins, without filling values.\"\"\""
+    },
+    {
+      "file": "apps/analytics/aggregation.py",
+      "line": 25,
+      "quote": "daily = rows.groupby(\"date\").agg(value=(\"value\", \"mean\"), valid_count=(\"hour\", \"nunique\"))"
+    },
+    {
+      "file": "apps/analytics/aggregation.py",
+      "line": 28,
+      "quote": "daily.loc[daily.valid_count < 18, \"value\"] = float(\"nan\")"
+    },
+    {
+      "file": "apps/forecast/weather.py",
+      "line": 30,
+      "quote": "def issue_end(day):"
+    },
+    {
+      "file": "apps/forecast/weather.py",
+      "line": 34,
+      "quote": "return pd.Timestamp((first_next - timedelta(microseconds=1)).astimezone(UTC))"
+    },
+    {
+      "file": "apps/forecast/pipeline.py",
+      "line": 180,
+      "quote": "predictions[name] = predict(model, test, rows)"
+    },
+    {
+      "file": "apps/forecast/pipeline.py",
+      "line": 337,
+      "quote": "score = scores(group, algorithm)"
+    },
+    {
+      "file": "apps/forecast/serving.py",
+      "line": 54,
+      "quote": "return raw_daily(hourly)[\"value\"].to_dict()"
+    },
+    {
+      "file": "apps/forecast/serving.py",
+      "line": 60,
+      "quote": "value = forecast.feature_provenance.get(\"persistence_value\")"
+    },
+    {
+      "file": "apps/forecast/serving.py",
+      "line": 73,
+      "quote": "value = daily.get(pd.Timestamp(forecast.issued_for_date))"
+    }
+  ],
+  "checks": {
+    "passed": 322,
+    "warnings": 147,
+    "seconds": 74.13,
+    "original_tests": 310,
+    "new_tests": 12,
+    "ruff": "pass",
+    "deployment": "System check identified no issues (0 silenced)."
+  },
+  "frozen_before": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "phase4_all_artifacts": {
+      "files": 967,
+      "aggregate_sha256": "302ad61bf22f1d9e617d052a113f027c4c5ce80064d6e99c99766c8b8bc97335"
+    },
+    "existing_tests": {
+      "files": 56,
+      "aggregate_sha256": "fa7d081a2259d033ff09d034b59a4118b4cf6f4f8551ecf8bebf9c8468d1e412"
+    },
+    "historical_results": {
+      "files": 73,
+      "aggregate_sha256": "fb2625a145d9c50c1cfa0810fb02f5081612ef48d6c1a83403f7a244ea087f5e"
+    },
+    "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4"
+  },
+  "frozen_after": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "phase4_all_artifacts": {
+      "files": 967,
+      "aggregate_sha256": "302ad61bf22f1d9e617d052a113f027c4c5ce80064d6e99c99766c8b8bc97335"
+    },
+    "existing_tests": {
+      "files": 56,
+      "aggregate_sha256": "fa7d081a2259d033ff09d034b59a4118b4cf6f4f8551ecf8bebf9c8468d1e412"
+    },
+    "historical_results": {
+      "files": 73,
+      "aggregate_sha256": "fb2625a145d9c50c1cfa0810fb02f5081612ef48d6c1a83403f7a244ea087f5e"
+    },
+    "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4"
+  },
+  "database_unchanged": {
+    "Forecast": {
+      "rows": 3948,
+      "sha256": "69cad0739e5527360cac98043cf3fb2656111685ed1a20c6a6237b4cf44c67fe"
+    },
+    "ForecastEvaluation": {
+      "rows": 21,
+      "sha256": "67a08ebf3adf9fcefe9c6426d9bececcfc851f3b029c21546c961587473692bd"
+    },
+    "ForecastModelVersion": {
+      "rows": 150,
+      "sha256": "b9b5b622311c4554cbf6f9e3dadc9a490dc75662441438ce254c6b2b3df81b77"
+    }
+  },
+  "remote_command": "git remote -v",
+  "remote_output": "",
+  "remote_backup_configured": false,
+  "unrelated_manual_backup": "unverified",
+  "browser": [
+    {
+      "width": 1440,
+      "city": "mumbai",
+      "method": "persistence",
+      "live_api_status": 200,
+      "dashboard_label_visible": true,
+      "api_label_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 1440,
+      "city": "delhi",
+      "method": "model",
+      "live_api_status": 200,
+      "dashboard_label_visible": true,
+      "api_label_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 1440,
+      "page": "dashboard",
+      "fixture_status": 503,
+      "message": "No forecast: input data missing for this issue date. Issue-day persistence input unavailable; the losing model is not served.",
+      "horizontal_overflow": false
+    },
+    {
+      "width": 1440,
+      "page": "forecasts",
+      "fixture_status": 503,
+      "message": "No forecast: input data missing for this issue date. Issue-day persistence input unavailable; the losing model is not served.",
+      "horizontal_overflow": false
+    },
+    {
+      "width": 1440,
+      "page": "api",
+      "fixture_status": 503,
+      "message": "No forecast: input data missing for this issue date. Issue-day persistence input unavailable; the losing model is not served.",
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "city": "mumbai",
+      "method": "persistence",
+      "live_api_status": 200,
+      "dashboard_label_visible": true,
+      "api_label_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "city": "delhi",
+      "method": "model",
+      "live_api_status": 200,
+      "dashboard_label_visible": true,
+      "api_label_visible": true,
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "page": "dashboard",
+      "fixture_status": 503,
+      "message": "No forecast: input data missing for this issue date. Issue-day persistence input unavailable; the losing model is not served.",
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "page": "forecasts",
+      "fixture_status": 503,
+      "message": "No forecast: input data missing for this issue date. Issue-day persistence input unavailable; the losing model is not served.",
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "page": "api",
+      "fixture_status": 503,
+      "message": "No forecast: input data missing for this issue date. Issue-day persistence input unavailable; the losing model is not served.",
+      "horizontal_overflow": false
+    }
+  ],
+  "missing_fixture": {
+    "status": 503,
+    "body": {
+      "detail": "No forecast: input data missing for this issue date. Issue-day persistence input unavailable; the losing model is not served."
+    },
+    "source": "Process-local Django test-client fixture; no production files, rows or running server changed"
+  },
+  "basemap_before": {
+    "stage": "before",
+    "tiles": [
+      {
+        "status": 200,
+        "referer": null
+      },
+      {
+        "status": 200,
+        "referer": null
+      },
+      {
+        "status": 200,
+        "referer": null
+      },
+      {
+        "status": 200,
+        "referer": null
+      },
+      {
+        "status": 200,
+        "referer": null
+      },
+      {
+        "status": 200,
+        "referer": null
+      }
+    ],
+    "basemap_status": null
+  },
+  "basemap_after": {
+    "stage": "after",
+    "tiles": [
+      {
+        "status": 200,
+        "referer": "http://localhost:8000/"
+      },
+      {
+        "status": 200,
+        "referer": "http://localhost:8000/"
+      },
+      {
+        "status": 200,
+        "referer": "http://localhost:8000/"
+      },
+      {
+        "status": 200,
+        "referer": "http://localhost:8000/"
+      },
+      {
+        "status": 200,
+        "referer": "http://localhost:8000/"
+      },
+      {
+        "status": 200,
+        "referer": "http://localhost:8000/"
+      }
+    ],
+    "basemap_status": "Street map · © OpenStreetMap contributors"
+  },
+  "basemap_failure_fixtures": [
+    {
+      "width": 1440,
+      "fixture_tile_status": 403,
+      "plume_run": 62,
+      "peak_display": "15.64",
+      "message": "Street map unavailable · plume and station locations remain visible.",
+      "js_errors": [],
+      "horizontal_overflow": false
+    },
+    {
+      "width": 390,
+      "fixture_tile_status": 403,
+      "plume_run": 62,
+      "peak_display": "15.64",
+      "message": "Street map unavailable · plume and station locations remain visible.",
+      "js_errors": [],
+      "horizontal_overflow": false
+    }
+  ],
+  "definition_docs_unchanged": [
+    "README.md",
+    "docs/results/WRITEUP.md",
+    "docs/DEMO.md",
+    "docs/RESUME.md",
+    "docs/results/PHASE7_FIX.md"
+  ],
+  "health": {
+    "ok": true,
+    "checks": {
+      "database": {
+        "ok": true
+      },
+      "extensions": {
+        "postgis": {
+          "ok": true,
+          "version": "3.6.4"
+        },
+        "timescaledb": {
+          "ok": true,
+          "version": "2.30.2"
+        },
+        "vector": {
+          "ok": true,
+          "version": "0.8.7"
+        }
+      },
+      "redis": {
+        "ok": true
+      },
+      "celery": {
+        "ok": true
+      }
+    }
+  },
+  "screenshots": {
+    "docs/results/map-fix-after.png": {
+      "sha256": "b46a926e1c536c8b73f8979302f5a2bb9f656a1dff30651fcdfa4c2ff2ab000c",
+      "bytes": 447985
+    },
+    "docs/results/map-fix-before.png": {
+      "sha256": "40fb50b67912f7444b9cdbf4d4a0534330d0f93ad11041e20add8dd38600d619",
+      "bytes": 447753
+    },
+    "docs/results/map-fix-blocked-1440.png": {
+      "sha256": "e1f55fb5dc97e07285ef53d6bda34ac5f93161443a597143a11dbd0435970e8a",
+      "bytes": 104854
+    },
+    "docs/results/map-fix-blocked-390.png": {
+      "sha256": "2d98949c15b6a5ba0701274c221beac5fed470508e790eb6091ec694566e31d9",
+      "bytes": 45065
+    },
+    "docs/results/phase7-verify-api-delhi-1440.png": {
+      "sha256": "2c976eed0d6247ee537256a038eb51cc912e96df65e3ea98890e7b9f0fc7ff07",
+      "bytes": 77096
+    },
+    "docs/results/phase7-verify-api-delhi-390.png": {
+      "sha256": "7cb4fc6a1264b6bcb04fff5b9b8a95d1019be409d747de51d70634149545c930",
+      "bytes": 58086
+    },
+    "docs/results/phase7-verify-api-missing-1440.png": {
+      "sha256": "6d1e890da60bbd98c728ab3a1fa11cee0743cabec1805324b4a4ab9626f63ec0",
+      "bytes": 11188
+    },
+    "docs/results/phase7-verify-api-missing-390.png": {
+      "sha256": "7fe125846bbba27d763da9fb23197fdf6d0122ec203f9347305e6366b2c96e05",
+      "bytes": 8278
+    },
+    "docs/results/phase7-verify-api-mumbai-1440.png": {
+      "sha256": "c8962dd11b1c4ad159402825493f34afcf50cac01561bb306e75ec70e5b3b1b8",
+      "bytes": 88043
+    },
+    "docs/results/phase7-verify-api-mumbai-390.png": {
+      "sha256": "2db05d13e19d280c5bbabae223a50c2c21cb962cd40ab437580891f95a183d2c",
+      "bytes": 55039
+    },
+    "docs/results/phase7-verify-dashboard-delhi-1440.png": {
+      "sha256": "56da800937f432e53e34ef576310b37141fb7ec5ae11b94d565c2c92050a26e1",
+      "bytes": 77359
+    },
+    "docs/results/phase7-verify-dashboard-delhi-390.png": {
+      "sha256": "6c9f73c1ce30bc17283be5f1b1e35b394346628dc524b61aceaf705d18761b50",
+      "bytes": 45322
+    },
+    "docs/results/phase7-verify-dashboard-missing-1440.png": {
+      "sha256": "00ee392f7ff2b706ea15cdb0c0d2cbb57cfed6758a830b116997529f1870348c",
+      "bytes": 75571
+    },
+    "docs/results/phase7-verify-dashboard-missing-390.png": {
+      "sha256": "431bb8d2910f983423083db685737031334e79855f658ad153b17c7c41bd8bdb",
+      "bytes": 45117
+    },
+    "docs/results/phase7-verify-dashboard-mumbai-1440.png": {
+      "sha256": "49169164792d7bb588fd89000f064026c502cc384ed96dc0da926fa84a5cde83",
+      "bytes": 75942
+    },
+    "docs/results/phase7-verify-dashboard-mumbai-390.png": {
+      "sha256": "c4c66f707cb5a16803fca32b17d6a8c0ee70333128fc6e769194beb8bf6401c9",
+      "bytes": 45275
+    },
+    "docs/results/phase7-verify-forecasts-missing-1440.png": {
+      "sha256": "e778899f2152d8ca951e0b96459e9290c53ac30c2344e05947f8e0839c31861c",
+      "bytes": 71059
+    },
+    "docs/results/phase7-verify-forecasts-missing-390.png": {
+      "sha256": "ede4421ea329ba7af8cdf35d0dfebf6cef2c0eedbecc6000abd3470fc4502337",
+      "bytes": 45658
+    }
+  }
+}

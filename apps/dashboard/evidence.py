@@ -57,5 +57,9 @@ def evidence_dashboard(request):
     return render(
         request,
         "dashboard/evidence.html",
-        {"record": data, "serving_config": load_serving_policy()},
+        {
+            "record": data,
+            "serving_config": load_serving_policy(),
+            "serving_cities": sorted({row["city"] for row in data["forecasts"]}),
+        },
     )

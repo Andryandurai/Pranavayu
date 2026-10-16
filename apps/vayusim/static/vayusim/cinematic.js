@@ -78,12 +78,15 @@
   });
   const city = () =>
     cities.find((c) => c.slug === $("city").value) || cities[0];
+  let basemapFailed = false;
   function place(point) {
     $("lon").value = point[0];
     $("lat").value = point[1];
     marker?.setLngLat(point);
   }
   function fallback() {
+    basemapFailed = true;
+    $("basemap-status").textContent = "Street map unavailable · static plume field shown.";
     map = null;
     $("fallback-map").hidden = false;
     $("vayu-map").hidden = true;
@@ -99,6 +102,10 @@
       zoom: 11,
       attributionControl: true,
       preserveDrawingBuffer: false,
+      transformRequest: (url) =>
+        url.startsWith("https://tile.openstreetmap.org/")
+          ? { url, referrerPolicy: "strict-origin-when-cross-origin" }
+          : { url },
       style: {
         version: 8,
         sources: {
@@ -113,6 +120,11 @@
         },
         layers: [
           {
+            id: "map-background",
+            type: "background",
+            paint: { "background-color": "#11232a" },
+          },
+          {
             id: "basemap",
             type: "raster",
             source: "osm",
@@ -123,6 +135,21 @@
           },
         ],
       },
+    });
+    map.on("error", (event) => {
+      if (
+        event.sourceId !== "osm" &&
+        !event.error?.url?.startsWith("https://tile.openstreetmap.org/")
+      ) return;
+      basemapFailed = true;
+      if (map.getLayer("basemap"))
+        map.setLayoutProperty("basemap", "visibility", "none");
+      $("basemap-status").textContent =
+        "Street map unavailable · plume and station locations remain visible.";
+    });
+    map.on("sourcedata", (event) => {
+      if (event.sourceId === "osm" && event.isSourceLoaded && !basemapFailed)
+        $("basemap-status").textContent = "Street map · © OpenStreetMap contributors";
     });
     map.addControl(
       new maplibregl.NavigationControl({ showCompass: true }),

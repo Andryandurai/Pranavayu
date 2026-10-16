@@ -36,7 +36,10 @@ def serving_policy(city, horizon):
 
 class PersistenceUnavailable(APIException):
     status_code = 503
-    default_detail = "Issue-day persistence input unavailable; the losing model is not served."
+    default_detail = (
+        "No forecast: input data missing for this issue date. "
+        "Issue-day persistence input unavailable; the losing model is not served."
+    )
     default_code = "persistence_input_unavailable"
 
 

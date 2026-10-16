@@ -1,0 +1,1712 @@
+{
+  "sample_issue_dates": [
+    "2025-07-15",
+    "2025-09-15",
+    "2025-12-15"
+  ],
+  "absolute_tolerance_ugm3": 1e-10,
+  "hourly": {
+    "bengaluru": {
+      "provenance": {
+        "path": "data/results/8/bengaluru_panel_hourly.pkl",
+        "sha256": "f5f8fc04e142b4919c8f534b7dbece25705ea3a1bd3facf246d620fbb9422490",
+        "data_run": 8,
+        "cohort": "fixed_panel",
+        "normalised_input": false
+      },
+      "rows": [
+        {
+          "observed_at": "2025-07-14 18:30:00+00:00",
+          "value": 16.475416666666664,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-14 19:30:00+00:00",
+          "value": 13.798333333333332,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-14 20:30:00+00:00",
+          "value": 12.920833333333334,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-14 21:30:00+00:00",
+          "value": 13.759166666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-14 22:30:00+00:00",
+          "value": 13.290416666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-14 23:30:00+00:00",
+          "value": 11.164642857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 00:30:00+00:00",
+          "value": 12.719999999999999,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 01:30:00+00:00",
+          "value": 13.525,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 02:30:00+00:00",
+          "value": 13.709642857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 03:30:00+00:00",
+          "value": 13.605357142857143,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 04:30:00+00:00",
+          "value": 14.684285714285712,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 05:30:00+00:00",
+          "value": 11.563214285714285,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 06:30:00+00:00",
+          "value": 12.957083333333335,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-15 07:30:00+00:00",
+          "value": 13.884285714285713,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 08:30:00+00:00",
+          "value": 16.158690476190475,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 09:30:00+00:00",
+          "value": 16.195714285714285,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 10:30:00+00:00",
+          "value": 17.51142857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 11:30:00+00:00",
+          "value": 15.90875,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-15 12:30:00+00:00",
+          "value": 16.680833333333336,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-15 13:30:00+00:00",
+          "value": 15.34607142857143,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 14:30:00+00:00",
+          "value": 16.239285714285714,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 15:30:00+00:00",
+          "value": 14.280357142857143,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 16:30:00+00:00",
+          "value": 14.487142857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 17:30:00+00:00",
+          "value": 14.684761904761904,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-14 18:30:00+00:00",
+          "value": 13.088095238095239,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-14 19:30:00+00:00",
+          "value": 13.114583333333334,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 20:30:00+00:00",
+          "value": 14.54625,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 21:30:00+00:00",
+          "value": 11.65375,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 22:30:00+00:00",
+          "value": 11.501666666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 23:30:00+00:00",
+          "value": 11.439583333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 00:30:00+00:00",
+          "value": 14.530833333333334,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 01:30:00+00:00",
+          "value": 13.054583333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 02:30:00+00:00",
+          "value": 17.859583333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 03:30:00+00:00",
+          "value": 16.44607142857143,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 04:30:00+00:00",
+          "value": 14.82642857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 05:30:00+00:00",
+          "value": 14.993571428571428,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 06:30:00+00:00",
+          "value": 15.559285714285712,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 07:30:00+00:00",
+          "value": 15.411785714285713,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 08:30:00+00:00",
+          "value": 14.426428571428572,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 09:30:00+00:00",
+          "value": 13.779642857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 10:30:00+00:00",
+          "value": 10.96625,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 11:30:00+00:00",
+          "value": 15.994,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 12:30:00+00:00",
+          "value": 16.918833333333332,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 13:30:00+00:00",
+          "value": 18.565,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 14:30:00+00:00",
+          "value": 24.482,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 15:30:00+00:00",
+          "value": 14.742083333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 16:30:00+00:00",
+          "value": 11.975,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 17:30:00+00:00",
+          "value": 15.044166666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 18:30:00+00:00",
+          "value": 59.354166666666664,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 19:30:00+00:00",
+          "value": 59.865,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 20:30:00+00:00",
+          "value": 50.314166666666665,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 21:30:00+00:00",
+          "value": 46.67541666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 22:30:00+00:00",
+          "value": 46.82708333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 23:30:00+00:00",
+          "value": 47.18694444444444,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 00:30:00+00:00",
+          "value": 48.9625,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 01:30:00+00:00",
+          "value": 52.50625,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 02:30:00+00:00",
+          "value": 50.91583333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 03:30:00+00:00",
+          "value": 49.33208333333334,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 04:30:00+00:00",
+          "value": 47.57416666666666,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 05:30:00+00:00",
+          "value": 46.62583333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 06:30:00+00:00",
+          "value": 39.612500000000004,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 07:30:00+00:00",
+          "value": 38.01166666666666,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 08:30:00+00:00",
+          "value": 35.71083333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 09:30:00+00:00",
+          "value": 36.013999999999996,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 10:30:00+00:00",
+          "value": 36.51649999999999,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 11:30:00+00:00",
+          "value": 35.190999999999995,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 12:30:00+00:00",
+          "value": 34.900999999999996,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 13:30:00+00:00",
+          "value": 42.36533333333333,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 14:30:00+00:00",
+          "value": 43.778,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 15:30:00+00:00",
+          "value": 44.089999999999996,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 16:30:00+00:00",
+          "value": 54.7505,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 17:30:00+00:00",
+          "value": 53.03016666666666,
+          "station_count": 5
+        }
+      ]
+    },
+    "chennai": {
+      "provenance": {
+        "path": "data/results/8/chennai_hourly.pkl",
+        "sha256": "bd18a3eaaa1bdcb83d0e6e617ad4ac818a9dfed2966d1ded4b8a06a28bef8872",
+        "data_run": 8,
+        "cohort": "all_stations",
+        "normalised_input": false
+      },
+      "rows": [
+        {
+          "observed_at": "2025-07-14 18:30:00+00:00",
+          "value": 17.9425,
+          "station_count": 4
+        },
+        {
+          "observed_at": "2025-07-14 19:30:00+00:00",
+          "value": 14.7985,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-07-14 20:30:00+00:00",
+          "value": 15.858500000000001,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-07-14 21:30:00+00:00",
+          "value": 16.789499999999997,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-07-14 22:30:00+00:00",
+          "value": 17.50375,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-14 23:30:00+00:00",
+          "value": 24.920499999999997,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-07-15 00:30:00+00:00",
+          "value": 27.679375,
+          "station_count": 4
+        },
+        {
+          "observed_at": "2025-07-15 01:30:00+00:00",
+          "value": 26.595,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-07-15 02:30:00+00:00",
+          "value": 23.5485,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-07-15 03:30:00+00:00",
+          "value": 26.1145,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-07-15 04:30:00+00:00",
+          "value": 18.675972222222224,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-15 05:30:00+00:00",
+          "value": 17.138928571428572,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 06:30:00+00:00",
+          "value": 18.675,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-15 07:30:00+00:00",
+          "value": 19.390416666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-15 08:30:00+00:00",
+          "value": 17.64875,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-15 09:30:00+00:00",
+          "value": 18.096309523809524,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 10:30:00+00:00",
+          "value": 21.49642857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 11:30:00+00:00",
+          "value": 25.32821428571429,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 12:30:00+00:00",
+          "value": 25.618571428571425,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 13:30:00+00:00",
+          "value": 36.301785714285714,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 14:30:00+00:00",
+          "value": 40.49892857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 15:30:00+00:00",
+          "value": 37.01535714285715,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 16:30:00+00:00",
+          "value": 30.228571428571428,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 17:30:00+00:00",
+          "value": 23.46035714285714,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-14 18:30:00+00:00",
+          "value": 27.963,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-14 19:30:00+00:00",
+          "value": 32.06041666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 20:30:00+00:00",
+          "value": 33.87916666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 21:30:00+00:00",
+          "value": 29.062083333333334,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 22:30:00+00:00",
+          "value": 22.80125,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 23:30:00+00:00",
+          "value": 22.8785,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 00:30:00+00:00",
+          "value": 23.0565,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 01:30:00+00:00",
+          "value": 26.2455,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 02:30:00+00:00",
+          "value": 28.087,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 03:30:00+00:00",
+          "value": 26.060833333333335,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 04:30:00+00:00",
+          "value": 32.039,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 05:30:00+00:00",
+          "value": 26.3485,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 06:30:00+00:00",
+          "value": 23.354583333333334,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 07:30:00+00:00",
+          "value": 26.145,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 08:30:00+00:00",
+          "value": 27.115499999999997,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 09:30:00+00:00",
+          "value": 31.562,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 10:30:00+00:00",
+          "value": 28.6875,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 11:30:00+00:00",
+          "value": 31.258999999999997,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 12:30:00+00:00",
+          "value": 37.1505,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 13:30:00+00:00",
+          "value": 30.5505,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 14:30:00+00:00",
+          "value": 33.476,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 15:30:00+00:00",
+          "value": 30.788999999999998,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 16:30:00+00:00",
+          "value": 30.5135,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 17:30:00+00:00",
+          "value": 25.782999999999998,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-14 18:30:00+00:00",
+          "value": 38.657,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-14 19:30:00+00:00",
+          "value": 47.855000000000004,
+          "station_count": 4
+        },
+        {
+          "observed_at": "2025-12-14 20:30:00+00:00",
+          "value": 41.4005,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-14 21:30:00+00:00",
+          "value": 42.181,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-14 22:30:00+00:00",
+          "value": 44.056,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-14 23:30:00+00:00",
+          "value": 47.998000000000005,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 00:30:00+00:00",
+          "value": 67.0235,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 01:30:00+00:00",
+          "value": 77.5855,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 02:30:00+00:00",
+          "value": 78.974,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 03:30:00+00:00",
+          "value": 68.12899999999999,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 04:30:00+00:00",
+          "value": 58.17541666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 05:30:00+00:00",
+          "value": 49.290416666666665,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 06:30:00+00:00",
+          "value": 49.36749999999999,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 07:30:00+00:00",
+          "value": 47.015499999999996,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 08:30:00+00:00",
+          "value": 52.767083333333325,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 09:30:00+00:00",
+          "value": 55.47833333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 10:30:00+00:00",
+          "value": 55.772083333333335,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 11:30:00+00:00",
+          "value": 63.04708333333334,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 12:30:00+00:00",
+          "value": 61.49875,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 13:30:00+00:00",
+          "value": 64.875,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 14:30:00+00:00",
+          "value": 63.479,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 15:30:00+00:00",
+          "value": 76.5245,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 16:30:00+00:00",
+          "value": 61.46083333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 17:30:00+00:00",
+          "value": 60.83041666666666,
+          "station_count": 6
+        }
+      ]
+    },
+    "mumbai": {
+      "provenance": {
+        "path": "data/results/8/mumbai_hourly.pkl",
+        "sha256": "d375ff7d907dcf3554985e7352a04d11e9ba88384e2ddac2456145c2f4abbe1b",
+        "data_run": 8,
+        "cohort": "all_stations",
+        "normalised_input": false
+      },
+      "rows": [
+        {
+          "observed_at": "2025-07-14 18:30:00+00:00",
+          "value": 13.987756410256411,
+          "station_count": 26
+        },
+        {
+          "observed_at": "2025-07-14 19:30:00+00:00",
+          "value": 13.870666666666667,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-14 20:30:00+00:00",
+          "value": 14.531199999999998,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-14 21:30:00+00:00",
+          "value": 13.6341,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-14 22:30:00+00:00",
+          "value": 13.225033333333334,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-14 23:30:00+00:00",
+          "value": 12.780128205128205,
+          "station_count": 26
+        },
+        {
+          "observed_at": "2025-07-15 00:30:00+00:00",
+          "value": 12.253800000000002,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-15 01:30:00+00:00",
+          "value": 13.507533333333333,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-15 02:30:00+00:00",
+          "value": 15.860833333333334,
+          "station_count": 24
+        },
+        {
+          "observed_at": "2025-07-15 03:30:00+00:00",
+          "value": 16.106875,
+          "station_count": 24
+        },
+        {
+          "observed_at": "2025-07-15 04:30:00+00:00",
+          "value": 15.4154,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-15 05:30:00+00:00",
+          "value": 14.7391,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-15 06:30:00+00:00",
+          "value": 14.21,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-15 07:30:00+00:00",
+          "value": 13.593461538461538,
+          "station_count": 26
+        },
+        {
+          "observed_at": "2025-07-15 08:30:00+00:00",
+          "value": 15.841145833333334,
+          "station_count": 24
+        },
+        {
+          "observed_at": "2025-07-15 09:30:00+00:00",
+          "value": 19.5136,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-15 10:30:00+00:00",
+          "value": 38.970576923076926,
+          "station_count": 26
+        },
+        {
+          "observed_at": "2025-07-15 11:30:00+00:00",
+          "value": 19.5058024691358,
+          "station_count": 27
+        },
+        {
+          "observed_at": "2025-07-15 12:30:00+00:00",
+          "value": 18.495925925925924,
+          "station_count": 27
+        },
+        {
+          "observed_at": "2025-07-15 13:30:00+00:00",
+          "value": 17.158179012345677,
+          "station_count": 27
+        },
+        {
+          "observed_at": "2025-07-15 14:30:00+00:00",
+          "value": 17.493125,
+          "station_count": 24
+        },
+        {
+          "observed_at": "2025-07-15 15:30:00+00:00",
+          "value": 19.4732,
+          "station_count": 25
+        },
+        {
+          "observed_at": "2025-07-15 16:30:00+00:00",
+          "value": 18.471153846153847,
+          "station_count": 26
+        },
+        {
+          "observed_at": "2025-07-15 17:30:00+00:00",
+          "value": 17.89777777777778,
+          "station_count": 27
+        },
+        {
+          "observed_at": "2025-09-14 18:30:00+00:00",
+          "value": 26.844117647058823,
+          "station_count": 17
+        },
+        {
+          "observed_at": "2025-09-14 19:30:00+00:00",
+          "value": 25.016833333333334,
+          "station_count": 15
+        },
+        {
+          "observed_at": "2025-09-14 20:30:00+00:00",
+          "value": 22.8746875,
+          "station_count": 16
+        },
+        {
+          "observed_at": "2025-09-14 21:30:00+00:00",
+          "value": 19.53666666666667,
+          "station_count": 15
+        },
+        {
+          "observed_at": "2025-09-14 22:30:00+00:00",
+          "value": 17.3665,
+          "station_count": 15
+        },
+        {
+          "observed_at": "2025-09-14 23:30:00+00:00",
+          "value": 17.244500000000002,
+          "station_count": 15
+        },
+        {
+          "observed_at": "2025-09-15 00:30:00+00:00",
+          "value": 16.69388888888889,
+          "station_count": 18
+        },
+        {
+          "observed_at": "2025-09-15 01:30:00+00:00",
+          "value": 15.33,
+          "station_count": 16
+        },
+        {
+          "observed_at": "2025-09-15 02:30:00+00:00",
+          "value": 15.72029411764706,
+          "station_count": 17
+        },
+        {
+          "observed_at": "2025-09-15 03:30:00+00:00",
+          "value": 15.531029411764708,
+          "station_count": 17
+        },
+        {
+          "observed_at": "2025-09-15 04:30:00+00:00",
+          "value": 13.51575,
+          "station_count": 20
+        },
+        {
+          "observed_at": "2025-09-15 05:30:00+00:00",
+          "value": 15.623815789473685,
+          "station_count": 19
+        },
+        {
+          "observed_at": "2025-09-15 06:30:00+00:00",
+          "value": 12.924523809523809,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-09-15 07:30:00+00:00",
+          "value": 12.73280303030303,
+          "station_count": 22
+        },
+        {
+          "observed_at": "2025-09-15 08:30:00+00:00",
+          "value": 13.590833333333332,
+          "station_count": 23
+        },
+        {
+          "observed_at": "2025-09-15 09:30:00+00:00",
+          "value": 13.361626984126985,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-09-15 10:30:00+00:00",
+          "value": 12.686309523809525,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-09-15 11:30:00+00:00",
+          "value": 13.897954545454546,
+          "station_count": 22
+        },
+        {
+          "observed_at": "2025-09-15 12:30:00+00:00",
+          "value": 15.482608695652173,
+          "station_count": 23
+        },
+        {
+          "observed_at": "2025-09-15 13:30:00+00:00",
+          "value": 18.065652173913044,
+          "station_count": 23
+        },
+        {
+          "observed_at": "2025-09-15 14:30:00+00:00",
+          "value": 21.703478260869566,
+          "station_count": 23
+        },
+        {
+          "observed_at": "2025-09-15 15:30:00+00:00",
+          "value": 24.883478260869566,
+          "station_count": 23
+        },
+        {
+          "observed_at": "2025-09-15 16:30:00+00:00",
+          "value": 27.748043478260872,
+          "station_count": 23
+        },
+        {
+          "observed_at": "2025-09-15 17:30:00+00:00",
+          "value": 27.854545454545452,
+          "station_count": 22
+        },
+        {
+          "observed_at": "2025-12-14 18:30:00+00:00",
+          "value": 60.52934210526316,
+          "station_count": 19
+        },
+        {
+          "observed_at": "2025-12-14 19:30:00+00:00",
+          "value": 60.029659090909085,
+          "station_count": 22
+        },
+        {
+          "observed_at": "2025-12-14 20:30:00+00:00",
+          "value": 62.14833333333333,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-12-14 21:30:00+00:00",
+          "value": 62.81380952380952,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-12-14 22:30:00+00:00",
+          "value": 60.663333333333334,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-12-14 23:30:00+00:00",
+          "value": 59.56059523809524,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-12-15 00:30:00+00:00",
+          "value": 59.57083333333333,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-12-15 01:30:00+00:00",
+          "value": 59.41178571428571,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-12-15 02:30:00+00:00",
+          "value": 59.93988095238095,
+          "station_count": 21
+        },
+        {
+          "observed_at": "2025-12-15 03:30:00+00:00",
+          "value": 57.53842105263158,
+          "station_count": 19
+        },
+        {
+          "observed_at": "2025-12-15 04:30:00+00:00",
+          "value": 56.80960526315789,
+          "station_count": 19
+        },
+        {
+          "observed_at": "2025-12-15 05:30:00+00:00",
+          "value": 51.971500000000006,
+          "station_count": 20
+        },
+        {
+          "observed_at": "2025-12-15 06:30:00+00:00",
+          "value": 50.239875,
+          "station_count": 20
+        },
+        {
+          "observed_at": "2025-12-15 07:30:00+00:00",
+          "value": 46.458991228070175,
+          "station_count": 19
+        },
+        {
+          "observed_at": "2025-12-15 08:30:00+00:00",
+          "value": 39.189473684210526,
+          "station_count": 19
+        },
+        {
+          "observed_at": "2025-12-15 09:30:00+00:00",
+          "value": 37.300648148148156,
+          "station_count": 18
+        },
+        {
+          "observed_at": "2025-12-15 10:30:00+00:00",
+          "value": 37.610441176470594,
+          "station_count": 17
+        },
+        {
+          "observed_at": "2025-12-15 11:30:00+00:00",
+          "value": 35.855694444444445,
+          "station_count": 18
+        },
+        {
+          "observed_at": "2025-12-15 12:30:00+00:00",
+          "value": 36.4625,
+          "station_count": 19
+        },
+        {
+          "observed_at": "2025-12-15 13:30:00+00:00",
+          "value": 40.76675,
+          "station_count": 20
+        },
+        {
+          "observed_at": "2025-12-15 14:30:00+00:00",
+          "value": 44.180625,
+          "station_count": 20
+        },
+        {
+          "observed_at": "2025-12-15 15:30:00+00:00",
+          "value": 50.441125,
+          "station_count": 20
+        },
+        {
+          "observed_at": "2025-12-15 16:30:00+00:00",
+          "value": 62.214125,
+          "station_count": 20
+        },
+        {
+          "observed_at": "2025-12-15 17:30:00+00:00",
+          "value": 59.205124999999995,
+          "station_count": 20
+        }
+      ]
+    },
+    "pune": {
+      "provenance": {
+        "path": "data/results/8/pune_hourly.pkl",
+        "sha256": "0c282db758f6a9c049e5f637a7304473feb0bfa18bec2a4ed1e161d91cfb54d2",
+        "data_run": 8,
+        "cohort": "all_stations",
+        "normalised_input": false
+      },
+      "rows": [
+        {
+          "observed_at": "2025-07-14 18:30:00+00:00",
+          "value": 12.720714285714285,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-14 19:30:00+00:00",
+          "value": 10.856666666666667,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-14 20:30:00+00:00",
+          "value": 9.986785714285714,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-14 21:30:00+00:00",
+          "value": 9.5475,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-14 22:30:00+00:00",
+          "value": 11.250357142857142,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-14 23:30:00+00:00",
+          "value": 10.805714285714286,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 00:30:00+00:00",
+          "value": 13.4909375,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 01:30:00+00:00",
+          "value": 14.440833333333332,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-07-15 02:30:00+00:00",
+          "value": 17.6525,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 03:30:00+00:00",
+          "value": 17.769375,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 04:30:00+00:00",
+          "value": 15.2203125,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 05:30:00+00:00",
+          "value": 14.0415625,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 06:30:00+00:00",
+          "value": 18.760119047619046,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 07:30:00+00:00",
+          "value": 13.805714285714286,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 08:30:00+00:00",
+          "value": 11.222142857142858,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 09:30:00+00:00",
+          "value": 11.51,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 10:30:00+00:00",
+          "value": 11.396785714285715,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 11:30:00+00:00",
+          "value": 12.76392857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-07-15 12:30:00+00:00",
+          "value": 13.817083333333333,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 13:30:00+00:00",
+          "value": 16.3934375,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 14:30:00+00:00",
+          "value": 19.265625,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 15:30:00+00:00",
+          "value": 21.410937500000003,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 16:30:00+00:00",
+          "value": 22.36375,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-07-15 17:30:00+00:00",
+          "value": 31.86583333333333,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-09-14 18:30:00+00:00",
+          "value": 19.959642857142857,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-14 19:30:00+00:00",
+          "value": 17.58285714285714,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-14 20:30:00+00:00",
+          "value": 14.124285714285715,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-14 21:30:00+00:00",
+          "value": 10.966785714285715,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-14 22:30:00+00:00",
+          "value": 11.048333333333332,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-14 23:30:00+00:00",
+          "value": 11.163333333333332,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 00:30:00+00:00",
+          "value": 9.642916666666666,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 01:30:00+00:00",
+          "value": 10.749,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 02:30:00+00:00",
+          "value": 12.815833333333332,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 03:30:00+00:00",
+          "value": 10.554166666666665,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 04:30:00+00:00",
+          "value": 15.318999999999999,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 05:30:00+00:00",
+          "value": 13.80625,
+          "station_count": 4
+        },
+        {
+          "observed_at": "2025-09-15 06:30:00+00:00",
+          "value": 16.49547619047619,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 07:30:00+00:00",
+          "value": 14.58,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 08:30:00+00:00",
+          "value": 13.761666666666668,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 09:30:00+00:00",
+          "value": 11.037857142857144,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 10:30:00+00:00",
+          "value": 10.55625,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 11:30:00+00:00",
+          "value": 12.370833333333332,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-09-15 12:30:00+00:00",
+          "value": 14.5915,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-09-15 13:30:00+00:00",
+          "value": 13.651428571428571,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 14:30:00+00:00",
+          "value": 13.337857142857143,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 15:30:00+00:00",
+          "value": 16.068571428571428,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 16:30:00+00:00",
+          "value": 16.629285714285714,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-09-15 17:30:00+00:00",
+          "value": 15.656071428571428,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-12-14 18:30:00+00:00",
+          "value": 138.82238095238094,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-12-14 19:30:00+00:00",
+          "value": 111.28916666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 20:30:00+00:00",
+          "value": 106.60666666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 21:30:00+00:00",
+          "value": 104.00625000000001,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 22:30:00+00:00",
+          "value": 95.37875000000001,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-14 23:30:00+00:00",
+          "value": 90.47208333333333,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 00:30:00+00:00",
+          "value": 102.42916666666667,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 01:30:00+00:00",
+          "value": 111.62208333333335,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 02:30:00+00:00",
+          "value": 127.78750000000001,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 03:30:00+00:00",
+          "value": 127.59500000000001,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 04:30:00+00:00",
+          "value": 114.12875000000001,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 05:30:00+00:00",
+          "value": 95.00958333333334,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 06:30:00+00:00",
+          "value": 77.67541666666666,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 07:30:00+00:00",
+          "value": 64.59716666666667,
+          "station_count": 5
+        },
+        {
+          "observed_at": "2025-12-15 08:30:00+00:00",
+          "value": 51.50763888888889,
+          "station_count": 6
+        },
+        {
+          "observed_at": "2025-12-15 09:30:00+00:00",
+          "value": 53.41125,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-12-15 10:30:00+00:00",
+          "value": 53.40833333333334,
+          "station_count": 7
+        },
+        {
+          "observed_at": "2025-12-15 11:30:00+00:00",
+          "value": 59.58083333333333,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-12-15 12:30:00+00:00",
+          "value": 67.2703125,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-12-15 13:30:00+00:00",
+          "value": 76.06343749999999,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-12-15 14:30:00+00:00",
+          "value": 83.3065625,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-12-15 15:30:00+00:00",
+          "value": 86.859375,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-12-15 16:30:00+00:00",
+          "value": 92.596875,
+          "station_count": 8
+        },
+        {
+          "observed_at": "2025-12-15 17:30:00+00:00",
+          "value": 86.44809523809523,
+          "station_count": 7
+        }
+      ]
+    }
+  },
+  "comparisons": [
+    {
+      "city": "bengaluru",
+      "horizon": 1,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 14.397946428571428,
+      "source": "data/results/21/bengaluru_h1_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "f0fd1c9da66eef2ff224d66ae09ab207b874772004aa6c527a25388ee94e381f"
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 1,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 14.788311507936507,
+      "source": "data/results/21/bengaluru_h1_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "f8b67f55ec5f58950371563e3d4c1472825ce8fadce89377706a4f9c0ea245cf"
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 1,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 45.83795601851852,
+      "source": "data/results/21/bengaluru_h1_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "14e268efbac1192465e2286db9a11961033df02a72f124d11240f732891bb8c4"
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 3,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 14.397946428571428,
+      "source": "data/results/21/bengaluru_h3_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "9f86d7cfb6bd1aa01d2bea398cf36695aab087d1dc82540cdf2d34db466fff4d"
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 3,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 14.788311507936507,
+      "source": "data/results/21/bengaluru_h3_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "ebd07ee360a944d000b69e34e8f1c9f6e50e4284d162f7c06f7a32d98edd20a9"
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 3,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 45.83795601851852,
+      "source": "data/results/21/bengaluru_h3_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "f9728fd550de5ba87ed9ab26a7ec2113b46f175bc897222a4eb6e6b0db1b66a6"
+    },
+    {
+      "city": "chennai",
+      "horizon": 1,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 23.388509011243386,
+      "source": "data/results/21/chennai_h1_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "683b97f5a684c65142a9fb3c7d0bf817dac983560ef9bacc5a9fdc10fd36dbfd"
+    },
+    {
+      "city": "chennai",
+      "horizon": 1,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 28.619493055555555,
+      "source": "data/results/21/chennai_h1_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "fb350c49b33a259188bd497efb9ff2af9b75b5c80fda1e3bbb1d15655645c86a"
+    },
+    {
+      "city": "chennai",
+      "horizon": 1,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 57.22672569444444,
+      "source": "data/results/21/chennai_h1_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "1a4b97dc013b51cf8f956554e3146e0632323ea2ea560504884564bc6608534d"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 1,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 16.68901560867759,
+      "source": "data/results/21/mumbai_h1_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "6d0664ce9c7500d0f48b856100610cfad31460b865fd012c6d136e6e807edfc0"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 1,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 18.17624753772896,
+      "source": "data/results/21/mumbai_h1_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "f1fcf6eff70872c47ea90913db68eeb559ca3ce29f90f6b29e8068cc4bc5d76b"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 1,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 52.12135302591154,
+      "source": "data/results/21/mumbai_h1_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "a65ad22fda69dd9c58f86c7c70e8811eee5a37f8201f5ef3c39a2b0bbe3b6e48"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 2,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 16.68901560867759,
+      "source": "data/results/21/mumbai_h2_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "c375d5e5b2040018e063a9558a1c659dd7a1725212643199476b8c56869cff32"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 2,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 18.17624753772896,
+      "source": "data/results/21/mumbai_h2_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "5869a7b8c5177cf1636b7417221fa1138734bd46c7ad0ad79a39be208a741a2e"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 2,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 52.12135302591154,
+      "source": "data/results/21/mumbai_h2_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "589d1c1db98df7dd55e079595851482fd4c210f7b09bd68763d94ed3fc3e71af"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 3,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 16.68901560867759,
+      "source": "data/results/21/mumbai_h3_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "347cbac9bb9977d56ea7ab4e851f8a768d263001174646a8fa15d598ca930158"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 3,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 18.17624753772896,
+      "source": "data/results/21/mumbai_h3_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "64d5101cdd46c1ef1f766c785ec01ed71df9fce5f9ff4b5d1e4be129d87e84b6"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 3,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 52.12135302591154,
+      "source": "data/results/21/mumbai_h3_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "f4afec5d1c2ede2eee102782177887f07250c37b454be56ea098bb713055bf97"
+    },
+    {
+      "city": "pune",
+      "horizon": 1,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 15.098275669642858,
+      "source": "data/results/21/pune_h1_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "75400bc0a7fa8bf70f89d7dcecd4e171496dc950cd6b62c2a2b49d279d1ca018"
+    },
+    {
+      "city": "pune",
+      "horizon": 1,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 13.602883432539684,
+      "source": "data/results/21/pune_h1_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "f393fdbe0ba443a20fd8b6cda4d6f53319adf392364df1cad27a70babd1f783d"
+    },
+    {
+      "city": "pune",
+      "horizon": 1,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 90.7446948991402,
+      "source": "data/results/21/pune_h1_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "c664829527ac0f0ae8f184d720fa08066fdcbdb7f9683b9d49592487a1bdb63d"
+    },
+    {
+      "city": "pune",
+      "horizon": 2,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 15.098275669642858,
+      "source": "data/results/21/pune_h2_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "98c89dbac93dc206862709e2c80b26bcc913daddc3ee9f295aa62c83e82eea2e"
+    },
+    {
+      "city": "pune",
+      "horizon": 2,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 13.602883432539684,
+      "source": "data/results/21/pune_h2_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "96cd06680152ce12dd44d745d90309e891769593ff924549a4c989d4b11522af"
+    },
+    {
+      "city": "pune",
+      "horizon": 2,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 90.7446948991402,
+      "source": "data/results/21/pune_h2_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "bfeb75355d92338f4fa4d430d21dce40b2d9f2d3f00f2d2dd4136c30693bd156"
+    },
+    {
+      "city": "pune",
+      "horizon": 3,
+      "issue_date": "2025-07-15",
+      "evaluated_persistence": 15.098275669642858,
+      "source": "data/results/21/pune_h3_archived_forecast_2025-07_predictions.csv",
+      "source_sha256": "a1456ac3b905af05848164d92d841d7b38629eb45ac5dc602f5ac988350dd897"
+    },
+    {
+      "city": "pune",
+      "horizon": 3,
+      "issue_date": "2025-09-15",
+      "evaluated_persistence": 13.602883432539684,
+      "source": "data/results/21/pune_h3_archived_forecast_2025-09_predictions.csv",
+      "source_sha256": "8bc214665bc3a4298011de3e8b3df39a3321b908718733ae9d3aa5784139e0d5"
+    },
+    {
+      "city": "pune",
+      "horizon": 3,
+      "issue_date": "2025-12-15",
+      "evaluated_persistence": 90.7446948991402,
+      "source": "data/results/21/pune_h3_archived_forecast_2025-12_predictions.csv",
+      "source_sha256": "952c603ee98f22feca1e096a23a3b0bebde9dfaa37f1771f949ad4eecd8e552f"
+    }
+  ]
+}
