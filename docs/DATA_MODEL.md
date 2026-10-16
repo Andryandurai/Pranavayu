@@ -383,3 +383,14 @@ extension of the original horizontal field. The transect begins at the first
 retained source, with all retained sources contributing. Sidecars do not mutate
 the parent run's numerical summary or original binary field. Source-removal
 comparisons use another normal ScenarioRun with all source rates explicitly zero.
+
+## Phase 7 presentation snapshot
+
+No schema migration. `docs/results/PHASE7_DATA.json` stores the dated evidence
+dashboard projection: warehouse counts/quality flags, matched-network summaries,
+archived forecast scores, both interval methods/selected-family gates, actual
+latest issuance algorithms, historical assistant metrics and unchanged example
+run identifiers/values. Source paths and SHA256s retain the underlying record
+identity. It is an export, not a new analysis or a claim that data were restored
+on a fresh machine. `PHASE7_CHECKS.json` stores actual repeated test results and
+deployment-check output. Neither file rewrites earlier results or frozen labels.

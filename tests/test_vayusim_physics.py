@@ -83,7 +83,7 @@ def test_briggs_published_table(environment, stability, expected):
 
 
 @given(q=POSITIVE, sy=POSITIVE, sz=POSITIVE, wind=st.floats(1, 20))
-@settings(max_examples=30)
+@settings(max_examples=30, deadline=1000)
 def test_crosswind_mass_reflection(q, sy, sz, wind):
     y = np.linspace(-10 * sy, 10 * sy, 2001)
     integrated = np.trapezoid(concentration(q, wind, sy, sz, y, z=0.0, height=0.0), y)

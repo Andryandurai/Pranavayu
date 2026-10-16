@@ -17,6 +17,7 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" hidden>Menu <span aria-hidden="true">⌄</span></button>
     <nav id="site-navigation" class="primary-nav" aria-label="Main navigation">
       <a href="{% url 'home' %}" {% if request.path == '/' %}aria-current="page"{% endif %}>Overview</a>
+      <a href="{% url 'dashboard' %}" {% if request.path == '/dashboard/' %}aria-current="page"{% endif %}>Dashboard</a>
       <a href="{% url 'forecasts' %}" {% if request.path == '/forecasts/' %}aria-current="page"{% endif %}>Forecasts</a>
       <a href="{% url 'research' %}" {% if request.path == '/research/' %}aria-current="page"{% endif %}>Research</a>
       <a href="{% url 'library' %}" {% if request.path == '/library/' %}aria-current="page"{% endif %}>Library</a>

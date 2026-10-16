@@ -1,0 +1,1582 @@
+{
+  "captured_at": "2026-10-16T06:36:28.635328+00:00",
+  "source_hashes": {
+    "data/results/phase7/warehouse.json": "66d655f8d26b3237044a149ddf0bdf92b7ac5a78de468823f8c00c2e7f47e4b6",
+    "data/results/21/phase4_results.json": "9d403c7dae44fc04dce4b9856fa31b9e1f7ae9ea6bc8f75517ecb06386183e7d",
+    "data/results/19/paired_network.csv": "a1bdce3d50566442b25a572b7bc4f48ed0830e9a5174850c4382d7e249015a90",
+    "data/results/19/network_annual.csv": "e3cb9103e07baf239a17de859fd3bf725809afac5db55da9bc7e99f098590ea6",
+    "data/results/rag-phase5/metrics.json": "36d26d3f33395e71caa40ed59a5e9ce6012514d28c0dbaafa484fd379857c6cc",
+    "data/results/rag-ollama-phase6a/metrics.json": "ed24b3968b34b1f4c54d848c6dfa669b6d1f46e46adddcf5ddc27b82023cbddf",
+    "data/results/vayusim/verification/forecast-interval-policy.json": "a5bcaa09b4e001c73276609be4be4116aa1743ac3a91a4971412dedbfb02a144",
+    "docs/results/PHASE5.md": "0865fb7e306fabc8d40898495065298fed0d6a3b35ea7f83ae6a323f97dadd5e",
+    "docs/results/PHASE6A_INDEPENDENT_METRICS.json": "5773d4b6dba7c37b88b6348a6313dd00c5f5b02db84e4e2f91982354bdb5bbd2",
+    "docs/results/PHASE6B_METRICS.json": "4a912ab30b18277abf5dc7e7267c550493422847ac2b075d3265324be5853e11"
+  },
+  "ingestion": {
+    "captured_at": "2026-10-16T06:36:28.635328+00:00",
+    "reading_sources": [
+      {
+        "station__source__slug": "cpcb-ccr",
+        "rows": 1478656,
+        "first": "2014-12-31 18:30:00+00:00",
+        "last": "2019-12-31 17:30:00+00:00"
+      },
+      {
+        "station__source__slug": "opencity",
+        "rows": 14787584,
+        "first": "2023-12-31 18:30:00+00:00",
+        "last": "2025-12-31 17:30:00+00:00"
+      }
+    ],
+    "quality_flags": [
+      {
+        "quality_flag": "missing",
+        "rows": 2950728
+      },
+      {
+        "quality_flag": "ok",
+        "rows": 13214169
+      },
+      {
+        "quality_flag": "pm25_gt_pm10",
+        "rows": 1760
+      },
+      {
+        "quality_flag": "stuck",
+        "rows": 99583
+      }
+    ],
+    "readings_total": 16266240,
+    "weather": {
+      "rows": 1238688,
+      "first": "2015-01-01 00:00:00+00:00",
+      "last": "2026-10-10 23:00:00+00:00"
+    },
+    "fires": {
+      "rows": 0,
+      "first": null,
+      "last": null
+    }
+  },
+  "combined_observation_rows": 17504928,
+  "delhi": {
+    "difference": -17.591985246475744,
+    "ci": [
+      -35.071142907974696,
+      1.6623174839119734
+    ],
+    "days": 2417,
+    "refits": 20
+  },
+  "hyderabad": [
+    {
+      "city": "hyderabad",
+      "cohort": "fixed_panel",
+      "mean": "37.80465253995434",
+      "year": "2025",
+      "maximum": 77.68692129629629,
+      "valid_days": 365,
+      "days_above_60": 53
+    },
+    {
+      "city": "hyderabad",
+      "cohort": "all_stations",
+      "mean": "35.02119537769171",
+      "year": "2025",
+      "maximum": 53.030601989445735,
+      "valid_days": 365,
+      "days_above_60": 0
+    }
+  ],
+  "forecasts": [
+    {
+      "city": "bengaluru",
+      "horizon": 1,
+      "n": 184,
+      "models": {
+        "persistence": 5.746597800213739,
+        "mean7": 8.122748300487,
+        "climatology": 9.933143344915262,
+        "sarimax": 5.646345083573105,
+        "lightgbm": 6.339001436678055,
+        "lstm": 5.9917726446779325,
+        "prediction": 5.945268187419454
+      },
+      "skill_percent": -3.4571827385992737,
+      "mae": 4.295222374765833,
+      "dm_p": 0.3384840836134102,
+      "persistence_advised": true,
+      "latest_algorithm": "persistence",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6141304347826086,
+          "mean_width": 10.215276069342664,
+          "n": 184,
+          "percent": 61.41304347826087
+        },
+        "95": {
+          "coverage": 0.8586956521739131,
+          "mean_width": 18.585411555990245,
+          "n": 184,
+          "percent": 85.86956521739131
+        },
+        "quantile_80": {
+          "coverage": 0.7119565217391305,
+          "mean_width": 13.030397960792286,
+          "n": 184,
+          "percent": 71.19565217391305
+        },
+        "quantile_95": {
+          "coverage": 0.8913043478260869,
+          "mean_width": 25.58506268082963,
+          "n": 184,
+          "percent": 89.13043478260869
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7119565217391305,
+          "mean_width": 13.030397960792286,
+          "coverage_gate_passed": false,
+          "percent": 71.19565217391305
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.8913043478260869,
+          "mean_width": 25.58506268082963,
+          "coverage_gate_passed": false,
+          "percent": 89.13043478260869
+        }
+      }
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 2,
+      "n": 184,
+      "models": {
+        "persistence": 8.483591133141482,
+        "mean7": 8.777331828247352,
+        "climatology": 9.933143344915262,
+        "sarimax": 8.082869016659929,
+        "lightgbm": 6.8077778470989605,
+        "lstm": 7.217536003145574,
+        "prediction": 7.869905700062464
+      },
+      "skill_percent": 7.233793136041555,
+      "mae": 5.73680747677061,
+      "dm_p": 0.3231632095718443,
+      "persistence_advised": false,
+      "latest_algorithm": "persistence",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.657608695652174,
+          "mean_width": 14.283746445952142,
+          "n": 184,
+          "percent": 65.76086956521739
+        },
+        "95": {
+          "coverage": 0.842391304347826,
+          "mean_width": 23.92710624809288,
+          "n": 184,
+          "percent": 84.23913043478261
+        },
+        "quantile_80": {
+          "coverage": 0.7336956521739131,
+          "mean_width": 16.45184649123645,
+          "n": 184,
+          "percent": 73.36956521739131
+        },
+        "quantile_95": {
+          "coverage": 0.8695652173913043,
+          "mean_width": 32.299531560094245,
+          "n": 184,
+          "percent": 86.95652173913044
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7336956521739131,
+          "mean_width": 16.45184649123645,
+          "coverage_gate_passed": false,
+          "percent": 73.36956521739131
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.8695652173913043,
+          "mean_width": 32.299531560094245,
+          "coverage_gate_passed": false,
+          "percent": 86.95652173913044
+        }
+      }
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 3,
+      "n": 184,
+      "models": {
+        "persistence": 9.813875070341838,
+        "mean7": 9.044000650175004,
+        "climatology": 9.933143344915262,
+        "sarimax": 8.619902900508269,
+        "lightgbm": 7.034165519803921,
+        "lstm": 7.194259079918116,
+        "prediction": 9.970976135033789
+      },
+      "skill_percent": -1.6008056304560148,
+      "mae": 7.0958549806454405,
+      "dm_p": 0.8012933246062529,
+      "persistence_advised": true,
+      "latest_algorithm": "persistence",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6141304347826086,
+          "mean_width": 15.699446184355036,
+          "n": 184,
+          "percent": 61.41304347826087
+        },
+        "95": {
+          "coverage": 0.7717391304347826,
+          "mean_width": 27.491081412272855,
+          "n": 184,
+          "percent": 77.17391304347827
+        },
+        "quantile_80": {
+          "coverage": 0.7336956521739131,
+          "mean_width": 16.477828451466916,
+          "n": 184,
+          "percent": 73.36956521739131
+        },
+        "quantile_95": {
+          "coverage": 0.8641304347826086,
+          "mean_width": 30.856933938592494,
+          "n": 184,
+          "percent": 86.41304347826086
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7336956521739131,
+          "mean_width": 16.477828451466916,
+          "coverage_gate_passed": false,
+          "percent": 73.36956521739131
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.8641304347826086,
+          "mean_width": 30.856933938592494,
+          "coverage_gate_passed": false,
+          "percent": 86.41304347826086
+        }
+      }
+    },
+    {
+      "city": "chennai",
+      "horizon": 1,
+      "n": 184,
+      "models": {
+        "persistence": 11.443705739551303,
+        "mean7": 13.793363682432906,
+        "climatology": 17.4232109535754,
+        "sarimax": 10.088740593565317,
+        "lightgbm": 10.868572824582344,
+        "lstm": 10.652497634061705,
+        "prediction": 12.353367677576403
+      },
+      "skill_percent": -7.9490154564282545,
+      "mae": 7.705097042295679,
+      "dm_p": 0.3684661383884309,
+      "persistence_advised": true,
+      "latest_algorithm": "lstm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6521739130434783,
+          "mean_width": 16.102067930781875,
+          "n": 184,
+          "percent": 65.21739130434783
+        },
+        "95": {
+          "coverage": 0.8586956521739131,
+          "mean_width": 27.099542925681238,
+          "n": 184,
+          "percent": 85.86956521739131
+        },
+        "quantile_80": {
+          "coverage": 0.7282608695652174,
+          "mean_width": 19.312044288189078,
+          "n": 184,
+          "percent": 72.82608695652173
+        },
+        "quantile_95": {
+          "coverage": 0.9130434782608695,
+          "mean_width": 29.599624115791336,
+          "n": 184,
+          "percent": 91.30434782608695
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7282608695652174,
+          "mean_width": 19.312044288189078,
+          "coverage_gate_passed": false,
+          "percent": 72.82608695652173
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9130434782608695,
+          "mean_width": 29.599624115791336,
+          "coverage_gate_passed": true,
+          "percent": 91.30434782608695
+        }
+      }
+    },
+    {
+      "city": "chennai",
+      "horizon": 2,
+      "n": 184,
+      "models": {
+        "persistence": 15.634761088987595,
+        "mean7": 14.765850052817123,
+        "climatology": 17.4232109535754,
+        "sarimax": 12.900556606047271,
+        "lightgbm": 13.59350792006093,
+        "lstm": 13.460503491368236,
+        "prediction": 14.820418548611203
+      },
+      "skill_percent": 5.208538433951371,
+      "mae": 8.811117552923438,
+      "dm_p": 0.671323381433629,
+      "persistence_advised": false,
+      "latest_algorithm": "lstm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6195652173913043,
+          "mean_width": 16.57416735789644,
+          "n": 184,
+          "percent": 61.95652173913043
+        },
+        "95": {
+          "coverage": 0.8369565217391305,
+          "mean_width": 30.49128708559198,
+          "n": 184,
+          "percent": 83.69565217391305
+        },
+        "quantile_80": {
+          "coverage": 0.7391304347826086,
+          "mean_width": 21.99638882836809,
+          "n": 184,
+          "percent": 73.91304347826086
+        },
+        "quantile_95": {
+          "coverage": 0.9130434782608695,
+          "mean_width": 37.025058562653655,
+          "n": 184,
+          "percent": 91.30434782608695
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7391304347826086,
+          "mean_width": 21.99638882836809,
+          "coverage_gate_passed": false,
+          "percent": 73.91304347826086
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9130434782608695,
+          "mean_width": 37.025058562653655,
+          "coverage_gate_passed": true,
+          "percent": 91.30434782608695
+        }
+      }
+    },
+    {
+      "city": "chennai",
+      "horizon": 3,
+      "n": 184,
+      "models": {
+        "persistence": 17.82301020565468,
+        "mean7": 15.10381146942056,
+        "climatology": 17.4232109535754,
+        "sarimax": 15.09055486320253,
+        "lightgbm": 14.463784342310607,
+        "lstm": 15.28485960086897,
+        "prediction": 13.302007064314894
+      },
+      "skill_percent": 25.36610308344779,
+      "mae": 9.137448728781965,
+      "dm_p": 0.13000699352623546,
+      "persistence_advised": false,
+      "latest_algorithm": "lightgbm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6304347826086957,
+          "mean_width": 19.77193037288782,
+          "n": 184,
+          "percent": 63.04347826086957
+        },
+        "95": {
+          "coverage": 0.907608695652174,
+          "mean_width": 41.6135143472927,
+          "n": 184,
+          "percent": 90.76086956521739
+        },
+        "quantile_80": {
+          "coverage": 0.7445652173913043,
+          "mean_width": 23.422018337065143,
+          "n": 184,
+          "percent": 74.45652173913044
+        },
+        "quantile_95": {
+          "coverage": 0.9402173913043478,
+          "mean_width": 42.35344104526258,
+          "n": 184,
+          "percent": 94.02173913043478
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7445652173913043,
+          "mean_width": 23.422018337065143,
+          "coverage_gate_passed": false,
+          "percent": 74.45652173913044
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9402173913043478,
+          "mean_width": 42.35344104526258,
+          "coverage_gate_passed": true,
+          "percent": 94.02173913043478
+        }
+      }
+    },
+    {
+      "city": "delhi",
+      "horizon": 1,
+      "n": 184,
+      "models": {
+        "persistence": 33.668290507229024,
+        "mean7": 40.75532375742606,
+        "climatology": 48.91742733851911,
+        "sarimax": 30.110194509131798,
+        "lightgbm": 34.249164532958865,
+        "lstm": 29.24843359080672,
+        "prediction": 29.41698872585291
+      },
+      "skill_percent": 12.627020015950329,
+      "mae": 18.68599823615678,
+      "dm_p": 0.0284450930457046,
+      "persistence_advised": false,
+      "latest_algorithm": "lstm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6847826086956522,
+          "mean_width": 41.45974685634395,
+          "n": 184,
+          "percent": 68.47826086956522
+        },
+        "95": {
+          "coverage": 0.8967391304347826,
+          "mean_width": 77.20351720394808,
+          "n": 184,
+          "percent": 89.67391304347827
+        },
+        "quantile_80": {
+          "coverage": 0.8043478260869565,
+          "mean_width": 66.49470261819421,
+          "n": 184,
+          "percent": 80.43478260869566
+        },
+        "quantile_95": {
+          "coverage": 0.967391304347826,
+          "mean_width": 159.92505044144715,
+          "n": 184,
+          "percent": 96.73913043478261
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.8043478260869565,
+          "mean_width": 66.49470261819421,
+          "coverage_gate_passed": true,
+          "percent": 80.43478260869566
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.967391304347826,
+          "mean_width": 159.92505044144715,
+          "coverage_gate_passed": true,
+          "percent": 96.73913043478261
+        }
+      }
+    },
+    {
+      "city": "delhi",
+      "horizon": 2,
+      "n": 184,
+      "models": {
+        "persistence": 47.7599567891647,
+        "mean7": 44.14630575792966,
+        "climatology": 48.91742733851911,
+        "sarimax": 41.35002156480965,
+        "lightgbm": 42.39775953681219,
+        "lstm": 39.18955276121141,
+        "prediction": 43.85779838694791
+      },
+      "skill_percent": 8.170355805476914,
+      "mae": 26.554932391441092,
+      "dm_p": 0.2263270201054891,
+      "persistence_advised": false,
+      "latest_algorithm": "mean7",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6739130434782609,
+          "mean_width": 55.58995149702694,
+          "n": 184,
+          "percent": 67.3913043478261
+        },
+        "95": {
+          "coverage": 0.8260869565217391,
+          "mean_width": 97.75669590456441,
+          "n": 184,
+          "percent": 82.6086956521739
+        },
+        "quantile_80": {
+          "coverage": 0.7989130434782609,
+          "mean_width": 81.5196823812448,
+          "n": 184,
+          "percent": 79.8913043478261
+        },
+        "quantile_95": {
+          "coverage": 0.9619565217391305,
+          "mean_width": 171.2082362950825,
+          "n": 184,
+          "percent": 96.19565217391305
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.7989130434782609,
+          "mean_width": 81.5196823812448,
+          "coverage_gate_passed": true,
+          "percent": 79.8913043478261
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9619565217391305,
+          "mean_width": 171.2082362950825,
+          "coverage_gate_passed": true,
+          "percent": 96.19565217391305
+        }
+      }
+    },
+    {
+      "city": "delhi",
+      "horizon": 3,
+      "n": 184,
+      "models": {
+        "persistence": 53.31639788615591,
+        "mean7": 45.73665566356686,
+        "climatology": 48.91742733851911,
+        "sarimax": 44.68416069196965,
+        "lightgbm": 41.06955015573558,
+        "lstm": 40.791047478194464,
+        "prediction": 44.84128718910698
+      },
+      "skill_percent": 15.89588012893417,
+      "mae": 26.35978896979263,
+      "dm_p": 0.062074838871037215,
+      "persistence_advised": false,
+      "latest_algorithm": "mean7",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7282608695652174,
+          "mean_width": 64.08716620370951,
+          "n": 184,
+          "percent": 72.82608695652173
+        },
+        "95": {
+          "coverage": 0.9021739130434783,
+          "mean_width": 143.29320028827186,
+          "n": 184,
+          "percent": 90.21739130434783
+        },
+        "quantile_80": {
+          "coverage": 0.8586956521739131,
+          "mean_width": 90.46689720520916,
+          "n": 184,
+          "percent": 85.86956521739131
+        },
+        "quantile_95": {
+          "coverage": 0.9728260869565217,
+          "mean_width": 210.93386166975014,
+          "n": 184,
+          "percent": 97.28260869565217
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.8586956521739131,
+          "mean_width": 90.46689720520916,
+          "coverage_gate_passed": true,
+          "percent": 85.86956521739131
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9728260869565217,
+          "mean_width": 210.93386166975014,
+          "coverage_gate_passed": true,
+          "percent": 97.28260869565217
+        }
+      }
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 1,
+      "n": 184,
+      "models": {
+        "persistence": 3.827989712808818,
+        "mean7": 5.630812809893327,
+        "climatology": 8.045020057478462,
+        "sarimax": 3.4753715294174006,
+        "lightgbm": 4.082710387141432,
+        "lstm": 4.170236280314854,
+        "prediction": 3.6555814768791066
+      },
+      "skill_percent": 4.5038845154890765,
+      "mae": 2.8693653865007236,
+      "dm_p": 0.425558888774754,
+      "persistence_advised": false,
+      "latest_algorithm": "sarimax",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.782608695652174,
+          "mean_width": 8.456211615768613,
+          "n": 184,
+          "percent": 78.26086956521739
+        },
+        "95": {
+          "coverage": 0.9619565217391305,
+          "mean_width": 15.15286296066695,
+          "n": 184,
+          "percent": 96.19565217391305
+        },
+        "quantile_80": {
+          "coverage": 0.8260869565217391,
+          "mean_width": 10.380679897959826,
+          "n": 184,
+          "percent": 82.6086956521739
+        },
+        "quantile_95": {
+          "coverage": 0.9836956521739131,
+          "mean_width": 18.059508118333266,
+          "n": 184,
+          "percent": 98.36956521739131
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "conformal",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.782608695652174,
+          "mean_width": 8.456211615768613,
+          "coverage_gate_passed": true,
+          "percent": 78.26086956521739
+        },
+        "95": {
+          "n": 184,
+          "method": "conformal",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9619565217391305,
+          "mean_width": 15.15286296066695,
+          "coverage_gate_passed": true,
+          "percent": 96.19565217391305
+        }
+      }
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 2,
+      "n": 184,
+      "models": {
+        "persistence": 5.649779714885271,
+        "mean7": 6.174402003676212,
+        "climatology": 8.045020057478462,
+        "sarimax": 4.9525249181490745,
+        "lightgbm": 5.910874460379246,
+        "lstm": 5.160122139344027,
+        "prediction": 5.121769508301879
+      },
+      "skill_percent": 9.345677764962446,
+      "mae": 4.053605618490876,
+      "dm_p": 0.21570156914381816,
+      "persistence_advised": false,
+      "latest_algorithm": "sarimax",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7608695652173914,
+          "mean_width": 12.04580250000571,
+          "n": 184,
+          "percent": 76.08695652173914
+        },
+        "95": {
+          "coverage": 0.9293478260869565,
+          "mean_width": 19.745475901145145,
+          "n": 184,
+          "percent": 92.93478260869566
+        },
+        "quantile_80": {
+          "coverage": 0.7880434782608695,
+          "mean_width": 13.478706306952175,
+          "n": 184,
+          "percent": 78.80434782608695
+        },
+        "quantile_95": {
+          "coverage": 0.9619565217391305,
+          "mean_width": 21.731320059332624,
+          "n": 184,
+          "percent": 96.19565217391305
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.7880434782608695,
+          "mean_width": 13.478706306952175,
+          "coverage_gate_passed": true,
+          "percent": 78.80434782608695
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9619565217391305,
+          "mean_width": 21.731320059332624,
+          "coverage_gate_passed": true,
+          "percent": 96.19565217391305
+        }
+      }
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 3,
+      "n": 184,
+      "models": {
+        "persistence": 6.902082660245979,
+        "mean7": 6.531347357560696,
+        "climatology": 8.045020057478462,
+        "sarimax": 5.63434090841516,
+        "lightgbm": 7.015251608589947,
+        "lstm": 5.620690093432086,
+        "prediction": 5.63434090841516
+      },
+      "skill_percent": 18.367524908570697,
+      "mae": 4.36124966858562,
+      "dm_p": 0.014397374767971908,
+      "persistence_advised": false,
+      "latest_algorithm": "sarimax",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.75,
+          "mean_width": 12.714812211084672,
+          "n": 184,
+          "percent": 75.0
+        },
+        "95": {
+          "coverage": 0.9239130434782609,
+          "mean_width": 26.921581925892625,
+          "n": 184,
+          "percent": 92.3913043478261
+        },
+        "quantile_80": {
+          "coverage": 0.7880434782608695,
+          "mean_width": 16.455748433201983,
+          "n": 184,
+          "percent": 78.80434782608695
+        },
+        "quantile_95": {
+          "coverage": 0.9565217391304348,
+          "mean_width": 23.645945686517862,
+          "n": 184,
+          "percent": 95.65217391304348
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.7880434782608695,
+          "mean_width": 16.455748433201983,
+          "coverage_gate_passed": true,
+          "percent": 78.80434782608695
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9565217391304348,
+          "mean_width": 23.645945686517862,
+          "coverage_gate_passed": true,
+          "percent": 95.65217391304348
+        }
+      }
+    },
+    {
+      "city": "kolkata",
+      "horizon": 1,
+      "n": 184,
+      "models": {
+        "persistence": 10.1744050956804,
+        "mean7": 14.63352156809754,
+        "climatology": 17.897864344231472,
+        "sarimax": 9.416723633861773,
+        "lightgbm": 10.333106451148549,
+        "lstm": 10.140435819001587,
+        "prediction": 10.15875633730014
+      },
+      "skill_percent": 0.1538051437219079,
+      "mae": 6.884176968731111,
+      "dm_p": 0.9830852828332051,
+      "persistence_advised": false,
+      "latest_algorithm": "lstm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6467391304347826,
+          "mean_width": 15.131504347841474,
+          "n": 184,
+          "percent": 64.67391304347827
+        },
+        "95": {
+          "coverage": 0.8913043478260869,
+          "mean_width": 28.364747575299514,
+          "n": 184,
+          "percent": 89.13043478260869
+        },
+        "quantile_80": {
+          "coverage": 0.8043478260869565,
+          "mean_width": 21.61601051999694,
+          "n": 184,
+          "percent": 80.43478260869566
+        },
+        "quantile_95": {
+          "coverage": 0.9402173913043478,
+          "mean_width": 46.28159760493989,
+          "n": 184,
+          "percent": 94.02173913043478
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.8043478260869565,
+          "mean_width": 21.61601051999694,
+          "coverage_gate_passed": true,
+          "percent": 80.43478260869566
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9402173913043478,
+          "mean_width": 46.28159760493989,
+          "coverage_gate_passed": true,
+          "percent": 94.02173913043478
+        }
+      }
+    },
+    {
+      "city": "kolkata",
+      "horizon": 2,
+      "n": 184,
+      "models": {
+        "persistence": 14.902601145525939,
+        "mean7": 16.026772967371848,
+        "climatology": 17.897864344231472,
+        "sarimax": 13.325167456566255,
+        "lightgbm": 12.855718794604782,
+        "lstm": 12.676661905602739,
+        "prediction": 12.682766219744563
+      },
+      "skill_percent": 14.895620597400306,
+      "mae": 8.186489735734105,
+      "dm_p": 0.17809849328462315,
+      "persistence_advised": false,
+      "latest_algorithm": "lstm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.6467391304347826,
+          "mean_width": 19.247959757699242,
+          "n": 184,
+          "percent": 64.67391304347827
+        },
+        "95": {
+          "coverage": 0.9130434782608695,
+          "mean_width": 37.38142793892596,
+          "n": 184,
+          "percent": 91.30434782608695
+        },
+        "quantile_80": {
+          "coverage": 0.8260869565217391,
+          "mean_width": 27.113814576132164,
+          "n": 184,
+          "percent": 82.6086956521739
+        },
+        "quantile_95": {
+          "coverage": 0.9456521739130435,
+          "mean_width": 57.48242491572761,
+          "n": 184,
+          "percent": 94.56521739130434
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.8260869565217391,
+          "mean_width": 27.113814576132164,
+          "coverage_gate_passed": true,
+          "percent": 82.6086956521739
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9456521739130435,
+          "mean_width": 57.48242491572761,
+          "coverage_gate_passed": true,
+          "percent": 94.56521739130434
+        }
+      }
+    },
+    {
+      "city": "kolkata",
+      "horizon": 3,
+      "n": 184,
+      "models": {
+        "persistence": 17.14990036965526,
+        "mean7": 16.84190049786464,
+        "climatology": 17.897864344231472,
+        "sarimax": 14.966923530622768,
+        "lightgbm": 13.75895621231445,
+        "lstm": 12.808124834217079,
+        "prediction": 15.455631890287092
+      },
+      "skill_percent": 9.879173889347935,
+      "mae": 10.327459372856811,
+      "dm_p": 0.42538204570963056,
+      "persistence_advised": false,
+      "latest_algorithm": "lstm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7282608695652174,
+          "mean_width": 24.96487140514465,
+          "n": 184,
+          "percent": 72.82608695652173
+        },
+        "95": {
+          "coverage": 0.8804347826086957,
+          "mean_width": 43.64091254219547,
+          "n": 184,
+          "percent": 88.04347826086956
+        },
+        "quantile_80": {
+          "coverage": 0.7989130434782609,
+          "mean_width": 27.539046072928148,
+          "n": 184,
+          "percent": 79.8913043478261
+        },
+        "quantile_95": {
+          "coverage": 0.9565217391304348,
+          "mean_width": 61.227051106423765,
+          "n": 184,
+          "percent": 95.65217391304348
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.7989130434782609,
+          "mean_width": 27.539046072928148,
+          "coverage_gate_passed": true,
+          "percent": 79.8913043478261
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9565217391304348,
+          "mean_width": 61.227051106423765,
+          "coverage_gate_passed": true,
+          "percent": 95.65217391304348
+        }
+      }
+    },
+    {
+      "city": "mumbai",
+      "horizon": 1,
+      "n": 184,
+      "models": {
+        "persistence": 7.05540174730074,
+        "mean7": 11.89135678164628,
+        "climatology": 14.807438576422276,
+        "sarimax": 7.155017966769164,
+        "lightgbm": 7.336661088151264,
+        "lstm": 8.003920069803545,
+        "prediction": 10.728991973980452
+      },
+      "skill_percent": -52.067768190311156,
+      "mae": 6.235184961142028,
+      "dm_p": 0.08969240592086686,
+      "persistence_advised": true,
+      "latest_algorithm": "lightgbm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7608695652173914,
+          "mean_width": 12.850899480897604,
+          "n": 184,
+          "percent": 76.08695652173914
+        },
+        "95": {
+          "coverage": 0.8804347826086957,
+          "mean_width": 28.08702846043817,
+          "n": 184,
+          "percent": 88.04347826086956
+        },
+        "quantile_80": {
+          "coverage": 0.8206521739130435,
+          "mean_width": 14.656499188937174,
+          "n": 184,
+          "percent": 82.06521739130434
+        },
+        "quantile_95": {
+          "coverage": 0.9619565217391305,
+          "mean_width": 34.3910106880741,
+          "n": 184,
+          "percent": 96.19565217391305
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.8206521739130435,
+          "mean_width": 14.656499188937174,
+          "coverage_gate_passed": true,
+          "percent": 82.06521739130434
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9619565217391305,
+          "mean_width": 34.3910106880741,
+          "coverage_gate_passed": true,
+          "percent": 96.19565217391305
+        }
+      }
+    },
+    {
+      "city": "mumbai",
+      "horizon": 2,
+      "n": 184,
+      "models": {
+        "persistence": 11.03025827593347,
+        "mean7": 13.325040588636341,
+        "climatology": 14.807438576422276,
+        "sarimax": 10.48336127786454,
+        "lightgbm": 9.745388748961156,
+        "lstm": 10.128875085046156,
+        "prediction": 12.802258008120884
+      },
+      "skill_percent": -16.064897918607013,
+      "mae": 8.029844565997015,
+      "dm_p": 0.20692461901126344,
+      "persistence_advised": true,
+      "latest_algorithm": "persistence",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7282608695652174,
+          "mean_width": 19.13467566601655,
+          "n": 184,
+          "percent": 72.82608695652173
+        },
+        "95": {
+          "coverage": 0.8369565217391305,
+          "mean_width": 35.69071295460798,
+          "n": 184,
+          "percent": 83.69565217391305
+        },
+        "quantile_80": {
+          "coverage": 0.8315217391304348,
+          "mean_width": 18.552624446792002,
+          "n": 184,
+          "percent": 83.15217391304348
+        },
+        "quantile_95": {
+          "coverage": 0.9619565217391305,
+          "mean_width": 36.79348749967306,
+          "n": 184,
+          "percent": 96.19565217391305
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.8315217391304348,
+          "mean_width": 18.552624446792002,
+          "coverage_gate_passed": true,
+          "percent": 83.15217391304348
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9619565217391305,
+          "mean_width": 36.79348749967306,
+          "coverage_gate_passed": true,
+          "percent": 96.19565217391305
+        }
+      }
+    },
+    {
+      "city": "mumbai",
+      "horizon": 3,
+      "n": 184,
+      "models": {
+        "persistence": 13.43146132675909,
+        "mean7": 14.342331165533842,
+        "climatology": 14.807438576422276,
+        "sarimax": 10.812699036349896,
+        "lightgbm": 12.418300761416914,
+        "lstm": 10.799984441848592,
+        "prediction": 14.488188934973389
+      },
+      "skill_percent": -7.867555007652172,
+      "mae": 9.214824285778331,
+      "dm_p": 0.43973387533052205,
+      "persistence_advised": true,
+      "latest_algorithm": "persistence",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7880434782608695,
+          "mean_width": 27.39033614984721,
+          "n": 184,
+          "percent": 78.80434782608695
+        },
+        "95": {
+          "coverage": 0.842391304347826,
+          "mean_width": 45.6429226295372,
+          "n": 184,
+          "percent": 84.23913043478261
+        },
+        "quantile_80": {
+          "coverage": 0.8260869565217391,
+          "mean_width": 22.994197062733104,
+          "n": 184,
+          "percent": 82.6086956521739
+        },
+        "quantile_95": {
+          "coverage": 0.9565217391304348,
+          "mean_width": 53.88581248533978,
+          "n": 184,
+          "percent": 95.65217391304348
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "conformal",
+          "nominal": 0.8,
+          "warning": "",
+          "coverage": 0.7880434782608695,
+          "mean_width": 27.39033614984721,
+          "coverage_gate_passed": true,
+          "percent": 78.80434782608695
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9565217391304348,
+          "mean_width": 53.88581248533978,
+          "coverage_gate_passed": true,
+          "percent": 95.65217391304348
+        }
+      }
+    },
+    {
+      "city": "pune",
+      "horizon": 1,
+      "n": 184,
+      "models": {
+        "persistence": 7.990694747792978,
+        "mean7": 11.6884964005023,
+        "climatology": 20.420689935738615,
+        "sarimax": 7.115395420150477,
+        "lightgbm": 10.900644286489058,
+        "lstm": 9.05318636052374,
+        "prediction": 10.413931228258802
+      },
+      "skill_percent": -30.325729576081216,
+      "mae": 6.195553226399044,
+      "dm_p": 0.17637144869496577,
+      "persistence_advised": true,
+      "latest_algorithm": "lightgbm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7119565217391305,
+          "mean_width": 12.785846764358162,
+          "n": 184,
+          "percent": 71.19565217391305
+        },
+        "95": {
+          "coverage": 0.8858695652173914,
+          "mean_width": 25.06788393216776,
+          "n": 184,
+          "percent": 88.58695652173914
+        },
+        "quantile_80": {
+          "coverage": 0.7119565217391305,
+          "mean_width": 17.50623247822507,
+          "n": 184,
+          "percent": 71.19565217391305
+        },
+        "quantile_95": {
+          "coverage": 0.8260869565217391,
+          "mean_width": 35.19400275618646,
+          "n": 184,
+          "percent": 82.6086956521739
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "conformal",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7119565217391305,
+          "mean_width": 12.785846764358162,
+          "coverage_gate_passed": false,
+          "percent": 71.19565217391305
+        },
+        "95": {
+          "n": 184,
+          "method": "conformal",
+          "nominal": 0.95,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.8858695652173914,
+          "mean_width": 25.06788393216776,
+          "coverage_gate_passed": false,
+          "percent": 88.58695652173914
+        }
+      }
+    },
+    {
+      "city": "pune",
+      "horizon": 2,
+      "n": 184,
+      "models": {
+        "persistence": 11.478518259643533,
+        "mean7": 13.016498133710574,
+        "climatology": 20.420689935738615,
+        "sarimax": 11.031539000352888,
+        "lightgbm": 13.60024037512423,
+        "lstm": 11.064876468676983,
+        "prediction": 13.615800422222126
+      },
+      "skill_percent": -18.61984373098837,
+      "mae": 8.416184864165487,
+      "dm_p": 0.24650320662912098,
+      "persistence_advised": true,
+      "latest_algorithm": "lightgbm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7010869565217391,
+          "mean_width": 17.40896625049811,
+          "n": 184,
+          "percent": 70.1086956521739
+        },
+        "95": {
+          "coverage": 0.8532608695652174,
+          "mean_width": 33.446171150029116,
+          "n": 184,
+          "percent": 85.32608695652173
+        },
+        "quantile_80": {
+          "coverage": 0.7065217391304348,
+          "mean_width": 19.32365847573945,
+          "n": 184,
+          "percent": 70.65217391304348
+        },
+        "quantile_95": {
+          "coverage": 0.8641304347826086,
+          "mean_width": 39.24105427450772,
+          "n": 184,
+          "percent": 86.41304347826086
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7065217391304348,
+          "mean_width": 19.32365847573945,
+          "coverage_gate_passed": false,
+          "percent": 70.65217391304348
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.8641304347826086,
+          "mean_width": 39.24105427450772,
+          "coverage_gate_passed": false,
+          "percent": 86.41304347826086
+        }
+      }
+    },
+    {
+      "city": "pune",
+      "horizon": 3,
+      "n": 184,
+      "models": {
+        "persistence": 12.986576732302693,
+        "mean7": 13.9391627766741,
+        "climatology": 20.420689935738615,
+        "sarimax": 12.458752933823929,
+        "lightgbm": 14.354996748066934,
+        "lstm": 11.925176540290632,
+        "prediction": 14.467725749141296
+      },
+      "skill_percent": -11.405230549744537,
+      "mae": 9.342129815458145,
+      "dm_p": 0.44527822099410796,
+      "persistence_advised": true,
+      "latest_algorithm": "lightgbm",
+      "latest_issue_date": "2025-12-31",
+      "intervals": {
+        "80": {
+          "coverage": 0.7010869565217391,
+          "mean_width": 20.054583560697047,
+          "n": 184,
+          "percent": 70.1086956521739
+        },
+        "95": {
+          "coverage": 0.875,
+          "mean_width": 42.40595330907596,
+          "n": 184,
+          "percent": 87.5
+        },
+        "quantile_80": {
+          "coverage": 0.7391304347826086,
+          "mean_width": 22.469655819961805,
+          "n": 184,
+          "percent": 73.91304347826086
+        },
+        "quantile_95": {
+          "coverage": 0.9130434782608695,
+          "mean_width": 47.19934065492174,
+          "n": 184,
+          "percent": 91.30434782608695
+        }
+      },
+      "choices": {
+        "80": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.8,
+          "warning": "No existing method meets the five-point tolerance",
+          "coverage": 0.7391304347826086,
+          "mean_width": 22.469655819961805,
+          "coverage_gate_passed": false,
+          "percent": 73.91304347826086
+        },
+        "95": {
+          "n": 184,
+          "method": "quantile_lightgbm",
+          "nominal": 0.95,
+          "warning": "",
+          "coverage": 0.9130434782608695,
+          "mean_width": 47.19934065492174,
+          "coverage_gate_passed": true,
+          "percent": 91.30434782608695
+        }
+      }
+    }
+  ],
+  "negative_policy_count": 9,
+  "coverage_failure_count": 14,
+  "fallback_gap_count": 5,
+  "assistant": {
+    "documents": 29,
+    "chunks": 7194,
+    "chunks_source": "docs/results/PHASE5.md: Library",
+    "recall5_percent": 80.3125,
+    "mrr": 0.6932707917082916,
+    "citations_correct": 925,
+    "citations_total": 925,
+    "numbers_correct": 669,
+    "numbers_total": 669,
+    "refusals_correct": 10,
+    "refusals_total": 10,
+    "completed_at": "2026-10-12T09:52:59.930123+00:00"
+  },
+  "llm": {
+    "literature_answered": 2,
+    "literature_total": 80,
+    "data_answered": 0,
+    "data_total": 30,
+    "removed": 118,
+    "claims": 120,
+    "completed_at": "2026-10-15T15:16:48.629771+00:00"
+  },
+  "examples": [
+    {
+      "run_id": 62,
+      "city": "delhi",
+      "stability": "C",
+      "peak_ugm3": 15.641839027404785,
+      "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+      "grid_sha256": "d1aaf3e80b3890463af41998244f9c8136f549b0e649c814389968cd45ad9592",
+      "all_original_summary_values_identical": true
+    },
+    {
+      "run_id": 63,
+      "city": "mumbai",
+      "stability": "C",
+      "peak_ugm3": 11.536741256713867,
+      "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+      "grid_sha256": "6adfb341ceda54cf51e39be0a9a71a81cff112979cb662a6311caa46976f150c",
+      "all_original_summary_values_identical": true
+    },
+    {
+      "run_id": 64,
+      "city": "hyderabad",
+      "stability": "F",
+      "peak_ugm3": 18.990890502929688,
+      "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+      "grid_sha256": "528d6c0080dab5c48dd2bf7716529d4d26e0f49f1b0ce07d2292b54e1f562663",
+      "all_original_summary_values_identical": true
+    }
+  ],
+  "testing": {
+    "passed": 284,
+    "date": "2026-10-16T12:19:14.9208882+05:30",
+    "source": "checks",
+    "note": "Three full runs passed; explicit bounded deadline for the recorded timing-only failure. Numerical assertions and input domains unchanged."
+  }
+}

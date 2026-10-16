@@ -1,590 +1,139 @@
 # EnviroInsights-India
 
-Open **http://127.0.0.1:8000/vayusim/** for the Phase 6B dispersion lab.
-It provides source placement, cited source families, archived/manual weather,
-binary-grid particles and contours, stored source-removal comparisons, a cached
-hourly timeline, separate CPCB totals, a stored vertical cross-section and
-annotated image exports. `/simulator/` remains an alias, including old share links.
-Urban Briggs C/F show **unvalidated branch** on the page, summary, day frames and
-exports. Other branches say **formula check only**. These labels are not evidence
-of predictive performance. See [Phase 6B](docs/results/PHASE6B.md) for the exact
-API contract, measured timings, browser screenshots and limitations.
+EnviroInsights-India is a Django research project for inspecting Indian air-quality
+observations, weather associations, daily PM2.5 forecasts, cited documents and
+educational source-dispersion scenarios. It separates observations, fitted
+estimates and evidence that is missing.
 
-Phase6A adds **VayuSim**, an educational, source-specific Gaussian dispersion
-engine with archived weather, WorldPop2025 exposure, saved scenarios and a
-verification map. The website now has consistent desktop/mobile navigation:
-[Overview](http://localhost:8000/), [Forecasts](http://localhost:8000/forecasts/),
-[Research](http://localhost:8000/research/), [Library](http://localhost:8000/library/),
-[Ask](http://localhost:8000/ask/) and [VayuSim](http://localhost:8000/simulator/).
-Read [the Phase6A report](docs/results/PHASE6A.md) for actual verification and
-limitations. Forecast cards show archived replay dates; research comparisons
-do not establish causation or official NCAP compliance.
+Working: a provenance-aware warehouse, stored-results dashboard, retrospective
+analytics, archived-replay forecasting, extractive retrieval with verified
+citations, and VayuSim. The dated warehouse snapshot contains **17,504,928 combined
+rows**: **16,266,240 concentration rows**, including missing/flagged rows, and
+**1,238,688 weather observations**. It is not complete national coverage.
+[Source](docs/results/PHASE7_DATA.json).
 
-The [fix pass](docs/results/PHASE6A.md#fix-pass) separates passing **formula checks**
-from a **scheme comparison**. Briggs versus Cimbala's Martin solution (PDF p.3)
-differs by 14.13% in sigma-y, 15.60% in sigma-z and 10.66% in concentration.
-These scheme differences exceed the unchanged 5%/10% tolerances; they are not
-validation errors. Brune Table 2.3 agrees with the code: rural-B sigma-y at 1 km
-is 152.554014 m; the adjacent paragraph's 210 m is inconsistent. Turner physical
-pages remain **unverified**. End-to-end physical validity is not established.
+Not established: urban C/F plume performance, causal BS-VI attribution, fire
+effects, useful local-LLM answer quality, interval coverage everywhere, or live
+forecast operation without fresh keyed observations. Nine retrospective forecast
+policies lose to persistence. Persistence is advised, but the latest saved
+issuance still uses other algorithms for five of those nine; automatic fallback
+for all nine is **not implemented**. [Record](docs/results/PHASE7.md).
 
-The [independent-reference pass](docs/results/PHASE6A.md#independent-validation)
-verifies the published rural-D sigma pair at 1 km (DOE p.213): errors 0.030135%
-and 0.124886%, within 5%. This does not validate the **urban C** branches used by
-Delhi/Mumbai or **urban F** used by Hyderabad; those remain **not independently
-validated** against numeric cases. Their example values are unchanged. The gate
-is **Ready for 6B with caveats**. The Phase 6B frontend now displays
-**unvalidated branch** for these scenarios; the scientific caveats still apply.
+## Open the project
 
-VayuSim inputs are explicit scenario assumptions, not measured facility
-inventories. All five source-family presets require emission rate, release
-height, diameter, exit velocity and temperature where no defensible universal
-default was established. Real weather uses the UTC midpoint of the selected
-IST hour. Station totals stay separate from the modelled increment. The
-population calculation is **hourly added exposure**, with fractional raster
-support; missing population is not extrapolated across unknown area.
-
-The audited examples each use a **hypothetical 1 g/s source**: Delhi (2025-01-15
-12:00 IST), Mumbai (2025-07-15 15:00 IST), and Hyderabad (2025-11-15 20:00 IST).
-Their peak increments are 15.641839, 11.536741 and 18.990891 µg/m³. For one source, at fixed
-weather, geometry, release parameters and grid, peak concentration scales
-linearly with emission rate Q. Population values cover the modelled footprint
-only and its known raster support; population above a fixed threshold does not
-scale linearly. These examples are not measured emission inventories.
-
-The stable preset ID `highway` now displays **Road dust resuspension**.
-[AP-42 13.2.1](https://www.epa.gov/sites/default/files/2020-10/documents/13.2.1_paved_roads.pdf),
-January 2011, printed pp.13.2.1-1 and 13.2.1-4, excludes exhaust, brake wear
-and tire wear from its road-dust equation. Enter total primary PM2.5 g/s for
-the complete segment; no exhaust factor or universal emission rate is supplied.
-
-The default grid is10km×10km at50m, with an AEQD CRS and a wind-rotated affine.
-`POST /api/vayusim/run/` returns summary, GeoJSON contours and binary/header/PNG
-URLs. `POST /api/vayusim/day/` uses a timezone-aware datetime to select an IST
-date and returns24 independent hourly summaries; missing hours remain
-unavailable, and grids are materialised on their first request. Share scenarios
-through `/simulator/?scenario=<slug>`. Explain uses a stored `run_id`; arbitrary
-client numbers never become verified evidence.
-
-The Windows test wrapper and Makefile force test settings, extractive answering
-and a `/tmp` Hypothesis cache, so enabling the local language model cannot make
-tests call it. Tests retain the real PostgreSQL and Celery integration. On this
-machine an earlier memory measurement enabled Qwen2.5:3b-instruct; source-model
-caches and all project data remain on D:. The default is **extractive retrieval
-with verified citations** (`LLM_PROVIDER=extractive`, `OLLAMA_ENABLED=false`,
-empty `COMPOSE_PROFILES`). The experimental Qwen provider is stopped and remains
-available through the opt-in `llm` profile. It takes minutes on CPU and has
-**not passed answer-quality acceptance**:
-its existing frozen evaluation retained only 2/80 literature answers and 0/30
-available-data answers. Exact support among those two retained answers does not
-establish useful question-answering quality. No prompt/provider tuning or new
-language-model evaluation was performed during the audit.
-The final audit measurement had 4,103,503,872 bytes available against the
-3B model's 5,151,137,904-byte memory requirement, so its **current memory gate
-also fails**. Earlier measurements passed; that eligibility varies with resident
-allocations. The default extractive path needs no language-model memory gate.
-Opting into experimental generation still requires a fresh resource check.
-
-Phase 5 adds [extractive retrieval with verified citations](#phase-5-extractive-retrieval-with-verified-citations),
-available at [Ask](http://localhost:8000/ask/). It uses real document passages
-and recorded project results, with extractive answers available without API keys.
-
-Phase 4 forecasting commands run from `D:\EnviroInsights-India` in the web
-container. Forecasts are daily city PM2.5, issued at end-of-day IST for t+1–t+3.
-They explicitly use replay mode until an OpenAQ key and fresh complete-day
-observations are available. Bengaluru uses its seven-site fixed panel.
-
-```powershell
-.\scripts\dev.ps1 up
-.\scripts\dev.ps1 migrate
-.\scripts\dev.ps1 manage fetch_historical_forecasts
-.\scripts\dev.ps1 manage train_forecasters
-.\scripts\dev.ps1 manage evaluate_forecasters
-.\scripts\dev.ps1 manage issue_forecasts
-.\scripts\dev.ps1 manage issue_forecasts --replay-date 2025-12-31
-.\scripts\dev.ps1 test
-.\scripts\dev.ps1 lint
-```
-
-Read the frozen [forecast protocol](docs/results/PHASE4_PROTOCOL.md) and
-[Delhi/Pune bias investigation](docs/results/PHASE4_BIAS.md). After training,
-`export_phase4_report --run <id>` exports `docs/results/PHASE4.md` and actual
-figures/tables under `data/results/<id>/`. Evaluation scores come from saved
-monthly rolling predictions, with observed-weather perfect-prognosis kept separate.
-Forecast versions and predictions reference their AnalysisRun and MLflow run.
-The MLflow service is available at `http://localhost:5000`; SQLite metadata and
-artifacts persist in `data/mlflow/` on D: and are ignored by Git.
-
-The completed [Phase 4 report](docs/results/PHASE4.md) uses AnalysisRun 21:
-7,728 real/ideal prediction rows, 147 registered versions and 148 passing tests.
-Nine city/horizon issued policies lose to persistence. Empirical intervals often
-undercover; read the measured tables before interpreting uncertainty or skill.
-
-Read-only endpoints are `/api/forecast/<city>/latest/`,
-`/api/forecast/<city>/history/?start=YYYY-MM-DD&end=YYYY-MM-DD` (inclusive target
-dates, at most 366 days), and `/api/forecast/<city>/evaluation/`. Latest/history
-include replay/live mode, three horizons, bounds, PM2.5 category, model version
-and top five conditional SHAP drivers. The category is the PM2.5 subindex,
-not overall CPCB AQI. Evaluation never serves perfect-prognosis as headline skill.
-
-The daily PM refresh runs at 23:35 IST and requests ten days of readings through
-the current instant. Public forecast weather is refreshed at 23:40 IST; issuance
-runs at 00:10 IST for the latest completed day. Absent a key, fresh issue-time
-readings, complete lag inputs or weather, it replays the latest archived day.
-Only readings ingested before that day's cutoff enter live inputs. Saved training
-calibration radii are retained when issuing forecasts. Bengaluru additionally
-requires verified source station IDs matching its fixed panel; a provider's
-different station IDs do not establish that correspondence.
-Add `OPENAQ_API_KEY` only to ignored `.env`
-and recreate containers to enable keyed ingestion. Historical publication delays,
-missing forecast BLH, station changes and seasonal interval calibration remain
-limitations; see the protocol and generated report before using predictions.
-
-The active Windows checkout is `D:\EnviroInsights-India`. Docker's registered WSL
-VM is at `D:\DockerDesktopData\main`, and its image/container/volume data disk is
-at `D:\DockerDesktopData\disk`. Compatibility junctions at the former Docker
-AppData paths preserve Docker Desktop's expected locations. Run project commands
-from the D: checkout, and reopen that folder in the editor when switching workspaces.
-
-A Django foundation for research on India's air quality. Phase 1 provides a spatial
-reference catalogue, time-series storage, document metadata, curator admin,
-read-only API, and background-task infrastructure. Phase 2 loads traceable public
-observations. Phase 3A audits quality, builds analysis datasets and reports descriptive
-statistics and meteorological normalisation. Synthetic measurements belong only in tests.
-
-Requires Docker Engine/Desktop with **Linux containers**, Docker Compose v2, and GNU
-Make, or the included PowerShell wrapper on Windows. Python 3.12 and GeoDjango's native
-libraries are installed inside the application image. On Windows, use Docker Desktop
-with the WSL 2 backend and Linux containers. Reserve several GB for the database image.
-
-## Quick start
-
-```sh
-git clone <your-repository-url> enviroinsights-india
-cd enviroinsights-india
-cp .env.example .env
-# Edit .env: set a random DJANGO_SECRET_KEY, POSTGRES_PASSWORD,
-# the matching URL-encoded password in DATABASE_URL, and FLOWER_BASIC_AUTH.
-make up
-make migrate
-make seed
-make superuser
-make health
-make verify-worker
-```
-
-Generate secrets with `python -c "import secrets; print(secrets.token_urlsafe(64))"`.
-The example values must be replaced. `.env`, media, local tools and caches are ignored.
-Worker, Beat and Flower wait for migrations for up to five minutes and restart if
-they time out. The web server supports autoreload. `make down` preserves data volumes.
-Use one Beat instance to avoid duplicate scheduled tasks; Phase 1 installs no ingestion schedules.
-
-The seed creates seven pollutant definitions, twelve sources, twelve cities and ten
-parent states. Running it again updates published pollutant/source metadata and
-preserves curated city data. It creates no stations, readings, weather, fires or PDFs.
-See [reference provenance](docs/REFERENCE_DATA.md) for units and averaging periods.
-
-| Service | URL / connection |
+| Page | Purpose |
 | --- | --- |
-| Home placeholder | http://localhost:8000/ |
-| Curator admin | http://localhost:8000/admin/ |
-| Infrastructure health | http://localhost:8000/api/health/ |
-| Swagger UI | http://localhost:8000/api/docs/ |
-| OpenAPI schema | http://localhost:8000/api/schema/ |
-| City / station GeoJSON | http://localhost:8000/api/cities/ and /api/stations/ |
-| Pollutants | http://localhost:8000/api/pollutants/ |
-| Flower, with configured Basic authentication | http://localhost:5555/ |
-| PostgreSQL 16 | localhost:5433, credentials from `.env` |
-| Redis | localhost:6380 |
+| [Dashboard](http://127.0.0.1:8000/dashboard/) | Stored figures, source files and failure flags |
+| [Overview](http://127.0.0.1:8000/) | Navigation and dated stored outlooks |
+| [Forecasts](http://127.0.0.1:8000/forecasts/) | Replay dates, bounds and model provenance |
+| [Research](http://127.0.0.1:8000/research/) | Cohorts, descriptive comparisons and uncertainty |
+| [Library](http://127.0.0.1:8000/library/) | Stored documents and source passages |
+| [Ask](http://127.0.0.1:8000/ask/) | Extractive retrieval with verified citations |
+| [VayuSim](http://127.0.0.1:8000/vayusim/) | Hypothetical increments; urban C/F warnings |
+| [Health](http://127.0.0.1:8000/api/health/) | Database/extensions, Redis and Celery |
 
-Published ports bind to loopback. All container connections use service names `db`
-and `redis`. Host port changes do not change container URLs. Set
-`DJANGO_CSRF_TRUSTED_ORIGINS` to match a changed browser web port.
-The default `POSTGRES_PORT=5433` leaves a native Windows PostgreSQL service on 5432
-running. Compose's `DATABASE_URL` stays at `db:5432`. Any separate host application
-must use `127.0.0.1:5433` with the matching credentials; run this project's tests
-inside the web container.
-Similarly, `REDIS_PORT=6380` coexists with a native Redis service on 6379. Container
-Redis/broker URLs continue to use `redis:6379`; host applications use port 6380.
+Each dashboard figure links to a stored evidence file. Original raw bodies, large
+results, model weights and the database are not bundled in Git. A fresh checkout
+can display the committed dashboard snapshot; historical interactive queries and
+saved scenarios require the retained data/database. [Restoration](docs/DEPLOYMENT.md).
 
-## Verification
+## Windows quick start
 
-```sh
-make lint          # ruff check and format check
-make schema        # OpenAPI validation; warnings fail
-make test          # checks, migration drift, full pytest suite on a fresh test DB
-make health        # real DB/extensions/Redis/worker probe
-make verify-worker # broker task + persisted successful IngestionRun with zero rows
-```
+Use Docker Desktop with **WSL 2 and Linux containers**. Install WSL with
+`wsl --install` if absent, enable “Use WSL 2 based engine”, restart when required,
+and wait for the engine. Check `docker version`, `docker info` (`OSType: linux`)
+and `docker run --rm hello-world`.
 
-Tests use `enviroinsights.settings.test` and PostgreSQL with all three extensions,
-never SQLite. The database role must create the isolated `TEST_DATABASE_NAME` and
-extensions. Full tests require a running Compose worker for the live health probe
-and Redis for a dedicated test worker. That worker consumes a unique queue against
-the test DB; the ordinary Compose worker cannot consume test tasks. No integration
-test silently skips missing infrastructure. Unit tests alone can be selected with
-`pytest -m 'not integration'`, but they do not establish live service readiness.
-
-The suite verifies fresh migrations, PostgreSQL major version, extension versions,
-all hypertables and unique indexes, duplicate rejection, reversible hypertable
-migration, vector dimensions/cosine ordering, HNSW/full-text indexes, seed
-idempotence, GeoJSON, read-only API/admin behavior, bounded admin counts, and a
-real broker/worker round trip. GitHub Actions runs the complete Compose sequence.
-
-The database init SQL loads and reports PostGIS, TimescaleDB and vector. Django
-extension migrations also run in fresh/test databases, before spatial/vector
-tables. To inspect the actual installed versions:
-
-```sh
-docker compose exec db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT extname, extversion FROM pg_extension ORDER BY extname;"'
-```
-
-If any extension fails to load, inspect `docker compose logs db` and the selected
-image's installed extensions/preload configuration. Do not replace the stack with
-a plain PostgreSQL or a test fake. The HA image's data directory is
-`/home/postgres/pgdata/data`, where the named volume is mounted.
-
-## PowerShell without Make
-
-`scripts/dev.ps1` mirrors every Makefile target and runs from the project directory
-even when invoked elsewhere. It quotes paths, so a folder name containing spaces
-does not require renaming. It also finds standard per-user/all-users Docker Desktop
-installations when the current shell's PATH predates installation.
+Work from `D:\EnviroInsights-India`. The recorded 16 GiB laptop has
+`[wsl2] memory=9GB` in `%UserProfile%\.wslconfig`: 60% of memory, rounded down.
+That is machine-specific, not proof that a model fits. A pre-change original
+configuration could not be recovered. [Audit](docs/results/PHASE6A.md#fix-pass).
 
 ```powershell
-if (-not (Test-Path -LiteralPath .env)) { Copy-Item .env.example .env }
-# Fill in secret placeholders if this is a newly copied .env.
+Set-Location -LiteralPath 'D:\EnviroInsights-India'
+if (-not (Test-Path -LiteralPath '.env')) { Copy-Item '.env.example' '.env' }
+# Fill the secrets below before starting.
 .\scripts\dev.ps1 up
 .\scripts\dev.ps1 migrate
 .\scripts\dev.ps1 seed
-.\scripts\dev.ps1 superuser
 .\scripts\dev.ps1 health
 .\scripts\dev.ps1 verify-worker
 .\scripts\dev.ps1 test
 .\scripts\dev.ps1 lint
-.\scripts\dev.ps1 schema
 ```
 
-Other wrapper targets: `shell`, `logs`, `down`. A failing external command stops
-the wrapper and returns a failure; the `test` target runs checks, migration drift
-and the entire suite inside `web`, explicitly selecting test settings with `--ds`
-so Compose's development environment cannot override pytest's configuration.
-Docker command temporary files also stay under the active project's `.tools/temp`.
-Native stderr stays visible; the wrapper uses the real exit code so informational
-Python/Docker logs do not falsely fail a successful command on PowerShell 5.1.
-`down` preserves volumes. Run commands normally;
-if PowerShell reports an execution-policy error, use a process-only invocation:
-`powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\dev.ps1 test`.
+Set a random `DJANGO_SECRET_KEY` of at least 50 characters, `POSTGRES_PASSWORD`,
+the matching URL-encoded password in `DATABASE_URL`, and `FLOWER_BASIC_AUTH`.
+Inside Compose the database is **db:5432**; host clients use **127.0.0.1:5433**.
+Keep `.env` out of Git. No paid key is required for the default application.
+Defaults: `LLM_PROVIDER=extractive`, `OLLAMA_ENABLED=false`, empty
+`COMPOSE_PROFILES`. The experimental Ollama `llm` profile is opt-in.
 
-For host-side Python development,
-create a Python 3.12 virtual environment, install `requirements/dev.txt`, install
-GDAL/GEOS/PROJ, and change `DATABASE_URL`, `REDIS_URL` and `CELERY_BROKER_URL` to
-the loopback ports in that host process's environment. For PostgreSQL that is
-`postgis://enviroinsights:<URL-encoded-password>@127.0.0.1:5433/enviroinsights`;
-do not replace the Compose `.env` value of `db:5432` with a localhost address.
-Optional GIS library paths are documented in `.env.example`.
+Other wrapper targets: `down`, `logs`, `shell`, `superuser`, `schema`, and
+`manage <command>`. `down` preserves volumes; avoid `down -v` on retained data.
+The seed creates reference metadata, not observations or model artifacts.
+Compose runs a development server. A deployment-settings check is not hosting.
 
-## Settings and deployment boundary
+## Data sources and recorded access
 
-`base`, `dev`, `prod` and `test` settings are separate. Production requires a long
-random secret and enables secure cookies, HTTPS redirect and HSTS. Build with
-`--build-arg INSTALL_DEV=false`, run Gunicorn with `enviroinsights.wsgi:application`,
-and supply `DJANGO_SETTINGS_MODULE=enviroinsights.settings.prod`. Configure an HTTPS
-proxy, static/media serving, backups and a separate least-privilege runtime database
-role before deployment. The development Compose database role is a superuser for
-extension migrations and disposable test database creation. Use a privileged
-migration role separately in production. Only enable `DJANGO_TRUST_PROXY` for a
-proxy that strips client-supplied forwarding headers. Compose is a development
-stack, not an HA or production deployment.
+These are recorded licence/access declarations; review terms for a different
+use. Detailed provenance is in [DATA_SOURCES.md](docs/DATA_SOURCES.md).
 
-All Python dependencies, including transitive dependencies, are pinned in
-`requirements/base.txt` and `requirements/dev.txt`. `.in` files are the update
-inputs; regenerate intentionally with `uv pip compile --python-version 3.12
---universal`. Pre-commit uses the same Ruff version as the development lock.
-The database image follows the requested `timescale/timescaledb-ha:pg16` tag; pin
-its verified digest before deploying a reproducible production environment.
+| Source | Recorded licence/access | Used | Skipped or limited |
+| --- | --- | --- | --- |
+| Princeton CPCB / XKDR | CC BY 4.0 metadata; original delivery needs Globus | XKDR historical PM2.5 alternative, 2015–2019 | Original bodies unavailable; other historical pollutants absent |
+| OpenCity / CPCB boards | Catalogue “Other (Public Domain)”; retain resource terms | 2024–2025 concentration exports | Older AQI matrices excluded; never inverted to concentrations |
+| Open-Meteo / ERA5 | Recorded CC BY 4.0; public non-commercial API | Historical city-grid weather | Not instrument meteorology; null BLH stays explicit |
+| Open-Meteo Previous Runs | Public archive, documented lead semantics | GFS lead-offset forecast weather | Stitched near-valid-time history excluded from headline features |
+| Datameet | CC BY 4.0 | Census-vintage boundaries | Not a current surveyed boundary guarantee |
+| WorldPop | CC BY 4.0; release-specific attribution | Registered 2025 raster | Not a census or citywide health-impact estimate |
+| OpenAQ | API key and provider terms | Adapter/tests only | Keyed live ingestion skipped; live forecasting unverified |
+| NASA FIRMS | MAP_KEY and product attribution | Adapter/tests only | Keyed retrieval skipped; no fire-effect estimate |
+| CDS ERA5 | Token and accepted dataset licence | Adapter/tests only | Keyed retrieval skipped; public Open-Meteo alternative used |
+| Research PDFs/plans | Publisher-specific rights | Retained Phase 5 corpus and source passages | Missing downloads recorded; public access is not a blanket reuse licence |
 
-Read [architecture](docs/ARCHITECTURE.md), [data model and decisions](docs/DATA_MODEL.md)
-and [validation record](docs/VALIDATION.md) before Phase 2.
+## Limitations, in claim order
 
-## Phase 2 ingestion
+1. **VayuSim urban C/F are unvalidated branches.** The Delhi, Mumbai and Hyderabad
+   examples use hypothetical 1 g/s releases. Unchanged peaks are 15.641839,
+   11.536741 and 18.990891 µg/m³. Primary PM2.5, flat terrain and steady hourly
+   conditions apply. These are educational estimates, not regulatory assessments
+   or AQI. [Examples](docs/results/PHASE6B_METRICS.json).
+2. **Briggs–Martin comparison exceeds tolerance.** Differences of 14.13% in σy,
+   15.60% in σz and 10.66% in concentration are scheme differences, not validation
+   errors or a passing comparison. Formula checks and the limited rural-D numeric
+   case do not establish urban performance. Turner physical pages are unverified.
+   [Audit](docs/results/PHASE6A.md#independent-validation).
+3. **The assistant is extractive retrieval with verified citations.** Exact-support
+   and numeric matching scores are not comprehensive semantic answer-quality
+   evidence. The opt-in local LLM failed its quality gate: 2/80 literature answers
+   and 0/30 available-data answers retained. [Phase 5](docs/results/PHASE5.md),
+   [later provider record](docs/results/PHASE6A.md).
+4. **Forecast skill is uneven.** Delhi next-day RMSE improves on persistence by
+   12.6% in the rolling backtest. Nine policies lose; the operational fallback gap
+   is disclosed above. Fourteen selected interval levels fail the five-point
+   coverage gate. Replay is not live operation, and post-evaluation interval
+   selection is not independent evidence. [Phase 4](docs/results/PHASE4.md),
+   [coverage](docs/results/PHASE6A.md).
+5. **Frozen evaluations are unchanged.** Before/after hashes cover Phase 3A.2,
+   Phase 4 and Phase 5. Delhi's fixed-panel difference is −17.59 µg/m³ with refit
+   interval [−35.07, +1.66], so direction is inconclusive under this procedure.
+   Hyderabad's 0 versus 53 exceedance days depends on cohort. The archive gap
+   blocks BS-VI attribution; missing FIRMS data block the fire question.
+   [Phase 3B](docs/results/PHASE3B.md).
 
-Ingestion, time/units, quality flags and bulk insertion live in `apps/ingest/`.
-Public inputs cache under `data/raw/` with SHA256 manifests; keyed pipelines skip
-cleanly without credentials. Read [DATA_SOURCES.md](docs/DATA_SOURCES.md) for
-licences, verified layouts and gaps.
+## Results and handoff
 
-```powershell
-.\scripts\dev.ps1 manage download_sources
-.\scripts\dev.ps1 manage ingest_all
-.\scripts\dev.ps1 manage data_completeness --output .tools/phase2-validation/completeness.json
-.\scripts\dev.ps1 manage backfill_weather --start 2015-01-01 --end 2026-10-03
-```
+- [Phase 3A](docs/results/PHASE3A.md), [Phase 3A.2](docs/results/PHASE3A2.md),
+  [Phase 3B](docs/results/PHASE3B.md).
+- [Phase 4](docs/results/PHASE4.md), [protocol](docs/results/PHASE4_PROTOCOL.md),
+  [bias investigation](docs/results/PHASE4_BIAS.md).
+- [Phase 5](docs/results/PHASE5.md), [Phase 6A](docs/results/PHASE6A.md),
+  [Phase 6B](docs/results/PHASE6B.md), [Phase 7](docs/results/PHASE7.md).
+- [Write-up](docs/results/WRITEUP.md), [five-minute demo](docs/DEMO.md),
+  [resume lines](docs/RESUME.md), [deployment](docs/DEPLOYMENT.md).
+- [Architecture](docs/ARCHITECTURE.md), [data model](docs/DATA_MODEL.md),
+  [command journal](docs/VALIDATION.md).
 
-`manage` forwards Django commands/arguments inside `web`. Commands include
-`load_cpcb_archive`, `load_opencity`, `load_boundaries`, `register_worldpop`,
-`backfill_openaq`, `backfill_firms` and optional `backfill_era5`. `ingest_all`
-creates admin-editable OpenAQ hourly, FIRMS six-hourly and weather daily Beat
-schedules while preserving curator edits.
-
-Read-only APIs: `/api/readings/?station=&pollutant=&start=&end=`,
-`/api/weather/?city=<slug>&start=&end=`, `/api/fires/?bbox=&start=&end=` and
-`/api/completeness/`. Observation responses use 100-row cursor pagination, a
-31-day maximum and an exclusive end. Supply timestamps with explicit offsets.
-Missing stays null. The ingestion coverage measure counts finite values, including
-flagged ones; Phase 3A uses the stricter clean-data coverage below.
-
-## Phase 3A audit and analysis
-
-Run from `D:\EnviroInsights-India`; all commands execute inside the containers:
-
-```powershell
-.\scripts\dev.ps1 migrate
-.\scripts\dev.ps1 manage run_phase3a --enqueue
-# Individual maintenance steps:
-.\scripts\dev.ps1 manage reflag_readings
-.\scripts\dev.ps1 manage build_analysis_tables
-.\scripts\dev.ps1 test
-.\scripts\dev.ps1 lint
-```
-
-`run_phase3a --enqueue` submits the real Celery task and waits for its result.
-Omit `--enqueue` to run the same pipeline synchronously inside `web`. The full
-local dataset takes approximately 15 minutes. Run one analysis job at a time.
-Defaults are 100 RF trees, 300 joint observed donor samples and seed 42. A run
-records the local Git revision, code hash, package versions, dates and status.
-The task has its own four-hour soft limit rather than ingestion's five-minute limit.
-
-The audit updates only quality flags, uses cached original quarters and verifies
-that measurement/provenance fingerprints remain unchanged. Zero flatlines and
-equal hourly means with varying quarters no longer trigger stuck. Five unverified
-sites are excluded pending official GPS evidence. WorldPop 2025 is registered
-as default; the retained 2030 projection is not default.
-
-Versioned materialised tables average quality-OK readings per station/IST hour,
-then equally across eligible stations. Daily means require 18 valid hours; monthly
-means require 75% of calendar days. Analysis-eligible years require 75% valid hours
-and 75% valid days. Weather joins at the UTC timestamp of the local hour's midpoint.
-Calendar gaps remain null and never become training observations or predictions.
-
-```python
-from apps.analytics.aggregation import analysis_dataframe
-
-df = analysis_dataframe("delhi")  # latest successful Phase 3A run; joined weather
-```
-
-Read-only APIs use the latest successful full analysis run, or explicit `?run=<id>`:
-
-- `/api/analytics/coverage/?city=delhi&pollutant=pm25&limit=1000`
-- `/api/analytics/city/delhi/summary/`
-- `/api/analytics/city/delhi/series/?kind=raw&freq=daily`
-- `/api/analytics/city/delhi/series/?kind=deweathered&freq=monthly&start=2024-01-01&end=2026-01-01`
-
-`start` is inclusive and `end` exclusive. Series/coverage use limit/offset
-pagination (100 by default, capped at 1000). Invalid options return 400; writes
-return 405. All metrics/series link to their `AnalysisRun`; earlier runs remain
-available. Standalone maintenance runs do not replace the API's full analysis run.
-
-Actual results, figures, model performance and limitations are in
-[docs/results/PHASE3A.md](docs/results/PHASE3A.md). CSVs, fitted models and SVG/PNG
-figures are local under `data/results/<run_id>/`; only `manifest.json` is eligible
-for Git. The descriptive comparisons are not causal effects. Models use observed,
-complete-case hours only and a blocked holdout; they do not forecast or bridge
-2020–2023. Phase 3B uses the corrected snapshot described below. Forecasting and
-RAG were deferred at the Phase 3A handoff and are covered in the later phase
-sections. Simulators and dashboards remain deferred.
-
-## Phase 3A2: corrected deweathering method
-
-Use this method for the audited PM2.5 snapshot. The Phase 3A command above is
-retained for legacy comparisons; it uses the old clock interpretation and terminal
-holdout. The corrected method does not begin Phase 3B research.
-
-```powershell
-# Reconstruct and audit the corrected observed series; note the returned data-run ID.
-.\scripts\dev.ps1 manage diagnose_deweathering
-# Substitute that ID; note the returned model-run ID.
-.\scripts\dev.ps1 manage run_phase3a2 --data-run 6
-# Substitute the model-run ID in both commands.
-.\scripts\dev.ps1 manage supplement_phase3a2 --run 7
-.\scripts\dev.ps1 manage export_phase3a2_report --run 7
-.\scripts\dev.ps1 test
-.\scripts\dev.ps1 lint
-```
-
-`run_phase3a2` without `--data-run` creates a new diagnostic data run first.
-Run one full model job at a time. Fixed seeds, the eight prespecified variants,
-readiness criteria and identical pooled reference-weather donors are recorded in
-[PHASE3A2_PROTOCOL.json](docs/results/PHASE3A2_PROTOCOL.json). The model grid takes
-substantially longer than the legacy single-model run. The hourly supplement is
-descriptive and does not change selection, thresholds or normalised values.
-
-Independent same-site comparisons in all seven recent cities establish that the
-OpenCity exports' `+0000` labels contain IST wall clocks. The corrected analysis
-converts those clocks to UTC, reuses the audited native IST four-quarter means,
-and joins UTC weather at IST-hour midpoints. Phase 3B has now moved the verified
-fix into ingestion and stored UTC timestamps. Raw CSV labels remain unchanged
-for provenance; clock-version markers prevent applying the shift twice.
-Archived runs 2 and 7 retain their original versioned results.
-`diagnose_deweathering --clock-shift-hours 0` reproduces the literal-UTC sensitivity
-case, rebuilding quarter bins across UTC-hour boundaries. It is not the corrected
-default. See [PHASE3A2_CLOCK_PROOF.json](docs/results/PHASE3A2_CLOCK_PROOF.json).
-
-Successful full `phase3a2` runs become the analytics API and pandas-helper default;
-diagnostic, failed and running jobs do not. Earlier full runs remain addressable
-with `?run=2`. Phase 3A2 stores PM2.5 diagnostics and series; use the legacy full
-run explicitly for other pollutants and its older descriptive metrics. Read the
-[actual diagnostic report](docs/results/PHASE3A2.md) before using normalisation:
-passing execution or random-hour fitting does not mean passing readiness, and
-its original normalised bootstrap intervals exclude model-refit and network uncertainty.
-
-## Phase 3B: observed-data research
-
-The timestamp repair is an idempotent management command. It retains raw values,
-quality flags, original ingestion links and cached publisher files. The bulk repair
-uses partition-aware routing when a timestamp crosses a Timescale chunk boundary.
-New OpenCity exports require verified clock evidence before canonical ingestion.
-The corrected warehouse timestamps are safe for direct UTC reads; forecasting is
-not implemented in this phase.
-
-```powershell
-.\scripts\dev.ps1 manage correct_stored_clocks
-# Existing canonical diagnostic/data snapshots: 8 and 9.
-.\scripts\dev.ps1 manage run_phase3b --diagnostic-run 8 --stored-run 9
-# Use the completed research-run ID printed by the command.
-.\scripts\dev.ps1 manage export_phase3b_report --run <research-run-id>
-.\scripts\dev.ps1 test
-.\scripts\dev.ps1 lint
-```
-
-If rebuilding snapshots, run `diagnose_deweathering`, then
-`rebuild_research_tables --diagnostic-run <new-diagnostic-id>` and use the returned
-IDs. The table rebuild checks PM2.5 equivalence against frozen Run 7 and verifies
-NCAP reference flags against the retained official library document.
-
-Run one research command at a time. Completed city runs with the same frozen
-protocol/data IDs are reused after an interruption. Each city records nested
-whole-week validation, a weather-only RF/GAM comparison, 20 actual bootstrap model
-refits, seasonal exact SHAP/ALE, monthly trend tests and descriptive comparisons.
-Bengaluru uses its fixed panel; unsupported panels and years remain unavailable.
-Both eras use the same pooled reference weather. Research outputs include refit
-series, sampled-index hashes, CSV tables, models, figures and manifests under
-`data/results/<run_id>/`.
-
-Read-only endpoints publish only completed full Phase 3B research runs:
-
-- `/api/analytics/rq2/delhi/`
-- `/api/analytics/ncap/`
-- `/api/analytics/comparisons/`
-
-They accept `?run=<id>` for a completed research run. Other cities are labelled
-descriptive only. NCAP outputs are explicitly a **PM2.5 proxy for NCAP progress**,
-with official compliance marked **not assessed**. Missing historic PM10 and the
-fiscal/calendar baseline mismatch prevent official compliance conclusions.
-Chennai participates as a million-plus city but is outside the non-attainment
-classification in the verified CPCB list; its reference flag is corrected.
-
-The paper and actual research results are in
-[docs/results/PHASE3B.md](docs/results/PHASE3B.md). Primary reference documents and
-their download hashes are catalogued in
-[docs/RESEARCH_LIBRARY.md](docs/RESEARCH_LIBRARY.md). Weekly interpolation skill is
-not forecasting validation, and weather-adjusted changes do not identify policy
-effects. BS-VI attribution needs the missing intervening concentrations; crop-fire
-analysis is deferred pending FIRMS data.
-
-## Phase 5: extractive retrieval with verified citations
-
-Open [Ask](http://localhost:8000/ask/) for a minimal question box, provider badge
-and clickable source citations. In extractive mode, literature results quote
-retrieved evidence; data results use eight original validated, read-only tools
-plus Phase 6A's `vayusim_run` tool. Missing evidence produces an
-explicit refusal. Current forecasts are identified as live or archival replay.
-Read [PHASE5.md](docs/results/PHASE5.md) for measured performance and corpus limits.
-
-Verified corpus: 29 actual document bodies (24 public and five internal),
-7,194 indexed chunks and four unavailable requests. The full suite passes
-183 tests at its original handoff; the frozen 120-question evaluation is logged
-in MLflow's `rag` experiment. The later Phase 6A Qwen evaluation failed answer
-quality, as described above and in the Phase 6A audit. Retrieval and exact
-citation verification are distinct from semantic answer accuracy.
-
-```powershell
-.\scripts\dev.ps1 up
-.\scripts\dev.ps1 migrate
-.\scripts\dev.ps1 manage download_rag_library
-.\scripts\dev.ps1 manage prepare_rag_models
-.\scripts\dev.ps1 manage ingest_rag_library
-# Submit selected registered documents to the real Celery worker:
-.\scripts\dev.ps1 manage ingest_rag_library --enqueue --ids 1
-.\scripts\dev.ps1 test
-.\scripts\dev.ps1 lint
-```
-
-Public bodies are hash-addressed under `data/raw/rag/`; Git retains only the
-manifest and source specifications. Download failures are explicit, not empty
-documents. The BGE encoder/reranker weights and deterministic computation caches
-persist on D: under `data/models/`. The internal `rag-models` service serializes
-CPU embedding inference; a separate single-slot `rag-reranker` retains the
-pinned cross-encoder. Parsing and completed embedding
-batches survive an interrupted command. Unchanged content with the same parser
-version is a no-op; an incompatible parser fix requires an explicitly versioned
-index rebuild. After upgrading ingestion code, restart the Celery worker before
-submitting new tasks so it imports the current parser.
-
-Upload and tag a PDF at `/admin/rag/document/add/` to queue ingestion after the
-database commit. Existing PDF bodies cannot be replaced; a changed file is a new
-SHA256 revision. HTML and Markdown have actual section citations and logical
-text pages; PDF citations use physical file pages, not printed-page labels.
-
-`LLM_PROVIDER=extractive` is the default even when provider keys are present.
-Explicit `LLM_PROVIDER=auto` opts into configured Anthropic, OpenAI, enabled Ollama,
-then extractive. Optional remote providers require both their API key and model
-name in `.env`; see `.env.example`. Extractive works without keys.
-
-For experimental local generation, first check container memory against actual
-model bytes plus 3 GiB headroom. This resource check does not certify answer
-quality. Set these opt-in values in `.env`, then run `.\scripts\dev.ps1 up`:
-
-```dotenv
-COMPOSE_PROFILES=llm
-OLLAMA_ENABLED=true
-OLLAMA_MODEL=qwen2.5:3b-instruct
-LLM_PROVIDER=ollama
-```
-
-To restore the default, stop Ollama with `docker compose --profile llm stop ollama`,
-clear `COMPOSE_PROFILES`, set `OLLAMA_ENABLED=false` and `LLM_PROVIDER=extractive`,
-then run `.\scripts\dev.ps1 up` to recreate the application containers.
-Installed RAM is 16 GiB, with `[wsl2] memory=9GB` in `%UserProfile%\.wslconfig`
-(60% of 16 GiB, rounded down). The current-settings backup is
-`C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`. A pre-change original
-could not be recovered; the earlier report's claim that none existed cannot be
-independently reconstructed. See [the fix pass](docs/results/PHASE6A.md#fix-pass).
-
-API examples:
-
-```json
-POST /api/rag/ask/
-{"question":"What was the annual mean PM2.5 in Delhi in 2025?"}
-
-POST /api/rag/explain/
-{"context_type":"forecast","payload":{"city":"delhi"}}
-
-POST /api/rag/explain/
-{"context_type":"scenario","payload":{"question":"What assumptions does AERMOD use?","scenario_id":"example"}}
-```
-
-`ask` accepts optional filters `category`, `year_min`, `year_max`, `city` (seeded
-slug). `GET /api/rag/documents/` lists sources and ingestion status;
-`GET /api/rag/documents/<id>/page/<n>/` exposes stored page text and provenance.
-Explain payloads select evidence; supplied scenario/chart values are not verified
-measurements or simulation results. Phase 6 must validate its actual scenario
-outputs before using them as numerical evidence. Phase 6A now supplies the
-read-only `vayusim_run(run_id)` tool for actual stored simulation results.
-
-The checked-in `data/eval/rag_eval.jsonl` has frozen real-source and database
-expectations. `evaluate_rag` resumes saved question/provider results under
-`data/results/rag-phase5/` and logs them to MLflow's `rag` experiment. Do not
-overwrite frozen questions in response to poor scores. `build_rag_eval` refuses
-to overwrite an existing evaluation file; its input is the authored question
-catalogue, with exact source excerpts verified against real stored chunks.
+No remote is configured in the audited checkout. Earlier publication elsewhere
+is unverified. This finishing pass commits locally and does not push.

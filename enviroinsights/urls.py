@@ -8,6 +8,7 @@ from rest_framework.routers import DefaultRouter
 from apps.analytics.api import CoverageView, SeriesView, SummaryView
 from apps.analytics.research_api import ComparisonsView, NCAPView, RQ2View
 from apps.core.views import HealthView
+from apps.dashboard.evidence import evidence_dashboard, evidence_file
 from apps.dashboard.views import ForecastPage, HomeView, LibraryPage, ResearchPage
 from apps.forecast.api import EvaluationView, HistoryView, LatestView
 from apps.ingest.api import CompletenessView, FireView, ReadingView, WeatherView
@@ -23,6 +24,8 @@ router.register("pollutants", PollutantViewSet)
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
+    path("dashboard/", evidence_dashboard, name="dashboard"),
+    path("evidence/<slug:key>/", evidence_file, name="evidence-file"),
     path("simulator/", SimulatorPage.as_view(), name="simulator"),
     path("vayusim/", SimulatorPage.as_view(), name="vayusim"),
     path("forecasts/", ForecastPage.as_view(), name="forecasts"),

@@ -317,3 +317,27 @@ idempotent. Historical engines without that artifact cannot be recomputed.
 This is a new receptor grid, not a vertical reconstruction from a single-height
 field. No schema migration, physics/preset change or historical summary rewrite
 is required. See [PHASE6B](results/PHASE6B.md).
+
+## Phase 7 evidence dashboard
+
+`/dashboard/` reads the committed `docs/results/PHASE7_DATA.json` snapshot.
+It performs no warehouse aggregation, ingestion, forecast issuance or model
+inference on page load. The snapshot combines a dated read-only warehouse count
+with retained Phase 3B/4/5/6 result files and their source SHA256s. Displayed
+numbers link to a fixed evidence-file allowlist under `/evidence/<key>/`.
+Unknown keys and unavailable files return 404; a missing/corrupt dashboard
+snapshot produces an explicit 503 state without fabricated figures.
+
+The dashboard separates combined observation counts from concentration-only
+quality flags, reports inconclusive and cohort-dependent analytics, distinguishes
+retrospective persistence advice from actual issuance, and shows both interval
+methods plus selected-family failures. Assistant exact-support metrics retain
+their original benchmark scope; the later local generator's failed gate remains
+visible. VayuSim examples retain their hypothetical-source and urban C/F warnings.
+
+Tables have numerical labels and text warnings; mobile rows become cards. Native
+theme controls add no remote library. Deployment notes distinguish checked
+production settings from the existing development Compose server. No database
+schema or scientific result changes are introduced by this presentation layer.
+The bounded Hypothesis timing adjustment and three full-suite runs are recorded
+in [PHASE7](results/PHASE7.md), separately from physical model evidence.

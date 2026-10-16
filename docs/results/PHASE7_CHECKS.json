@@ -1,0 +1,587 @@
+{
+  "recorded_at": "2026-10-16T06:53:04.439531+00:00",
+  "test_runs": [
+    {
+      "run": 1,
+      "started": "2026-10-16T12:16:04.8346652+05:30",
+      "completed": "2026-10-16T12:17:05.5956436+05:30",
+      "passed": 284,
+      "warnings": 147,
+      "seconds": 48.62,
+      "exit": 0
+    },
+    {
+      "run": 2,
+      "started": "2026-10-16T12:17:05.7405894+05:30",
+      "completed": "2026-10-16T12:18:08.6100412+05:30",
+      "passed": 284,
+      "warnings": 147,
+      "seconds": 49.98,
+      "exit": 0
+    },
+    {
+      "run": 3,
+      "started": "2026-10-16T12:18:08.6120762+05:30",
+      "completed": "2026-10-16T12:19:14.9208882+05:30",
+      "passed": 284,
+      "warnings": 147,
+      "seconds": 51.57,
+      "exit": 0
+    }
+  ],
+  "test_change": {
+    "file": "tests/test_vayusim_physics.py",
+    "test": "test_crosswind_mass_reflection",
+    "deadline_ms": 1000,
+    "max_examples_unchanged": 30,
+    "assertions_unchanged": true,
+    "health_checks_suppressed": false,
+    "seed_forced": false
+  },
+  "ruff": "pass",
+  "format": "pass",
+  "production_settings": "enviroinsights.settings.prod",
+  "deployment_check_command": "docker compose exec -T web python manage.py check --deploy --settings=enviroinsights.settings.prod",
+  "deployment_check_output": "System check identified no issues (0 silenced).",
+  "finalized_at": "2026-10-16T07:03:17.569466+00:00",
+  "frozen_before": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "existing_tests": {
+      "files": 53,
+      "aggregate_sha256": "7bc78a287ca9a0f4af2c3c5c72789ea3145dfd603b4d85d22100efb70c76c9ea"
+    },
+    "scientific_reports": {
+      "files": 38,
+      "aggregate_sha256": "d32b85824cc434a8e1a838cf3ffc91c848b7feb6e968b2b6519698a359efd5e4"
+    },
+    "physics_and_presets": {
+      "files": 6,
+      "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+    },
+    "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "stage": "before"
+  },
+  "frozen_after": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "existing_tests": {
+      "files": 53,
+      "aggregate_sha256": "09c6bc8ef012ac8a46a747a2f5b0e4f2f4d64e04a1d93f32f1f31006800fa908"
+    },
+    "scientific_reports": {
+      "files": 38,
+      "aggregate_sha256": "d32b85824cc434a8e1a838cf3ffc91c848b7feb6e968b2b6519698a359efd5e4"
+    },
+    "physics_and_presets": {
+      "files": 6,
+      "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+    },
+    "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "authorised_test_change": [
+      "tests/test_vayusim_physics.py"
+    ],
+    "all_assertions_strategies_example_counts_and_other_tests_unchanged": true,
+    "stage": "after"
+  },
+  "examples_preserved": {
+    "original_example_runs": [
+      {
+        "run_id": 62,
+        "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+        "grid_sha256": "d1aaf3e80b3890463af41998244f9c8136f549b0e649c814389968cd45ad9592",
+        "peak_ugm3": 15.641839027404785,
+        "summary_unchanged": true
+      },
+      {
+        "run_id": 63,
+        "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+        "grid_sha256": "6adfb341ceda54cf51e39be0a9a71a81cff112979cb662a6311caa46976f150c",
+        "peak_ugm3": 11.536741256713867,
+        "summary_unchanged": true
+      },
+      {
+        "run_id": 64,
+        "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+        "grid_sha256": "528d6c0080dab5c48dd2bf7716529d4d26e0f49f1b0ce07d2292b54e1f562663",
+        "peak_ugm3": 18.990890502929688,
+        "summary_unchanged": true
+      }
+    ],
+    "prior_manifests": [
+      {
+        "manifest": "data/results/phase6b/manifest.json",
+        "artifact_files_unchanged": 131
+      }
+    ]
+  },
+  "browser": [
+    {
+      "evidence_links": 14,
+      "all_evidence_links_status": 200,
+      "width": 1440
+    },
+    {
+      "route": "dashboard",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "overview",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "forecasts",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "research",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "library",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "ask",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "vayusim",
+      "width": 1440,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": [
+        "tile.openstreetmap.org"
+      ]
+    },
+    {
+      "evidence_links": 14,
+      "all_evidence_links_status": 200,
+      "width": 390
+    },
+    {
+      "route": "dashboard",
+      "width": 390,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "overview",
+      "width": 390,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "forecasts",
+      "width": 390,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "research",
+      "width": 390,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "library",
+      "width": 390,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "ask",
+      "width": 390,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": []
+    },
+    {
+      "route": "vayusim",
+      "width": 390,
+      "status": 200,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "external_hosts": [
+        "tile.openstreetmap.org"
+      ]
+    }
+  ],
+  "other_examples_browser": [
+    {
+      "run_id": 63,
+      "city": "mumbai",
+      "width": 1440,
+      "status": 200,
+      "branch_label": "unvalidated branch",
+      "label_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": []
+    },
+    {
+      "run_id": 64,
+      "city": "hyderabad",
+      "width": 1440,
+      "status": 200,
+      "branch_label": "unvalidated branch",
+      "label_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": []
+    },
+    {
+      "run_id": 63,
+      "city": "mumbai",
+      "width": 390,
+      "status": 200,
+      "branch_label": "unvalidated branch",
+      "label_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": []
+    },
+    {
+      "run_id": 64,
+      "city": "hyderabad",
+      "width": 390,
+      "status": 200,
+      "branch_label": "unvalidated branch",
+      "label_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": []
+    }
+  ],
+  "live_demo": [
+    {
+      "kind": "answer",
+      "question": "What was the annual mean PM2.5 in Delhi in 2025?",
+      "status": 200,
+      "citations": 1,
+      "text": "Cited answer\nExtractive\nFIELD\tVALUE\tCITATION\ncity\tdelhi\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\nyear\t2025\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\nannual_mean\t96.65482379525307\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\npartial_observed_mean\tNone\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\nvalid_days\t365\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\nannual_eligible\tTrue\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\nunits\tµg/m³\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\ncohort\tall_stations\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\naggregation\tmean of valid equal-station IST daily means; days require 18 hours\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\nstatus\tavailable\t[dataset: city_annual_mean, Delhi, year=2025, run 9]\nPlain text answer\nInspect the supporting evidence\ndataset: city_annual_mean, Delhi, year=2025, run 9"
+    },
+    {
+      "kind": "refusal",
+      "question": "What was the annual mean PM2.5 in Delhi in 2020?",
+      "status": 200,
+      "citations": 0,
+      "text": "Cited answer\nExtractive\n\nInsufficient evidence in the available documents and project data.\n\nPlain text answer"
+    }
+  ],
+  "documents": {
+    "writeup_word_count": 2507,
+    "word_count_method": "Unicode words including numerals; punctuation and markup not words",
+    "resume_bullets": 5,
+    "demo_planned_duration": "5:00",
+    "missing_local_links": [],
+    "external_links": [
+      {
+        "file": "README.md",
+        "target": "http://127.0.0.1:8000/dashboard/"
+      },
+      {
+        "file": "README.md",
+        "target": "http://127.0.0.1:8000/"
+      },
+      {
+        "file": "README.md",
+        "target": "http://127.0.0.1:8000/forecasts/"
+      },
+      {
+        "file": "README.md",
+        "target": "http://127.0.0.1:8000/research/"
+      },
+      {
+        "file": "README.md",
+        "target": "http://127.0.0.1:8000/library/"
+      },
+      {
+        "file": "README.md",
+        "target": "http://127.0.0.1:8000/ask/"
+      },
+      {
+        "file": "README.md",
+        "target": "http://127.0.0.1:8000/vayusim/"
+      },
+      {
+        "file": "README.md",
+        "target": "http://127.0.0.1:8000/api/health/"
+      },
+      {
+        "file": "docs/DEPLOYMENT.md",
+        "target": "https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "https://acp.copernicus.org/articles/18/6223/2018/"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "https://hypothesis.readthedocs.io/en/latest/reference/api.html"
+      }
+    ]
+  },
+  "links": {
+    "recorded_at": "2026-10-16T07:02:49.529810+00:00",
+    "local_markdown_anchors_checked": [
+      {
+        "file": "README.md",
+        "target": "docs/results/PHASE6A.md#fix-pass"
+      },
+      {
+        "file": "README.md",
+        "target": "docs/results/PHASE6A.md#independent-validation"
+      },
+      {
+        "file": "docs/RESUME.md",
+        "target": "results/WRITEUP.md#2-data-and-quality-control"
+      },
+      {
+        "file": "docs/RESUME.md",
+        "target": "results/WRITEUP.md#3-analytics-findings"
+      },
+      {
+        "file": "docs/RESUME.md",
+        "target": "results/WRITEUP.md#4-forecasting-results"
+      },
+      {
+        "file": "docs/RESUME.md",
+        "target": "results/WRITEUP.md#5-the-research-assistant"
+      },
+      {
+        "file": "docs/RESUME.md",
+        "target": "results/WRITEUP.md#6-vayusim-equations-and-scope"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "PHASE3B.md#delhi-long-run-weather-adjusted-change"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "PHASE3B.md#station-network-composition"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "PHASE6A.md#forecast-intervals"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "PHASE6A.md#local-language-model"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "PHASE3B.md#what-would-change-with-more-data"
+      },
+      {
+        "file": "docs/results/WRITEUP.md",
+        "target": "PHASE6A.md#independent-validation"
+      },
+      {
+        "file": "docs/ARCHITECTURE.md",
+        "target": "results/PHASE6A.md#fix-pass"
+      },
+      {
+        "file": "docs/ARCHITECTURE.md",
+        "target": "results/PHASE6A.md#independent-validation"
+      }
+    ],
+    "production_yaml_extracted_from_document": true,
+    "external_links": [
+      {
+        "title": "Hypothesis API",
+        "url": "https://hypothesis.readthedocs.io/en/latest/reference/api.html",
+        "verification": "Retrieved as readable content using web reader during Phase 7; see VALIDATION entry 022."
+      },
+      {
+        "title": "Grange et al., 2018",
+        "url": "https://acp.copernicus.org/articles/18/6223/2018/",
+        "verification": "Retrieved as readable content using web reader during Phase 7; see VALIDATION entry 022."
+      },
+      {
+        "title": "Brune atmospheric dispersion, Table 2.3",
+        "url": "https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm",
+        "verification": "Retrieved as readable content using web reader during Phase 7; see VALIDATION entry 022."
+      },
+      {
+        "title": "EPA ISC3 volume II",
+        "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf",
+        "verification": "Retrieved as readable content using web reader during Phase 7; see VALIDATION entry 022."
+      },
+      {
+        "title": "Django 5.2 deployment checklist",
+        "url": "https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/",
+        "verification": "Retrieved as readable content using web reader during Phase 7; see VALIDATION entry 022."
+      }
+    ]
+  },
+  "screenshots": {
+    "docs/results/phase7-ask-1440.png": {
+      "sha256": "0359c8d7d7c5f99f1caff2ec845a5764d30bf221c844618bae941301516f5d47",
+      "bytes": 70371
+    },
+    "docs/results/phase7-ask-390.png": {
+      "sha256": "9d904f6e05a61b602445d3c9fdcdb2c8e31ac1ff4deafc56c87a2998d3b0a32e",
+      "bytes": 39867
+    },
+    "docs/results/phase7-dashboard-1440.png": {
+      "sha256": "b2ac276521eecbb8f2febd7cacfd4d073f361fa66f84ed78bf5a18e9dd21602d",
+      "bytes": 90948
+    },
+    "docs/results/phase7-dashboard-390.png": {
+      "sha256": "a8c0096662e015b69280a600367cdb3a427ebac117a66e276550b952f487734b",
+      "bytes": 50459
+    },
+    "docs/results/phase7-dashboard-assistant-1440.png": {
+      "sha256": "846e12c0bc8f2fe43a7e6372e22da067f5176ef6cabf7904a3823460f0f5ba74",
+      "bytes": 81295
+    },
+    "docs/results/phase7-dashboard-assistant-390.png": {
+      "sha256": "805adf21a593126062bbe771e4bffafc7d7c569421058af05f3411936e6ccbcc",
+      "bytes": 49697
+    },
+    "docs/results/phase7-dashboard-dark-1440.png": {
+      "sha256": "36a403644e5bb25284218312940f3631ef3974e9b39bf7190fc6f4ee0ae9dff6",
+      "bytes": 91193
+    },
+    "docs/results/phase7-dashboard-dark-390.png": {
+      "sha256": "28603e124f035a28620a68da7eb57ec2754af985052d4bf44ede0b8d8ae3f697",
+      "bytes": 48883
+    },
+    "docs/results/phase7-demo-answer.png": {
+      "sha256": "47300d81274331d8a39c5e9f86d716bc72334fc819747f7f5a2f53a03ce3b05f",
+      "bytes": 68905
+    },
+    "docs/results/phase7-demo-refusal.png": {
+      "sha256": "2a4b67d6316a8718e81b3a020cc62cd3aed4316862ae34a203f5b019b0ca415f",
+      "bytes": 76731
+    },
+    "docs/results/phase7-forecasts-1440.png": {
+      "sha256": "3bf37356fdeefccbb0d6d87278736107b2ee59709f5118c06ab2f1e78f4c8898",
+      "bytes": 68406
+    },
+    "docs/results/phase7-forecasts-390.png": {
+      "sha256": "af2d334fd18a82e85e0a4f2648df02d01be4de46016ed45fdf1d0727075bbbef",
+      "bytes": 44788
+    },
+    "docs/results/phase7-library-1440.png": {
+      "sha256": "43dd2bfe5c2f04127f060588ea9b89e945e382a34b41388747e54937ba063742",
+      "bytes": 87319
+    },
+    "docs/results/phase7-library-390.png": {
+      "sha256": "c952bd3709398b6138d135b1a3e36c9ad72d8502fa0e73cdf9241429cc32dc54",
+      "bytes": 40653
+    },
+    "docs/results/phase7-overview-1440.png": {
+      "sha256": "efb82229401e32d35762e6a35673faf9edf889b46a06e63b0a39b032e84ed8f8",
+      "bytes": 260708
+    },
+    "docs/results/phase7-overview-390.png": {
+      "sha256": "cac86aa53cc1f71ea00acc959f8a0409000fb2992c943a7a2f8fffec1a9d2212",
+      "bytes": 108094
+    },
+    "docs/results/phase7-research-1440.png": {
+      "sha256": "dcc461a082047475707abe84393733c416c669915d91bb4e2b4113af1a4e13f5",
+      "bytes": 60081
+    },
+    "docs/results/phase7-research-390.png": {
+      "sha256": "3484f053bd363c68fb439f47f8820964257aa204725c2dc77b2b475f472f7a7c",
+      "bytes": 42832
+    },
+    "docs/results/phase7-vayusim-1440.png": {
+      "sha256": "e8e200cd2c648a064f50aa9a8e5ef72d684b5b8354b11bdc9c72f21f6eca1def",
+      "bytes": 639160
+    },
+    "docs/results/phase7-vayusim-390.png": {
+      "sha256": "f2934a57af5b914f24bf9e61fad96708cf289bd65a603bc3ce763365818e4844",
+      "bytes": 215288
+    },
+    "docs/results/phase7-vayusim-hyderabad-1440.png": {
+      "sha256": "5bef43641bbe39b87b4f16693b25d8db5b11f69715bc7192eb8f275dd2647d0d",
+      "bytes": 653160
+    },
+    "docs/results/phase7-vayusim-hyderabad-390.png": {
+      "sha256": "4234db514ef05a95f43da1701b5d6f4427c0c703f9b34ee74221502204947dde",
+      "bytes": 228487
+    },
+    "docs/results/phase7-vayusim-mumbai-1440.png": {
+      "sha256": "0a827383bfe1e7d485e3b96d381b0db9aa9ac25b0377cea7b9b9c87ac943f918",
+      "bytes": 484024
+    },
+    "docs/results/phase7-vayusim-mumbai-390.png": {
+      "sha256": "bad13d2379457ea859341ae7969d8d2c7137d313dbda4122ca54b1d6d986c47f",
+      "bytes": 208501
+    }
+  },
+  "historical_journal_prefix": {
+    "bytes": 1823041,
+    "sha256": "a155d245d821cc6d4f8092a57f96d207e9b57c53901c26fc7fe3ad67b009a049",
+    "unchanged": true
+  },
+  "focused_rerun": {
+    "passed": 15,
+    "seconds": 7.3,
+    "reason": "Home presentation paragraph changed after the three full suites; rechecked home and new evidence views."
+  },
+  "production_yaml_config_check": "pass; no deployment performed"
+}
