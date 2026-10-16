@@ -14,10 +14,7 @@ rows**: **16,266,240 concentration rows**, including missing/flagged rows, and
 
 Not established: urban C/F plume performance, causal BS-VI attribution, fire
 effects, useful local-LLM answer quality, interval coverage everywhere, or live
-forecast operation without fresh keyed observations. Nine retrospective forecast
-policies lose to persistence. Persistence is advised, but the latest saved
-issuance still uses other algorithms for five of those nine; automatic fallback
-for all nine is **not implemented**. [Record](docs/results/PHASE7.md).
+forecast operation without fresh keyed observations. Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others. This serving override was added after Phase 7; it does not revise the Phase 4 backtest. [Fix record](docs/results/PHASE7_FIX.md).
 
 ## Open the project
 
@@ -110,8 +107,7 @@ use. Detailed provenance is in [DATA_SOURCES.md](docs/DATA_SOURCES.md).
    and 0/30 available-data answers retained. [Phase 5](docs/results/PHASE5.md),
    [later provider record](docs/results/PHASE6A.md).
 4. **Forecast skill is uneven.** Delhi next-day RMSE improves on persistence by
-   12.6% in the rolling backtest. Nine policies lose; the operational fallback gap
-   is disclosed above. Fourteen selected interval levels fail the five-point
+   12.6% in the rolling backtest. Nine policies lose; the versioned serving override now uses persistence for them. This does not establish prospective fallback skill. Fourteen selected interval levels fail the five-point
    coverage gate. Replay is not live operation, and post-evaluation interval
    selection is not independent evidence. [Phase 4](docs/results/PHASE4.md),
    [coverage](docs/results/PHASE6A.md).
@@ -129,7 +125,8 @@ use. Detailed provenance is in [DATA_SOURCES.md](docs/DATA_SOURCES.md).
 - [Phase 4](docs/results/PHASE4.md), [protocol](docs/results/PHASE4_PROTOCOL.md),
   [bias investigation](docs/results/PHASE4_BIAS.md).
 - [Phase 5](docs/results/PHASE5.md), [Phase 6A](docs/results/PHASE6A.md),
-  [Phase 6B](docs/results/PHASE6B.md), [Phase 7](docs/results/PHASE7.md).
+  [Phase 6B](docs/results/PHASE6B.md), [Phase 7](docs/results/PHASE7.md),
+  [serving fix](docs/results/PHASE7_FIX.md).
 - [Write-up](docs/results/WRITEUP.md), [five-minute demo](docs/DEMO.md),
   [resume lines](docs/RESUME.md), [deployment](docs/DEPLOYMENT.md).
 - [Architecture](docs/ARCHITECTURE.md), [data model](docs/DATA_MODEL.md),

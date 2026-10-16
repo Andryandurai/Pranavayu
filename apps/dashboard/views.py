@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 
 from apps.forecast.models import Forecast
+from apps.forecast.serving import served_forecast
 from apps.rag.models import Document
 from apps.vayusim.models import ScenarioRun
 from apps.warehouse.models import City
@@ -21,10 +22,15 @@ class HomeView(TemplateView):
         for city in City.objects.filter(slug__in=["delhi", "mumbai", "bengaluru", "hyderabad"]):
             latest = (
                 Forecast.objects.filter(city=city, horizon=1)
+                .select_related("city")
                 .order_by("-issued_for_date", "-id")
                 .first()
             )
             if latest:
+                served = served_forecast(latest)
+                for key in ("point", "aqi_category"):
+                    if key in served:
+                        setattr(latest, key, served[key])
                 context["city_forecasts"].append(
                     {
                         "city": city,

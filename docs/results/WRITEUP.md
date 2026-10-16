@@ -132,21 +132,19 @@ models remain visible. A sophisticated model is not entitled to replace a
 simple baseline merely because it was trained.
 
 Nine city–horizon policies have negative skill: Bengaluru horizons 1 and 3,
-Chennai 1, Mumbai 1–3 and Pune 1–3. Persistence is the sensible recommendation
-for those retrospective failures. An operational audit found an additional
-documentation gap: the latest stored issuance uses persistence for four of
-these nine, while five still use other algorithms. The application does **not**
-automatically enforce fallback for all nine. Phase 7 exposes this discrepancy
-without rewriting forecasts or selecting a replacement against frozen outcomes.
-[Scores and issuance snapshot](PHASE7_DATA.json).
+Chennai 1, Mumbai 1–3 and Pune 1–3. Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others.
+The Phase 7 audit found that four of these nine latest stored selections used
+persistence, while five used other algorithms. This follow-up adds the serving
+override without rewriting those stored selections or the backtest.
+[Original snapshot](PHASE7_DATA.json), [serving fix](PHASE7_FIX.md).
 
-A future fallback needs its own prospective rule, version and evaluation date.
-It should retain the original policy prediction alongside the replacement and
-explain which information was available when the decision was made. Calling a
+The fallback now has an explicit versioned rule citing the Phase 4 table; it still
+needs prospective evaluation. Original model predictions remain stored for audit
+and are not exposed by the serving API. Calling a
 retrospective persistence substitution an improved original backtest would mix
-selection and evaluation. For this finishing pass, the honest engineering
-deliverable is a visible operational gap and its evidence, not a newly favourable
-score table assembled after seeing the outcomes.
+selection and evaluation. Persistence copies the issue-day mean, never a target-day
+value. Original model intervals and SHAP drivers are omitted from fallback responses:
+they do not assess the replacement. The original score table remains unchanged.
 
 Uncertainty is also uneven. Quantile and conformal empirical coverage are
 reported separately. The later method-selection audit has **14 failures among
@@ -239,7 +237,7 @@ lower thresholds. Inconclusive Delhi uncertainty stayed inconclusive. Missing
 FIRMS and intervention-period data prevented unsupported research answers.
 
 Negative forecast skill exposed the need to compare with persistence and to
-distinguish recommended fallback from the code's actual issuance. Undercoverage
+introduce a versioned serving fallback separately from original issued-policy scores. Undercoverage
 remains visible after method selection. The local generator's poor answer rate
 led to extractive defaults. Dispersion discrepancies led to narrower formula,
 scheme and independent-case labels rather than coefficients adjusted to match
@@ -269,8 +267,8 @@ station identities and calibration histories for RQ1, and actual fire detections
 with coverage and transport controls for RQ3. The [Phase 3B research requirements](PHASE3B.md#what-would-change-with-more-data)
 describe the required designs. More rows alone do not establish comparability.
 
-Forecast work needs fresh publication-aware inputs, an explicitly governed
-prospective fallback policy and an untouched future evaluation period. Interval
+Forecast work needs fresh publication-aware inputs and an untouched future
+evaluation period for the new serving fallback. Interval
 selection needs assessment beyond the window that selected it. The
 [forecast protocol](PHASE4_PROTOCOL.md) is the starting point; the frozen outcomes
 must remain historical evidence, not a target for repeated tuning.

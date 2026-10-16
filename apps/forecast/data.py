@@ -161,6 +161,7 @@ def feature_provenance(row, horizon):
     if row.weather_kind not in {"archived_forecast", "live_forecast"} or available > end:
         raise ValueError("Future or observed weather cannot enter an issued forecast")
     return {
+        "persistence_value": float(row.pm_t),
         "issue_end_utc": end.isoformat(),
         "concentration_latest_available_at": end.isoformat(),
         "weather_available_by": available.isoformat(),

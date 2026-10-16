@@ -55,6 +55,14 @@
         node("h2", "Day +" + row.horizon, top);
         node("span", row.mode, top, "badge warning");
         node("p", row.target_date + " · daily PM2.5", card, "help");
+        node("p", "forecast_method: " + row.forecast_method, card, "forecast-method");
+        node(
+          "p",
+          "policy_source: " + row.policy_source +
+            (row.fallback_used ? " · fallback: " + row.fallback_reason : " · fallback: no"),
+          card,
+          "help",
+        );
         const value = node("p", num(row.point), card, "city-value");
         node("span", "µg/m³", value);
         node(
@@ -67,23 +75,24 @@
         node(
           "p",
           "80% interval: " +
-            num(row.lower80) +
-            "–" +
-            num(row.upper80) +
-            " µg/m³",
+            (row.lower80 == null || row.upper80 == null
+              ? "unavailable for persistence override"
+              : num(row.lower80) + "–" + num(row.upper80) + " µg/m³"),
           card,
         );
         node(
           "p",
           "95% interval: " +
-            num(row.lower95) +
-            "–" +
-            num(row.upper95) +
-            " µg/m³",
+            (row.lower95 == null || row.upper95 == null
+              ? "unavailable for persistence override"
+              : num(row.lower95) + "–" + num(row.upper95) + " µg/m³"),
           card,
           "help",
         );
-        if (row.point < row.lower80 || row.point > row.upper80)
+        if (
+          row.lower80 != null && row.upper80 != null &&
+          (row.point < row.lower80 || row.point > row.upper80)
+        )
           node(
             "p",
             "The chosen target interval excludes this separate point forecast.",
@@ -91,6 +100,8 @@
             "help",
           );
         const choices = row.interval_policy?.choices || {};
+        if (row.interval_policy?.serving_note)
+          node("p", row.interval_policy.serving_note, card, "help");
         for (const [level, policy] of Object.entries(choices)) {
           node(
             "p",

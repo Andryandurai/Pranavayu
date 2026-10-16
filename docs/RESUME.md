@@ -10,8 +10,8 @@
   exceedance days.
 - Implemented rolling daily PM2.5 forecasting: Delhi next-day RMSE improved
   **12.6%** against persistence in the saved backtest; disclosed **nine** losing
-  policies, the incomplete operational fallback and **14** interval-level
-  coverage failures.
+  policies and **14** interval-level coverage failures; added a versioned serving
+  override that uses persistence for those nine, without revising the backtest.
 - Built extractive retrieval with verified citations across **29 documents and
   7,194 chunks**, reaching **80.31% recall@5** on frozen literature questions;
   exact-support checks do not establish complete answer quality, and the opt-in
@@ -20,6 +20,8 @@
   cached hourly playback; Delhi day preparation measured **2.742 s** with no
   further grid/overlay requests during scrubbing. Urban C/F lack independent
   numeric-case support; sources are hypothetical.
+
+Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others. This was added after Phase 7; the original results remain unchanged.
 
 ## Likely interview questions
 

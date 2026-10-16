@@ -6,6 +6,8 @@ from pathlib import Path
 from django.http import FileResponse, Http404
 from django.shortcuts import render
 
+from apps.forecast.serving import load_serving_policy, serving_policy
+
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = {
     "snapshot": "docs/results/PHASE7_DATA.json",
@@ -25,6 +27,8 @@ SOURCES = {
     "ollama": "data/results/rag-ollama-phase6a/metrics.json",
     "physics": "docs/results/PHASE6A_INDEPENDENT_METRICS.json",
     "examples": "docs/results/PHASE6B_METRICS.json",
+    "serving-policy": "apps/forecast/config/serving_policy_v1.json",
+    "phase7-fix": "docs/results/PHASE7_FIX.md",
 }
 
 
@@ -48,4 +52,10 @@ def evidence_dashboard(request):
         return render(
             request, "dashboard/evidence.html", {"snapshot_unavailable": True}, status=503
         )
-    return render(request, "dashboard/evidence.html", {"record": data})
+    for row in data["forecasts"]:
+        row.update(serving_policy(row["city"], row["horizon"]))
+    return render(
+        request,
+        "dashboard/evidence.html",
+        {"record": data, "serving_config": load_serving_policy()},
+    )

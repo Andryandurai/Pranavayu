@@ -50035,3 +50035,4566 @@ commit to avoid a self-referential hash, following the existing Phase 6B journal
 convention. No push command is used. Remote and remote-tracking refs are absent;
 publication of earlier 6A–6B commits elsewhere remains unverified. Unrelated
 untracked ingestion manifests and local prior evidence are preserved and excluded.
+
+
+<details>
+<summary>Phase 7 fix: 001-initial-scope (2026-10-16T12:39:27.7782715+05:30; exit 0)</summary>
+
+```powershell
+Write-Output 'Bootstrap: working directory D:\EnviroInsights-India; HEAD 739f7708fb1817d37c53aa7a92e5c266d5af67a0; no project or D:\AGENTS.md found. Reused append-only Phase 7 command logger in .tools/phase7fix.'
+Get-Content -LiteralPath 'docs/results/PHASE4.md' -Encoding UTF8
+rg --files apps/forecast tests config scripts | Select-String 'forecast|policy|dev.ps1'
+rg -n 'persistence|fallback|forecast_method|policy_source' apps/forecast apps/dashboard/evidence.py apps/dashboard/templates/dashboard/evidence.html README.md docs/results/WRITEUP.md docs/DEMO.md docs/RESUME.md
+Get-Content -LiteralPath '.tools/phase7/identity.py' -Encoding UTF8
+```
+
+```text
+Bootstrap: working directory D:\EnviroInsights-India; HEAD 739f7708fb1817d37c53aa7a92e5c266d5af67a0; no project or D:\AGENTS.md found. Reused append-only Phase 7 command logger in .tools/phase7fix.
+# Phase 4: daily PM2.5 forecasting
+
+AnalysisRun **21**. Primary cities: Hyderabad, Mumbai and Bengaluru's
+seven-site fixed panel. Secondary: Delhi, Pune, Chennai and Kolkata. No RAG,
+simulator or dashboard is built. Kanpur, Lucknow, Ahmedabad, Jaipur and Patna
+are excluded because their concentration archive has no recent targets.
+
+## Data and leakage rules
+
+Raw 2024–2025 concentration inputs come from canonical Run 8, with equal-station
+hourly means and at least 18 IST hours for each daily target. Fixed-panel inputs
+are raw measurements, not deweathered values. Hashes are in input_provenance.json.
+
+Forecasts target t+1/t+2/t+3 at end-of-day t IST. PM lags, rolling means and
+night/day summaries stop at t. Calendar features are known dates. Target weather
+uses explicit GFS Global lead offsets from Open-Meteo's Previous Runs archive;
+the requested Historical Forecast endpoint was probed and excluded from headline
+features because it stitches near-valid-time forecasts. Offsets are h+1 days
+with a 12-hour publication allowance. The bound is tested against issue-end.
+Exact historical run/publication logs are unavailable: these bounds rely on the
+documented lead semantics and a latency assumption. Provider outages cannot be
+reconstructed. Historical concentration publication times are also unavailable;
+the backtest assumes day-t observations were available at issue-end.
+
+BLH is excluded because lead-offset archive values are null; it is never filled
+from the stitched series or ERA5. Wind direction uses sine/cosine, precipitation
+is a daily sum, cloud cover a fraction and wind speed m/s. Hourly UTC forecast
+points are assigned to native IST dates; overlapping download windows retain
+complete days across the half-hour timezone boundary.
+Hourly accumulated rain assigned by its UTC valid-time midpoint approximates
+the IST-day boundary within half an hour; it is a weather predictor, not a
+claimed exact station precipitation integral.
+
+## Archived forecast coverage
+
+| City | Horizon | First target | Last target | 2024–25 days | Jul–Dec 2025 days / 184 | BLH days |
+| --- | --- | --- | --- | --- | --- | --- |
+| hyderabad | 1 | 2024-01-21 | 2025-12-31 | 711 | 184 | 0 |
+| hyderabad | 2 | 2024-01-22 | 2025-12-31 | 710 | 184 | 0 |
+| hyderabad | 3 | 2024-01-23 | 2025-12-31 | 709 | 184 | 0 |
+| mumbai | 1 | 2024-01-21 | 2025-12-31 | 711 | 184 | 0 |
+| mumbai | 2 | 2024-01-22 | 2025-12-31 | 710 | 184 | 0 |
+| mumbai | 3 | 2024-01-23 | 2025-12-31 | 709 | 184 | 0 |
+| bengaluru | 1 | 2024-01-21 | 2025-12-31 | 711 | 184 | 0 |
+| bengaluru | 2 | 2024-01-22 | 2025-12-31 | 710 | 184 | 0 |
+| bengaluru | 3 | 2024-01-23 | 2025-12-31 | 709 | 184 | 0 |
+| delhi | 1 | 2024-01-21 | 2025-12-31 | 711 | 184 | 0 |
+| delhi | 2 | 2024-01-22 | 2025-12-31 | 710 | 184 | 0 |
+| delhi | 3 | 2024-01-23 | 2025-12-31 | 709 | 184 | 0 |
+| pune | 1 | 2024-01-21 | 2025-12-31 | 711 | 184 | 0 |
+| pune | 2 | 2024-01-22 | 2025-12-31 | 710 | 184 | 0 |
+| pune | 3 | 2024-01-23 | 2025-12-31 | 709 | 184 | 0 |
+| chennai | 1 | 2024-01-21 | 2025-12-31 | 711 | 184 | 0 |
+| chennai | 2 | 2024-01-22 | 2025-12-31 | 710 | 184 | 0 |
+| chennai | 3 | 2024-01-23 | 2025-12-31 | 709 | 184 | 0 |
+| kolkata | 1 | 2024-01-21 | 2025-12-31 | 711 | 184 | 0 |
+| kolkata | 2 | 2024-01-22 | 2025-12-31 | 710 | 184 | 0 |
+| kolkata | 3 | 2024-01-23 | 2025-12-31 | 709 | 184 | 0 |
+
+Coverage counts require all 24 weather hours and non-null required variables.
+They are separate from usable PM/lag target support. Raw assets preserve original
+responses, download URL, SHA256, lead settings, licence and IngestionRun links.
+
+## Evaluation design
+
+The frozen [protocol](PHASE4_PROTOCOL.md) specifies expanding monthly origins,
+a purged 60-day tuning segment and a separate latest 60-day calibration segment.
+Only training-window tuning selects parameters and the algorithm. Scalers,
+imputers and holiday/lag inputs are audited. SARIMAX filters only labels whose
+target date has arrived by t; future target labels are masked. No shuffle occurs.
+The latest six target calendar months are evaluated on common real/ideal support.
+Monthly origins and omitted support are in split_audit.json and input_provenance.json.
+
+Point models are persistence, seven-day mean, training-month climatology, direct-
+horizon exogenous SARIMAX, LightGBM and a small regularised PyTorch LSTM. LSTM
+is selectable only if tuning RMSE beats LightGBM. Diagnostic LSTM scores remain
+visible when rejected. Quantile LightGBM is evaluated separately for intervals.
+The issued policy may change its algorithm monthly; the evaluation itself never
+selects a model from held-out scores. RMSE skill is 1−RMSE/RMSE_persistence.
+
+## Model comparisons
+
+RMSE in µg/m³; `policy` is the training-selected issued prediction. A model with
+negative skill loses to persistence. The complete MAE, category accuracy, bias,
+event counts and DM scores for every model are in model_comparison.csv.
+
+| City | Horizon | n | Persistence | Mean7 | Climatology | SARIMAX | LightGBM | LSTM diagnostic | Policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| bengaluru | 1 | 184 | 5.747 | 8.123 | 9.933 | 5.646 | 6.339 | 5.992 | 5.945 |
+| bengaluru | 2 | 184 | 8.484 | 8.777 | 9.933 | 8.083 | 6.808 | 7.218 | 7.870 |
+| bengaluru | 3 | 184 | 9.814 | 9.044 | 9.933 | 8.620 | 7.034 | 7.194 | 9.971 |
+| chennai | 1 | 184 | 11.444 | 13.793 | 17.423 | 10.089 | 10.869 | 10.652 | 12.353 |
+| chennai | 2 | 184 | 15.635 | 14.766 | 17.423 | 12.901 | 13.594 | 13.461 | 14.820 |
+| chennai | 3 | 184 | 17.823 | 15.104 | 17.423 | 15.091 | 14.464 | 15.285 | 13.302 |
+| delhi | 1 | 184 | 33.668 | 40.755 | 48.917 | 30.110 | 34.249 | 29.248 | 29.417 |
+| delhi | 2 | 184 | 47.760 | 44.146 | 48.917 | 41.350 | 42.398 | 39.190 | 43.858 |
+| delhi | 3 | 184 | 53.316 | 45.737 | 48.917 | 44.684 | 41.070 | 40.791 | 44.841 |
+| hyderabad | 1 | 184 | 3.828 | 5.631 | 8.045 | 3.475 | 4.083 | 4.170 | 3.656 |
+| hyderabad | 2 | 184 | 5.650 | 6.174 | 8.045 | 4.953 | 5.911 | 5.160 | 5.122 |
+| hyderabad | 3 | 184 | 6.902 | 6.531 | 8.045 | 5.634 | 7.015 | 5.621 | 5.634 |
+| kolkata | 1 | 184 | 10.174 | 14.634 | 17.898 | 9.417 | 10.333 | 10.140 | 10.159 |
+| kolkata | 2 | 184 | 14.903 | 16.027 | 17.898 | 13.325 | 12.856 | 12.677 | 12.683 |
+| kolkata | 3 | 184 | 17.150 | 16.842 | 17.898 | 14.967 | 13.759 | 12.808 | 15.456 |
+| mumbai | 1 | 184 | 7.055 | 11.891 | 14.807 | 7.155 | 7.337 | 8.004 | 10.729 |
+| mumbai | 2 | 184 | 11.030 | 13.325 | 14.807 | 10.483 | 9.745 | 10.129 | 12.802 |
+| mumbai | 3 | 184 | 13.431 | 14.342 | 14.807 | 10.813 | 12.418 | 10.800 | 14.488 |
+| pune | 1 | 184 | 7.991 | 11.688 | 20.421 | 7.115 | 10.901 | 9.053 | 10.414 |
+| pune | 2 | 184 | 11.479 | 13.016 | 20.421 | 11.032 | 13.600 | 11.065 | 13.616 |
+| pune | 3 | 184 | 12.987 | 13.939 | 20.421 | 12.459 | 14.355 | 11.925 | 14.468 |
+
+## Issued-policy skill and statistical comparison
+
+DM compares paired squared-loss forecast sequences using calendar-day Bartlett
+HAC through max(7,h−1), the Harvey small-sample correction and a two-sided t test.
+P-values are nominal; dependence, model selection and multiple comparisons limit
+inference. A significant p-value can favour persistence when skill is negative.
+
+| City | Horizon | RMSE | MAE | Skill | DM p | Category accuracy | Monthly chosen algorithms (days) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| bengaluru | 1 | 5.945 | 4.295 | -0.035 | 0.33848 | 0.902 | lstm:62, persistence:60, lightgbm:31, sarimax:31 |
+| bengaluru | 2 | 7.870 | 5.737 | 0.072 | 0.32316 | 0.842 | sarimax:94, mean7:31, lstm:30, persistence:29 |
+| bengaluru | 3 | 9.971 | 7.096 | -0.016 | 0.80129 | 0.783 | mean7:61, sarimax:61, lstm:34, persistence:28 |
+| chennai | 1 | 12.353 | 7.705 | -0.079 | 0.36847 | 0.761 | lightgbm:61, sarimax:32, persistence:31, mean7:30, lstm:30 |
+| chennai | 2 | 14.820 | 8.811 | 0.052 | 0.67132 | 0.777 | lightgbm:94, lstm:90 |
+| chennai | 3 | 13.302 | 9.137 | 0.254 | 0.13001 | 0.761 | lightgbm:92, lstm:62, persistence:30 |
+| delhi | 1 | 29.417 | 18.686 | 0.126 | 0.02845 | 0.717 | lstm:153, lightgbm:31 |
+| delhi | 2 | 43.858 | 26.555 | 0.082 | 0.22633 | 0.641 | lstm:94, mean7:59, lightgbm:31 |
+| delhi | 3 | 44.841 | 26.360 | 0.159 | 0.06207 | 0.603 | lightgbm:65, lstm:61, mean7:58 |
+| hyderabad | 1 | 3.656 | 2.869 | 0.045 | 0.42556 | 0.832 | sarimax:121, lightgbm:32, lstm:31 |
+| hyderabad | 2 | 5.122 | 4.054 | 0.093 | 0.21570 | 0.783 | sarimax:121, lightgbm:33, lstm:30 |
+| hyderabad | 3 | 5.634 | 4.361 | 0.184 | 0.01440 | 0.761 | sarimax:184 |
+| kolkata | 1 | 10.159 | 6.884 | 0.002 | 0.98309 | 0.734 | lightgbm:154, lstm:30 |
+| kolkata | 2 | 12.683 | 8.186 | 0.149 | 0.17810 | 0.750 | lstm:151, lightgbm:33 |
+| kolkata | 3 | 15.456 | 10.327 | 0.099 | 0.42538 | 0.701 | lstm:123, climatology:31, lightgbm:30 |
+| mumbai | 1 | 10.729 | 6.235 | -0.521 | 0.08969 | 0.837 | lightgbm:62, sarimax:31, mean7:31, lstm:30, persistence:30 |
+| mumbai | 2 | 12.802 | 8.030 | -0.161 | 0.20692 | 0.815 | sarimax:62, mean7:61, persistence:59, lstm:2 |
+| mumbai | 3 | 14.488 | 9.215 | -0.079 | 0.43973 | 0.772 | mean7:91, sarimax:31, lightgbm:31, persistence:28, lstm:3 |
+| pune | 1 | 10.414 | 6.196 | -0.303 | 0.17637 | 0.832 | lightgbm:91, sarimax:63, persistence:30 |
+| pune | 2 | 13.616 | 8.416 | -0.186 | 0.24650 | 0.793 | lightgbm:120, sarimax:64 |
+| pune | 3 | 14.468 | 9.342 | -0.114 | 0.44528 | 0.788 | lightgbm:89, lstm:61, sarimax:34 |
+
+Issued policies failing to beat persistence: bengaluru h1, bengaluru h3, chennai h1, mumbai h1, mumbai h2, mumbai h3, pune h1, pune h2, pune h3.
+
+## CAMS benchmark
+
+Actual CAMS Global archived lead-2/3/4 queries across the seven cities returned null evaluation-period forecasts. Historical valid-time PM2.5 exists, but it cannot replace issued forecasts in a benchmark.
+The real historical PM2.5 sample is retained in the archive probes. It is not
+converted into an issue-safe benchmark, and no CAMS skill number is fabricated.
+
+## Detection of daily means above 60 µg/m³
+
+Undefined scores have a zero denominator; zero events are not perfect detection.
+These are city means, not station maxima or overall air-quality warnings.
+
+| City | Horizon | Observed events | Hits | Misses | False alarms | POD | FAR | CSI |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| bengaluru | 1 | 2 | 0 | 2 | 2 | 0.000 | 1.000 | 0.000 |
+| bengaluru | 2 | 2 | 0 | 2 | 1 | 0.000 | 1.000 | 0.000 |
+| bengaluru | 3 | 2 | 0 | 2 | 1 | 0.000 | 1.000 | 0.000 |
+| chennai | 1 | 16 | 5 | 11 | 2 | 0.312 | 0.286 | 0.278 |
+| chennai | 2 | 16 | 1 | 15 | 0 | 0.062 | 0.000 | 0.062 |
+| chennai | 3 | 16 | 0 | 16 | 0 | 0.000 | undefined | 0.000 |
+| delhi | 1 | 86 | 84 | 2 | 0 | 0.977 | 0.000 | 0.977 |
+| delhi | 2 | 86 | 83 | 3 | 2 | 0.965 | 0.024 | 0.943 |
+| delhi | 3 | 86 | 83 | 3 | 2 | 0.965 | 0.024 | 0.943 |
+| hyderabad | 1 | 0 | 0 | 0 | 0 | undefined | undefined | undefined |
+| hyderabad | 2 | 0 | 0 | 0 | 0 | undefined | undefined | undefined |
+| hyderabad | 3 | 0 | 0 | 0 | 0 | undefined | undefined | undefined |
+| kolkata | 1 | 65 | 55 | 10 | 2 | 0.846 | 0.035 | 0.821 |
+| kolkata | 2 | 65 | 62 | 3 | 3 | 0.954 | 0.046 | 0.912 |
+| kolkata | 3 | 65 | 55 | 10 | 4 | 0.846 | 0.068 | 0.797 |
+| mumbai | 1 | 28 | 17 | 11 | 11 | 0.607 | 0.393 | 0.436 |
+| mumbai | 2 | 28 | 12 | 16 | 13 | 0.429 | 0.520 | 0.293 |
+| mumbai | 3 | 28 | 9 | 19 | 15 | 0.321 | 0.625 | 0.209 |
+| pune | 1 | 49 | 46 | 3 | 2 | 0.939 | 0.042 | 0.902 |
+| pune | 2 | 49 | 44 | 5 | 4 | 0.898 | 0.083 | 0.830 |
+| pune | 3 | 49 | 43 | 6 | 3 | 0.878 | 0.065 | 0.827 |
+
+## Prediction intervals
+
+Selected-policy absolute-residual split-conformal radii use finite-sample higher
+order statistics. Quantile LightGBM uses a separate calibration correction and
+nested 80/95% bounds. Calibration labels are not refitted. Temporal dependence and
+season shifts violate exchangeability; report empirical coverage rather than a
+distribution-free deployment guarantee. Bounds are nonnegative.
+
+| City | Horizon | Policy 80% | Policy 95% | Mean width 80 | Mean width 95 | Quantile 80% | Quantile 95% |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| bengaluru | 1 | 0.614 | 0.859 | 10.215 | 18.585 | 0.712 | 0.891 |
+| bengaluru | 2 | 0.658 | 0.842 | 14.284 | 23.927 | 0.734 | 0.870 |
+| bengaluru | 3 | 0.614 | 0.772 | 15.699 | 27.491 | 0.734 | 0.864 |
+| chennai | 1 | 0.652 | 0.859 | 16.102 | 27.100 | 0.728 | 0.913 |
+| chennai | 2 | 0.620 | 0.837 | 16.574 | 30.491 | 0.739 | 0.913 |
+| chennai | 3 | 0.630 | 0.908 | 19.772 | 41.614 | 0.745 | 0.940 |
+| delhi | 1 | 0.685 | 0.897 | 41.460 | 77.204 | 0.804 | 0.967 |
+| delhi | 2 | 0.674 | 0.826 | 55.590 | 97.757 | 0.799 | 0.962 |
+| delhi | 3 | 0.728 | 0.902 | 64.087 | 143.293 | 0.859 | 0.973 |
+| hyderabad | 1 | 0.783 | 0.962 | 8.456 | 15.153 | 0.826 | 0.984 |
+| hyderabad | 2 | 0.761 | 0.929 | 12.046 | 19.745 | 0.788 | 0.962 |
+| hyderabad | 3 | 0.750 | 0.924 | 12.715 | 26.922 | 0.788 | 0.957 |
+| kolkata | 1 | 0.647 | 0.891 | 15.132 | 28.365 | 0.804 | 0.940 |
+| kolkata | 2 | 0.647 | 0.913 | 19.248 | 37.381 | 0.826 | 0.946 |
+| kolkata | 3 | 0.728 | 0.880 | 24.965 | 43.641 | 0.799 | 0.957 |
+| mumbai | 1 | 0.761 | 0.880 | 12.851 | 28.087 | 0.821 | 0.962 |
+| mumbai | 2 | 0.728 | 0.837 | 19.135 | 35.691 | 0.832 | 0.962 |
+| mumbai | 3 | 0.788 | 0.842 | 27.390 | 45.643 | 0.826 | 0.957 |
+| pune | 1 | 0.712 | 0.886 | 12.786 | 25.068 | 0.712 | 0.826 |
+| pune | 2 | 0.701 | 0.853 | 17.409 | 33.446 | 0.707 | 0.864 |
+| pune | 3 | 0.701 | 0.875 | 20.055 | 42.406 | 0.739 | 0.913 |
+
+## Month and season errors
+
+All city/horizon month and season scores are in seasonal_errors.csv. Winter is
+December–February, pre-monsoon March–May, monsoon June–September and post-monsoon
+October–November, reusing the forecasting calendar convention.
+
+| City | Horizon | Month | n | Bias µg/m³ | NMB % | RMSE |
+| --- | --- | --- | --- | --- | --- | --- |
+| delhi | 1 | 2025-07 | 31 | 4.767 | 16.311 | 8.170 |
+| delhi | 1 | 2025-08 | 31 | -0.046 | -0.139 | 7.532 |
+| delhi | 1 | 2025-09 | 30 | 7.819 | 22.189 | 10.190 |
+| delhi | 1 | 2025-10 | 31 | 5.224 | 4.791 | 34.642 |
+| delhi | 1 | 2025-11 | 30 | 3.629 | 1.681 | 36.105 |
+| delhi | 1 | 2025-12 | 31 | -9.134 | -4.258 | 49.506 |
+| delhi | 2 | 2025-07 | 31 | 7.885 | 26.981 | 10.680 |
+| delhi | 2 | 2025-08 | 31 | 1.731 | 5.303 | 9.963 |
+| delhi | 2 | 2025-09 | 30 | 8.978 | 25.480 | 13.842 |
+| delhi | 2 | 2025-10 | 31 | 0.015 | 0.014 | 51.870 |
+| delhi | 2 | 2025-11 | 30 | -6.445 | -2.985 | 54.949 |
+| delhi | 2 | 2025-12 | 31 | -9.621 | -4.485 | 73.524 |
+| delhi | 3 | 2025-07 | 31 | 7.260 | 24.842 | 11.616 |
+| delhi | 3 | 2025-08 | 31 | -0.038 | -0.115 | 9.881 |
+| delhi | 3 | 2025-09 | 30 | 8.263 | 23.450 | 12.569 |
+| delhi | 3 | 2025-10 | 31 | 1.341 | 1.230 | 54.372 |
+| delhi | 3 | 2025-11 | 30 | -4.948 | -2.292 | 56.128 |
+| delhi | 3 | 2025-12 | 31 | -9.589 | -4.470 | 74.460 |
+| pune | 1 | 2025-07 | 31 | -0.632 | -3.355 | 3.210 |
+| pune | 1 | 2025-08 | 31 | -0.606 | -3.519 | 2.875 |
+| pune | 1 | 2025-09 | 30 | 0.216 | 1.297 | 2.700 |
+| pune | 1 | 2025-10 | 31 | 2.472 | 7.167 | 8.305 |
+| pune | 1 | 2025-11 | 30 | -2.225 | -3.930 | 7.231 |
+| pune | 1 | 2025-12 | 31 | -17.954 | -19.164 | 22.327 |
+| pune | 2 | 2025-07 | 31 | -2.755 | -14.610 | 4.611 |
+| pune | 2 | 2025-08 | 31 | 1.211 | 7.038 | 3.687 |
+| pune | 2 | 2025-09 | 30 | 1.356 | 8.136 | 2.989 |
+| pune | 2 | 2025-10 | 31 | 3.693 | 10.705 | 15.746 |
+| pune | 2 | 2025-11 | 30 | -2.394 | -4.229 | 8.292 |
+| pune | 2 | 2025-12 | 31 | -23.448 | -25.029 | 27.247 |
+| pune | 3 | 2025-07 | 31 | -3.210 | -17.029 | 5.347 |
+| pune | 3 | 2025-08 | 31 | 0.412 | 2.397 | 4.602 |
+| pune | 3 | 2025-09 | 30 | 0.279 | 1.676 | 3.970 |
+| pune | 3 | 2025-10 | 31 | 2.177 | 6.311 | 19.081 |
+| pune | 3 | 2025-11 | 30 | 0.035 | 0.061 | 8.376 |
+| pune | 3 | 2025-12 | 31 | -24.088 | -25.712 | 27.302 |
+
+## Delhi and Pune bias findings
+
+The [pre-fit investigation](PHASE4_BIAS.md) reproduces the Phase 3B month failures
+from saved outer predictions, including actual station counts, design switches
+and missing dates. Delhi's pooled no-trend/BLH models overpredict recent low-PM
+months; old-era pooling and regression toward the mean are plausible contributors,
+not an established unique cause. Pune's May overprediction is modest in absolute
+units but exceeds the unchanged percentage gate because the observed mean is low.
+
+Phase 4 removes old-era targets and introduces observed PM lags with temporal
+selection. Its six-month test includes Delhi's July concern but does not include
+February/March or Pune's May. It cannot establish that those untested seasonal
+biases are fixed. Forecast month errors above are reported without relaxing gates.
+
+## Perfect-prognosis comparison — retrospective upper-bound experiment
+
+Observed target-day ERA5 weather is used only in this separately labelled variant.
+It is an optimistic information experiment, not a guaranteed mathematical bound:
+finite samples and fitted models can produce worse scores despite ideal information.
+Positive gap means the ideal-weather policy had lower RMSE. It is never served
+as an operational forecast or used to select headline models.
+
+| City | Horizon | Real-weather policy RMSE | Ideal-weather policy RMSE | Real−ideal gap |
+| --- | --- | --- | --- | --- |
+| bengaluru | 1 | 5.945 | 5.969 | -0.024 |
+| bengaluru | 2 | 7.870 | 7.939 | -0.069 |
+| bengaluru | 3 | 9.971 | 8.954 | 1.017 |
+| chennai | 1 | 12.353 | 12.712 | -0.358 |
+| chennai | 2 | 14.820 | 13.446 | 1.374 |
+| chennai | 3 | 13.302 | 15.986 | -2.684 |
+| delhi | 1 | 29.417 | 32.028 | -2.611 |
+| delhi | 2 | 43.858 | 43.174 | 0.683 |
+| delhi | 3 | 44.841 | 42.516 | 2.326 |
+| hyderabad | 1 | 3.656 | 3.731 | -0.076 |
+| hyderabad | 2 | 5.122 | 4.674 | 0.448 |
+| hyderabad | 3 | 5.634 | 5.286 | 0.349 |
+| kolkata | 1 | 10.159 | 10.228 | -0.069 |
+| kolkata | 2 | 12.683 | 12.755 | -0.073 |
+| kolkata | 3 | 15.456 | 16.044 | -0.588 |
+| mumbai | 1 | 10.729 | 10.618 | 0.111 |
+| mumbai | 2 | 12.802 | 12.677 | 0.125 |
+| mumbai | 3 | 14.488 | 14.527 | -0.039 |
+| pune | 1 | 10.414 | 11.025 | -0.612 |
+| pune | 2 | 13.616 | 12.768 | 0.848 |
+| pune | 3 | 14.468 | 13.957 | 0.511 |
+
+## Operations, provenance and limitations
+
+Every origin/model and quantile experiment is logged to the local MLflow service;
+chosen city/horizon models are registered. Its database and artifacts live under
+data/mlflow/ on D:. Forecast versions retain training dates, inner selection metrics,
+MLflow IDs, cohort and AnalysisRun. Each issued forecast stores bounds, category,
+mode, model version, top five SHAP drivers/values and feature availability audit.
+SHAP describes conditional predictions, not causal effects. Only PM2.5 categories
+are forecast; an overall CPCB AQI requires other pollutants. Decimal concentrations
+use the continuous boundary extension (≤30, ≤60, ≤90, ≤120, ≤250, then severe).
+
+Daily weather refresh is scheduled before day-end and issuance after midnight IST.
+Live mode requires an OpenAQ key, at least 18 fresh current-completed-day hours and
+ingestion completed before issue-end. Without this it explicitly replays the latest
+archived day. Live mode remains unverified without the user's OpenAQ key; replay
+and public live weather are tested. Historical daily source rounding, station-network
+changes and missing data remain limitations. Bengaluru's fixed panel does not accept
+unmatched new provider IDs. Replay predictions beyond the last observation are unscored.
+
+No tuning or threshold change follows held-out scores. SARIMAX iteration/convergence
+flags are retained; inspect them alongside its errors. The last six months provide
+only one seasonal cycle, no external year test and no claim of clinical/regulatory
+fitness. Model choice may favour a simple baseline, and negative skill is retained.
+
+## Notes for Phase 5 citation support
+
+The future assistant should cite this report, the frozen protocol, prior bias report,
+AnalysisRun-specific model_comparison/seasonal_errors/coverage CSVs and input hashes.
+Use read-only `/api/forecast/<city>/latest/`, `/history/?start=&end=` (inclusive target
+dates), and `/evaluation/`. Always identify city, horizon, issue/target date, cohort,
+replay/live mode, model version and weather knowledge. Cite event counts with POD/FAR/CSI
+and empirical interval coverage. Never present perfect-prognosis, rejected LSTM,
+historical CAMS samples or retrospective best-model scores as live forecast skill.
+
+References: [Open-Meteo archive](https://open-meteo.com/en/docs/historical-forecast-api),
+[Previous Runs](https://open-meteo.com/en/docs/previous-runs-api),
+[run/publication semantics](https://open-meteo.com/en/docs/single-runs-api),
+[Air Quality API](https://open-meteo.com/en/docs/air-quality-api),
+[conformal methods](https://arxiv.org/abs/2107.07511),
+[DM/HLN](https://github.com/bank-of-england/forecast_evaluation/blob/main/src/forecast_evaluation/tests/diebold_mariano.py),
+[CPCB technical AQI report](https://www.cpcb.gov.in/displaypdf.php?id=bmF0aW9uYWwtYWlyLXF1YWxpdHktaW5kZXgvRklOQUwtUkVQT1JUX0FRSV8ucGRm).
+
+
+## Additional reproducibility evidence
+
+CAMS: 0 non-null values out of 93240 requested lead-forecast hours; IngestionRun 97.
+
+SARIMAX tuning convergence: 569 of 588 recorded candidates did not converge within the fixed iteration limit. These flags and warnings remain visible; finite predictions do not prove a stable fitted likelihood.
+
+SARIMAX SHAP describes current exogenous terms conditional on the filtered known history; it does not allocate the dynamic past-state contribution. Correlated feature attributions and this conditioning limit interpretation.
+
+Archived weather deliberately uses older leads than the latest live forecast. The deployment weather distribution can differ; live skill is unverified.
+
+The latest registered selections below use inner tuning, not final test scores. Their rolling test score is the full monthly-selected policy above.
+
+| City | Horizon | Latest selected algorithm | Fit label end | Inner RMSE |
+| --- | --- | --- | --- | --- |
+| bengaluru | 1 | persistence | 2025-10-01 | 2.637 |
+| bengaluru | 2 | persistence | 2025-10-01 | 3.696 |
+| bengaluru | 3 | persistence | 2025-10-01 | 3.715 |
+| chennai | 1 | lstm | 2025-10-01 | 4.260 |
+| chennai | 2 | lstm | 2025-10-01 | 4.621 |
+| chennai | 3 | lightgbm | 2025-10-01 | 4.615 |
+| delhi | 1 | lstm | 2025-10-01 | 8.580 |
+| delhi | 2 | mean7 | 2025-10-01 | 9.211 |
+| delhi | 3 | mean7 | 2025-10-01 | 9.367 |
+| hyderabad | 1 | sarimax | 2025-10-01 | 3.310 |
+| hyderabad | 2 | sarimax | 2025-10-01 | 4.136 |
+| hyderabad | 3 | sarimax | 2025-10-01 | 4.168 |
+| kolkata | 1 | lstm | 2025-10-01 | 3.945 |
+| kolkata | 2 | lstm | 2025-10-01 | 4.637 |
+| kolkata | 3 | lstm | 2025-10-01 | 4.801 |
+| mumbai | 1 | lightgbm | 2025-10-01 | 2.277 |
+| mumbai | 2 | persistence | 2025-10-01 | 3.139 |
+| mumbai | 3 | persistence | 2025-10-01 | 3.087 |
+| pune | 1 | lightgbm | 2025-10-01 | 2.726 |
+| pune | 2 | lightgbm | 2025-10-01 | 3.059 |
+| pune | 3 | lightgbm | 2025-10-01 | 3.420 |
+
+## Live verification
+
+Compute launch Git revision: `6b3f4b028d0b352b0f29763e8833b4372497f1b1`. Report export provenance
+is recorded separately in the manifest; postprocessing does not refit models.
+
+Independent checks covered 7728 prediction rows, 294 purged origins and 147 finished MLflow model versions.
+Stored replay forecasts: 3885. All 21 latest/history/evaluation GETs returned HTTP 200; POST and invalid-input checks retained their expected 405/400/404 responses.
+
+All 18 original test/support files retain their baseline hashes. Earlier research artifact hashes and the 16,266,240 measurement/provenance fingerprint are unchanged.
+
+Full suite: `148 passed, 148 warnings in 29.25s`. Warnings remain visible.
+
+
+## Figures
+
+![Issued-policy skill](../../data/results/21/forecast_skill.png)
+
+[Bengaluru observed/issued forecasts and 95% intervals](../../data/results/21/bengaluru_forecast_evaluation.png)
+[Chennai observed/issued forecasts and 95% intervals](../../data/results/21/chennai_forecast_evaluation.png)
+[Delhi observed/issued forecasts and 95% intervals](../../data/results/21/delhi_forecast_evaluation.png)
+[Hyderabad observed/issued forecasts and 95% intervals](../../data/results/21/hyderabad_forecast_evaluation.png)
+[Kolkata observed/issued forecasts and 95% intervals](../../data/results/21/kolkata_forecast_evaluation.png)
+[Mumbai observed/issued forecasts and 95% intervals](../../data/results/21/mumbai_forecast_evaluation.png)
+[Pune observed/issued forecasts and 95% intervals](../../data/results/21/pune_forecast_evaluation.png)
+rg : rg: config: The system cannot find the file specified. (os error 2)
+At line:3 char:1
++ rg --files apps/forecast tests config scripts | Select-String 'foreca ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (rg: config: The...d. (os error 2):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+
+scripts\dev.ps1
+apps/forecast\__init__.py
+apps/forecast\weather.py
+apps/forecast\tracking.py
+apps/forecast\tasks.py
+apps/forecast\reporting.py
+apps/forecast\prior_bias.py
+apps/forecast\pipeline.py
+apps/forecast\operations.py
+apps/forecast\models.py
+tests\test_forecast_operations.py
+tests\test_forecast_intervals.py
+tests\test_forecasting.py
+apps/forecast\migrations\__init__.py
+apps/forecast\migrations\0002_forecastmodelversion_interval_policy.py
+apps/forecast\migrations\0001_initial.py
+apps/forecast\metrics.py
+apps/forecast\management\__init__.py
+apps/forecast\management\commands\__init__.py
+apps/forecast\management\commands\train_forecasters.py
+apps/forecast\management\commands\select_forecast_intervals.py
+apps/forecast\management\commands\issue_forecasts.py
+apps/forecast\management\commands\fetch_historical_forecasts.py
+apps/forecast\management\commands\export_phase4_report.py
+apps/forecast\management\commands\evaluate_forecasters.py
+apps/forecast\intervals.py
+apps/forecast\explain.py
+apps/forecast\estimators.py
+apps/forecast\data.py
+apps/forecast\cams.py
+apps/forecast\apps.py
+apps/forecast\api.py
+docs/DEMO.md:13:| 1:20–2:10 | Forecast dashboard row, then `/forecasts/?city=delhi` | “The saved Delhi next-day policy improves RMSE by 12.6% against persistence in this backtest. Nine policies lose. Persistence is advised, but five of those nine latest issuances still use another algorithm. Fourteen selected interval levels fail their coverage gate. This page shows replay dates, not an unverified live forecast.” Read the displayed target date; do not call it today's forecast. |
+docs/DEMO.md:22:If a result is negative, name the failure and its consequence: keep persistence
+docs/RESUME.md:12:  **12.6%** against persistence in the saved backtest; disclosed **nine** losing
+docs/RESUME.md:13:  policies, the incomplete operational fallback and **14** interval-level
+docs/RESUME.md:30:| Forecasts | How was leakage controlled, what lost to persistence, and is fallback actually enforced? | [Write-up §4](results/WRITEUP.md#4-forecasting-results), [protocol](results/PHASE4_PROTOCOL.md) |
+README.md:18:policies lose to persistence. Persistence is advised, but the latest saved
+README.md:19:issuance still uses other algorithms for five of those nine; automatic fallback
+README.md:112:4. **Forecast skill is uneven.** Delhi next-day RMSE improves on persistence by
+README.md:113:   12.6% in the rolling backtest. Nine policies lose; the operational fallback gap
+docs/results/WRITEUP.md:127:Delhi next-day policy RMSE is **29.417 µg/m³**, against persistence at
+docs/results/WRITEUP.md:137:documentation gap: the latest stored issuance uses persistence for four of
+docs/results/WRITEUP.md:139:automatically enforce fallback for all nine. Phase 7 exposes this discrepancy
+docs/results/WRITEUP.md:143:A future fallback needs its own prospective rule, version and evaluation date.
+docs/results/WRITEUP.md:146:retrospective persistence substitution an improved original backtest would mix
+docs/results/WRITEUP.md:241:Negative forecast skill exposed the need to compare with persistence and to
+docs/results/WRITEUP.md:242:distinguish recommended fallback from the code's actual issuance. Undercoverage
+docs/results/WRITEUP.md:273:prospective fallback policy and an untouched future evaluation period. Interval
+apps/dashboard/templates/dashboard/evidence.html:16:<section id="forecasting" class="evidence-section"><div class="section-heading"><div><p class="eyebrow">03 / FORECASTING</p><h2>A baseline is a serious competitor.</h2></div><a href="{% url 'evidence-file' 'phase4' %}">Phase 4 table ↗</a></div><div class="evidence-limits"><strong>Retrospective evaluation, not live performance.</strong><p>{{record.negative_policy_count}} city–horizon policies lose to persistence. Persistence is advised for those rows. The latest stored issuance already uses persistence for some; <b>{{record.fallback_gap_count}} still use other algorithms</b>. Automatic fallback for all nine is not implemented. No old forecast or score has been changed.</p></div>
+apps/dashboard/templates/dashboard/evidence.html:17:<p class="help">RMSE in µg/m³; archived-weather rolling evaluation. LSTM is diagnostic when rejected. Skill = 1 − policy RMSE / persistence RMSE. Positive skill favours the policy. Sources: <a href="{% url 'evidence-file' 'phase4-json' %}">Run 21 result JSON</a>, <a href="{% url 'evidence-file' 'snapshot' %}">latest issuance snapshot</a>.</p>
+apps/dashboard/templates/dashboard/evidence.html:18:<table class="evidence-table forecast-table"><caption>All saved archived-weather city–horizon results; no perfect-prognosis scores</caption><thead><tr><th>City / horizon</th><th>Persistence</th><th>Mean 7</th><th>Climatology</th><th>SARIMAX</th><th>LightGBM</th><th>LSTM</th><th>Policy</th><th>Skill</th><th>Fallback / latest algorithm</th></tr></thead><tbody>{% for row in record.forecasts %}<tr><th scope="row"><a href="{% url 'evidence-file' 'phase4-json' %}">{{row.city}} / +{{row.horizon}} day</a></th><td data-label="Persistence">{{row.models.persistence|floatformat:3}}</td><td data-label="Mean 7">{{row.models.mean7|floatformat:3}}</td><td data-label="Climatology">{{row.models.climatology|floatformat:3}}</td><td data-label="SARIMAX">{{row.models.sarimax|floatformat:3}}</td><td data-label="LightGBM">{{row.models.lightgbm|floatformat:3}}</td><td data-label="LSTM diagnostic">{{row.models.lstm|floatformat:3}}</td><td data-label="Policy">{{row.models.prediction|floatformat:3}}</td><td data-label="Skill">{{row.skill_percent|floatformat:1}}%</td><td data-label="Fallback / latest algorithm">{% if row.persistence_advised %}<span class="result-warning">Persistence advised</span>{% else %}<span class="result-neutral">Positive held-out skill</span>{% endif %}<small>Latest: {{row.latest_algorithm}} · {{row.latest_issue_date}}</small></td></tr>{% endfor %}</tbody></table>
+apps/forecast\explain.py:22:    elif isinstance(model, Baseline) and model.name in ("persistence", "mean7"):
+apps/forecast\explain.py:23:        name = "pm_t" if model.name == "persistence" else "pm_mean7"
+apps/forecast\metrics.py:23:def dm_test(dates, observed, prediction, persistence, horizon):
+apps/forecast\metrics.py:24:    losses = (np.asarray(prediction) - observed) ** 2 - (np.asarray(persistence) - observed) ** 2
+apps/forecast\metrics.py:58:    base = frame.persistence.to_numpy()
+apps/forecast\metrics.py:69:        "skill_vs_persistence": float(1 - rmse / base_rmse) if base_rmse else None,
+apps/forecast\pipeline.py:325:                "persistence",
+apps/forecast\pipeline.py:342:                group.persistence.to_numpy(),
+apps/forecast\operations.py:147:        fallback_reason = ""
+apps/forecast\operations.py:155:            fallback_reason = (
+apps/forecast\operations.py:201:                    "fallback_reason": fallback_reason,
+apps/forecast\estimators.py:50:        if self.name == "persistence":
+apps/forecast\estimators.py:195:    for name in ("persistence", "mean7", "climatology"):
+apps/forecast\estimators.py:229:        name: Baseline(name).fit(final_fit) for name in ("persistence", "mean7", "climatology")
+apps/forecast\reporting.py:103:        "Point models are persistence, seven-day mean, training-month climatology, direct-",
+apps/forecast\reporting.py:108:        "selects a model from held-out scores. RMSE skill is 1−RMSE/RMSE_persistence.",
+apps/forecast\reporting.py:113:        "negative skill loses to persistence. The complete MAE, category accuracy, bias,",
+apps/forecast\reporting.py:125:                "persistence",
+apps/forecast\reporting.py:146:        "inference. A significant p-value can favour persistence when skill is negative.",
+apps/forecast\reporting.py:157:            f"| {number(s['skill_vs_persistence'])} | {number(s['dm']['p_value'], 5)} "
+apps/forecast\reporting.py:163:        if e["models"]["prediction"]["skill_vs_persistence"] <= 0
+apps/forecast\reporting.py:167:        "Issued policies failing to beat persistence: "
+apps/forecast\reporting.py:435:                    e["models"]["prediction"]["skill_vs_persistence"]
+apps/forecast\reporting.py:452:    fig.colorbar(im, ax=ax, label="1 − RMSE / persistence RMSE")
+apps/forecast\reporting.py:453:    ax.set_title("Issued-policy skill\nNegative values lose to persistence")
+import ast
+import hashlib
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+root=Path(__file__).resolve().parents[2]
+out=root/'data/results/phase7';out.mkdir(parents=True,exist_ok=True)
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+groups={}
+for name,directory in [('phase3a2','data/results/7'),('phase4','data/results/21'),('phase5','data/eval')]:
+ groups[name]={p.relative_to(root).as_posix():sha(p) for p in sorted((root/directory).rglob('*')) if p.is_file() and p.suffix in {'.json','.jsonl','.csv'}}
+for name,directory in [('existing_tests','tests'),('scientific_reports','docs/results')]:
+ paths=subprocess.check_output(['git','ls-tree','-r','--name-only','25be37b',directory],cwd=root,text=True).splitlines()
+ groups[name]={p:sha(root/p) for p in paths}
+groups['physics_and_presets']={p.relative_to(root).as_posix():sha(p) for p in [*sorted((root/'apps/vayusim/physics').glob('*.py')),root/'apps/vayusim/presets.py']}
+summary={k:{'files':len(v),'aggregate_sha256':hashlib.sha256(json.dumps(v,sort_keys=True,separators=(',',':')).encode()).hexdigest()} for k,v in groups.items()}
+assert summary['phase3a2']['aggregate_sha256']=='c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350'
+assert summary['phase4']['aggregate_sha256']=='35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4'
+summary['phase5_questions_sha256']=groups['phase5']['data/eval/rag_eval.jsonl']
+assert summary['phase5_questions_sha256']=='f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4'
+stage=sys.argv[1]
+if stage=='before':assert not (out/'identity-before.json').exists()
+else:
+ before=json.loads((out/'identity-before.json').read_text(encoding='utf-8'))
+ for name in groups:
+  if name!='existing_tests':assert groups[name]==before[name],name
+ changed=[p for p,v in groups['existing_tests'].items() if v!=before['existing_tests'][p]]
+ assert changed==['tests/test_vayusim_physics.py'],changed
+ old=subprocess.check_output(['git','show','25be37b:tests/test_vayusim_physics.py'],cwd=root).decode('utf-8')
+ tree=ast.parse((root/changed[0]).read_text(encoding='utf-8'))
+ for node in tree.body:
+  if isinstance(node,ast.FunctionDef) and node.name=='test_crosswind_mass_reflection':
+   for dec in node.decorator_list:
+    if isinstance(dec,ast.Call) and isinstance(dec.func,ast.Name) and dec.func.id=='settings':
+     assert next(k.value.value for k in dec.keywords if k.arg=='deadline')==1000
+     dec.keywords=[k for k in dec.keywords if k.arg!='deadline']
+ assert ast.dump(tree)==ast.dump(ast.parse(old)),'Only the explicitly authorised deadline may change'
+ summary['authorised_test_change']=changed
+ summary['all_assertions_strategies_example_counts_and_other_tests_unchanged']=True
+summary['stage']=stage
+(out/f'identity-{stage}.json').write_text(json.dumps(groups,indent=2)+'\n',encoding='utf-8')
+(out/f'identity-{stage}-summary.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(summary,indent=2))
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 002-serving-and-existing-tests (2026-10-16T12:39:33.9154352+05:30; exit 0)</summary>
+
+```powershell
+Get-Content -LiteralPath 'apps/forecast/operations.py' -Encoding UTF8
+Get-Content -LiteralPath 'apps/forecast/api.py' -Encoding UTF8
+Get-Content -LiteralPath 'apps/forecast/models.py' -Encoding UTF8
+Get-Content -LiteralPath 'apps/dashboard/views.py' -Encoding UTF8
+Get-Content -LiteralPath 'tests/test_forecast_operations.py' -Encoding UTF8
+Get-Content -LiteralPath 'tests/test_phase7_dashboard.py' -Encoding UTF8
+```
+
+```text
+import os
+from datetime import timedelta
+
+import joblib
+import numpy as np
+import pandas as pd
+from django.conf import settings
+from django.db import connection
+from django.utils import timezone
+
+from apps.ingest.sources.openaq import OpenAQSource
+from apps.warehouse.models import City
+
+from .data import load_hourly, make_features, raw_daily
+from .estimators import predict
+from .explain import top_drivers
+from .intervals import apply_interval_policy
+from .models import ForecastModelVersion, ForecastWeather
+from .pipeline import save_forecasts
+from .weather import ForecastWeatherSource, issue_end
+
+
+def operational_hourly(city, day):
+    """Only readings whose ingestion finished before this issue cutoff."""
+    first = pd.Timestamp(day - timedelta(days=9), tz="Asia/Kolkata").to_pydatetime()
+    cutoff = issue_end(day).to_pydatetime()
+    panel = None
+    if city.slug == "bengaluru":
+        import json
+
+        rows = json.loads(
+            (settings.BASE_DIR / "data" / "results" / "8" / "fixed_panels.json").read_text()
+        )
+        panel = next(r["common_sites"] for r in rows if r["city"] == city.slug)
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """WITH station_hours AS (
+            SELECT s.id, date_trunc('hour',r.observed_at AT TIME ZONE 'Asia/Kolkata')
+                AT TIME ZONE 'Asia/Kolkata' AS observed_at, avg(r.value) AS value
+            FROM warehouse_reading r JOIN warehouse_station s ON s.id=r.station_id
+            JOIN ingest_ingestionrun ir ON ir.id=r.ingestion_run_id
+            JOIN warehouse_pollutant p ON p.id=r.pollutant_id
+            LEFT JOIN analytics_stationeligibility e ON e.station_id=s.id
+            WHERE s.city_id=%s AND p.code='pm25' AND r.quality_flag='ok'
+                AND r.value IS NOT NULL AND r.observed_at >= %s AND r.observed_at <= %s
+                AND ir.finished_at <= %s AND coalesce(e.excluded_from_city,false)=false
+                AND (%s::text[] IS NULL OR s.external_id=ANY(%s::text[]))
+            GROUP BY s.id,2
+        ) SELECT observed_at,avg(value) AS value,count(*) AS station_count
+          FROM station_hours GROUP BY observed_at ORDER BY observed_at""",
+            [city.pk, first, cutoff, cutoff, panel, panel],
+        )
+        return pd.DataFrame(cursor.fetchall(), columns=["observed_at", "value", "station_count"])
+
+
+def select_issue_mode(key_present, fresh_day, completed_day, replay_date=None):
+    if replay_date is not None:
+        return "replay", pd.Timestamp(replay_date).date()
+    if key_present and fresh_day == completed_day:
+        return "live", completed_day
+    return "replay", fresh_day
+
+
+def observed_history(daily, rows, horizon):
+    """Keep every measured label even when that day's exogenous row is missing."""
+    history = rows.reindex(daily.index).copy()
+    targets = pd.DatetimeIndex(daily.index.to_numpy() + np.timedelta64(horizon, "D"))
+    history["y"] = daily.value.reindex(targets).to_numpy()
+    return history
+
+
+def operational_intervals(bundle, rows, history):
+    """Use frozen calibration radii; current live history cannot rewrite old errors."""
+    selection = bundle["selection"]
+    q80, q95 = selection["radius80"], selection["radius95"]
+    point = predict(bundle["model"], rows, history)
+    result = {
+        "prediction": point,
+        "lower80": np.maximum(0, point - q80),
+        "upper80": point + q80,
+        "lower95": np.maximum(0, point - q95),
+        "upper95": point + q95,
+    }
+    # Quantile trees depend only on their saved calibration feature rows, not state.
+    calibration = bundle["calibration"]
+    for lower, upper, alpha in [(0.1, 0.9, 0.2), (0.025, 0.975, 0.05)]:
+        cl = bundle["quantiles"][str(lower)].predict(calibration)
+        cu = bundle["quantiles"][str(upper)].predict(calibration)
+        errors = np.maximum(
+            np.minimum(cl, cu) - calibration.y.to_numpy(),
+            calibration.y.to_numpy() - np.maximum(cl, cu),
+        )
+        rank = int(np.ceil((len(errors) + 1) * (1 - alpha)))
+        adjustment = max(0, float(np.sort(errors)[rank - 1]))
+        lo = bundle["quantiles"][str(lower)].predict(rows)
+        hi = bundle["quantiles"][str(upper)].predict(rows)
+        label = "80" if alpha == 0.2 else "95"
+        result[f"quantile_lower{label}"] = np.maximum(0, np.minimum(lo, hi) - adjustment)
+        result[f"quantile_upper{label}"] = np.maximum(lo, hi) + adjustment
+    result["quantile_lower95"] = np.minimum(result["quantile_lower95"], result["quantile_lower80"])
+    result["quantile_upper95"] = np.maximum(result["quantile_upper95"], result["quantile_upper80"])
+    return result, {"radius80": q80, "radius95": q95, "calibration_n": len(calibration)}
+
+
+def issue_feature_rows(city, daily, mode):
+    result = {}
+    for horizon in (1, 2, 3):
+        weather = ForecastWeather.objects.filter(city=city, horizon=horizon)
+        if mode == "replay":
+            weather = weather.filter(mode="archive")
+        by_issue = {
+            r["issued_for_date"]: r
+            for r in weather.order_by("issued_for_date", "mode").values(
+                "issued_for_date", "available_by", "asset_id", "features"
+            )
+        }
+        result[horizon] = make_features(daily, list(by_issue.values()), horizon)
+    return result
+
+
+def issue_forecasts(replay_date=None, cities=None):
+    results = []
+    completed = timezone.localdate() - timedelta(days=1)
+    key_present = bool(os.environ.get("OPENAQ_API_KEY"))
+    for city in City.objects.filter(slug__in=cities or settings.FORECAST_CITIES).order_by("slug"):
+        hourly, provenance = load_hourly(city.slug)
+        daily = raw_daily(hourly)
+        latest = daily[daily.value.notna()].index.max().date()
+        live = (
+            operational_hourly(city, completed)
+            if key_present and replay_date is None
+            else pd.DataFrame()
+        )
+        if not live.empty:
+            live_daily = raw_daily(live, str(completed - timedelta(days=9)), str(completed))
+            fresh = (
+                completed if pd.notna(live_daily.loc[pd.Timestamp(completed), "value"]) else latest
+            )
+        else:
+            fresh = latest
+        mode, issued = select_issue_mode(key_present, fresh, completed, replay_date)
+        if mode == "live":
+            combined = pd.concat([hourly, live], ignore_index=True)
+            combined = combined.drop_duplicates("observed_at", keep="last")
+            daily = raw_daily(combined, "2024-01-01", str(completed))
+        feature_rows = issue_feature_rows(city, daily, mode)
+        fallback_reason = ""
+        if mode == "live" and any(
+            pd.Timestamp(issued) not in rows.index for rows in feature_rows.values()
+        ):
+            # A fresh day alone does not establish the seven-day lag/weather inputs.
+            mode, issued = "replay", latest
+            daily = raw_daily(hourly)
+            feature_rows = issue_feature_rows(city, daily, mode)
+            fallback_reason = (
+                "Incomplete issue-safe live lag or weather inputs; replay latest archive"
+            )
+        for horizon in (1, 2, 3):
+            version = (
+                ForecastModelVersion.objects.filter(
+                    city=city,
+                    horizon=horizon,
+                    available_from__lte=issued,
+                    training_end__lte=issued,
+                    analysis_run__status="success",
+                )
+                .order_by("-analysis_run_id", "-available_from", "-pk")
+                .first()
+            )
+            if version is None:
+                raise ValueError(
+                    f"No issue-safe trained version for {city.slug} h{horizon} at {issued}"
+                )
+            rows = feature_rows[horizon]
+            if pd.Timestamp(issued) not in rows.index:
+                raise ValueError(f"No complete issue-time features for {city.slug} on {issued}")
+            test = rows.loc[[pd.Timestamp(issued)]].copy()
+            if mode == "live":
+                test["weather_kind"] = "live_forecast"
+            bundle = joblib.load(settings.BASE_DIR / version.artifact_path)
+            history = observed_history(daily, rows, horizon)
+            point, calibration_info = operational_intervals(bundle, test, history)
+            point = apply_interval_policy(point, version.interval_policy)
+            for key, values in point.items():
+                test[key] = values
+            drivers = top_drivers(bundle["model"], test, bundle["background"], history)
+            save_forecasts(city, horizon, version, test, drivers, mode)
+            results.append(
+                {
+                    "city": city.slug,
+                    "issued_for_date": str(issued),
+                    "target_date": str(test.target_date.iloc[0].date()),
+                    "horizon": horizon,
+                    "mode": mode,
+                    "algorithm": version.algorithm,
+                    "point": float(test.prediction.iloc[0]),
+                    "model_version": version.pk,
+                    "calibration": calibration_info,
+                    "interval_policy": version.interval_policy,
+                    "data": provenance,
+                    "fallback_reason": fallback_reason,
+                }
+            )
+    return results
+
+
+def fetch_live_weather():
+    day = timezone.localdate()
+    return ForecastWeatherSource().execute(
+        "load", start=str(day), end=str(day + timedelta(days=4)), mode="live"
+    )
+
+
+def refresh_live_pm():
+    end = timezone.now()
+    return OpenAQSource().execute(
+        "load", start=(end - timedelta(days=10)).isoformat(), end=end.isoformat()
+    )
+from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import OpenApiParameter, OpenApiTypes, extend_schema
+from rest_framework import serializers
+from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from apps.analytics.models import AnalysisRun
+from apps.warehouse.models import City
+
+from .models import Forecast, ForecastEvaluation
+
+
+class ForecastSerializer(serializers.ModelSerializer):
+    algorithm = serializers.CharField(source="model_version.algorithm", read_only=True)
+    cohort = serializers.CharField(source="model_version.cohort", read_only=True)
+    mlflow_run_id = serializers.CharField(source="model_version.mlflow_run_id", read_only=True)
+    interval_policy = serializers.JSONField(source="model_version.interval_policy", read_only=True)
+
+    class Meta:
+        model = Forecast
+        fields = [
+            "id",
+            "issued_for_date",
+            "target_date",
+            "horizon",
+            "point",
+            "lower80",
+            "upper80",
+            "lower95",
+            "upper95",
+            "aqi_category",
+            "mode",
+            "model_version",
+            "algorithm",
+            "cohort",
+            "mlflow_run_id",
+            "top_drivers",
+            "feature_provenance",
+            "interval_policy",
+        ]
+
+
+def completed_run():
+    run = AnalysisRun.objects.filter(name="phase4", status="success").order_by("-pk").first()
+    if run is None:
+        raise NotFound("No completed Phase 4 forecasting run")
+    return run
+
+
+class LatestView(APIView):
+    @extend_schema(responses=OpenApiTypes.OBJECT)
+    def get(self, request, slug):
+        city = get_object_or_404(City, slug=slug)
+        run = completed_run()
+        rows = Forecast.objects.filter(city=city, model_version__analysis_run=run).select_related(
+            "model_version"
+        )
+        last = rows.order_by("-issued_for_date").first()
+        if last is None:
+            raise NotFound("No issued forecasts for this city")
+        rows = rows.filter(issued_for_date=last.issued_for_date).order_by("horizon", "-id")
+        return Response(
+            {
+                "city": slug,
+                "run": run.pk,
+                "category_scope": "CPCB PM2.5 subindex category; not overall AQI",
+                "forecasts": ForecastSerializer(rows, many=True).data,
+            }
+        )
+
+
+class HistoryView(APIView):
+    @extend_schema(
+        parameters=[
+            OpenApiParameter("start", type=OpenApiTypes.DATE),
+            OpenApiParameter("end", type=OpenApiTypes.DATE),
+        ],
+        responses=OpenApiTypes.OBJECT,
+    )
+    def get(self, request, slug):
+        class Query(serializers.Serializer):
+            start = serializers.DateField(required=True)
+            end = serializers.DateField(required=True)
+
+            def validate(self, data):
+                if not 0 <= (data["end"] - data["start"]).days <= 366:
+                    raise serializers.ValidationError("Use an ordered date interval up to 366 days")
+                return data
+
+        query = Query(data=request.query_params)
+        query.is_valid(raise_exception=True)
+        city = get_object_or_404(City, slug=slug)
+        run = completed_run()
+        rows = (
+            Forecast.objects.filter(
+                city=city,
+                model_version__analysis_run=run,
+                target_date__range=(query.validated_data["start"], query.validated_data["end"]),
+            )
+            .select_related("model_version")
+            .order_by("target_date", "horizon")
+        )
+        return Response(
+            {
+                "city": slug,
+                "run": run.pk,
+                "date_filter": "target_date inclusive",
+                "forecasts": ForecastSerializer(rows, many=True).data,
+            }
+        )
+
+
+class EvaluationView(APIView):
+    @extend_schema(responses=OpenApiTypes.OBJECT)
+    def get(self, request, slug):
+        city = get_object_or_404(City, slug=slug)
+        run = completed_run()
+        rows = list(
+            ForecastEvaluation.objects.filter(city=city, analysis_run=run)
+            .order_by("horizon")
+            .values_list("result", flat=True)
+        )
+        if not rows:
+            raise NotFound("No evaluation for this city")
+        return Response(
+            {"city": slug, "run": run.pk, "headline_weather": "archived_forecast", "results": rows}
+        )
+from django.db import models
+from django.db.models import F, Q
+
+from apps.core.models import TimeStampedModel
+
+
+class ForecastWeather(TimeStampedModel):
+    """Daily weather from a documented lead archive, distinct from observations."""
+
+    city = models.ForeignKey("warehouse.City", on_delete=models.PROTECT)
+    issued_for_date = models.DateField()
+    target_date = models.DateField()
+    horizon = models.PositiveSmallIntegerField()
+    available_by = models.DateTimeField()
+    lead_days = models.PositiveSmallIntegerField()
+    source = models.ForeignKey("ingest.DataSource", on_delete=models.PROTECT)
+    ingestion_run = models.ForeignKey("ingest.IngestionRun", on_delete=models.PROTECT)
+    asset = models.ForeignKey("ingest.RawAsset", on_delete=models.PROTECT)
+    features = models.JSONField(default=dict)
+    provenance = models.JSONField(default=dict)
+    hours = models.PositiveSmallIntegerField()
+    mode = models.CharField(max_length=10, choices=[("archive", "Archive"), ("live", "Live")])
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["city", "issued_for_date", "horizon", "mode"],
+                name="forecast_weather_issue_unique",
+            ),
+            models.CheckConstraint(
+                condition=Q(horizon__range=(1, 3)), name="weather_horizon_valid"
+            ),
+        ]
+        indexes = [models.Index(fields=["city", "issued_for_date", "horizon"])]
+
+
+class ForecastModelVersion(TimeStampedModel):
+    city = models.ForeignKey("warehouse.City", on_delete=models.PROTECT)
+    horizon = models.PositiveSmallIntegerField()
+    algorithm = models.CharField(max_length=40)
+    mlflow_run_id = models.CharField(max_length=64)
+    registry_name = models.CharField(max_length=100)
+    registry_version = models.CharField(max_length=20)
+    training_start = models.DateField()
+    training_end = models.DateField()
+    available_from = models.DateField()
+    validation_metrics = models.JSONField(default=dict)
+    interval_policy = models.JSONField(default=dict)
+    artifact_path = models.CharField(max_length=1000)
+    analysis_run = models.ForeignKey("analytics.AnalysisRun", on_delete=models.PROTECT)
+    cohort = models.CharField(max_length=30)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(condition=Q(horizon__range=(1, 3)), name="model_horizon_valid"),
+            models.CheckConstraint(
+                condition=Q(training_end__gte=F("training_start")), name="model_window_valid"
+            ),
+        ]
+        indexes = [models.Index(fields=["city", "horizon", "available_from"])]
+
+
+class Forecast(TimeStampedModel):
+    city = models.ForeignKey("warehouse.City", on_delete=models.PROTECT)
+    issued_for_date = models.DateField()
+    target_date = models.DateField()
+    horizon = models.PositiveSmallIntegerField()
+    point = models.FloatField()
+    lower80 = models.FloatField()
+    upper80 = models.FloatField()
+    lower95 = models.FloatField()
+    upper95 = models.FloatField()
+    aqi_category = models.CharField(max_length=20)
+    mode = models.CharField(max_length=10, choices=[("live", "Live"), ("replay", "Replay")])
+    model_version = models.ForeignKey(ForecastModelVersion, on_delete=models.PROTECT)
+    top_drivers = models.JSONField(default=list)
+    feature_provenance = models.JSONField(default=dict)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["city", "issued_for_date", "horizon", "mode", "model_version"],
+                name="forecast_version_issue_unique",
+            ),
+            models.CheckConstraint(
+                condition=Q(horizon__range=(1, 3)), name="forecast_horizon_valid"
+            ),
+            models.CheckConstraint(condition=Q(point__gte=0), name="forecast_point_nonnegative"),
+            models.CheckConstraint(
+                condition=Q(
+                    lower95__lte=F("lower80"), lower80__lte=F("upper80"), upper80__lte=F("upper95")
+                ),
+                name="forecast_intervals_ordered",
+            ),
+        ]
+        indexes = [models.Index(fields=["city", "-issued_for_date", "horizon"])]
+
+
+class ForecastEvaluation(TimeStampedModel):
+    analysis_run = models.ForeignKey("analytics.AnalysisRun", on_delete=models.PROTECT)
+    city = models.ForeignKey("warehouse.City", on_delete=models.PROTECT)
+    horizon = models.PositiveSmallIntegerField()
+    result = models.JSONField(default=dict)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["analysis_run", "city", "horizon"], name="forecast_evaluation_unique"
+            )
+        ]
+from django.views.generic import TemplateView
+
+from apps.forecast.models import Forecast
+from apps.rag.models import Document
+from apps.vayusim.models import ScenarioRun
+from apps.warehouse.models import City
+
+
+class HomeView(TemplateView):
+    template_name = "dashboard/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(
+            city_count=City.objects.count(),
+            document_count=Document.objects.filter(status="ready").count(),
+            forecast_count=Forecast.objects.count(),
+            scenario_count=ScenarioRun.objects.count(),
+        )
+        context["city_forecasts"] = []
+        for city in City.objects.filter(slug__in=["delhi", "mumbai", "bengaluru", "hyderabad"]):
+            latest = (
+                Forecast.objects.filter(city=city, horizon=1)
+                .order_by("-issued_for_date", "-id")
+                .first()
+            )
+            if latest:
+                context["city_forecasts"].append(
+                    {
+                        "city": city,
+                        "forecast": latest,
+                        "category_label": latest.aqi_category.replace("_", " ").title(),
+                    }
+                )
+        return context
+
+
+class ForecastPage(TemplateView):
+    template_name = "dashboard/forecasts.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cities"] = City.objects.filter(forecast__isnull=False).distinct().order_by("name")
+        return context
+
+
+class ResearchPage(TemplateView):
+    template_name = "dashboard/research.html"
+
+
+class LibraryPage(TemplateView):
+    template_name = "dashboard/library.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["documents"] = Document.objects.filter(status="ready").order_by("category", "title")
+        return context
+from datetime import date, timedelta
+
+import numpy as np
+import pytest
+from django.utils import timezone
+
+from apps.analytics.models import AnalysisRun
+from apps.forecast.data import make_features
+from apps.forecast.models import Forecast, ForecastModelVersion, ForecastWeather
+from apps.ingest.models import RawAsset
+from tests.factories import CityFactory, IngestionRunFactory
+from tests.test_forecasting import feature_fixture
+
+
+@pytest.mark.django_db
+def test_actual_issue_pipeline_replays_without_key(monkeypatch, tmp_path):
+    import joblib
+    from django.test import override_settings
+
+    from apps.forecast import operations
+    from apps.forecast.estimators import TREE_GRID, Baseline, TreeModel
+
+    monkeypatch.delenv("OPENAQ_API_KEY", raising=False)
+    hourly, daily, records = feature_fixture()
+    city = CityFactory(slug="hyderabad")
+    run = AnalysisRun.objects.create(
+        started_at=timezone.now(),
+        name="phase4",
+        status="success",
+        data_start=date(2024, 1, 1),
+        data_end=date(2024, 2, 1),
+    )
+    ingest = IngestionRunFactory()
+    asset = RawAsset.objects.create(
+        source=ingest.source, ingestion_run=ingest, path="fixture", sha256="a" * 64, size_bytes=1
+    )
+    monkeypatch.setattr(operations, "load_hourly", lambda slug: (hourly, {"fixture": True}))
+    monkeypatch.setattr(
+        operations, "operational_hourly", lambda *a: pytest.fail("No key: live lookup forbidden")
+    )
+    issued = date(2024, 2, 1)
+    for horizon in (1, 2, 3):
+        for r in records:
+            ForecastWeather.objects.create(
+                city=city,
+                source=ingest.source,
+                ingestion_run=ingest,
+                asset=asset,
+                mode="archive",
+                horizon=horizon,
+                issued_for_date=r["issued_for_date"],
+                target_date=r["issued_for_date"] + timedelta(days=horizon),
+                lead_days=horizon + 1,
+                available_by=r["available_by"],
+                features=r["features"],
+                hours=24,
+            )
+        rows = make_features(daily, records, horizon)
+        training = rows[rows.y.notna()].copy()
+        calibration = training.copy()
+        calibration["y"] = calibration.pm_t + np.linspace(-4, 4, len(calibration))
+        path = tmp_path / f"h{horizon}.joblib"
+        model = Baseline("persistence").fit(training)
+        quantiles = {
+            str(a): TreeModel(TREE_GRID[0], a).fit(training) for a in (0.025, 0.1, 0.9, 0.975)
+        }
+        joblib.dump(
+            {
+                "model": model,
+                "quantiles": quantiles,
+                "calibration": calibration,
+                "background": training,
+                "chosen": "persistence",
+                "selection": {"radius80": 3.0, "radius95": 4.0},
+            },
+            path,
+        )
+        ForecastModelVersion.objects.create(
+            city=city,
+            horizon=horizon,
+            algorithm="persistence",
+            mlflow_run_id="fixture",
+            registry_name="fixture",
+            registry_version="1",
+            training_start=date(2024, 1, 1),
+            training_end=date(2024, 1, 10),
+            available_from=date(2024, 1, 11),
+            artifact_path=str(path),
+            analysis_run=run,
+            cohort="all_stations",
+        )
+    with override_settings(FORECAST_CITIES=(city.slug,)):
+        result = operations.issue_forecasts()
+    assert len(result) == 3
+    assert all(r["mode"] == "replay" and r["issued_for_date"] == str(issued) for r in result)
+    assert Forecast.objects.filter(mode="replay", issued_for_date=issued).count() == 3
+    assert all(len(f.top_drivers) == 5 for f in Forecast.objects.all())
+    # A keyed source with only today's observations still lacks the required lags.
+    import pandas as pd
+
+    completed = timezone.localdate() - timedelta(days=1)
+    fresh_hourly = pd.DataFrame(
+        {
+            "observed_at": pd.date_range(
+                pd.Timestamp(completed, tz="Asia/Kolkata"), periods=24, freq="h"
+            ),
+            "value": np.repeat(20.0, 24),
+            "station_count": np.repeat(1, 24),
+        }
+    )
+    monkeypatch.setenv("OPENAQ_API_KEY", "fixture-only-not-used-for-network")
+    monkeypatch.setattr(operations, "operational_hourly", lambda *a: fresh_hourly)
+    with override_settings(FORECAST_CITIES=(city.slug,)):
+        fallback = operations.issue_forecasts()
+    assert all(r["mode"] == "replay" and r["fallback_reason"] for r in fallback)
+    assert Forecast.objects.count() == 3
+
+
+def test_sarimax_state_never_assimilates_future_target_labels():
+    from apps.forecast.estimators import SarimaxModel
+
+    _, daily, records = feature_fixture()
+    rows = make_features(daily, records, 3)
+    train = rows[rows.y.notna()].iloc[:12]
+    model = SarimaxModel((1, 0, 0), 3).fit(train)
+    issued = rows.index[-2]
+    test = rows.loc[[issued]]
+    before = model.predict(test, rows)
+    assert np.isfinite(before).all()
+    contaminated = rows.copy()
+    contaminated.loc[contaminated.target_date > issued, "y"] = 99999
+    np.testing.assert_allclose(model.predict(test, contaminated), before, rtol=0, atol=1e-12)
+
+
+def test_live_state_uses_frozen_calibration_and_preserves_measured_labels():
+    import pandas as pd
+
+    from apps.forecast.estimators import SarimaxModel
+    from apps.forecast.operations import observed_history, operational_intervals
+
+    class StateModel(SarimaxModel):
+        def predict(self, rows, history=None):
+            assert rows.index.min() == pd.Timestamp("2026-10-10")
+            return np.repeat(20.0, len(rows))
+
+    class Quantile:
+        def __init__(self, value):
+            self.value = value
+
+        def predict(self, rows):
+            return np.repeat(self.value, len(rows))
+
+    calibration = pd.DataFrame({"y": np.linspace(15, 25, 60)})
+    test = pd.DataFrame(index=[pd.Timestamp("2026-10-10")])
+    bundle = {
+        "model": StateModel((1, 0, 0), 3),
+        "calibration": calibration,
+        "selection": {"radius80": 3.0, "radius95": 5.0},
+        "quantiles": {
+            "0.025": Quantile(10),
+            "0.1": Quantile(12),
+            "0.9": Quantile(28),
+            "0.975": Quantile(30),
+        },
+    }
+    result, info = operational_intervals(bundle, test, pd.DataFrame())
+    assert result["lower80"][0] == 17 and result["upper80"][0] == 23
+    assert result["lower95"][0] == 15 and result["upper95"][0] == 25
+    assert info["calibration_n"] == 60
+    _, daily, records = feature_fixture()
+    rows = make_features(daily, records, 3).drop(pd.Timestamp("2024-01-20"))
+    history = observed_history(daily, rows, 3)
+    assert history.loc["2024-01-20", "y"] == daily.loc["2024-01-23", "value"]
+    assert pd.isna(history.loc["2024-01-20", "pm_t"])
+
+
+def test_daily_pm_refresh_includes_current_day_and_ten_day_lag_history(monkeypatch):
+    from datetime import UTC, datetime
+    from types import SimpleNamespace
+
+    from apps.forecast import operations
+
+    instant = datetime(2026, 10, 10, 18, 5, tzinfo=UTC)
+    called = {}
+
+    class Source:
+        def execute(self, action, **kwargs):
+            called.update(action=action, **kwargs)
+            return SimpleNamespace(status="success")
+
+    monkeypatch.setattr(operations, "OpenAQSource", Source)
+    monkeypatch.setattr(operations.timezone, "now", lambda: instant)
+    assert operations.refresh_live_pm().status == "success"
+    assert called == {
+        "action": "load",
+        "start": (instant - timedelta(days=10)).isoformat(),
+        "end": instant.isoformat(),
+    }
+
+
+@pytest.mark.django_db
+def test_daily_forecast_schedules_refresh_pm_before_issue_cutoff():
+    from django_celery_beat.models import PeriodicTask
+
+    from apps.forecast.tasks import configure_schedules
+
+    configure_schedules()
+    configure_schedules()
+    tasks = PeriodicTask.objects.filter(
+        name__in=["Forecast PM inputs daily", "Forecast weather daily", "PM2.5 forecasts daily"]
+    )
+    assert tasks.count() == 3
+    expected = {
+        "Forecast PM inputs daily": ("23", "35"),
+        "Forecast weather daily": ("23", "40"),
+        "PM2.5 forecasts daily": ("0", "10"),
+    }
+    for task in tasks:
+        assert (task.crontab.hour, task.crontab.minute) == expected[task.name]
+        assert str(task.crontab.timezone) == "Asia/Kolkata"
+import json
+from pathlib import Path
+
+import pytest
+
+from apps.dashboard import evidence
+
+
+@pytest.mark.django_db
+def test_dashboard_is_stored_only_and_exposes_limits(client, django_assert_num_queries):
+    with django_assert_num_queries(0):
+        response = client.get("/dashboard/")
+    assert response.status_code == 200
+    html = response.content.decode()
+    for text in [
+        "17,504,928",
+        "16,266,240",
+        "1,238,688",
+        "-17.59",
+        "-35.07",
+        "+1.66",
+        "unvalidated branch",
+        "hypothetical 1 g/s source",
+        "7194",
+        "80.31",
+        "0.6933",
+    ]:
+        assert text in html.replace("7,194", "7194")
+    assert html.count("coverage-fail") == 14
+    assert html.count("Persistence advised") == 9
+    assert "Automatic fallback for all nine is not implemented" in html
+    assert "5 still use other algorithms" in html
+    assert "Extractive retrieval with verified citations" in html
+    assert "local LLM is opt-in and failed its quality gate" in html
+    assert 'src="https://' not in html
+    for section in ["ingestion", "analytics", "forecasting", "assistant", "dispersion", "testing"]:
+        assert f'id="{section}"' in html
+
+
+@pytest.mark.parametrize("key", ["snapshot", "phase3b", "phase4", "phase5", "phase6a", "examples"])
+def test_evidence_serves_exact_allowed_file(client, key):
+    response = client.get(f"/evidence/{key}/")
+    assert response.status_code == 200
+    assert (
+        b"".join(response.streaming_content) == (evidence.ROOT / evidence.SOURCES[key]).read_bytes()
+    )
+    assert response["Content-Type"].startswith("text/plain")
+    assert response["X-Content-Type-Options"] == "nosniff"
+
+
+@pytest.mark.parametrize(
+    "path", ["/evidence/env/", "/evidence/secret/", "/evidence/.env/", "/evidence/..%2F.env/"]
+)
+def test_evidence_cannot_read_arbitrary_files(client, path):
+    assert client.get(path).status_code == 404
+
+
+def test_missing_snapshot_has_no_invented_values(client, monkeypatch, tmp_path):
+    monkeypatch.setattr(evidence, "ROOT", tmp_path)
+    result = client.get("/dashboard/")
+    assert result.status_code == 503
+    assert b"Stored dashboard snapshot unavailable" in result.content
+    assert b"17,504,928" not in result.content
+    assert client.get("/evidence/snapshot/").status_code == 404
+
+
+def test_snapshot_consistency_and_no_result_reselection():
+    data = json.loads((evidence.ROOT / evidence.SOURCES["snapshot"]).read_text(encoding="utf-8"))
+    assert data["combined_observation_rows"] == (
+        data["ingestion"]["readings_total"]
+        + data["ingestion"]["weather"]["rows"]
+        + data["ingestion"]["fires"]["rows"]
+    )
+    assert (
+        sum(row["rows"] for row in data["ingestion"]["quality_flags"])
+        == data["ingestion"]["readings_total"]
+    )
+    assert sum(row["persistence_advised"] for row in data["forecasts"]) == 9
+    assert len(data["forecasts"]) == 21
+    assert all(
+        "prediction" in row["models"] and "persistence" in row["models"]
+        for row in data["forecasts"]
+    )
+    assert data["fallback_gap_count"] == 5
+    original = json.loads(
+        (Path(__file__).resolve().parents[1] / "docs/results/PHASE6B_METRICS.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert data["examples"] == original["preservation"]["examples"]
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 003-feature-provenance-and-intervals (2026-10-16T12:39:49.7672226+05:30; exit 2)</summary>
+
+```powershell
+rg -n 'def save_forecasts|feature_provenance|pm_t|ForecastSerializer|forecast' apps/forecast/pipeline.py apps/forecast/data.py tests/test_forecasting.py apps/dashboard/static/dashboard/site.js apps/dashboard/templates/dashboard/forecasts.html apps/rag -g '*.py' -g '*.js' -g '*.html'
+Get-Content -LiteralPath 'apps/forecast/pipeline.py' -Encoding UTF8 | Select-Object -First 170
+Get-Content -LiteralPath 'apps/dashboard/templates/dashboard/forecasts.html' -Encoding UTF8
+Get-Content -LiteralPath 'apps/dashboard/static/dashboard/site.js' -Encoding UTF8
+Get-Content -LiteralPath 'apps/forecast/intervals.py' -Encoding UTF8
+Get-Content -LiteralPath 'tests/test_forecast_intervals.py' -Encoding UTF8
+```
+
+```text
+rg : rg: apps/dashboard/static/dashboard/site.js: The system cannot find the file specified. (os error 2)
+At line:1 char:1
++ rg -n 'def save_forecasts|feature_provenance|pm_t|ForecastSerializer| ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (rg: apps/dashbo...d. (os error 2):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+apps/forecast/pipeline.py:19:from .data import city_dataset, feature_provenance, rolling_origins, training_segments, write_json
+apps/forecast/pipeline.py:58:def save_forecasts(city, horizon, version, frame, drivers, mode="replay"):
+apps/forecast/pipeline.py:76:                feature_provenance=feature_provenance(row, horizon),
+apps/forecast/pipeline.py:91:            provenance = dict(existing.feature_provenance)
+apps/forecast/pipeline.py:102:            existing.feature_provenance = provenance
+apps/forecast/pipeline.py:104:                update_fields=["lower80", "upper80", "lower95", "upper95", "feature_provenance"]
+apps/forecast/pipeline.py:108:def train_forecasters(cities=None):
+apps/forecast/pipeline.py:157:                for kind, rows in [("archived_forecast", real), ("perfect_prognosis", ideal)]:
+apps/forecast/pipeline.py:162:                                    "event": "forecast_origin",
+apps/forecast/pipeline.py:262:                        if kind == "archived_forecast":
+apps/forecast/pipeline.py:302:                            save_forecasts(city, horizon, version, predictions, drivers)
+apps/forecast/pipeline.py:309:        # Score only after every prespecified forecast has been produced.
+apps/forecast/pipeline.py:416:                "returned null evaluation-period forecasts. Historical valid-time PM2.5 "
+apps/forecast/pipeline.py:417:                "exists, but it cannot replace issued forecasts in a benchmark."
+apps/forecast/pipeline.py:421:    cams_run = IngestionRun.objects.filter(source__slug="cams-forecast").order_by("-pk").first()
+apps/forecast/pipeline.py:430:        if entry["weather"] == "archived_forecast":
+apps/forecast/data.py:19:    "pm_t",
+apps/forecast/data.py:20:    "pm_tminus1",
+apps/forecast/data.py:21:    "pm_tminus2",
+apps/forecast/data.py:22:    "pm_tminus7",
+apps/forecast/data.py:131:    rows["weather_kind"] = "archived_forecast"
+apps/forecast/data.py:158:def feature_provenance(row, horizon):
+apps/forecast/data.py:161:    if row.weather_kind not in {"archived_forecast", "live_forecast"} or available > end:
+apps/forecast/data.py:162:        raise ValueError("Future or observed weather cannot enter an issued forecast")
+apps/forecast/data.py:170:        "lead_days": horizon + 1 if row.weather_kind == "archived_forecast" else None,
+apps/dashboard/templates/dashboard/forecasts.html:2:{% block title %}City forecasts · EnviroInsights{% endblock %}
+apps/dashboard/templates/dashboard/forecasts.html:5:<div class="toolbar"><div><label for="forecast-city">Choose a city</label><select id="forecast-city">{% for city in cities %}<option value="{{city.slug}}" {% if city.slug == 'delhi' %}selected{% endif %}>{{city.name}}</option>{% endfor %}</select></div><p id="forecast-status" class="loading" role="status">Loading stored forecasts…</p></div>
+apps/dashboard/templates/dashboard/forecasts.html:6:<div id="forecast-cards" class="forecast-grid" aria-live="polite"></div>
+apps/dashboard/templates/dashboard/forecasts.html:7:<section class="panel section"><h2>How well did the issued policy perform?</h2><p class="help">Monthly rolling evaluation with archived forecast weather. Negative skill loses to persistence. Selected interval coverage is retrospective; it does not guarantee future coverage.</p><div id="forecast-evaluation" class="table-wrap"></div></section>
+apps/dashboard/templates/dashboard/forecasts.html:8:<section class="notice section"><h3>Read before using the forecast</h3><p>Replay forecasts use archived observations and their original issue dates. They are not a live forecast for today. Interval methods retain explicit coverage failures. SHAP describes conditional model associations, not causal sources. Categories represent the CPCB PM2.5 subindex, not overall AQI.</p></section>
+apps/dashboard/templates/dashboard/forecasts.html:9:<script src="{% static 'dashboard/forecasts.js' %}" defer></script>
+tests/test_forecasting.py:10:from apps.forecast.data import (
+tests/test_forecasting.py:13:    feature_provenance,
+tests/test_forecasting.py:19:from apps.forecast.metrics import aqi_category, conformal_radius, dm_test, scores
+tests/test_forecasting.py:20:from apps.forecast.models import Forecast, ForecastModelVersion
+tests/test_forecasting.py:21:from apps.forecast.operations import select_issue_mode
+tests/test_forecasting.py:22:from apps.forecast.weather import daily_weather, issue_end
+tests/test_forecasting.py:80:    provenance = feature_provenance(row, 3)
+tests/test_forecasting.py:85:    assert provenance["weather_kind"] == "archived_forecast"
+tests/test_forecasting.py:93:        feature_provenance(bad, 3)
+tests/test_forecasting.py:96:        feature_provenance(bad, 3)
+tests/test_forecasting.py:125:    from apps.forecast.weather import WEATHER_VARIABLES
+tests/test_forecasting.py:172:def test_forecast_api_read_only_replay_and_date_validation():
+tests/test_forecasting.py:207:        top_drivers=[{"feature": "pm_t", "value": 20, "shap_value": 1}],
+tests/test_forecasting.py:210:    url = "/api/forecast/hyderabad/latest/"
+tests/test_forecasting.py:213:    assert response.data["forecasts"][0]["mode"] == "replay"
+tests/test_forecasting.py:214:    assert response.data["forecasts"][0]["top_drivers"][0]["feature"] == "pm_t"
+tests/test_forecasting.py:216:    assert client.get("/api/forecast/missing/latest/").status_code == 404
+tests/test_forecasting.py:217:    assert client.get("/api/forecast/hyderabad/history/?start=2026-01-01&end=2026-01-01").data[
+tests/test_forecasting.py:218:        "forecasts"
+tests/test_forecasting.py:221:        client.get("/api/forecast/hyderabad/history/?start=2026-01-02&end=2026-01-01").status_code
+tests/test_forecasting.py:225:        client.get("/api/forecast/hyderabad/history/?start=wrong&end=2026-01-01").status_code == 400
+apps/rag\api.py:50:    context_type = serializers.ChoiceField(choices=["chart", "forecast", "scenario"])
+apps/rag\api.py:96:        elif kind == "forecast":
+apps/rag\api.py:99:                or f"Explain the latest replay forecast for {city} and its limitations."
+apps/rag\data_tools.py:12:from apps.forecast.api import ForecastSerializer, completed_run
+apps/rag\data_tools.py:13:from apps.forecast.models import Forecast, ForecastEvaluation
+apps/rag\data_tools.py:305:    forecasts = list(ForecastSerializer(rows, many=True).data)
+apps/rag\data_tools.py:307:        "forecasts": forecasts,
+apps/rag\data_tools.py:311:        "status": "available" if forecasts else "unavailable",
+apps/rag\data_tools.py:312:        "interpretation": "Replay is archival and is not a current live forecast",
+apps/rag\data_tools.py:315:        "latest_forecast",
+apps/rag\data_tools.py:319:        f"/api/forecast/{parameters['city']}/latest/",
+apps/rag\data_tools.py:320:        model_versions=[row["model_version"] for row in forecasts],
+apps/rag\data_tools.py:336:            "weather": "archived_forecast",
+apps/rag\data_tools.py:347:        "forecast_skill", parameters, run, values, f"/api/forecast/{parameters['city']}/evaluation/"
+apps/rag\data_tools.py:448:    "latest_forecast": (StrictParameters, latest),
+apps/rag\data_tools.py:449:    "forecast_skill": (SkillParameters, skill),
+apps/rag\formatting.py:53:    if result["tool"] == "latest_forecast":
+apps/rag\formatting.py:54:        for row in values.get("forecasts", []):
+apps/rag\formatting.py:93:    elif result["tool"] == "forecast_skill" and values["status"] == "available":
+apps/rag\routing.py:29:            for term in ["forecast skill", "forecast rmse", "skill versus", "forecast evaluation"]
+apps/rag\routing.py:33:                "forecast_skill",
+apps/rag\routing.py:36:        elif "forecast" in lower and any(
+apps/rag\routing.py:39:            tool = "latest_forecast"
+"""Monthly expanding-window experiments and auditable replay predictions."""
+
+import hashlib
+import json
+import os
+import shutil
+
+import joblib
+import numpy as np
+import pandas as pd
+from django.conf import settings
+from threadpoolctl import threadpool_info
+
+from apps.analytics.descriptive import season
+from apps.analytics.lifecycle import analysis_run
+from apps.ingest.models import IngestionRun
+from apps.warehouse.models import City
+
+from .data import city_dataset, feature_provenance, rolling_origins, training_segments, write_json
+from .estimators import SEED, choose_models, predict
+from .explain import top_drivers
+from .metrics import aqi_category, conformal_radius, dm_test, scores
+from .models import Forecast, ForecastEvaluation, ForecastModelVersion, ForecastWeather
+from .tracking import log_experiment, register_model, tracking_client
+
+
+def interval_predictions(models, quantiles, calibration, rows, history, chosen):
+    point = predict(models[chosen], rows, history)
+    residual = calibration.y.to_numpy() - predict(models[chosen], calibration, history)
+    q80 = conformal_radius(residual, 0.2)
+    q95 = conformal_radius(residual, 0.05)
+    result = {
+        "prediction": point,
+        "lower80": np.maximum(0, point - q80),
+        "upper80": point + q80,
+        "lower95": np.maximum(0, point - q95),
+        "upper95": point + q95,
+    }
+    for lower, upper, alpha in [(0.1, 0.9, 0.2), (0.025, 0.975, 0.05)]:
+        cl = predict(quantiles[str(lower)], calibration, history)
+        cu = predict(quantiles[str(upper)], calibration, history)
+        errors = np.maximum(
+            np.minimum(cl, cu) - calibration.y.to_numpy(),
+            calibration.y.to_numpy() - np.maximum(cl, cu),
+        )
+        rank = int(np.ceil((len(errors) + 1) * (1 - alpha)))
+        adjustment = max(0, float(np.sort(errors)[rank - 1]))
+        lo = predict(quantiles[str(lower)], rows, history)
+        hi = predict(quantiles[str(upper)], rows, history)
+        label = "80" if alpha == 0.2 else "95"
+        result[f"quantile_lower{label}"] = np.maximum(0, np.minimum(lo, hi) - adjustment)
+        result[f"quantile_upper{label}"] = np.maximum(lo, hi) + adjustment
+    result["quantile_lower95"] = np.minimum(result["quantile_lower95"], result["quantile_lower80"])
+    result["quantile_upper95"] = np.maximum(result["quantile_upper95"], result["quantile_upper80"])
+    return result, {"radius80": q80, "radius95": q95, "calibration_n": len(residual)}
+
+
+def save_forecasts(city, horizon, version, frame, drivers, mode="replay"):
+    objects = []
+    for (_, row), explanation in zip(frame.iterrows(), drivers, strict=True):
+        objects.append(
+            Forecast(
+                city=city,
+                issued_for_date=row.issued_for_date.date(),
+                target_date=row.target_date.date(),
+                horizon=horizon,
+                point=float(row.prediction),
+                lower80=float(row.lower80),
+                upper80=float(row.upper80),
+                lower95=float(row.lower95),
+                upper95=float(row.upper95),
+                aqi_category=aqi_category(row.prediction),
+                mode=mode,
+                model_version=version,
+                top_drivers=explanation,
+                feature_provenance=feature_provenance(row, horizon),
+            )
+        )
+    Forecast.objects.bulk_create(objects, ignore_conflicts=True)
+    if version.interval_policy:
+        # Reissued archival rows keep their original point, dates and model.
+        # Retain the original bounds as an audit trail; do not rewrite old runs.
+        for proposed in objects:
+            existing = Forecast.objects.get(
+                city=city,
+                issued_for_date=proposed.issued_for_date,
+                horizon=horizon,
+                mode=mode,
+                model_version=version,
+            )
+            provenance = dict(existing.feature_provenance)
+            provenance.setdefault(
+                "original_interval_bounds",
+                {
+                    key: getattr(existing, key)
+                    for key in ("lower80", "upper80", "lower95", "upper95")
+                },
+            )
+            provenance["interval_policy"] = version.interval_policy
+            for key in ("lower80", "upper80", "lower95", "upper95"):
+                setattr(existing, key, getattr(proposed, key))
+            existing.feature_provenance = provenance
+            existing.save(
+                update_fields=["lower80", "upper80", "lower95", "upper95", "feature_provenance"]
+            )
+
+
+def train_forecasters(cities=None):
+    protocol = settings.BASE_DIR / "docs" / "results" / "PHASE4_PROTOCOL.md"
+    digest = hashlib.sha256(protocol.read_bytes()).hexdigest()
+    client, experiment = tracking_client()
+    with analysis_run(
+        "phase4",
+        start="2024-01-01",
+        end="2025-12-31",
+        seed=SEED,
+        protocol_sha256=digest,
+        baseline=19,
+        diagnostic_data_run=8,
+        cpu_thread_environment={
+            key: os.environ.get(key)
+            for key in (
+                "OMP_NUM_THREADS",
+                "OPENBLAS_NUM_THREADS",
+                "MKL_NUM_THREADS",
+                "NUMEXPR_NUM_THREADS",
+            )
+        },
+        threadpools=threadpool_info(),
+    ) as (run, output):
+        shutil.copy2(protocol, output / "protocol.md")
+        evidence = settings.BASE_DIR / ".tools" / "phase4-validation"
+        for path in evidence.glob("*.json"):
+            shutil.copy2(path, output / path.name)
+        for path in evidence.glob("*bias.csv"):
+            shutil.copy2(path, output / path.name)
+        if (evidence / "bias").exists():
+            shutil.copytree(evidence / "bias", output / "prior_bias", dirs_exist_ok=True)
+        all_results = []
+        splits = []
+        provenance = []
+        for slug in cities or settings.FORECAST_CITIES:
+            city = City.objects.get(slug=slug)
+            for horizon in (1, 2, 3):
+                daily, real, ideal, data_provenance = city_dataset(slug, horizon)
+                latest = daily[daily.value.notna()].index.max()
+                provenance.append(
+                    {
+                        "city": slug,
+                        "horizon": horizon,
+                        "raw_valid_days": int(daily.value.notna().sum()),
+                        "feature_rows": len(real),
+                        "latest_target": str(latest.date()),
+                        **data_provenance,
+                    }
+                )
+                for kind, rows in [("archived_forecast", real), ("perfect_prognosis", ideal)]:
+                    for month, origin, train, test in rolling_origins(rows, latest):
+                        print(
+                            json.dumps(
+                                {
+                                    "event": "forecast_origin",
+                                    "run": run.pk,
+                                    "city": slug,
+                                    "horizon": horizon,
+                                    "weather": kind,
+                                    "month": month,
+                                    "train": len(train),
+                                    "test": len(test),
+                                }
+{% extends "dashboard/base.html" %}{% load static %}
+{% block title %}City forecasts · EnviroInsights{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">THE CITY OUTLOOK</p><h1>Forecasts, with context.</h1><p>Daily PM2.5 for the next three target days of the latest stored issuance. Inspect the uncertainty and retrospective skill alongside each estimate.</p></div><span class="badge warning">Archived replay</span></div>
+<div class="toolbar"><div><label for="forecast-city">Choose a city</label><select id="forecast-city">{% for city in cities %}<option value="{{city.slug}}" {% if city.slug == 'delhi' %}selected{% endif %}>{{city.name}}</option>{% endfor %}</select></div><p id="forecast-status" class="loading" role="status">Loading stored forecasts…</p></div>
+<div id="forecast-cards" class="forecast-grid" aria-live="polite"></div>
+<section class="panel section"><h2>How well did the issued policy perform?</h2><p class="help">Monthly rolling evaluation with archived forecast weather. Negative skill loses to persistence. Selected interval coverage is retrospective; it does not guarantee future coverage.</p><div id="forecast-evaluation" class="table-wrap"></div></section>
+<section class="notice section"><h3>Read before using the forecast</h3><p>Replay forecasts use archived observations and their original issue dates. They are not a live forecast for today. Interval methods retain explicit coverage failures. SHAP describes conditional model associations, not causal sources. Categories represent the CPCB PM2.5 subindex, not overall AQI.</p></section>
+<script src="{% static 'dashboard/forecasts.js' %}" defer></script>
+{% endblock %}
+Get-Content : Cannot find path 'apps/dashboard/static/dashboard/site.js' because it does not exist.
+At line:4 char:1
++ Get-Content -LiteralPath 'apps/dashboard/static/dashboard/site.js' -E ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (apps/dashboard/static/dashboard/site.js:String) [Get-Content], ItemNotF
+   oundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+
+"""Post-Phase-4 interval policy, selected from existing archived-weather scores.
+
+Selection uses the completed evaluation by explicit user request. Its coverage is
+retrospective, not an independent test of the newly selected policy. No fit or
+point-prediction parameter is changed.
+"""
+
+import numpy as np
+
+
+def choose_interval_policy(result):
+    choices = {}
+    for nominal in (80, 95):
+        target = nominal / 100
+        candidates = []
+        for method, prefix in (("conformal", ""), ("quantile_lightgbm", "quantile_")):
+            score = result["intervals"][f"{prefix}{nominal}"]
+            candidates.append({"method": method, **score})
+        eligible = [c for c in candidates if c["coverage"] >= target - 0.05 - 1e-12]
+        chosen = min(
+            eligible or candidates, key=lambda c: (abs(c["coverage"] - target), c["method"])
+        )
+        choices[str(nominal)] = {
+            **chosen,
+            "nominal": target,
+            "coverage_gate_passed": bool(eligible),
+            "warning": "" if eligible else "No existing method meets the five-point tolerance",
+        }
+    return {
+        "version": 1,
+        "choices": choices,
+        "evaluation_window": [result["target_start"], result["target_end"]],
+        "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+        "evaluation_weather": "archived_forecast",
+        "post_evaluation_selection": True,
+        "independent_validation": False,
+        "point_model_changed": False,
+    }
+
+
+def apply_interval_policy(values, policy):
+    """Keep the point fixed; select saved interval families and ensure nesting."""
+    selected = dict(values)
+    for nominal, choice in policy.get("choices", {}).items():
+        prefix = "quantile_" if choice["method"] == "quantile_lightgbm" else ""
+        for side in ("lower", "upper"):
+            selected[f"{side}{nominal}"] = np.asarray(values[f"{prefix}{side}{nominal}"]).copy()
+    selected["lower95"] = np.minimum(selected["lower95"], selected["lower80"])
+    selected["upper95"] = np.maximum(selected["upper95"], selected["upper80"])
+    return selected
+import numpy as np
+
+from apps.forecast.intervals import apply_interval_policy, choose_interval_policy
+
+
+def test_existing_interval_selection_has_an_explicit_no_eligible_path():
+    result = {
+        "target_start": "2025-07-01",
+        "target_end": "2025-12-31",
+        "intervals": {
+            "80": {"coverage": 0.685, "n": 184},
+            "quantile_80": {"coverage": 0.804, "n": 184},
+            "95": {"coverage": 0.82, "n": 184},
+            "quantile_95": {"coverage": 0.87, "n": 184},
+        },
+    }
+    policy = choose_interval_policy(result)
+    assert policy["choices"]["80"]["method"] == "quantile_lightgbm"
+    assert policy["choices"]["80"]["coverage_gate_passed"]
+    assert not policy["choices"]["95"]["coverage_gate_passed"]
+    assert policy["choices"]["95"]["warning"]
+    values = {
+        "prediction": np.array([20.0]),
+        "lower80": np.array([17.0]),
+        "upper80": np.array([23.0]),
+        "lower95": np.array([15.0]),
+        "upper95": np.array([25.0]),
+        "quantile_lower80": np.array([10.0]),
+        "quantile_upper80": np.array([30.0]),
+        "quantile_lower95": np.array([12.0]),
+        "quantile_upper95": np.array([28.0]),
+    }
+    applied = apply_interval_policy(values, policy)
+    np.testing.assert_array_equal(applied["prediction"], values["prediction"])
+    assert applied["lower95"][0] == 10 and applied["upper95"][0] == 30
+    assert values["lower95"][0] == 15
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 004-persistence-input-contract (2026-10-16T12:39:57.6720543+05:30; exit -1)</summary>
+
+```powershell
+Get-Content -LiteralPath 'apps/forecast/data.py' -Encoding UTF8 | Select-Object -Skip 100 -First 100
+Get-Content -LiteralPath 'apps/dashboard/static/dashboard/forecasts.js' -Encoding UTF8
+Get-Content -LiteralPath 'tests/test_forecasting.py' -Encoding UTF8 | Select-Object -Skip 165 -First 70
+rg --files data/models data/results/21 | Select-Object -First 35
+Get-Content -LiteralPath 'apps/forecast/estimators.py' -Encoding UTF8 | Select-Object -First 75
+Get-Content -LiteralPath 'apps/dashboard/evidence.py' -Encoding UTF8
+```
+
+```text
+    frame["wind_sin"] = np.sin(radians)
+    frame["wind_cos"] = np.cos(radians)
+    frame["date"] = dates
+    weather = frame.groupby("date")[WEATHER_FEATURES].mean()
+    weather["precipitation_mm"] = frame.groupby("date").precipitation_mm.sum(min_count=18)
+    return weather
+
+
+def make_features(daily, weather_records, horizon, observed=None):
+    """Forecast valid times are future; feature availability timestamps are past."""
+    rows = daily[PM_FEATURES].copy()
+    rows["issued_for_date"] = rows.index
+    rows["target_date"] = pd.DatetimeIndex(rows.index.to_numpy() + np.timedelta64(horizon, "D"))
+    rows["y"] = daily.value.reindex(rows.target_date).to_numpy()
+    calendar = calendar_features(rows.target_date)
+    for col in CALENDAR_FEATURES:
+        rows[col] = calendar[col].to_numpy()
+    weather = pd.DataFrame(weather_records)
+    if weather.empty:
+        return pd.DataFrame(columns=[*FEATURES, "issued_for_date", "target_date", "y"])
+    weather["issued_for_date"] = pd.to_datetime(weather.issued_for_date)
+    weather = weather.set_index("issued_for_date")
+    for col in WEATHER_FEATURES:
+        rows[col] = pd.Series(
+            {idx: r.get(col) for idx, r in zip(weather.index, weather.features, strict=True)}
+        ).reindex(rows.index)
+    rows["weather_available_by"] = pd.to_datetime(weather.available_by, utc=True).reindex(
+        rows.index
+    )
+    rows["weather_asset"] = weather.asset_id.reindex(rows.index)
+    rows["weather_kind"] = "archived_forecast"
+    cutoffs = pd.Series([issue_end(day.date()) for day in rows.index], index=rows.index)
+    if (rows.weather_available_by > cutoffs).any():
+        raise ValueError("Forecast weather availability exceeds its issue cutoff")
+    if observed is not None:
+        for col in WEATHER_FEATURES:
+            rows[col] = observed[col].reindex(rows.target_date).to_numpy()
+        rows["weather_kind"] = "perfect_prognosis_observed"
+    for lag in range(7):
+        rows[f"seq_{lag}"] = daily.value.shift(lag)
+    return rows.dropna(subset=[*FEATURES, *[f"seq_{i}" for i in range(7)]])
+
+
+def city_dataset(slug, horizon):
+    hourly, provenance = load_hourly(slug)
+    daily = raw_daily(hourly)
+    records = list(
+        ForecastWeather.objects.filter(city__slug=slug, horizon=horizon, mode="archive")
+        .order_by("issued_for_date")
+        .values("issued_for_date", "available_by", "asset_id", "features")
+    )
+    real = make_features(daily, records, horizon)
+    ideal = make_features(daily, records, horizon, observed_daily_weather(hourly))
+    shared = real.index.intersection(ideal.index)
+    return daily, real.loc[shared], ideal.loc[shared], provenance
+
+
+def feature_provenance(row, horizon):
+    end = issue_end(row.issued_for_date.date())
+    available = pd.Timestamp(row.weather_available_by)
+    if row.weather_kind not in {"archived_forecast", "live_forecast"} or available > end:
+        raise ValueError("Future or observed weather cannot enter an issued forecast")
+    return {
+        "issue_end_utc": end.isoformat(),
+        "concentration_latest_available_at": end.isoformat(),
+        "weather_available_by": available.isoformat(),
+        "weather_asset_id": int(row.weather_asset),
+        "weather_kind": row.weather_kind,
+        "weather_target_date": str(row.target_date.date()),
+        "lead_days": horizon + 1 if row.weather_kind == "archived_forecast" else None,
+        "feature_availability": {
+            name: (available.isoformat() if name in WEATHER_FEATURES else end.isoformat())
+            for name in FEATURES
+        },
+        "concentration_publication_assumption": (
+            "day-t readings available at issue-end; historical release logs absent"
+        ),
+    }
+
+
+def rolling_origins(rows, latest_target):
+    latest = pd.Timestamp(latest_target)
+    first = (latest.to_period("M") - 5).start_time
+    scored = rows[(rows.target_date >= first) & (rows.target_date <= latest) & rows.y.notna()]
+    for month, test in scored.groupby(scored.issued_for_date.dt.to_period("M")):
+        origin = test.issued_for_date.min()
+        train = rows[(rows.target_date <= origin) & rows.y.notna()]
+        if len(train) < 180:
+            raise ValueError(f"Insufficient expanding training support at {origin}")
+        yield str(month), origin, train, test
+
+
+def training_segments(train, origin):
+    calibration_start = pd.Timestamp(pd.Timestamp(origin).date() - timedelta(days=60))
+    tuning_start = pd.Timestamp(calibration_start.date() - timedelta(days=60))
+    fit = train[train.target_date < tuning_start]
+    tune = train[(train.issued_for_date >= tuning_start) & (train.target_date < calibration_start)]
+    final_fit = train[train.target_date < calibration_start]
+    calibration = train[
+        (train.issued_for_date >= calibration_start) & (train.target_date <= origin)
+(() => {
+  const $ = (id) => document.getElementById(id),
+    num = (v, d = 1) =>
+      v == null
+        ? "Unavailable"
+        : Number(v).toLocaleString("en-IN", { maximumFractionDigits: d });
+  const node = (tag, text, parent, cls) => {
+    const e = document.createElement(tag);
+    e.textContent = text;
+    if (cls) e.className = cls;
+    if (parent) parent.append(e);
+    return e;
+  };
+  const city = $("forecast-city");
+  const requested = new URLSearchParams(location.search).get("city");
+  if ([...city.options].some((o) => o.value === requested))
+    city.value = requested;
+  let activeRequest = 0;
+  async function load() {
+    const request = ++activeRequest;
+    const slug = city.value;
+    $("forecast-status").textContent = "Loading stored forecasts…";
+    $("forecast-cards").replaceChildren();
+    $("forecast-evaluation").replaceChildren();
+    try {
+      const [latest, evaluation] = await Promise.all(
+        [
+          "/api/forecast/" + slug + "/latest/",
+          "/api/forecast/" + slug + "/evaluation/",
+        ].map(async (url) => {
+          const response = await fetch(url);
+          const data = await response.json();
+          if (!response.ok)
+            throw new Error(data.detail || "Forecast unavailable");
+          return data;
+        }),
+      );
+      if (request !== activeRequest) return;
+      const issued = latest.forecasts[0];
+      $("forecast-status").textContent =
+        "Issued for " +
+        issued.issued_for_date +
+        " IST · " +
+        issued.mode +
+        " · stored Run " +
+        latest.run;
+      for (const row of latest.forecasts) {
+        const card = node(
+          "article",
+          "",
+          $("forecast-cards"),
+          "panel forecast-card",
+        );
+        const top = node("div", "", card, "card-top");
+        node("h2", "Day +" + row.horizon, top);
+        node("span", row.mode, top, "badge warning");
+        node("p", row.target_date + " · daily PM2.5", card, "help");
+        const value = node("p", num(row.point), card, "city-value");
+        node("span", "µg/m³", value);
+        node(
+          "p",
+          row.aqi_category.replaceAll("_", " ") + " · PM2.5 subindex category",
+          card,
+          "help",
+        );
+        node("div", "", card, "range-bar");
+        node(
+          "p",
+          "80% interval: " +
+            num(row.lower80) +
+            "–" +
+            num(row.upper80) +
+            " µg/m³",
+          card,
+        );
+        node(
+          "p",
+          "95% interval: " +
+            num(row.lower95) +
+            "–" +
+            num(row.upper95) +
+            " µg/m³",
+          card,
+          "help",
+        );
+        if (row.point < row.lower80 || row.point > row.upper80)
+          node(
+            "p",
+            "The chosen target interval excludes this separate point forecast.",
+            card,
+            "help",
+          );
+        const choices = row.interval_policy?.choices || {};
+        for (const [level, policy] of Object.entries(choices)) {
+          node(
+            "p",
+            level +
+              "%: " +
+              policy.method.replaceAll("_", " ") +
+              " · empirical coverage " +
+              num(policy.coverage * 100) +
+              "%",
+            card,
+            "help",
+          );
+          if (!policy.coverage_gate_passed)
+            node(
+              "p",
+              "Coverage rule failed: " +
+                (policy.warning || "No available method meets the rule."),
+              card,
+              "help",
+            );
+        }
+        node("h3", "Conditional drivers", card);
+        for (const driver of row.top_drivers || [])
+          node(
+            "p",
+            typeof driver === "object"
+              ? (driver.feature || driver.name || "Driver") +
+                  ": " +
+                  num(driver.shap_value ?? driver.shap, 2) +
+                  " µg/m³ contribution"
+              : String(driver),
+            card,
+            "help",
+          );
+        node(
+          "p",
+          "Model " +
+            row.model_version +
+            " · " +
+            row.algorithm +
+            " · " +
+            row.cohort,
+          card,
+          "help",
+        );
+      }
+      const table = node("table", "", $("forecast-evaluation"));
+      node(
+        "caption",
+        "Archived-weather issued-policy skill; live skill is unverified.",
+        table,
+      );
+      const header = node("tr", "", node("thead", "", table));
+      for (const h of [
+        "Horizon",
+        "RMSE (µg/m³)",
+        "MAE (µg/m³)",
+        "Mean bias (µg/m³)",
+        "Skill vs persistence",
+      ])
+        node("th", h, header);
+      const body = node("tbody", "", table);
+      for (const result of evaluation.results) {
+        const score = result.models.prediction;
+        const tr = node("tr", "", body);
+        for (const text of [
+          "+" + result.horizon,
+          num(score.rmse, 2),
+          num(score.mae, 2),
+          num(score.mean_bias, 2),
+          num(score.skill_vs_persistence, 3),
+        ])
+          node("td", text, tr);
+      }
+    } catch (error) {
+      if (request === activeRequest)
+        $("forecast-status").textContent = error.message;
+    }
+  }
+  city.addEventListener("change", load);
+  load();
+})();
+    score = scores(frame)
+    assert score["pod"] is None and score["far"] is None and score["csi"] is None
+    assert score["skill_vs_persistence"] == 1
+
+
+@pytest.mark.django_db
+def test_forecast_api_read_only_replay_and_date_validation():
+    city = CityFactory(slug="hyderabad")
+    run = AnalysisRun.objects.create(
+        started_at=timezone.now(),
+        name="phase4",
+        status="success",
+        data_start=date(2024, 1, 1),
+        data_end=date(2025, 12, 31),
+    )
+    version = ForecastModelVersion.objects.create(
+        city=city,
+        horizon=1,
+        algorithm="persistence",
+        mlflow_run_id="test",
+        registry_name="test",
+        registry_version="1",
+        training_start=date(2024, 1, 1),
+        training_end=date(2025, 10, 1),
+        available_from=date(2025, 12, 1),
+        analysis_run=run,
+        cohort="all_stations",
+    )
+    Forecast.objects.create(
+        city=city,
+        issued_for_date=date(2025, 12, 31),
+        target_date=date(2026, 1, 1),
+        horizon=1,
+        point=20,
+        lower80=15,
+        upper80=25,
+        lower95=10,
+        upper95=30,
+        aqi_category="good",
+        mode="replay",
+        model_version=version,
+        top_drivers=[{"feature": "pm_t", "value": 20, "shap_value": 1}],
+    )
+    client = APIClient()
+    url = "/api/forecast/hyderabad/latest/"
+    response = client.get(url)
+    assert response.status_code == 200
+    assert response.data["forecasts"][0]["mode"] == "replay"
+    assert response.data["forecasts"][0]["top_drivers"][0]["feature"] == "pm_t"
+    assert client.post(url, {}).status_code == 405
+    assert client.get("/api/forecast/missing/latest/").status_code == 404
+    assert client.get("/api/forecast/hyderabad/history/?start=2026-01-01&end=2026-01-01").data[
+        "forecasts"
+    ]
+    assert (
+        client.get("/api/forecast/hyderabad/history/?start=2026-01-02&end=2026-01-01").status_code
+        == 400
+    )
+    assert (
+        client.get("/api/forecast/hyderabad/history/?start=wrong&end=2026-01-01").status_code == 400
+    )
+data/models\huggingface\hub\models--BAAI--bge-reranker-v2-m3\trees\953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e.json
+data/models\ollama\models\metadata\sha256-5ee4f07cdb9beadbbb293e85803c569b01bd37ed059d2715faa7bb405f31caa6.json
+data/models\computations\query\fd331c50e6fa9926cd8bd39bcb7724a1cb8f6978161cd86da31374d60ce5ea9f.json
+data/models\computations\query\f505b8018845cde455f8788fa8ce9200c6def5c30cbd61233591ec484a3bc1c5.json
+data/models\computations\query\ed8e84b5a31cac550278bdc3100b7a04536a91956c51e0c1963a1eab859e6981.json
+data/models\computations\query\ed74c96f1c3417d2e5b629a9510d785b2604ab2a54cdffbee5482370f48851f1.json
+data/models\computations\query\e9811f50bfb8adccb6177f568d2ffd735091abe19bf021f191548e83070fb762.json
+data/models\computations\query\e7a15fc786d1b9346ab9998d043e8d459aaba2712477b4b0241de19db279890d.json
+data/models\computations\query\e573980c72484f8eb259d7f3ad03c932712bc7364b15a725af228443537a7a43.json
+data/models\computations\query\e449e2032f198a2828d5c3a58f3d1a6fb012a0cee7c2344a814bf70f296244db.json
+data/models\computations\query\de9e8623e8db3df6a094a530227a1a6a04ef3368d97cb0a0597a0dcd4ad8a8dc.json
+data/models\computations\query\de528e6e5e1a06633ea9b019a611b92503ffcb3a4de5c2b8f41975849c5e330f.json
+data/models\computations\query\de4383977916889165547b4e89b5572b2fc2df3806cef6d0d1d0003d0c0e4b24.json
+data/models\computations\query\d62ffa26a4b52fb4167c96e16d55c5ce18909367460317b97de9b1eb86a87397.json
+data/models\computations\query\d23ee421b0196cea026f316069603f941e71ca7fe133601ad6a53d96a98a6b38.json
+data/models\computations\query\cf0404c9a0a551618cf7714b9f70a7884b7aa7095d358de9f701a1d0aef6995f.json
+data/models\computations\query\ced9819a026de92c97e12dcf7715e415b8027d50abe8fff0abe641cb536c3b5c.json
+data/models\computations\query\ccb0ec103536715150869169ec11ea412e88f3544024aad31fe5a9c7bab98108.json
+data/models\computations\query\c7f43ed6b2cb4b1c081bd8aa33c80646b9665ecff58d72c5b5745683b41321b0.json
+data/models\computations\query\c70de57dd15a2e6f97db4020b82e4702998a18350bf5ef888df697d80ba98901.json
+data/models\computations\query\c505ce2fff6016bedf18230d9dba3b0f6438f4abb333d0855521fde6025af360.json
+data/models\computations\query\c15b71750aec4900ea5439a5b39f5a95e958c0cf1763c7b50e711f8d8dd6610e.json
+data/models\computations\query\bce974eeef6245997bca274b4fb4bcc0f1be08dcbd959b80648a05f7d88418e1.json
+data/models\computations\query\bcb2a4e7b4746192a3f70242f3865a0900f3d7bf49e7f098825b5abf6ac7ab58.json
+data/models\computations\query\bb7545237ac76fcb0bd39cb12c0c3b5e4ca2646d0b253965f29833c3c19af0ec.json
+data/models\computations\query\b928a19386838d3739dc9f633d89a389092c86317bd34fc02151a474a93a853e.json
+data/models\computations\query\b8ac3b6adbaf01b2e4d0d8e4e8b4916add35e228c805cb12313575757aad8068.json
+data/models\computations\query\b89292a6491d33234f66c37ba4491386c7d7b61a88050efce4953c85e318e303.json
+data/models\computations\query\b772159e936073d01d9c9851985b8e2bdf792eac478abf2951ea8122bf487636.json
+data/models\computations\query\b53a306c582128304abe9ce634d624ad5e03f80c39d2e526f0a332df72149253.json
+data/models\computations\query\b363d60e84b5dec31715722adec9a84eee1aa83bb23af8cf4155aa0f33015ab1.json
+data/models\computations\query\b07675075d11c6b612c122ac2d2101212178879f39dd9b1b8cc70b2797b3a968.json
+data/models\computations\query\af2800bc456f5d4e063ff17b7e2265abcf0b914844a7b36825bb9d5a9dca5019.json
+data/models\computations\query\ae886b64ce7cfb49847ba884d230513954cadd1b968592d32b1cc9797ab73db0.json
+data/models\computations\query\a995ca95f7256f984c6b3eed9835519d4a2d3a39c2ca7026a736d03f1e9673be.json
+"""Small prespecified models; every scaler and choice belongs to its origin."""
+
+from datetime import timedelta
+
+import numpy as np
+import pandas as pd
+import torch
+from lightgbm import LGBMRegressor
+from scipy.linalg import qr
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+from torch import nn
+
+from .data import FEATURES
+
+SEED = 20261010
+TREE_GRID = [
+    {"num_leaves": 7, "max_depth": 3, "min_child_samples": 20},
+    {"num_leaves": 15, "max_depth": 4, "min_child_samples": 30},
+]
+
+
+def lightgbm(config, alpha=None):
+    return LGBMRegressor(
+        **config,
+        n_estimators=200,
+        learning_rate=0.04,
+        reg_lambda=1,
+        random_state=SEED,
+        n_jobs=1,
+        verbosity=-1,
+        deterministic=True,
+        force_col_wise=True,
+        objective="quantile" if alpha is not None else "regression",
+        **({"alpha": alpha} if alpha is not None else {}),
+    )
+
+
+class Baseline:
+    def __init__(self, name):
+        self.name = name
+
+    def fit(self, rows):
+        self.month_means = rows.groupby(rows.target_date.dt.month).y.mean().to_dict()
+        self.overall = float(rows.y.mean())
+        return self
+
+    def predict(self, rows):
+        if self.name == "persistence":
+            return rows.pm_t.to_numpy()
+        if self.name == "mean7":
+            return rows.pm_mean7.to_numpy()
+        return rows.month.map(self.month_means).fillna(self.overall).to_numpy()
+
+
+class TreeModel:
+    def __init__(self, config, alpha=None):
+        self.config = config
+        self.model = lightgbm(config, alpha)
+
+    def fit(self, rows):
+        self.model.fit(rows[FEATURES], rows.y)
+        return self
+
+    def predict(self, rows):
+        return np.maximum(0, self.model.predict(rows[FEATURES]))
+
+
+class SarimaxModel:
+    def __init__(self, order, horizon):
+        self.order = order
+        self.horizon = horizon
+
+    def fit(self, rows):
+"""Read-only, explicitly allowed project evidence. No warehouse aggregation on page load."""
+
+import json
+from pathlib import Path
+
+from django.http import FileResponse, Http404
+from django.shortcuts import render
+
+ROOT = Path(__file__).resolve().parents[2]
+SOURCES = {
+    "snapshot": "docs/results/PHASE7_DATA.json",
+    "checks": "docs/results/PHASE7_CHECKS.json",
+    "phase3b": "docs/results/PHASE3B.md",
+    "phase4": "docs/results/PHASE4.md",
+    "phase5": "docs/results/PHASE5.md",
+    "phase6a": "docs/results/PHASE6A.md",
+    "phase6b": "docs/results/PHASE6B.md",
+    "phase7": "docs/results/PHASE7.md",
+    "writeup": "docs/results/WRITEUP.md",
+    "phase4-json": "data/results/21/phase4_results.json",
+    "interval-policy": "data/results/vayusim/verification/forecast-interval-policy.json",
+    "paired-network": "data/results/19/paired_network.csv",
+    "network-annual": "data/results/19/network_annual.csv",
+    "extractive": "data/results/rag-phase5/metrics.json",
+    "ollama": "data/results/rag-ollama-phase6a/metrics.json",
+    "physics": "docs/results/PHASE6A_INDEPENDENT_METRICS.json",
+    "examples": "docs/results/PHASE6B_METRICS.json",
+}
+
+
+def evidence_file(request, key):
+    relative = SOURCES.get(key)
+    if not relative:
+        raise Http404("Unknown evidence identifier")
+    path = ROOT / relative
+    if not path.is_file():
+        raise Http404("Original evidence file is unavailable in this checkout")
+    response = FileResponse(path.open("rb"), content_type="text/plain; charset=utf-8")
+    response["Content-Disposition"] = f'inline; filename="{path.name}"'
+    response["X-Content-Type-Options"] = "nosniff"
+    return response
+
+
+def evidence_dashboard(request):
+    try:
+        data = json.loads((ROOT / SOURCES["snapshot"]).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return render(
+            request, "dashboard/evidence.html", {"snapshot_unavailable": True}, status=503
+        )
+    return render(request, "dashboard/evidence.html", {"record": data})
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 005-stored-input-locations (2026-10-16T12:40:06.5586754+05:30; exit 0)</summary>
+
+```powershell
+Get-Content -LiteralPath 'apps/forecast/data.py' -Encoding UTF8 | Select-Object -First 100
+Get-ChildItem -LiteralPath 'data/results/21' | Select-Object -First 30 Name,Length
+Get-Content -LiteralPath 'apps/core/api.py' -Encoding UTF8 -ErrorAction SilentlyContinue
+Get-Content -LiteralPath 'apps/forecast/metrics.py' -Encoding UTF8 | Select-Object -First 25
+git status --short --untracked-files=no
+```
+
+```text
+"""Raw targets, issue-time features and expanding-origin partitions."""
+
+import hashlib
+import json
+from datetime import timedelta
+
+import holidays
+import numpy as np
+import pandas as pd
+from django.conf import settings
+
+from apps.analytics.aggregation import aggregate_daily
+from apps.analytics.descriptive import DIWALI, season
+
+from .models import ForecastWeather
+from .weather import issue_end
+
+PM_FEATURES = [
+    "pm_t",
+    "pm_tminus1",
+    "pm_tminus2",
+    "pm_tminus7",
+    "pm_mean3",
+    "pm_mean7",
+    "pm_night_mean",
+    "pm_day_max",
+]
+WEATHER_FEATURES = [
+    "temperature_c",
+    "relative_humidity",
+    "wind_speed_ms",
+    "wind_sin",
+    "wind_cos",
+    "precipitation_mm",
+    "total_cloud_cover",
+    "surface_pressure_hpa",
+]
+CALENDAR_FEATURES = ["weekday", "month", "holiday", "diwali_window", "season", "doy_sin", "doy_cos"]
+FEATURES = PM_FEATURES + WEATHER_FEATURES + CALENDAR_FEATURES
+
+
+def raw_daily(hourly, start="2024-01-01", end="2025-12-31"):
+    daily = aggregate_daily(hourly, pd.Timestamp(start).date(), pd.Timestamp(end).date())
+    daily.index = pd.to_datetime(daily.pop("date"))
+    local = pd.to_datetime(hourly.observed_at, utc=True).dt.tz_convert("Asia/Kolkata")
+    work = hourly.assign(date=local.dt.tz_localize(None).dt.normalize(), hour=local.dt.hour)
+    daily["night_mean"] = work[(work.hour < 6) | (work.hour >= 20)].groupby("date").value.mean()
+    daily["day_max"] = work.groupby("date").value.max()
+    for name, lag in zip(PM_FEATURES[:4], (0, 1, 2, 7), strict=True):
+        daily[name] = daily.value.shift(lag)
+    daily["pm_mean3"] = daily.value.rolling(3, min_periods=3).mean()
+    daily["pm_mean7"] = daily.value.rolling(7, min_periods=7).mean()
+    daily["pm_night_mean"] = daily.night_mean
+    daily["pm_day_max"] = daily.day_max
+    return daily
+
+
+def load_hourly(slug):
+    suffix = "panel_hourly" if slug == "bengaluru" else "hourly"
+    path = settings.BASE_DIR / "data" / "results" / "8" / f"{slug}_{suffix}.pkl"
+    frame = pd.read_pickle(path)
+    dates = pd.to_datetime(frame.observed_at, utc=True).dt.tz_convert("Asia/Kolkata")
+    frame = frame[(dates.dt.year >= 2024) & (dates.dt.year <= 2025)].copy()
+    return frame, {
+        "path": str(path.relative_to(settings.BASE_DIR)),
+        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "data_run": 8,
+        "cohort": "fixed_panel" if slug == "bengaluru" else "all_stations",
+        "normalised_input": False,
+    }
+
+
+def calendar_features(target_dates):
+    dates = pd.DatetimeIndex(target_dates)
+    india = holidays.India(years=sorted(set(dates.year)))
+    result = pd.DataFrame(index=dates)
+    result["weekday"] = dates.dayofweek
+    result["month"] = dates.month
+    result["holiday"] = [int(d.date() in india) for d in dates]
+    result["diwali_window"] = [
+        int(d.year in DIWALI and abs((d.date() - DIWALI[d.year]).days) <= 3) for d in dates
+    ]
+    result["season"] = [
+        {"winter": 0, "pre_monsoon": 1, "monsoon": 2, "post_monsoon": 3}[season(d.month)]
+        for d in dates
+    ]
+    result["doy_sin"] = np.sin(2 * np.pi * dates.dayofyear / 365.25)
+    result["doy_cos"] = np.cos(2 * np.pi * dates.dayofyear / 365.25)
+    return result
+
+
+def observed_daily_weather(hourly):
+    dates = (
+        pd.to_datetime(hourly.observed_at, utc=True)
+        .dt.tz_convert("Asia/Kolkata")
+        .dt.tz_localize(None)
+        .dt.normalize()
+    )
+    frame = hourly.copy()
+    radians = np.deg2rad(frame.wind_dir_deg)
+
+Name                                                     Length
+----                                                     ------
+prior_bias
+verification
+archive-probes.json                                      2041
+archived_weather_coverage.csv                            1058
+baseline-tests.json                                      1748
+bengaluru_forecast_evaluation.png                        330859
+bengaluru_h1_archived_forecast_2025-06_explanations.json 943
+bengaluru_h1_archived_forecast_2025-06_model.joblib      636092
+bengaluru_h1_archived_forecast_2025-06_predictions.csv   1412
+bengaluru_h1_archived_forecast_2025-06_selection.json    1666
+bengaluru_h1_archived_forecast_2025-07_explanations.json 29049
+bengaluru_h1_archived_forecast_2025-07_model.joblib      631948
+bengaluru_h1_archived_forecast_2025-07_predictions.csv   25722
+bengaluru_h1_archived_forecast_2025-07_selection.json    1666
+bengaluru_h1_archived_forecast_2025-08_explanations.json 29020
+bengaluru_h1_archived_forecast_2025-08_model.joblib      702572
+bengaluru_h1_archived_forecast_2025-08_predictions.csv   27136
+bengaluru_h1_archived_forecast_2025-08_selection.json    1671
+bengaluru_h1_archived_forecast_2025-09_explanations.json 28099
+bengaluru_h1_archived_forecast_2025-09_model.joblib      585708
+bengaluru_h1_archived_forecast_2025-09_predictions.csv   24773
+bengaluru_h1_archived_forecast_2025-09_selection.json    1665
+bengaluru_h1_archived_forecast_2025-10_explanations.json 28812
+bengaluru_h1_archived_forecast_2025-10_model.joblib      1990608
+bengaluru_h1_archived_forecast_2025-10_predictions.csv   27328
+bengaluru_h1_archived_forecast_2025-10_selection.json    1669
+bengaluru_h1_archived_forecast_2025-11_explanations.json 25229
+bengaluru_h1_archived_forecast_2025-11_model.joblib      572599
+bengaluru_h1_archived_forecast_2025-11_predictions.csv   26265
+bengaluru_h1_archived_forecast_2025-11_selection.json    1678
+import numpy as np
+import pandas as pd
+from scipy.stats import t
+
+
+def aqi_category(value):
+    if not np.isfinite(value) or value < 0:
+        raise ValueError("PM2.5 must be finite and nonnegative")
+    return ("good", "satisfactory", "moderate", "poor", "very_poor", "severe")[
+        int(np.searchsorted([30, 60, 90, 120, 250], value, side="left"))
+    ]
+
+
+def conformal_radius(errors, alpha):
+    values = np.sort(np.abs(np.asarray(errors, dtype=float)))
+    values = values[np.isfinite(values)]
+    rank = int(np.ceil((len(values) + 1) * (1 - alpha)))
+    if rank > len(values) or rank < 1:
+        raise ValueError("Calibration sample too small for requested conformal coverage")
+    return float(values[rank - 1])
+
+
+def dm_test(dates, observed, prediction, persistence, horizon):
+    losses = (np.asarray(prediction) - observed) ** 2 - (np.asarray(persistence) - observed) ** 2
+    n = len(losses)
+ M docs/VALIDATION.md
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 006-baseline-hashes-and-serving-snapshot (2026-10-16T12:41:05.9453739+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/identity.py before
+docker compose exec -T web python .tools/phase7fix/database_snapshot.py before
+Get-Content -LiteralPath 'data/results/21/chennai_h1_archived_forecast_2025-12_predictions.csv' -TotalCount 2 -Encoding UTF8
+```
+
+```text
+{
+  "stage": "before",
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "phase4_all_artifacts": {
+    "files": 967,
+    "aggregate_sha256": "302ad61bf22f1d9e617d052a113f027c4c5ce80064d6e99c99766c8b8bc97335"
+  },
+  "existing_tests": {
+    "files": 54,
+    "aggregate_sha256": "3520582daef603fc3af5aec5f3ee5f35b72c7ae1eb58bfe82f905879e690b392"
+  },
+  "historical_results": {
+    "files": 65,
+    "aggregate_sha256": "2a07d22d6f65c2c77401aa03ef28fb6017106c8624f91f050919a43a4bbec4cb"
+  },
+  "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4"
+}
+{
+  "Forecast": {
+    "rows": 3948,
+    "sha256": "69cad0739e5527360cac98043cf3fb2656111685ed1a20c6a6237b4cf44c67fe"
+  },
+  "ForecastEvaluation": {
+    "rows": 21,
+    "sha256": "67a08ebf3adf9fcefe9c6426d9bececcfc851f3b029c21546c961587473692bd"
+  },
+  "ForecastModelVersion": {
+    "rows": 150,
+    "sha256": "b9b5b622311c4554cbf6f9e3dadc9a490dc75662441438ce254c6b2b3df81b77"
+  }
+}
+[
+  {
+    "city": "bengaluru",
+    "horizon": 1,
+    "point": 55.83447337962963,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "persistence",
+    "forecast_id": 3928,
+    "before_method": "persistence"
+  },
+  {
+    "city": "bengaluru",
+    "horizon": 3,
+    "point": 55.83447337962963,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "persistence",
+    "forecast_id": 3930,
+    "before_method": "persistence"
+  },
+  {
+    "city": "chennai",
+    "horizon": 1,
+    "point": 58.11832046508789,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "lstm",
+    "forecast_id": 3931,
+    "before_method": "model"
+  },
+  {
+    "city": "mumbai",
+    "horizon": 1,
+    "point": 53.839575837931626,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "lightgbm",
+    "forecast_id": 3943,
+    "before_method": "model"
+  },
+  {
+    "city": "mumbai",
+    "horizon": 2,
+    "point": 54.67062973792404,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "persistence",
+    "forecast_id": 3944,
+    "before_method": "persistence"
+  },
+  {
+    "city": "mumbai",
+    "horizon": 3,
+    "point": 54.67062973792404,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "persistence",
+    "forecast_id": 3945,
+    "before_method": "persistence"
+  },
+  {
+    "city": "pune",
+    "horizon": 1,
+    "point": 67.13205448423994,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "lightgbm",
+    "forecast_id": 3946,
+    "before_method": "model"
+  },
+  {
+    "city": "pune",
+    "horizon": 2,
+    "point": 70.7445847754589,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "lightgbm",
+    "forecast_id": 3947,
+    "before_method": "model"
+  },
+  {
+    "city": "pune",
+    "horizon": 3,
+    "point": 68.75705913158087,
+    "issued_for_date": "2025-12-31",
+    "algorithm": "lightgbm",
+    "forecast_id": 3948,
+    "before_method": "model"
+  }
+]
+pm_t,pm_tminus1,pm_tminus2,pm_tminus7,pm_mean3,pm_mean7,pm_night_mean,pm_day_max,issued_for_date,target_date,y,weekday,month,holiday,diwali_window,season,doy_sin,doy_cos,temperature_c,relative_humidity,wind_speed_ms,wind_sin,wind_cos,precipitation_mm,total_cloud_cover,surface_pressure_hpa,weather_available_by,weather_asset,weather_kind,seq_0,seq_1,seq_2,seq_3,seq_4,seq_5,seq_6,persistence,mean7,climatology,lightgbm,sarimax,lstm,prediction,lower80,upper80,lower95,upper95,quantile_lower80,quantile_upper80,quantile_lower95,quantile_upper95,city,horizon,weather,origin_month,algorithm,keep_lstm
+9.507729745370371,8.57313773148148,22.62121875,29.8246875,13.567362075617284,32.24377108134921,10.200334722222223,20.14875,2025-12-01,2025-12-02,21.70862789351852,1,12,0,0,0,-0.4822058478963526,0.8760579434344281,23.087500000000002,87.16666666666667,6.453749999999999,-0.45385833755503263,0.885957948090648,1.1,0.9770833333333333,1008.3208333333333,2025-12-01 06:00:00+00:00,1166.0,archived_forecast,9.507729745370371,8.57313773148148,22.62121875,46.19742708333334,44.48921759259259,49.392291666666665,44.925375,9.507729745370371,32.24377108134921,32.11397779591227,15.28572032317581,16.75761778724696,17.136284,17.136284,3.6206017,30.651966,0.0,37.41082,9.625398255429051,33.2537948017902,4.190272567835606,37.59994376754736,chennai,1,archived_forecast,2025-12,lstm,True
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 007-serving-presentation-update (2026-10-16T12:43:06.7271790+05:30; exit 1)</summary>
+
+```powershell
+python .tools/phase7fix/update_presentation.py
+```
+
+```text
+Updated README.md
+Updated docs/DEMO.md
+Updated docs/RESUME.md
+python : Traceback (most recent call last):
+At line:1 char:1
++ python .tools/phase7fix/update_presentation.py
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  File "D:\EnviroInsights-India\.tools\phase7fix\update_presentation.py", line 33, in <module>
+    assert old in text,(relative,old)
+           ^^^^^^^^^^^
+AssertionError: ('docs/results/WRITEUP.md', 'There is also an operational rather than\ndocumentation gap: the latest
+stored issuance uses persistence for four of\nthose nine, while five still use other algorithms. The serving code does
+not\nautomatically enforce fallback for all nine. Phase 7 exposes this discrepancy\ninstead of editing old predictions
+or claiming a deployed safeguard.')
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 008-exact-writeup-text (2026-10-16T12:43:12.6667116+05:30; exit 0)</summary>
+
+```powershell
+Get-Content -LiteralPath 'docs/results/WRITEUP.md' -Encoding UTF8 | Select-Object -Skip 128 -First 24
+Get-Content -LiteralPath 'docs/results/WRITEUP.md' -Encoding UTF8 | Select-Object -Skip 236 -First 40
+Get-Content -LiteralPath 'apps/dashboard/static/dashboard/evidence.css' -Encoding UTF8 | Select-Object -Last 60
+```
+
+```text
+for this rolling window, not a national or independent-year guarantee. Monthly
+selection can choose different algorithms, and diagnostic scores for rejected
+models remain visible. A sophisticated model is not entitled to replace a
+simple baseline merely because it was trained.
+
+Nine city–horizon policies have negative skill: Bengaluru horizons 1 and 3,
+Chennai 1, Mumbai 1–3 and Pune 1–3. Persistence is the sensible recommendation
+for those retrospective failures. An operational audit found an additional
+documentation gap: the latest stored issuance uses persistence for four of
+these nine, while five still use other algorithms. The application does **not**
+automatically enforce fallback for all nine. Phase 7 exposes this discrepancy
+without rewriting forecasts or selecting a replacement against frozen outcomes.
+[Scores and issuance snapshot](PHASE7_DATA.json).
+
+A future fallback needs its own prospective rule, version and evaluation date.
+It should retain the original policy prediction alongside the replacement and
+explain which information was available when the decision was made. Calling a
+retrospective persistence substitution an improved original backtest would mix
+selection and evaluation. For this finishing pass, the honest engineering
+deliverable is a visible operational gap and its evidence, not a newly favourable
+score table assembled after seeing the outcomes.
+
+Uncertainty is also uneven. Quantile and conformal empirical coverage are
+reported separately. The later method-selection audit has **14 failures among
+screens prompted cohort, weather and blocked-validation comparisons instead of
+lower thresholds. Inconclusive Delhi uncertainty stayed inconclusive. Missing
+FIRMS and intervention-period data prevented unsupported research answers.
+
+Negative forecast skill exposed the need to compare with persistence and to
+distinguish recommended fallback from the code's actual issuance. Undercoverage
+remains visible after method selection. The local generator's poor answer rate
+led to extractive defaults. Dispersion discrepancies led to narrower formula,
+scheme and independent-case labels rather than coefficients adjusted to match
+an inconsistent reference. The [claims audit](PHASE7.md) identifies the final
+documentation corrections without modifying historical reports.
+
+Phase 6B also recorded intermittent Hypothesis input-generation timing failures.
+Phase 7 gives the affected crosswind-mass test a bounded explicit deadline,
+with numerical integration, assertions, strategies and example count unchanged.
+The installed Hypothesis source explains how the deadline also bounds initial
+generation time; its [API reference](https://hypothesis.readthedocs.io/en/latest/reference/api.html)
+was checked. Three full suite runs test the cleanup. This is environment timing
+configuration, not a relaxation of a physics tolerance or a new scientific result.
+
+Repeated passing runs provide local reliability evidence, not proof that a
+timing-sensitive test can never fail on another machine. Similarly, matching
+frozen hashes establishes that the evaluated inputs and labels were preserved;
+it does not establish that those labels are exhaustive or error-free. The
+dashboard serves a committed snapshot and a fixed allowlist of source files,
+with an explicit unavailable state when evidence is absent. This keeps a fresh
+checkout from pretending it has restored the full research database.
+
+## 8. Limitations and future work
+
+The first priority is better evidence: intervention-era concentrations, stable
+station identities and calibration histories for RQ1, and actual fire detections
+with coverage and transport controls for RQ3. The [Phase 3B research requirements](PHASE3B.md#what-would-change-with-more-data)
+describe the required designs. More rows alone do not establish comparability.
+
+Forecast work needs fresh publication-aware inputs, an explicitly governed
+prospective fallback policy and an untouched future evaluation period. Interval
+selection needs assessment beyond the window that selected it. The
+[forecast protocol](PHASE4_PROTOCOL.md) is the starting point; the frozen outcomes
+must remain historical evidence, not a target for repeated tuning.
+    background: var(--ev-note);
+    text-align: left;
+    padding: 12px;
+  }
+  .evidence-table td {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    text-align: right;
+    padding: 8px 0;
+  }
+  .evidence-table td:before {
+    content: attr(data-label);
+    color: var(--ev-soft);
+    text-align: left;
+    flex: 1;
+    max-width: 45%;
+  }
+  .evidence-table td:last-child {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .evidence-table small {
+    flex-basis: 100%;
+    font-size: 12px !important;
+  }
+  .evidence-table .result-warning,
+  .evidence-table .result-neutral {
+    font-size: 11px;
+  }
+}
+@media (max-width: 600px) {
+  body:has(#evidence-dashboard) .page-container {
+    padding-inline: 16px;
+  }
+  #evidence-dashboard[data-theme="dark"] {
+    padding: 14px;
+  }
+  .evidence-section {
+    padding: 24px 0;
+  }
+  .evidence-panel,
+  .evidence-stat,
+  .evidence-limits {
+    padding: 18px;
+  }
+  .evidence-pair {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .evidence-nav {
+    gap: 12px 18px;
+  }
+  .evidence-section h2 {
+    font-size: 27px;
+  }
+  .evidence-table {
+    font-size: 13px;
+  }
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 009-policy-and-api-tests (2026-10-16T12:44:52.4181474+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/build_fixture.py
+docker compose exec -T web ruff check apps/forecast/serving.py apps/forecast/api.py apps/forecast/data.py apps/dashboard/evidence.py apps/dashboard/views.py tests/test_forecast_serving_policy.py
+docker compose exec -T web ruff format apps/forecast/serving.py apps/forecast/api.py apps/forecast/data.py apps/dashboard/evidence.py apps/dashboard/views.py tests/test_forecast_serving_policy.py
+docker compose exec -T -e HYPOTHESIS_STORAGE_DIRECTORY=/tmp/hypothesis web pytest --ds=enviroinsights.settings.test tests/test_forecast_serving_policy.py tests/test_phase7_dashboard.py tests/test_forecasting.py tests/test_forecast_operations.py
+```
+
+```text
+{
+  "stored_fixture_rows": 10,
+  "source": "Phase 4 archived-weather December prediction files",
+  "dates": [
+    "2025-12-28",
+    "2025-12-29",
+    "2025-12-30"
+  ]
+}
+E501 Line too long (109 > 100)
+  --> tests/test_forecast_serving_policy.py:70:101
+   |
+68 | @pytest.mark.parametrize("row", LOSERS, ids=lambda r:f"{r['city']}-h{r['horizon']}")
+69 | @pytest.mark.parametrize("endpoint", ["latest/", "history/?start=2025-12-31&end=2025-12-31"])
+70 | def test_api_serves_persistence_for_all_nine_without_rewriting_stored_values(row, endpoint, stored_forecast):
+   |                                                                                                     ^^^^^^^^^
+71 |     original = stored_forecast(row)
+72 |     before = Forecast.objects.filter(pk=original.pk).values().get()
+   |
+
+E501 Line too long (103 > 100)
+   --> tests/test_forecast_serving_policy.py:109:101
+    |
+109 | def test_missing_persistence_is_not_replaced_with_losing_model(stored_forecast, monkeypatch, tmp_path):
+    |                                                                                                     ^^^
+110 |     from django.conf import settings
+111 |     forecast = stored_forecast(LOSERS[0])
+    |
+
+E501 Line too long (105 > 100)
+   --> tests/test_forecast_serving_policy.py:120:101
+    |
+120 | def test_legacy_replay_uses_issue_day_fixed_panel_not_target_day(stored_forecast, monkeypatch, tmp_path):
+    |                                                                                                     ^^^^^
+121 |     import pandas as pd
+122 |     from django.conf import settings
+    |
+
+I001 [*] Import block is un-sorted or un-formatted
+   --> tests/test_forecast_serving_policy.py:121:5
+    |
+120 |   def test_legacy_replay_uses_issue_day_fixed_panel_not_target_day(stored_forecast, monkeypatch, tmp_path):
+121 | /     import pandas as pd
+122 | |     from django.conf import settings
+123 | |     from apps.forecast import serving
+    | |_____________________________________^
+124 |       row=LOSERS[0]
+125 |       forecast=stored_forecast(row)
+    |
+help: Organize imports
+    |
+122 |     from django.conf import settings
+123 +
+124 |     from apps.forecast import serving
+    |
+
+E702 Multiple statements on one line (semicolon)
+   --> tests/test_forecast_serving_policy.py:128:36
+    |
+126 |     forecast.feature_provenance={}
+127 |     path=tmp_path/'data/results/8/bengaluru_panel_hourly.pkl'
+128 |     path.parent.mkdir(parents=True);path.touch()
+    |                                    ^
+129 |     monkeypatch.setattr(settings,"BASE_DIR",tmp_path)
+130 |     observed=[]
+    |
+
+E501 Line too long (120 > 100)
+   --> tests/test_forecast_serving_policy.py:133:101
+    |
+131 |     def daily(path_string, modified, size):
+132 |         observed.append(path_string)
+133 |         return {pd.Timestamp(forecast.issued_for_date):row['pm_t'],pd.Timestamp(forecast.target_date):row['prediction']}
+    |                                                                                                     ^^^^^^^^^^^^^^^^^^^^
+134 |     monkeypatch.setattr(serving,"_archived_daily",daily)
+135 |     assert persistence_input(forecast)==row['pm_t']
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests/test_forecast_serving_policy.py:138:47
+    |
+136 |     assert observed==[str(path)]
+137 |     forecast.mode='live'
+138 |     with pytest.raises(PersistenceUnavailable):persistence_input(forecast)
+    |                                               ^
+
+E501 Line too long (107 > 100)
+   --> tests/test_forecast_serving_policy.py:142:101
+    |
+141 | @pytest.mark.django_db
+142 | def test_dashboard_shows_current_serving_separately_from_historical_gap(client, django_assert_num_queries):
+    |                                                                                                     ^^^^^^^
+143 |     with django_assert_num_queries(0):response=client.get('/dashboard/')
+144 |     text=response.content.decode()
+    |
+
+E701 Multiple statements on one line (colon)
+   --> tests/test_forecast_serving_policy.py:143:38
+    |
+141 | @pytest.mark.django_db
+142 | def test_dashboard_shows_current_serving_separately_from_historical_gap(client, django_assert_num_queries):
+143 |     with django_assert_num_queries(0):response=client.get('/dashboard/')
+    |                                      ^
+144 |     text=response.content.decode()
+145 |     assert text.count('forecast_method: persistence')==9
+    |
+
+Found 9 errors.
+[*] 1 fixable with the `--fix` option.
+1 file reformatted, 5 files left unchanged
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 61 items
+
+tests/test_forecast_serving_policy.py .......................            [ 37%]
+tests/test_phase7_dashboard.py .                                         [ 39%]
+tests/test_forecasting.py .                                              [ 40%]
+tests/test_forecast_operations.py ..                                     [ 44%]
+tests/test_forecast_serving_policy.py ..                                 [ 47%]
+tests/test_phase7_dashboard.py ............                              [ 67%]
+tests/test_forecasting.py .................                              [ 95%]
+tests/test_forecast_operations.py ...                                    [100%]
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 61 passed, 134 warnings in 21.38s =======================
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 011-actual-serving-and-browser (2026-10-16T12:46:06.8776177+05:30; exit 1)</summary>
+
+```powershell
+python .tools/phase7fix/verify_live.py
+node scripts/verify_phase7_fix_browser.cjs
+```
+
+```text
+python : Traceback (most recent call last):
+At line:1 char:1
++ python .tools/phase7fix/verify_live.py
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  File "D:\EnviroInsights-India\.tools\phase7fix\verify_live.py", line 25, in <module>
+    result={'captured_at':datetime.now(timezone.utc).isoformat(),'forecasts':rows,'health':get('/api/health/')}
+                                                                                           ^^^^^^^^^^^^^^^^^^^
+  File "D:\EnviroInsights-India\.tools\phase7fix\verify_live.py", line 11, in get
+    with urllib.request.urlopen('http://127.0.0.1:8000'+path,timeout=90) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 1352, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1395, in getresponse
+    response.begin()
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 325, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 294, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+node : page.goto: net::ERR_EMPTY_RESPONSE at http://127.0.0.1:8000/dashboard/
+At line:2 char:1
++ node scripts/verify_phase7_fix_browser.cjs
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (page.goto: net:...8000/dashboard/:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Call log:
+[2m  - navigating to "http://127.0.0.1:8000/dashboard/", waiting until "domcontentloaded"[22m
+
+    at D:\EnviroInsights-India\scripts\verify_phase7_fix_browser.cjs:16:35 {
+  log: [
+    '  - navigating to "http://127.0.0.1:8000/dashboard/", waiting until "domcontentloaded"'
+  ],
+  name: 'Error'
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 012-web-readiness-during-validation (2026-10-16T12:46:28.4096866+05:30; exit 0)</summary>
+
+```powershell
+docker compose ps --format json
+docker compose logs --tail 45 web
+```
+
+```text
+{"Command":"\"/bin/sh /app/docker…\"","CreatedAt":"2026-10-15 23:25:32 +0530 IST","Engine":"","ExitCode":0,"Health":"","ID":"3e890fa2f116","Image":"enviroinsights-india:dev","Labels":"com.docker.compose.oneoff=False,com.docker.compose.project=enviroinsights-india,com.docker.compose.replace=beat-1,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/1/Source=D:\\EnviroInsights-India\\data\\models,desktop.docker.io/binds/1/Target=/app/data/models,com.docker.compose.config-hash=4a6af777dacc5ce06143d0b19e551f3b344da608009da3b3d3fad81632dbe8b3,com.docker.compose.image=sha256:aa66f6d1f08943489183270577beed7b5eb36b3c6dbe473e3a29571cd6c9d7a7,com.docker.compose.version=5.5.1,com.docker.compose.container-number=1,com.docker.compose.depends_on=redis:service_healthy:false,db:service_healthy:false,com.docker.compose.project.working_dir=D:\\EnviroInsights-India,desktop.docker.io/binds/0/Source=D:\\EnviroInsights-India,desktop.docker.io/binds/0/Target=/app,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/ports.scheme=v2,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml,com.docker.compose.service=beat","LocalVolumes":"1","Mounts":"/run/desktop/m…,enviroinsights…,/run/desktop/m…","Name":"enviroinsights-india-beat-1","Names":"enviroinsights-india-beat-1","Networks":"enviroinsights-india_default","Ports":"8000/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"","TargetPort":8000,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"13 hours ago","Service":"beat","Size":"0B","State":"running","Status":"Up 3 hours"}
+{"Command":"\"/docker-entrypoint.…\"","CreatedAt":"2026-10-07 23:22:49 +0530 IST","Engine":"","ExitCode":0,"Health":"healthy","ID":"64a8911542bf","Image":"timescale/timescaledb-ha:pg16","Labels":"com.timescaledb.image.postgresql.available_versions=16.15,desktop.docker.io/binds/1/Target=/docker-entrypoint-initdb.d/020_extensions.sql,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml,com.timescaledb.image.timescaledb_toolkit.available_versions=1.18.0,1.19.0,1.21.0,1.22.0,1.23.0,1.24.0,1.25.0,1.26.0,desktop.docker.io/binds/1/Source=D:\\EnviroInsights-India\\docker\\init\\020_extensions.sql,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=ea7b6bcde5515dba574f00ab62ec119e892e50555f3ca8e68c29da01984c7036,com.docker.compose.project=enviroinsights-india,com.docker.compose.service=db,com.timescaledb.image.postgresql.version=16.15,com.timescaledb.image.timescaledb.version=2.30.2,com.timescaledb.image.vectorscale.version=0.9.1,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/ports/5432/tcp=127.0.0.1:5433,org.opencontainers.image.created=2026-10-07T13:27:49+00:00,org.opencontainers.image.source=https://github.com/timescale/timescaledb-docker-ha,org.opencontainers.image.vendor=Timescale,com.timescaledb.image.install_method=docker-ha,com.timescaledb.image.timescaledb.available_versions=2.12.2,2.13.0,2.13.1,2.14.0,2.14.1,2.14.2,2.15.0,2.15.1,2.15.2,2.15.3,2.16.0,2.16.1,2.17.0,2.17.1,2.17.2,2.18.0,2.18.1,2.18.2,2.19.0,2.19.1,2.19.2,2.19.3,2.20.0,2.20.1,2.20.2,2.20.3,2.21.0,2.21.1,2.21.2,2.21.3,2.21.4,2.22.0,2.22.1,2.23.0,2.23.1,2.24.0,2.25.0,2.25.1,2.25.2,2.26.0,2.26.1,2.26.2,2.26.3,2.26.4,2.27.0,2.27.1,2.27.2,2.28.0,2.28.1,2.28.2,2.28.3,2.29.0,2.29.1,2.29.2,2.30.0,2.30.1,2.30.2,com.timescaledb.image.timescaledb_toolkit.version=1.26.0,com.docker.compose.depends_on=,com.docker.compose.project.working_dir=D:\\EnviroInsights-India,com.docker.compose.version=5.5.1,com.timescaledb.image.pgBackRest.version=2.59.3,org.opencontainers.image.revision=refs/heads/master,com.docker.compose.container-number=1,com.docker.compose.image=sha256:3f789a1926336e0ff4d62701c19636b22b6beb3cc998aabe6d6d695cde63e85d,com.docker.compose.oneoff=False,com.timescaledb.image.patroni.version=4.1.5,com.timescaledb.image.postgis.version=3.6.4,com.timescaledb.image.vectorscale.available_versions=0.2.0,0.3.0,0.4.0,0.5.0,0.5.1,0.6.0,0.7.0,0.7.1,0.8.0,0.9.0,0.9.1","LocalVolumes":"1","Mounts":"/run/desktop/m…,enviroinsights…","Name":"enviroinsights-india-db-1","Names":"enviroinsights-india-db-1","Networks":"enviroinsights-india_default","Ports":"127.0.0.1:5433-\u003e5432/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"127.0.0.1","TargetPort":5432,"PublishedPort":5433,"Protocol":"tcp"}],"RunningFor":"8 days ago","Service":"db","Size":"0B","State":"running","Status":"Up 3 hours (healthy)"}
+{"Command":"\"/bin/sh /app/docker…\"","CreatedAt":"2026-10-15 23:25:32 +0530 IST","Engine":"","ExitCode":0,"Health":"","ID":"97851b919659","Image":"enviroinsights-india:dev","Labels":"com.docker.compose.service=flower,desktop.docker.io/ports/5555/tcp=127.0.0.1:5555,com.docker.compose.config-hash=82210c8876d4e8850d7fc0159c752ecd89d5f0c540daab37509e8d208e41de9d,com.docker.compose.image=sha256:aa66f6d1f08943489183270577beed7b5eb36b3c6dbe473e3a29571cd6c9d7a7,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml,desktop.docker.io/binds/0/Target=/app,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/ports.scheme=v2,com.docker.compose.container-number=1,com.docker.compose.oneoff=False,com.docker.compose.project.working_dir=D:\\EnviroInsights-India,com.docker.compose.replace=flower-1,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/1/Source=D:\\EnviroInsights-India\\data\\models,desktop.docker.io/binds/1/Target=/app/data/models,com.docker.compose.depends_on=redis:service_healthy:false,db:service_healthy:false,com.docker.compose.project=enviroinsights-india,com.docker.compose.version=5.5.1,desktop.docker.io/binds/0/Source=D:\\EnviroInsights-India","LocalVolumes":"1","Mounts":"/run/desktop/m…,enviroinsights…,/run/desktop/m…","Name":"enviroinsights-india-flower-1","Names":"enviroinsights-india-flower-1","Networks":"enviroinsights-india_default","Ports":"127.0.0.1:5555-\u003e5555/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"127.0.0.1","TargetPort":5555,"PublishedPort":5555,"Protocol":"tcp"}],"RunningFor":"13 hours ago","Service":"flower","Size":"0B","State":"running","Status":"Up 3 hours"}
+{"Command":"\"/bin/sh /app/docker…\"","CreatedAt":"2026-10-15 23:25:31 +0530 IST","Engine":"","ExitCode":0,"Health":"healthy","ID":"b1d580a09546","Image":"enviroinsights-india:dev","Labels":"com.docker.compose.image=sha256:aa66f6d1f08943489183270577beed7b5eb36b3c6dbe473e3a29571cd6c9d7a7,desktop.docker.io/binds/0/Target=/app,desktop.docker.io/binds/1/Source=D:\\EnviroInsights-India\\data\\models,com.docker.compose.depends_on=redis:service_healthy:false,db:service_healthy:false,com.docker.compose.project=enviroinsights-india,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml,desktop.docker.io/binds/0/Source=D:\\EnviroInsights-India,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/1/Target=/app/data/models,desktop.docker.io/ports/5000/tcp=127.0.0.1:5000,com.docker.compose.config-hash=219d088b3f7b53e29e0e1ed999dafa4b5b05b7e6423a29e95421029c8c17aa54,com.docker.compose.container-number=1,com.docker.compose.replace=mlflow-1,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/ports.scheme=v2,com.docker.compose.oneoff=False,com.docker.compose.project.working_dir=D:\\EnviroInsights-India,com.docker.compose.service=mlflow,com.docker.compose.version=5.5.1","LocalVolumes":"1","Mounts":"/run/desktop/m…,enviroinsights…,/run/desktop/m…","Name":"enviroinsights-india-mlflow-1","Names":"enviroinsights-india-mlflow-1","Networks":"enviroinsights-india_default","Ports":"127.0.0.1:5000-\u003e5000/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"127.0.0.1","TargetPort":5000,"PublishedPort":5000,"Protocol":"tcp"}],"RunningFor":"13 hours ago","Service":"mlflow","Size":"0B","State":"running","Status":"Up 3 hours (healthy)"}
+{"Command":"\"/bin/sh /app/docker…\"","CreatedAt":"2026-10-15 23:25:32 +0530 IST","Engine":"","ExitCode":0,"Health":"healthy","ID":"6fd8274763ee","Image":"enviroinsights-india:dev","Labels":"com.docker.compose.image=sha256:aa66f6d1f08943489183270577beed7b5eb36b3c6dbe473e3a29571cd6c9d7a7,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/ports.scheme=v2,desktop.docker.io/binds/1/Target=/app,desktop.docker.io/binds/2/SourceKind=hostFile,desktop.docker.io/binds/2/Target=/app/data/models,com.docker.compose.container-number=1,com.docker.compose.depends_on=redis:service_healthy:false,db:service_healthy:false,com.docker.compose.project=enviroinsights-india,com.docker.compose.project.working_dir=D:\\EnviroInsights-India,com.docker.compose.replace=rag-models-1,com.docker.compose.service=rag-models,com.docker.compose.oneoff=False,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml,com.docker.compose.version=5.5.1,desktop.docker.io/binds/1/Source=D:\\EnviroInsights-India,desktop.docker.io/binds/2/Source=D:\\EnviroInsights-India\\data\\models,com.docker.compose.config-hash=af479a520d0059800bf3cc1a886b6a899d476163f34368cdcd34737ec6c8b32f","LocalVolumes":"1","Mounts":"/run/desktop/m…,enviroinsights…,/run/desktop/m…","Name":"enviroinsights-india-rag-models-1","Names":"enviroinsights-india-rag-models-1","Networks":"enviroinsights-india_default","Ports":"8000/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"","TargetPort":8000,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"13 hours ago","Service":"rag-models","Size":"0B","State":"running","Status":"Up 3 hours (healthy)"}
+{"Command":"\"/bin/sh /app/docker…\"","CreatedAt":"2026-10-15 23:25:31 +0530 IST","Engine":"","ExitCode":0,"Health":"healthy","ID":"933540cbe226","Image":"enviroinsights-india:dev","Labels":"desktop.docker.io/binds/0/Source=D:\\EnviroInsights-India\\data\\models,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/2/SourceKind=hostFile,desktop.docker.io/binds/2/Target=/app,com.docker.compose.image=sha256:aa66f6d1f08943489183270577beed7b5eb36b3c6dbe473e3a29571cd6c9d7a7,com.docker.compose.project.working_dir=D:\\EnviroInsights-India,desktop.docker.io/ports.scheme=v2,com.docker.compose.depends_on=db:service_healthy:false,redis:service_healthy:false,com.docker.compose.project=enviroinsights-india,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml,com.docker.compose.service=rag-reranker,desktop.docker.io/binds/0/Target=/app/data/models,desktop.docker.io/binds/2/Source=D:\\EnviroInsights-India,com.docker.compose.config-hash=abbf2a20041cee00e80112dd2628f11421e7b7904a9675fd15bade1ad942fc59,com.docker.compose.oneoff=False,com.docker.compose.replace=rag-reranker-1,com.docker.compose.version=5.5.1,com.docker.compose.container-number=1","LocalVolumes":"1","Mounts":"/run/desktop/m…,enviroinsights…,/run/desktop/m…","Name":"enviroinsights-india-rag-reranker-1","Names":"enviroinsights-india-rag-reranker-1","Networks":"enviroinsights-india_default","Ports":"8000/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"","TargetPort":8000,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"13 hours ago","Service":"rag-reranker","Size":"0B","State":"running","Status":"Up 3 hours (healthy)"}
+{"Command":"\"docker-entrypoint.s…\"","CreatedAt":"2026-10-07 23:22:49 +0530 IST","Engine":"","ExitCode":0,"Health":"healthy","ID":"3d2847b8ebff","Image":"redis:7.4.2-alpine","Labels":"com.docker.compose.depends_on=,com.docker.compose.oneoff=False,com.docker.compose.version=5.5.1,desktop.docker.io/ports/6379/tcp=127.0.0.1:6380,com.docker.compose.config-hash=ab67d3cbc15f6703ecb2ba6f5e0ebf956f41c47be0c0488291ba1c9acea2490c,com.docker.compose.container-number=1,com.docker.compose.image=sha256:519f0189dfdee3bc0bad61fb265fe73d864b5c64020e6579ad48a45c49965635,com.docker.compose.project=enviroinsights-india,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml,com.docker.compose.project.working_dir=D:\\EnviroInsights-India,com.docker.compose.service=redis,desktop.docker.io/ports.scheme=v2","LocalVolumes":"1","Mounts":"enviroinsights…","Name":"enviroinsights-india-redis-1","Names":"enviroinsights-india-redis-1","Networks":"enviroinsights-india_default","Ports":"127.0.0.1:6380-\u003e6379/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"127.0.0.1","TargetPort":6379,"PublishedPort":6380,"Protocol":"tcp"}],"RunningFor":"8 days ago","Service":"redis","Size":"0B","State":"running","Status":"Up 3 hours (healthy)"}
+{"Command":"\"/bin/sh /app/docker…\"","CreatedAt":"2026-10-15 23:25:31 +0530 IST","Engine":"","ExitCode":0,"Health":"","ID":"7e620c27b0e9","Image":"enviroinsights-india:dev","Labels":"com.docker.compose.project.working_dir=D:\\EnviroInsights-India,com.docker.compose.project=enviroinsights-india,desktop.docker.io/binds/0/Source=D:\\EnviroInsights-India,desktop.docker.io/binds/1/Target=/app/data/models,com.docker.compose.version=5.5.1,com.docker.compose.config-hash=254dc0d139f1bd93344a75ae407c7a7b3b9be928ad54c923729eb3fbb5f865ef,com.docker.compose.container-number=1,com.docker.compose.depends_on=db:service_healthy:false,redis:service_healthy:false,com.docker.compose.image=sha256:aa66f6d1f08943489183270577beed7b5eb36b3c6dbe473e3a29571cd6c9d7a7,com.docker.compose.replace=web-1,com.docker.compose.service=web,desktop.docker.io/binds/1/Source=D:\\EnviroInsights-India\\data\\models,com.docker.compose.oneoff=False,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/8000/tcp=127.0.0.1:8000,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/0/Target=/app,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml","LocalVolumes":"1","Mounts":"/run/desktop/m…,enviroinsights…,/run/desktop/m…","Name":"enviroinsights-india-web-1","Names":"enviroinsights-india-web-1","Networks":"enviroinsights-india_default","Ports":"127.0.0.1:8000-\u003e8000/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"127.0.0.1","TargetPort":8000,"PublishedPort":8000,"Protocol":"tcp"}],"RunningFor":"13 hours ago","Service":"web","Size":"0B","State":"running","Status":"Up 2 hours"}
+{"Command":"\"/bin/sh /app/docker…\"","CreatedAt":"2026-10-15 23:25:31 +0530 IST","Engine":"","ExitCode":0,"Health":"","ID":"8211dd415f62","Image":"enviroinsights-india:dev","Labels":"desktop.docker.io/ports.scheme=v2,com.docker.compose.container-number=1,desktop.docker.io/binds/0/SourceKind=hostFile,desktop.docker.io/binds/1/Target=/app/data/models,com.docker.compose.config-hash=9ff39195587b4aa83fad68b0c19d160ac0927c34672d64baef435feee97e729e,com.docker.compose.project.config_files=D:\\EnviroInsights-India\\compose.yaml,com.docker.compose.service=worker,com.docker.compose.version=5.5.1,com.docker.compose.image=sha256:aa66f6d1f08943489183270577beed7b5eb36b3c6dbe473e3a29571cd6c9d7a7,com.docker.compose.project.working_dir=D:\\EnviroInsights-India,desktop.docker.io/binds/1/SourceKind=hostFile,com.docker.compose.depends_on=db:service_healthy:false,redis:service_healthy:false,com.docker.compose.oneoff=False,com.docker.compose.project=enviroinsights-india,com.docker.compose.replace=worker-1,desktop.docker.io/binds/0/Source=D:\\EnviroInsights-India,desktop.docker.io/binds/0/Target=/app,desktop.docker.io/binds/1/Source=D:\\EnviroInsights-India\\data\\models","LocalVolumes":"1","Mounts":"/run/desktop/m…,enviroinsights…,/run/desktop/m…","Name":"enviroinsights-india-worker-1","Names":"enviroinsights-india-worker-1","Networks":"enviroinsights-india_default","Ports":"8000/tcp","Project":"enviroinsights-india","Publishers":[{"URL":"","TargetPort":8000,"PublishedPort":0,"Protocol":"tcp"}],"RunningFor":"13 hours ago","Service":"worker","Size":"0B","State":"running","Status":"Up 3 hours"}
+web-1  | [16/Oct/2026 12:31:51] "GET /static/dashboard/site.css HTTP/1.1" 200 15915
+web-1  | [16/Oct/2026 12:31:51] "GET /static/vayusim/cinematic.css HTTP/1.1" 200 12572
+web-1  | [16/Oct/2026 12:31:51] "GET /static/vayusim/cinematic.js HTTP/1.1" 200 34919
+web-1  | [16/Oct/2026 12:31:51] "GET /static/dashboard/vendor/maplibre-gl.css HTTP/1.1" 200 70024
+web-1  | [16/Oct/2026 12:31:51] "GET /static/dashboard/vendor/maplibre-gl.js HTTP/1.1" 200 1056837
+web-1  | [16/Oct/2026 12:31:51] "GET /api/vayusim/presets/ HTTP/1.1" 200 4255
+web-1  | [16/Oct/2026 12:31:51] "GET /api/vayusim/grid/64.json HTTP/1.1" 200 6386
+web-1  | [16/Oct/2026 12:31:51] "GET /api/vayusim/grid/64.png HTTP/1.1" 200 719
+web-1  | [16/Oct/2026 12:31:51] "GET /api/vayusim/grid/64.bin HTTP/1.1" 200 160000
+web-1  | [16/Oct/2026 12:31:51] "GET /api/vayusim/stations/?city=hyderabad&datetime=2025-11-15T20%3A00%3A00%2B05%3A30 HTTP/1.1" 200 1468
+web-1  | /app/apps/forecast/api.py changed, reloading.
+web-1  | /app/apps/forecast/api.py changed, reloading.
+web-1  | Watching for file changes with StatReloader
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+web-1  | System check identified no issues (0 silenced).
+web-1  | October 16, 2026 - 12:42:10
+web-1  | Django version 5.2.18, using settings 'enviroinsights.settings.dev'
+web-1  | Starting development server at http://0.0.0.0:8000/
+web-1  | Quit the server with CONTROL-C.
+web-1  |
+web-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+web-1  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+web-1  | [16/Oct/2026 12:46:09] "GET /api/forecast/bengaluru/latest/?format=json HTTP/1.1" 200 10717
+web-1  | [16/Oct/2026 12:46:10] "GET /api/forecast/chennai/latest/?format=json HTTP/1.1" 200 11886
+web-1  | [16/Oct/2026 12:46:10] "GET /api/forecast/delhi/latest/?format=json HTTP/1.1" 200 12663
+web-1  | [16/Oct/2026 12:46:10] "GET /api/forecast/hyderabad/latest/?format=json HTTP/1.1" 200 12811
+web-1  | [16/Oct/2026 12:46:10] "GET /api/forecast/kolkata/latest/?format=json HTTP/1.1" 200 12865
+web-1  | [16/Oct/2026 12:46:10] "GET /api/forecast/mumbai/latest/?format=json HTTP/1.1" 200 9146
+web-1  | [16/Oct/2026 12:46:11] "GET /api/forecast/pune/latest/?format=json HTTP/1.1" 200 9387
+web-1  | /app/apps/forecast/api.py changed, reloading.
+web-1  | /app/apps/forecast/api.py changed, reloading.
+web-1  | Watching for file changes with StatReloader
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+web-1  | System check identified no issues (0 silenced).
+web-1  | October 16, 2026 - 12:46:16
+web-1  | Django version 5.2.18, using settings 'enviroinsights.settings.dev'
+web-1  | Starting development server at http://0.0.0.0:8000/
+web-1  | Quit the server with CONTROL-C.
+web-1  |
+web-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+web-1  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 013-stable-serving-and-browser-rerun (2026-10-16T12:46:57.7095983+05:30; exit 0)</summary>
+
+```powershell
+Write-Output 'The earlier HTTP probe overlapped a logged Django autoreload after api.py changed; all 21 forecast assertions had succeeded before the connection closed. Rerun after readiness.'
+python .tools/phase7fix/verify_live.py
+node scripts/verify_phase7_fix_browser.cjs
+```
+
+```text
+The earlier HTTP probe overlapped a logged Django autoreload after api.py changed; all 21 forecast assertions had succeeded before the connection closed. Rerun after readiness.
+{
+  "rows": 21,
+  "persistence_overrides": 9,
+  "model_paths": 12,
+  "health": {
+    "ok": true,
+    "checks": {
+      "database": {
+        "ok": true
+      },
+      "extensions": {
+        "postgis": {
+          "ok": true,
+          "version": "3.6.4"
+        },
+        "timescaledb": {
+          "ok": true,
+          "version": "2.30.2"
+        },
+        "vector": {
+          "ok": true,
+          "version": "0.8.7"
+        }
+      },
+      "redis": {
+        "ok": true
+      },
+      "celery": {
+        "ok": true
+      }
+    }
+  },
+  "serving": [
+    {
+      "city": "bengaluru",
+      "horizon": 1,
+      "point": 55.83447337962963,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 2,
+      "point": 55.83447337962963,
+      "algorithm": "persistence",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 3,
+      "point": 55.83447337962963,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "chennai",
+      "horizon": 1,
+      "point": 79.60152604166667,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "chennai",
+      "horizon": 2,
+      "point": 46.623435974121094,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "chennai",
+      "horizon": 3,
+      "point": 44.565903335367146,
+      "algorithm": "lightgbm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "delhi",
+      "horizon": 1,
+      "point": 230.26629638671875,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "delhi",
+      "horizon": 2,
+      "point": 238.1969746040898,
+      "algorithm": "mean7",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "delhi",
+      "horizon": 3,
+      "point": 238.1969746040898,
+      "algorithm": "mean7",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 1,
+      "point": 44.22298657635257,
+      "algorithm": "sarimax",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 2,
+      "point": 41.270224480730135,
+      "algorithm": "sarimax",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 3,
+      "point": 41.59455091657645,
+      "algorithm": "sarimax",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "kolkata",
+      "horizon": 1,
+      "point": 82.728515625,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "kolkata",
+      "horizon": 2,
+      "point": 83.09186553955078,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "kolkata",
+      "horizon": 3,
+      "point": 83.86842346191406,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "mumbai",
+      "horizon": 1,
+      "point": 54.67062973792404,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 2,
+      "point": 54.67062973792404,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 3,
+      "point": 54.67062973792404,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "pune",
+      "horizon": 1,
+      "point": 79.181115244709,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "pune",
+      "horizon": 2,
+      "point": 79.181115244709,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "pune",
+      "horizon": 3,
+      "point": 79.181115244709,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    }
+  ]
+}
+[
+  {
+    "name": "dashboard",
+    "path": "/dashboard/",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-dashboard-1440.png"
+  },
+  {
+    "name": "api",
+    "path": "/api/forecast/mumbai/latest/",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-api-1440.png"
+  },
+  {
+    "name": "forecasts",
+    "path": "/forecasts/?city=mumbai",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-forecasts-1440.png"
+  },
+  {
+    "name": "dashboard",
+    "path": "/dashboard/",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-dashboard-390.png"
+  },
+  {
+    "name": "api",
+    "path": "/api/forecast/mumbai/latest/",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-api-390.png"
+  },
+  {
+    "name": "forecasts",
+    "path": "/forecasts/?city=mumbai",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-forecasts-390.png"
+  }
+]
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 010-final-lint-and-suite (2026-10-16T12:46:06.8776177+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web ruff check --fix tests/test_forecast_serving_policy.py
+.\scripts\dev.ps1 lint
+.\scripts\dev.ps1 test
+docker compose exec -T web python manage.py check --deploy --settings=enviroinsights.settings.prod
+```
+
+```text
+Found 1 error (1 fixed, 0 remaining).
+All checks passed!
+279 files already formatted
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 309 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  1%]
+tests/test_api.py ...                                                    [  2%]
+tests/test_database.py ......                                            [  4%]
+tests/test_deweather_diagnostics.py ...                                  [  5%]
+tests/test_forecast_operations.py ..                                     [  6%]
+tests/test_forecast_serving_policy.py .......................            [ 13%]
+tests/test_forecasting.py .                                              [ 14%]
+tests/test_ingest_api.py ....                                            [ 15%]
+tests/test_ingest_sources.py ...................                         [ 21%]
+tests/test_phase7_dashboard.py .                                         [ 22%]
+tests/test_rag_audit.py .                                                [ 22%]
+tests/test_rag_pipeline.py .......................                       [ 29%]
+tests/test_research_api.py .                                             [ 30%]
+tests/test_research_clocks.py ..                                         [ 30%]
+tests/test_seed.py .                                                     [ 31%]
+tests/test_vayusim_api.py ..............                                 [ 35%]
+tests/test_vayusim_frontend.py ...........                               [ 39%]
+tests/test_vectors.py ..                                                 [ 39%]
+tests/test_database.py .                                                 [ 40%]
+tests/test_vayusim_api.py .                                              [ 40%]
+tests/test_worker.py .                                                   [ 40%]
+tests/test_analytics.py ...................                              [ 46%]
+tests/test_dashboard_evidence.py ..                                      [ 47%]
+tests/test_deweather_diagnostics.py ....                                 [ 48%]
+tests/test_forecast_intervals.py .                                       [ 49%]
+tests/test_forecast_operations.py ...                                    [ 50%]
+tests/test_forecast_serving_policy.py ..                                 [ 50%]
+tests/test_forecasting.py .................                              [ 56%]
+tests/test_foundation.py .....................                           [ 63%]
+tests/test_ingest_sources.py ......                                      [ 65%]
+tests/test_ingest_units.py .....................                         [ 71%]
+tests/test_phase6a_audit.py .......                                      [ 74%]
+tests/test_phase6a_fix.py ...                                            [ 75%]
+tests/test_phase7_dashboard.py ............                              [ 78%]
+tests/test_rag_pipeline.py ...........                                   [ 82%]
+tests/test_rag_resident_worker.py .                                      [ 82%]
+tests/test_research_methods.py .....                                     [ 84%]
+tests/test_vayusim_api.py ....                                           [ 85%]
+tests/test_vayusim_independent_references.py ........                    [ 88%]
+tests/test_vayusim_physics.py ....................................       [100%]
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 309 passed, 147 warnings in 63.56s (0:01:03) =================
+System check identified no issues (0 silenced).
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 015-post-fix-integrity-and-doc-claims (2026-10-16T12:48:45.8804677+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/identity.py after
+docker compose exec -T web python .tools/phase7fix/database_snapshot.py after
+git diff --check
+git diff --stat
+rg -n 'fallback|persistence|Phase 7' README.md docs/DEMO.md docs/RESUME.md docs/results/WRITEUP.md
+```
+
+```text
+{
+  "stage": "after",
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "phase4_all_artifacts": {
+    "files": 967,
+    "aggregate_sha256": "302ad61bf22f1d9e617d052a113f027c4c5ce80064d6e99c99766c8b8bc97335"
+  },
+  "existing_tests": {
+    "files": 54,
+    "aggregate_sha256": "3520582daef603fc3af5aec5f3ee5f35b72c7ae1eb58bfe82f905879e690b392"
+  },
+  "historical_results": {
+    "files": 65,
+    "aggregate_sha256": "2a07d22d6f65c2c77401aa03ef28fb6017106c8624f91f050919a43a4bbec4cb"
+  },
+  "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4"
+}
+{
+  "Forecast": {
+    "rows": 3948,
+    "sha256": "69cad0739e5527360cac98043cf3fb2656111685ed1a20c6a6237b4cf44c67fe"
+  },
+  "ForecastEvaluation": {
+    "rows": 21,
+    "sha256": "67a08ebf3adf9fcefe9c6426d9bececcfc851f3b029c21546c961587473692bd"
+  },
+  "ForecastModelVersion": {
+    "rows": 150,
+    "sha256": "b9b5b622311c4554cbf6f9e3dadc9a490dc75662441438ce254c6b2b3df81b77"
+  }
+}
+ README.md                                        |    8 +-
+ apps/dashboard/evidence.py                       |   12 +-
+ apps/dashboard/static/dashboard/forecasts.js     |   10 +
+ apps/dashboard/templates/dashboard/evidence.html |    4 +-
+ apps/dashboard/views.py                          |    6 +
+ apps/forecast/api.py                             |   19 +-
+ apps/forecast/data.py                            |    1 +
+ docs/DEMO.md                                     |    2 +-
+ docs/RESUME.md                                   |    6 +-
+ docs/VALIDATION.md                               | 3480 ++++++++++++++++++++++
+ docs/results/WRITEUP.md                          |   32 +-
+ 11 files changed, 3549 insertions(+), 31 deletions(-)
+docs/DEMO.md:13:| 1:20–2:10 | Forecast dashboard row, then `/forecasts/?city=delhi` | “The saved Delhi next-day policy improves RMSE by 12.6% against persistence in this backtest. Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others. This override was introduced after the original evaluation; the saved scores have not been recomputed. Fourteen selected interval levels fail their coverage gate. This page shows replay dates, not an unverified live forecast.” Read the displayed target date; do not call it today's forecast. |
+docs/DEMO.md:22:If a result is negative, name the failure and its consequence: keep persistence
+docs/DEMO.md:26:Phase 7 browser verification; evidence and screenshots are indexed in
+README.md:17:forecast operation without fresh keyed observations. Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others. This serving override was added after Phase 7; it does not revise the Phase 4 backtest. [Fix record](docs/results/PHASE7_FIX.md).
+README.md:109:4. **Forecast skill is uneven.** Delhi next-day RMSE improves on persistence by
+README.md:110:   12.6% in the rolling backtest. Nine policies lose; the versioned serving override now uses persistence for them. This does not establish prospective fallback skill. Fourteen selected interval levels fail the five-point
+README.md:128:  [Phase 6B](docs/results/PHASE6B.md), [Phase 7](docs/results/PHASE7.md).
+docs/results/WRITEUP.md:37:The retained Phase 7 snapshot contains 17,504,928 combined observation rows:
+docs/results/WRITEUP.md:127:Delhi next-day policy RMSE is **29.417 µg/m³**, against persistence at
+docs/results/WRITEUP.md:135:Chennai 1, Mumbai 1–3 and Pune 1–3. Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others.
+docs/results/WRITEUP.md:136:The Phase 7 audit found that four of these nine latest stored selections used
+docs/results/WRITEUP.md:137:persistence, while five used other algorithms. This follow-up adds the serving
+docs/results/WRITEUP.md:141:The fallback now has an explicit versioned rule citing the Phase 4 table; it still
+docs/results/WRITEUP.md:144:retrospective persistence substitution an improved original backtest would mix
+docs/results/WRITEUP.md:146:value. Original model intervals and SHAP drivers are omitted from fallback responses:
+docs/results/WRITEUP.md:239:Negative forecast skill exposed the need to compare with persistence and to
+docs/results/WRITEUP.md:240:introduce a versioned serving fallback separately from original issued-policy scores. Undercoverage
+docs/results/WRITEUP.md:248:Phase 7 gives the affected crosswind-mass test a bounded explicit deadline,
+docs/results/WRITEUP.md:271:evaluation period for the new serving fallback. Interval
+docs/results/WRITEUP.md:285:used here were checked locally or through the web reader during Phase 7;
+docs/RESUME.md:12:  **12.6%** against persistence in the saved backtest; disclosed **nine** losing
+docs/RESUME.md:14:  override that uses persistence for those nine, without revising the backtest.
+docs/RESUME.md:24:Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others. This was added after Phase 7; the original results remain unchanged.
+docs/RESUME.md:32:| Forecasts | How was leakage controlled, what lost to persistence, and is fallback actually enforced? | [Write-up §4](results/WRITEUP.md#4-forecasting-results), [protocol](results/PHASE4_PROTOCOL.md) |
+docs/RESUME.md:38:completed. The final test-count record is in [Phase 7](results/PHASE7.md).
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 016-final-visible-policy-browser (2026-10-16T12:49:21.4898903+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/verify_live.py
+node scripts/verify_phase7_fix_browser.cjs
+```
+
+```text
+{
+  "rows": 21,
+  "persistence_overrides": 9,
+  "model_paths": 12,
+  "health": {
+    "ok": true,
+    "checks": {
+      "database": {
+        "ok": true
+      },
+      "extensions": {
+        "postgis": {
+          "ok": true,
+          "version": "3.6.4"
+        },
+        "timescaledb": {
+          "ok": true,
+          "version": "2.30.2"
+        },
+        "vector": {
+          "ok": true,
+          "version": "0.8.7"
+        }
+      },
+      "redis": {
+        "ok": true
+      },
+      "celery": {
+        "ok": true
+      }
+    }
+  },
+  "serving": [
+    {
+      "city": "bengaluru",
+      "horizon": 1,
+      "point": 55.83447337962963,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 2,
+      "point": 55.83447337962963,
+      "algorithm": "persistence",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 3,
+      "point": 55.83447337962963,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "chennai",
+      "horizon": 1,
+      "point": 79.60152604166667,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "chennai",
+      "horizon": 2,
+      "point": 46.623435974121094,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "chennai",
+      "horizon": 3,
+      "point": 44.565903335367146,
+      "algorithm": "lightgbm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "delhi",
+      "horizon": 1,
+      "point": 230.26629638671875,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "delhi",
+      "horizon": 2,
+      "point": 238.1969746040898,
+      "algorithm": "mean7",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "delhi",
+      "horizon": 3,
+      "point": 238.1969746040898,
+      "algorithm": "mean7",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 1,
+      "point": 44.22298657635257,
+      "algorithm": "sarimax",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 2,
+      "point": 41.270224480730135,
+      "algorithm": "sarimax",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "hyderabad",
+      "horizon": 3,
+      "point": 41.59455091657645,
+      "algorithm": "sarimax",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "kolkata",
+      "horizon": 1,
+      "point": 82.728515625,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "kolkata",
+      "horizon": 2,
+      "point": 83.09186553955078,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "kolkata",
+      "horizon": 3,
+      "point": 83.86842346191406,
+      "algorithm": "lstm",
+      "forecast_method": "model",
+      "fallback_reason": null
+    },
+    {
+      "city": "mumbai",
+      "horizon": 1,
+      "point": 54.67062973792404,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 2,
+      "point": 54.67062973792404,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 3,
+      "point": 54.67062973792404,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "pune",
+      "horizon": 1,
+      "point": 79.181115244709,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "pune",
+      "horizon": 2,
+      "point": 79.181115244709,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    },
+    {
+      "city": "pune",
+      "horizon": 3,
+      "point": 79.181115244709,
+      "algorithm": "persistence",
+      "forecast_method": "persistence",
+      "fallback_reason": "model_loses_to_persistence_phase4"
+    }
+  ]
+}
+[
+  {
+    "name": "dashboard",
+    "path": "/dashboard/",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-dashboard-1440.png"
+  },
+  {
+    "name": "api",
+    "path": "/api/forecast/mumbai/latest/",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-api-1440.png"
+  },
+  {
+    "name": "forecasts",
+    "path": "/forecasts/?city=mumbai",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-forecasts-1440.png"
+  },
+  {
+    "name": "dashboard",
+    "path": "/dashboard/",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-dashboard-390.png"
+  },
+  {
+    "name": "api",
+    "path": "/api/forecast/mumbai/latest/",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-api-390.png"
+  },
+  {
+    "name": "forecasts",
+    "path": "/forecasts/?city=mumbai",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-forecasts-390.png"
+  }
+]
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 014-final-full-suite-and-deployment (2026-10-16T12:48:15.3718277+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web ruff format apps/forecast/api.py apps/forecast/serving.py tests/test_forecast_serving_policy.py
+.\scripts\dev.ps1 lint
+.\scripts\dev.ps1 test
+docker compose exec -T web python manage.py check --deploy --settings=enviroinsights.settings.prod
+```
+
+```text
+3 files left unchanged
+All checks passed!
+279 files already formatted
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 310 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  1%]
+tests/test_api.py ...                                                    [  2%]
+tests/test_database.py ......                                            [  4%]
+tests/test_deweather_diagnostics.py ...                                  [  5%]
+tests/test_forecast_operations.py ..                                     [  6%]
+tests/test_forecast_serving_policy.py ........................           [ 14%]
+tests/test_forecasting.py .                                              [ 14%]
+tests/test_ingest_api.py ....                                            [ 15%]
+tests/test_ingest_sources.py ...................                         [ 21%]
+tests/test_phase7_dashboard.py .                                         [ 22%]
+tests/test_rag_audit.py .                                                [ 22%]
+tests/test_rag_pipeline.py .......................                       [ 30%]
+tests/test_research_api.py .                                             [ 30%]
+tests/test_research_clocks.py ..                                         [ 30%]
+tests/test_seed.py .                                                     [ 31%]
+tests/test_vayusim_api.py ..............                                 [ 35%]
+tests/test_vayusim_frontend.py ...........                               [ 39%]
+tests/test_vectors.py ..                                                 [ 40%]
+tests/test_database.py .                                                 [ 40%]
+tests/test_vayusim_api.py .                                              [ 40%]
+tests/test_worker.py .                                                   [ 40%]
+tests/test_analytics.py ...................                              [ 47%]
+tests/test_dashboard_evidence.py ..                                      [ 47%]
+tests/test_deweather_diagnostics.py ....                                 [ 49%]
+tests/test_forecast_intervals.py .                                       [ 49%]
+tests/test_forecast_operations.py ...                                    [ 50%]
+tests/test_forecast_serving_policy.py ..                                 [ 50%]
+tests/test_forecasting.py .................                              [ 56%]
+tests/test_foundation.py .....................                           [ 63%]
+tests/test_ingest_sources.py ......                                      [ 65%]
+tests/test_ingest_units.py .....................                         [ 71%]
+tests/test_phase6a_audit.py .......                                      [ 74%]
+tests/test_phase6a_fix.py ...                                            [ 75%]
+tests/test_phase7_dashboard.py ............                              [ 79%]
+tests/test_rag_pipeline.py ...........                                   [ 82%]
+tests/test_rag_resident_worker.py .                                      [ 82%]
+tests/test_research_methods.py .....                                     [ 84%]
+tests/test_vayusim_api.py ....                                           [ 85%]
+tests/test_vayusim_independent_references.py ........                    [ 88%]
+tests/test_vayusim_physics.py ....................................       [100%]
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 310 passed, 147 warnings in 58.95s ======================
+System check identified no issues (0 silenced).
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 017-shared-serving-consumer-review (2026-10-16T12:49:49.6973964+05:30; exit 0)</summary>
+
+```powershell
+rg -n 'cache|def latest|def _|Computation|ForecastSerializer' apps/rag/data_tools.py
+Get-Content -LiteralPath 'apps/rag/data_tools.py' -Encoding UTF8 | Select-Object -First 110
+Get-Content -LiteralPath 'apps/rag/data_tools.py' -Encoding UTF8 | Select-Object -Skip 275 -First 55
+rg --files docs | Select-String 'API|api'
+```
+
+```text
+12:from apps.forecast.api import ForecastSerializer, completed_run
+294:def latest(parameters):
+305:    forecasts = list(ForecastSerializer(rows, many=True).data)
+"""Eight validated read-only data tools; all results carry their actual provenance."""
+
+import hashlib
+import json
+import math
+
+from django.conf import settings
+from django.db.models import Avg, Count, Max
+from rest_framework import serializers
+
+from apps.analytics.models import AnalysisRun, CityCoverage, CityMetric, CitySeries
+from apps.forecast.api import ForecastSerializer, completed_run
+from apps.forecast.models import Forecast, ForecastEvaluation
+from apps.warehouse.models import City
+
+
+class StrictParameters(serializers.Serializer):
+    city = serializers.CharField(max_length=100)
+
+    def to_internal_value(self, data):
+        if not isinstance(data, dict):
+            raise serializers.ValidationError({"parameters": "Use a parameter object"})
+        unknown = set(data) - set(self.fields)
+        if unknown:
+            raise serializers.ValidationError(
+                {"parameters": f"Unknown fields: {', '.join(sorted(unknown))}"}
+            )
+        if any(
+            isinstance(data.get(name), bool) for name in ("year", "horizon", "threshold", "run_id")
+        ):
+            raise serializers.ValidationError(
+                {"parameters": "Numeric parameters cannot be booleans"}
+            )
+        return super().to_internal_value(data)
+
+    def validate_city(self, value):
+        value = value.strip().casefold().replace(" ", "-")
+        value = {"new-delhi": "delhi", "bangalore": "bengaluru", "calcutta": "kolkata"}.get(
+            value, value
+        )
+        city = City.objects.filter(slug=value).first()
+        if city is None:
+            raise serializers.ValidationError("Unknown seeded city")
+        return city.slug
+
+
+class AnnualParameters(StrictParameters):
+    year = serializers.IntegerField(min_value=1900, max_value=2100)
+
+
+class SeriesParameters(StrictParameters):
+    start = serializers.DateField()
+    end = serializers.DateField()
+    kind = serializers.ChoiceField(choices=["raw", "deweathered"], default="raw")
+
+    def validate(self, attrs):
+        if not 0 < (attrs["end"] - attrs["start"]).days <= 366 * 15:
+            raise serializers.ValidationError(
+                "Use an ordered interval up to 15 years; end is exclusive"
+            )
+        return attrs
+
+
+class ExceedanceParameters(AnnualParameters):
+    threshold = serializers.FloatField(min_value=0, max_value=1000)
+
+    def validate_threshold(self, value):
+        if not math.isfinite(value):
+            raise serializers.ValidationError("Threshold must be finite µg/m³")
+        return value
+
+
+class DriverParameters(StrictParameters):
+    season = serializers.ChoiceField(choices=["winter", "pre_monsoon", "monsoon"])
+
+
+class SkillParameters(StrictParameters):
+    horizon = serializers.IntegerField(min_value=1, max_value=3)
+
+
+def fixed_run(setting, default):
+    return AnalysisRun.objects.get(pk=getattr(settings, setting, default), status="success")
+
+
+def raw_run():
+    return fixed_run("RAG_DATA_RUN", 9)
+
+
+def normalised_run():
+    return fixed_run("RAG_NORMALISATION_RUN", 7)
+
+
+def research_run():
+    return fixed_run("RAG_RESEARCH_RUN", 19)
+
+
+def evidence(tool, parameters, run, values, url, **extra):
+    city = City.objects.get(slug=parameters["city"])
+    pieces = ["dataset: " + tool, city.name]
+    pieces += [f"{name}={value}" for name, value in parameters.items() if name != "city"]
+    pieces += [f"run {run.pk}"]
+    parameter_hash = hashlib.sha256(
+        json.dumps(parameters, sort_keys=True, default=str).encode()
+    ).hexdigest()[:12]
+    reference = {
+        "id": f"dataset:{tool}:{city.slug}:{run.pk}:{parameter_hash}",
+        "kind": "dataset",
+        "label": ", ".join(pieces),
+        "analysis_run": run.pk,
+        "query_parameters": parameters,
+        "nested_readiness": selected.get("nested_readiness"),
+        "interpretation": (
+            "conditional model attribution; not causal effects or a variance partition"
+        ),
+        "season_definition": (
+            "winter October–February; pre-monsoon March–May; monsoon June–September"
+        ),
+        "status": "available" if ranks else "unavailable",
+    }
+    return evidence(
+        "rq2_drivers",
+        parameters,
+        run,
+        values,
+        f"/api/analytics/rq2/{parameters['city']}/?run={run.pk}",
+    )
+
+
+def latest(parameters):
+    run = completed_run()
+    rows = Forecast.objects.filter(
+        city__slug=parameters["city"], model_version__analysis_run=run
+    ).select_related("model_version")
+    last = rows.order_by("-issued_for_date").first()
+    rows = (
+        rows.filter(issued_for_date=last.issued_for_date).order_by("horizon")
+        if last
+        else rows.none()
+    )
+    forecasts = list(ForecastSerializer(rows, many=True).data)
+    values = {
+        "forecasts": forecasts,
+        "units": "µg/m³",
+        "timezone": "Asia/Kolkata",
+        "category_scope": "PM2.5 subindex category, not overall AQI",
+        "status": "available" if forecasts else "unavailable",
+        "interpretation": "Replay is archival and is not a current live forecast",
+    }
+    return evidence(
+        "latest_forecast",
+        parameters,
+        run,
+        values,
+        f"/api/forecast/{parameters['city']}/latest/",
+        model_versions=[row["model_version"] for row in forecasts],
+    )
+
+
+def skill(parameters):
+    run = completed_run()
+    row = ForecastEvaluation.objects.filter(
+        analysis_run=run, city__slug=parameters["city"], horizon=parameters["horizon"]
+    ).first()
+    if row:
+        values = {
+
+docs\results\phase7-fix-api-390.png
+docs\results\phase7-fix-api-1440.png
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 018-null-interval-consumer-compatibility (2026-10-16T12:49:59.5415815+05:30; exit 0)</summary>
+
+```powershell
+Get-Content -LiteralPath 'apps/rag/formatting.py' -Encoding UTF8 | Select-Object -Skip 45 -First 51
+Get-Content -LiteralPath 'apps/rag/data_tools.py' -Encoding UTF8 | Select-Object -Skip 100 -First 63
+```
+
+```text
+    return str(value)
+
+
+def table_rows(result):
+    values = result["values"]
+    rows = [("city", result["parameters"]["city"])]
+    rows += [(key, value) for key, value in result["parameters"].items() if key != "city"]
+    if result["tool"] == "latest_forecast":
+        for row in values.get("forecasts", []):
+            for key in [
+                "issued_for_date",
+                "target_date",
+                "mode",
+                "point",
+                "lower80",
+                "upper80",
+                "lower95",
+                "upper95",
+                "aqi_category",
+                "algorithm",
+                "model_version",
+                "cohort",
+            ]:
+                rows.append((f"h{row['horizon']}.{key}", row[key]))
+        rows += [
+            (key, values[key]) for key in ["units", "timezone", "category_scope", "interpretation"]
+        ]
+    elif result["tool"] == "city_monthly_series":
+        rows += [(row["date"], row["value"]) for row in values["series"][:24]]
+        rows.append(("rows_shown", min(24, len(values["series"]))))
+        rows.append(("total_rows", len(values["series"])))
+        if len(values["series"]) > 24:
+            rows.append(
+                ("display_limitation", "First 24 months shown; full series in tool_results")
+            )
+        rows += [(key, value) for key, value in values.items() if key != "series"]
+    elif result["tool"] == "data_coverage":
+        rows += [
+            (str(row["year"]), {k: v for k, v in row.items() if k != "year"})
+            for row in values["coverage"]
+        ]
+    elif result["tool"] == "rq2_drivers":
+        rows += [
+            (row["period"] + "." + row["feature"], row["mean_abs_daily_shap"])
+            for row in values["drivers"]
+        ]
+        rows += [(key, value) for key, value in values.items() if key != "drivers"]
+    elif result["tool"] == "forecast_skill" and values["status"] == "available":
+        rows += [(key, value) for key, value in values["policy"].items()]
+        rows += [(key, value) for key, value in values.items() if key != "policy"]
+    else:
+    pieces += [f"run {run.pk}"]
+    parameter_hash = hashlib.sha256(
+        json.dumps(parameters, sort_keys=True, default=str).encode()
+    ).hexdigest()[:12]
+    reference = {
+        "id": f"dataset:{tool}:{city.slug}:{run.pk}:{parameter_hash}",
+        "kind": "dataset",
+        "label": ", ".join(pieces),
+        "analysis_run": run.pk,
+        "query_parameters": parameters,
+        "url": url,
+        **extra,
+    }
+    return {"tool": tool, "parameters": parameters, "values": values, "citation": reference}
+
+
+def daily_rows(run, city, year):
+    return CitySeries.objects.filter(
+        run=run,
+        city__slug=city,
+        pollutant__code="pm25",
+        kind="raw",
+        frequency="daily",
+        date__year=year,
+    )
+
+
+def annual(parameters):
+    run = raw_run()
+    year, city = parameters["year"], parameters["city"]
+    coverage = CityCoverage.objects.filter(
+        run=run, city__slug=city, pollutant__code="pm25", year=year
+    ).first()
+    summary = daily_rows(run, city, year).aggregate(
+        mean=Avg("value"), valid_days=Count("value"), maximum=Max("value")
+    )
+    eligible = bool(coverage and coverage.eligible)
+    values = {
+        "annual_mean": summary["mean"] if eligible else None,
+        "partial_observed_mean": summary["mean"] if not eligible else None,
+        "valid_days": summary["valid_days"],
+        "annual_eligible": eligible,
+        "units": "µg/m³",
+        "cohort": "all_stations",
+        "aggregation": "mean of valid equal-station IST daily means; days require 18 hours",
+        "status": "available" if eligible else "insufficient_annual_coverage",
+    }
+    return evidence(
+        "city_annual_mean",
+        parameters,
+        run,
+        values,
+        f"/api/analytics/city/{city}/series/?run={run.pk}&kind=raw&freq=daily"
+        f"&start={year}-01-01&end={year + 1}-01-01",
+    )
+
+
+def monthly(parameters):
+    run = raw_run() if parameters["kind"] == "raw" else normalised_run()
+    city = parameters["city"]
+    rows = list(
+        CitySeries.objects.filter(
+            run=run,
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 019-null-safe-interval-browser-rerun (2026-10-16T12:51:00.6558337+05:30; exit 0)</summary>
+
+```powershell
+node --check apps/dashboard/static/dashboard/forecasts.js
+node --check scripts/verify_phase7_fix_browser.cjs
+node scripts/verify_phase7_fix_browser.cjs
+```
+
+```text
+[
+  {
+    "name": "dashboard",
+    "path": "/dashboard/",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-dashboard-1440.png"
+  },
+  {
+    "name": "api",
+    "path": "/api/forecast/mumbai/latest/",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-api-1440.png"
+  },
+  {
+    "name": "forecasts",
+    "path": "/forecasts/?city=mumbai",
+    "width": 1440,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-forecasts-1440.png"
+  },
+  {
+    "name": "dashboard",
+    "path": "/dashboard/",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-dashboard-390.png"
+  },
+  {
+    "name": "api",
+    "path": "/api/forecast/mumbai/latest/",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-api-390.png"
+  },
+  {
+    "name": "forecasts",
+    "path": "/forecasts/?city=mumbai",
+    "width": 390,
+    "status": 200,
+    "forecast_method_labels_visible": true,
+    "horizontal_overflow": false,
+    "js_errors": [],
+    "screenshot": "docs/results/phase7-fix-forecasts-390.png"
+  }
+]
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 020-completed-fix-report (2026-10-16T12:52:18.7673423+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/finish_report.py
+git diff --check
+```
+
+```text
+python : Traceback (most recent call last):
+At line:1 char:1
++ python .tools/phase7fix/finish_report.py
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  File "D:\EnviroInsights-India\.tools\phase7fix\finish_report.py", line 39, in <module>
+    assert (root/'docs/results/PHASE7_DATA.json').read_bytes()==old_snapshot
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 021-git-newline-identity (2026-10-16T12:52:34.2402131+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/check_prefix.py
+git diff --numstat -- docs/results/PHASE7_DATA.json
+```
+
+```text
+docs/results/PHASE7_DATA.json {'git_bytes': 46825, 'worktree_bytes': 48407, 'first_difference': 1}
+b'{\n  "captured_at": "2026-10-16T' b'{\r\n  "captured_at": "2026-10-16'
+JSON values identical True
+docs/VALIDATION.md {'git_bytes': 2517514, 'worktree_bytes': 2730639, 'first_difference': 1823271}
+b'utputs follow.\n\n<details>\n<summary>Phase 7: 0' b'utputs follow.\n\r\n<details>\r\n<summary>Phase 7:'
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 022-completed-evidence-report-rerun (2026-10-16T12:53:00.7603342+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/preserve_journal.py
+python .tools/phase7fix/finish_report.py
+git diff --check
+```
+
+```text
+{'historical_journal_prefix': 2517514, 'sha256': '2de9545c7e1dd6d7bc1701783801ee5df87c2591addbf92fe51e3522d73501d5', 'prefix_verbatim_from_baseline': True, 'reason': 'Git newline normalization differs from the clean Windows worktree; preserve exact baseline Git bytes and every new fix log.'}
+{
+  "checks": {
+    "passed": 310,
+    "original_tests": 284,
+    "new_tests": 26,
+    "warnings": 147,
+    "seconds": 58.95,
+    "ruff": "pass",
+    "format": "pass",
+    "deployment": "System check identified no issues (0 silenced)."
+  },
+  "before_losing": 9,
+  "before_model_gaps": 5,
+  "after_persistence": 9,
+  "docs_with_exact_sentence": 4,
+  "screenshots": 6,
+  "all_protected_values_unchanged": true
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 023-final-review-and-integrity (2026-10-16T12:53:46.5547978+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/check_docs.py
+python .tools/phase7fix/identity.py after
+docker compose exec -T web python .tools/phase7fix/database_snapshot.py after
+.\scripts\dev.ps1 lint
+git diff --check
+git status --short --untracked-files=no
+```
+
+```text
+{
+  "missing_local_links": [],
+  "writeup_word_count": 2515,
+  "all_original_writeup_numeric_tokens_retained": true
+}
+{
+  "stage": "after",
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "phase4_all_artifacts": {
+    "files": 967,
+    "aggregate_sha256": "302ad61bf22f1d9e617d052a113f027c4c5ce80064d6e99c99766c8b8bc97335"
+  },
+  "existing_tests": {
+    "files": 54,
+    "aggregate_sha256": "3520582daef603fc3af5aec5f3ee5f35b72c7ae1eb58bfe82f905879e690b392"
+  },
+  "historical_results": {
+    "files": 65,
+    "aggregate_sha256": "2a07d22d6f65c2c77401aa03ef28fb6017106c8624f91f050919a43a4bbec4cb"
+  },
+  "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4"
+}
+{
+  "Forecast": {
+    "rows": 3948,
+    "sha256": "69cad0739e5527360cac98043cf3fb2656111685ed1a20c6a6237b4cf44c67fe"
+  },
+  "ForecastEvaluation": {
+    "rows": 21,
+    "sha256": "67a08ebf3adf9fcefe9c6426d9bececcfc851f3b029c21546c961587473692bd"
+  },
+  "ForecastModelVersion": {
+    "rows": 150,
+    "sha256": "b9b5b622311c4554cbf6f9e3dadc9a490dc75662441438ce254c6b2b3df81b77"
+  }
+}
+All checks passed!
+279 files already formatted
+ M README.md
+ M apps/dashboard/evidence.py
+ M apps/dashboard/static/dashboard/forecasts.js
+ M apps/dashboard/templates/dashboard/evidence.html
+ M apps/dashboard/views.py
+ M apps/forecast/api.py
+ M apps/forecast/data.py
+ M docs/DEMO.md
+ M docs/RESUME.md
+ M docs/VALIDATION.md
+ M docs/results/WRITEUP.md
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 024-archive-completed-fix (2026-10-16T12:54:59.6400632+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase7fix/archive.py
+```
+
+```text
+{
+  "status": "complete",
+  "artifacts": 70,
+  "commit_files_including_journal": 24,
+  "checks": {
+    "passed": 310,
+    "original_tests": 284,
+    "new_tests": 26,
+    "warnings": 147,
+    "seconds": 58.95,
+    "ruff": "pass",
+    "format": "pass",
+    "deployment": "System check identified no issues (0 silenced)."
+  }
+}
+
+```
+
+</details>
+
+
+### Phase 7 serving-fix local finalization
+
+The 310-test suite, ruff and production deployment check pass. Frozen sets,
+Phase 4 models/metrics/artifacts, all stored forecast/evaluation/model-version
+rows and original tests retain their fingerprints. The evidence archive is
+`data/results/phase7fix/manifest.json`. Final Git commands use the explicit
+reviewed list in that manifest: `git add -- <paths>`, `git diff --cached
+--name-only`, `git diff --cached --check`, `git commit`, `git rev-parse HEAD`,
+`git remote`, and `git status --porcelain --untracked-files=no`.
+Exact arguments, actual stdout/stderr, exit codes and commit ID are retained
+in [final-git.json](../data/results/phase7fix/final-git.json), outside this
+commit to avoid a self-referential hash, following the Phase 7 convention.
+Unrelated untracked ingestion manifests and earlier evidence remain excluded.
+No push command is used.

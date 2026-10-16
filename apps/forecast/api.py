@@ -9,6 +9,7 @@ from apps.analytics.models import AnalysisRun
 from apps.warehouse.models import City
 
 from .models import Forecast, ForecastEvaluation
+from .serving import served_forecast
 
 
 class ForecastSerializer(serializers.ModelSerializer):
@@ -16,6 +17,16 @@ class ForecastSerializer(serializers.ModelSerializer):
     cohort = serializers.CharField(source="model_version.cohort", read_only=True)
     mlflow_run_id = serializers.CharField(source="model_version.mlflow_run_id", read_only=True)
     interval_policy = serializers.JSONField(source="model_version.interval_policy", read_only=True)
+    forecast_method = serializers.CharField(read_only=True)
+    policy_source = serializers.CharField(read_only=True)
+    fallback_used = serializers.BooleanField(read_only=True)
+    fallback_reason = serializers.CharField(read_only=True, allow_null=True)
+
+    def to_representation(self, instance):
+        result = super().to_representation(instance)
+        result.update(served_forecast(instance))
+        fields = ("forecast_method", "policy_source", "fallback_used", "fallback_reason")
+        return {**{key: result.pop(key) for key in fields}, **result}
 
     class Meta:
         model = Forecast
@@ -38,6 +49,10 @@ class ForecastSerializer(serializers.ModelSerializer):
             "top_drivers",
             "feature_provenance",
             "interval_policy",
+            "forecast_method",
+            "policy_source",
+            "fallback_used",
+            "fallback_reason",
         ]
 
 
@@ -54,7 +69,7 @@ class LatestView(APIView):
         city = get_object_or_404(City, slug=slug)
         run = completed_run()
         rows = Forecast.objects.filter(city=city, model_version__analysis_run=run).select_related(
-            "model_version"
+            "model_version", "city"
         )
         last = rows.order_by("-issued_for_date").first()
         if last is None:
@@ -98,7 +113,7 @@ class HistoryView(APIView):
                 model_version__analysis_run=run,
                 target_date__range=(query.validated_data["start"], query.validated_data["end"]),
             )
-            .select_related("model_version")
+            .select_related("model_version", "city")
             .order_by("target_date", "horizon")
         )
         return Response(

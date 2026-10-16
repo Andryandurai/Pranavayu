@@ -1,0 +1,2848 @@
+{
+  "recorded_at": "2026-10-16T07:23:02.085707+00:00",
+  "baseline_commit": "739f7708fb1817d37c53aa7a92e5c266d5af67a0",
+  "policy": {
+    "version": "phase4-persistence-v1",
+    "source": "docs/results/PHASE4.md#issued-policy-skill-and-statistical-comparison",
+    "result_file": "data/results/21/phase4_results.json",
+    "scope": "Serving override selected after Phase 4; not a re-evaluation of the original backtest",
+    "default_method": "model",
+    "fallback_reason": "model_loses_to_persistence_phase4",
+    "policies": {
+      "bengaluru": {
+        "1": "persistence",
+        "3": "persistence"
+      },
+      "chennai": {
+        "1": "persistence"
+      },
+      "mumbai": {
+        "1": "persistence",
+        "2": "persistence",
+        "3": "persistence"
+      },
+      "pune": {
+        "1": "persistence",
+        "2": "persistence",
+        "3": "persistence"
+      }
+    }
+  },
+  "serving_before": [
+    {
+      "city": "bengaluru",
+      "horizon": 1,
+      "point": 55.83447337962963,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "persistence",
+      "forecast_id": 3928,
+      "before_method": "persistence"
+    },
+    {
+      "city": "bengaluru",
+      "horizon": 3,
+      "point": 55.83447337962963,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "persistence",
+      "forecast_id": 3930,
+      "before_method": "persistence"
+    },
+    {
+      "city": "chennai",
+      "horizon": 1,
+      "point": 58.11832046508789,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "lstm",
+      "forecast_id": 3931,
+      "before_method": "model"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 1,
+      "point": 53.839575837931626,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "lightgbm",
+      "forecast_id": 3943,
+      "before_method": "model"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 2,
+      "point": 54.67062973792404,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "persistence",
+      "forecast_id": 3944,
+      "before_method": "persistence"
+    },
+    {
+      "city": "mumbai",
+      "horizon": 3,
+      "point": 54.67062973792404,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "persistence",
+      "forecast_id": 3945,
+      "before_method": "persistence"
+    },
+    {
+      "city": "pune",
+      "horizon": 1,
+      "point": 67.13205448423994,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "lightgbm",
+      "forecast_id": 3946,
+      "before_method": "model"
+    },
+    {
+      "city": "pune",
+      "horizon": 2,
+      "point": 70.7445847754589,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "lightgbm",
+      "forecast_id": 3947,
+      "before_method": "model"
+    },
+    {
+      "city": "pune",
+      "horizon": 3,
+      "point": 68.75705913158087,
+      "issued_for_date": "2025-12-31",
+      "algorithm": "lightgbm",
+      "forecast_id": 3948,
+      "before_method": "model"
+    }
+  ],
+  "serving_after": {
+    "captured_at": "2026-10-16T07:19:26.090126+00:00",
+    "forecasts": [
+      {
+        "city": "bengaluru",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3928,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-01",
+        "horizon": 1,
+        "point": 55.83447337962963,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 52,
+        "algorithm": "persistence",
+        "cohort": "fixed_panel",
+        "mlflow_run_id": "692153bc2f23434da13456696356ba08",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 2,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1158,
+          "weather_target_date": "2026-01-01",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      },
+      {
+        "city": "bengaluru",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3929,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-02",
+        "horizon": 2,
+        "point": 55.83447337962963,
+        "lower80": 26.845145699356365,
+        "upper80": 48.08939357513178,
+        "lower95": 16.153311304160688,
+        "upper95": 60.366973875674596,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 59,
+        "algorithm": "persistence",
+        "cohort": "fixed_panel",
+        "mlflow_run_id": "2e4be0925b654e97a2b2d9214925c33d",
+        "top_drivers": [
+          {
+            "value": 55.83447337962963,
+            "feature": "pm_t",
+            "shap_value": 30.73778507495591,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.03439806061360801,
+            "feature": "doy_sin",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.9994082116062598,
+            "feature": "doy_cos",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.0,
+            "feature": "diwali_window",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.0,
+            "feature": "holiday",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 3,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "No existing method meets the five-point tolerance",
+                "coverage": 0.7336956521739131,
+                "mean_width": 16.45184649123645,
+                "coverage_gate_passed": false
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "No existing method meets the five-point tolerance",
+                "coverage": 0.8695652173913043,
+                "mean_width": 32.299531560094245,
+                "coverage_gate_passed": false
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.467800+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1158,
+          "weather_target_date": "2026-01-02",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 39.09583498677249,
+            "lower95": 30.470368055555554,
+            "upper80": 72.57311177248677,
+            "upper95": 81.1985787037037
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "No existing method meets the five-point tolerance",
+              "coverage": 0.7336956521739131,
+              "mean_width": 16.45184649123645,
+              "coverage_gate_passed": false
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "No existing method meets the five-point tolerance",
+              "coverage": 0.8695652173913043,
+              "mean_width": 32.299531560094245,
+              "coverage_gate_passed": false
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.467800+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "bengaluru",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3930,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-03",
+        "horizon": 3,
+        "point": 55.83447337962963,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 66,
+        "algorithm": "persistence",
+        "cohort": "fixed_panel",
+        "mlflow_run_id": "cf969e65326d4fe585f4f972ac89ab10",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 4,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1158,
+          "weather_target_date": "2026-01-03",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      },
+      {
+        "city": "chennai",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3931,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-01",
+        "horizon": 1,
+        "point": 79.60152604166667,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "moderate",
+        "mode": "replay",
+        "model_version": 115,
+        "algorithm": "persistence",
+        "cohort": "all_stations",
+        "mlflow_run_id": "693213d3e9fd45d78ca365f1523150d7",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 2,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1167,
+          "weather_target_date": "2026-01-01",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      },
+      {
+        "city": "chennai",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3932,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-02",
+        "horizon": 2,
+        "point": 46.623435974121094,
+        "lower80": 16.993583169359226,
+        "upper80": 59.37484452341706,
+        "lower95": 9.241185583955179,
+        "upper95": 82.02643074130597,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 122,
+        "algorithm": "lstm",
+        "cohort": "all_stations",
+        "mlflow_run_id": "8f44d410dfcc48c6b119e419e0a118c7",
+        "top_drivers": [
+          {
+            "value": 75.63512361111111,
+            "feature": "pm_night_mean",
+            "shap_value": 7.1583451747894316,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 82.7447199074074,
+            "feature": "pm_tminus2",
+            "shap_value": 5.098494338989257,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 79.60152604166667,
+            "feature": "pm_t",
+            "shap_value": 4.777336978912356,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 73.12634242724867,
+            "feature": "pm_mean7",
+            "shap_value": -4.380817508697511,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 68.66666666666667,
+            "feature": "relative_humidity",
+            "shap_value": -4.029798007011415,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 3,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "No existing method meets the five-point tolerance",
+                "coverage": 0.7391304347826086,
+                "mean_width": 21.99638882836809,
+                "coverage_gate_passed": false
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9130434782608695,
+                "mean_width": 37.025058562653655,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.591938+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1167,
+          "weather_target_date": "2026-01-02",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 29.810199737548828,
+            "lower95": 19.788293838500977,
+            "upper80": 63.43667221069336,
+            "upper95": 73.45858001708984
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "No existing method meets the five-point tolerance",
+              "coverage": 0.7391304347826086,
+              "mean_width": 21.99638882836809,
+              "coverage_gate_passed": false
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9130434782608695,
+              "mean_width": 37.025058562653655,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.591938+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "chennai",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3933,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-03",
+        "horizon": 3,
+        "point": 44.565903335367146,
+        "lower80": 17.310258896159,
+        "upper80": 64.3297297530621,
+        "lower95": 1.9702972988600216,
+        "upper95": 86.05449261253142,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 129,
+        "algorithm": "lightgbm",
+        "cohort": "all_stations",
+        "mlflow_run_id": "5ce8b4856e0c48e992a106f9bdb1565a",
+        "top_drivers": [
+          {
+            "value": 0.9986686402879997,
+            "feature": "doy_cos",
+            "shap_value": 11.148761749287202,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 25.720833333333335,
+            "feature": "temperature_c",
+            "shap_value": 5.685512558175687,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 73.12634242724867,
+            "feature": "pm_mean7",
+            "shap_value": -5.0042006287087535,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.652974948155658,
+            "feature": "wind_cos",
+            "shap_value": 3.6421891487956115,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 79.60152604166667,
+            "feature": "pm_t",
+            "shap_value": 2.7578554679616336,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 4,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "No existing method meets the five-point tolerance",
+                "coverage": 0.7445652173913043,
+                "mean_width": 23.422018337065143,
+                "coverage_gate_passed": false
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9402173913043478,
+                "mean_width": 42.35344104526258,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.630018+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1167,
+          "weather_target_date": "2026-01-03",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 23.35481155803786,
+            "lower95": 3.7788296911012225,
+            "upper80": 65.77699511269643,
+            "upper95": 85.35297697963307
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "No existing method meets the five-point tolerance",
+              "coverage": 0.7445652173913043,
+              "mean_width": 23.422018337065143,
+              "coverage_gate_passed": false
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9402173913043478,
+              "mean_width": 42.35344104526258,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.630018+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "delhi",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3934,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-01",
+        "horizon": 1,
+        "point": 230.26629638671875,
+        "lower80": 150.61242030257515,
+        "upper80": 289.23990008746983,
+        "lower95": 35.28908584053871,
+        "upper95": 345.1571672487578,
+        "aqi_category": "very_poor",
+        "mode": "replay",
+        "model_version": 73,
+        "algorithm": "lstm",
+        "cohort": "all_stations",
+        "mlflow_run_id": "ee4d1bb98d2f445590f1ff5be3ef8f36",
+        "top_drivers": [
+          {
+            "value": 300.426967664389,
+            "feature": "pm_night_mean",
+            "shap_value": 29.462880134582512,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 346.64234848484847,
+            "feature": "pm_day_max",
+            "shap_value": 25.903588867187487,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 248.8268348818364,
+            "feature": "pm_t",
+            "shap_value": 21.770162010192877,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 1.31125,
+            "feature": "wind_speed_ms",
+            "shap_value": 17.23570861816406,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 252.77893539456917,
+            "feature": "pm_mean3",
+            "shap_value": 13.04231967926026,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 2,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.8043478260869565,
+                "mean_width": 66.49470261819421,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.967391304347826,
+                "mean_width": 159.92505044144715,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.654673+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1176,
+          "weather_target_date": "2026-01-01",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 181.943603515625,
+            "lower95": 158.89047241210938,
+            "upper80": 278.5889892578125,
+            "upper95": 301.6421203613281
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.8043478260869565,
+              "mean_width": 66.49470261819421,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.967391304347826,
+              "mean_width": 159.92505044144715,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.654673+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "delhi",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3935,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-02",
+        "horizon": 2,
+        "point": 238.1969746040898,
+        "lower80": 148.8221356625237,
+        "upper80": 252.7530805119747,
+        "lower95": 36.34369464084313,
+        "upper95": 319.49459927997873,
+        "aqi_category": "very_poor",
+        "mode": "replay",
+        "model_version": 80,
+        "algorithm": "mean7",
+        "cohort": "all_stations",
+        "mlflow_run_id": "1b681273ca95414286864249cfd8fe80",
+        "top_drivers": [
+          {
+            "value": 238.1969746040898,
+            "feature": "pm_mean7",
+            "shap_value": 149.2879467797197,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.03439806061360801,
+            "feature": "doy_sin",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.9994082116062598,
+            "feature": "doy_cos",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.0,
+            "feature": "diwali_window",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.0,
+            "feature": "holiday",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 3,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.7989130434782609,
+                "mean_width": 81.5196823812448,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9619565217391305,
+                "mean_width": 171.2082362950825,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.670928+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1176,
+          "weather_target_date": "2026-01-02",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 178.66278211113706,
+            "lower95": 113.57259958643508,
+            "upper80": 297.73116709704254,
+            "upper95": 362.8213496217445
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.7989130434782609,
+              "mean_width": 81.5196823812448,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9619565217391305,
+              "mean_width": 171.2082362950825,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.670928+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "delhi",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3936,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-03",
+        "horizon": 3,
+        "point": 238.1969746040898,
+        "lower80": 124.69750694375514,
+        "upper80": 209.2503795418951,
+        "lower95": 15.52735944335052,
+        "upper95": 299.5587107232555,
+        "aqi_category": "very_poor",
+        "mode": "replay",
+        "model_version": 87,
+        "algorithm": "mean7",
+        "cohort": "all_stations",
+        "mlflow_run_id": "ff39b2b3620142ddb6cd0c2f6c60bf4e",
+        "top_drivers": [
+          {
+            "value": 238.1969746040898,
+            "feature": "pm_mean7",
+            "shap_value": 149.59860822007676,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.051584366869408364,
+            "feature": "doy_sin",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.9986686402879997,
+            "feature": "doy_cos",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.0,
+            "feature": "diwali_window",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.0,
+            "feature": "holiday",
+            "shap_value": 0.0,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 4,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.8586956521739131,
+                "mean_width": 90.46689720520916,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9728260869565217,
+                "mean_width": 210.93386166975014,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.686844+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1176,
+          "weather_target_date": "2026-01-03",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 162.43145268333978,
+            "lower95": 92.9506598823165,
+            "upper80": 313.9624965248398,
+            "upper95": 383.44328932586313
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.8586956521739131,
+              "mean_width": 90.46689720520916,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9728260869565217,
+              "mean_width": 210.93386166975014,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.686844+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "hyderabad",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3937,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-01",
+        "horizon": 1,
+        "point": 44.22298657635257,
+        "lower80": 39.28767457390893,
+        "upper80": 49.158298578796206,
+        "lower95": 34.81531656679129,
+        "upper95": 53.63065658591385,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 10,
+        "algorithm": "sarimax",
+        "cohort": "all_stations",
+        "mlflow_run_id": "d969dfac91d94c918ad867c066085bc0",
+        "top_drivers": [
+          {
+            "value": 45.3654870014245,
+            "feature": "pm_t",
+            "shap_value": 5.009684394848697,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 47.09799572649573,
+            "feature": "pm_night_mean",
+            "shap_value": 3.698314457531387,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 45.485229263998235,
+            "feature": "pm_mean7",
+            "shap_value": 2.3597776437747107,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.9998520419557735,
+            "feature": "doy_cos",
+            "shap_value": 1.416264509802438,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 1.77125,
+            "feature": "wind_speed_ms",
+            "shap_value": 1.2336609228459738,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 2,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "conformal",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.782608695652174,
+                "mean_width": 8.456211615768613,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "conformal",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9619565217391305,
+                "mean_width": 15.15286296066695,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.701237+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1185,
+          "weather_target_date": "2026-01-01",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 39.28767457390893,
+            "lower95": 34.81531656679129,
+            "upper80": 49.158298578796206,
+            "upper95": 53.63065658591385
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "conformal",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.782608695652174,
+              "mean_width": 8.456211615768613,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "conformal",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9619565217391305,
+              "mean_width": 15.15286296066695,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.701237+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "hyderabad",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3938,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-02",
+        "horizon": 2,
+        "point": 41.270224480730135,
+        "lower80": 36.414291047003516,
+        "upper80": 49.76616057530759,
+        "lower95": 22.91043643816579,
+        "upper95": 52.014733675774444,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 17,
+        "algorithm": "sarimax",
+        "cohort": "all_stations",
+        "mlflow_run_id": "7295e02a64fa48cfb4a71fc92331a8dd",
+        "top_drivers": [
+          {
+            "value": 45.3654870014245,
+            "feature": "pm_t",
+            "shap_value": 4.607482960968177,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.9994082116062598,
+            "feature": "doy_cos",
+            "shap_value": 3.095514360653181,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 43.06541994752933,
+            "feature": "pm_tminus2",
+            "shap_value": 1.6593456168851126,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 955.2916666666666,
+            "feature": "surface_pressure_hpa",
+            "shap_value": -1.0466960847277638,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.0,
+            "feature": "season",
+            "shap_value": -0.9951841886723451,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 3,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.7880434782608695,
+                "mean_width": 13.478706306952175,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9619565217391305,
+                "mean_width": 21.731320059332624,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.711827+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1185,
+          "weather_target_date": "2026-01-02",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 33.8757340400574,
+            "lower95": 28.65442646230681,
+            "upper80": 48.66471492140287,
+            "upper95": 53.88602249915346
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.7880434782608695,
+              "mean_width": 13.478706306952175,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9619565217391305,
+              "mean_width": 21.731320059332624,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.711827+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "hyderabad",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3939,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-03",
+        "horizon": 3,
+        "point": 41.59455091657645,
+        "lower80": 33.791729355956285,
+        "upper80": 54.182996652952376,
+        "lower95": 24.331237048519867,
+        "upper95": 54.59304430838262,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 24,
+        "algorithm": "sarimax",
+        "cohort": "all_stations",
+        "mlflow_run_id": "5f90cd7e601740bc94c266efde0ca2cc",
+        "top_drivers": [
+          {
+            "value": 0.9986686402879997,
+            "feature": "doy_cos",
+            "shap_value": 5.310082436707958,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.0,
+            "feature": "season",
+            "shap_value": -1.5336081848116652,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 44.6393184411075,
+            "feature": "pm_tminus1",
+            "shap_value": 1.4158400750217217,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.9226679890485437,
+            "feature": "wind_sin",
+            "shap_value": 1.3458550247987515,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 956.4333333333334,
+            "feature": "surface_pressure_hpa",
+            "shap_value": -1.2713969431677279,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 4,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.7880434782608695,
+                "mean_width": 16.455748433201983,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9565217391304348,
+                "mean_width": 23.645945686517862,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.721724+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1185,
+          "weather_target_date": "2026-01-03",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 32.41586756812179,
+            "lower95": 19.597931595356645,
+            "upper80": 50.773234265031114,
+            "upper95": 63.59117023779626
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.7880434782608695,
+              "mean_width": 16.455748433201983,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9565217391304348,
+              "mean_width": 23.645945686517862,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.721724+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "kolkata",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3940,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-01",
+        "horizon": 1,
+        "point": 82.728515625,
+        "lower80": 62.66251277477862,
+        "upper80": 100.87888786677458,
+        "lower95": 33.092103535706684,
+        "upper95": 122.0103933106868,
+        "aqi_category": "moderate",
+        "mode": "replay",
+        "model_version": 136,
+        "algorithm": "lstm",
+        "cohort": "all_stations",
+        "mlflow_run_id": "5c608a11dc2e4617a6410f4844492606",
+        "top_drivers": [
+          {
+            "value": 145.27166666666668,
+            "feature": "pm_day_max",
+            "shap_value": 9.591449451446529,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 72.28691302910053,
+            "feature": "pm_t",
+            "shap_value": 5.375855064392091,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 26.041666666666668,
+            "feature": "relative_humidity",
+            "shap_value": 4.864524555206302,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 84.82141666666666,
+            "feature": "pm_night_mean",
+            "shap_value": 4.85350856781006,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 1.5658333333333332,
+            "feature": "wind_speed_ms",
+            "shap_value": 4.156579589843748,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 2,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.8043478260869565,
+                "mean_width": 21.61601051999694,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9402173913043478,
+                "mean_width": 46.28159760493989,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.734843+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1194,
+          "weather_target_date": "2026-01-01",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 66.66902160644531,
+            "lower95": 55.24285125732422,
+            "upper80": 98.78800964355469,
+            "upper95": 110.21417999267578
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.8043478260869565,
+              "mean_width": 21.61601051999694,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9402173913043478,
+              "mean_width": 46.28159760493989,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.734843+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "kolkata",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3941,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-02",
+        "horizon": 2,
+        "point": 83.09186553955078,
+        "lower80": 55.47994246685918,
+        "upper80": 103.22461950892144,
+        "lower95": 0.0,
+        "upper95": 141.24764165281795,
+        "aqi_category": "moderate",
+        "mode": "replay",
+        "model_version": 143,
+        "algorithm": "lstm",
+        "cohort": "all_stations",
+        "mlflow_run_id": "696f85da2c014e5890922b82050d8a46",
+        "top_drivers": [
+          {
+            "value": 145.27166666666668,
+            "feature": "pm_day_max",
+            "shap_value": 7.137937736511237,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 29.0,
+            "feature": "relative_humidity",
+            "shap_value": 6.462038421630858,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 1.7291666666666667,
+            "feature": "wind_speed_ms",
+            "shap_value": 4.0165910720825195,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.7789362160818203,
+            "feature": "wind_cos",
+            "shap_value": 3.5482563972473145,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 84.82141666666666,
+            "feature": "pm_night_mean",
+            "shap_value": 3.41389350891113,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 3,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.8260869565217391,
+                "mean_width": 27.113814576132164,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9456521739130435,
+                "mean_width": 57.48242491572761,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.742635+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1194,
+          "weather_target_date": "2026-01-02",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 60.8958625793457,
+            "lower95": 46.39252853393555,
+            "upper80": 105.28787231445312,
+            "upper95": 119.79119873046875
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.8260869565217391,
+              "mean_width": 27.113814576132164,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9456521739130435,
+              "mean_width": 57.48242491572761,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.742635+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "kolkata",
+        "forecast_method": "model",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "id": 3942,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-03",
+        "horizon": 3,
+        "point": 83.86842346191406,
+        "lower80": 59.048212116371786,
+        "upper80": 114.90841122284536,
+        "lower95": 2.8534213613306036,
+        "upper95": 140.43770167643686,
+        "aqi_category": "moderate",
+        "mode": "replay",
+        "model_version": 150,
+        "algorithm": "lstm",
+        "cohort": "all_stations",
+        "mlflow_run_id": "95ac424987624c528a9ba685bc9647be",
+        "top_drivers": [
+          {
+            "value": 29.583333333333332,
+            "feature": "relative_humidity",
+            "shap_value": 6.314658927917481,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 0.8864942333118121,
+            "feature": "wind_cos",
+            "shap_value": 6.122362232208253,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 1013.1124999999998,
+            "feature": "surface_pressure_hpa",
+            "shap_value": 4.38251791000366,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 95.94099454365079,
+            "feature": "pm_tminus7",
+            "shap_value": 4.317226600646968,
+            "interpretation": "conditional model attribution, not causal"
+          },
+          {
+            "value": 145.27166666666668,
+            "feature": "pm_day_max",
+            "shap_value": 4.019602155685423,
+            "interpretation": "conditional model attribution, not causal"
+          }
+        ],
+        "feature_provenance": {
+          "lead_days": 4,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "interval_policy": {
+            "choices": {
+              "80": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.8,
+                "warning": "",
+                "coverage": 0.7989130434782609,
+                "mean_width": 27.539046072928148,
+                "coverage_gate_passed": true
+              },
+              "95": {
+                "n": 184,
+                "method": "quantile_lightgbm",
+                "nominal": 0.95,
+                "warning": "",
+                "coverage": 0.9565217391304348,
+                "mean_width": 61.227051106423765,
+                "coverage_gate_passed": true
+              }
+            },
+            "version": 1,
+            "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+            "adopted_at": "2026-10-12T10:30:04.750904+00:00",
+            "source_run": 21,
+            "evaluation_window": [
+              "2025-07-01",
+              "2025-12-31"
+            ],
+            "evaluation_weather": "archived_forecast",
+            "point_model_changed": false,
+            "independent_validation": false,
+            "post_evaluation_selection": true
+          },
+          "weather_asset_id": 1194,
+          "weather_target_date": "2026-01-03",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "original_interval_bounds": {
+            "lower80": 60.05889129638672,
+            "lower95": 43.80546569824219,
+            "upper80": 107.6779556274414,
+            "upper95": 123.93138122558594
+          },
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {
+            "80": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.8,
+              "warning": "",
+              "coverage": 0.7989130434782609,
+              "mean_width": 27.539046072928148,
+              "coverage_gate_passed": true
+            },
+            "95": {
+              "n": 184,
+              "method": "quantile_lightgbm",
+              "nominal": 0.95,
+              "warning": "",
+              "coverage": 0.9565217391304348,
+              "mean_width": 61.227051106423765,
+              "coverage_gate_passed": true
+            }
+          },
+          "version": 1,
+          "selection": "closest empirical coverage, requiring nominal minus 0.05 when possible",
+          "adopted_at": "2026-10-12T10:30:04.750904+00:00",
+          "source_run": 21,
+          "evaluation_window": [
+            "2025-07-01",
+            "2025-12-31"
+          ],
+          "evaluation_weather": "archived_forecast",
+          "point_model_changed": false,
+          "independent_validation": false,
+          "post_evaluation_selection": true
+        }
+      },
+      {
+        "city": "mumbai",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3943,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-01",
+        "horizon": 1,
+        "point": 54.67062973792404,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 31,
+        "algorithm": "persistence",
+        "cohort": "all_stations",
+        "mlflow_run_id": "2c22ff5266e54792a26158c3b72e8a21",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 2,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1203,
+          "weather_target_date": "2026-01-01",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      },
+      {
+        "city": "mumbai",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3944,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-02",
+        "horizon": 2,
+        "point": 54.67062973792404,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 38,
+        "algorithm": "persistence",
+        "cohort": "all_stations",
+        "mlflow_run_id": "5cff2ffc3ced4d1d91985d1af3f75ac5",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 3,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1203,
+          "weather_target_date": "2026-01-02",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      },
+      {
+        "city": "mumbai",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3945,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-03",
+        "horizon": 3,
+        "point": 54.67062973792404,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "satisfactory",
+        "mode": "replay",
+        "model_version": 45,
+        "algorithm": "persistence",
+        "cohort": "all_stations",
+        "mlflow_run_id": "9b66200236144cc59ea05e062e985de1",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 4,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1203,
+          "weather_target_date": "2026-01-03",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      },
+      {
+        "city": "pune",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3946,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-01",
+        "horizon": 1,
+        "point": 79.181115244709,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "moderate",
+        "mode": "replay",
+        "model_version": 94,
+        "algorithm": "persistence",
+        "cohort": "all_stations",
+        "mlflow_run_id": "e5f1534701ad437693ca0490f14a5c56",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 2,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1212,
+          "weather_target_date": "2026-01-01",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      },
+      {
+        "city": "pune",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3947,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-02",
+        "horizon": 2,
+        "point": 79.181115244709,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "moderate",
+        "mode": "replay",
+        "model_version": 101,
+        "algorithm": "persistence",
+        "cohort": "all_stations",
+        "mlflow_run_id": "2f914f66570247dbbd8a0c18c596ba4b",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 3,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1212,
+          "weather_target_date": "2026-01-02",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      },
+      {
+        "city": "pune",
+        "forecast_method": "persistence",
+        "policy_source": "phase4-persistence-v1",
+        "fallback_used": true,
+        "fallback_reason": "model_loses_to_persistence_phase4",
+        "id": 3948,
+        "issued_for_date": "2025-12-31",
+        "target_date": "2026-01-03",
+        "horizon": 3,
+        "point": 79.181115244709,
+        "lower80": null,
+        "upper80": null,
+        "lower95": null,
+        "upper95": null,
+        "aqi_category": "moderate",
+        "mode": "replay",
+        "model_version": 108,
+        "algorithm": "persistence",
+        "cohort": "all_stations",
+        "mlflow_run_id": "bddb7ae5062b47ba8c970ec19c37ac8c",
+        "top_drivers": [],
+        "feature_provenance": {
+          "lead_days": 4,
+          "weather_kind": "archived_forecast",
+          "issue_end_utc": "2025-12-31T18:29:59.999999+00:00",
+          "weather_asset_id": 1212,
+          "weather_target_date": "2026-01-03",
+          "feature_availability": {
+            "pm_t": "2025-12-31T18:29:59.999999+00:00",
+            "month": "2025-12-31T18:29:59.999999+00:00",
+            "season": "2025-12-31T18:29:59.999999+00:00",
+            "doy_cos": "2025-12-31T18:29:59.999999+00:00",
+            "doy_sin": "2025-12-31T18:29:59.999999+00:00",
+            "holiday": "2025-12-31T18:29:59.999999+00:00",
+            "weekday": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean3": "2025-12-31T18:29:59.999999+00:00",
+            "pm_mean7": "2025-12-31T18:29:59.999999+00:00",
+            "wind_cos": "2025-12-31T06:00:00+00:00",
+            "wind_sin": "2025-12-31T06:00:00+00:00",
+            "pm_day_max": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus1": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus2": "2025-12-31T18:29:59.999999+00:00",
+            "pm_tminus7": "2025-12-31T18:29:59.999999+00:00",
+            "diwali_window": "2025-12-31T18:29:59.999999+00:00",
+            "pm_night_mean": "2025-12-31T18:29:59.999999+00:00",
+            "temperature_c": "2025-12-31T06:00:00+00:00",
+            "wind_speed_ms": "2025-12-31T06:00:00+00:00",
+            "precipitation_mm": "2025-12-31T06:00:00+00:00",
+            "relative_humidity": "2025-12-31T06:00:00+00:00",
+            "total_cloud_cover": "2025-12-31T06:00:00+00:00",
+            "surface_pressure_hpa": "2025-12-31T06:00:00+00:00"
+          },
+          "weather_available_by": "2025-12-31T06:00:00+00:00",
+          "concentration_latest_available_at": "2025-12-31T18:29:59.999999+00:00",
+          "concentration_publication_assumption": "day-t readings available at issue-end; historical release logs absent"
+        },
+        "interval_policy": {
+          "choices": {},
+          "serving_note": "Original model intervals do not assess this persistence override. No fallback interval coverage is claimed; see unchanged Phase 4 evaluation."
+        }
+      }
+    ],
+    "health": {
+      "ok": true,
+      "checks": {
+        "database": {
+          "ok": true
+        },
+        "extensions": {
+          "postgis": {
+            "ok": true,
+            "version": "3.6.4"
+          },
+          "timescaledb": {
+            "ok": true,
+            "version": "2.30.2"
+          },
+          "vector": {
+            "ok": true,
+            "version": "0.8.7"
+          }
+        },
+        "redis": {
+          "ok": true
+        },
+        "celery": {
+          "ok": true
+        }
+      }
+    }
+  },
+  "checks": {
+    "passed": 310,
+    "original_tests": 284,
+    "new_tests": 26,
+    "warnings": 147,
+    "seconds": 58.95,
+    "ruff": "pass",
+    "format": "pass",
+    "deployment": "System check identified no issues (0 silenced)."
+  },
+  "frozen_before": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "phase4_all_artifacts": {
+      "files": 967,
+      "aggregate_sha256": "302ad61bf22f1d9e617d052a113f027c4c5ce80064d6e99c99766c8b8bc97335"
+    },
+    "existing_tests": {
+      "files": 54,
+      "aggregate_sha256": "3520582daef603fc3af5aec5f3ee5f35b72c7ae1eb58bfe82f905879e690b392"
+    },
+    "historical_results": {
+      "files": 65,
+      "aggregate_sha256": "2a07d22d6f65c2c77401aa03ef28fb6017106c8624f91f050919a43a4bbec4cb"
+    },
+    "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4"
+  },
+  "frozen_after": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "phase4_all_artifacts": {
+      "files": 967,
+      "aggregate_sha256": "302ad61bf22f1d9e617d052a113f027c4c5ce80064d6e99c99766c8b8bc97335"
+    },
+    "existing_tests": {
+      "files": 54,
+      "aggregate_sha256": "3520582daef603fc3af5aec5f3ee5f35b72c7ae1eb58bfe82f905879e690b392"
+    },
+    "historical_results": {
+      "files": 65,
+      "aggregate_sha256": "2a07d22d6f65c2c77401aa03ef28fb6017106c8624f91f050919a43a4bbec4cb"
+    },
+    "phase5_questions_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4"
+  },
+  "database_before": {
+    "Forecast": {
+      "rows": 3948,
+      "sha256": "69cad0739e5527360cac98043cf3fb2656111685ed1a20c6a6237b4cf44c67fe"
+    },
+    "ForecastEvaluation": {
+      "rows": 21,
+      "sha256": "67a08ebf3adf9fcefe9c6426d9bececcfc851f3b029c21546c961587473692bd"
+    },
+    "ForecastModelVersion": {
+      "rows": 150,
+      "sha256": "b9b5b622311c4554cbf6f9e3dadc9a490dc75662441438ce254c6b2b3df81b77"
+    }
+  },
+  "database_after": {
+    "Forecast": {
+      "rows": 3948,
+      "sha256": "69cad0739e5527360cac98043cf3fb2656111685ed1a20c6a6237b4cf44c67fe"
+    },
+    "ForecastEvaluation": {
+      "rows": 21,
+      "sha256": "67a08ebf3adf9fcefe9c6426d9bececcfc851f3b029c21546c961587473692bd"
+    },
+    "ForecastModelVersion": {
+      "rows": 150,
+      "sha256": "b9b5b622311c4554cbf6f9e3dadc9a490dc75662441438ce254c6b2b3df81b77"
+    }
+  },
+  "browser": [
+    {
+      "name": "dashboard",
+      "path": "/dashboard/",
+      "width": 1440,
+      "status": 200,
+      "forecast_method_labels_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "screenshot": "docs/results/phase7-fix-dashboard-1440.png"
+    },
+    {
+      "name": "api",
+      "path": "/api/forecast/mumbai/latest/",
+      "width": 1440,
+      "status": 200,
+      "forecast_method_labels_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "screenshot": "docs/results/phase7-fix-api-1440.png"
+    },
+    {
+      "name": "forecasts",
+      "path": "/forecasts/?city=mumbai",
+      "width": 1440,
+      "status": 200,
+      "forecast_method_labels_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "screenshot": "docs/results/phase7-fix-forecasts-1440.png"
+    },
+    {
+      "name": "dashboard",
+      "path": "/dashboard/",
+      "width": 390,
+      "status": 200,
+      "forecast_method_labels_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "screenshot": "docs/results/phase7-fix-dashboard-390.png"
+    },
+    {
+      "name": "api",
+      "path": "/api/forecast/mumbai/latest/",
+      "width": 390,
+      "status": 200,
+      "forecast_method_labels_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "screenshot": "docs/results/phase7-fix-api-390.png"
+    },
+    {
+      "name": "forecasts",
+      "path": "/forecasts/?city=mumbai",
+      "width": 390,
+      "status": 200,
+      "forecast_method_labels_visible": true,
+      "horizontal_overflow": false,
+      "js_errors": [],
+      "screenshot": "docs/results/phase7-fix-forecasts-390.png"
+    }
+  ],
+  "screenshots": {
+    "docs/results/phase7-fix-api-1440.png": "39a46ab9cbf88117b947dfb142eadb5d8be2b5b19b4857599dcdda4040c44638",
+    "docs/results/phase7-fix-api-390.png": "94c862e20a1996c591cfbd5bdfa29aa0ce2acc62f5811e76db26016cf42e6608",
+    "docs/results/phase7-fix-dashboard-1440.png": "1526212d15352201ba3f75d24c7c7489e7eeeb4f79db65757d26634db9621aa5",
+    "docs/results/phase7-fix-dashboard-390.png": "360904a790114cd536cce28e9ae27a4f49b8848b7d306d398f1224a7c8beea87",
+    "docs/results/phase7-fix-forecasts-1440.png": "1c3b4724cec17a221c9b6e4ccf2516077171fcd01fe4c12454adde41735fbdcc",
+    "docs/results/phase7-fix-forecasts-390.png": "188b9ea40ef9c5a8fc2ab57f3c245f4354ab6d4b3123e46266818a1c8e9da599"
+  },
+  "documentation_sentence_changes": [
+    {
+      "file": "README.md",
+      "old_exact_text_whitespace_normalized": "Persistence is advised, but the latest saved issuance still uses other algorithms for five of those nine; automatic fallback for all nine is **not implemented**.",
+      "new_exact_sentence": "Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others."
+    },
+    {
+      "file": "docs/results/WRITEUP.md",
+      "old_exact_text_whitespace_normalized": "The application does **not** automatically enforce fallback for all nine. Phase 7 exposes this discrepancy without rewriting forecasts or selecting a replacement against frozen outcomes.",
+      "new_exact_sentence": "Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others."
+    },
+    {
+      "file": "docs/DEMO.md",
+      "old_exact_text_whitespace_normalized": "Nine policies lose. Persistence is advised, but five of those nine latest issuances still use another algorithm.",
+      "new_exact_sentence": "Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others."
+    },
+    {
+      "file": "docs/RESUME.md",
+      "old_exact_text_whitespace_normalized": "disclosed **nine** losing policies, the incomplete operational fallback and **14** interval-level coverage failures.",
+      "new_exact_sentence": "Serving uses persistence for the nine city-horizon combinations where Phase 4 found that the model lost to persistence; the model is used for the others."
+    }
+  ],
+  "phase7_snapshot_unchanged": true,
+  "historical_validation_prefix_unchanged": true,
+  "historical_journal_sha256": "2de9545c7e1dd6d7bc1701783801ee5df87c2591addbf92fe51e3522d73501d5"
+}

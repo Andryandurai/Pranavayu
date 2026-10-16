@@ -1,0 +1,14 @@
+{
+  "version": "phase4-persistence-v1",
+  "source": "docs/results/PHASE4.md#issued-policy-skill-and-statistical-comparison",
+  "result_file": "data/results/21/phase4_results.json",
+  "scope": "Serving override selected after Phase 4; not a re-evaluation of the original backtest",
+  "default_method": "model",
+  "fallback_reason": "model_loses_to_persistence_phase4",
+  "policies": {
+    "bengaluru": {"1": "persistence", "3": "persistence"},
+    "chennai": {"1": "persistence"},
+    "mumbai": {"1": "persistence", "2": "persistence", "3": "persistence"},
+    "pune": {"1": "persistence", "2": "persistence", "3": "persistence"}
+  }
+}
