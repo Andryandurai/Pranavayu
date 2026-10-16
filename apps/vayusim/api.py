@@ -14,9 +14,10 @@ from apps.warehouse.models import City
 
 from .artifacts import overlay_png
 from .models import Scenario, ScenarioRun
+from .presentation import export_png, section_path, store_section
 from .presets import presets
 from .serializers import RunSerializer
-from .service import ensure_grid, interpretation, run_response, run_scenario
+from .service import ensure_grid, interpretation, run_response, run_scenario, validation_status
 from .weather import IST, background_stations
 
 
@@ -49,6 +50,7 @@ class GridView(APIView):
             return Response(
                 {
                     "run_id": run.pk,
+                    "validation_status": validation_status(run),
                     "engine_version": run.engine_version,
                     "inputs_hash": run.inputs_hash,
                     **run.summary["grid"],
@@ -73,14 +75,46 @@ class ScenarioView(APIView):
     @extend_schema(responses=OpenApiTypes.OBJECT)
     def get(self, request, slug):
         scenario = get_object_or_404(Scenario, share_slug=slug)
+        runs = list(scenario.runs.order_by("id"))
         return Response(
             {
                 "name": scenario.name,
                 "slug": slug,
                 "inputs": scenario.inputs,
-                "runs": [run_response(r) for r in scenario.runs.order_by("id")],
+                "validation_status": validation_status(runs[-1]) if runs else None,
+                "runs": [run_response(r) for r in runs],
             }
         )
+
+
+class ExportView(APIView):
+    @extend_schema(responses=OpenApiTypes.BINARY)
+    def get(self, request, run_id):
+        run = get_object_or_404(ScenarioRun.objects.select_related("scenario__city"), pk=run_id)
+        response = HttpResponse(export_png(run), content_type="image/png")
+        response["Content-Disposition"] = f'attachment; filename="vayusim-{run.pk}.png"'
+        response["X-Validation-Status"] = validation_status(run)
+        return response
+
+
+class SectionView(APIView):
+    @extend_schema(responses=OpenApiTypes.OBJECT)
+    def get(self, request, run_id):
+        import json
+
+        run = get_object_or_404(ScenarioRun, pk=run_id)
+        path = section_path(run)
+        if not path.exists():
+            return Response(
+                {"detail": "No stored vertical grid; POST here to create it"}, status=404
+            )
+        return Response(json.loads(path.read_text(encoding="utf-8")))
+
+    @extend_schema(request=None, responses=OpenApiTypes.OBJECT)
+    def post(self, request, run_id):
+        run = get_object_or_404(ScenarioRun, pk=run_id)
+        store_section(run)
+        return self.get(request, run_id)
 
 
 class DayView(APIView):

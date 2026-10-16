@@ -1,5 +1,15 @@
 # EnviroInsights-India
 
+Open **http://127.0.0.1:8000/vayusim/** for the Phase 6B dispersion lab.
+It provides source placement, cited source families, archived/manual weather,
+binary-grid particles and contours, stored source-removal comparisons, a cached
+hourly timeline, separate CPCB totals, a stored vertical cross-section and
+annotated image exports. `/simulator/` remains an alias, including old share links.
+Urban Briggs C/F show **unvalidated branch** on the page, summary, day frames and
+exports. Other branches say **formula check only**. These labels are not evidence
+of predictive performance. See [Phase 6B](docs/results/PHASE6B.md) for the exact
+API contract, measured timings, browser screenshots and limitations.
+
 Phase6A adds **VayuSim**, an educational, source-specific Gaussian dispersion
 engine with archived weather, WorldPop2025 exposure, saved scenarios and a
 verification map. The website now has consistent desktop/mobile navigation:
@@ -23,8 +33,8 @@ verifies the published rural-D sigma pair at 1 km (DOE p.213): errors 0.030135%
 and 0.124886%, within 5%. This does not validate the **urban C** branches used by
 Delhi/Mumbai or **urban F** used by Hyderabad; those remain **not independently
 validated** against numeric cases. Their example values are unchanged. The gate
-is **Ready for 6B with caveats**, conditional on the future frontend displaying
-**unvalidated branch** for these scenarios. Phase6B has not been started.
+is **Ready for 6B with caveats**. The Phase 6B frontend now displays
+**unvalidated branch** for these scenarios; the scientific caveats still apply.
 
 VayuSim inputs are explicit scenario assumptions, not measured facility
 inventories. All five source-family presets require emission rate, release

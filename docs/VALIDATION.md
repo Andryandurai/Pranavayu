@@ -27680,3 +27680,10140 @@ Actual Git commands, stdout/stderr, exit codes and the final commit hash are
 retained in [the local final Git output](../data/results/phase6a-independent/final-git.json).
 This final output is written after commit to avoid requiring the committed
 Markdown to contain its own hash. No push or Phase6B work is performed.
+
+## Phase 6B frontend verification
+
+Bootstrap: read the user attachment, Sites local-only skill, and prior logging/identity helpers. Confirmed D:\EnviroInsights-India at b29083f with no tracked changes. No source or frozen files changed by bootstrap. Commands and real outputs follow.
+
+<details>
+<summary>Phase 6B: 001-request-foundations (2026-10-16T10:59:11.8911287+05:30; exit 0)</summary>
+
+````powershell
+Get-Content -LiteralPath 'C:\Users\Andry\.codex\attachments\b68aab6d-1a3b-4967-a7eb-df72fd6918e0\Pasted text.txt' -Raw -Encoding UTF8
+Get-Location
+git log -1 --oneline
+git status --short --untracked-files=no
+python .tools/phase6b/identity.py before
+Get-Content -LiteralPath 'docs/results/PHASE6A.md' -Raw -Encoding UTF8
+Get-Content -LiteralPath 'README.md' -Raw -Encoding UTF8
+Get-Content -LiteralPath 'docs/ARCHITECTURE.md' -Raw -Encoding UTF8
+Get-Content -LiteralPath 'docs/DATA_MODEL.md' -Raw -Encoding UTF8
+````
+
+````text
+ROLE
+You are continuing EnviroInsights-India at D:\EnviroInsights-India after commit b29083f (Phase 6A independent validation). Build Phase 6B: the cinematic VayuSim frontend on top of the 6A engine and API. Do not change engine physics, coefficients, presets or validation results. I may be away: never stop to ask questions. Choose the most reasonable option, record it under "Decisions" in docs/results/PHASE6B.md, and continue.
+
+GATE (from PHASE6A.md)
+"Ready for 6B with caveats." The following are acceptance criteria for 6B:
+- Every scenario that uses urban Briggs coefficients for class C or F shows a visible "unvalidated branch" label on the scenario page, in the summary panel, in the exported image, and in the API response field validation_status.
+- The three example cities (Delhi C, Mumbai C, Hyderabad F) carry that label everywhere they appear, including the day-mode view and any shared link.
+- No 6B text, tooltip, caption or export may describe the results as validated, accurate or realistic.
+
+GROUND RULES
+- Never invent data, values, citations or results. Every number shown must come from an API response or a stored ScenarioRun.
+- Do not change the frozen Phase 3A.2, Phase 4 or Phase 5 evaluation sets or their labels. Hash them before and after. Expected hashes:
+  - Phase 3A.2: c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350
+  - Phase 4: 35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4
+  - Phase 5: f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4
+- Use only free tiles and libraries (OpenFreeMap or OpenStreetMap raster, MapLibre GL, deck.gl, Three.js, or Canvas). No paid keys. Load scripts only from cdnjs.cloudflare.com, cdn.jsdelivr.net/npm/ (pinned versions at least two weeks old), or unpkg.com. Vendor them locally if you prefer, and record the version and licence for each.
+- Keep all 260 tests passing. Do not edit existing tests to pass. Add tests for every new endpoint and for the validation label. Run ruff, the full suite and the deployment check before committing.
+- Record every command and output in docs/VALIDATION.md.
+- Commit locally. Do not push.
+
+FIRST
+Read docs/results/PHASE6A.md (especially the gate, API contract and benchmarks), docs/results/PHASE6A.md "Independent validation", README.md, ARCHITECTURE.md, DATA_MODEL.md, the vayusim API, the scenario and run models, and the existing overview and Ask pages so the new design fits the site.
+
+TASK 1: Confirm the API contract
+- Document the 6A endpoints as they exist: POST /api/vayusim/run/, GET /api/vayusim/grid/<run_id>.bin with its JSON header, the PNG overlay, GET /api/vayusim/scenarios/<slug>/, POST /api/vayusim/day/, GET /api/vayusim/presets/, GET /api/vayusim/stations/.
+- If the response does not include validation_status per scenario, add it. Values: "unvalidated_branch" for urban C/F, "formula_check_only" for other branches. Add a test.
+- Do not change any numeric output.
+
+TASK 2: Day mode performance
+- Benchmark the day endpoint for 24 hourly runs on the three example cities, using cold and warm cache. Record the timings in PHASE6B.md.
+- Target: the frontend can animate the 24 hourly frames smoothly. Set a frame budget (for example 16 ms or 100 ms per frame, depending on rendering method) and say which option you chose. If the server is too slow, prefetch the grid files in the browser and cache them, and record the result.
+
+TASK 3: Cinematic frontend
+Build one Django template page for the VayuSim visualisation (a new route, for example /vayusim/). Include:
+- Map: a free-style base map with the source placed by clicking. Source preset selector with its citation shown next to it. Manual or real weather choice, date and hour selector.
+- Plume: particle or smoke-like animation drawn from the returned binary grid, coloured with the CPCB PM2.5 category colours from the PNG overlay definition. Keep the static PNG overlay as a fallback when WebGL is unavailable.
+- Contours: 1, 15, 60 and 120 µg/m³ from the GeoJSON, plus user thresholds.
+- Summary panel: peak concentration and location, distance to peak, stability class, flags (including low-wind), population above each threshold, and the four required limits (primary PM2.5 only; flat terrain; steady state within the hour; educational estimate, not a regulatory assessment).
+- Before/after view: one run with the user's source and one with the source removed, both from stored runs. Label the difference "modelled increment from these sources only."
+- Timeline: 24-hour scrubber calling the day endpoint.
+- Background: nearby CPCB readings from the stations endpoint, labelled "measured total (all sources)." Never add them to the plume values.
+- Cross-section: a vertical profile along the wind direction from stored grid data only.
+- Validation label: the unvalidated-branch label described in the gate, shown wherever a scenario appears.
+
+TASK 4: Accessibility and layout
+- Phone width with a 16 px gutter and no horizontal page scroll.
+- Light and dark modes, with colour-blind-safe category labels in addition to colour.
+- Keyboard operation for source placement and the timeline.
+
+TASK 5: Tests
+- Endpoint tests: validation_status present and correct for urban C/F and other branches.
+- Frontend smoke test: the page loads, the label appears for the three example scenarios, and no page calls an external service other than the tile and script CDNs.
+- Day-mode test with a cached run.
+- No test downloads data or calls live services.
+
+TASK 6: Browser verification
+- Check the new page at desktop and phone widths. Capture screenshots to docs/results/ and record the commands used.
+- Confirm that the unvalidated label is visible on each example scenario.
+
+FINAL REPORT
+1. API contract as implemented: endpoints, request and response fields, validation_status values, and grid format.
+2. Day-mode benchmark: cold and warm timings, frame budget, and the chosen rendering path.
+3. Frontend: the list of features built, and any feature deferred with a reason.
+4. Validation label: where it appears, verified in the browser.
+5. Screenshots: paths for desktop and phone.
+6. Test count, ruff status, deployment check, frozen-set hashes before and after (must match the expected hashes above).
+7. Commit hash. Do not push.
+8. Known limitations and anything that could be misread by viewers.
+
+Path
+----
+D:\EnviroInsights-India
+b29083f Verify independent VayuSim reference cases and record conditional 6B gate
+ M docs/VALIDATION.md
+{
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "existing_tests_and_fixtures": {
+    "files": 52,
+    "aggregate_sha256": "96269be9a5fac7370622731cc9bd2266c74ccf63e2f51aff4e49c112bb145416"
+  },
+  "physics_and_presets": {
+    "files": 6,
+    "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+  },
+  "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+  "stage": "before",
+  "identical_to_before": false
+}
+# Phase 6A: VayuSim engine, data integration and API
+
+**Gate: Ready for 6B with caveats.** Urban C (Delhi/Mumbai) and urban F
+(Hyderabad) remain **not independently validated**. Phase6B must display an
+**unvalidated branch** label for these scenarios before presenting them. This
+is a conditional frontend acceptance requirement; **Phase6B has not started**.
+See [Independent validation](#independent-validation) for the exact case scope.
+
+The engine, real-data adapters, API and verification map are implemented in
+`D:\EnviroInsights-India`. The user's subsequent whole-site presentation request
+covers the overview, forecasts, research, library, assistant and simulator pages.
+This report separates measured software/scientific checks from predictive validity.
+The [Phase 6A audit](#phase-6a-audit) below narrows the original validation claims;
+it includes discrepancies beyond the original supplied-sigma concentration checks.
+The full Phase 6B frontend is outside this implementation.
+
+## Step 0 outcomes
+
+### Forecast intervals
+
+Existing Run 21 archived-weather evaluation results selected the closest coverage
+to nominal among methods no more than five percentage points below it, separately
+for each city, horizon and level. The policy is stored on all 147 model versions.
+No point model was refitted. At the change, all 3,885 existing rows and their point
+values were retained; 19 latest issuance rows had revised bounds. Earlier bounds
+remain in provenance and `forecast-intervals-before.json`. Scheduled jobs may add
+subsequent rows; 3,885 is the snapshot count, not a permanent database total.
+
+Coverage below is retrospective selection evidence, **not independent validation**
+of the selected policy. Fourteen of 42 level choices have no qualifying method;
+the closest existing method is retained with an explicit failure flag. If needed,
+issued 95% bounds are widened to contain the 80% interval. The archived coverage
+table describes each selected family, not an independently rescored combined
+nesting policy.
+
+| City | Horizon | 80% method / coverage / gate | 95% method / coverage / gate |
+| --- | --- | --- | --- |
+| bengaluru | 1 | quantile_lightgbm / 71.20% / FAIL | quantile_lightgbm / 89.13% / FAIL |
+| bengaluru | 2 | quantile_lightgbm / 73.37% / FAIL | quantile_lightgbm / 86.96% / FAIL |
+| bengaluru | 3 | quantile_lightgbm / 73.37% / FAIL | quantile_lightgbm / 86.41% / FAIL |
+| chennai | 1 | quantile_lightgbm / 72.83% / FAIL | quantile_lightgbm / 91.30% / pass |
+| chennai | 2 | quantile_lightgbm / 73.91% / FAIL | quantile_lightgbm / 91.30% / pass |
+| chennai | 3 | quantile_lightgbm / 74.46% / FAIL | quantile_lightgbm / 94.02% / pass |
+| delhi | 1 | quantile_lightgbm / 80.43% / pass | quantile_lightgbm / 96.74% / pass |
+| delhi | 2 | quantile_lightgbm / 79.89% / pass | quantile_lightgbm / 96.20% / pass |
+| delhi | 3 | quantile_lightgbm / 85.87% / pass | quantile_lightgbm / 97.28% / pass |
+| hyderabad | 1 | conformal / 78.26% / pass | conformal / 96.20% / pass |
+| hyderabad | 2 | quantile_lightgbm / 78.80% / pass | quantile_lightgbm / 96.20% / pass |
+| hyderabad | 3 | quantile_lightgbm / 78.80% / pass | quantile_lightgbm / 95.65% / pass |
+| kolkata | 1 | quantile_lightgbm / 80.43% / pass | quantile_lightgbm / 94.02% / pass |
+| kolkata | 2 | quantile_lightgbm / 82.61% / pass | quantile_lightgbm / 94.57% / pass |
+| kolkata | 3 | quantile_lightgbm / 79.89% / pass | quantile_lightgbm / 95.65% / pass |
+| mumbai | 1 | quantile_lightgbm / 82.07% / pass | quantile_lightgbm / 96.20% / pass |
+| mumbai | 2 | quantile_lightgbm / 83.15% / pass | quantile_lightgbm / 96.20% / pass |
+| mumbai | 3 | conformal / 78.80% / pass | quantile_lightgbm / 95.65% / pass |
+| pune | 1 | conformal / 71.20% / FAIL | conformal / 88.59% / FAIL |
+| pune | 2 | quantile_lightgbm / 70.65% / FAIL | quantile_lightgbm / 86.41% / FAIL |
+| pune | 3 | quantile_lightgbm / 73.91% / FAIL | quantile_lightgbm / 91.30% / pass |
+
+Failures: Bengaluru all three horizons at both levels; Chennai all three at 80%;
+Pune all three at 80%, and horizons 1–2 at 95%. Quantile target distributions can
+place the separate unchanged point model outside an interval. The API/UI retains
+and explains that outcome instead of altering point forecasts or stretching bounds.
+
+### Local language model
+
+Installed RAM was 17,179,869,184 bytes (16 GiB). The requested floor of 60% gives
+`[wsl2] memory=9GB` in `C:\Users\Andry\.wslconfig`. The earlier report stated there was no existing file;
+that historical absence cannot be independently reconstructed. Docker/WSL were cleanly restarted. The resumed
+2026-10-15 measurement gave MemAvailable 6,909,865,984 bytes, exceeding the actual
+model 1,929,912,432 bytes plus 3,221,225,472 bytes (3 GiB) headroom.
+
+The capability is **extractive retrieval with verified citations**, not a
+certified question-answering assistant. The fix pass now defaults to extractive retrieval and disables the `llm` profile.
+The retained experimental opt-in Ollama model is `qwen2.5:3b-instruct`, Q4_K_M, digest
+`357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b`.
+Model files and Docker's data disk reside on D:. Generation uses temperature 0,
+seed 20261010, context 16384, maximum 1600 new tokens, four CPU threads and
+keep_alive=0. The provider-only evaluation uses the original 120 frozen questions;
+the previous extractive evaluation is preserved.
+
+| Ollama frozen evaluation metric | Actual result |
+| --- | --- |
+| questions | 120 |
+| citations | 2 |
+| citation_accuracy | 1.0 |
+| audited_citation_uses | 2 |
+| correct_citation_uses | 2 |
+| groundedness_before_removal | 0.016666666666666666 |
+| groundedness_emitted | 1.0 |
+| emitted_sentences | 2 |
+| supported_emitted_sentences | 2 |
+| claims | 120 |
+| supported_claims | 2 |
+| removed_claims | 118 |
+| number_correctness | 0.0 |
+| numeric_precision | None |
+| numeric_cell_exactness | 0.0 |
+| correct_numeric_values | 0 |
+| expected_numeric_values | 669 |
+| extra_numeric_values | 0 |
+| available_data_questions | 30 |
+| missing_data_questions | 0 |
+| available_data_answer_rate | 0.0 |
+| missing_data_refusal_rate | None |
+| displayed_row_exactness | 0.0 |
+| correct_data_rows | 0 |
+| expected_data_rows | 491 |
+| data_questions_exact | 0.9 |
+| correct_refusal_rate | 1.0 |
+| literature_answer_rate | 0.025 |
+| literature_gold_source_citation_rate | 0.025 |
+| latency_seconds_mean | 80.76179166666667 |
+| generation_fallbacks | 0 |
+
+Completed 2026-10-15T15:16:48.629771+00:00; MLflow run `a70d7abfbf0149b8a4a1f78b8dad544b`.
+
+The strict verifier requires a literal supplied `[E#]` alias and exact source
+sentences/table rows. Unsupported output becomes a refusal. Do not interpret
+high grounding among retained claims as a high answer rate. The frozen forecast
+expectations predate the new interval bounds and new interval-policy provenance;
+snapshot mismatches must be reported separately from generation correctness.
+See the appended provider results in PHASE5. Only 2/80 literature questions
+retained an answer, 0/30 available-data questions were answered, and all 10
+unanswerable questions were refused. The 100% emitted grounding/citation scores
+apply to just two retained sentences/citation uses, not to all 120 questions.
+
+With inference finished and the reranker still resident, the final warm check
+measured 5,394,948,096 bytes available against 5,151,137,904 bytes required
+(actual model + 3 GiB). This also passes; the margin is small. See `warm-memory-gate.json`.
+
+### Resident reranker and candidate gate
+
+A dedicated single-process Celery inference worker retains the same pinned
+float32 cross-encoder (maximum length 1024, batch 2). HTTP embedding requests
+release their embedding model; they do not unload the resident reranker.
+All 80 frozen literature questions were measured for both candidate counts.
+
+| Metric | Fused 40 | Fused 24 |
+| --- | --- | --- |
+| recall_at_5 | 0.803125 | 0.809375 |
+| recall_at_10 | 0.884375 | 0.903125 |
+| hit_at_10 | 0.9 | 0.9125 |
+| mrr | 0.6932707917082916 | 0.7010148358585859 |
+| seconds | 5.121477811050002 | 2.317789466399995 |
+
+Recall@10 improved by 1.875 percentage points, satisfying the predeclared maximum
+one-point drop gate, so 24 is retained. The `seconds` row above is mean
+**cache-assisted evaluation** time and is not uncached interactive latency.
+
+| Uncached L001 stage | Before (seconds) | After resident worker (seconds) |
+| --- | --- | --- |
+| Cold 40 | 80.36799 | 246.86437 |
+| Warm 40 | 47.59473 | 156.84292 |
+| Embedding request | 10.3666 | 224.39866 |
+| Rerank 40 after embedding | 66.5089 | 204.19029 |
+| Warm 24 | not measured | 87.96909 |
+
+These actual uncached after timings are slower. They do **not** establish a latency
+improvement. They were recorded on different days under different competing CPU
+workloads on this laptop. Identical 40 candidate IDs had exactly matching scores;
+the 24 subset differed by at most 4.2841e-8. Residence fixes model lifetime and the
+24-candidate gate improves the measured retrieval tradeoff; CPU latency remains
+a material limitation. Evidence: `reranker-before.json`, `reranker-after.json`,
+`rerank-candidate-gate.json`.
+
+## Engine design and references
+
+`apps/vayusim/physics/` imports NumPy only. Geographic projection, population,
+weather, Django/database and artifact generation are external adapters.
+The current engine version is **gaussian-briggs-1.1.0**.
+Point contributions broadcast over receptors and source batches of at most 20;
+area midpoint lattices and line midpoint segments conserve total Q and then use
+the same superposition. They approximate extended sources, not analytic ISC
+area/line integrals. Upwind receptors and the first metre downwind are excluded.
+
+With Q in g/s, the output concentration in µg/m³ is
+
+`C = 10^6 Q/(2π u σy σz) exp(−y²/(2σy²))`
+`× [exp(−(z−H)²/(2σz²)) + exp(−(z+H)²/(2σz²))]`.
+
+The default receptor is z=1.5 m. Reflecting images at ±2nL converge elementwise
+to a relative contribution below 1e-6. At σz/L≥1.6, the vertical factor becomes
+`sqrt(2π) σz/L`, giving a vertically uniform profile. Effective releases above
+the lid, or receptors above it, contribute zero and are flagged. Applying an
+observed lid also in stable conditions is an educational adaptation; it is not
+the unlimited stable mixing assumption of ISC and is not model equivalence.
+
+Briggs σy/σz rural/urban tables are transcribed from
+[Brune, PSU METEO532 Table 2.3](https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm).
+They are extrapolated with a flag outside the cited 100 m–10 km range. Urban is
+the city default. The adjacent class-B worked example conflicts with its own
+σy table; coefficients were not tuned to reproduce that inconsistency.
+
+Wind is FROM the supplied meteorological bearing. Wind at the physical release
+height is `max(1, u10 (h/10)^p)`. Exponents from
+[ISC3 Volume II](https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf),
+printed p.1-5 Table 1-1, are rural A–F .07/.07/.10/.15/.35/.55 and urban
+.15/.15/.20/.25/.30/.30. Low 10 m or release-height wind is flagged.
+Release height is not silently clamped to 10 m.
+
+Briggs buoyancy `Fb = g v d²(Ts−Ta)/(4Ts)`, momentum `Fm = v²d²Ta/(4Ts)`,
+stable/unstable final and distance-dependent transitional rise and stack-tip
+adjustment follow ISC3 printed pp.1-6–1-11, Eqs.1-7–1-29. g=9.80616 m/s²;
+stable E/F potential-temperature gradients are .020/.035 K/m. Zero flow or
+diameter disables rise. Cold exhaust uses momentum only and is flagged because
+dense-gas sinking is not modelled.
+
+Stability is a disclosed approximation: measured-radiation SRDT by day using
+[EPA Meteorological Monitoring Guidance](https://www.epa.gov/sites/production/files/2020-10/documents/mmgrma_0.pdf),
+Table 6-7 printed p.6-16 (925/675/175 W/m²), and Turner cloud/wind classes at
+night. It is **not full Turner**, because cloud ceiling and nighttime delta-T
+are unavailable. Daytime classes use measured radiation; an overcast daytime
+hour is not overridden using the separate nighttime cloud table.
+
+If BLH is absent, [CDM2 Table 5, printed p.15](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101EO4F.TXT)
+supplies stability ratios. L=1500 m is the Turner Problem 6 illustrative inversion;
+Lmin=500 m is an illustrative screening case in
+[EPA Screening Procedures, Figure 4-19 printed p.4-62](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000F86J.TXT).
+Transferred values A2250, B/C/D-day1500, D-night1000, E/F500 m are educational
+assumptions, **not Indian climatology, measured BLH or universal EPA defaults**.
+Every affected result contains the fallback and citation flags. The three final
+real-weather examples below all have warehouse-supplied BLH; none needs this
+fallback. Open-Meteo/ERA5 grid-point meteorology is archived model/reanalysis
+data, not direct measurements of BLH. The provenance `observed` flag distinguishes
+a supplied warehouse value from the illustrative fallback, not an instrument.
+
+## Numerical checks and scope
+
+The [fix pass](#fix-pass) contains the authoritative two tables: passing formula
+checks and Briggs-versus-Martin scheme comparisons. Same-formula arithmetic
+checks implementation, not independent physical validity. Cimbala PDF p.3 supplies
+the Gaussian inputs; Turner physical pages remain **unverified** and excluded
+from the validation pass count. The inconsistent Brune class-B paragraph is also
+excluded. No end-to-end physical validation is claimed.
+
+All six required Hypothesis properties pass: reflected crosswind mass integral,
+crosswind symmetry, Q linearity, source superposition, non-increasing ground
+maximum with increased effective release height at identical wind/dispersion,
+and zero upwind concentration. The stack-height property explicitly fixes
+transport and has z=0/no rise/no lid; it does not claim every coupled plume-rise
+configuration is monotonic. Three stored independent scalar-oracle golden fields
+pass. Additional tests cover lid mass/uniform mixing, A–F heterogeneous rising
+source broadcasting, stability tables, wind profiles, area/line mass conservation,
+strict input rejection, synthetic raster count/support, cache uniqueness,
+concurrent lazy materialisation and server-computed RAG provenance.
+
+Pre-audit container output: **242 passed, 149 warnings in 39.09 s**. All 41 original
+test/support/fixture files are SHA256-identical; all 183 original tests remain.
+The frozen question hash and all 32 original Phase 5 result artifacts also match.
+Ruff: `All checks passed!`; format: `261 files already formatted`.
+
+## Performance
+
+| Sources | Median ms | Min ms | Max ms | Timed repetitions |
+| --- | --- | --- | --- | --- |
+| 1 | 6.127 | 5.588 | 7.398 | 20 |
+| 20 | 255.313 | 212.995 | 319.776 | 20 |
+
+Measured on Intel Core i5-13420H (8 cores/12 logical processors), 16 GiB RAM,
+Windows 11 with the 9 GB WSL2 limit; Python 3.12.15/NumPy 2.5.3 in Linux Docker.
+200×200 receptors, float32 result, one warmup before 20 repetitions, one NumPy
+thread. This times the pure engine, including buoyant rise, not projection,
+population reprojection or response artifacts. The local Qwen evaluation and
+normal Docker services were active. The one-source <100 ms target passes;
+20-source latency is reported without an invented target. Source broadcasting
+increases working memory and does not imply a guaranteed multicity speedup.
+Reproduce with `docker compose exec -T web python manage.py verify_vayusim`.
+
+## Real-data integration and three actual examples
+
+Hourly WeatherObservation timestamps are UTC. An IST hour starting 06:30 UTC
+uses its 07:00 UTC midpoint observation, which avoids shifting the IST half-hour
+offset. Missing required weather is unavailable, not synthetic observations.
+
+WorldPop 2025 counts become geodesic source-cell population densities, warped
+by area-weighted rasterio reprojection onto the rotated AEQD grid. A separate
+fractional support mask prevents nodata from being extrapolated over missing
+areas. Known population counts are retained; unknown population is excluded,
+and support area is reported. Reprojection is an approximate finite-cell
+method, tested for conservation on known synthetic grids, not a census.
+
+Every demonstration is a **hypothetical 1 g/s source**. All three deliberately
+use the same hypothetical 1 g/s
+primary PM2.5 point release at 50 m, diameter/velocity 0 (no rise), 293.15 K
+(irrelevant at zero flow), urban dispersion, z=1.5 m, 10 km/50 m grid.
+These are declared software demonstration assumptions, not measured facilities,
+AP-42 defaults or source-apportionment findings. Weather, population and the
+computed scenario outputs are real stored runs.
+
+| City / IST hour / ScenarioRun | Class | Peak added µg/m³ | Nearest source–peak m | Population >1 µg/m³ | Population support | Population-weighted increment µg/m³ |
+| --- | --- | --- | --- | --- | --- | --- |
+| Delhi, 2025-01-15 12:00 IST, #62 | C | 15.641839 | 176.777 | 11,787.141 | 91.306% | 0.025990 |
+| Mumbai, 2025-07-15 15:00 IST, #63 | C | 11.536741 | 176.777 | 5,906.777 | 93.905% | 0.029134 |
+| Hyderabad, 2025-11-15 20:00 IST, #64 | F | 18.990891 | 725.431 | 66,300.357 | 96.022% | 0.245285 |
+
+| City | u10 m/s | Wind FROM ° | Air K | Shortwave W/m² | Cloud fraction | Warehouse BLH m | Same-hour nearby CPCB readings |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Delhi | 3.26 | 126.0 | 285.65 | 501.0 | 0.71 | 815.0 | 33 |
+| Mumbai | 4.42 | 227.0 | 300.65 | 296.0 | 1.0 | 460.0 | 25 |
+| Hyderabad | 2.06 | 61.0 | 292.45 | 0.0 | 0.0 | 65.0 | 8 |
+
+![Actual stored modelled-increment fields, with explicit hypothetical source assumptions](assets/phase6a-scenarios.png)
+
+Population is modelled and fractional, so table decimals are retained for audit;
+the UI rounds people. Population values cover the modelled footprint only and
+its known raster support, not an entire city. At fixed weather, source/release
+geometry and grid, concentration and peak scale linearly with Q; population
+above a fixed concentration threshold does not. Concentrations are hourly increments from these assumed
+sources. CPCB/OpenCity-CPCB readings are quality-OK nearby **measured total (all
+sources)** within the same IST hour and remain separate; they are never added.
+Peak is a 50 m lattice maximum, not a continuous analytical peak. All runs
+retain assumptions, exact weather row/source, population SHA, engine version,
+input hash, limits and flags. Old engine-version runs are retained.
+
+Delhi 2025-01-15 day mode returned **24/24 available hourly summaries**. Grids
+were initially lazy; the first metadata request successfully materialised grid
+and contours. All three runs' detail, shared scenario, binary, JSON and PNG
+requests returned HTTP 200; each default binary is 160,000 bytes.
+
+## Presets and citations
+
+| Family | Geometry | AP-42 source section | Physical numeric defaults |
+| --- | --- | --- | --- |
+| Thermal power plant | point | 1.1 Bituminous/subbituminous coal combustion | all null; required |
+| Brick kiln cluster | area | 11.3 Brick/structural clay products | all null; required |
+| Industrial boiler | point | 1 External combustion; select actual fuel/controls | all null; required |
+| Crop-fire field | area | 2.5 Open burning; verify crop/activity/fine fraction | all null; required |
+| Road dust resuspension (stable ID `highway`) | line | [13.2.1 January 2011](https://www.epa.gov/sites/default/files/2020-10/documents/13.2.1_paved_roads.pdf), §13.2.1.1 p.13.2.1-1 and §13.2.1.3 p.13.2.1-4 (PDF pp.1,4); excludes exhaust/brake/tire wear | all null; required |
+
+Each preset links to the [EPA AP-42 compilation](https://www.epa.gov/air-emissions-factors-and-quantification/ap-42-compilation-air-emissions-factors-stationary-sources)
+and its exact section. No universal, defensible facility emission rate, height,
+diameter, exit velocity or temperature was established. Those five fields are
+null and required. Activity-based total particulate factors are not silently
+converted to instantaneous primary PM2.5 g/s. Area/line geometry and subdivision
+counts also require explicit input. No numbers were invented to make a preset
+appear complete.
+
+The road preset requires the total segment primary PM2.5 rate in g/s; it does
+not accept a g/VKT emission factor or a per-metre rate as that total. The cited
+January 2011 road-dust equation excludes exhaust, brake wear and tire wear.
+No transferable fleet-specific exhaust factor was established in this audit;
+exhaust emissions remain a required independently justified user input for a
+separately specified source, not an implied component of this preset.
+
+## Stored evidence and assistant integration
+
+`vayusim_run(run_id)` is a strict whitelisted tool returning stored summary,
+engine version, hash and scenario provenance. `/api/rag/explain/` with
+`context_type=scenario,payload.run_id` combines that tool with retrieved
+literature. Arbitrary client parameters remain unverified context. The separate
+five-question VayuSim set checks exact stored values, stability/provenance,
+population/support, separation from measured totals and limitations; all five
+pass exact citation support with the deterministic extractive provider and
+keyword literature retrieval. This is integration evidence, **not a measured
+five-question generative LLM quality claim**, and not part of the frozen Phase 5
+evaluation. The independent provider results are reported above.
+
+An additional real HTTP request to the default-provider explanation endpoint
+returned 200 in 405.516 s using Ollama. Its tool result exactly matched Hyderabad
+ScenarioRun 64; the deliberately incorrect client peak 999999 was absent. The
+generated explanation omitted valid evidence aliases and was rejected to a
+refusal, with no generation or retrieval exception. This proves live routing
+and stored-value isolation, **not successful generative explanation quality**.
+The complete response is `default-provider-explain.json`.
+
+Lazy materialisation reads the run's canonical input/weather snapshot, not the
+editable Scenario record. A regression changes a scenario's emission by 100×
+after summary creation and confirms its historical lazy grid still matches
+the original peak/hash. This preserves result identity across future edits.
+
+## Whole-site UI and browser verification
+
+The additional requested presentation work gives all six main pages a shared
+responsive navigation, typography, green/ivory palette, accessible labels, cards,
+empty/loading/error states and explicit dates. Overview cards use actual stored
+counts/results. Forecasts show horizon intervals, failed coverage warnings and
+actual SHAP contributions. Research shows fixed-panel/all-station distinctions,
+intervals and the observed calendar gap. Library search exposes source/licence
+and page links. Ask renders safe Markdown plus source links and plaintext audit.
+VayuSim supports click/drag placement, cited source families, manual/real weather,
+PNG/contours, exposure, measured background and share/download/explain controls.
+
+MapLibre GL JS 5.24.0 and its BSD-3-Clause licence are vendored. The basemap is
+OpenStreetMap raster with visible attribution; no paid key, offline bulk fetch
+or prefetch. The UI is a one-source verification form; the API supports multiple
+sources. Shared one-source scenarios repopulate city, time and source values;
+shared multiple-source results are viewable, with edits directed to the API.
+
+Headless Microsoft Edge/Playwright returned HTTP 200 on all six pages at both
+1440 px and 390 px, without horizontal overflow or JavaScript errors. Actual
+interactions exercised mobile navigation, city selection (three forecast cards),
+research mode (seven NCAP cards), AERMOD library filtering, example-question fill,
+shared Hyderabad output and an actual map run/overlay. Browser artifacts are in
+the verification folder; screenshots are retained under `.tools/phase6a-validation/`.
+
+## Failures found, root causes and corrections
+
+| Failure | Root cause / correction | Measured rerun |
+| --- | --- | --- |
+| Docker unavailable on resume | Installed Docker Desktop was stopped; start hidden and bring Compose up | Services running/healthy; health 200 |
+| Resident reranker lacked Django model registry | Standalone entrypoint needed django.setup() before database result backend | Resident worker requests returned scores matching original |
+| Population warp overstated nodata-border support | GDAL excludes nodata from density average; preserve a separate fractional support mask and do not extrapolate | Synthetic count/partial-nodata checks pass; final real exposure recomputed |
+| GDAL denormal nodata warning | Zero destination nodata was converted to a tiny sentinel; use NaN nodata and explicit mask | No warning in final reprojection checks |
+| New transactional test missing analytics table after original migration test | Original test intentionally restores warehouse-only migration; arrange full leaf schema inside new test | 242 full-suite tests pass; original test unchanged |
+| Hypothesis generation timing health check under concurrent inference | CPU contention and Windows bind-mounted cache; put storage in /tmp and briefly pause inference during test, then unpause | Unchanged 53 targeted tests pass, then all242 pass |
+| Map repeated-run wait could hang | map.loaded() can be false during tile refresh after load event; cache initial load Promise | Browser map run/share checks pass |
+| Shared form showed default city/blank assumptions | Map result was loaded without repopulating controls; restore saved inputs and robust IST datetime | Shared Hyderabad form/output browser check passes |
+| Standalone verification helper import error | Script path omitted project PYTHONPATH; invoke with -e PYTHONPATH=/app | Five scenario evidence checks pass |
+| Local model refuses most answerable questions | Model output omits required evidence aliases and/or exact supported text; verifier rejects claims | No verifier weakening or synthetic fallback score; completed 120-question results above |
+
+The pre-audit 149 suite warnings were retained, primarily Django 6 URL-scheme deprecation,
+NumPy generic timedelta deprecation and statsmodels convergence warnings.
+The preexisting netCDF4/NumPy ndarray-size warning, SHAP/matplotlib deprecations
+and MLflow type-hint warning also remain. The original baseline log contains
+the same warning classes; they were not suppressed or treated as proof of
+compatibility outside the tested paths.
+`check --deploy --settings=enviroinsights.settings.prod` reports **no issues
+(0 silenced)**, so there are no deployment warnings to list or suppress.
+Migration drift and OpenAPI validation checks pass.
+
+## Decisions
+
+1. Preserve original tests, gold questions, original extractive artifacts and
+   old simulation runs; new outputs have separate directories/version hashes.
+2. Keep the requested retrospective interval-selection rule even when no method
+   passes; flag the 14 failures and preserve unchanged point forecasts.
+3. Adopt 24 candidates on its predefined recall gate; do not claim a latency
+   improvement contradicted by uncached measurements.
+4. Keep source-specific physical defaults null when citations do not establish
+   them. Demonstration source assumptions are explicit and distinct from data.
+5. Use the measured-radiation/cloud-table stability hybrid and cited BLH transfer
+   anchors with persistent flags rather than claiming unavailable full Turner
+   inputs or local climatology.
+6. Preserve unknown population support. Report known hourly added exposure;
+   do not invent zeros outside the raster or extrapolate counts over nodata.
+7. Use local AEQD and bounded source/receptor broadcasting. Performance numbers
+   cover the engine only and include actual background laptop CPU contention.
+8. Fulfil the later whole-site UI request while leaving Phase 6B's cinematic
+   frontend and additional research scope for its own phase.
+
+## Limitations
+
+Primary PM2.5 only: no chemistry, secondary aerosol, deposition or removal.
+Flat terrain and uniform steady hourly meteorology; no building downwash beyond
+stack-tip. Calm wind, near-field coefficient extrapolation, stable shallow lids,
+cold exhaust and extended-source discretisation need caution. No regulatory
+assessment or claim of equivalence with AERMOD. Real regulatory work needs
+appropriate emissions, meteorological preprocessing and model configuration.
+The demonstration has no measured facility inventory. BLH transfer defaults
+are illustrative. WorldPop is modelled 2025 population with missing support;
+exposure is not daily/annual exposure, dose, health impact or causal attribution.
+Partial support, grid resolution and assumed source parameters limit precision.
+Reranking/generation are CPU-bound and can take minutes; strict citation support
+does not measure semantic correctness or completeness. Existing data gaps,
+fixed-panel restrictions, causal limitations and replay labels still apply.
+The development server and public local scenario shares are not a production
+authentication/hosting deployment.
+
+## Phase 6B API contract
+
+| Endpoint | Contract |
+| --- | --- |
+| `POST /api/vayusim/run/` | Strict finite JSON, city slug, centre `[lon,lat]`, 1–20 sources, real/manual weather, offset-aware datetime; returns run ID, flags, summary, contours, URLs and cache flag |
+| `GET /api/vayusim/runs/<id>/` | Re-open an actual stored run and its provenance |
+| `GET /api/vayusim/grid/<id>.bin` | Row-major little-endian float32; default200×200=160000 bytes; `X-Grid-Header` points to metadata |
+| `GET /api/vayusim/grid/<id>.json` | Shape, dtype/order, six affine coefficients, AEQD WKT, four lon/lat corners in image order, receptor height, units, label, version/hash, flags, limits and contours |
+| `GET /api/vayusim/grid/<id>.png` | Transparent at ≤1 µg/m³, category-colour overlay; hourly increment, **not CPCB AQI** |
+| Contours | GeoJSON FeatureCollection in WGS84 lon/lat, thresholds1/15/60/120 plus user values; may be empty; metadata request materialises lazy contours |
+| `GET /api/vayusim/scenarios/<slug>/` | Stored inputs and versioned runs for a shared scenario |
+| `POST /api/vayusim/day/` | Real weather only, uses the supplied datetime's IST date, 24 entries with availability/reason and summary; grids/contours on demand; **24 independent hours**, not averaged exposure |
+| `GET /api/vayusim/presets/` | Five source families, null physical defaults, required inputs and citations |
+| `GET /api/vayusim/stations/?city=&datetime=` | Same-hour nearby measured totals; never summed with modelled increment |
+| `POST /api/rag/explain/` | `context_type=scenario`, `payload.run_id` selects stored evidence; returns answer, citations, provider and verification |
+
+Affine maps **pixel corners** to east/north metres; sample receptors at
+`(column+0.5,row+0.5)`. Wind rotates the grid. PNG corners are top-left,
+top-right,bottom-right,bottom-left, with their actual geographic positions;
+do not assume an unrotated north-up image. Validate returned shape/resolution.
+The frontend must display increment versus measured-total labels, hourly scope,
+real/manual weather, actual date and source assumptions, source citations,
+population support/unavailability, all flags/limits and replay/provider
+verification. Do not animate missing hours as zeros or hide fallback weather.
+
+An older run without a retained grid cannot be silently materialised by a new
+engine under its old version label. Its summary stays available; grid requests
+return400 with instructions to submit its saved inputs as a new versioned run.
+
+Full commands and measured output are recorded in [VALIDATION](../VALIDATION.md).
+Structured local proof files are under `data/results/vayusim/verification/`.
+Their final manifest hashes retained files; downloaded scientific source
+manifests are under `data/raw/vayusim/`. Re-run the committed verification
+command against the retained database/raw assets to reproduce the examples.
+
+## Phase 6A audit
+
+Completed from commit `b5136b2` in `D:\EnviroInsights-India`.
+No Phase 6B work, new language-model evaluation, prompt tuning, coefficient
+fitting, evaluation-label edits or original-test changes occurred. Structured
+measurements are in [PHASE6A_AUDIT_METRICS.json](PHASE6A_AUDIT_METRICS.json).
+Every shell command and actual output, including failed attempts, is retained
+in [VALIDATION](../VALIDATION.md#phase-6a-audit-command-journal-15-october-2026).
+
+### Decisions
+
+1. Keep 5% sigma and 10% concentration tolerances unchanged. Use independently
+   transcribed source values; classify same-formula arithmetic as formula check
+   only. A different published parameterisation is not a fitting target.
+2. Keep the existing candidate default only when the gain has an evidenced cause
+   and the original maximum one-point Recall@10 drop gate holds against both
+   fresh K=40 and the historic K=40 baseline. K=32 is diagnostic, not a newly tuned winner.
+3. Score each frozen query's 40 pairs freshly once and filter that fixed scored
+   set at 24/32/40. This isolates candidate competition without conflating it with
+   batch/model differences. Independently time actual uncached 24/32/40 RPCs.
+4. Relabel stable ID `highway` as road dust resuspension, because the verified
+   January 2011 AP-42 pages exclude exhaust/brake/tire wear. Keep the rate required.
+5. At the audit, preserve prompts, provider configuration and frozen labels. The
+   later fix-pass decision below supersedes only the provider default. Decline the optional
+   larger-model evaluation; this audit needs an accurate status, not model tuning.
+6. Back up the current 9GB WSL file. The prior report records no original existed;
+   do not claim a nonexistent historical backup. Keep resource and quality gates separate.
+7. Fix project-controlled warning causes with explicit URL-form settings and
+   accurate model input/return types. Leave upstream warnings visible with reasons;
+   do not edit original tests, suppress categories or change frozen estimator settings.
+8. Derive API disclosures from retained run inputs. Do not rewrite old numerical
+   summaries, hashes or engine versions. Retain original result artifacts separately.
+
+### Textbook audit and corrections to earlier claims
+
+The original mixed pass/fail table is superseded by the [fix pass](#fix-pass).
+The 14 rounded sigma references are arithmetic from the same published formulas,
+not independently printed numeric observations. Their authoring provenance beyond
+the original test docstring remains **unverified**. Cimbala PDF p.3 supplies a
+published-input Gaussian formula check. Its Martin sigmas are a separate scheme
+from Briggs: their differences exceed 5%/10%, but are not validation errors.
+Turner physical pages remain unverified. Brune Table 2.3 agrees with the code;
+the adjacent paragraph is the inconsistent reference. All original measured
+values remain in the historical audit artifacts, without promoting them to
+independent physical validation.
+
+### Highway citation decision
+
+Stable ID `highway` now displays **Road dust resuspension**. The retained
+[AP-42 January 2011 §13.2.1](https://www.epa.gov/sites/default/files/2020-10/documents/13.2.1_paved_roads.pdf),
+§13.2.1.1 printed p. 13.2.1-1 (PDF p. 1), explicitly separates resuspension from
+exhaust, brake wear and tire wear. §13.2.1.3 printed p. 13.2.1-4 (PDF p. 4) gives
+the dust equation and separates other vehicle emissions. No applicable generic
+India-fleet exhaust factor was established; it remains required if modelled as
+a separately justified source. All five physical defaults remain null. The
+required emission is total segment primary PM2.5 g/s, not g/VKT or g/s/m.
+The preset/API citation table and limitations now state this scope explicitly.
+
+### Reranker comparison and cause
+
+All 80 frozen literature queries were freshly scored without the pair cache,
+once over their fused 40. K=24/32/40 use subsets of the same fixed pair scores.
+Model revision `953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e`, CPU float32,
+1024-token limit, batch size 2, four Torch threads and seed 20261010 are unchanged.
+RRF k=60 and both first-stage limits of 40 are unchanged. Query vectors were cached.
+
+| K | Recall@5 | Recall@10 | MRR through K | Cold L001 s | Warm L001 s |
+| --- | --- | --- | --- | --- | --- |
+| 24 | 0.809375000000 | 0.903125000000 | 0.701014835859 | 63.861518 | 31.741508 |
+| 32 | 0.803125000000 | 0.884375000000 | 0.700181277056 | 76.974456 | 42.284033 |
+| 40 | 0.803125000000 | 0.884375000000 | 0.693270791708 | 102.609534 | 52.454254 |
+
+Cold/warm timings are each one actual uncached L001 RPC per K, in order 40, 32, 24.
+The worker was restarted before each cold measurement. Cold refers to the model
+process, **not a flushed OS file cache**; warm means the immediately repeated
+RPC. Pair caches were bypassed for both. Other normal services remained running.
+These are measured samples, not confidence intervals or full-corpus averages.
+The full fresh K=40 comparison averaged 63.425801 s/query;
+other audit checks and the suite ran during parts of that pass. It is not a
+controlled speed comparison with the earlier Phase 6A timings, which remain above.
+
+Historical K=40 ordering restricted to the 24 candidates equals K=24 for 80/80 queries.
+Fresh K=40 and K=24
+orders each match their historic counterparts for
+76/80 and
+77/80 respectively;
+fresh K=40 candidate sets match for 80/80.
+This evidences candidate competition, rather than a resident-model improvement.
+The retained pair cache reconstructs 80 historical
+orders from 80 queries with complete
+cached pairs. Fresh scores differ from those cached values by at most
+7.45058059692e-08. Near-tie movement changes some
+ordering: 79/80 top-10 orders and
+80/80 top-10 sets are exactly unchanged. The precise
+floating-point kernel/batching mechanism is **unverified**; measured drift and
+individual moved scores/ranks are retained in `reranker-score-drift.json`.
+For the actual independent K timing probes the maximum warm-prefix score
+difference from 40 is 4.76837158203e-07;
+the largest cold/warm difference is 0.
+Ties use ascending chunk ID. Exact score ties among the displayed gain/displacer
+pairs: `False`. The gain rows and actual pair scores are:
+
+| Query | Known-gold chunk | Rank40 | Rank24 | Fixed pair score | Removed higher-scoring non-gold chunks |
+| --- | --- | --- | --- | --- | --- |
+| L025 | 50660 | 13 | 10 | 0.073289424181 | 50644 (0.264985233545, rank1), 50681 (0.105676166713, rank10) |
+| L072 | 43818 | 14 | 9 | 0.0752021819353 | 43545 (0.604610085487, rank2), 50687 (0.30640399456, rank5), 47410 (0.189759835601, rank9), 43796 (0.180791005492, rank10) |
+
+Loss rows (query, lost known-gold IDs, Recall@10 change): `[('L023', [50659], -0.5)]`.
+Two historical gains of 1 and one loss of 0.5 give `(1+1-0.5)/80=0.01875`,
+exactly the earlier 1.875-point gain. Non-gold means absent from these incomplete
+frozen labels, not independently judged irrelevant. This is a repeated frozen
+benchmark audit, not new out-of-sample evidence or a tuning exercise.
+Recall@5/10 is measured before the service's evidence filtering. For example,
+L025's gained gold is rank 10 with score 0.07328942418, below the existing 0.2
+relevance floor and outside the eight retained passages. That recall gain does
+not itself establish improved returned evidence or answer quality. The floor
+and retained-passage count were not changed.
+
+**Chosen default: 24.** Cause evidenced: `True`.
+Fresh40 minus 24 Recall@10=-0.018750000000; historic K=40 minus 24=-0.018750000000,
+both compared with the unchanged maximum 0.01 drop gate. K=32 is reported without
+selecting a new optimum from this benchmark. Evidence retains every candidate
+ID, text SHA, score and per-query metric in `reranker-state.json`.
+
+### Assistant resource and quality status
+
+Installed RAM is 17,179,869,184 bytes (16 GiB); Windows
+usable RAM is 16,852,574,208 bytes. These are separate
+actual CIM measurements. `.wslconfig` exists at `C:\Users\Andry\.wslconfig`
+with `[wsl2] memory=9GB`. The current file is backed up at
+`C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`; both files have SHA256
+`d4f748ea8f222563e1beb8319e62496c62635ce052aa4dd380ee332b73375268`. There was no original backup at audit start.
+The prior report records no pre-Phase 6A file existed; that historical absence
+cannot be independently reconstructed now. The new file preserves current
+settings and is **not** misrepresented as a pre-change original.
+
+The readiness endpoint returned **HTTP 200**, all
+checks true. After the full evaluation/tests, with the reranker still resident
+and normal services running, MemAvailable was
+4,103,503,872 bytes, compared with the installed Qwen
+file 1,929,912,432 bytes + 3 GiB headroom =
+5,151,137,904 bytes; resource gate=False.
+An earlier audit measurement was 5,415,559,168
+bytes and passed the same gate. The **final measurement fails**, so memory
+eligibility is not a permanent certification. The cause of the lower final
+availability is **unverified**; no allocator/kernel change is asserted or tuned.
+No larger model was downloaded/evaluated, and no provider/prompt was tuned.
+
+The final description in README, Architecture, this report and the Ask page is
+**extractive retrieval with verified citations**. The earlier audit retained the experimental Qwen configuration; the fix pass
+now selects extractive by default and stops Ollama, keeping generation opt-in. Its existing 120-question evaluation retained
+only 2/80 literature answers, 0/30 available-data answers and refused 10/10
+unanswerable questions. Two supported citations do not certify answer quality.
+The earlier 0.9 data-snapshot match is not numeric answer correctness. The
+answer-quality acceptance gate remains **not passed**; the resource gate does
+not change that status.
+
+### Warnings and final tests
+
+Before: 149 warnings, including
+2 project-controlled causes. After:
+**147 warnings, zero project-originated**, all remaining
+warnings upstream. DRF warnings: 0. Original test files are byte-identical.
+Source is classified by the implementation that emits the warning, not just
+the reported stacklevel callsite; standalone pandas construction reproduces
+the 142 datetime warnings without any project import.
+
+| Origin | Category | Exact message | Before | After | Action / reason retained |
+| --- | --- | --- | --- | --- | --- |
+| Django / project URL-form configuration | RemovedInDjango60Warning | The default scheme will be changed from 'http' to 'https' in Django 6.0. Pass the forms.URLField.assume_scheme argument to silence this warning, or set the FORMS_URLFIELD_ASSUME_HTTPS transitional setting to True to opt into using 'https' as the new default scheme. | 1 | 0 | Fixed with an explicit HTTPS URL form field and admin field overrides; no transitional setting or warning filter. |
+| MLflow / project model adapter | UserWarning | Add type hints to the `predict` method to enable data validation and automatic signature inference during model logging. Check https://mlflow.org/docs/latest/model/python_model.html#type-hint-usage-in-pythonmodel for more details. | 1 | 0 | Fixed RegisteredForecaster.predict DataFrame input and ndarray return annotations; no warning filter. |
+| SHAP / matplotlib | PendingDeprecationWarning | The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead. | 1 | 1 | Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade. |
+| SHAP / matplotlib | PendingDeprecationWarning | The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead. | 1 | 1 | Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade. |
+| SHAP / matplotlib | PendingDeprecationWarning | The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead. | 1 | 1 | Pinned SHAP 0.52.0 calls deprecated matplotlib colormap setters at import. No vendored library patch or blanket suppression; retain until compatible upstream upgrade. |
+| netCDF4 / NumPy | RuntimeWarning | numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject | 1 | 1 | Error-mode trace identifies compiled netCDF4._netCDF4 import. Existing parser tests pass, but full ABI compatibility is unverified; retain visibly pending compatible wheel/rebuild. |
+| pandas / NumPy | DeprecationWarning | The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead. | 142 | 142 | Standalone pd.Timedelta(hours=1) reproduces the warning without project imports. Root is pandas 2.3.3 Cython conversion with NumPy 2.5.3. Original tests untouched; dependency upgrade/rebuild deferred, visible and unsuppressed. |
+| statsmodels | ConvergenceWarning | Maximum Likelihood optimization failed to converge. Check mle_retvals | 1 | 1 | SARIMAX maximum likelihood does not converge on the original 12-row synthetic state-leakage fixture. The adapter records the convergence flag in tuning metadata. Do not change frozen estimator iterations, edit the fixture or hide the warning. |
+
+An initial URL fix using `FORMS_URLFIELD_ASSUME_HTTPS` exposed its own Django5.2
+deprecation (intermediate 148 warnings). It was removed. Explicit URL field
+classes/admin overrides choose HTTPS for schemeless curator input and preserve
+explicit HTTP, blank/length metadata and stored URLs. MLflow's adapter now has
+accurate DataFrame/ndarray hints; this does not claim new automatic schema certification.
+No warning suppression was added. Error-mode traces identify pandas Cython and
+the compiled netCDF4 extension; ABI compatibility beyond tested paths is unverified.
+
+Final full web-container suite: **249 passed, 147 warnings in 43.62 s**.
+Seven added regressions check candidate competition, stable ties, the road-dust
+citation/default, source labels/scopes and URL forms. All 242 existing tests and
+47 existing test/support/fixture files are unchanged. Ruff check/format, Django
+check/deploy, migration drift and strict OpenAPI validation pass in the command journal.
+The initial audit baseline attempt hit Hypothesis's generation-speed health
+check under host contention; no health checks/assertions were weakened. The
+subsequent complete run and final run are retained with their actual conditions.
+
+### Three rerun examples
+
+The verification command returned original runs 62/63/64. Independently recomputed
+fields, peak distances and every reported population numeric value match the
+retained Phase 6A report. Every example is labelled **hypothetical 1 g/s source**
+in this report, README and both run/header API responses. Weather and registered
+WorldPop are real archived inputs; the release remains a declared assumption.
+
+| City / run | Source label | Peak added µg/m³ | Peak distance m | Population >1 µg/m³ | Population-weighted mean µg/m³ | Support |
+| --- | --- | --- | --- | --- | --- | --- |
+| delhi / #62 | hypothetical 1 g/s source | 15.641839027 | 176.776695297 | 11787.140769548 | 0.025989982135 | 0.913056536128 |
+| mumbai / #63 | hypothetical 1 g/s source | 11.536741257 | 176.776695297 | 5906.777275623 | 0.029133751121 | 0.939046243713 |
+| hyderabad / #64 | hypothetical 1 g/s source | 18.990890503 | 725.430906427 | 66300.357405811 | 0.245285103375 | 0.960219877969 |
+
+At fixed weather, geometry, release parameters and grid, concentration and peak
+scale linearly with Q (or a common multiplier on all sources). A fresh 2 g/s
+calculation doubled every example peak exactly. Float32 underflow tails differ
+by at most 1.40129846432e-45 µg/m³
+when scaling before versus after output casting; bitwise equality of all tails
+is not claimed. Population above a fixed threshold is nonlinear in Q.
+Population values are **for the footprint only**, limited to known raster
+support, not citywide exposure, census counts, dose or health impacts.
+
+The extra verification-command benchmark measured median
+7.871904 ms for one source and
+287.775578 ms for 20, engine only.
+Those incidental audit timings do not replace the original measured conditions.
+
+### Frozen identity before and after
+
+Each aggregate SHA256 hashes canonical JSON (`sort_keys=True`, compact separators)
+mapping relative filename to the SHA256 of its exact bytes. The 316 Run 7 and 776
+Run 21 CSV/JSON files include saved targets, OOF/evaluation labels, split audits,
+predictions and metadata. The four evaluation catalogue files additionally cover
+the separate VayuSim set. No file or label in these bundles changed.
+
+| Preserved data bundle | Files | SHA256 before | SHA256 after | Identical |
+| --- | --- | --- | --- | --- |
+| phase3a2 | 316 | c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350 | c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350 | True |
+| phase4 | 776 | 35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4 | 35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4 | True |
+| phase5 | 4 | 51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23 | 51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23 | True |
+| existing_tests | 47 | a93dc34f7ed9d7469f70a765dad8de26e8eed2b08563458da3563c973451e8a6 | a93dc34f7ed9d7469f70a765dad8de26e8eed2b08563458da3563c973451e8a6 | True |
+| protocols | 2 | 11448872580c317d228eeef2f89c54721b34a40cddf124db11b5223b0fb24c17 | 11448872580c317d228eeef2f89c54721b34a40cddf124db11b5223b0fb24c17 | True |
+
+Phase 5 frozen query/relevance file before and after:
+`f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4`. It includes the known-gold IDs and frozen data labels.
+Individual protocol hashes also match the pre-audit Git blobs:
+
+| Protocol | Before SHA256 (baseline Git blob) | After SHA256 |
+| --- | --- | --- |
+| docs/results/PHASE3A2_PROTOCOL.json | 09d869e72551b31af0368b0d89a5c91510e8ecd65e6ce53605d33a704b827977 | 09d869e72551b31af0368b0d89a5c91510e8ecd65e6ce53605d33a704b827977 |
+| docs/results/PHASE4_PROTOCOL.md | 395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c | 395b384c7b5324ba4b4e87f87e2cdff30295be1de9a42155c85c707e417aa28c |
+| docs/results/PHASE5_PROTOCOL.md | d4872769cb454c79b83a275a0e3004384ef4ac5394bf633d2ab000cc4e0562a7 | d4872769cb454c79b83a275a0e3004384ef4ac5394bf633d2ab000cc4e0562a7 |
+
+Full per-file maps are retained in `identity-before.json` and `identity-after.json`.
+The result manifest hashes the measurement artifacts. The older Phase 6A manifest
+describes commit b5136b2 and is retained as historical provenance; its source-code
+hashes should be checked against that commit, not later changed documentation.
+
+### Remaining limitations and claim changes
+
+Software regression checks pass; independent Briggs sigma validation within 5%
+has **not** been established. Briggs/Martin differences exceed the unchanged
+tolerances and are disclosed as scheme comparisons, not validation errors.
+No dispersion coefficients or source defaults were
+invented to erase them. The road preset means dust resuspension only.
+The Qwen quality gate remains failed, its final measured memory gate also fails,
+and no new generation is cleared by this audit. The later fix pass now selects
+extractive by default and stops Ollama; its local generation profile is opt-in.
+CPU retrieval/generation remain slow,
+known-gold relevance labels are incomplete, and upstream dependency/ABI warnings
+remain visible. Existing primary-PM2.5, steady wind, flat terrain, missing
+chemistry/deposition, near-field, BLH-transfer and fractional population-support
+limitations still apply. This audit makes no regulatory or predictive-validity
+certification and starts no Phase 6B work. No manual installation/restart/action
+is required to finish the audit.
+
+## Fix pass
+
+Completed on 16 October 2026 from commit `05ef914` in `D:\EnviroInsights-India`.
+The initial checks ran on 15 October; the user interrupted the session, then
+resumed it on 16 October. **Phase 6B has not been started.** Structured evidence:
+[PHASE6A_FIX_METRICS.json](PHASE6A_FIX_METRICS.json). Commands, failed attempts
+and real outputs are in [VALIDATION](../VALIDATION.md#phase-6a-fix-pass-command-journal--15-october-2026).
+
+### Decisions
+
+1. Treat Brune Table 2.3 as the stated equation authority. Correct the fixture's
+   reference/classification; keep the paragraph's 210 m as an excluded source
+   diagnostic. No coefficient change is justified by the source.
+2. Keep sigma 5% and concentration 10% tolerances. Formula checks and scheme
+   comparisons answer different questions; report both without counting scheme
+   differences or unverified Turner pages as validation passes.
+3. Set extractive as the code, example-env and actual local default, including
+   when API keys exist. Stop Ollama and clear the default Compose profile, while
+   retaining its model and opt-in profile. This explicitly supersedes the earlier
+   audit's decision to preserve provider configuration. No prompt, question,
+   relevance label or provider generation parameter was tuned.
+4. Keep WSL at 9GB. A readable backup of current settings is not a recoverable
+   pre-change original. Report the search scope and access limits honestly.
+5. Preserve the historical audit artifacts. Freshly recompute all three examples
+   even though physics is unchanged, and compare every reported numeric value.
+   Keep all 249 tests unchanged and add three focused regressions.
+
+### Brune resolution and code trace
+
+**The worked-example paragraph's numeric reference is wrong relative to its own
+table; the code and table transcription agree.** The requested 27.355231%
+discrepancy is against the paragraph's 210 m, not Table 2.3's class-B equation.
+Source: [Brune METEO532 §2.2.5, Table 2.3 rural row B and the following paragraph](https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm).
+This is an **unpaginated HTML source**, so no physical page number is available.
+The fresh HTTP 200 source body has SHA256
+`86bbdbb9ff24d66b8adaa02daffdd5deb075415960e18c1061ec673c5f28abf0`.
+
+The path was traced as follows:
+
+1. `weather.weather_for()` derives `stability_class`, which `service.compute()`
+   passes to `physics.engine.simulate()`. The reference check explicitly supplies
+   `B`; a separate synthetic day input (2.5 m/s, 800 W/m², cloud fraction 0.1)
+   also derives B. Daytime classification uses EPA Meteorological Monitoring
+   Guidance Table 6-7, printed p.6-16; it is the existing disclosed SRDT/night
+   cloud hybrid, not a new interpretation of Brune's example meteorology.
+2. The API defaults to **urban**; the reference check explicitly selects
+   **rural**. `sigmas()` indexes `COEFFICIENTS[environment][stability]` without
+   changing the supplied class. Rural B selects `(0.16, 0.0001, 0.12, 0, 0)`.
+   Table 2.3 supplies each nonzero coefficient and exponent: sigma-y is
+   `0.16*x*(1+0.0001*x)^(-1/2)`; sigma-z is `0.12*x`. The zero pair encodes
+   the absence of a sigma-z correction factor, rather than a fitted parameter.
+3. The grid's AEQD projection specifies `+units=m`; source/receptor deltas and
+   wind rotation preserve metres. The check converts **1 km to 1000 m once**.
+   Brune's stated range is `100 m < x < 10000 m`; 1000 m is inside it.
+   `sigmas()` floors x at 1 m, which does not affect this case; the engine flags
+   out-of-range extrapolation and excludes upwind/first-metre receptors.
+4. Evaluation gives sigma-y **152.55401427929476 m**, sigma-z **120 m**.
+   Urban B would instead give sigma-y **270.4493615131253 m**. Rural A gives
+   **209.7617696340303 m**, resembling the paragraph's 210 m, but the cause of
+   the paragraph error and any publisher erratum remain **unverified**.
+
+Code sigma-y before → after: **152.55401427929476 → 152.55401427929476 m**.
+Fixture reference focus, paragraph → table: **210 → 152.55401427929476 m**.
+The new primary entry is explicitly table-derived; the earlier fixture retained
+only the inconsistent paragraph as a diagnostic, rather than a table expectation.
+The paragraph's 210/120 m remains visible in an excluded diagnostic. Its
+sigma-y disagreement is **27.355231295573923%**. A new regression pins rural B
+at 1000 m and distinguishes urban B; no physics module was edited.
+
+### (a) Formula checks
+
+These check code against published equations, including rounded table arithmetic.
+They do not establish independent field accuracy. Sigma quantities are metres;
+the last row is concentration. There are **15 passing scalar formula checks**:
+14 sigma checks in seven pairs plus one supplied-sigma Gaussian check.
+
+| Check | Equation-derived or published-input reference | Computed | Difference % | Tolerance % | Scope / result |
+| --- | --- | --- | --- | --- | --- |
+| rural/A sigma-y / sigma-z at 1000 m | 209.762 / 200.000 | 209.761770 / 200.000000 | 0.000109823 / 0.000000000 | 5 / 5 | PASS, formula only |
+| rural/B sigma-y / sigma-z at 1000 m | 152.554 / 120.000 | 152.554014 / 120.000000 | 0.000009360 / 0.000000000 | 5 / 5 | PASS, formula only |
+| rural/D sigma-y / sigma-z at 1000 m | 76.277 / 37.947 | 76.277007 / 37.947332 | 0.000009360 / 0.000874699 | 5 / 5 | PASS, formula only |
+| rural/F sigma-y / sigma-z at 1000 m | 38.139 / 12.308 | 38.138504 / 12.307692 | 0.001301634 / 0.002499938 | 5 / 5 | PASS, formula only |
+| urban/A sigma-y / sigma-z at 1000 m | 270.449 / 339.411 | 270.449362 / 339.411255 | 0.000133671 / 0.000075121 | 5 / 5 | PASS, formula only |
+| urban/D sigma-y / sigma-z at 1000 m | 135.225 / 122.788 | 135.224681 / 122.788123 | 0.000236083 / 0.000099931 | 5 / 5 | PASS, formula only |
+| urban/F sigma-y / sigma-z at 1000 m | 92.967 / 50.596 | 92.966968 / 50.596443 | 0.000034399 / 0.000874699 | 5 / 5 | PASS, formula only |
+| Cimbala p.3 Gaussian, supplied Martin sigmas (concentration µg/m³) | 149300.000000 | 149314.351448 | 0.009612 | 10 | PASS, formula only |
+
+The Gaussian equation and independent supplied inputs are visible in
+[Cimbala ME433 Lesson 06E, physical PDF page 3](https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf):
+Q=110 kg/s (110000 g/s), u=5 m/s, effective H=100 m, x=4850 m, z=y=0,
+Martin sigma-y=278.97 m, sigma-z=87.51 m, concentration=149.3 mg/m³
+(149300 µg/m³). The retained PDF was visually checked and SHA256-verified:
+`ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462`.
+
+### (b) Scheme comparison: Briggs versus Martin
+
+At identical Cimbala p.3 class-D inputs, rural Briggs and the printed Martin
+solution differ as below. **These are differences between two dispersion schemes,
+not validation errors.** They exceed the unchanged **5% sigma / 10% concentration**
+tolerances. No coefficients were fitted to remove the differences. Differences
+use `100*abs(Briggs-Martin)/abs(Martin)`; concentration is µg/m³.
+
+| Quantity | Martin / printed lesson | Briggs | Difference % | Tolerance % | Interpretation |
+| --- | --- | --- | --- | --- | --- |
+| Briggs versus Martin sigma-y | 278.970000 | 318.396657 | 14.132938 | 5 | exceeds; scheme difference |
+| Briggs versus Martin sigma-z | 87.510000 | 101.160039 | 15.598262 | 5 | exceeds; scheme difference |
+| Briggs versus Martin concentration | 149300.000000 | 133382.771845 | 10.661238 | 10 | exceeds; scheme difference |
+
+**Unverified items, excluded from the validation pass count:** Turner AP26,
+Chapter 7 Problem 9 Table 7-4 is available as an
+[EPA HTML transcription](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT),
+but its physical source page remains unverified. At z=0/30/150 m the retained
+278/285/358 µg/m³ references give computed 274.592426/283.075948/356.331422 µg/m³,
+differences 1.225746%/0.675106%/0.466083%. Arithmetic within tolerance does not
+verify a physical page. The conflicting Brune paragraph is likewise excluded.
+Independent end-to-end physical validity remains unestablished.
+
+### Three city examples: before and after
+
+Fresh fields, distances, exposure summaries and API/header responses reproduce
+all archived numbers exactly. Every run/header endpoint returned HTTP 200 and
+retained its input hash. All examples are hypothetical 1 g/s sources. None uses
+rural B, and all five physics-module byte hashes match before/after.
+
+| City / run / dispersion | Peak before µg/m³ | Peak after µg/m³ | Comparison |
+| --- | --- | --- | --- |
+| Delhi / #62 / urban C | 15.641839027404785 | 15.641839027404785 | exact match |
+| Mumbai / #63 / urban C | 11.536741256713867 | 11.536741256713867 | exact match |
+| Hyderabad / #64 / urban F | 18.990890502929688 | 18.990890502929688 | exact match |
+
+Population, source-to-peak distance and weighted increments also match exactly;
+their full values are retained in the structured metrics. No example number or
+API-doc number needs changing. Engine version remains `gaussian-briggs-1.1.0`.
+
+### Default assistant and running application
+
+Code fallback, `.env.example` and actual `.env` now select `LLM_PROVIDER=extractive`.
+Actual/default env values are `OLLAMA_ENABLED=false`, empty `COMPOSE_PROFILES`;
+the installed `qwen2.5:3b-instruct` model is retained for opt-in use. Ollama is
+stopped, the existing Compose `llm` profile is retained, and normal `compose up`
+selects nine services. All nine are running; all five defined service healthchecks
+are healthy. The running web container selects `extractive` and lists only that
+provider as configured. No language-model generation or frozen-set evaluation ran.
+
+`GET /api/health/` returned **200**, `ok=true`; database, PostGIS 3.6.4,
+TimescaleDB 2.30.2, vector 0.8.7, Redis and Celery checks are all true. Production
+`manage.py check --deploy` reports **no issues (0 silenced)**. README documents
+explicit local opt-in and how to restore the extractive defaults. Existing
+Qwen answer-quality and variable memory limitations remain; neither is certified
+by infrastructure health.
+
+### WSL configuration and backup inventory
+
+The read-only search covered `C:\Users\Andry` and `D:\`, without traversing
+reparse points. It found the current `.wslconfig` and **one readable backup**:
+
+- `C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`; created **2026-10-15T15:54:42.370363+00:00**;
+  last modified **2026-10-12T10:35:22.988743+00:00** (timestamps UTC).
+  SHA256 `d4f748ea8f222563e1beb8319e62496c62635ce052aa4dd380ee332b73375268`, 20 bytes.
+
+Both backup and current file contain exactly:
+
+```ini
+[wsl2]
+memory=9GB
+```
+
+The current file was created/modified 2026-10-12T10:35:22.988743+00:00 and has
+the same SHA256. The backup preserves that modification timestamp; its creation
+timestamp identifies the later copy. **A pre-change original could not be
+recovered.** The earlier report says no file existed, but historical absence
+cannot be independently reconstructed from a later backup.
+The search recorded 6 inaccessible/invalid/disappearing paths,
+including Windows application aliases and protected System Volume Information;
+these limits are retained in the local inventory, not presented as a universal
+proof that no other backup exists. No setting was changed. Installed capacity
+is 17,179,869,184 bytes (16 GiB); `floor(0.60*16)=9` gives the requested **9 GB**
+limit. No concrete problem requiring a different value was found in this pass.
+
+### Checks and frozen identities
+
+Full web-container suite: **252 passed, 147 warnings in 55.80 s**
+(all 249 baseline tests plus three new regressions). Existing Python test files
+are byte-identical. The expressly requested textbook fixture correction is the
+only existing fixture changed; frozen evaluation data and labels are untouched.
+Ruff: **All checks passed!** Format: **264 files already formatted**.
+The warnings retain the earlier audited categories: pandas/NumPy generic
+timedelta, SHAP/matplotlib deprecations, compiled ndarray-size warning and
+statsmodels nonconvergence; none was suppressed. Django and migration checks
+also pass. No new model/provider evaluation or prompt tuning was performed.
+
+| Frozen set | Before SHA256 | After SHA256 | Expected |
+| --- | --- | --- | --- |
+| Phase 3A.2, 316 files | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | expected match |
+| Phase 4, 776 files | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | expected match |
+| Phase 5 questions/relevance | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | expected match |
+
+The entire four-file `data/eval` bundle is also unchanged, aggregate
+`51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23`.
+Per-file snapshots are retained locally under `data/results/phase6a-fix/`.
+
+### Failed attempts and resolutions
+
+- Recursive PowerShell WSL inventory hit a filesystem error. A read-only Python
+  walk completed with explicit access-error reporting; it found the backup above.
+  The first walk was interrupted by the user and was rerun after resume.
+- The first standalone physics script invocation lacked `/app` on its import
+  path. Rerunning with `PYTHONPATH=/app` completed all reference checks. This was
+  an audit-script invocation issue; application imports required no code change.
+- Docker was unavailable after the overnight interruption, so the first lint
+  attempt could not run. Started installed Docker Desktop in the background,
+  restored default Compose services and reran Ruff/full tests successfully.
+  PowerShell also decorates Docker's normal stderr progress as NativeCommandError;
+  actual Docker exit codes and final service states are recorded in the journal.
+
+Changes: provider fallback and env examples/local defaults; textbook fixture;
+three regression tests; README, architecture, data model, this report, structured
+metrics and the command journal. Historical artifacts remain separate. Commit
+creation/output is recorded by the final Git journal; **no push is performed**.
+No manual action is required for the default application. Phase 6B remains unstarted.
+
+## Independent validation
+
+Completed 16 October 2026 from `c154eaa` in `D:\EnviroInsights-India`.
+The reproducible command is:
+
+```powershell
+docker compose exec -T web python manage.py verify_vayusim_references
+```
+
+Hand-transcribed references, their dates and exact printed values are in
+`tests/fixtures/vayusim-independent-references.json`. Actual outputs are in
+[PHASE6A_INDEPENDENT_METRICS.json](PHASE6A_INDEPENDENT_METRICS.json).
+Commands and linked raw web-reader outputs are in [VALIDATION](../VALIDATION.md).
+
+### Decisions
+
+1. Keep every physics module, coefficient, preset, tolerance, existing test and
+   existing fixture unchanged. New expectations come from external printed
+   values, not the engine or calculations copied from its implementation.
+2. Separate an independent **printed numeric case** from equation transcription,
+   cross-scheme comparisons and empirical field validation. A published equation
+   alone, including a new page citation, cannot clear numeric branch readiness.
+3. Use 5% for printed sigma values and 10% for concentrations. Use 10% only for
+   an actual manually read chart point; none could be visually verified in this
+   run. Turner's author-derived chart inputs are printed numbers in the retained
+   fixture, so their diagnostic sigma comparison retains 5%, not a relaxed 10%.
+4. Count only the DOE rural-D printed sigma pair at 1000 m as an independent
+   numerical case. Keep the Martin and Turner diagnostics visible, including
+   failures, but out of matched-scheme independent pass counts. Do not equate
+   separate scalar values with separate experiments.
+5. Do not manufacture missing urban C/F numeric reference values from equations,
+   another class, a rural curve, inaccessible figures or a search snippet.
+   Equation coefficients are transcribed separately and tested for all six
+   urban classes; they do not qualify as independent numeric sigma references.
+6. Use the available web reader for public sources; no separate named WebFetch
+   tool was exposed. Perform no shell network downloads. ZIP-only data and
+   unsuccessful PDF/chart reads remain explicit access/verification limits.
+7. Record **Ready for 6B with caveats**, conditional on the future Phase 6B
+   frontend displaying **unvalidated branch** for urban C/F scenarios, including
+   all three examples. This is a mandatory future acceptance condition, not a
+   claim that the label has already been implemented. Do not start Phase 6B here.
+
+### Source search and accessibility
+
+The repository was searched first: the cached VayuSim sources, research library
+and all cached RAG PDFs. Relevant local hits include ISC3, the meteorological
+guide, AERMOD formulation and dispersion references inside city reports; no
+matched independent urban C/F numeric pair was established from them. Public
+search then examined the sources below. Raw requests and returned outputs are
+retained separately; inaccessible sources do not contribute reference values.
+
+| Source | Page / table / locator | Access and use |
+| --- | --- | --- |
+| [Brune METEO532](https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm) | Section 2.2.5, Table 2.3; unpaginated | cached primary lecture table, all rural/urban A-F formulas; equation source, not numeric validation |
+| [DOE-HDBK-1224-2018](https://www.energy.gov/documents/doe-hdbk-1224-2018pdf) | printed p.213 / PDF p.228 example after Eq.6-10; Table6-9 p.214 / PDF p.229 | accessible PDF text with page markers; independently printed rural D numeric case |
+| [EPA ISC3 Volume II (1995)](https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf) | Tables1-3/1-4 p.1-19 / PDF p.32; rural pp.1-14 to1-18 | cached and accessible primary PDF; all urban equations, different rural PG equations |
+| [Turner revised 1970](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKHD.TXT) | Problems4/9, Table7-4; exact physical page unverified | HTML readable; EPA PDF fetch failed; prior numeric transcription excluded from pass count |
+| [Turner workbook mirror](https://www.keysolutionsinc.com/references/Turner%20Workbook.pdf) | 92-page metadata detected; needed page not verified | subsequent reads timed out/failed; no verified chart readings |
+| [Turner workbook in EPA docket](https://downloads.regulations.gov/EPA-HQ-OAR-2003-0062-0323/attachment_2.pdf) | page unverified | 403 Forbidden |
+| [Cimbala ME433 Lesson06E](https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf) | physical PDF p.3 | cached primary PDF available and SHA verified; remote read failed; Martin scheme comparison only |
+| [EPA ISC3 test distribution](https://gaftp.epa.gov/AIR/aqmg/SCRAM/models/other/isc3/iscst.zip) | distribution archive | public directory readable; web reader rejects application/zip; no shell download performed |
+| [EPA ISC3 Volume I](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=000031VJ.TXT) | sample TEST-ST run and input/output instructions | HTML readable; PDF fetch failed; no complete matching isolated urban C/F input-output tuple verified |
+| [EPA AERMOD sample run](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/preferred/aermod/AERMOD_Sample_Run_Instructions.pdf) | pp.17-21, especially p.20 Section4.3; AppendixA p.31 | readable primary guide; original outputs are in separate sample/test ZIPs; no matched Briggs-only numeric case verified |
+| [GENII v2 design Rev3](https://www.pnnl.gov/main/publications/external/technical_reports/PNNL-14584Rev3.pdf) | 338-page metadata detected; needed numeric page unverified | initial PDF identified; follow-up needed-page searches/reads failed; no numerical reference used |
+| [DOE-HDBK-1224-2024](https://www.energy.gov/documents/doe-hdbk-1224-2024pdf) | needed numerical page unverified | PDF identified; relevant-page reads failed; no value promoted from search snippets or independent Doxcelerate mirror |
+
+**Formula provenance for all classes:** Brune Table2.3 and DOE Table6-9 on
+printed p.214 cover rural/urban A-F. The latter discusses Briggs (1973) with
+Griffiths (1994) updates; an original 1973 report page was not independently
+verified. ISC3 Tables1-3/1-4, printed p.1-19, explicitly list all six urban
+classes, use x in metres and agree with the implemented urban coefficients.
+Rural ISC3 instead uses Pasquill-Gifford fits (pp.1-14–1-18), not this engine's
+Briggs rural equations. An ISC rural output is therefore not an interchangeable
+Briggs reference.
+
+The DOE2018 extracted Table6-9 rural-E `b_y` appears as 0.00001, whereas the
+cached Brune table uses 0.0001. That glyph/typographical discrepancy was not
+resolved from a visual source page; it is **unverified** and was not used to
+change a coefficient or establish an E-case pass. DOE p.214 also explicitly
+warns that the urban E/F sigma-z factor 0.00015 found in some references is
+incorrect, giving 0.0015 instead. ISC3 p.1-19 and the code use 0.0015. No source
+variant was silently substituted or used to tune the engine.
+
+Turner chapter3 describes open-country/rural applicability and urban limitations;
+no verified matching Briggs-urban C/F worked case was found. The revised-1970
+HTML's Table7-4 is identifiable, but its physical page is still unverified.
+The EPA catalogue title of the older cached copy says revised1969 while its
+title-page transcription says revised1970; the new record uses the explicitly
+revised1970 catalogue entry and preserves that distinction.
+
+EPA's AERMOD guide p.20 Section4.3 explains comparison with the separate original
+output files. Those sample outputs and meteorological profiles are not a
+single published Briggs-only C/F sigma pair. The ISC ZIP is public but the web
+reader returned unsupported `application/zip`; its contents were not inspected.
+No exact-input ISC/AERMOD end-to-end numerical match is claimed.
+DOE p.341 Table9-6 does print ALOHA concentrations, including urban F, but
+the necessary equivalent stack/effective height, receptor and evaporation/
+averaging assumptions were not established as a matching VayuSim case. Filling
+those gaps with guesses would not be independent validation.
+
+### Validation table
+
+Sigma values are metres; concentrations are µg/m³. Differences are
+`100*abs(engine-reference)/abs(reference)`. All rows below come from the actual
+new run. **PASS/FAIL tolerance** on a diagnostic is not independent branch
+validation. The only eligible case is explicitly marked.
+
+| Point / quantity / method | Source | Reference | Engine | Error % | Tolerance % | Result / scope |
+| --- | --- | --- | --- | --- | --- | --- |
+| doe-briggs-rural-d-1000m / sigma_y_m / engine sigma | DOE p.213 / PDF228 | 76.300000 | 76.277007 | 0.030135 | 5 | PASS; independent numeric case |
+| doe-briggs-rural-d-1000m / sigma_z_m / engine sigma | DOE p.213 / PDF228 | 37.900000 | 37.947332 | 0.124886 | 5 | PASS; independent numeric case |
+| cimbala-martin-d-4850m / sigma_y_m / engine sigma | Cimbala PDF3 | 278.970000 | 318.396657 | 14.132938 | 5 | FAIL tolerance; scheme comparison |
+| cimbala-martin-d-4850m / sigma_z_m / engine sigma | Cimbala PDF3 | 87.510000 | 101.160039 | 15.598262 | 5 | FAIL tolerance; scheme comparison |
+| cimbala-martin-d-4850m / concentration_ugm3 at z=0 m / engine sigma -> Gaussian, prescribed H/u | Cimbala PDF3 | 149300.000000 | 133382.771845 | 10.661238 | 10 | FAIL tolerance; scheme comparison |
+| cimbala-martin-d-4850m / concentration_ugm3 at z=0 m / Gaussian only, source-supplied sigmas/H/u | Cimbala PDF3 | 149300.000000 | 149314.351448 | 0.009612 | 10 | PASS; Gaussian formula only |
+| turner-pg-b-1000m / sigma_y_m / engine sigma | Turner Table7-4, page unverified | 157.000000 | 152.554014 | 2.831838 | 5 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / sigma_z_m / engine sigma | Turner Table7-4, page unverified | 110.000000 | 120.000000 | 9.090909 | 5 | FAIL tolerance; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=0 m / engine sigma -> Gaussian, prescribed H/u | Turner Table7-4, page unverified | 278.000000 | 300.517407 | 8.099787 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=0 m / Gaussian only, source-supplied sigmas/H/u | Turner Table7-4, page unverified | 278.000000 | 274.592426 | 1.225746 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=30 m / engine sigma -> Gaussian, prescribed H/u | Turner Table7-4, page unverified | 285.000000 | 305.609816 | 7.231514 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=30 m / Gaussian only, source-supplied sigmas/H/u | Turner Table7-4, page unverified | 285.000000 | 283.075948 | 0.675106 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=150 m / engine sigma -> Gaussian, prescribed H/u | Turner Table7-4, page unverified | 358.000000 | 342.615072 | 4.297466 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=150 m / Gaussian only, source-supplied sigmas/H/u | Turner Table7-4, page unverified | 358.000000 | 356.331422 | 0.466083 | 10 | PASS; page unverified; excluded |
+
+There is **one independent printed numerical case**, comprising **two passing
+scalar sigma comparisons** and zero failing eligible comparisons: rural D at
+1000 m. It is **independently validated for these cases only**: sigma-y against
+the printed 76.3 m and sigma-z against 37.9 m in DOE p.213. This is independent
+reference-case verification, not a field-data validation or evidence of accuracy
+for Indian city conditions.
+
+The Cimbala sigma and concentration differences exceed 5%/10%; their cause is
+the source's Martin scheme versus this engine's Briggs rural D. They remain
+**scheme differences, not coding/validation errors**, and do not justify changing
+Briggs. Supplying the lesson's sigmas makes the Gaussian primitive agree within
+0.009612%, demonstrating the distinction without validating the dispersion branch.
+The Turner B sigma-z diagnostic differs by 9.090909%, exceeding 5%; its P-G chart
+parameterisation differs from Briggs and its physical page remains unverified.
+Here B is the selected diagnostic branch; its exact source-case classification
+has not been verified from a physical page. All Turner inputs/rows remain excluded.
+Neither case was tuned or reclassified into an independent pass.
+
+**Concentration scope:** the sigma-to-Gaussian calculations use exactly the
+published Q, transport wind, receptor height and effective H. Cimbala prints
+physical stack80 m plus rise20 m, giving H100 m, but omits the diameter, exit
+velocity and exit/ambient temperatures needed to reproduce that rise through
+the engine. It is therefore a complete prescribed-H concentration calculation,
+not a verification of the full physical-stack/wind-profile/plume-rise pipeline.
+Those missing inputs were not invented. No plume-rise, mixing-lid, population
+or empirical full-pipeline validation is established by this run.
+
+### Branch coverage and not-validated list
+
+Six new urban equation-transcription tests cover A–F, specifically C and F,
+against ISC3 p.1-19. Two new sigma tests pin the independently printed rural-D
+pair. Existing tests and reference fixtures are unchanged.
+
+| Branch / scope | Independent numeric status | Examples affected |
+| --- | --- | --- |
+| rural D sigmas, x=1000 m | validated for this printed case only | none |
+| rural D other distances / full concentration pipeline | not independently validated | none |
+| rural A/B/C/E/F | not independently validated; B diagnostics do not qualify | none |
+| urban A/B/D/E | equation coverage only; not independently validated | none of these three examples |
+| urban C | **not independently validated** | Delhi #62, Mumbai #63 |
+| urban F | **not independently validated** | Hyderabad #64 |
+
+There are zero verified chart-read points; chart-only candidates were left
+unverified and excluded rather than assigned fabricated coordinates or values.
+No printed-number or visual-chart evidence for urban C/F was verified in the
+sources successfully accessed. This is a bounded search result, not proof that
+no such reference exists anywhere.
+
+### Example claims and gate
+
+All three examples now have the explicit claim **not independently validated for
+their urban dispersion branch**. They remain hypothetical 1 g/s educational
+scenarios with archived weather and WorldPop support, not observed facilities.
+Fresh recomputation reproduced every peak, distance, exposure summary and input
+hash exactly. Run/header endpoints all returned200. No number changed.
+
+| Example | Branch | Peak before µg/m³ | Peak after µg/m³ | Claim |
+| --- | --- | --- | --- | --- |
+| Delhi #62 | urban C | 15.641839027404785 | 15.641839027404785 | not independently validated |
+| Mumbai #63 | urban C | 11.536741256713867 | 11.536741256713867 | not independently validated |
+| Hyderabad #64 | urban F | 18.990890502929688 | 18.990890502929688 | not independently validated |
+
+**Ready for 6B with caveats** is conditional: the Phase6B frontend must label
+urban C/F scenarios **unvalidated branch**, including these three examples, and
+retain the educational/no-regulatory-validity caveats. That frontend label is
+not implemented or asserted to exist by this task; **Phase6B has not started**.
+Equation agreement or a health200 response cannot remove this requirement.
+
+### Software checks, frozen identities and command outcomes
+
+Web-container suite: **260 passed, 147 warnings in 51.74s**;
+all 252 existing tests plus two independent-number and six equation-transcription
+regressions. Ruff: **All checks passed!** Format: **266 files already formatted**.
+Django system and migration checks pass. Warnings remain visible and unsuppressed
+in the same upstream categories documented in the fix pass. Current default
+provider remains extractive, Ollama disabled; health returned200 with all checks
+true. No model/provider evaluation or prompt tuning ran.
+
+| Frozen set | Before SHA256 | After SHA256 | Expected |
+| --- | --- | --- | --- |
+| Phase3A.2, 316 files | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | expected match |
+| Phase4, 776 files | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | expected match |
+| Phase5 questions/relevance | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | expected match |
+
+All 50 existing test/support/fixture files also match before and after:
+`3ca434500859bf7230fc713bb6c85e1262213b8bb637a090302fa364cddc3fd6`.
+All six physics/preset files match before and after:
+`60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e`.
+The complete four-file evaluation catalogue remains unchanged as well.
+
+The first local glob search used a literal Windows wildcard path rejected by
+`rg`; the subsequent directory search completed. The first Ruff run found one
+overlong string in the new command; wrapping that string fixed it, with no
+coefficient, tolerance or test changes. Public-read failures are retained in
+the source inventory and raw web journal. No scientific mismatch was hidden.
+The report helper initially used the Windows default decoder for UTF-8 research
+records; explicit UTF-8 completed the journal without duplicating the report.
+A cached legacy EPA HTML read needed Windows-1252 decoding; the source bytes
+were retained unchanged. Neither decoder issue affected numerical computations.
+
+Files added: the manually transcribed fixture, reproducible management command,
+eight regressions, structured result metrics and evidence manifest. README,
+architecture, this report and the command journal now state the limited case
+result and conditional gate. No Phase6B frontend or engine feature was added.
+
+# EnviroInsights-India
+
+Phase6A adds **VayuSim**, an educational, source-specific Gaussian dispersion
+engine with archived weather, WorldPop2025 exposure, saved scenarios and a
+verification map. The website now has consistent desktop/mobile navigation:
+[Overview](http://localhost:8000/), [Forecasts](http://localhost:8000/forecasts/),
+[Research](http://localhost:8000/research/), [Library](http://localhost:8000/library/),
+[Ask](http://localhost:8000/ask/) and [VayuSim](http://localhost:8000/simulator/).
+Read [the Phase6A report](docs/results/PHASE6A.md) for actual verification and
+limitations. Forecast cards show archived replay dates; research comparisons
+do not establish causation or official NCAP compliance.
+
+The [fix pass](docs/results/PHASE6A.md#fix-pass) separates passing **formula checks**
+from a **scheme comparison**. Briggs versus Cimbala's Martin solution (PDF p.3)
+differs by 14.13% in sigma-y, 15.60% in sigma-z and 10.66% in concentration.
+These scheme differences exceed the unchanged 5%/10% tolerances; they are not
+validation errors. Brune Table 2.3 agrees with the code: rural-B sigma-y at 1 km
+is 152.554014 m; the adjacent paragraph's 210 m is inconsistent. Turner physical
+pages remain **unverified**. End-to-end physical validity is not established.
+
+The [independent-reference pass](docs/results/PHASE6A.md#independent-validation)
+verifies the published rural-D sigma pair at 1 km (DOE p.213): errors 0.030135%
+and 0.124886%, within 5%. This does not validate the **urban C** branches used by
+Delhi/Mumbai or **urban F** used by Hyderabad; those remain **not independently
+validated** against numeric cases. Their example values are unchanged. The gate
+is **Ready for 6B with caveats**, conditional on the future frontend displaying
+**unvalidated branch** for these scenarios. Phase6B has not been started.
+
+VayuSim inputs are explicit scenario assumptions, not measured facility
+inventories. All five source-family presets require emission rate, release
+height, diameter, exit velocity and temperature where no defensible universal
+default was established. Real weather uses the UTC midpoint of the selected
+IST hour. Station totals stay separate from the modelled increment. The
+population calculation is **hourly added exposure**, with fractional raster
+support; missing population is not extrapolated across unknown area.
+
+The audited examples each use a **hypothetical 1 g/s source**: Delhi (2025-01-15
+12:00 IST), Mumbai (2025-07-15 15:00 IST), and Hyderabad (2025-11-15 20:00 IST).
+Their peak increments are 15.641839, 11.536741 and 18.990891 µg/m³. For one source, at fixed
+weather, geometry, release parameters and grid, peak concentration scales
+linearly with emission rate Q. Population values cover the modelled footprint
+only and its known raster support; population above a fixed threshold does not
+scale linearly. These examples are not measured emission inventories.
+
+The stable preset ID `highway` now displays **Road dust resuspension**.
+[AP-42 13.2.1](https://www.epa.gov/sites/default/files/2020-10/documents/13.2.1_paved_roads.pdf),
+January 2011, printed pp.13.2.1-1 and 13.2.1-4, excludes exhaust, brake wear
+and tire wear from its road-dust equation. Enter total primary PM2.5 g/s for
+the complete segment; no exhaust factor or universal emission rate is supplied.
+
+The default grid is10km×10km at50m, with an AEQD CRS and a wind-rotated affine.
+`POST /api/vayusim/run/` returns summary, GeoJSON contours and binary/header/PNG
+URLs. `POST /api/vayusim/day/` uses a timezone-aware datetime to select an IST
+date and returns24 independent hourly summaries; missing hours remain
+unavailable, and grids are materialised on their first request. Share scenarios
+through `/simulator/?scenario=<slug>`. Explain uses a stored `run_id`; arbitrary
+client numbers never become verified evidence.
+
+The Windows test wrapper and Makefile force test settings, extractive answering
+and a `/tmp` Hypothesis cache, so enabling the local language model cannot make
+tests call it. Tests retain the real PostgreSQL and Celery integration. On this
+machine an earlier memory measurement enabled Qwen2.5:3b-instruct; source-model
+caches and all project data remain on D:. The default is **extractive retrieval
+with verified citations** (`LLM_PROVIDER=extractive`, `OLLAMA_ENABLED=false`,
+empty `COMPOSE_PROFILES`). The experimental Qwen provider is stopped and remains
+available through the opt-in `llm` profile. It takes minutes on CPU and has
+**not passed answer-quality acceptance**:
+its existing frozen evaluation retained only 2/80 literature answers and 0/30
+available-data answers. Exact support among those two retained answers does not
+establish useful question-answering quality. No prompt/provider tuning or new
+language-model evaluation was performed during the audit.
+The final audit measurement had 4,103,503,872 bytes available against the
+3B model's 5,151,137,904-byte memory requirement, so its **current memory gate
+also fails**. Earlier measurements passed; that eligibility varies with resident
+allocations. The default extractive path needs no language-model memory gate.
+Opting into experimental generation still requires a fresh resource check.
+
+Phase 5 adds [extractive retrieval with verified citations](#phase-5-extractive-retrieval-with-verified-citations),
+available at [Ask](http://localhost:8000/ask/). It uses real document passages
+and recorded project results, with extractive answers available without API keys.
+
+Phase 4 forecasting commands run from `D:\EnviroInsights-India` in the web
+container. Forecasts are daily city PM2.5, issued at end-of-day IST for t+1–t+3.
+They explicitly use replay mode until an OpenAQ key and fresh complete-day
+observations are available. Bengaluru uses its seven-site fixed panel.
+
+```powershell
+.\scripts\dev.ps1 up
+.\scripts\dev.ps1 migrate
+.\scripts\dev.ps1 manage fetch_historical_forecasts
+.\scripts\dev.ps1 manage train_forecasters
+.\scripts\dev.ps1 manage evaluate_forecasters
+.\scripts\dev.ps1 manage issue_forecasts
+.\scripts\dev.ps1 manage issue_forecasts --replay-date 2025-12-31
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+Read the frozen [forecast protocol](docs/results/PHASE4_PROTOCOL.md) and
+[Delhi/Pune bias investigation](docs/results/PHASE4_BIAS.md). After training,
+`export_phase4_report --run <id>` exports `docs/results/PHASE4.md` and actual
+figures/tables under `data/results/<id>/`. Evaluation scores come from saved
+monthly rolling predictions, with observed-weather perfect-prognosis kept separate.
+Forecast versions and predictions reference their AnalysisRun and MLflow run.
+The MLflow service is available at `http://localhost:5000`; SQLite metadata and
+artifacts persist in `data/mlflow/` on D: and are ignored by Git.
+
+The completed [Phase 4 report](docs/results/PHASE4.md) uses AnalysisRun 21:
+7,728 real/ideal prediction rows, 147 registered versions and 148 passing tests.
+Nine city/horizon issued policies lose to persistence. Empirical intervals often
+undercover; read the measured tables before interpreting uncertainty or skill.
+
+Read-only endpoints are `/api/forecast/<city>/latest/`,
+`/api/forecast/<city>/history/?start=YYYY-MM-DD&end=YYYY-MM-DD` (inclusive target
+dates, at most 366 days), and `/api/forecast/<city>/evaluation/`. Latest/history
+include replay/live mode, three horizons, bounds, PM2.5 category, model version
+and top five conditional SHAP drivers. The category is the PM2.5 subindex,
+not overall CPCB AQI. Evaluation never serves perfect-prognosis as headline skill.
+
+The daily PM refresh runs at 23:35 IST and requests ten days of readings through
+the current instant. Public forecast weather is refreshed at 23:40 IST; issuance
+runs at 00:10 IST for the latest completed day. Absent a key, fresh issue-time
+readings, complete lag inputs or weather, it replays the latest archived day.
+Only readings ingested before that day's cutoff enter live inputs. Saved training
+calibration radii are retained when issuing forecasts. Bengaluru additionally
+requires verified source station IDs matching its fixed panel; a provider's
+different station IDs do not establish that correspondence.
+Add `OPENAQ_API_KEY` only to ignored `.env`
+and recreate containers to enable keyed ingestion. Historical publication delays,
+missing forecast BLH, station changes and seasonal interval calibration remain
+limitations; see the protocol and generated report before using predictions.
+
+The active Windows checkout is `D:\EnviroInsights-India`. Docker's registered WSL
+VM is at `D:\DockerDesktopData\main`, and its image/container/volume data disk is
+at `D:\DockerDesktopData\disk`. Compatibility junctions at the former Docker
+AppData paths preserve Docker Desktop's expected locations. Run project commands
+from the D: checkout, and reopen that folder in the editor when switching workspaces.
+
+A Django foundation for research on India's air quality. Phase 1 provides a spatial
+reference catalogue, time-series storage, document metadata, curator admin,
+read-only API, and background-task infrastructure. Phase 2 loads traceable public
+observations. Phase 3A audits quality, builds analysis datasets and reports descriptive
+statistics and meteorological normalisation. Synthetic measurements belong only in tests.
+
+Requires Docker Engine/Desktop with **Linux containers**, Docker Compose v2, and GNU
+Make, or the included PowerShell wrapper on Windows. Python 3.12 and GeoDjango's native
+libraries are installed inside the application image. On Windows, use Docker Desktop
+with the WSL 2 backend and Linux containers. Reserve several GB for the database image.
+
+## Quick start
+
+```sh
+git clone <your-repository-url> enviroinsights-india
+cd enviroinsights-india
+cp .env.example .env
+# Edit .env: set a random DJANGO_SECRET_KEY, POSTGRES_PASSWORD,
+# the matching URL-encoded password in DATABASE_URL, and FLOWER_BASIC_AUTH.
+make up
+make migrate
+make seed
+make superuser
+make health
+make verify-worker
+```
+
+Generate secrets with `python -c "import secrets; print(secrets.token_urlsafe(64))"`.
+The example values must be replaced. `.env`, media, local tools and caches are ignored.
+Worker, Beat and Flower wait for migrations for up to five minutes and restart if
+they time out. The web server supports autoreload. `make down` preserves data volumes.
+Use one Beat instance to avoid duplicate scheduled tasks; Phase 1 installs no ingestion schedules.
+
+The seed creates seven pollutant definitions, twelve sources, twelve cities and ten
+parent states. Running it again updates published pollutant/source metadata and
+preserves curated city data. It creates no stations, readings, weather, fires or PDFs.
+See [reference provenance](docs/REFERENCE_DATA.md) for units and averaging periods.
+
+| Service | URL / connection |
+| --- | --- |
+| Home placeholder | http://localhost:8000/ |
+| Curator admin | http://localhost:8000/admin/ |
+| Infrastructure health | http://localhost:8000/api/health/ |
+| Swagger UI | http://localhost:8000/api/docs/ |
+| OpenAPI schema | http://localhost:8000/api/schema/ |
+| City / station GeoJSON | http://localhost:8000/api/cities/ and /api/stations/ |
+| Pollutants | http://localhost:8000/api/pollutants/ |
+| Flower, with configured Basic authentication | http://localhost:5555/ |
+| PostgreSQL 16 | localhost:5433, credentials from `.env` |
+| Redis | localhost:6380 |
+
+Published ports bind to loopback. All container connections use service names `db`
+and `redis`. Host port changes do not change container URLs. Set
+`DJANGO_CSRF_TRUSTED_ORIGINS` to match a changed browser web port.
+The default `POSTGRES_PORT=5433` leaves a native Windows PostgreSQL service on 5432
+running. Compose's `DATABASE_URL` stays at `db:5432`. Any separate host application
+must use `127.0.0.1:5433` with the matching credentials; run this project's tests
+inside the web container.
+Similarly, `REDIS_PORT=6380` coexists with a native Redis service on 6379. Container
+Redis/broker URLs continue to use `redis:6379`; host applications use port 6380.
+
+## Verification
+
+```sh
+make lint          # ruff check and format check
+make schema        # OpenAPI validation; warnings fail
+make test          # checks, migration drift, full pytest suite on a fresh test DB
+make health        # real DB/extensions/Redis/worker probe
+make verify-worker # broker task + persisted successful IngestionRun with zero rows
+```
+
+Tests use `enviroinsights.settings.test` and PostgreSQL with all three extensions,
+never SQLite. The database role must create the isolated `TEST_DATABASE_NAME` and
+extensions. Full tests require a running Compose worker for the live health probe
+and Redis for a dedicated test worker. That worker consumes a unique queue against
+the test DB; the ordinary Compose worker cannot consume test tasks. No integration
+test silently skips missing infrastructure. Unit tests alone can be selected with
+`pytest -m 'not integration'`, but they do not establish live service readiness.
+
+The suite verifies fresh migrations, PostgreSQL major version, extension versions,
+all hypertables and unique indexes, duplicate rejection, reversible hypertable
+migration, vector dimensions/cosine ordering, HNSW/full-text indexes, seed
+idempotence, GeoJSON, read-only API/admin behavior, bounded admin counts, and a
+real broker/worker round trip. GitHub Actions runs the complete Compose sequence.
+
+The database init SQL loads and reports PostGIS, TimescaleDB and vector. Django
+extension migrations also run in fresh/test databases, before spatial/vector
+tables. To inspect the actual installed versions:
+
+```sh
+docker compose exec db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -c "SELECT extname, extversion FROM pg_extension ORDER BY extname;"'
+```
+
+If any extension fails to load, inspect `docker compose logs db` and the selected
+image's installed extensions/preload configuration. Do not replace the stack with
+a plain PostgreSQL or a test fake. The HA image's data directory is
+`/home/postgres/pgdata/data`, where the named volume is mounted.
+
+## PowerShell without Make
+
+`scripts/dev.ps1` mirrors every Makefile target and runs from the project directory
+even when invoked elsewhere. It quotes paths, so a folder name containing spaces
+does not require renaming. It also finds standard per-user/all-users Docker Desktop
+installations when the current shell's PATH predates installation.
+
+```powershell
+if (-not (Test-Path -LiteralPath .env)) { Copy-Item .env.example .env }
+# Fill in secret placeholders if this is a newly copied .env.
+.\scripts\dev.ps1 up
+.\scripts\dev.ps1 migrate
+.\scripts\dev.ps1 seed
+.\scripts\dev.ps1 superuser
+.\scripts\dev.ps1 health
+.\scripts\dev.ps1 verify-worker
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+.\scripts\dev.ps1 schema
+```
+
+Other wrapper targets: `shell`, `logs`, `down`. A failing external command stops
+the wrapper and returns a failure; the `test` target runs checks, migration drift
+and the entire suite inside `web`, explicitly selecting test settings with `--ds`
+so Compose's development environment cannot override pytest's configuration.
+Docker command temporary files also stay under the active project's `.tools/temp`.
+Native stderr stays visible; the wrapper uses the real exit code so informational
+Python/Docker logs do not falsely fail a successful command on PowerShell 5.1.
+`down` preserves volumes. Run commands normally;
+if PowerShell reports an execution-policy error, use a process-only invocation:
+`powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\dev.ps1 test`.
+
+For host-side Python development,
+create a Python 3.12 virtual environment, install `requirements/dev.txt`, install
+GDAL/GEOS/PROJ, and change `DATABASE_URL`, `REDIS_URL` and `CELERY_BROKER_URL` to
+the loopback ports in that host process's environment. For PostgreSQL that is
+`postgis://enviroinsights:<URL-encoded-password>@127.0.0.1:5433/enviroinsights`;
+do not replace the Compose `.env` value of `db:5432` with a localhost address.
+Optional GIS library paths are documented in `.env.example`.
+
+## Settings and deployment boundary
+
+`base`, `dev`, `prod` and `test` settings are separate. Production requires a long
+random secret and enables secure cookies, HTTPS redirect and HSTS. Build with
+`--build-arg INSTALL_DEV=false`, run Gunicorn with `enviroinsights.wsgi:application`,
+and supply `DJANGO_SETTINGS_MODULE=enviroinsights.settings.prod`. Configure an HTTPS
+proxy, static/media serving, backups and a separate least-privilege runtime database
+role before deployment. The development Compose database role is a superuser for
+extension migrations and disposable test database creation. Use a privileged
+migration role separately in production. Only enable `DJANGO_TRUST_PROXY` for a
+proxy that strips client-supplied forwarding headers. Compose is a development
+stack, not an HA or production deployment.
+
+All Python dependencies, including transitive dependencies, are pinned in
+`requirements/base.txt` and `requirements/dev.txt`. `.in` files are the update
+inputs; regenerate intentionally with `uv pip compile --python-version 3.12
+--universal`. Pre-commit uses the same Ruff version as the development lock.
+The database image follows the requested `timescale/timescaledb-ha:pg16` tag; pin
+its verified digest before deploying a reproducible production environment.
+
+Read [architecture](docs/ARCHITECTURE.md), [data model and decisions](docs/DATA_MODEL.md)
+and [validation record](docs/VALIDATION.md) before Phase 2.
+
+## Phase 2 ingestion
+
+Ingestion, time/units, quality flags and bulk insertion live in `apps/ingest/`.
+Public inputs cache under `data/raw/` with SHA256 manifests; keyed pipelines skip
+cleanly without credentials. Read [DATA_SOURCES.md](docs/DATA_SOURCES.md) for
+licences, verified layouts and gaps.
+
+```powershell
+.\scripts\dev.ps1 manage download_sources
+.\scripts\dev.ps1 manage ingest_all
+.\scripts\dev.ps1 manage data_completeness --output .tools/phase2-validation/completeness.json
+.\scripts\dev.ps1 manage backfill_weather --start 2015-01-01 --end 2026-10-03
+```
+
+`manage` forwards Django commands/arguments inside `web`. Commands include
+`load_cpcb_archive`, `load_opencity`, `load_boundaries`, `register_worldpop`,
+`backfill_openaq`, `backfill_firms` and optional `backfill_era5`. `ingest_all`
+creates admin-editable OpenAQ hourly, FIRMS six-hourly and weather daily Beat
+schedules while preserving curator edits.
+
+Read-only APIs: `/api/readings/?station=&pollutant=&start=&end=`,
+`/api/weather/?city=<slug>&start=&end=`, `/api/fires/?bbox=&start=&end=` and
+`/api/completeness/`. Observation responses use 100-row cursor pagination, a
+31-day maximum and an exclusive end. Supply timestamps with explicit offsets.
+Missing stays null. The ingestion coverage measure counts finite values, including
+flagged ones; Phase 3A uses the stricter clean-data coverage below.
+
+## Phase 3A audit and analysis
+
+Run from `D:\EnviroInsights-India`; all commands execute inside the containers:
+
+```powershell
+.\scripts\dev.ps1 migrate
+.\scripts\dev.ps1 manage run_phase3a --enqueue
+# Individual maintenance steps:
+.\scripts\dev.ps1 manage reflag_readings
+.\scripts\dev.ps1 manage build_analysis_tables
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+`run_phase3a --enqueue` submits the real Celery task and waits for its result.
+Omit `--enqueue` to run the same pipeline synchronously inside `web`. The full
+local dataset takes approximately 15 minutes. Run one analysis job at a time.
+Defaults are 100 RF trees, 300 joint observed donor samples and seed 42. A run
+records the local Git revision, code hash, package versions, dates and status.
+The task has its own four-hour soft limit rather than ingestion's five-minute limit.
+
+The audit updates only quality flags, uses cached original quarters and verifies
+that measurement/provenance fingerprints remain unchanged. Zero flatlines and
+equal hourly means with varying quarters no longer trigger stuck. Five unverified
+sites are excluded pending official GPS evidence. WorldPop 2025 is registered
+as default; the retained 2030 projection is not default.
+
+Versioned materialised tables average quality-OK readings per station/IST hour,
+then equally across eligible stations. Daily means require 18 valid hours; monthly
+means require 75% of calendar days. Analysis-eligible years require 75% valid hours
+and 75% valid days. Weather joins at the UTC timestamp of the local hour's midpoint.
+Calendar gaps remain null and never become training observations or predictions.
+
+```python
+from apps.analytics.aggregation import analysis_dataframe
+
+df = analysis_dataframe("delhi")  # latest successful Phase 3A run; joined weather
+```
+
+Read-only APIs use the latest successful full analysis run, or explicit `?run=<id>`:
+
+- `/api/analytics/coverage/?city=delhi&pollutant=pm25&limit=1000`
+- `/api/analytics/city/delhi/summary/`
+- `/api/analytics/city/delhi/series/?kind=raw&freq=daily`
+- `/api/analytics/city/delhi/series/?kind=deweathered&freq=monthly&start=2024-01-01&end=2026-01-01`
+
+`start` is inclusive and `end` exclusive. Series/coverage use limit/offset
+pagination (100 by default, capped at 1000). Invalid options return 400; writes
+return 405. All metrics/series link to their `AnalysisRun`; earlier runs remain
+available. Standalone maintenance runs do not replace the API's full analysis run.
+
+Actual results, figures, model performance and limitations are in
+[docs/results/PHASE3A.md](docs/results/PHASE3A.md). CSVs, fitted models and SVG/PNG
+figures are local under `data/results/<run_id>/`; only `manifest.json` is eligible
+for Git. The descriptive comparisons are not causal effects. Models use observed,
+complete-case hours only and a blocked holdout; they do not forecast or bridge
+2020–2023. Phase 3B uses the corrected snapshot described below. Forecasting and
+RAG were deferred at the Phase 3A handoff and are covered in the later phase
+sections. Simulators and dashboards remain deferred.
+
+## Phase 3A2: corrected deweathering method
+
+Use this method for the audited PM2.5 snapshot. The Phase 3A command above is
+retained for legacy comparisons; it uses the old clock interpretation and terminal
+holdout. The corrected method does not begin Phase 3B research.
+
+```powershell
+# Reconstruct and audit the corrected observed series; note the returned data-run ID.
+.\scripts\dev.ps1 manage diagnose_deweathering
+# Substitute that ID; note the returned model-run ID.
+.\scripts\dev.ps1 manage run_phase3a2 --data-run 6
+# Substitute the model-run ID in both commands.
+.\scripts\dev.ps1 manage supplement_phase3a2 --run 7
+.\scripts\dev.ps1 manage export_phase3a2_report --run 7
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+`run_phase3a2` without `--data-run` creates a new diagnostic data run first.
+Run one full model job at a time. Fixed seeds, the eight prespecified variants,
+readiness criteria and identical pooled reference-weather donors are recorded in
+[PHASE3A2_PROTOCOL.json](docs/results/PHASE3A2_PROTOCOL.json). The model grid takes
+substantially longer than the legacy single-model run. The hourly supplement is
+descriptive and does not change selection, thresholds or normalised values.
+
+Independent same-site comparisons in all seven recent cities establish that the
+OpenCity exports' `+0000` labels contain IST wall clocks. The corrected analysis
+converts those clocks to UTC, reuses the audited native IST four-quarter means,
+and joins UTC weather at IST-hour midpoints. Phase 3B has now moved the verified
+fix into ingestion and stored UTC timestamps. Raw CSV labels remain unchanged
+for provenance; clock-version markers prevent applying the shift twice.
+Archived runs 2 and 7 retain their original versioned results.
+`diagnose_deweathering --clock-shift-hours 0` reproduces the literal-UTC sensitivity
+case, rebuilding quarter bins across UTC-hour boundaries. It is not the corrected
+default. See [PHASE3A2_CLOCK_PROOF.json](docs/results/PHASE3A2_CLOCK_PROOF.json).
+
+Successful full `phase3a2` runs become the analytics API and pandas-helper default;
+diagnostic, failed and running jobs do not. Earlier full runs remain addressable
+with `?run=2`. Phase 3A2 stores PM2.5 diagnostics and series; use the legacy full
+run explicitly for other pollutants and its older descriptive metrics. Read the
+[actual diagnostic report](docs/results/PHASE3A2.md) before using normalisation:
+passing execution or random-hour fitting does not mean passing readiness, and
+its original normalised bootstrap intervals exclude model-refit and network uncertainty.
+
+## Phase 3B: observed-data research
+
+The timestamp repair is an idempotent management command. It retains raw values,
+quality flags, original ingestion links and cached publisher files. The bulk repair
+uses partition-aware routing when a timestamp crosses a Timescale chunk boundary.
+New OpenCity exports require verified clock evidence before canonical ingestion.
+The corrected warehouse timestamps are safe for direct UTC reads; forecasting is
+not implemented in this phase.
+
+```powershell
+.\scripts\dev.ps1 manage correct_stored_clocks
+# Existing canonical diagnostic/data snapshots: 8 and 9.
+.\scripts\dev.ps1 manage run_phase3b --diagnostic-run 8 --stored-run 9
+# Use the completed research-run ID printed by the command.
+.\scripts\dev.ps1 manage export_phase3b_report --run <research-run-id>
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+If rebuilding snapshots, run `diagnose_deweathering`, then
+`rebuild_research_tables --diagnostic-run <new-diagnostic-id>` and use the returned
+IDs. The table rebuild checks PM2.5 equivalence against frozen Run 7 and verifies
+NCAP reference flags against the retained official library document.
+
+Run one research command at a time. Completed city runs with the same frozen
+protocol/data IDs are reused after an interruption. Each city records nested
+whole-week validation, a weather-only RF/GAM comparison, 20 actual bootstrap model
+refits, seasonal exact SHAP/ALE, monthly trend tests and descriptive comparisons.
+Bengaluru uses its fixed panel; unsupported panels and years remain unavailable.
+Both eras use the same pooled reference weather. Research outputs include refit
+series, sampled-index hashes, CSV tables, models, figures and manifests under
+`data/results/<run_id>/`.
+
+Read-only endpoints publish only completed full Phase 3B research runs:
+
+- `/api/analytics/rq2/delhi/`
+- `/api/analytics/ncap/`
+- `/api/analytics/comparisons/`
+
+They accept `?run=<id>` for a completed research run. Other cities are labelled
+descriptive only. NCAP outputs are explicitly a **PM2.5 proxy for NCAP progress**,
+with official compliance marked **not assessed**. Missing historic PM10 and the
+fiscal/calendar baseline mismatch prevent official compliance conclusions.
+Chennai participates as a million-plus city but is outside the non-attainment
+classification in the verified CPCB list; its reference flag is corrected.
+
+The paper and actual research results are in
+[docs/results/PHASE3B.md](docs/results/PHASE3B.md). Primary reference documents and
+their download hashes are catalogued in
+[docs/RESEARCH_LIBRARY.md](docs/RESEARCH_LIBRARY.md). Weekly interpolation skill is
+not forecasting validation, and weather-adjusted changes do not identify policy
+effects. BS-VI attribution needs the missing intervening concentrations; crop-fire
+analysis is deferred pending FIRMS data.
+
+## Phase 5: extractive retrieval with verified citations
+
+Open [Ask](http://localhost:8000/ask/) for a minimal question box, provider badge
+and clickable source citations. In extractive mode, literature results quote
+retrieved evidence; data results use eight original validated, read-only tools
+plus Phase 6A's `vayusim_run` tool. Missing evidence produces an
+explicit refusal. Current forecasts are identified as live or archival replay.
+Read [PHASE5.md](docs/results/PHASE5.md) for measured performance and corpus limits.
+
+Verified corpus: 29 actual document bodies (24 public and five internal),
+7,194 indexed chunks and four unavailable requests. The full suite passes
+183 tests at its original handoff; the frozen 120-question evaluation is logged
+in MLflow's `rag` experiment. The later Phase 6A Qwen evaluation failed answer
+quality, as described above and in the Phase 6A audit. Retrieval and exact
+citation verification are distinct from semantic answer accuracy.
+
+```powershell
+.\scripts\dev.ps1 up
+.\scripts\dev.ps1 migrate
+.\scripts\dev.ps1 manage download_rag_library
+.\scripts\dev.ps1 manage prepare_rag_models
+.\scripts\dev.ps1 manage ingest_rag_library
+# Submit selected registered documents to the real Celery worker:
+.\scripts\dev.ps1 manage ingest_rag_library --enqueue --ids 1
+.\scripts\dev.ps1 test
+.\scripts\dev.ps1 lint
+```
+
+Public bodies are hash-addressed under `data/raw/rag/`; Git retains only the
+manifest and source specifications. Download failures are explicit, not empty
+documents. The BGE encoder/reranker weights and deterministic computation caches
+persist on D: under `data/models/`. The internal `rag-models` service serializes
+CPU embedding inference; a separate single-slot `rag-reranker` retains the
+pinned cross-encoder. Parsing and completed embedding
+batches survive an interrupted command. Unchanged content with the same parser
+version is a no-op; an incompatible parser fix requires an explicitly versioned
+index rebuild. After upgrading ingestion code, restart the Celery worker before
+submitting new tasks so it imports the current parser.
+
+Upload and tag a PDF at `/admin/rag/document/add/` to queue ingestion after the
+database commit. Existing PDF bodies cannot be replaced; a changed file is a new
+SHA256 revision. HTML and Markdown have actual section citations and logical
+text pages; PDF citations use physical file pages, not printed-page labels.
+
+`LLM_PROVIDER=extractive` is the default even when provider keys are present.
+Explicit `LLM_PROVIDER=auto` opts into configured Anthropic, OpenAI, enabled Ollama,
+then extractive. Optional remote providers require both their API key and model
+name in `.env`; see `.env.example`. Extractive works without keys.
+
+For experimental local generation, first check container memory against actual
+model bytes plus 3 GiB headroom. This resource check does not certify answer
+quality. Set these opt-in values in `.env`, then run `.\scripts\dev.ps1 up`:
+
+```dotenv
+COMPOSE_PROFILES=llm
+OLLAMA_ENABLED=true
+OLLAMA_MODEL=qwen2.5:3b-instruct
+LLM_PROVIDER=ollama
+```
+
+To restore the default, stop Ollama with `docker compose --profile llm stop ollama`,
+clear `COMPOSE_PROFILES`, set `OLLAMA_ENABLED=false` and `LLM_PROVIDER=extractive`,
+then run `.\scripts\dev.ps1 up` to recreate the application containers.
+Installed RAM is 16 GiB, with `[wsl2] memory=9GB` in `%UserProfile%\.wslconfig`
+(60% of 16 GiB, rounded down). The current-settings backup is
+`C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`. A pre-change original
+could not be recovered; the earlier report's claim that none existed cannot be
+independently reconstructed. See [the fix pass](docs/results/PHASE6A.md#fix-pass).
+
+API examples:
+
+```json
+POST /api/rag/ask/
+{"question":"What was the annual mean PM2.5 in Delhi in 2025?"}
+
+POST /api/rag/explain/
+{"context_type":"forecast","payload":{"city":"delhi"}}
+
+POST /api/rag/explain/
+{"context_type":"scenario","payload":{"question":"What assumptions does AERMOD use?","scenario_id":"example"}}
+```
+
+`ask` accepts optional filters `category`, `year_min`, `year_max`, `city` (seeded
+slug). `GET /api/rag/documents/` lists sources and ingestion status;
+`GET /api/rag/documents/<id>/page/<n>/` exposes stored page text and provenance.
+Explain payloads select evidence; supplied scenario/chart values are not verified
+measurements or simulation results. Phase 6 must validate its actual scenario
+outputs before using them as numerical evidence. Phase 6A now supplies the
+read-only `vayusim_run(run_id)` tool for actual stored simulation results.
+
+The checked-in `data/eval/rag_eval.jsonl` has frozen real-source and database
+expectations. `evaluate_rag` resumes saved question/provider results under
+`data/results/rag-phase5/` and logs them to MLflow's `rag` experiment. Do not
+overwrite frozen questions in response to poor scores. `build_rag_eval` refuses
+to overwrite an existing evaluation file; its input is the authored question
+catalogue, with exact source excerpts verified against real stored chunks.
+
+# Architecture
+
+```mermaid
+flowchart LR
+    S[Public sources] --> I[Celery ingestion: Phase 2]
+    I --> DB[PostgreSQL 16: TimescaleDB + PostGIS + pgvector]
+    DB --> D[Django apps]
+    D --> API[Read-only DRF API]
+    D --> UI[Curator admin and dashboard]
+    R[Redis] --> I
+    B[Database Beat scheduler] --> I
+    F[Flower] -. monitors .-> I
+```
+
+The arrows into ingestion describe a future boundary. Phase 1 creates the storage
+and task infrastructure, with a zero-row ping task, and downloads no observations.
+Those capabilities were deferred in Phase1; the later sections describe delivered phases.
+
+| App | Phase 1 responsibility |
+| --- | --- |
+| core | Abstract timestamps, health checks, restricted admin site, capped paginator, ping and infrastructure commands; extension migration |
+| warehouse | Reference geography, pollutants, station metadata, three Timescale hypertables, GeoJSON catalogue and real reference seed |
+| ingest | Source registry and auditable ingestion runs; task module reserved for Phase 2 |
+| rag | PDF and chunk metadata, nullable 1024-dimensional vectors, HNSW cosine and GIN full-text indexes |
+| analytics | Empty app shell for later policy-impact analysis |
+| forecast | Empty app shell for later PM2.5 forecasting |
+| vayusim | Empty app shell for later dispersion simulation |
+| dashboard | Base template and home placeholder |
+
+`web` runs Django's development server with source autoreload. `worker` consumes
+Celery's default queue. `beat` uses django-celery-beat's DatabaseScheduler. Task
+results persist through django-celery-results in PostgreSQL. Redis stores broker
+messages; Flower monitors task events and requires HTTP Basic authentication.
+The database image includes the three extension libraries in one PostgreSQL server.
+Init SQL and dependency-ordered Django migrations explicitly load them; the health
+endpoint reports actual `pg_extension` versions and pings Redis and workers.
+See the upstream [HA image source](https://github.com/timescale/timescaledb-docker-ha).
+
+The health response returns 200 only when every dependency check passes and 503
+otherwise. Errors stay in server logs; credentials and stack traces are not returned
+to clients. This is a readiness probe, with per-network timeouts, rather than a
+cheap liveness endpoint. Warehouse APIs permit public reads and reject writes.
+Reference APIs paginate at 100 items; GeoJSON page-size requests are capped at 100.
+
+The PostgreSQL, Redis and media named volumes survive normal `make down`. Docker
+installs the native GIS libraries so Windows hosts need no host GDAL installation.
+Workers wait for migrations, avoiding Beat querying tables before schema creation.
+Migration/seed commands remain explicit and are not run concurrently by services.
+Use only one Beat scheduler; ingestion schedules will require an explicit design
+in Phase 2.
+
+Database migrations and integration tests are tied to PostgreSQL 16 with the real
+extensions. This deliberately prevents a SQLite fallback from concealing spatial,
+hypertable, or vector incompatibilities. CI creates the complete stack and executes
+the live worker verification as well as the full suite. Local validation status is
+recorded separately in [VALIDATION.md](VALIDATION.md).
+
+## Phase 2 ingestion
+
+Management commands share a source lifecycle and immutable raw cache. Each input
+is registered with source, run, URL, byte count and SHA256. HTTP retries transient
+errors/rate limits; the documented anonymous FTP alternative resumes the large
+WorldPop input after validating cached bytes. Source failures remain visible as
+failed/partial runs, and absent optional keys create finished skipped runs.
+
+Scalar readings use COPY into a session-local staging table followed by batched
+`INSERT ... ON CONFLICT DO NOTHING RETURNING`. Weather/fire use native GIS-aware
+batched inserts. Actual returned keys count insertions; observation values and
+first provenance are retained on conflict. Weather/fire provenance is inserted
+transactionally in a separate ledger because the foundation uses composite keys.
+See [data model decisions](DATA_MODEL.md) and [source details](DATA_SOURCES.md).
+
+`ingest_all` creates database-backed, admin-editable schedules: OpenAQ hourly,
+FIRMS six hourly and Open-Meteo daily. Existing curator settings are preserved.
+Only one Beat process runs. Public backfills remain explicit commands rather than
+startup hooks. Observation APIs are read-only, use cursor pagination and enforce
+a maximum time range. Completeness is an ingestion coverage check. Analytics,
+ML, RAG, exposure calculations and simulator logic were deferred at the Phase 2 handoff.
+
+## Phase 3A analysis
+
+`apps/analytics/` owns the audit, versioned analysis tables, pandas export,
+descriptive calculations and RF meteorological normalisation. Warehouse observation
+values, raw values and provenance stay immutable; `ReadingFlagChange` records each
+in-place quality correction. Cached source quarters distinguish changing input
+from coincidentally equal hourly means. Unverified positions have explicit city
+and spatial exclusion metadata, with curator evidence required to override it.
+
+We chose materialised Django tables instead of Timescale continuous aggregates:
+each analysis is a versioned snapshot with its own quality rules, station exclusions
+and data window. `build_analysis_tables` creates one snapshot; `run_phase3a`
+performs audit → population registration → tables → descriptions → models → report.
+An `AnalysisRun` retains parameters, code hash, Git commit, installed versions,
+timestamps and success/failure. Only a successful full run becomes the API default.
+
+City means weight stations equally after averaging within a station/IST-hour bin.
+Weather attaches at the local-hour midpoint's UTC timestamp. Calendar rows count
+missing coverage without generating observations. Daily/monthly thresholds apply
+to raw and normalised series; models additionally require complete weather and
+eligible city-years. The RF validation split is chronological 80/20 with a seven-day
+purge. The final historical normalisation refits on eligible complete-case hours.
+Joint observed weather/seasonal draws hold the trend term fixed. An exact tree
+partition optimisation reuses predictions for observed trend values with identical
+tree branches; it is checked against direct donor predictions in the smoke suite.
+
+`analytics.run_phase3a` is a real Celery task with a four-hour soft limit. `--enqueue`
+submits and awaits it; synchronous CLI operation shares the same pipeline. Run one
+job at a time. CSVs, joblib models, SVG/PNG figures and a SHA256 manifest live under
+`data/results/<run_id>/`; bodies are ignored by Git, manifests retained. There is
+no model target or plot axis spanning the 2020–2023 concentration gap. Read-only
+DRF coverage, city summary and raw/deweathered series endpoints expose these runs.
+
+Phase 3A2 retains the legacy pipeline and adds `diagnostic_data`/`diagnostic_pipeline`
+for verified source-clock conversion, native IST bins, geography, station panels
+and source sanity checks. `model_diagnostics` implements random splits, embargoed
+week folds, transfer diagnostics, bias/support gates and reproducible common-weather
+normalisation. `revised_deweather` evaluates the frozen eight-variant grid and
+stores new models/series in a full `phase3a2` run. `hourly_validation` reports the
+hourly counterpart when selection favours a daily target; it does not alter fits
+or readiness. `diagnostic_report` exports the measured figures/tables separately.
+The result manifest distinguishes compute, supplement and export revisions.
+Only successful full `phase3a`/`phase3a2` runs become the read-only API default;
+diagnostic data and failed provisional results remain available for the audit.
+
+## Phase 4 forecasting
+
+`apps/forecast/` reads the canonical raw concentration snapshot and immutable
+lead-offset forecast weather. Monthly expanding-origin experiments fit point,
+quantile and small recurrent models with separate purged tuning/calibration
+segments. A versioned AnalysisRun retains predictions, split audits, input hashes,
+metrics and conditional SHAP explanations. MLflow tracks every algorithm/origin
+and registers each selected city/horizon version; SQLite metadata and artifact
+files persist under `data/mlflow/` on D:. The frozen method is in
+[PHASE4_PROTOCOL.md](results/PHASE4_PROTOCOL.md).
+
+ForecastWeather retains archive/live mode, issue/target dates, availability bounds
+and raw-asset links. ForecastModelVersion connects weights and MLflow identifiers
+to training dates and the AnalysisRun. Forecast stores three horizons, nested
+80/95% uncertainty bounds, the PM2.5 subindex category, mode, drivers and feature
+availability. ForecastEvaluation stores the complete archived-weather comparison.
+The read-only latest/history/evaluation endpoints select only a successful full
+forecasting run; running and failed experiments do not become defaults.
+
+Celery refreshes ten days of keyed PM at 23:35 IST, public forecast weather at
+23:40, and issues at 00:10 for the completed day. Readings must have finished
+ingestion before issue-end. Missing keys or incomplete live features select
+explicit replay; no observations are manufactured. Operational uncertainty uses
+the frozen training calibration radii, and SARIMAX state masks all future target
+labels. Historic publication latency and changes in station/weather support remain
+limitations rather than being hidden by service readiness.
+
+## Phase 5 evidence flow
+
+The user-facing capability is **extractive retrieval with verified citations**.
+The optional local Qwen generator failed answer-quality acceptance (2/80
+literature and 0/30 available-data answers retained in its completed evaluation).
+It remains an experimental opt-in provider. The default is the extractive path:
+`LLM_PROVIDER=extractive`, `OLLAMA_ENABLED=false`, empty `COMPOSE_PROFILES`.
+Ollama's existing `llm` Compose profile remains available but is stopped locally.
+Exact citation support checks source text, not independent semantic correctness.
+The Phase 6A fix changes the provider default only; prompts, frozen questions and
+relevance labels are unchanged, with no additional language-model evaluation.
+The final audit memory check also fails for the installed 3B model:
+4,103,503,872 available bytes versus 5,151,137,904 required. Earlier measurements
+passed; the precise cause of the lower final availability is unverified.
+Opt-in generation requires a new resource check; default extractive retrieval
+does not invoke a language model.
+
+`apps/rag/library.py` downloads public PDF/HTML and snapshots the five internal
+results/provenance documents. SHA256-addressed bodies, real retrieval times,
+licence notes and failed attempts are recorded in the retained manifest.
+No body means no invented Document row or hash. Curator PDF uploads share the
+same ingestion pipeline via an after-commit Celery task.
+
+PyMuPDF physical pages, pdfplumber Markdown tables and Tesseract OCR feed a
+versioned section parser. Native tables are excluded from prose heading detection;
+OCR typography is not trusted as a section detector. BGE-token windows retain
+page ranges and source sections, with 100-token overlap and shorter section tails.
+Document-level advisory locks prevent concurrent ingestion of the same revision;
+each completed embedding batch persists independently for resume.
+
+The internal `rag-models` HTTP service produces normalized1024-vectors and releases
+the embedding model after use. Reranking delegates to a dedicated single-slot
+Celery `rag-reranker` worker on queue `rag-rerank`; its pinned model stays resident.
+Top24 RRF candidates passed the frozen Recall@10 gate against40. The audit isolates
+candidate competition with a shared fresh score vector per query and measures
+uncached cold/warm latency separately. Known-gold recall is measured before the
+unchanged 0.2 relevance floor and eight-passage output; it is not answer-quality
+acceptance. Near-tied ranks can move under small floating-point score differences,
+which are retained in the audit evidence. Model revision, float32 and1024-token
+limits are unchanged. Query/passage/pair caches include revisions and
+content hashes. pgvector cosine HNSW and indexed English full-text retrieval
+remain in PostgreSQL. Metadata filters apply before ranking; missing model
+service connectivity is recorded and permits an explicit keyword fallback.
+
+Transparent rules select literature/data/mixed routes. Eight original data tools
+and the new `vayusim_run(run_id)` tool are explicitly whitelisted.
+Parameter serializers reject unknown fields/cities, bad date windows, nonfinite
+thresholds and out-of-range horizons. Tool results retain their actual data,
+normalisation, research or forecasting run and model IDs. No raw SQL is exposed.
+The provider defaults to extractive, including when keys are configured. Explicit
+`auto` opts into configured Anthropic/OpenAI/Ollama/extractive order. The generator
+receives evidence only. The verifier requires each cited source to contain the
+claim and its numbers; unsupported lines are removed and empty evidence refuses.
+This conservative exact-text check is not a semantic entailment or medical-validity
+classifier. Query rows retain answers, retrieval IDs, calls, latency and checks.
+
+DRF exposes ask/explain/library/page endpoints. Django templates and vendored HTMX
+provide the minimal Ask page with escaped text and clickable citations. Explain
+context never promotes unverified client numbers into evidence. Frozen human-
+authored questions and DB expectations drive four retrieval comparisons and
+available-provider answer evaluation, independently auditing emitted claims
+against stored source text. Actual metrics/artifacts are logged to MLflow `rag`.
+
+## Phase6A dispersion and presentation
+
+`apps/vayusim/physics/` imports NumPy only: stability tables, power-profile wind,
+Briggs rural/urban sigmas, stack-tip/buoyancy/momentum rise, ground/lid images and
+linear source superposition. Geographic adapters use pyproj AEQD; the receptor
+grid's affine rotates with transport direction (meteorological wind FROM+180°).
+Area midpoint lattices and line midpoint segments conserve entered total g/s.
+Their near-field discretisation and the100m–10km coefficient range are flagged.
+
+DRF strictly validates finite values, geometry, city, source type and grid size.
+The adapter reads warehouse weather at the IST hour midpoint's UTC instant;
+missing BLH uses the cited, explicitly illustrative CDM2 class relationship.
+WorldPop counts become geodesic-area densities before area-weighted warping;
+a separately warped support mask prevents inflating partial nodata cells.
+Exposure includes known population only. Nearby quality-OK, spatially eligible
+CPCB/OpenCity CPCB readings are labelled measured totals and never added.
+
+Scenario inputs, actual weather values/provenance, population asset hash and
+engine version form a canonical SHA256. Transaction advisory locks plus a unique
+hash prevent duplicate runs. Atomic float32 files live under
+`data/results/vayusim/<run_id>/`. Day mode stores24 summaries, marks missing
+hours unavailable, and defers grid/contour files until requested. A second
+advisory lock serialises concurrent lazy materialisation.
+Materialisation reads the run's hashed input/weather snapshot, so later edits
+to its Scenario cannot change the historical field. An unmaterialised old-engine
+run cannot be silently rebuilt by a different engine version.
+
+Run/header responses carry limitations, units, affine, WKT CRS, shape, byte order
+and image corners. Threshold masks become WGS84 GeoJSON polygons. The PNG uses
+CPCB PM2.5 category colours only; hourly increments are not actual AQI.
+Scenario explanation validates the stored run and supplies its values as dataset
+evidence alongside library passages. Client parameters remain unverified.
+
+Run responses also derive `interpretation` from the run's retained input snapshot.
+Explicitly declared hypothetical examples are labelled `hypothetical 1 g/s source`;
+an emission rate of 1 alone does not establish that label. Disclosures explain
+linear Q scaling at fixed transport/release geometry and limit population values
+to the grid footprint and known raster support. This presentation metadata does
+not rewrite historical summaries or change numerical input hashes/engine version.
+The stable `highway` preset ID is displayed as road dust resuspension, citing
+AP-42 January 2011 §13.2.1.1 p.13.2.1-1 and §13.2.1.3 p.13.2.1-4. No exhaust,
+brake/tire or universal PM2.5 emission factor is supplied.
+
+The Phase 6A fix separates passing formula checks (Table 2.3 arithmetic and the
+Gaussian equation with published inputs) from Briggs-versus-Martin scheme
+comparisons using Cimbala PDF p.3. Differences of 14.13% sigma-y, 15.60% sigma-z
+and 10.66% concentration exceed unchanged 5%/10% tolerances; they are differences
+between schemes, not validation errors. Brune's rural-B table gives 152.554014 m
+at 1 km, matching code; the adjacent paragraph's 210 m reference is excluded.
+The source is unpaginated, and Turner physical pages remain unverified.
+No physical coefficients or city example outputs changed. See the revised
+tables in [PHASE6A](results/PHASE6A.md#fix-pass).
+
+Django templates serve the overview, forecast/research selectors, source library,
+assistant and simulator with shared responsive styling. MapLibre5.24.0 is vendored
+with its BSD licence; the map requests standard OSM tiles with visible attribution
+and normal browser caching, without tile prefetch or offline downloads. Scientific
+figures and saved results retain their original timestamps and caveats. Markdown
+answer tables render with raw HTML disabled and unsafe URL schemes rejected.
+
+
+The independent-reference command `verify_vayusim_references` reads a separate,
+manually transcribed fixture with source/page, literal values and dates. It
+compares unchanged physics against DOE's printed rural-D sigmas at 1000 m
+(p.213; errors 0.030135%/0.124886%, within 5%). This establishes that numeric
+case only, not field validity or a full plume-rise pipeline. Martin and Turner
+differences, physical-page uncertainty and excluded counts remain explicit.
+ISC3 p.1-19 equation-transcription tests cover all urban classes, including C/F;
+equation coverage does not clear independent numeric readiness. Urban C
+(Delhi/Mumbai) and F (Hyderabad) remain not independently validated. The future
+Phase6B frontend must display **unvalidated branch** for those scenarios as a
+condition of **Ready for 6B with caveats**. No Phase6B frontend changes were made
+in this task, and all example numbers, engine coefficients/presets and frozen
+evaluation sets are unchanged. See [Independent validation](results/PHASE6A.md#independent-validation).
+
+# Data model
+
+## Relationships
+
+```mermaid
+erDiagram
+    State ||--o{ District : contains
+    State ||--o{ City : contains
+    City o|--o{ Station : locates
+    DataSource ||--o{ Station : provides
+    DataSource ||--o{ IngestionRun : records
+    Station ||--o{ Reading : measures
+    Pollutant ||--o{ Reading : identifies
+    IngestionRun ||--o{ Reading : audits
+    City o|--o{ WeatherObservation : locates
+    DataSource ||--o{ WeatherObservation : provides
+    DataSource ||--o{ FireDetection : provides
+    Document ||--o{ DocumentChunk : contains
+    City ||--o{ Scenario : locates
+    Scenario ||--o{ ScenarioRun : computes
+```
+
+`State` stores unique project codes and optional WGS84 MultiPolygons. `District`
+belongs to a state, has an optional census code/geometry, and is unique by state
+and name; non-null census codes are unique. `City` has a unique slug and state/name
+pair, a mandatory WGS84 point, an NCAP flag and optional nonnegative population.
+`Pollutant` restricts codes to the seven requested pollutants and stores the
+display name, canonical unit, nullable WHO short-term value/averaging period and
+nullable NAAQS 24-hour value.
+
+`Station` belongs to a source, optionally a city, and has a WGS84 location, operator,
+active flag and optional first/last-seen timestamps. `(source, external_id)` is
+unique and last-seen cannot precede first-seen. Deletion of referenced sources,
+stations, cities, pollutants and ingestion runs is protected to preserve provenance.
+
+`DataSource` stores access and licence metadata under a stable unique slug.
+`IngestionRun` records task identity, start/finish, status, counts, error and JSON
+parameters. Finish cannot precede start. Source/start and city/active indexes support
+curation. The demo ping references an existing source, records zero fetched/inserted/
+flagged rows and labels its parameters as an infrastructure probe.
+
+`Reading` associates station, pollutant and a timezone-aware observation timestamp
+with normalized/raw values, a quality flag and an ingestion run. Its primary key is
+the natural `(station_id, pollutant_id, observed_at)` tuple. The station/time index
+supports recent-history queries across pollutants. Quality flags are enforced in
+the database; an `ok` value must exist and be nonnegative.
+
+`WeatherObservation` stores an optional city, mandatory source/location/time and
+nullable meteorological variables. Relative humidity uses percent, wind direction
+uses degrees in `[0, 360)`, total cloud cover uses a fraction in `[0, 1]`, pressure
+uses hPa, wind speed m/s, radiation W/m², precipitation mm and boundary-layer height m.
+Wind speed, precipitation, pressure and boundary-layer height cannot be negative.
+City/time and source/time indexes support later joins. `FireDetection` stores time,
+WGS84 point, satellite, confidence, nullable nonnegative FRP in MW and source.
+Source/time and implicit spatial indexes support subsequent querying.
+
+`Document` stores title, authors as citation text, optional year/page count, category,
+source/licence metadata, a PDF FileField, a unique lowercase SHA-256 digest and
+nullable parse time. `DocumentChunk` stores ordered text and page/section metadata,
+token count and JSON metadata. Document/index is unique; pages are 1-based and end
+cannot precede start. Document deletion cascades to chunks; deleting a database
+record does not automatically delete the stored PDF. No parsing or hashing pipeline
+is implemented in this phase; curators must supply the actual digest.
+
+Chunk embeddings are nullable `vector(1024)`. The HNSW index uses `vector_cosine_ops`,
+`m=16`, `ef_construction=64`. The functional GIN index uses
+`to_tsvector('english', text)`; later full-text queries must use the same configuration.
+PostgreSQL maintains both indexes on insert/update. Index creation does not generate
+embeddings, perform retrieval or provide RAG logic. See [pgvector's Django integration](https://github.com/pgvector/pgvector-python).
+
+## Hypertables
+
+All unique keys include the partition time column:
+
+| Table | Partition column | Django and PostgreSQL primary key |
+| --- | --- | --- |
+| Reading | observed_at | station_id, pollutant_id, observed_at |
+| WeatherObservation | observed_at | UUID id, observed_at |
+| FireDetection | detected_at | UUID id, detected_at |
+
+Django 5.2's `CompositePrimaryKey` represents these keys honestly in both migration
+state and the database. There is no hidden single-column unique/primary index that
+would prevent Timescale conversion. All three tables use seven-day chunks and
+retain standard PostgreSQL foreign keys to regular reference tables. The initial
+table migration precedes an explicit `RunSQL` migration using `create_hypertable`.
+Compression, retention and continuous aggregates are deferred.
+
+The reverse SQL rebuilds each ordinary table inside the migration transaction,
+copying rows and restoring outgoing FKs, primary/unique keys and non-constraint
+indexes. It does not edit Timescale's internal catalog. Reversal takes an exclusive
+lock and needs space for a complete table copy; it is expensive at research scale.
+The integration test reverses/reapplies this migration and verifies row/key survival.
+There are no incoming foreign keys to these composite-key tables. Adding any later
+requires revisiting both Django's relation support and the reverse migration.
+
+## Decisions
+
+1. **Composite keys and admin:** [Django 5.2 does not support composite models in
+   standard admin](https://docs.djangoproject.com/en/5.2/topics/composite-primary-key/).
+   A narrowly restricted custom AdminSite registers the actual models for changelists
+   only. These listings have no forms, object links, actions or mutation/detail URLs,
+   and never write scalar-key admin log entries. They inherit GISModelAdmin, but
+   geometry editing/maps are available only for editable reference models. This
+   reconciles correct hypertable keys with the requested curator listings without
+   misrepresenting a nonunique scalar ID as the ORM primary key. Review the custom
+   registration when upgrading Django; standard support may replace it.
+2. **Count bounds:** time-series admin counts at most `ADMIN_COUNT_CAP + 1` rows and
+   returns at most the configured cap. Full-result counting, facets and show-all are
+   disabled. Pagination intentionally stops at the cap; users narrow with date/search
+   filters. This bounds counted rows but does not guarantee constant query latency
+   for arbitrary search predicates or large offsets.
+3. **Missing data:** nullable reading values/raw values preserve missing observations
+   without fabricated zeros. Weather variables and FRP may also be unavailable.
+   `quality_flag='ok'` requires a nonnegative value. Ingestion must preserve raw negative
+   values with an appropriate flag and normalize units in Phase 2.
+4. **Time and geography:** `USE_TZ=True` stores timestamps in PostgreSQL timestamptz;
+   application display timezone is Asia/Kolkata. Tests reject naive DateTimeField
+   warnings. Every geometry uses SRID 4326 and points are `(longitude, latitude)`.
+   Seed coordinates are approximate urban centres, not boundary-derived centroids;
+   geometries and population remain unknown. State codes are stable project codes;
+   `TS` is retained for Telangana and is not a live ISO-code synchronization system.
+5. **Standards:** `who_averaging_hours` explicitly disambiguates WHO's short-term
+   values. Ozone uses 8 hours; most others use 24. NH3 has no WHO 2021 AQG and CO/O3
+   have no NAAQS 24-hour standard, so those fields are null. CO is mg/m³; others are
+   µg/m³. Null means unpublished for that field, not zero or compliance.
+6. **Fire confidence:** stored as source-native text because MODIS uses numerical
+   confidence while VIIRS uses categories. Phase 2 must retain satellite/product
+   provenance and define comparable normalization explicitly.
+7. **Weather/fire identity:** UUID/time composite keys avoid nullable-city uniqueness
+   and geometry-key assumptions. They do not deduplicate repeated downloads. Phase 2
+   must define stable product identity and retry/deduplication rules before ingestion.
+8. **Audit metadata:** timestamps apply to catalogue, audit and document models; the
+   three observation tables stay lean without created/updated fields. Phase 2 must
+   ensure a reading's station source matches its ingestion-run source; this cross-table
+   condition is not enforced by a PostgreSQL CHECK constraint. Reading natural-key
+   conflicts must have an explicit policy for corrections and provenance.
+9. **Licence/access entries:** source records document product-dependent permissions;
+   public availability does not imply an unrestricted API or reuse licence. The seed
+   adds no credentials or download code. NCAP flags reflect the cited CPCB list and
+   are preserved on reruns rather than treated as dynamically updated classifications.
+10. **Text language:** the initial full-text index uses English. A multilingual
+    library will require explicit language/configuration changes before indexing
+    substantial Hindi or other-language content. The 1024-dimensional schema does
+    not select or download an embedding model.
+
+## Phase 2 decisions
+
+11. **Provenance:** `RawAsset` stores source, download run, digest/path and metadata.
+    `ObservationProvenance` logically associates weather/fire kind + UUID + timestamp
+    with source/run/asset in the observation insertion transaction. Its unique
+    logical key has no unsupported FK into a composite-key table. Reading already
+    links to its run and station source; loaders keep those providers consistent.
+    Runs retain raw units, asset IDs and coordinate-registry provenance. Dew point
+    and fire product/version metadata stay in the ledger. Warehouse columns and
+    the reversible foundation hypertable migration are preserved.
+12. **Identity/corrections:** weather UUID5 includes source, model, city and UTC time.
+    Fire UUID5 includes product/version, satellite, coordinates and UTC time.
+    Readings keep their natural composite key. COPY staging plus batched SQL
+    `ON CONFLICT DO NOTHING RETURNING` counts real insertions. First values and
+    provenance win; a rerun
+    never silently replaces measurements. Different fire products are retained
+    separately; these rows are not a deduplicated fire-event catalogue.
+    Valid committed batches from a partial run keep that original run link after
+    repair passes. A partial status describes the whole job; it does not make
+    every committed observation unusable.
+13. **Quality:** negative/physically impossible gas concentrations become null and
+    flagged negative; raw stays available. Finite PM2.5 >1000/PM10 >2000 is retained
+    as outlier. Phase 2 used six consecutive constant hours to flag the entire streak, including
+    its first five; five-hour database context joins adjacent files. Existing
+    flags may be promoted to stuck when neighbours arrive, with revised counts
+    audited in run parameters; values/run links are immutable. Priority is
+    negative/missing, outlier, stuck, PM2.5 > PM10. Quarter means require three
+    valid distinct slots; original quarters stay in raw input, absent hours stay absent.
+14. **Time/units:** CO remains mg/m³ per Decision 5 despite the brief asking for all
+    gases in µg/m³. Gas ppb/ppm conversion assumes 25°C and one atmosphere; the
+    raw value's original units are recorded by the run. Naive CPCB times are IST;
+    explicit OpenCity +0000 offsets are preserved. Weather explicitly uses ERA5
+    and current Open-Meteo BLH in metres; missing values are null.
+15. **Geography:** boundary loading updates State/District geometry and creates
+    `BoundaryProvenance`. `CityDistrictLink` records point-in-polygon matches,
+    run and asset. Districts are Census 2011 and use national `censuscode`, not
+    state-local district numbering. Retain source/vintage rather than relabelling
+    historical districts to current administrative geography.
+    Resolve state-name aliases across boundary layers. National census identity
+    retains district IDs when a parent spelling is corrected; historical DN/DD
+    names retain district-asset provenance even without a newer state polygon.
+16. **Completeness:** station/pollutant/month coverage counts distinct IST calendar
+    hours with finite nonnegative concentrations, including finite flagged values.
+    Missing days/months between first/last reports count zero. Flag station-days
+    with fewer than 18 present hours. City-year PM2.5 is the union of station hours,
+    not average station coverage or a representativeness claim. Current-year
+    denominators end at the last complete local day. Coverage calendars generate
+    expected counts, never measurements.
+17. **Access/vintage:** Princeton original files require Globus; the historical
+    alternative is explicitly XKDR PM2.5 only. Older OpenCity AQI matrices cannot
+    create concentrations. WorldPop 2030 is a constrained alpha population
+    projection registered for later use. See [DATA_SOURCES.md](DATA_SOURCES.md)
+    for source access/licences and honestly labelled contract-fixture adaptations.
+
+## Phase 3A decisions and tables
+
+18. **Corrected quality screening:** six consecutive *positive* constant hours
+    remain diagnostic stuck candidates. Zero alone can be a detection/reporting
+    floor and is not sufficient. An hour with varying cached original quarters
+    breaks a stuck sequence even if its mean equals adjacent means. The first
+    five hours of a qualifying sequence are flagged as before; gaps break sequences.
+    Rounded positive measurements alone do not establish instrument failure.
+    Negative/missing, outlier and paired canonical-unit PM inversion rules retain
+    their priority. `reflag_readings` updates flags only, records natural keys in
+    `ReadingFlagChange`, and verifies the count/hash of values/raw/run links.
+19. **Station eligibility:** `StationEligibility` adds city/spatial exclusion,
+    reason and evidence without changing warehouse schema. Sites 292, 293, 5405,
+    5618 and 5767 are excluded pending official coordinates. Their observations
+    remain stored. An explicit curator `verified_official_listing` evidence flag
+    preserves a reviewed override; no contributed position is silently upgraded.
+20. **Population vintage:** `PopulationRaster` references `RawAsset`, vintage,
+    rationale and default status. A partial unique constraint permits one default.
+    The public constrained R2025A v1 2025 raster is default; 2030 stays registered.
+    This does not perform exposure estimation or imply census accuracy.
+21. **Versioned analysis:** `AnalysisRun` contains name, JSON parameters, start/end
+    dates, Git revision, job times/status/error and results. `CityHourly` stores
+    run/city/pollutant/UTC timestamp, equal-station mean, contributor count and
+    joined weather JSON. `CityCoverage` stores per-year hour/day/month coverage
+    and eligibility. `CityMetric` holds named result JSON. `CitySeries` holds
+    daily/monthly raw/deweathered values, counts, denominators and sampling SE.
+    Ordinary scalar keys avoid unsupported relations to warehouse composite keys.
+22. **Coverage/time:** use IST bins/calendar dates, quality_flag=ok and eligible
+    stations. Daily ≥18 distinct hours, monthly ≥75% calendar days, annual
+    analysis eligibility ≥75% valid hours *and* valid days. Weather joins the local
+    hour midpoint in UTC with no interpolation. Raw calendar rows with NULL values
+    describe missingness. Normalisation exports only dates with observed complete-case
+    targets; missing weather/gap dates are absent rather than predicted.
+23. **Inference:** eligible PM2.5 years support descriptive annual ranks/exceedances,
+    seasonal, weekday, Diwali and winter summaries. Old/recent differences use a
+    seeded year/seven-day block bootstrap, not a causal interpretation. Holdout
+    performance comes from a separate blocked validation forest; final RF
+    normalisation uses joint observed donors and at least 300 draws, holding trend
+    fixed. Sampling SE is Monte Carlo error, not total uncertainty.
+
+The analytics migration depends on ingestion 0002 and warehouse 0001. It leaves
+the foundational hypertables and their reversible migration unchanged. See
+[actual Phase 3A results](results/PHASE3A.md) for coverage and model limits.
+
+24. **Corrected source clocks:** Phase 3A2 uses independently verified IST wall
+    clocks for cached OpenCity concentration exports despite their UTC labels.
+    Original files/warehouse keys remain immutable. Corrected derived hourly
+    timestamps subtract 5.5 hours only for that source; historical CPCB and weather
+    physical timestamps are unchanged. Audited four-quarter publisher means are
+    native IST-hour means after conversion. Literal UTC sensitivity runs rebin the
+    original quarters across the IST half-hour boundary instead of relabelling means.
+25. **Readiness and reference weather:** `phase3a2-data` stores audited PM2.5
+    snapshots/panels; `phase3a2` stores the new fits, OOF diagnostics and normalised
+    series. Five folds assign whole IST weeks within each observed era, with a
+    24-hour embargo. Immutable protocol thresholds gate daily OOF R2, overall and
+    monthly NMB and support separately in each era. Random-hour and cross-period
+    transfer scores are supplementary. Both eras draw the same pooled observed
+    weather/calendar reference, holding explicit period and within-era trend.
+    Calendar gaps never become targets. Fixed panels match physical CPCB IDs
+    across source-specific station identities, with coverage checked separately.
+
+26. **Canonical clock repair in Phase 3B:** the verified OpenCity IST conversion
+    is now applied once to warehouse timestamp keys, with an idempotent source
+    clock marker and audit run. Measurement values, flags and ingestion links are
+    preserved. Frozen earlier derived snapshots remain unchanged.
+27. **Forecast weather:** `ForecastWeather` stores city, issue and target date,
+    horizon, archive/live mode, lead offset, availability bound, 24-hour coverage,
+    weather features and source/run/raw-asset provenance. Uniqueness is per
+    city/issue/horizon/mode. Observed reanalysis remains a separate input used
+    only in the explicit perfect-prognosis experiment.
+28. **Forecast versions and results:** `ForecastModelVersion` references an
+    AnalysisRun, city/horizon, cohort, algorithm, fit label dates, first available
+    issue date, training-only selection/calibration metadata, weights path and
+    MLflow run/registry version. `Forecast` references that version, with issue/
+    target dates, mode, point, nested 80/95% bounds, PM2.5 category, top-five
+    drivers and feature-availability provenance. Uniqueness includes the model
+    version, preserving prior outputs. `ForecastEvaluation` holds one full
+    evaluation JSON per run/city/horizon, including all models, interval/event
+    scores and the separately labelled perfect-prognosis comparison.
+29. **Operational forecast inputs:** completed-day PM must have been ingested
+    before issue-end. Seven-day lag support and forecast weather must be complete
+    at all three horizons; otherwise issuance uses labelled archival replay.
+    Saved conformal radii are immutable during issuance. SARIMAX can assimilate
+    measured past labels across days missing weather, but never future labels.
+    Forecast migrations depend on existing analytics/ingest/warehouse tables and
+    do not modify the foundational hypertables or observation values.
+
+30. **RAG document revisions:** existing Document SHA256 remains unique. New
+    fields record local source path/format, bytes, retrieval time, ingestion state,
+    error and versioned parser/encoder metadata. PDF uploads use the media volume;
+    hash-addressed public PDF/HTML/Markdown bodies use `data/raw/rag/` on D:.
+    `project_results` is a distinct category. Missing downloads stay in the
+    manifest and have no fabricated document body/hash.
+31. **Physical and logical pages:** DocumentPage is unique on document/page number,
+    with stored source text, sections, Markdown tables, OCR flag and logical-page
+    flag. PDF indices are one-based physical file pages. HTML/Markdown remain
+    unpaginated and cite actual section headings, even though their text endpoint
+    exposes one explicitly logical page. Empty physical PDF pages are retained.
+32. **RAG chunks:** existing DocumentChunk uniqueness, page-range constraint,
+    1024-dimensional nullable VectorField, cosine HNSW and English FTS GIN remain.
+    Metadata stores source SHA256, category/year, seeded city/pollutant mentions,
+    table flag and logical-page flag. Parser versions distinguish incompatible
+    index rebuilds; pending NULL vectors support batch resume without reparsing.
+33. **Stored answers:** Query retains question, validated filters, route, retrieved
+    chunk IDs, validated tool results/provenance, answer, citation objects, provider,
+    latency and verification/removal/refusal details. Dataset citations reference
+    the actual AnalysisRun and parameters, with forecast model version IDs.
+    Client scenario/chart numbers are context rather than trusted evidence.
+
+
+## Phase6A scenarios
+
+`Scenario` stores name, protected city FK, WGS84 centre point, source JSON,
+manual/real weather mode, date-hour, receptor height, grid settings, complete
+validated input JSON, unique random share slug and creation time. It is a
+scenario specification, not a measured emission inventory.
+
+`ScenarioRun` has a protected Scenario FK, globally unique64-character inputs
+SHA256, stability class, flags, input/provenance JSON, summary JSON, grid path,
+engine version, actual compute milliseconds and creation time. The hash uses
+canonical numerical inputs (presentation name excluded), actual weather values,
+population asset hash and engine version. Identical requests return the original
+run and scenario. New engine versions retain earlier runs.
+
+Summaries include lattice peak/location/distance, threshold area, hourly known-
+population exposure and fractional support, weather/population provenance,
+source assumptions, separate measured station totals, limits and grid metadata.
+Day runs initially have no grid path/contours; they materialise under an advisory
+lock when the binary, header or overlay is requested. Files are little-endian
+float32; shape/affine/WKT CRS and lon/lat corners are served separately. The
+stored peak is a grid estimate, not an analytic continuous maximum.
+
+`ForecastModelVersion.interval_policy` records per-level interval choices,
+empirical coverage/gate, original evaluation run/window, adoption time and
+explicit post-evaluation selection. Point model versions are not refitted.
+Changed bounds retain their original values in Forecast feature provenance.
+
+Dataset citations for `vayusim_run` reference the actual ScenarioRun, input hash,
+engine version and read-only run endpoint. They do not reuse an AnalysisRun ID
+for a simulator run. The immutable Phase5 evaluation remains unchanged; the five
+scenario questions live in separate `data/eval/vayusim_eval.jsonl`.
+
+Phase 6A audit response metadata (`interpretation`) is derived from the retained
+ScenarioRun input snapshot, never an edited Scenario. It labels explicitly
+hypothetical unit-release examples, explains fixed-condition linear Q scaling,
+and limits population to the modelled footprint and known raster support.
+It does not change stored inputs, numerical summaries, hashes or engine versions.
+The `highway` preset ID is retained for compatibility but means road dust
+resuspension only; its required total segment PM2.5 emission rate stays null.
+No exhaust factor is stored or inferred. The RAG feature is described as
+extractive retrieval with verified citations; a stored provider name and valid
+citations do not constitute answer-quality certification.
+Memory eligibility is likewise a timestamped resource measurement, separate from
+Query/provider identity and answer quality. The final audit gate failed for the
+installed 3B model. The fix pass defaults to `LLM_PROVIDER=extractive`, disables
+Ollama and leaves its Compose `llm` profile opt-in. Existing Query provider/model
+identities and evaluation artifacts are retained; no question, relevance label,
+prompt or generation parameter was tuned.
+
+Textbook references in `tests/fixtures/vayusim-textbook-audit.json` now distinguish
+formula checks, scheme comparisons and unverified physical pages. Rural-B
+Table 2.3 arithmetic yields sigma-y 152.554014 m at 1000 m; the inconsistent 210 m
+paragraph reference is retained as an excluded diagnostic. Briggs-versus-Martin
+differences (Cimbala PDF p.3: 14.13%/15.60%/10.66%) are scheme differences beyond
+5%/10% tolerances, not validation errors. Turner physical pages are unverified.
+This correction changes no ScenarioRun input hashes, engine version, stored
+numerical summaries or frozen Phase 3A.2/4/5 evaluation records.
+
+
+
+
+````
+
+</details>
+
+<details>
+<summary>Phase 6B: 002-api-service-grid (2026-10-16T10:59:19.5256698+05:30; exit 0)</summary>
+
+```powershell
+Get-Content apps/vayusim/api.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/serializers.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/models.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/urls.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/service.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/grid.py -Raw -Encoding UTF8
+rg --files templates static apps | Select-String 'simulator|overview|ask|vayusim|views.py|urls.py|vendor'
+Get-Content 'C:/Users/Andry/.codex/plugins/cache/openai-curated-remote/sites/1.0.0/skills/sites/references/preview/local.md' -Raw -Encoding UTF8
+docker compose ps
+```
+
+```text
+from datetime import datetime, timedelta
+from pathlib import Path
+
+import numpy as np
+from django.conf import settings
+from django.http import FileResponse, HttpResponse
+from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import OpenApiTypes, extend_schema
+from rest_framework import serializers
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from apps.warehouse.models import City
+
+from .artifacts import overlay_png
+from .models import Scenario, ScenarioRun
+from .presets import presets
+from .serializers import RunSerializer
+from .service import ensure_grid, interpretation, run_response, run_scenario
+from .weather import IST, background_stations
+
+
+class RunView(APIView):
+    @extend_schema(request=RunSerializer, responses=OpenApiTypes.OBJECT)
+    def post(self, request):
+        serializer = RunSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        run, cached = run_scenario(serializer.validated_data)
+        return Response(run_response(run, cached))
+
+
+class RunDetailView(APIView):
+    @extend_schema(responses=OpenApiTypes.OBJECT)
+    def get(self, request, run_id):
+        return Response(
+            run_response(
+                get_object_or_404(ScenarioRun.objects.select_related("scenario"), pk=run_id)
+            )
+        )
+
+
+class GridView(APIView):
+    @extend_schema(responses=OpenApiTypes.BINARY)
+    def get(self, request, run_id, kind):
+        run = get_object_or_404(ScenarioRun, pk=run_id)
+        ensure_grid(run)
+        path = Path(settings.BASE_DIR) / run.grid_file_path
+        if kind == "json":
+            return Response(
+                {
+                    "run_id": run.pk,
+                    "engine_version": run.engine_version,
+                    "inputs_hash": run.inputs_hash,
+                    **run.summary["grid"],
+                    "units": "µg/m³",
+                    "label": run.summary["label"],
+                    "nodata": None,
+                    "limitations": run.summary["limitations"],
+                    "flags": run.flags,
+                    "contours": run.summary.get("contours"),
+                    "interpretation": interpretation(run.inputs),
+                }
+            )
+        if kind == "png":
+            values = np.fromfile(path, dtype="<f4").reshape(run.summary["grid"]["shape"])
+            return HttpResponse(overlay_png(values), content_type="image/png")
+        response = FileResponse(path.open("rb"), content_type="application/octet-stream")
+        response["X-Grid-Header"] = f"/api/vayusim/grid/{run.pk}.json"
+        return response
+
+
+class ScenarioView(APIView):
+    @extend_schema(responses=OpenApiTypes.OBJECT)
+    def get(self, request, slug):
+        scenario = get_object_or_404(Scenario, share_slug=slug)
+        return Response(
+            {
+                "name": scenario.name,
+                "slug": slug,
+                "inputs": scenario.inputs,
+                "runs": [run_response(r) for r in scenario.runs.order_by("id")],
+            }
+        )
+
+
+class DayView(APIView):
+    @extend_schema(request=RunSerializer, responses=OpenApiTypes.OBJECT)
+    def post(self, request):
+        serializer = RunSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        inputs = serializer.validated_data
+        if inputs["weather_mode"] != "real":
+            raise serializers.ValidationError("Day mode requires real hourly weather")
+        start = (
+            inputs["datetime"].astimezone(IST).replace(hour=0, minute=0, second=0, microsecond=0)
+        )
+        hours = []
+        for hour in range(24):
+            moment = start + timedelta(hours=hour)
+            try:
+                run, cached = run_scenario({**inputs, "datetime": moment}, materialize=False)
+                hours.append(
+                    {"datetime": moment.isoformat(), "available": True, **run_response(run, cached)}
+                )
+            except serializers.ValidationError as exc:
+                hours.append(
+                    {"datetime": moment.isoformat(), "available": False, "reason": str(exc.detail)}
+                )
+        return Response(
+            {
+                "date": start.date().isoformat(),
+                "timezone": "Asia/Kolkata",
+                "hours": hours,
+                "label": "24 independent hourly increments; not daily/annual exposure",
+                "grids": "Materialised on first grid request",
+            }
+        )
+
+
+class PresetsView(APIView):
+    @extend_schema(responses=OpenApiTypes.OBJECT)
+    def get(self, request):
+        return Response({"presets": presets()})
+
+
+class StationsView(APIView):
+    @extend_schema(responses=OpenApiTypes.OBJECT)
+    def get(self, request):
+        city = get_object_or_404(City, slug=request.query_params.get("city"))
+        try:
+            moment = datetime.fromisoformat(
+                request.query_params.get("datetime", "").replace("Z", "+00:00")
+            )
+            if moment.tzinfo is None:
+                raise ValueError
+        except ValueError:
+            raise serializers.ValidationError("Provide timezone-aware datetime") from None
+        return Response(background_stations(city, moment, [city.location.x, city.location.y]))
+
+import math
+
+from rest_framework import serializers
+
+from apps.warehouse.models import City
+
+
+class StrictSerializer(serializers.Serializer):
+    def to_internal_value(self, data):
+        if not isinstance(data, dict) or set(data) - set(self.fields):
+            raise serializers.ValidationError(
+                {"non_field_errors": "Use an object containing only documented fields"}
+            )
+        for name, value in data.items():
+            if isinstance(self.fields[name], (serializers.FloatField, serializers.IntegerField)):
+                if isinstance(value, bool):
+                    raise serializers.ValidationError({name: "Use a finite number, not a boolean"})
+                try:
+                    if not math.isfinite(float(value)):
+                        raise ValueError
+                except (ValueError, TypeError):
+                    raise serializers.ValidationError({name: "Use a finite number"}) from None
+        return super().to_internal_value(data)
+
+
+class Coordinates(serializers.ListField):
+    def __init__(self, **kwargs):
+        super().__init__(child=serializers.FloatField(), min_length=2, max_length=2, **kwargs)
+
+    def to_internal_value(self, data):
+        if not isinstance(data, (list, tuple)) or any(isinstance(x, bool) for x in data):
+            raise serializers.ValidationError("Use [longitude, latitude]")
+        value = super().to_internal_value(data)
+        if (
+            not all(math.isfinite(x) for x in value)
+            or not -180 <= value[0] <= 180
+            or not -85 <= value[1] <= 85
+        ):
+            raise serializers.ValidationError("Coordinates outside geographic range")
+        return value
+
+
+class SourceSerializer(StrictSerializer):
+    type = serializers.ChoiceField(choices=["point", "area", "line"])
+    location = Coordinates()
+    emission_gs = serializers.FloatField(min_value=0, max_value=100000)
+    height_m = serializers.FloatField(min_value=0, max_value=1000)
+    diameter_m = serializers.FloatField(min_value=0, max_value=100)
+    exit_velocity_ms = serializers.FloatField(min_value=0, max_value=200)
+    exit_temperature_k = serializers.FloatField(min_value=150, max_value=2000)
+    width_m = serializers.FloatField(min_value=1, max_value=10000, required=False)
+    length_m = serializers.FloatField(min_value=1, max_value=10000, required=False)
+    end_location = Coordinates(required=False)
+    subdivisions = serializers.IntegerField(min_value=1, max_value=20, required=False)
+    assumptions = serializers.CharField(
+        max_length=1000,
+        required=False,
+        default="User-supplied scenario assumptions; not measured emissions",
+    )
+
+    def validate(self, attrs):
+        needed = {
+            "point": [],
+            "area": ["width_m", "length_m", "subdivisions"],
+            "line": ["end_location", "subdivisions"],
+        }[attrs["type"]]
+        if any(k not in attrs for k in needed):
+            raise serializers.ValidationError("Required for this source: " + ", ".join(needed))
+        return attrs
+
+
+class WeatherSerializer(StrictSerializer):
+    wind_speed_ms = serializers.FloatField(min_value=0, max_value=100)
+    wind_direction_deg = serializers.FloatField(min_value=0, max_value=359.999999)
+    temperature_k = serializers.FloatField(min_value=150, max_value=350)
+    solar_radiation_wm2 = serializers.FloatField(min_value=0, max_value=1500)
+    cloud_fraction = serializers.FloatField(min_value=0, max_value=1)
+    mixing_height_m = serializers.FloatField(min_value=2, max_value=10000, required=False)
+    daytime = serializers.BooleanField()
+
+
+class GridSerializer(StrictSerializer):
+    width_m = serializers.IntegerField(min_value=1000, max_value=10000, default=10000)
+    resolution_m = serializers.IntegerField(min_value=25, max_value=500, default=50)
+
+    def validate(self, attrs):
+        if attrs["width_m"] % attrs["resolution_m"]:
+            raise serializers.ValidationError("Grid width must be a multiple of resolution")
+        return attrs
+
+
+class RunSerializer(StrictSerializer):
+    name = serializers.CharField(max_length=200, default="VayuSim scenario")
+    city = serializers.SlugField()
+    centre = Coordinates()
+    sources = SourceSerializer(many=True, min_length=1, max_length=20)
+    weather_mode = serializers.ChoiceField(choices=["manual", "real"])
+    datetime = serializers.DateTimeField()
+    weather = WeatherSerializer(required=False)
+    receptor_height = serializers.FloatField(min_value=0, max_value=100, default=1.5)
+    environment = serializers.ChoiceField(choices=["urban", "rural"], default="urban")
+    grid = GridSerializer(default=dict)
+    thresholds = serializers.ListField(
+        child=serializers.FloatField(min_value=0, max_value=10000), max_length=10, default=list
+    )
+
+    def validate_city(self, value):
+        if not City.objects.filter(slug=value).exists():
+            raise serializers.ValidationError("Unknown city")
+        return value
+
+    def validate_thresholds(self, value):
+        if not all(math.isfinite(x) for x in value):
+            raise serializers.ValidationError("Use finite thresholds")
+        return sorted(set(value))
+
+    def validate(self, attrs):
+        if attrs["weather_mode"] == "manual" and "weather" not in attrs:
+            raise serializers.ValidationError("Manual mode requires weather")
+        if attrs["weather_mode"] == "real" and "weather" in attrs:
+            raise serializers.ValidationError("Real mode cannot override measured weather")
+        total = sum(
+            s.get("subdivisions", 1) ** (2 if s["type"] == "area" else 1) for s in attrs["sources"]
+        )
+        if total > 400:
+            raise serializers.ValidationError("At most 400 point sub-sources per scenario")
+        return attrs
+
+import uuid
+
+from django.contrib.gis.db import models
+
+
+def share_slug():
+    return uuid.uuid4().hex
+
+
+class Scenario(models.Model):
+    name = models.CharField(max_length=200)
+    city = models.ForeignKey("warehouse.City", on_delete=models.PROTECT)
+    centre = models.PointField(srid=4326)
+    sources = models.JSONField()
+    weather_mode = models.CharField(max_length=6, choices=[("manual", "Manual"), ("real", "Real")])
+    date_hour = models.DateTimeField()
+    receptor_height = models.FloatField(default=1.5)
+    grid_settings = models.JSONField(default=dict)
+    inputs = models.JSONField(default=dict)
+    share_slug = models.SlugField(max_length=32, unique=True, default=share_slug)
+    created = models.DateTimeField(auto_now_add=True)
+
+
+class ScenarioRun(models.Model):
+    scenario = models.ForeignKey(Scenario, on_delete=models.PROTECT, related_name="runs")
+    inputs_hash = models.CharField(max_length=64, unique=True)
+    stability_class = models.CharField(max_length=1)
+    flags = models.JSONField(default=list)
+    summary = models.JSONField(default=dict)
+    inputs = models.JSONField(default=dict)
+    grid_file_path = models.CharField(max_length=500, blank=True)
+    engine_version = models.CharField(max_length=60)
+    run_time_ms = models.FloatField()
+    created = models.DateTimeField(auto_now_add=True)
+
+from django.urls import path
+
+from .api import DayView, GridView, PresetsView, RunDetailView, RunView, ScenarioView, StationsView
+
+urlpatterns = [
+    path("run/", RunView.as_view(), name="vayusim-run"),
+    path("runs/<int:run_id>/", RunDetailView.as_view(), name="vayusim-run-detail"),
+    path("grid/<int:run_id>.bin", GridView.as_view(), {"kind": "bin"}, name="vayusim-grid"),
+    path(
+        "grid/<int:run_id>.json", GridView.as_view(), {"kind": "json"}, name="vayusim-grid-header"
+    ),
+    path("grid/<int:run_id>.png", GridView.as_view(), {"kind": "png"}, name="vayusim-overlay"),
+    path("scenarios/<slug:slug>/", ScenarioView.as_view(), name="vayusim-scenario"),
+    path("day/", DayView.as_view(), name="vayusim-day"),
+    path("presets/", PresetsView.as_view(), name="vayusim-presets"),
+    path("stations/", StationsView.as_view(), name="vayusim-stations"),
+]
+
+import hashlib
+import json
+import time
+from pathlib import Path
+
+import numpy as np
+from django.conf import settings
+from django.contrib.gis.geos import Point
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db import transaction
+from rest_framework.exceptions import ValidationError
+
+from apps.analytics.models import PopulationRaster
+from apps.warehouse.models import City
+
+from .artifacts import contours
+from .exposure import exposure_summary, population_grid
+from .grid import build_grid, project_sources
+from .models import Scenario, ScenarioRun
+from .physics import ENGINE_VERSION, simulate
+from .weather import background_stations, hour_bounds, weather_for
+
+LIMITS = [
+    "Primary PM2.5 only; no secondary formation, chemistry or deposition",
+    "Flat terrain; no building downwash beyond stack-tip adjustment",
+    "Steady state within the hour; uniform city-grid meteorology",
+    "Educational estimate, not a regulatory assessment; use AERMOD for regulatory modelling",
+    "Hourly added exposure; not24-hour/annual exposure or actual CPCB AQI",
+]
+
+
+def json_values(value):
+    return json.loads(json.dumps(value, cls=DjangoJSONEncoder, allow_nan=False))
+
+
+def compute(inputs, weather):
+    grid = build_grid(inputs["centre"], weather["wind_direction_deg"], **inputs["grid"])
+    sources = project_sources(inputs["sources"], grid)
+    if any(np.hypot(s["east_m"], s["north_m"]) > 15000 for s in sources):
+        raise ValidationError({"sources": "Sources must be within15km of the scenario centre"})
+    if any(
+        s["type"] == "line" and np.hypot(s["end_east_m"], s["end_north_m"]) > 15000 for s in sources
+    ):
+        raise ValidationError({"sources": "Line endpoints must be within15km of the centre"})
+    values, flags = simulate(
+        grid["east"],
+        grid["north"],
+        sources,
+        weather,
+        inputs["receptor_height"],
+        inputs["environment"],
+    )
+    return values, grid, sources, flags
+
+
+def run_scenario(inputs, materialize=True):
+    started = time.perf_counter()
+    inputs = {**inputs, "grid": {"width_m": 10000, "resolution_m": 50, **inputs.get("grid", {})}}
+    city = City.objects.get(slug=inputs["city"])
+    weather, provenance, flags = weather_for(inputs, city)
+    population = (
+        PopulationRaster.objects.filter(year=2025, is_default=True).select_related("asset").first()
+    )
+    canonical = json_values({k: v for k, v in inputs.items() if k != "name"})
+    canonical["datetime"] = hour_bounds(inputs["datetime"])[0].isoformat()
+    canonical.update(
+        weather_values=weather,
+        weather_provenance=provenance,
+        population_sha256=population.asset.sha256 if population else None,
+        engine_version=ENGINE_VERSION,
+    )
+    digest = hashlib.sha256(
+        json.dumps(canonical, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    ).hexdigest()
+    with transaction.atomic():
+        # PostgreSQL transaction advisory lock serialises identical requests without
+        # holding other scenarios. Unique hash is a second database-level safeguard.
+        from django.db import connection
+
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT pg_advisory_xact_lock(%s)", [int(digest[:15], 16)])
+        existing = ScenarioRun.objects.filter(inputs_hash=digest).select_related("scenario").first()
+        if existing:
+            if materialize:
+                ensure_grid(existing)
+            return existing, True
+        values, grid, sources, engine_flags = compute(inputs, weather)
+        flags += engine_flags
+        thresholds = sorted(set([1.0, 15.0, 60.0, 120.0, *inputs["thresholds"]]))
+        index = np.unravel_index(int(values.argmax()), values.shape)
+        east, north = grid["east"][index], grid["north"][index]
+        lon, lat = grid["inverse"].transform(east, north)
+        exposure = {
+            "label": "hourly added exposure",
+            "available": False,
+            "reason": "No registered WorldPop2025 raster",
+        }
+        population_provenance = None
+        if population:
+            path = Path(population.asset.path)
+            if not path.is_absolute():
+                path = Path(settings.BASE_DIR) / "data/raw" / path
+            if path.exists():
+                counts, support = population_grid(path, grid, values.shape, return_support=True)
+                exposure = {
+                    "available": True,
+                    **exposure_summary(values, counts, thresholds, support),
+                }
+                population_provenance = {
+                    "asset_id": population.asset_id,
+                    "year": 2025,
+                    "sha256": population.asset.sha256,
+                    "url": population.asset.download_url,
+                    "rationale": population.rationale,
+                }
+                if exposure["missing_population_cells"] or exposure["partially_supported_cells"]:
+                    flags.append(
+                        "Population nodata cells excluded; exposure covers supported cells only"
+                    )
+            else:
+                exposure["reason"] = "Registered population file unavailable"
+        if not exposure["available"]:
+            flags.append("Population exposure unavailable; no zero substituted")
+        summary = {
+            "label": "modelled increment from these sources only",
+            "unit": "µg/m³",
+            "peak_ugm3": float(values[index]),
+            "peak_location": [lon, lat],
+            "distance_to_peak_m": min(
+                float(np.hypot(east - s["east_m"], north - s["north_m"])) for s in sources
+            ),
+            "distance_definition": "Nearest discretised source to peak receptor",
+            "area_above_km2": {
+                str(t): float(np.sum(values > t) * abs(grid["affine"].determinant) / 1e6)
+                for t in thresholds
+            },
+            "exposure": exposure,
+            "weather": weather,
+            "weather_provenance": provenance,
+            "population_provenance": population_provenance,
+            "source_assumptions": inputs["sources"],
+            "background": background_stations(city, inputs["datetime"], inputs["centre"]),
+            "limitations": LIMITS,
+            "grid": {
+                "shape": list(values.shape),
+                "dtype": "float32",
+                "byte_order": "little",
+                "affine": list(grid["affine"])[:6],
+                "crs": grid["crs"].to_wkt(),
+                "corners": grid["corners"],
+                "receptor_height_m": inputs["receptor_height"],
+                "png_label": (
+                    "CPCB category colours for visualisation only; hourly increment is not AQI"
+                ),
+            },
+            "contours": contours(values, grid, thresholds) if materialize else None,
+            "thresholds": thresholds,
+        }
+        scenario = Scenario.objects.create(
+            name=inputs["name"],
+            city=city,
+            centre=Point(*inputs["centre"], srid=4326),
+            sources=inputs["sources"],
+            weather_mode=inputs["weather_mode"],
+            date_hour=inputs["datetime"],
+            receptor_height=inputs["receptor_height"],
+            grid_settings=inputs["grid"],
+            inputs=json_values(inputs),
+        )
+        run = ScenarioRun.objects.create(
+            scenario=scenario,
+            inputs_hash=digest,
+            stability_class=weather["stability_class"],
+            flags=sorted(set(flags)),
+            summary=json_values(summary),
+            inputs=canonical,
+            engine_version=ENGINE_VERSION,
+            run_time_ms=(time.perf_counter() - started) * 1000,
+        )
+        if materialize:
+            store_grid(run, values)
+        return run, False
+
+
+def store_grid(run, values):
+    folder = Path(settings.BASE_DIR) / "data/results/vayusim" / str(run.pk)
+    folder.mkdir(parents=True, exist_ok=True)
+    temporary = folder / "grid.bin.tmp"
+    values.astype("<f4").tofile(temporary)
+    path = folder / "grid.bin"
+    temporary.replace(path)
+    run.grid_file_path = str(path.relative_to(settings.BASE_DIR))
+    run.save(update_fields=["grid_file_path"])
+
+
+def ensure_grid(run):
+    if run.grid_file_path and (Path(settings.BASE_DIR) / run.grid_file_path).exists():
+        return
+    if run.engine_version != ENGINE_VERSION:
+        raise ValidationError(
+            {
+                "grid": (
+                    "This run has no retained grid from its engine version. "
+                    "Submit its saved inputs to create a current-version run; "
+                    "the old summary is preserved."
+                )
+            }
+        )
+    with transaction.atomic():
+        from django.db import connection
+
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT pg_advisory_xact_lock(%s)", [int(run.inputs_hash[:15], 16)])
+        run.refresh_from_db(fields=["grid_file_path", "summary"])
+        if run.grid_file_path and (Path(settings.BASE_DIR) / run.grid_file_path).exists():
+            return
+        materialize_grid(run)
+
+
+def materialize_grid(run):
+    # A Scenario can later be edited; a run's hashed snapshot remains its input.
+    inputs = dict(run.inputs)
+    values, grid, _, _ = compute(inputs, inputs["weather_values"])
+    run.summary["contours"] = contours(values, grid, run.summary["thresholds"])
+    run.save(update_fields=["summary"])
+    store_grid(run, values)
+
+
+def run_response(run, cached=False):
+    prefix = f"/api/vayusim/grid/{run.pk}"
+    return {
+        "run_id": run.pk,
+        "scenario_slug": run.scenario.share_slug,
+        "cached": cached,
+        "inputs_hash": run.inputs_hash,
+        "engine_version": run.engine_version,
+        "stability_class": run.stability_class,
+        "flags": run.flags,
+        "runtime_ms": run.run_time_ms,
+        "summary": {k: v for k, v in run.summary.items() if k != "contours"},
+        "contours": run.summary.get("contours"),
+        "grid_url": prefix + ".bin",
+        "grid_header_url": prefix + ".json",
+        "overlay_url": prefix + ".png",
+        "limitations": run.summary["limitations"],
+        "interpretation": interpretation(run.inputs),
+    }
+
+
+def interpretation(inputs):
+    """Presentation disclosures from the retained input snapshot, including old runs."""
+    sources = []
+    for source in inputs["sources"]:
+        kind = (
+            "hypothetical"
+            if source.get("assumptions", "")
+            .casefold()
+            .startswith(("declared hypothetical", "hypothetical "))
+            else "user-specified"
+        )
+        sources.append(
+            {
+                "label": f"{kind} {source['emission_gs']:g} g/s source",
+                "assumptions": source.get("assumptions", ""),
+            }
+        )
+    return {
+        "sources": sources,
+        "scaling": (
+            "For a single source at fixed weather, geometry, release parameters and grid, "
+            "concentration and peak scale linearly with emission rate Q. For multiple sources, "
+            "contributions add; peak scales linearly with a common multiplier on all rates. "
+            "Population above a fixed concentration threshold does not scale linearly."
+        ),
+        "population_scope": (
+            "Population values are for the modelled grid footprint only, restricted to known "
+            "raster support. They are not citywide exposure, a census or health impact estimates."
+        ),
+    }
+
+"""Geographic adapters; the NumPy engine has no projection or Django imports."""
+
+import numpy as np
+from affine import Affine
+from pyproj import CRS, Transformer
+
+
+def build_grid(centre, wind_direction, width_m=10000, resolution_m=50):
+    crs = CRS.from_proj4(f"+proj=aeqd +lat_0={centre[1]} +lon_0={centre[0]} +datum=WGS84 +units=m")
+    forward = Transformer.from_crs(4326, crs, always_xy=True)
+    inverse = Transformer.from_crs(crs, 4326, always_xy=True)
+    theta = np.deg2rad((wind_direction + 180) % 360)
+    ne, nn = np.sin(theta), np.cos(theta)
+    pe, pn = -nn, ne
+    affine = Affine(
+        ne * resolution_m,
+        -pe * resolution_m,
+        -width_m / 2 * ne + width_m / 2 * pe,
+        nn * resolution_m,
+        -pn * resolution_m,
+        -width_m / 2 * nn + width_m / 2 * pn,
+    )
+    size = int(round(width_m / resolution_m))
+    columns, rows = np.meshgrid(np.arange(size) + 0.5, np.arange(size) + 0.5)
+    east, north = affine @ (columns, rows)
+    corners = [
+        list(inverse.transform(*(affine @ pixel)))
+        for pixel in [(0, 0), (size, 0), (size, size), (0, size)]
+    ]
+    return {
+        "east": east,
+        "north": north,
+        "crs": crs,
+        "affine": affine,
+        "forward": forward,
+        "inverse": inverse,
+        "corners": corners,
+    }
+
+
+def project_sources(sources, grid):
+    result = []
+    for source in sources:
+        east, north = grid["forward"].transform(*source["location"])
+        item = {**source, "east_m": east, "north_m": north}
+        if source["type"] == "line":
+            item["end_east_m"], item["end_north_m"] = grid["forward"].transform(
+                *source["end_location"]
+            )
+        result.append(item)
+    return result
+
+rg : rg: static: The system cannot find the file specified. (os error 2)
+At line:7 char:1
++ rg --files templates static apps | Select-String 'simulator|overview| ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (rg: static: The...d. (os error 2):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+
+apps\ingest\tasks.py
+apps\warehouse\views.py
+apps\rag\views.py
+apps\core\views.py
+apps\vayusim\__init__.py
+apps\vayusim\weather.py
+apps\vayusim\views.py
+apps\vayusim\urls.py
+apps\dashboard\views.py
+apps\forecast\tasks.py
+apps\rag\templates\rag\ask.html
+apps\rag\tasks.py
+apps\analytics\tasks.py
+apps\core\tasks.py
+apps\vayusim\templates\vayusim\simulator.html
+apps\rag\static\rag\vendor.json
+apps\vayusim\artifacts.py
+apps\vayusim\apps.py
+apps\vayusim\api.py
+apps\vayusim\exposure.py
+apps\vayusim\grid.py
+apps\vayusim\static\vayusim\simulator.js
+apps\dashboard\static\dashboard\vendor\README.txt
+apps\dashboard\static\dashboard\vendor\maplibre-version.txt
+apps\dashboard\static\dashboard\vendor\maplibre-LICENSE.txt
+apps\dashboard\static\dashboard\vendor\maplibre-gl.js
+apps\dashboard\static\dashboard\vendor\maplibre-gl.css
+apps\vayusim\management\__init__.py
+apps\vayusim\serializers.py
+apps\vayusim\presets.py
+apps\vayusim\service.py
+apps\vayusim\models.py
+apps\vayusim\physics\dispersion.py
+apps\vayusim\physics\engine.py
+apps\vayusim\physics\__init__.py
+apps\vayusim\physics\rise.py
+apps\vayusim\physics\meteorology.py
+apps\vayusim\migrations\__init__.py
+apps\vayusim\management\commands\__init__.py
+apps\vayusim\management\commands\verify_vayusim_references.py
+apps\vayusim\migrations\0001_initial.py
+apps\vayusim\management\commands\verify_vayusim.py
+# Local preview
+
+For the `portable` profile, selected whenever `SITES_MANAGED_LINUX_CONTAINER` is not `1`, including on Linux devices.
+
+In a visible task with a user-facing preview tool, run the project's dev script or a static HTTP server in a retained session after any required installation. Check that the representative page returns a successful HTTP response, then open the server's printed Local URL with `open_in_codex` or equivalent. Use supported forwarding when execution is remote; loopback on another host is not a device preview.
+
+Reuse the server and Site tab through edits and publication. For a background task or an environment without user-facing preview, start a server only when needed for the work. Request network permissions when required for the server and its readiness check. Stop the owned server during final teardown.
+
+NAME                                  IMAGE                           COMMAND                  SERVICE        CREATED        STATUS                       PORTS
+enviroinsights-india-beat-1           enviroinsights-india:dev        "/bin/sh /app/docker…"   beat           12 hours ago   Up About an hour             8000/tcp
+enviroinsights-india-db-1             timescale/timescaledb-ha:pg16   "/docker-entrypoint.…"   db             8 days ago     Up About an hour (healthy)   127.0.0.1:5433->5432/tcp
+enviroinsights-india-flower-1         enviroinsights-india:dev        "/bin/sh /app/docker…"   flower         12 hours ago   Up About an hour             127.0.0.1:5555->5555/tcp
+enviroinsights-india-mlflow-1         enviroinsights-india:dev        "/bin/sh /app/docker…"   mlflow         12 hours ago   Up About an hour (healthy)   127.0.0.1:5000->5000/tcp
+enviroinsights-india-rag-models-1     enviroinsights-india:dev        "/bin/sh /app/docker…"   rag-models     12 hours ago   Up About an hour (healthy)   8000/tcp
+enviroinsights-india-rag-reranker-1   enviroinsights-india:dev        "/bin/sh /app/docker…"   rag-reranker   12 hours ago   Up About an hour (healthy)   8000/tcp
+enviroinsights-india-redis-1          redis:7.4.2-alpine              "docker-entrypoint.s…"   redis          8 days ago     Up About an hour (healthy)   127.0.0.1:6380->6379/tcp
+enviroinsights-india-web-1            enviroinsights-india:dev        "/bin/sh /app/docker…"   web            12 hours ago   Up About an hour             127.0.0.1:8000->8000/tcp
+enviroinsights-india-worker-1         enviroinsights-india:dev        "/bin/sh /app/docker…"   worker         12 hours ago   Up About an hour             8000/tcp
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 003-ui-baseline-tests (2026-10-16T10:59:28.0540880+05:30; exit 0)</summary>
+
+```powershell
+Get-Content apps/vayusim/views.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/templates/vayusim/simulator.html -Raw -Encoding UTF8
+Get-Content apps/vayusim/static/vayusim/simulator.js -Raw -Encoding UTF8
+Get-Content apps/vayusim/artifacts.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/physics/engine.py -Raw -Encoding UTF8
+Get-Content enviroinsights/urls.py -Raw -Encoding UTF8
+Get-Content templates/base.html -Raw -Encoding UTF8
+Get-Content apps/dashboard/views.py -Encoding UTF8 | Select-Object -First 140
+Get-Content apps/rag/templates/rag/ask.html -Encoding UTF8 | Select-Object -First 90
+Get-Content tests/test_vayusim_api.py -Raw -Encoding UTF8
+Get-Content .tools/phase6a-audit/browser.js -Raw -Encoding UTF8
+Get-Content apps/dashboard/static/dashboard/vendor/README.txt -Raw -Encoding UTF8
+Get-Content apps/dashboard/static/dashboard/vendor/maplibre-version.txt -Raw -Encoding UTF8
+Get-Content .tools/phase6a-independent/examples.py -Raw -Encoding UTF8
+```
+
+```text
+from django.views.generic import TemplateView
+
+from apps.warehouse.models import City
+
+
+class SimulatorPage(TemplateView):
+    template_name = "vayusim/simulator.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cities"] = [
+            {"slug": city.slug, "name": city.name, "location": [city.location.x, city.location.y]}
+            for city in City.objects.order_by("name")
+        ]
+        return context
+
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %}VayuSim · EnviroInsights{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'dashboard/vendor/maplibre-gl.css' %}">
+<div class="page-heading"><div><p class="eyebrow">Source dispersion lab</p><h1>VayuSim</h1><p>Explore the hourly PM2.5 increment from the sources you specify.</p></div><div><span class="badge">Educational estimate</span><p><a href="#simulation-form" class="text-link">Set up your scenario ↓</a></p></div></div>
+<div class="simulation-layout">
+<form id="simulation-form" class="panel control-panel">
+ {% csrf_token %}
+ <h2>Your scenario</h2>
+ <label for="sim-city">City</label><select id="sim-city" name="city">{% for city in cities %}<option value="{{city.slug}}" {% if city.slug == 'delhi' %}selected{% endif %}>{{city.name}}</option>{% endfor %}</select>
+ <label for="sim-preset">Source family</label><select id="sim-preset" name="preset"></select><p id="preset-note" class="help">Enter source parameters explicitly. Presets do not assume a facility's emissions.</p>
+ <div class="field-pair"><div><label for="sim-lon">Longitude</label><input id="sim-lon" type="number" step="any" required></div><div><label for="sim-lat">Latitude</label><input id="sim-lat" type="number" step="any" required></div></div>
+ <p class="help">Click the map to place your source, or enter its coordinates.</p>
+ <div class="field-pair"><div><label for="sim-q">PM2.5 emission (g/s)</label><input id="sim-q" type="number" min="0" max="100000" step="any" required placeholder="Required"></div><div><label for="sim-height">Release height (m)</label><input id="sim-height" type="number" min="0" max="1000" step="any" required placeholder="Required"></div></div>
+ <div class="field-pair"><div><label for="sim-diameter">Stack diameter (m)</label><input id="sim-diameter" type="number" min="0" max="100" step="any" required placeholder="0 for no rise"></div><div><label for="sim-velocity">Exit velocity (m/s)</label><input id="sim-velocity" type="number" min="0" max="200" step="any" required placeholder="0 for no rise"></div></div>
+ <label for="sim-temperature">Exit temperature (K)</label><input id="sim-temperature" type="number" min="150" max="2000" step="any" required placeholder="Required">
+ <div id="extended-source" hidden>
+   <div class="field-pair"><div><label for="sim-width">Area width (m)</label><input id="sim-width" type="number" min="1" max="10000"></div><div><label for="sim-length">Area length (m)</label><input id="sim-length" type="number" min="1" max="10000"></div></div>
+   <div class="field-pair"><div><label for="sim-end-lon">Line end longitude</label><input id="sim-end-lon" type="number" step="any"></div><div><label for="sim-end-lat">Line end latitude</label><input id="sim-end-lat" type="number" step="any"></div></div>
+   <label for="sim-subdivisions">Subdivisions (1–20)</label><input id="sim-subdivisions" type="number" min="1" max="20">
+ </div>
+ <label for="sim-mode">Meteorology</label><select id="sim-mode"><option value="real">Archived city weather</option><option value="manual">Enter weather manually</option></select>
+ <label for="sim-hour">Date and hour (IST)</label><input id="sim-hour" type="datetime-local" step="3600" value="2025-01-15T12:00" required><p class="help">Archived coverage is mainly 2015–2019 and 2024–2025. A missing hour is reported as unavailable.</p>
+ <fieldset id="manual-weather" hidden><legend>Manual weather</legend>
+  <div class="field-pair"><div><label for="sim-wind">Wind at 10 m (m/s)</label><input id="sim-wind" type="number" min="0" max="100" step="any"></div><div><label for="sim-direction">Wind from (degrees)</label><input id="sim-direction" type="number" min="0" max="359.999" step="any"></div></div>
+  <div class="field-pair"><div><label for="sim-ambient">Air temperature (K)</label><input id="sim-ambient" type="number" min="150" max="350" step="any"></div><div><label for="sim-solar">Solar radiation (W/m²)</label><input id="sim-solar" type="number" min="0" max="1500" step="any"></div></div>
+  <div class="field-pair"><div><label for="sim-cloud">Cloud fraction (0–1)</label><input id="sim-cloud" type="number" min="0" max="1" step="any"></div><div><label for="sim-lid">Mixing height (m, optional)</label><input id="sim-lid" type="number" min="2" max="10000" step="any"></div></div>
+  <label for="sim-daytime">Time of day</label><select id="sim-daytime"><option value="day">Daytime</option><option value="night">Nighttime</option></select>
+ </fieldset>
+ <label for="sim-threshold">Additional threshold (µg/m³, optional)</label><input id="sim-threshold" type="number" min="0" max="10000" step="any">
+ <button id="sim-submit" type="submit" class="button">Run dispersion model <span aria-hidden="true">↗</span></button>
+ <p id="sim-status" role="status" aria-live="polite"></p>
+</form>
+<div class="simulation-results"><div class="map-shell"><div id="sim-map" role="region" aria-label="Scenario map" style="height:520px"></div><div class="map-caption">Click to place a source · 10 km × 10 km · 50 m grid</div></div>
+<section id="sim-summary" class="panel" aria-live="polite"><h2>From source to surroundings</h2><p>Place a source, enter its parameters and run a scenario. The map will show its modelled increment and exposure footprint.</p><p class="help">Station measurements represent the total from all sources. They remain separate from this model.</p></section>
+<section class="notice"><h3>Read the estimate in context</h3><p>Primary PM2.5 only. Flat terrain, no chemistry or deposition, no building downwash beyond stack-tip, and steady meteorology within each hour. Educational estimate; regulatory assessments require AERMOD.</p><p>Overlay uses CPCB category colours for visualisation. An hourly added concentration is not actual AQI.</p></section></div>
+</div>
+{{cities|json_script:"sim-cities"}}
+<script src="{% static 'dashboard/vendor/maplibre-gl.js' %}" defer></script>
+<script src="{% static 'vayusim/simulator.js' %}" defer></script>
+{% endblock %}
+
+/* Real server-computed increments. User assumptions never become observations. */
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const cities = JSON.parse($("sim-cities").textContent);
+  let presets = [],
+    lastRun = null,
+    sharedInputs = null;
+  const selectedCity = () => cities.find((c) => c.slug === $("sim-city").value);
+  const initial = selectedCity().location;
+  const map = new maplibregl.Map({
+    container: "sim-map",
+    center: initial,
+    zoom: 10,
+    style: {
+      version: 8,
+      sources: {
+        osm: {
+          type: "raster",
+          tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+          tileSize: 256,
+          attribution:
+            '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+          maxzoom: 19,
+        },
+      },
+      layers: [{ id: "osm", type: "raster", source: "osm" }],
+    },
+  });
+  map.addControl(new maplibregl.NavigationControl());
+  const mapReady = new Promise((resolve) => map.once("load", resolve));
+  const marker = new maplibregl.Marker({ color: "#0b6557", draggable: true })
+    .setLngLat(initial)
+    .addTo(map);
+  function place(point) {
+    marker.setLngLat(point);
+    $("sim-lon").value = point[0].toFixed(6);
+    $("sim-lat").value = point[1].toFixed(6);
+  }
+  place(initial);
+  map.on("click", (e) => place([e.lngLat.lng, e.lngLat.lat]));
+  marker.on("dragend", () => {
+    const p = marker.getLngLat();
+    place([p.lng, p.lat]);
+  });
+  $("sim-city").addEventListener("change", () => {
+    const p = selectedCity().location;
+    place(p);
+    map.flyTo({ center: p, zoom: 10, essential: false });
+  });
+  function family() {
+    const preset = presets.find((p) => p.id === $("sim-preset").value);
+    const extended = preset?.type !== "point";
+    $("extended-source").hidden = !extended;
+    for (const id of [
+      "sim-width",
+      "sim-length",
+      "sim-end-lon",
+      "sim-end-lat",
+      "sim-subdivisions",
+    ]) {
+      const needed =
+        extended &&
+        (id === "sim-subdivisions" ||
+          (preset.type === "area"
+            ? ["sim-width", "sim-length"].includes(id)
+            : ["sim-end-lon", "sim-end-lat"].includes(id)));
+      $(id).disabled = !needed;
+      $(id).required = needed;
+      $(id).parentElement.hidden = !needed;
+    }
+    $("preset-note").replaceChildren(
+      document.createTextNode(preset?.note || ""),
+    );
+    if (preset?.citations[0]) {
+      const a = document.createElement("a");
+      a.href = preset.citations[0].url;
+      a.textContent = " Source: " + preset.citations[0].section;
+      a.target = "_blank";
+      a.rel = "noopener";
+      $("preset-note").append(a);
+    }
+  }
+  const presetsReady = fetch("/api/vayusim/presets/")
+    .then((r) => r.json())
+    .then((data) => {
+      presets = data.presets;
+      for (const p of presets) {
+        const o = document.createElement("option");
+        o.value = p.id;
+        o.textContent = p.name;
+        $("sim-preset").append(o);
+      }
+      family();
+    })
+    .catch(() => {
+      $("sim-status").textContent = "Unable to load presets. Refresh to retry.";
+    });
+  $("sim-preset").addEventListener("change", family);
+  $("sim-mode").addEventListener("change", () => {
+    const manual = $("sim-mode").value === "manual";
+    $("manual-weather").hidden = !manual;
+    for (const i of $("manual-weather").querySelectorAll("input")) {
+      i.disabled = !manual;
+      i.required = manual && i.id !== "sim-lid";
+    }
+  });
+  for (const i of $("manual-weather").querySelectorAll("input"))
+    i.disabled = true;
+  const numeric = (id) => Number($(id).value);
+  const number = (value, digits = 2) =>
+    value === null || value === undefined
+      ? "Unavailable"
+      : Number(value).toLocaleString("en-IN", {
+          maximumFractionDigits: digits,
+        });
+  function paragraph(text, parent, tag = "p") {
+    const e = document.createElement(tag);
+    e.textContent = text;
+    parent.append(e);
+    return e;
+  }
+  function render(data) {
+    lastRun = data;
+    const summary = data.summary;
+    place(summary.source_assumptions[0].location);
+    const cell = Math.hypot(summary.grid.affine[0], summary.grid.affine[3]);
+    document.querySelector(".map-caption").textContent =
+      "Click to place a source · " +
+      number((summary.grid.shape[1] * cell) / 1000) +
+      " km × " +
+      number((summary.grid.shape[0] * cell) / 1000) +
+      " km · " +
+      number(cell, 0) +
+      " m grid";
+    $("sim-summary").replaceChildren();
+    paragraph("Modelled source increment", $("sim-summary"), "h2");
+    const stats = document.createElement("div");
+    stats.className = "metric-grid";
+    $("sim-summary").append(stats);
+    for (const [label, value] of [
+      ["Peak added PM2.5", number(summary.peak_ugm3) + " µg/m³"],
+      ["Distance to peak", number(summary.distance_to_peak_m, 0) + " m"],
+      ["Stability class", data.stability_class],
+      [
+        "Population above 1 µg/m³",
+        summary.exposure.available
+          ? number(summary.exposure.population_above["1.0"], 0)
+          : "Unavailable",
+      ],
+    ]) {
+      const div = document.createElement("div");
+      div.className = "metric";
+      paragraph(label, div, "span");
+      paragraph(value, div, "strong");
+      stats.append(div);
+    }
+    paragraph(summary.exposure.label, $("sim-summary"));
+    paragraph(
+      "Population-weighted added concentration: " +
+        number(summary.exposure.population_weighted_mean_added_ugm3) +
+        " µg/m³",
+      $("sim-summary"),
+    );
+    paragraph(
+      "Area above 1 µg/m³: " + number(summary.area_above_km2["1.0"]) + " km²",
+      $("sim-summary"),
+    );
+    if (summary.exposure.available)
+      paragraph(
+        "Population raster support: " +
+          number(100 * summary.exposure.population_support_fraction, 1) +
+          "% of grid area. Unknown population area excluded.",
+        $("sim-summary"),
+      );
+    for (const flag of data.flags)
+      paragraph(flag, $("sim-summary"), "p").className = "help";
+    paragraph(
+      "Measured total (all sources) · same hour",
+      $("sim-summary"),
+      "h3",
+    );
+    const stations = summary.background.stations;
+    if (!stations.length)
+      paragraph(
+        "No nearby quality-OK CPCB readings for this hour.",
+        $("sim-summary"),
+      );
+    for (const s of stations.slice(0, 8))
+      paragraph(
+        s.name +
+          ": " +
+          number(s.value_ugm3) +
+          " µg/m³ · " +
+          number(s.distance_km, 1) +
+          " km",
+        $("sim-summary"),
+      );
+    const links = document.createElement("div");
+    links.className = "inline-links";
+    $("sim-summary").append(links);
+    for (const [label, url] of [
+      ["Share this scenario", "/simulator/?scenario=" + data.scenario_slug],
+      ["Download grid", data.grid_url],
+      ["Grid metadata", data.grid_header_url],
+    ]) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.textContent = label;
+      links.append(a);
+    }
+    const explain = document.createElement("button");
+    explain.type = "button";
+    explain.textContent = "Explain this result";
+    explain.className = "button secondary";
+    $("sim-summary").append(explain);
+    explain.onclick = async () => {
+      explain.disabled = true;
+      const output = paragraph(
+        "Finding cited evidence; local model answers can take several minutes.",
+        $("sim-summary"),
+      );
+      try {
+        const r = await fetch("/api/rag/explain/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+              .value,
+          },
+          body: JSON.stringify({
+            context_type: "scenario",
+            payload: {
+              run_id: lastRun.run_id,
+              question:
+                "Explain the stored VayuSim peak, exposure and AERMOD assumptions and limitations.",
+            },
+          }),
+        });
+        const result = await r.json();
+        if (!r.ok) throw new Error(JSON.stringify(result));
+        output.textContent = result.answer;
+        output.style.whiteSpace = "pre-wrap";
+        for (const c of result.citations || []) {
+          const a = document.createElement("a");
+          a.href = c.url;
+          a.textContent = c.label;
+          links.append(a);
+        }
+      } catch (error) {
+        output.textContent = error.message;
+      } finally {
+        explain.disabled = false;
+      }
+    };
+    for (const layer of ["plume-contours", "plume-overlay"])
+      if (map.getLayer(layer)) map.removeLayer(layer);
+    for (const source of ["plume-contours", "plume-overlay"])
+      if (map.getSource(source)) map.removeSource(source);
+    map.addSource("plume-overlay", {
+      type: "image",
+      url: data.overlay_url,
+      coordinates: summary.grid.corners,
+    });
+    map.addLayer({
+      id: "plume-overlay",
+      type: "raster",
+      source: "plume-overlay",
+      paint: { "raster-opacity": 0.7, "raster-fade-duration": 0 },
+    });
+    map.addSource("plume-contours", {
+      type: "geojson",
+      data: data.contours || { type: "FeatureCollection", features: [] },
+    });
+    map.addLayer({
+      id: "plume-contours",
+      type: "line",
+      source: "plume-contours",
+      paint: { "line-color": "#6d2343", "line-width": 1.5 },
+    });
+  }
+  $("simulation-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    $("sim-submit").disabled = true;
+    $("sim-status").textContent =
+      "Computing dispersion and population exposure…";
+    try {
+      const preset = presets.find((p) => p.id === $("sim-preset").value);
+      const source = {
+        type: preset.type,
+        location: [numeric("sim-lon"), numeric("sim-lat")],
+        emission_gs: numeric("sim-q"),
+        height_m: numeric("sim-height"),
+        diameter_m: numeric("sim-diameter"),
+        exit_velocity_ms: numeric("sim-velocity"),
+        exit_temperature_k: numeric("sim-temperature"),
+      };
+      if (preset.type !== "point")
+        source.subdivisions = numeric("sim-subdivisions");
+      if (preset.type === "area") {
+        source.width_m = numeric("sim-width");
+        source.length_m = numeric("sim-length");
+      }
+      if (preset.type === "line")
+        source.end_location = [numeric("sim-end-lon"), numeric("sim-end-lat")];
+      const hour = $("sim-hour").value;
+      const sameCity = sharedInputs?.city === $("sim-city").value;
+      const body = {
+        ...(sameCity ? sharedInputs : {}),
+        city: $("sim-city").value,
+        centre: sameCity ? sharedInputs.centre : selectedCity().location,
+        sources: [source],
+        weather_mode: $("sim-mode").value,
+        datetime: hour + (hour.length === 16 ? ":00" : "") + "+05:30",
+        thresholds:
+          $("sim-threshold").value === "" ? [] : [numeric("sim-threshold")],
+      };
+      if (body.weather_mode === "real") delete body.weather;
+      if (body.weather_mode === "manual") {
+        body.weather = {
+          wind_speed_ms: numeric("sim-wind"),
+          wind_direction_deg: numeric("sim-direction"),
+          temperature_k: numeric("sim-ambient"),
+          solar_radiation_wm2: numeric("sim-solar"),
+          cloud_fraction: numeric("sim-cloud"),
+          daytime: $("sim-daytime").value === "day",
+        };
+        if ($("sim-lid").value !== "")
+          body.weather.mixing_height_m = numeric("sim-lid");
+      }
+      const response = await fetch("/api/vayusim/run/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+            .value,
+        },
+        body: JSON.stringify(body),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(JSON.stringify(data));
+      await mapReady;
+      render(data);
+      $("sim-status").textContent = data.cached
+        ? "Loaded the identical stored run."
+        : "Scenario complete.";
+    } catch (error) {
+      $("sim-status").textContent = "Could not run scenario: " + error.message;
+    } finally {
+      $("sim-submit").disabled = false;
+    }
+  });
+  const slug = new URLSearchParams(location.search).get("scenario");
+  if (slug)
+    fetch("/api/vayusim/scenarios/" + encodeURIComponent(slug) + "/")
+      .then((r) => r.json())
+      .then(async (data) => {
+        if (!data.runs?.length) throw new Error("Shared scenario unavailable");
+        await Promise.all([mapReady, presetsReady]);
+        const inputs = data.inputs,
+          source = inputs.sources[0];
+        sharedInputs = inputs;
+        $("sim-city").value = inputs.city;
+        const sharedFamily = {
+          id: "shared-source",
+          type: source.type,
+          citations: [],
+          note:
+            "Saved " +
+            source.type +
+            " geometry with supplied parameters. No facility family or cited default is inferred.",
+        };
+        presets.push(sharedFamily);
+        const sharedOption = document.createElement("option");
+        sharedOption.value = sharedFamily.id;
+        sharedOption.textContent = "Shared " + source.type + " source";
+        $("sim-preset").append(sharedOption);
+        $("sim-preset").value = sharedFamily.id;
+        family();
+        for (const [id, key] of Object.entries({
+          "sim-q": "emission_gs",
+          "sim-height": "height_m",
+          "sim-diameter": "diameter_m",
+          "sim-velocity": "exit_velocity_ms",
+          "sim-temperature": "exit_temperature_k",
+          "sim-width": "width_m",
+          "sim-length": "length_m",
+          "sim-subdivisions": "subdivisions",
+        }))
+          $(id).value = source[key] ?? "";
+        if (source.end_location) {
+          $("sim-end-lon").value = source.end_location[0];
+          $("sim-end-lat").value = source.end_location[1];
+        }
+        $("sim-mode").value = inputs.weather_mode;
+        $("sim-mode").dispatchEvent(new Event("change"));
+        $("sim-hour").value = new Date(
+          new Date(inputs.datetime).getTime() + 330 * 60000,
+        )
+          .toISOString()
+          .slice(0, 16);
+        $("sim-threshold").value = inputs.thresholds?.[0] ?? "";
+        if (inputs.weather) {
+          for (const [id, key] of Object.entries({
+            "sim-wind": "wind_speed_ms",
+            "sim-direction": "wind_direction_deg",
+            "sim-ambient": "temperature_k",
+            "sim-solar": "solar_radiation_wm2",
+            "sim-cloud": "cloud_fraction",
+            "sim-lid": "mixing_height_m",
+          }))
+            $(id).value = inputs.weather[key] ?? "";
+          $("sim-daytime").value = inputs.weather.daytime ? "day" : "night";
+        }
+        render(data.runs[data.runs.length - 1]);
+        map.flyTo({ center: inputs.centre, zoom: 10 });
+        place(source.location);
+        $("sim-status").textContent =
+          "Loaded shared scenario. Its source assumptions are shown in the form.";
+        if (inputs.sources.length > 1) {
+          $("sim-submit").disabled = true;
+          $("sim-status").textContent =
+            "Shared scenario contains " +
+            inputs.sources.length +
+            " sources. All are included in this result; use the API to edit multiple sources.";
+        }
+      })
+      .catch((error) => {
+        $("sim-status").textContent = error.message;
+      });
+})();
+
+import io
+
+import numpy as np
+from PIL import Image
+from rasterio.features import shapes
+
+
+def contours(values, grid, thresholds):
+    features = []
+    for threshold in thresholds:
+        mask = (values > threshold).astype(np.uint8)
+        for geometry, value in shapes(mask, mask=mask.astype(bool), transform=grid["affine"]):
+            if value != 1:
+                continue
+            rings = [
+                [
+                    [float(x), float(y)]
+                    for x, y in zip(
+                        *grid["inverse"].transform([p[0] for p in ring], [p[1] for p in ring]),
+                        strict=True,
+                    )
+                ]
+                for ring in geometry["coordinates"]
+            ]
+            features.append(
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "threshold_ugm3": threshold,
+                        "label": "modelled increment from these sources only",
+                    },
+                    "geometry": {"type": "Polygon", "coordinates": rings},
+                }
+            )
+    return {"type": "FeatureCollection", "features": features}
+
+
+def overlay_png(values):
+    # CPCB PM2.5 subindex concentration boundaries; visual categories ONLY.
+    # CPCB National AQI Technical Report Table2.1: 0–30/31–60/61–90/91–120/121–250/>250.
+    # These hourly ADDED values are not the required24-hour total used for AQI.
+    palette = np.array(
+        [
+            [0, 176, 80, 170],
+            [146, 208, 80, 185],
+            [255, 255, 0, 195],
+            [255, 153, 0, 205],
+            [255, 0, 0, 215],
+            [192, 0, 0, 225],
+        ],
+        dtype=np.uint8,
+    )
+    pixels = palette[np.searchsorted([30, 60, 90, 120, 250], values, side="left")]
+    pixels[values <= 1, 3] = 0
+    stream = io.BytesIO()
+    Image.fromarray(pixels, mode="RGBA").save(stream, format="PNG")
+    return stream.getvalue()
+
+"""Reflected Gaussian fields; concentrations returned in µg/m³, Q in g/s."""
+
+import numpy as np
+
+from .dispersion import sigmas
+from .meteorology import wind_at_height
+from .rise import effective_height
+
+ENGINE_VERSION = "gaussian-briggs-1.1.0"
+
+
+def concentration(q_gs, u_ms, sigma_y, sigma_z, y, z=1.5, height=0.0, mixing_height=None):
+    """Gaussian primitive with independently supplied dispersion coefficients.
+
+    ISC3 VolII Eq1-50, printed pp.1-32--1-33: reflected image series;
+    switch at sigma-z/L>=1.6 to vertical uniform mixing. Effective release
+    above the lid is excluded (inversion penetration), not folded below it.
+    Relative convergence is elementwise, including tiny nonzero tails.
+    """
+    sy, sz, yy, zz, hh = np.broadcast_arrays(sigma_y, sigma_z, y, z, height)
+    vertical = np.exp(-0.5 * ((zz - hh) / sz) ** 2) + np.exp(-0.5 * ((zz + hh) / sz) ** 2)
+    if mixing_height is not None:
+        lid = float(mixing_height)
+        if lid <= 0:
+            raise ValueError("Mixing height must be positive")
+        mixed = sz >= 1.6 * lid
+        active = ~mixed & (hh <= lid) & (zz <= lid)
+        for n in range(1, 100):
+            addition = sum(
+                np.exp(-0.5 * ((zz + sign * hh + shift * 2 * n * lid) / sz) ** 2)
+                for sign in (-1, 1)
+                for shift in (-1, 1)
+            )
+            vertical += np.where(active, addition, 0.0)
+            if np.all(~active | (addition <= 1e-6 * np.maximum(vertical, np.finfo(float).tiny))):
+                break
+        else:
+            raise ArithmeticError("Mixing-lid images did not converge")
+        vertical = np.where(mixed, np.sqrt(2 * np.pi) * sz / lid, vertical)
+        vertical = np.where((hh <= lid) & (zz <= lid), vertical, 0.0)
+    return q_gs * 1e6 / (2 * np.pi * u_ms * sy * sz) * np.exp(-0.5 * (yy / sy) ** 2) * vertical
+
+
+def expand_sources(sources):
+    """Area midpoint lattice / line midpoint segments, conserving total Q.
+
+    These are documented numerical point approximations, not ISC area/line
+    integrals. Refinement is user-controlled; near-field peaks depend on it.
+    Local coordinates are east/north metres, geographic conversion is external.
+    """
+    result = []
+    for source in sources:
+        kind = source.get("type", "point")
+        if kind == "point":
+            result.append(dict(source))
+            continue
+        count = source["subdivisions"]
+        if kind == "area":
+            offsets = (np.arange(count) + 0.5) / count - 0.5
+            xx, yy = np.meshgrid(offsets * source["width_m"], offsets * source["length_m"])
+            positions = np.column_stack(
+                (xx.ravel() + source["east_m"], yy.ravel() + source["north_m"])
+            )
+        elif kind == "line":
+            fraction = (np.arange(count) + 0.5) / count
+            positions = np.column_stack(
+                (
+                    source["east_m"] + fraction * (source["end_east_m"] - source["east_m"]),
+                    source["north_m"] + fraction * (source["end_north_m"] - source["north_m"]),
+                )
+            )
+        else:
+            raise ValueError("Unknown source type")
+        result.extend(
+            {
+                **source,
+                "type": "point",
+                "east_m": float(e),
+                "north_m": float(n),
+                "emission_gs": source["emission_gs"] / len(positions),
+            }
+            for e, n in positions
+        )
+    return result
+
+
+def simulate(east, north, sources, weather, receptor_height=1.5, environment="urban"):
+    """Vectorised receptors with bounded source batches, linear superposition."""
+    east, north = np.broadcast_arrays(east, north)
+    total = np.zeros(east.shape, dtype=float)
+    theta = np.deg2rad((weather["wind_direction_deg"] + 180) % 360)
+    ne, nn = np.sin(theta), np.cos(theta)
+    flags = set()
+    if weather["wind_speed_ms"] < 1:
+        flags.add("low-wind: Gaussian plume unreliable")
+    if weather.get("mixing_height_m") is not None and receptor_height > weather["mixing_height_m"]:
+        flags.add("Receptor above mixing lid: concentration excluded")
+    points = expand_sources(sources)
+    # Source/receptor broadcasting in bounded batches avoids a Python loop per
+    # source while keeping400x400 grids within a predictable memory envelope.
+    for offset in range(0, len(points), 20):
+        batch = points[offset : offset + 20]
+        shape = (len(batch),) + (1,) * east.ndim
+        columns = {
+            field: np.asarray([s[field] for s in batch], dtype=float).reshape(shape)
+            for field in [
+                "east_m",
+                "north_m",
+                "emission_gs",
+                "height_m",
+                "diameter_m",
+                "exit_velocity_ms",
+                "exit_temperature_k",
+            ]
+        }
+        if np.any(
+            (columns["exit_temperature_k"] < weather["temperature_k"])
+            & (columns["exit_velocity_ms"] > 0)
+        ):
+            flags.add("Cold exhaust: momentum-only rise; dense-gas sinking not modelled")
+        de, dn = east - columns["east_m"], north - columns["north_m"]
+        x, y = de * ne + dn * nn, -de * nn + dn * ne
+        active = x >= 1.0
+        if np.any(active & ((x < 100) | (x > 10000))):
+            flags.add("Briggs coefficients extrapolated outside 100m–10km")
+        sy, sz = sigmas(x, weather["stability_class"], environment)
+        u = wind_at_height(
+            weather["wind_speed_ms"], columns["height_m"], weather["stability_class"], environment
+        )
+        if np.any(u <= 1.0):
+            flags.add("low-wind: Gaussian plume unreliable; release-height wind floored at1m/s")
+        h = effective_height(
+            x,
+            columns["height_m"],
+            columns["diameter_m"],
+            columns["exit_velocity_ms"],
+            columns["exit_temperature_k"],
+            weather["temperature_k"],
+            u,
+            weather["stability_class"],
+        )
+        lid = weather.get("mixing_height_m")
+        if lid is not None and np.any(active & (h > lid)):
+            flags.add("Effective release above mixing lid: ground contribution excluded")
+        values = concentration(columns["emission_gs"], u, sy, sz, y, receptor_height, h, lid)
+        total += np.where(active, values, 0.0).sum(axis=0)
+    if any(s.get("type") in {"area", "line"} for s in sources):
+        flags.add("Area/line point discretisation: near-field peaks depend on subdivisions")
+    return total.astype(np.float32), sorted(flags)
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework.routers import DefaultRouter
+
+from apps.analytics.api import CoverageView, SeriesView, SummaryView
+from apps.analytics.research_api import ComparisonsView, NCAPView, RQ2View
+from apps.core.views import HealthView
+from apps.dashboard.views import ForecastPage, HomeView, LibraryPage, ResearchPage
+from apps.forecast.api import EvaluationView, HistoryView, LatestView
+from apps.ingest.api import CompletenessView, FireView, ReadingView, WeatherView
+from apps.rag.api import AskView, DocumentsView, ExplainView, PageView
+from apps.rag.views import AskPage, SourcePage
+from apps.vayusim.views import SimulatorPage
+from apps.warehouse.views import CityViewSet, PollutantViewSet, StationViewSet
+
+router = DefaultRouter()
+router.register("cities", CityViewSet)
+router.register("stations", StationViewSet)
+router.register("pollutants", PollutantViewSet)
+
+urlpatterns = [
+    path("", HomeView.as_view(), name="home"),
+    path("simulator/", SimulatorPage.as_view(), name="simulator"),
+    path("forecasts/", ForecastPage.as_view(), name="forecasts"),
+    path("research/", ResearchPage.as_view(), name="research"),
+    path("library/", LibraryPage.as_view(), name="library"),
+    path("admin/", admin.site.urls),
+    path("ask/", AskPage.as_view(), name="rag-ask-page"),
+    path(
+        "rag/documents/<int:document_id>/page/<int:page_number>/",
+        SourcePage.as_view(),
+        name="rag-source-page",
+    ),
+    path("api/rag/ask/", AskView.as_view(), name="rag-ask"),
+    path("api/rag/explain/", ExplainView.as_view(), name="rag-explain"),
+    path("api/rag/documents/", DocumentsView.as_view(), name="rag-documents"),
+    path(
+        "api/rag/documents/<int:document_id>/page/<int:page_number>/",
+        PageView.as_view(),
+        name="rag-page",
+    ),
+    path("api/health/", HealthView.as_view(), name="health"),
+    path("api/vayusim/", include("apps.vayusim.urls")),
+    path("api/forecast/<slug:slug>/latest/", LatestView.as_view(), name="forecast-latest"),
+    path("api/forecast/<slug:slug>/history/", HistoryView.as_view(), name="forecast-history"),
+    path(
+        "api/forecast/<slug:slug>/evaluation/", EvaluationView.as_view(), name="forecast-evaluation"
+    ),
+    path("api/readings/", ReadingView.as_view(), name="readings"),
+    path("api/weather/", WeatherView.as_view(), name="weather"),
+    path("api/fires/", FireView.as_view(), name="fires"),
+    path("api/completeness/", CompletenessView.as_view(), name="completeness"),
+    path("api/analytics/coverage/", CoverageView.as_view(), name="analytics-coverage"),
+    path("api/analytics/rq2/<slug:slug>/", RQ2View.as_view(), name="analytics-rq2"),
+    path("api/analytics/ncap/", NCAPView.as_view(), name="analytics-ncap"),
+    path("api/analytics/comparisons/", ComparisonsView.as_view(), name="analytics-comparisons"),
+    path(
+        "api/analytics/city/<slug:slug>/summary/", SummaryView.as_view(), name="analytics-summary"
+    ),
+    path("api/analytics/city/<slug:slug>/series/", SeriesView.as_view(), name="analytics-series"),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path("api/", include(router.urls)),
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+Get-Content : Cannot find path 'D:\EnviroInsights-India\templates\base.html' because it does not exist.
+At line:7 char:1
++ Get-Content templates/base.html -Raw -Encoding UTF8
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\EnviroInsigh...lates\base.html:String) [Get-Content], ItemNotFoundEx
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+
+from django.views.generic import TemplateView
+
+from apps.forecast.models import Forecast
+from apps.rag.models import Document
+from apps.vayusim.models import ScenarioRun
+from apps.warehouse.models import City
+
+
+class HomeView(TemplateView):
+    template_name = "dashboard/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update(
+            city_count=City.objects.count(),
+            document_count=Document.objects.filter(status="ready").count(),
+            forecast_count=Forecast.objects.count(),
+            scenario_count=ScenarioRun.objects.count(),
+        )
+        context["city_forecasts"] = []
+        for city in City.objects.filter(slug__in=["delhi", "mumbai", "bengaluru", "hyderabad"]):
+            latest = (
+                Forecast.objects.filter(city=city, horizon=1)
+                .order_by("-issued_for_date", "-id")
+                .first()
+            )
+            if latest:
+                context["city_forecasts"].append(
+                    {
+                        "city": city,
+                        "forecast": latest,
+                        "category_label": latest.aqi_category.replace("_", " ").title(),
+                    }
+                )
+        return context
+
+
+class ForecastPage(TemplateView):
+    template_name = "dashboard/forecasts.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cities"] = City.objects.filter(forecast__isnull=False).distinct().order_by("name")
+        return context
+
+
+class ResearchPage(TemplateView):
+    template_name = "dashboard/research.html"
+
+
+class LibraryPage(TemplateView):
+    template_name = "dashboard/library.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["documents"] = Document.objects.filter(status="ready").order_by("category", "title")
+        return context
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %}Ask · EnviroInsights-India{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">EXTRACTIVE RETRIEVAL WITH VERIFIED CITATIONS</p><h1>Explore cited evidence.</h1><p>Inspect source passages and recorded project results. The experimental local generator has not passed the answer-quality gate and may refuse answerable requests.</p></div><a class="text-link" href="{% url 'library' %}">Browse the source library →</a></div>
+<div class="ask-layout"><section class="panel">
+<form method="post" hx-post="{% url 'rag-ask-page' %}" hx-target="#answer" hx-indicator="#working" hx-disabled-elt="find button[type=submit]" hx-request='{"timeout":1200000}'>
+  {% csrf_token %}
+  <label for="question">Question</label>
+  <textarea id="question" name="question" rows="5" maxlength="2000" required placeholder="What would you like to understand about India's air quality?"></textarea>
+  <div class="hero-actions"><button type="submit" class="button">Find cited evidence ↗</button></div>
+  <span id="working" class="htmx-indicator loading" role="status">Finding evidence and checking citations. Local model answers can take several minutes…</span>
+</form>
+<div id="answer" class="answer-panel" aria-live="polite">{% include "rag/answer.html" %}</div>
+</section><aside><section class="panel"><h2>Example searches</h2><div class="question-examples"><button type="button">What was the annual mean PM2.5 in Delhi in 2025?</button><button type="button">What are AERMOD's assumptions and limitations?</button><button type="button">Why normalise air pollution for weather?</button></div></section><section class="notice section"><h3>Evidence, with limits</h3><p>Exact citation support is not independent semantic validation. Missing or rejected evidence produces a refusal. Replay dates, data gaps and model limitations remain part of the returned evidence.</p></section></aside></div>
+<script src="{% static 'rag/htmx.min.js' %}" defer></script>
+<script>for(const button of document.querySelectorAll('.question-examples button'))button.addEventListener('click',()=>{const q=document.getElementById('question');q.value=button.textContent;q.focus();});document.body.addEventListener('htmx:responseError',()=>{document.getElementById('answer').textContent='The request could not complete. Please retry.';});</script>
+{% endblock %}
+from datetime import UTC, datetime
+from unittest.mock import patch
+
+import numpy as np
+import pytest
+import rasterio
+from affine import Affine
+from django.contrib.gis.geos import Point
+from pyproj import CRS
+
+from apps.rag.data_tools import call_tool
+from apps.vayusim.exposure import exposure_summary, population_grid
+from apps.vayusim.grid import build_grid
+from apps.vayusim.models import ScenarioRun
+from apps.vayusim.weather import hour_bounds, weather_for
+from tests.factories import CityFactory, DataSourceFactory
+
+
+@pytest.fixture
+def inputs(db):
+    city = CityFactory(slug="delhi", location=Point(77.2, 28.6, srid=4326))
+    return {
+        "name": "Synthetic test only",
+        "city": city.slug,
+        "centre": [77.2, 28.6],
+        "sources": [
+            {
+                "type": "point",
+                "location": [77.2, 28.6],
+                "emission_gs": 10.0,
+                "height_m": 50.0,
+                "diameter_m": 2.0,
+                "exit_velocity_ms": 10.0,
+                "exit_temperature_k": 400.0,
+            }
+        ],
+        "weather_mode": "manual",
+        "datetime": "2025-01-01T12:00:00+05:30",
+        "weather": {
+            "wind_speed_ms": 4.0,
+            "wind_direction_deg": 270.0,
+            "temperature_k": 293.0,
+            "solar_radiation_wm2": 500.0,
+            "cloud_fraction": 0.2,
+            "mixing_height_m": 1000.0,
+            "daytime": True,
+        },
+        "grid": {"width_m": 1000, "resolution_m": 50},
+        "thresholds": [10.0],
+    }
+
+
+@pytest.mark.django_db
+def test_identical_api_requests_cache_grid_and_provenance(client, inputs, tmp_path, settings):
+    settings.BASE_DIR = tmp_path
+    first = client.post("/api/vayusim/run/", inputs, content_type="application/json")
+    assert first.status_code == 200, first.content
+    value = first.json()
+    second = client.post(
+        "/api/vayusim/run/",
+        {**inputs, "name": "Different presentation name"},
+        content_type="application/json",
+    )
+    assert second.status_code == 200
+    assert second.json()["cached"] and second.json()["run_id"] == value["run_id"]
+    assert ScenarioRun.objects.count() == 1
+    header = client.get(value["grid_header_url"]).json()
+    assert header["shape"] == [20, 20] and header["dtype"] == "float32"
+    binary = client.get(value["grid_url"])
+    assert len(b"".join(binary.streaming_content)) == 20 * 20 * 4
+    assert client.get(value["overlay_url"]).content[:8] == b"\x89PNG\r\n\x1a\n"
+    assert client.get("/api/vayusim/scenarios/" + value["scenario_slug"] + "/").status_code == 200
+    evidence = call_tool("vayusim_run", {"run_id": value["run_id"]})
+    assert evidence["values"]["peak_ugm3"] == value["summary"]["peak_ugm3"]
+    assert evidence["citation"]["inputs_hash"] == value["inputs_hash"]
+    assert evidence["citation"]["scenario_run"] == value["run_id"]
+    assert evidence["values"]["label"] == "modelled increment from these sources only"
+    assert not value["summary"]["exposure"]["available"]
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        {"city": "unknown"},
+        {"sources": [{"emission_gs": -1}]},
+        {"receptor_height": 1001},
+        {"receptor_height": "NaN"},
+        {"centre": [float("inf"), 28.0]},
+        {"unknown": 1},
+    ],
+)
+def test_api_rejects_invalid_input(client, inputs, mutation):
+    payload = {**inputs, **mutation}
+    if "sources" in mutation:
+        # Isolate the invalid value; all other required source fields stay valid.
+        payload["sources"] = [{**inputs["sources"][0], **mutation["sources"][0]}]
+    assert (
+        client.post("/api/vayusim/run/", payload, content_type="application/json").status_code
+        == 400
+    )
+    assert ScenarioRun.objects.count() == 0
+
+
+def test_hour_midpoint_accounts_for_ist_half_hour():
+    start, end = hour_bounds(datetime.fromisoformat("2025-01-01T12:00:00+05:30"))
+    assert start == datetime(2025, 1, 1, 6, 30, tzinfo=UTC)
+    assert start + (end - start) / 2 == datetime(2025, 1, 1, 7, tzinfo=UTC)
+
+
+@pytest.mark.django_db
+def test_real_weather_utc_midpoint_and_fallback(inputs):
+    from apps.warehouse.models import City, WeatherObservation
+
+    city = City.objects.get(slug="delhi")
+    weather = WeatherObservation.objects.create(
+        city=city,
+        source=DataSourceFactory(),
+        location=city.location,
+        observed_at=datetime(2025, 1, 1, 7, tzinfo=UTC),
+        wind_speed_ms=4,
+        wind_dir_deg=270,
+        temperature_c=20,
+        solar_radiation_wm2=400,
+        total_cloud_cover=0.2,
+        boundary_layer_height_m=None,
+    )
+    values, proof, flags = weather_for(
+        {**inputs, "weather_mode": "real", "datetime": datetime.fromisoformat(inputs["datetime"])},
+        city,
+    )
+    assert proof["observation_id"] == str(weather.id)
+    assert values["stability_class"] == "C" and values["temperature_k"] == pytest.approx(293.15)
+    assert not proof["mixing_height"]["observed"] and proof["mixing_height"]["citations"]
+    assert any("Missing boundary-layer" in f for f in flags)
+
+
+def test_exposure_density_warp_preserves_known_counts(tmp_path):
+    # Same projected source/destination extent,100m cells split into50m cells.
+    path = tmp_path / "population.tif"
+    crs = CRS.from_epsg(32643)
+    transform = Affine(100, 0, 500000, 0, -100, 3200000)
+    counts = np.array([[100.0, 200.0], [300.0, 400.0]], dtype="float32")
+    with rasterio.open(
+        path,
+        "w",
+        driver="GTiff",
+        height=2,
+        width=2,
+        count=1,
+        dtype="float32",
+        crs=crs,
+        transform=transform,
+        nodata=-9999,
+    ) as dst:
+        dst.write(counts, 1)
+    from pyproj import Transformer
+
+    inverse = Transformer.from_crs(crs, 4326, always_xy=True)
+    grid = {
+        "crs": crs,
+        "affine": Affine(50, 0, 500000, 0, -50, 3200000),
+        "corners": [inverse.transform(*(transform @ p)) for p in [(0, 0), (2, 0), (2, 2), (0, 2)]],
+    }
+    population = population_grid(path, grid, (4, 4))
+    np.testing.assert_allclose(population.sum(), 1000.0, rtol=1e-6)
+    np.testing.assert_allclose(population[:2, :2], 25.0)
+    field = np.zeros((4, 4))
+    field[:2, :2] = 20.0
+    summary = exposure_summary(field, population, [1.0, 15.0, 60.0])
+    assert summary["population_above"]["15.0"] == pytest.approx(100.0)
+    assert summary["population_weighted_mean_added_ugm3"] == pytest.approx(2.0)
+    # Four100m destination cells recover the source counts.
+    grid["affine"] = transform
+    np.testing.assert_allclose(population_grid(path, grid, (2, 2)), counts, rtol=1e-6)
+
+
+def test_rotated_grid_geometry():
+    grid = build_grid([77.2, 28.6], 270.0, 1000, 50)
+    assert grid["east"].shape == (20, 20)
+    assert grid["east"][0, 1] - grid["east"][0, 0] == pytest.approx(50.0)
+    assert grid["north"][1, 0] - grid["north"][0, 0] == pytest.approx(-50.0)
+    assert abs(grid["affine"].determinant) == pytest.approx(2500.0)
+
+
+def test_partial_population_nodata_does_not_inflate_known_counts(tmp_path):
+    from pyproj import Transformer
+
+    path = tmp_path / "partial-population.tif"
+    crs = CRS.from_epsg(32643)
+    transform = Affine(100, 0, 500000, 0, -100, 3200000)
+    with rasterio.open(
+        path,
+        "w",
+        driver="GTiff",
+        height=2,
+        width=2,
+        count=1,
+        dtype="float32",
+        crs=crs,
+        transform=transform,
+        nodata=-9999,
+    ) as dst:
+        dst.write(np.array([[100.0, -9999.0], [300.0, -9999.0]], dtype="float32"), 1)
+    inverse = Transformer.from_crs(crs, 4326, always_xy=True)
+    grid = {
+        "crs": crs,
+        "affine": Affine(200, 0, 500000, 0, -200, 3200000),
+        "corners": [inverse.transform(*(transform @ p)) for p in [(0, 0), (2, 0), (2, 2), (0, 2)]],
+    }
+    population, support = population_grid(path, grid, (1, 1), return_support=True)
+    assert population[0, 0] == pytest.approx(400.0)
+    assert support[0, 0] == pytest.approx(0.5)
+    summary = exposure_summary(np.array([[20.0]]), population, [1.0], support)
+    assert summary["population_above"]["1.0"] == pytest.approx(400.0)
+    assert summary["population_support_fraction"] == pytest.approx(0.5)
+    assert summary["partially_supported_cells"] == 1
+
+
+@pytest.mark.django_db
+def test_explain_uses_server_run_context(client, inputs, tmp_path, settings):
+    settings.BASE_DIR = tmp_path
+    response = client.post("/api/vayusim/run/", inputs, content_type="application/json").json()
+    with patch("apps.rag.api.ask", return_value={"answer": "test evidence"}) as ask:
+        result = client.post(
+            "/api/rag/explain/",
+            {
+                "context_type": "scenario",
+                "payload": {"run_id": response["run_id"], "parameters": {"peak": 999999}},
+            },
+            content_type="application/json",
+        )
+    assert result.status_code == 200
+    assert ask.call_args.kwargs["context_tool_calls"] == [
+        {"tool": "vayusim_run", "parameters": {"run_id": response["run_id"]}}
+    ]
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize("parameters", [{"run_id": True}, {"run_id": 1, "peak": 99}])
+def test_scenario_tool_rejects_bool_and_client_values(parameters):
+    from rest_framework.exceptions import ValidationError
+
+    with pytest.raises(ValidationError):
+        call_tool("vayusim_run", parameters)
+
+
+@pytest.mark.django_db
+def test_day_mode_keeps_missing_hours_and_materialises_grid_on_demand(
+    client, inputs, tmp_path, settings
+):
+    from apps.warehouse.models import City, WeatherObservation
+
+    settings.BASE_DIR = tmp_path
+    city = City.objects.get(slug="delhi")
+    WeatherObservation.objects.create(
+        city=city,
+        source=DataSourceFactory(),
+        location=city.location,
+        observed_at=datetime(2025, 1, 1, 7, tzinfo=UTC),
+        wind_speed_ms=4,
+        wind_dir_deg=270,
+        temperature_c=20,
+        solar_radiation_wm2=400,
+        total_cloud_cover=0.2,
+        boundary_layer_height_m=1000,
+    )
+    payload = {k: v for k, v in inputs.items() if k != "weather"}
+    payload["weather_mode"] = "real"
+    response = client.post("/api/vayusim/day/", payload, content_type="application/json")
+    assert response.status_code == 200, response.content
+    hours = response.json()["hours"]
+    assert len(hours) == 24 and sum(h["available"] for h in hours) == 1
+    hour = next(h for h in hours if h["available"])
+    run = ScenarioRun.objects.get(pk=hour["run_id"])
+    assert run.grid_file_path == "" and run.summary["contours"] is None
+    header = client.get(hour["grid_header_url"])
+    assert header.status_code == 200 and header.json()["contours"]["type"] == "FeatureCollection"
+    run.refresh_from_db()
+    assert run.grid_file_path and ScenarioRun.objects.count() == 1
+
+
+@pytest.mark.django_db(transaction=True)
+def test_concurrent_lazy_grid_requests_compute_once(inputs, tmp_path, settings):
+    from concurrent.futures import ThreadPoolExecutor
+    from threading import Barrier
+
+    from django.db import close_old_connections, connections
+    from django.db.migrations.executor import MigrationExecutor
+
+    from apps.vayusim import service
+    from apps.vayusim.serializers import RunSerializer
+
+    settings.BASE_DIR = tmp_path
+    # The original foundation reversal test restores warehouse only, so later
+    # transactional tests must explicitly arrange a fully migrated schema.
+    # Keep that test and every concurrency assertion unchanged.
+    executor = MigrationExecutor(connections["default"])
+    executor.migrate(executor.loader.graph.leaf_nodes())
+    serializer = RunSerializer(data=inputs)
+    serializer.is_valid(raise_exception=True)
+    run, _ = service.run_scenario(serializer.validated_data, materialize=False)
+    barrier = Barrier(2)
+
+    def materialise(_):
+        close_old_connections()
+        try:
+            instance = ScenarioRun.objects.get(pk=run.pk)
+            barrier.wait(timeout=10)
+            service.ensure_grid(instance)
+            return instance.grid_file_path
+        finally:
+            connections.close_all()
+
+    with patch("apps.vayusim.service.compute", wraps=service.compute) as compute:
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            paths = list(pool.map(materialise, range(2)))
+    assert paths[0] == paths[1] and paths[0]
+    assert compute.call_count == 1 and ScenarioRun.objects.count() == 1
+
+
+@pytest.mark.django_db
+def test_old_lazy_run_never_recomputes_under_new_engine(client, inputs, tmp_path, settings):
+    from apps.vayusim import service
+    from apps.vayusim.serializers import RunSerializer
+
+    settings.BASE_DIR = tmp_path
+    serializer = RunSerializer(data=inputs)
+    serializer.is_valid(raise_exception=True)
+    run, _ = service.run_scenario(serializer.validated_data, materialize=False)
+    original_summary = run.summary
+    run.engine_version = "historical-engine"
+    run.save(update_fields=["engine_version"])
+    with patch("apps.vayusim.service.compute") as compute:
+        response = client.get(f"/api/vayusim/grid/{run.pk}.json")
+    assert response.status_code == 400 and "saved inputs" in response.json()["grid"]
+    compute.assert_not_called()
+    run.refresh_from_db()
+    assert run.summary == original_summary and not run.grid_file_path
+    assert (
+        client.get(f"/api/vayusim/runs/{run.pk}/").json()["engine_version"] == "historical-engine"
+    )
+
+
+@pytest.mark.django_db
+def test_lazy_grid_uses_frozen_run_after_scenario_edit(inputs, tmp_path, settings):
+    from apps.vayusim import service
+    from apps.vayusim.serializers import RunSerializer
+
+    settings.BASE_DIR = tmp_path
+    serializer = RunSerializer(data=inputs)
+    serializer.is_valid(raise_exception=True)
+    run, _ = service.run_scenario(serializer.validated_data, materialize=False)
+    original_peak = run.summary["peak_ugm3"]
+    original_hash = run.inputs_hash
+    run.scenario.inputs["sources"][0]["emission_gs"] *= 100
+    run.scenario.save(update_fields=["inputs"])
+    service.ensure_grid(run)
+    values = np.fromfile(tmp_path / run.grid_file_path, dtype="<f4")
+    assert float(values.max()) == original_peak and original_peak > 0
+    run.refresh_from_db()
+    assert run.inputs_hash == original_hash
+    assert run.inputs["sources"][0]["emission_gs"] == inputs["sources"][0]["emission_gs"]
+
+const fs = require('fs');
+const assert = require('assert');
+const {chromium} = require('../ui-preview/node_modules/playwright');
+
+(async () => {
+  const browser = await chromium.launch({channel: 'msedge', headless: true, args: ['--enable-unsafe-swiftshader']});
+  const rows = [];
+  try {
+    for (const width of [1440,390]) {
+      const page = await browser.newPage({viewport:{width,height:1000}});
+      const errors=[];
+      page.on('pageerror', error => errors.push(error.message));
+      const response = await page.goto('http://127.0.0.1:8000/ask/', {waitUntil:'networkidle'});
+      assert.strictEqual(response.status(), 200);
+      assert((await page.locator('.eyebrow').first().innerText()).includes('EXTRACTIVE RETRIEVAL WITH VERIFIED CITATIONS'));
+      assert((await page.locator('.page-heading').innerText()).includes('has not passed the answer-quality gate'));
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+      assert.strictEqual(overflow,false);
+      assert.deepStrictEqual(errors,[]);
+      const presetsResponse=await page.request.get('http://127.0.0.1:8000/api/vayusim/presets/');
+      assert.strictEqual(presetsResponse.status(),200);
+      const preset=(await presetsResponse.json()).presets.find(p => p.id==='highway');
+      assert.strictEqual(preset.name,'Road dust resuspension');
+      assert.strictEqual(preset.defaults.emission_gs,null);
+      rows.push({width,status:response.status(),title:await page.title(),heading:await page.locator('h1').innerText(),horizontal_overflow:overflow,js_errors:errors,preset_name:preset.name,preset_status:presetsResponse.status()});
+      await page.close();
+    }
+  } finally { await browser.close(); }
+  fs.writeFileSync('data/results/phase6a-audit/browser.json',JSON.stringify(rows,null,2)+'\n');
+  console.log(JSON.stringify(rows,null,2));
+})().catch(error=>{console.error(error); process.exitCode=1;});
+
+MapLibre GL JS 5.24.0
+Upstream package: https://www.npmjs.com/package/maplibre-gl/v/5.24.0
+Source: https://github.com/maplibre/maplibre-gl-js/tree/v5.24.0
+Vendored dist/maplibre-gl.js and dist/maplibre-gl.css; see maplibre-LICENSE.txt.
+This is the browser UMD distribution; no paid basemap credentials are required.
+The page separately requests OpenStreetMap raster tiles with visible attribution.
+
+5.24.0
+
+import json
+import os
+from pathlib import Path
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'enviroinsights.settings.dev')
+import django
+django.setup()
+import numpy as np
+import requests
+
+from apps.analytics.models import PopulationRaster
+from apps.vayusim.exposure import exposure_summary, population_grid
+from apps.vayusim.models import ScenarioRun
+from apps.vayusim.service import compute
+
+root = Path('/app')
+folder = root / 'data/results/phase6a-independent'
+original = json.loads((root / 'data/results/vayusim/verification/real-scenarios.json').read_text())
+population = PopulationRaster.objects.select_related('asset').get(year=2025, is_default=True)
+path = Path(population.asset.path)
+if not path.is_absolute():
+    path = root / 'data/raw' / path
+proofs = []
+for expected in original:
+    run = ScenarioRun.objects.get(pk=expected['run_id'])
+    values, grid, sources, flags = compute(run.inputs, run.inputs['weather_values'])
+    index = np.unravel_index(int(values.argmax()), values.shape)
+    counts, support = population_grid(path, grid, values.shape, return_support=True)
+    actual_exposure = exposure_summary(values, counts, run.summary['thresholds'], support)
+    for key, value in actual_exposure.items():
+        if isinstance(value, dict):
+            assert value == expected['summary']['exposure'][key], (run.pk, key)
+        elif isinstance(value, (int, float)):
+            assert value == expected['summary']['exposure'][key], (run.pk, key, value)
+    peak = float(values[index])
+    assert peak == expected['summary']['peak_ugm3']
+    distance = min(float(np.hypot(grid['east'][index]-s['east_m'], grid['north'][index]-s['north_m'])) for s in sources)
+    assert distance == expected['summary']['distance_to_peak_m']
+    scaling_values, _, _, _ = compute({**run.inputs, 'sources': [{**s, 'emission_gs': s['emission_gs']*2} for s in run.inputs['sources']]}, run.inputs['weather_values'])
+    # The requested peak scaling is exact here. Underflowed float32 tails may
+    # differ by one subnormal quantum after scaling before versus after casting.
+    assert float(scaling_values.max()) == 2 * peak
+    field_delta = float(np.abs(scaling_values.astype(float) - 2*values.astype(float)).max())
+    response = requests.get(f'http://localhost:8000/api/vayusim/runs/{run.pk}/', timeout=30)
+    response.raise_for_status()
+    body = response.json()
+    assert body['interpretation']['sources'][0]['label'] == 'hypothetical 1 g/s source'
+    assert body['inputs_hash'] == expected['inputs_hash']
+    assert body['summary']['peak_ugm3'] == peak
+    header = requests.get(f'http://localhost:8000/api/vayusim/grid/{run.pk}.json', timeout=30)
+    header.raise_for_status()
+    assert header.json()['interpretation']['sources'][0]['label'] == 'hypothetical 1 g/s source'
+    proofs.append({'run_id': run.pk, 'city': run.inputs['city'], 'label': body['interpretation']['sources'][0]['label'], 'peak_ugm3': peak, 'distance_to_peak_m': distance, 'exposure': actual_exposure, 'stability_class': run.stability_class, 'all_reported_numeric_values_match': True, 'fresh_compute': True, 'doubled_Q_peak_exactly_doubled': True, 'doubled_Q_field_max_absolute_delta_ugm3': field_delta, 'http_status': response.status_code, 'header_status': header.status_code, 'inputs_hash': run.inputs_hash, 'interpretation': body['interpretation']})
+    print(json.dumps({key:value for key,value in proofs[-1].items() if key not in {'exposure','interpretation'}}, ensure_ascii=False), flush=True)
+(folder / 'example-recompute.json').write_text(json.dumps(proofs, indent=2, ensure_ascii=False) + '\n')
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 004-page-layout-and-rendering (2026-10-16T10:59:34.0985875+05:30; exit 0)</summary>
+
+````powershell
+Get-Content apps/vayusim/artifacts.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/physics/engine.py -Raw -Encoding UTF8
+Get-Content apps/dashboard/templates/dashboard/base.html -Raw -Encoding UTF8
+Get-Content enviroinsights/urls.py -Raw -Encoding UTF8
+Get-Content apps/dashboard/templates/dashboard/overview.html -Encoding UTF8 | Select-Object -First 100
+Get-Content docs/VALIDATION.md -Encoding UTF8 -Tail 30
+Get-Content apps/vayusim/weather.py -Encoding UTF8 | Select-Object -Last 100
+rg -n 'textbook|Independent validation|Benchmark|Endpoint|API|benchmark' docs/results/PHASE6A.md
+````
+
+````text
+import io
+
+import numpy as np
+from PIL import Image
+from rasterio.features import shapes
+
+
+def contours(values, grid, thresholds):
+    features = []
+    for threshold in thresholds:
+        mask = (values > threshold).astype(np.uint8)
+        for geometry, value in shapes(mask, mask=mask.astype(bool), transform=grid["affine"]):
+            if value != 1:
+                continue
+            rings = [
+                [
+                    [float(x), float(y)]
+                    for x, y in zip(
+                        *grid["inverse"].transform([p[0] for p in ring], [p[1] for p in ring]),
+                        strict=True,
+                    )
+                ]
+                for ring in geometry["coordinates"]
+            ]
+            features.append(
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "threshold_ugm3": threshold,
+                        "label": "modelled increment from these sources only",
+                    },
+                    "geometry": {"type": "Polygon", "coordinates": rings},
+                }
+            )
+    return {"type": "FeatureCollection", "features": features}
+
+
+def overlay_png(values):
+    # CPCB PM2.5 subindex concentration boundaries; visual categories ONLY.
+    # CPCB National AQI Technical Report Table2.1: 0–30/31–60/61–90/91–120/121–250/>250.
+    # These hourly ADDED values are not the required24-hour total used for AQI.
+    palette = np.array(
+        [
+            [0, 176, 80, 170],
+            [146, 208, 80, 185],
+            [255, 255, 0, 195],
+            [255, 153, 0, 205],
+            [255, 0, 0, 215],
+            [192, 0, 0, 225],
+        ],
+        dtype=np.uint8,
+    )
+    pixels = palette[np.searchsorted([30, 60, 90, 120, 250], values, side="left")]
+    pixels[values <= 1, 3] = 0
+    stream = io.BytesIO()
+    Image.fromarray(pixels, mode="RGBA").save(stream, format="PNG")
+    return stream.getvalue()
+
+"""Reflected Gaussian fields; concentrations returned in µg/m³, Q in g/s."""
+
+import numpy as np
+
+from .dispersion import sigmas
+from .meteorology import wind_at_height
+from .rise import effective_height
+
+ENGINE_VERSION = "gaussian-briggs-1.1.0"
+
+
+def concentration(q_gs, u_ms, sigma_y, sigma_z, y, z=1.5, height=0.0, mixing_height=None):
+    """Gaussian primitive with independently supplied dispersion coefficients.
+
+    ISC3 VolII Eq1-50, printed pp.1-32--1-33: reflected image series;
+    switch at sigma-z/L>=1.6 to vertical uniform mixing. Effective release
+    above the lid is excluded (inversion penetration), not folded below it.
+    Relative convergence is elementwise, including tiny nonzero tails.
+    """
+    sy, sz, yy, zz, hh = np.broadcast_arrays(sigma_y, sigma_z, y, z, height)
+    vertical = np.exp(-0.5 * ((zz - hh) / sz) ** 2) + np.exp(-0.5 * ((zz + hh) / sz) ** 2)
+    if mixing_height is not None:
+        lid = float(mixing_height)
+        if lid <= 0:
+            raise ValueError("Mixing height must be positive")
+        mixed = sz >= 1.6 * lid
+        active = ~mixed & (hh <= lid) & (zz <= lid)
+        for n in range(1, 100):
+            addition = sum(
+                np.exp(-0.5 * ((zz + sign * hh + shift * 2 * n * lid) / sz) ** 2)
+                for sign in (-1, 1)
+                for shift in (-1, 1)
+            )
+            vertical += np.where(active, addition, 0.0)
+            if np.all(~active | (addition <= 1e-6 * np.maximum(vertical, np.finfo(float).tiny))):
+                break
+        else:
+            raise ArithmeticError("Mixing-lid images did not converge")
+        vertical = np.where(mixed, np.sqrt(2 * np.pi) * sz / lid, vertical)
+        vertical = np.where((hh <= lid) & (zz <= lid), vertical, 0.0)
+    return q_gs * 1e6 / (2 * np.pi * u_ms * sy * sz) * np.exp(-0.5 * (yy / sy) ** 2) * vertical
+
+
+def expand_sources(sources):
+    """Area midpoint lattice / line midpoint segments, conserving total Q.
+
+    These are documented numerical point approximations, not ISC area/line
+    integrals. Refinement is user-controlled; near-field peaks depend on it.
+    Local coordinates are east/north metres, geographic conversion is external.
+    """
+    result = []
+    for source in sources:
+        kind = source.get("type", "point")
+        if kind == "point":
+            result.append(dict(source))
+            continue
+        count = source["subdivisions"]
+        if kind == "area":
+            offsets = (np.arange(count) + 0.5) / count - 0.5
+            xx, yy = np.meshgrid(offsets * source["width_m"], offsets * source["length_m"])
+            positions = np.column_stack(
+                (xx.ravel() + source["east_m"], yy.ravel() + source["north_m"])
+            )
+        elif kind == "line":
+            fraction = (np.arange(count) + 0.5) / count
+            positions = np.column_stack(
+                (
+                    source["east_m"] + fraction * (source["end_east_m"] - source["east_m"]),
+                    source["north_m"] + fraction * (source["end_north_m"] - source["north_m"]),
+                )
+            )
+        else:
+            raise ValueError("Unknown source type")
+        result.extend(
+            {
+                **source,
+                "type": "point",
+                "east_m": float(e),
+                "north_m": float(n),
+                "emission_gs": source["emission_gs"] / len(positions),
+            }
+            for e, n in positions
+        )
+    return result
+
+
+def simulate(east, north, sources, weather, receptor_height=1.5, environment="urban"):
+    """Vectorised receptors with bounded source batches, linear superposition."""
+    east, north = np.broadcast_arrays(east, north)
+    total = np.zeros(east.shape, dtype=float)
+    theta = np.deg2rad((weather["wind_direction_deg"] + 180) % 360)
+    ne, nn = np.sin(theta), np.cos(theta)
+    flags = set()
+    if weather["wind_speed_ms"] < 1:
+        flags.add("low-wind: Gaussian plume unreliable")
+    if weather.get("mixing_height_m") is not None and receptor_height > weather["mixing_height_m"]:
+        flags.add("Receptor above mixing lid: concentration excluded")
+    points = expand_sources(sources)
+    # Source/receptor broadcasting in bounded batches avoids a Python loop per
+    # source while keeping400x400 grids within a predictable memory envelope.
+    for offset in range(0, len(points), 20):
+        batch = points[offset : offset + 20]
+        shape = (len(batch),) + (1,) * east.ndim
+        columns = {
+            field: np.asarray([s[field] for s in batch], dtype=float).reshape(shape)
+            for field in [
+                "east_m",
+                "north_m",
+                "emission_gs",
+                "height_m",
+                "diameter_m",
+                "exit_velocity_ms",
+                "exit_temperature_k",
+            ]
+        }
+        if np.any(
+            (columns["exit_temperature_k"] < weather["temperature_k"])
+            & (columns["exit_velocity_ms"] > 0)
+        ):
+            flags.add("Cold exhaust: momentum-only rise; dense-gas sinking not modelled")
+        de, dn = east - columns["east_m"], north - columns["north_m"]
+        x, y = de * ne + dn * nn, -de * nn + dn * ne
+        active = x >= 1.0
+        if np.any(active & ((x < 100) | (x > 10000))):
+            flags.add("Briggs coefficients extrapolated outside 100m–10km")
+        sy, sz = sigmas(x, weather["stability_class"], environment)
+        u = wind_at_height(
+            weather["wind_speed_ms"], columns["height_m"], weather["stability_class"], environment
+        )
+        if np.any(u <= 1.0):
+            flags.add("low-wind: Gaussian plume unreliable; release-height wind floored at1m/s")
+        h = effective_height(
+            x,
+            columns["height_m"],
+            columns["diameter_m"],
+            columns["exit_velocity_ms"],
+            columns["exit_temperature_k"],
+            weather["temperature_k"],
+            u,
+            weather["stability_class"],
+        )
+        lid = weather.get("mixing_height_m")
+        if lid is not None and np.any(active & (h > lid)):
+            flags.add("Effective release above mixing lid: ground contribution excluded")
+        values = concentration(columns["emission_gs"], u, sy, sz, y, receptor_height, h, lid)
+        total += np.where(active, values, 0.0).sum(axis=0)
+    if any(s.get("type") in {"area", "line"} for s in sources):
+        flags.add("Area/line point discretisation: near-field peaks depend on subdivisions")
+    return total.astype(np.float32), sorted(flags)
+
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}EnviroInsights-India{% endblock %}</title>
+  <meta name="theme-color" content="#0b6557">
+  <meta name="description" content="Explore India's air quality through traceable observations, forecasts, cited research and educational dispersion scenarios.">
+  <link rel="stylesheet" href="{% static 'dashboard/site.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a href="{% url 'home' %}" class="brand" aria-label="EnviroInsights India home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M7 23C3 9 16 5 26 5c0 15-10 22-19 18Z" stroke="currentColor" stroke-width="2"/><path d="m8 25 14-14M14 19v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span>EnviroInsights<small>INDIA · AIR QUALITY RESEARCH</small></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" hidden>Menu <span aria-hidden="true">⌄</span></button>
+    <nav id="site-navigation" class="primary-nav" aria-label="Main navigation">
+      <a href="{% url 'home' %}" {% if request.path == '/' %}aria-current="page"{% endif %}>Overview</a>
+      <a href="{% url 'forecasts' %}" {% if request.path == '/forecasts/' %}aria-current="page"{% endif %}>Forecasts</a>
+      <a href="{% url 'research' %}" {% if request.path == '/research/' %}aria-current="page"{% endif %}>Research</a>
+      <a href="{% url 'library' %}" {% if request.path == '/library/' %}aria-current="page"{% endif %}>Library</a>
+      <a href="{% url 'rag-ask-page' %}" {% if request.path == '/ask/' %}aria-current="page"{% endif %}>Ask</a>
+      <a class="nav-simulator" href="{% url 'simulator' %}" {% if request.path == '/simulator/' %}aria-current="page"{% endif %}>VayuSim <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div></header>
+  <script>const navButton=document.querySelector('.nav-toggle'),siteHeader=document.querySelector('.site-header'),siteNavigation=document.getElementById('site-navigation');navButton.hidden=false;siteHeader.classList.add('nav-collapsed');navButton.addEventListener('click',()=>{const open=siteNavigation.classList.toggle('is-open');navButton.setAttribute('aria-expanded',String(open));});</script>
+  <main id="main" class="page-container">{% block content %}{% endblock %}</main>
+  <footer class="site-footer"><div><a class="footer-brand" href="{% url 'home' %}">EnviroInsights · India</a><p>Evidence you can inspect. Estimates you can question.</p></div><nav aria-label="Resources"><a href="{% url 'swagger-ui' %}">API documentation</a><a href="{% url 'health' %}">System health</a><a href="{% url 'admin:index' %}">Curator admin</a></nav><p class="help">Research and educational use. Historical results and replay forecasts retain their original dates.</p></footer>
+</body>
+</html>
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework.routers import DefaultRouter
+
+from apps.analytics.api import CoverageView, SeriesView, SummaryView
+from apps.analytics.research_api import ComparisonsView, NCAPView, RQ2View
+from apps.core.views import HealthView
+from apps.dashboard.views import ForecastPage, HomeView, LibraryPage, ResearchPage
+from apps.forecast.api import EvaluationView, HistoryView, LatestView
+from apps.ingest.api import CompletenessView, FireView, ReadingView, WeatherView
+from apps.rag.api import AskView, DocumentsView, ExplainView, PageView
+from apps.rag.views import AskPage, SourcePage
+from apps.vayusim.views import SimulatorPage
+from apps.warehouse.views import CityViewSet, PollutantViewSet, StationViewSet
+
+router = DefaultRouter()
+router.register("cities", CityViewSet)
+router.register("stations", StationViewSet)
+router.register("pollutants", PollutantViewSet)
+
+urlpatterns = [
+    path("", HomeView.as_view(), name="home"),
+    path("simulator/", SimulatorPage.as_view(), name="simulator"),
+    path("forecasts/", ForecastPage.as_view(), name="forecasts"),
+    path("research/", ResearchPage.as_view(), name="research"),
+    path("library/", LibraryPage.as_view(), name="library"),
+    path("admin/", admin.site.urls),
+    path("ask/", AskPage.as_view(), name="rag-ask-page"),
+    path(
+        "rag/documents/<int:document_id>/page/<int:page_number>/",
+        SourcePage.as_view(),
+        name="rag-source-page",
+    ),
+    path("api/rag/ask/", AskView.as_view(), name="rag-ask"),
+    path("api/rag/explain/", ExplainView.as_view(), name="rag-explain"),
+    path("api/rag/documents/", DocumentsView.as_view(), name="rag-documents"),
+    path(
+        "api/rag/documents/<int:document_id>/page/<int:page_number>/",
+        PageView.as_view(),
+        name="rag-page",
+    ),
+    path("api/health/", HealthView.as_view(), name="health"),
+    path("api/vayusim/", include("apps.vayusim.urls")),
+    path("api/forecast/<slug:slug>/latest/", LatestView.as_view(), name="forecast-latest"),
+    path("api/forecast/<slug:slug>/history/", HistoryView.as_view(), name="forecast-history"),
+    path(
+        "api/forecast/<slug:slug>/evaluation/", EvaluationView.as_view(), name="forecast-evaluation"
+    ),
+    path("api/readings/", ReadingView.as_view(), name="readings"),
+    path("api/weather/", WeatherView.as_view(), name="weather"),
+    path("api/fires/", FireView.as_view(), name="fires"),
+    path("api/completeness/", CompletenessView.as_view(), name="completeness"),
+    path("api/analytics/coverage/", CoverageView.as_view(), name="analytics-coverage"),
+    path("api/analytics/rq2/<slug:slug>/", RQ2View.as_view(), name="analytics-rq2"),
+    path("api/analytics/ncap/", NCAPView.as_view(), name="analytics-ncap"),
+    path("api/analytics/comparisons/", ComparisonsView.as_view(), name="analytics-comparisons"),
+    path(
+        "api/analytics/city/<slug:slug>/summary/", SummaryView.as_view(), name="analytics-summary"
+    ),
+    path("api/analytics/city/<slug:slug>/series/", SeriesView.as_view(), name="analytics-series"),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path("api/", include(router.urls)),
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+Get-Content : Cannot find path 'D:\EnviroInsights-India\apps\dashboard\templates\dashboard\overview.html' because it
+does not exist.
+At line:5 char:1
++ Get-Content apps/dashboard/templates/dashboard/overview.html -Encodin ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (D:\EnviroInsigh...d\overview.html:String) [Get-Content], ItemNotFoundEx
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+
+        if isinstance(value, dict):
+            assert value == expected['summary']['exposure'][key], (run.pk, key)
+        elif isinstance(value, (int, float)):
+            assert value == expected['summary']['exposure'][key], (run.pk, key, value)
+    peak = float(values[index])
+    assert peak == expected['summary']['peak_ugm3']
+    distance = min(float(np.hypot(grid['east'][index]-s['east_m'], grid['north'][index]-s['north_m'])) for s in sources)
+    assert distance == expected['summary']['distance_to_peak_m']
+    scaling_values, _, _, _ = compute({**run.inputs, 'sources': [{**s, 'emission_gs': s['emission_gs']*2} for s in run.inputs['sources']]}, run.inputs['weather_values'])
+    # The requested peak scaling is exact here. Underflowed float32 tails may
+    # differ by one subnormal quantum after scaling before versus after casting.
+    assert float(scaling_values.max()) == 2 * peak
+    field_delta = float(np.abs(scaling_values.astype(float) - 2*values.astype(float)).max())
+    response = requests.get(f'http://localhost:8000/api/vayusim/runs/{run.pk}/', timeout=30)
+    response.raise_for_status()
+    body = response.json()
+    assert body['interpretation']['sources'][0]['label'] == 'hypothetical 1 g/s source'
+    assert body['inputs_hash'] == expected['inputs_hash']
+    assert body['summary']['peak_ugm3'] == peak
+    header = requests.get(f'http://localhost:8000/api/vayusim/grid/{run.pk}.json', timeout=30)
+    header.raise_for_status()
+    assert header.json()['interpretation']['sources'][0]['label'] == 'hypothetical 1 g/s source'
+    proofs.append({'run_id': run.pk, 'city': run.inputs['city'], 'label': body['interpretation']['sources'][0]['label'], 'peak_ugm3': peak, 'distance_to_peak_m': distance, 'exposure': actual_exposure, 'stability_class': run.stability_class, 'all_reported_numeric_values_match': True, 'fresh_compute': True, 'doubled_Q_peak_exactly_doubled': True, 'doubled_Q_field_max_absolute_delta_ugm3': field_delta, 'http_status': response.status_code, 'header_status': header.status_code, 'inputs_hash': run.inputs_hash, 'interpretation': body['interpretation']})
+    print(json.dumps({key:value for key,value in proofs[-1].items() if key not in {'exposure','interpretation'}}, ensure_ascii=False), flush=True)
+(folder / 'example-recompute.json').write_text(json.dumps(proofs, indent=2, ensure_ascii=False) + '\n')
+
+
+```
+
+</details>
+        ]
+        if any(x is None for x in required):
+            raise ValidationError(
+                {"weather": "Required wind, temperature, solar or cloud observation is null"}
+            )
+        weather = {
+            "wind_speed_ms": required[0],
+            "wind_direction_deg": required[1],
+            "temperature_k": required[2] + 273.15,
+            "solar_radiation_wm2": required[3],
+            "cloud_fraction": required[4],
+            "daytime": observation.solar_radiation_wm2 > 0,
+        }
+        if (
+            observation.boundary_layer_height_m is not None
+            and observation.boundary_layer_height_m > 0
+        ):
+            weather["mixing_height_m"] = observation.boundary_layer_height_m
+        provenance = {
+            "mode": "real",
+            "observation_id": str(observation.id),
+            "observed_at_utc": midpoint.isoformat(),
+            "ist_hour_start": start.astimezone(IST).isoformat(),
+            "source": observation.source.slug,
+            "label": "City weather grid point; uniform over the scenario",
+        }
+    weather["stability_class"] = stability_class(
+        weather["wind_speed_ms"],
+        weather["solar_radiation_wm2"],
+        weather["cloud_fraction"],
+        weather["daytime"],
+    )
+    if "mixing_height_m" not in weather:
+        weather["mixing_height_m"] = fallback_mixing_height(
+            weather["stability_class"], weather["daytime"]
+        )
+        flags.append(
+            "Missing boundary-layer height: illustrative stability-based fallback; "
+            "not Indian climatology or measured BLH"
+        )
+        provenance["mixing_height"] = {
+            "observed": False,
+            "citations": FALLBACK_CITATIONS,
+            "assumption": "CDM2 class ratios using illustrative L=1500m and Lmin=500m anchors",
+        }
+    else:
+        provenance["mixing_height"] = {
+            "observed": inputs["weather_mode"] == "real",
+            "value_m": weather["mixing_height_m"],
+            "label": "Warehouse observation" if inputs["weather_mode"] == "real" else "User input",
+        }
+    return weather, provenance, flags
+
+
+def background_stations(city, moment, centre, distance_km=25):
+    from django.db.models import Avg, Count, Q
+    from pyproj import Geod
+
+    start, end = hour_bounds(moment)
+    rows = (
+        Reading.objects.filter(
+            station__city=city,
+            station__source__slug__in=["cpcb-ccr", "opencity"],
+            pollutant__code="pm25",
+            observed_at__gte=start,
+            observed_at__lt=end,
+            quality_flag="ok",
+            value__isnull=False,
+        )
+        .filter(
+            Q(station__analysis_eligibility__isnull=True)
+            | Q(station__analysis_eligibility__excluded_from_spatial=False)
+        )
+        .values("station_id", "station__name", "station__location")
+        .annotate(mean_value=Avg("value"), samples=Count("value"))
+    )
+    result = []
+    for row in rows:
+        point = row["station__location"]
+        if point is None:
+            continue
+        _, _, distance = Geod(ellps="WGS84").inv(*centre, point.x, point.y)
+        if distance <= distance_km * 1000:
+            result.append(
+                {
+                    "station_id": row["station_id"],
+                    "name": row["station__name"],
+                    "location": [point.x, point.y],
+                    "distance_km": distance / 1000,
+                    "value_ugm3": row["mean_value"],
+                    "samples": row["samples"],
+                }
+            )
+    return {
+        "label": "measured total (all sources)",
+        "unit": "µg/m³",
+        "ist_hour": start.astimezone(IST).isoformat(),
+        "stations": sorted(result, key=lambda r: r["distance_km"]),
+        "note": "Independent context only; never added to the modelled increment",
+    }
+1:# Phase 6A: VayuSim engine, data integration and API
+7:See [Independent validation](#independent-validation) for the exact case scope.
+9:The engine, real-data adapters, API and verification map are implemented in
+62:place the separate unchanged point model outside an interval. The API/UI retains
+386:or prefetch. The UI is a one-source verification form; the API supports multiple
+388:shared multiple-source results are viewable, with edits directed to the API.
+420:Migration drift and OpenAPI validation checks pass.
+460:## Phase 6B API contract
+462:| Endpoint | Contract |
+525:8. Derive API disclosures from retained run inputs. Do not rewrite old numerical
+551:The preset/API citation table and limitations now state this scope explicitly.
+606:benchmark audit, not new out-of-sample evidence or a tuning exercise.
+616:selecting a new optimum from this benchmark. Evidence retains every candidate
+685:check/deploy, migration drift and strict OpenAPI validation pass in the command journal.
+695:in this report, README and both run/header API responses. Weather and registered
+713:The extra verification-command benchmark measured median
+784:   when API keys exist. Stop Ollama and clear the default Compose profile, while
+812:2. The API defaults to **urban**; the reference check explicitly selects
+886:Fresh fields, distances, exposure summaries and API/header responses reproduce
+899:API-doc number needs changing. Engine version remains `gaussian-briggs-1.1.0`.
+950:are byte-identical. The expressly requested textbook fixture correction is the
+982:Changes: provider fallback and env examples/local defaults; textbook fixture;
+988:## Independent validation
+
+````
+
+</details>
+
+<details>
+<summary>Phase 6B: 005-frontend-contract-preflight (2026-10-16T11:00:58.0736923+05:30; exit 0)</summary>
+
+```powershell
+rg -n 'simulator|sim-map|sim-cities|simulation-form|VayuSim' tests apps/dashboard/templates
+Get-Content apps/dashboard/templates/dashboard/home.html -Encoding UTF8 | Select-Object -First 90
+Get-Content apps/dashboard/static/dashboard/site.css -Encoding UTF8 | Select-Object -First 90
+Get-Content apps/vayusim/presets.py -Raw -Encoding UTF8
+Get-Content docs/results/PHASE6A.md -Encoding UTF8 | Select-Object -Skip 455 -First 40
+docker compose exec -T web python -c "import PIL; from PIL import ImageFont; print(PIL.__version__); print(ImageFont.load_default(size=18))"
+```
+
+```text
+apps/dashboard/templates\dashboard\base.html:24:      <a class="nav-simulator" href="{% url 'simulator' %}" {% if request.path == '/simulator/' %}aria-current="page"{% endif %}>VayuSim <span aria-hidden="true">↗</span></a>
+apps/dashboard/templates\dashboard\home.html:6:<section class="section"><div class="section-heading"><div><p class="eyebrow">FOLLOW YOUR QUESTION</p><h2>From observations to understanding</h2></div></div><div class="tool-grid"><article class="tool-card"><span class="tool-number">01 / RESEARCH</span><h3>What has changed?</h3><p>Explore descriptive city comparisons and their weather, station-network and uncertainty limits.</p><a href="{% url 'research' %}" class="text-link">Explore the evidence →</a></article><article class="tool-card"><span class="tool-number">02 / CITED ASSISTANT</span><h3>Ask, then inspect.</h3><p>Find answers linked to source passages and stored project results. Inspect the evidence behind each claim.</p><a href="{% url 'rag-ask-page' %}" class="text-link">Ask the library →</a></article><article class="tool-card dark-card"><span class="tool-number">03 / VAYUSIM</span><h3>Follow a source.</h3><p>Place an emission source and explore its hourly modelled increment and population footprint.</p><a href="{% url 'simulator' %}" class="text-link">Open the dispersion lab ↗</a></article></div></section>
+{% extends "dashboard/base.html" %}
+{% block content %}
+<section class="hero"><div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span> INDIA'S AIR, THROUGH THE EVIDENCE</p><h1>See the air.<br><span>Understand the change.</span></h1><p class="hero-description">A clearer view of air quality: traceable observations, weather-adjusted research, city forecasts and source dispersion.</p><div class="hero-actions"><a class="button" href="{% url 'forecasts' %}">Explore city forecasts <span aria-hidden="true">↗</span></a><a class="text-link" href="{% url 'research' %}">Read the research <span aria-hidden="true">→</span></a></div><p class="help">Historical evidence, clearly dated. Forecasts currently use archived replay inputs.</p></div><div class="hero-visual" aria-hidden="true"><svg viewBox="0 0 540 420"><defs><radialGradient id="air"><stop stop-color="#c2e5b1"/><stop offset="1" stop-color="#e7eee4" stop-opacity="0"/></radialGradient></defs><circle cx="275" cy="210" r="200" fill="url(#air)"/><g fill="none" stroke="#529b78" stroke-width="1.4"><ellipse cx="287" cy="208" rx="210" ry="130" transform="rotate(-24 287 208)"/><ellipse cx="278" cy="205" rx="176" ry="108" transform="rotate(-24 278 205)"/><ellipse cx="267" cy="202" rx="140" ry="83" transform="rotate(-24 267 202)"/><ellipse cx="254" cy="199" rx="104" ry="59" transform="rotate(-24 254 199)"/><ellipse cx="239" cy="196" rx="69" ry="35" transform="rotate(-24 239 196)"/></g><path d="M74 275 429 116M106 314 444 157" stroke="#81ad94" stroke-dasharray="3 8"/><circle cx="223" cy="200" r="8" fill="#0b6557"/><circle cx="223" cy="200" r="17" fill="none" stroke="#0b6557"/><rect x="64" y="300" width="216" height="57" rx="12" fill="#fff" stroke="#d6e3d8"/><text x="83" y="324" fill="#153c31" font-size="13" font-family="Segoe UI,sans-serif">SOURCE DISPERSION</text><text x="83" y="343" fill="#53685d" font-size="12" font-family="Segoe UI,sans-serif">Explore the modelled increment</text></svg><span class="visual-label">Illustration · dispersion contours</span></div></section>
+<section class="platform-stats" aria-label="Stored project coverage"><div><strong>{{city_count}}</strong><span>cities in the catalogue</span></div><div><strong>{{document_count}}</strong><span>indexed source documents</span></div><div><strong>{{forecast_count}}</strong><span>stored forecast records</span></div><div><strong>{{scenario_count}}</strong><span>saved dispersion runs</span></div></section>
+<section class="section"><div class="section-heading"><div><p class="eyebrow">THE LATEST STORED OUTLOOK</p><h2>A view across cities</h2></div><a href="{% url 'forecasts' %}" class="text-link">All forecasts →</a></div><div class="city-grid">{% for item in city_forecasts %}<a class="city-card" href="{% url 'forecasts' %}?city={{item.city.slug}}"><div class="card-top"><h3>{{item.city.name}}</h3><span class="badge">{{item.forecast.mode|title}}</span></div><p class="city-value">{{item.forecast.point|floatformat:1}}<span>µg/m³</span></p><p class="help">PM2.5 · {{item.forecast.target_date|date:"j M Y"}}</p><div class="city-card-footer"><span>{{item.category_label}}</span><span aria-hidden="true">↗</span></div></a>{% empty %}<p>No issued forecasts are available yet.</p>{% endfor %}</div></section>
+<section class="section"><div class="section-heading"><div><p class="eyebrow">FOLLOW YOUR QUESTION</p><h2>From observations to understanding</h2></div></div><div class="tool-grid"><article class="tool-card"><span class="tool-number">01 / RESEARCH</span><h3>What has changed?</h3><p>Explore descriptive city comparisons and their weather, station-network and uncertainty limits.</p><a href="{% url 'research' %}" class="text-link">Explore the evidence →</a></article><article class="tool-card"><span class="tool-number">02 / CITED ASSISTANT</span><h3>Ask, then inspect.</h3><p>Find answers linked to source passages and stored project results. Inspect the evidence behind each claim.</p><a href="{% url 'rag-ask-page' %}" class="text-link">Ask the library →</a></article><article class="tool-card dark-card"><span class="tool-number">03 / VAYUSIM</span><h3>Follow a source.</h3><p>Place an emission source and explore its hourly modelled increment and population footprint.</p><a href="{% url 'simulator' %}" class="text-link">Open the dispersion lab ↗</a></article></div></section>
+<section class="evidence-banner"><div><p class="eyebrow">OPEN TO INSPECTION</p><h2>The context belongs beside the number.</h2><p>Missing data, model readiness, replay dates and source assumptions stay visible. Comparisons describe the evidence; they do not establish causation or official compliance.</p></div><a class="button secondary" href="{% url 'library' %}">Browse source documents →</a></section>
+{% endblock %}
+:root {
+  --ink: #163d32;
+  --muted: #607269;
+  --green: #0b6557;
+  --paper: #f6f8f4;
+  --line: #dce5dc;
+  --radius: 16px;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font:
+    15px/1.6 "Segoe UI",
+    system-ui,
+    sans-serif;
+}
+a {
+  color: var(--green);
+  text-underline-offset: 4px;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+:focus-visible {
+  outline: 3px solid #b4891e;
+  outline-offset: 4px;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1 {
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.12;
+  letter-spacing: -1.8px;
+  margin-bottom: 16px;
+}
+h2 {
+  font-size: 28px;
+  line-height: 1.25;
+  letter-spacing: -0.7px;
+  margin-bottom: 14px;
+}
+h3 {
+  font-size: 20px;
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+p {
+  margin-bottom: 16px;
+}
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -80px;
+  background: white;
+  padding: 12px;
+  z-index: 10;
+}
+.skip-link:focus {
+  top: 8px;
+}
+.site-header {
+  background: rgba(255, 255, 255, 0.95);
+"""Source families, with no unsupported facility-parameter defaults.
+
+AP42 emission factors require activity, fuel, controls and size fraction; a
+generic factor is not a facility PM2.5 g/s rate. Null fields require input.
+"""
+
+AP42 = (
+    "https://www.epa.gov/air-emissions-factors-and-quantification/"
+    "ap-42-compilation-air-emissions-factors-stationary-sources"
+)
+PRESETS = [
+    {
+        "id": "thermal-power",
+        "name": "Thermal power plant",
+        "type": "point",
+        "section": "AP42 Chapter1.1 Bituminous and subbituminous coal combustion",
+    },
+    {
+        "id": "brick-kiln",
+        "name": "Brick kiln cluster",
+        "type": "area",
+        "section": "AP42 Chapter11.3 Brick and structural clay product manufacturing",
+    },
+    {
+        "id": "industrial-boiler",
+        "name": "Industrial boiler",
+        "type": "point",
+        "section": "AP42 Chapter1 External combustion; choose fuel/controls",
+    },
+    {
+        "id": "crop-fire",
+        "name": "Crop-fire field",
+        "type": "area",
+        "section": "AP42 Chapter2.5 Open burning; verify crop/activity and fine fraction",
+    },
+    {
+        "id": "highway",
+        "name": "Road dust resuspension",
+        "type": "line",
+        "section": "AP42 Chapter13.2.1 Paved roads; resuspension only, not tailpipe exhaust",
+        "citation_url": (
+            "https://www.epa.gov/sites/default/files/2020-10/documents/13.2.1_paved_roads.pdf"
+        ),
+        "citation_pages": "13.2.1-1 and 13.2.1-4 (PDF pages 1 and 4), January 2011",
+        "limitation": (
+            "Resuspended paved-road dust only. Exhaust, brake wear and tire wear are excluded. "
+            "Enter the total primary PM2.5 g/s for the entire segment, not g/VKT or g/s/m. "
+            "No fleet-specific exhaust factor is established here."
+        ),
+    },
+]
+
+
+def presets():
+    fields = ["height_m", "diameter_m", "exit_velocity_ms", "exit_temperature_k", "emission_gs"]
+    return [
+        {
+            **preset,
+            "defaults": dict.fromkeys(fields),
+            "required_parameters": fields,
+            "citations": [
+                {
+                    "url": preset.get("citation_url", AP42),
+                    "section": preset["section"],
+                    **({"pages": preset["citation_pages"]} if "citation_pages" in preset else {}),
+                }
+            ],
+            "note": (
+                "No universal source-backed facility values were established; enter explicit "
+                "assumptions. AP42 factors are not default PM2.5 rates. "
+                + preset.get("limitation", "")
+            ),
+        }
+        for preset in PRESETS
+    ]
+
+fixed-panel restrictions, causal limitations and replay labels still apply.
+The development server and public local scenario shares are not a production
+authentication/hosting deployment.
+
+## Phase 6B API contract
+
+| Endpoint | Contract |
+| --- | --- |
+| `POST /api/vayusim/run/` | Strict finite JSON, city slug, centre `[lon,lat]`, 1–20 sources, real/manual weather, offset-aware datetime; returns run ID, flags, summary, contours, URLs and cache flag |
+| `GET /api/vayusim/runs/<id>/` | Re-open an actual stored run and its provenance |
+| `GET /api/vayusim/grid/<id>.bin` | Row-major little-endian float32; default200×200=160000 bytes; `X-Grid-Header` points to metadata |
+| `GET /api/vayusim/grid/<id>.json` | Shape, dtype/order, six affine coefficients, AEQD WKT, four lon/lat corners in image order, receptor height, units, label, version/hash, flags, limits and contours |
+| `GET /api/vayusim/grid/<id>.png` | Transparent at ≤1 µg/m³, category-colour overlay; hourly increment, **not CPCB AQI** |
+| Contours | GeoJSON FeatureCollection in WGS84 lon/lat, thresholds1/15/60/120 plus user values; may be empty; metadata request materialises lazy contours |
+| `GET /api/vayusim/scenarios/<slug>/` | Stored inputs and versioned runs for a shared scenario |
+| `POST /api/vayusim/day/` | Real weather only, uses the supplied datetime's IST date, 24 entries with availability/reason and summary; grids/contours on demand; **24 independent hours**, not averaged exposure |
+| `GET /api/vayusim/presets/` | Five source families, null physical defaults, required inputs and citations |
+| `GET /api/vayusim/stations/?city=&datetime=` | Same-hour nearby measured totals; never summed with modelled increment |
+| `POST /api/rag/explain/` | `context_type=scenario`, `payload.run_id` selects stored evidence; returns answer, citations, provider and verification |
+
+Affine maps **pixel corners** to east/north metres; sample receptors at
+`(column+0.5,row+0.5)`. Wind rotates the grid. PNG corners are top-left,
+top-right,bottom-right,bottom-left, with their actual geographic positions;
+do not assume an unrotated north-up image. Validate returned shape/resolution.
+The frontend must display increment versus measured-total labels, hourly scope,
+real/manual weather, actual date and source assumptions, source citations,
+population support/unavailability, all flags/limits and replay/provider
+verification. Do not animate missing hours as zeros or hide fallback weather.
+
+An older run without a retained grid cannot be silently materialised by a new
+engine under its old version label. Its summary stays available; grid requests
+return400 with instructions to submit its saved inputs as a new versioned run.
+
+Full commands and measured output are recorded in [VALIDATION](../VALIDATION.md).
+Structured local proof files are under `data/results/vayusim/verification/`.
+Their final manifest hashes retained files; downloaded scientific source
+manifests are under `data/raw/vayusim/`. Re-run the committed verification
+command against the retained database/raw assets to reproduce the examples.
+
+## Phase 6A audit
+12.3.0
+<PIL.ImageFont.FreeTypeFont object at 0x76c7aaade330>
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 006-new-contract-tests (2026-10-16T11:06:06.9838575+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web ruff check apps/vayusim tests/test_vayusim_frontend.py enviroinsights/urls.py --fix
+docker compose exec -T web ruff format apps/vayusim/api.py apps/vayusim/service.py apps/vayusim/presentation.py apps/vayusim/urls.py apps/vayusim/views.py tests/test_vayusim_frontend.py
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write apps/vayusim/static/vayusim/cinematic.js apps/vayusim/static/vayusim/cinematic.css
+node --check apps/vayusim/static/vayusim/cinematic.js
+docker compose exec -T web pytest tests/test_vayusim_frontend.py --ds=enviroinsights.settings.test -q
+```
+
+```text
+E501 Line too long (102 > 100)
+   --> apps/vayusim/api.py:107:101
+    |
+105 |         path = section_path(run)
+106 |         if not path.exists():
+107 |             return Response({"detail": "No stored vertical grid; POST here to create it"}, status=404)
+    |                                                                                                     ^^
+108 |         return Response(json.loads(path.read_text(encoding="utf-8")))
+    |
+
+E501 Line too long (135 > 100)
+  --> apps/vayusim/presentation.py:51:101
+   |
+49 |             "validation_status": validation_status(run),
+50 |             "label": "Vertical cross-section from stored grid data only",
+51 |             "method": "Supplementary grid from retained inputs; unchanged engine; not inferred from the single-height horizontal grid",
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+52 |             "origin": inputs["sources"][0]["location"],
+53 |             "direction_from_deg": weather["wind_direction_deg"],
+   |
+
+E501 Line too long (136 > 100)
+  --> apps/vayusim/presentation.py:71:101
+   |
+69 | …es))).convert("RGBA")
+70 | …
+71 | …sampling.NEAREST), (170, 112), overlay.resize((560, 560), Image.Resampling.NEAREST))
+   |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+72 | …
+73 | …)
+   |
+
+E501 Line too long (120 > 100)
+  --> apps/vayusim/presentation.py:76:101
+   |
+74 |     lines = [
+75 |         ("VayuSim | " + run.scenario.city.name + " | stored run " + str(run.pk), "white"),
+76 |         (status.upper() + " | " + run.inputs.get("environment", "urban") + " Briggs " + run.stability_class, "#ffc267"),
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^
+77 |         ("modelled increment from these sources only", "#d0e3db"),
+78 |         ("Peak: " + format(run.summary["peak_ugm3"], ".6g") + " ug/m3 | distance: " + format(run.summary["distance_to_peak_m"], ".6g")…
+   |
+
+E501 Line too long (152 > 100)
+  --> apps/vayusim/presentation.py:78:101
+   |
+76 | …t", "urban") + " Briggs " + run.stability_class, "#ffc267"),
+77 | …3db"),
+78 | …+ " ug/m3 | distance: " + format(run.summary["distance_to_peak_m"], ".6g") + " m", "white"),
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+79 | …
+80 | …rict=True):
+   |
+
+E501 Line too long (110 > 100)
+  --> apps/vayusim/views.py:25:101
+   |
+23 |             for city in City.objects.order_by("name")
+24 |         ]
+25 |         examples = ScenarioRun.objects.select_related("scenario__city").filter(inputs_hash__in=EXAMPLE_HASHES)
+   |                                                                                                     ^^^^^^^^^^
+26 |         context["examples"] = [
+27 |             {"city": run.scenario.city.name, "inputs": run.scenario.inputs, **run_response(run)}
+   |
+
+E501 Line too long (105 > 100)
+  --> apps/vayusim/views.py:39:101
+   |
+37 |             except ValueError:
+38 |                 run_id = -1
+39 |             selected = get_object_or_404(ScenarioRun.objects.select_related("scenario__city"), pk=run_id)
+   |                                                                                                     ^^^^^
+40 |         elif context["examples"]:
+41 |             selected = examples.get(inputs_hash=EXAMPLE_HASHES[0])
+   |
+
+E501 Line too long (111 > 100)
+  --> apps/vayusim/views.py:43:101
+   |
+41 |             selected = examples.get(inputs_hash=EXAMPLE_HASHES[0])
+42 |         context["initial_run"] = (
+43 |             {"city": selected.scenario.city.name, "inputs": selected.scenario.inputs, **run_response(selected)}
+   |                                                                                                     ^^^^^^^^^^^
+44 |             if selected else None
+45 |         )
+   |
+
+F811 Redefinition of unused `inputs` from line 14
+  --> tests/test_vayusim_frontend.py:17:20
+   |
+17 | def submit(client, inputs, settings, tmp_path):
+   |                    ^^^^^^ `inputs` redefined here
+18 |     settings.BASE_DIR = tmp_path
+19 |     response = client.post("/api/vayusim/run/", inputs, content_type="application/json")
+   |
+  ::: tests/test_vayusim_frontend.py:14:36
+   |
+12 | from apps.vayusim.models import ScenarioRun
+13 | from apps.vayusim.service import run_response
+14 | from tests.test_vayusim_api import inputs  # noqa: F401
+   |                                    ------ previous definition of `inputs` here
+help: Remove definition: `inputs`
+
+F811 Redefinition of unused `inputs` from line 14
+  --> tests/test_vayusim_frontend.py:31:59
+   |
+29 |      ("rural", "F", "formula_check_only")],
+30 | )
+31 | def test_status_on_run_scenario_header_and_export(client, inputs, settings, tmp_path, environment, stability, expected):
+   |                                                           ^^^^^^ `inputs` redefined here
+32 |     inputs["environment"] = environment
+33 |     run_data = submit(client, inputs, settings, tmp_path)
+   |
+  ::: tests/test_vayusim_frontend.py:14:36
+   |
+12 | from apps.vayusim.models import ScenarioRun
+13 | from apps.vayusim.service import run_response
+14 | from tests.test_vayusim_api import inputs  # noqa: F401
+   |                                    ------ previous definition of `inputs` here
+help: Remove definition: `inputs`
+
+E501 Line too long (120 > 100)
+  --> tests/test_vayusim_frontend.py:31:101
+   |
+29 |      ("rural", "F", "formula_check_only")],
+30 | )
+31 | def test_status_on_run_scenario_header_and_export(client, inputs, settings, tmp_path, environment, stability, expected):
+   |                                                                                                     ^^^^^^^^^^^^^^^^^^^^
+32 |     inputs["environment"] = environment
+33 |     run_data = submit(client, inputs, settings, tmp_path)
+   |
+
+F811 Redefinition of unused `inputs` from line 14
+  --> tests/test_vayusim_frontend.py:60:76
+   |
+59 | @pytest.mark.django_db
+60 | def test_vertical_grid_is_stored_idempotent_and_get_never_computes(client, inputs, settings, tmp_path):
+   |                                                                            ^^^^^^ `inputs` redefined here
+61 |     value = submit(client, inputs, settings, tmp_path)
+62 |     url = value["section_url"]
+   |
+  ::: tests/test_vayusim_frontend.py:14:36
+   |
+12 | from apps.vayusim.models import ScenarioRun
+13 | from apps.vayusim.service import run_response
+14 | from tests.test_vayusim_api import inputs  # noqa: F401
+   |                                    ------ previous definition of `inputs` here
+help: Remove definition: `inputs`
+
+E501 Line too long (103 > 100)
+  --> tests/test_vayusim_frontend.py:60:101
+   |
+59 | @pytest.mark.django_db
+60 | def test_vertical_grid_is_stored_idempotent_and_get_never_computes(client, inputs, settings, tmp_path):
+   |                                                                                                     ^^^
+61 |     value = submit(client, inputs, settings, tmp_path)
+62 |     url = value["section_url"]
+   |
+
+E501 Line too long (106 > 100)
+  --> tests/test_vayusim_frontend.py:72:101
+   |
+70 |     assert len(section["values_ugm3"][0]) == len(section["distance_m"])
+71 |     assert np.max(section["values_ugm3"]) > 0
+72 |     with patch("apps.vayusim.presentation.simulate", side_effect=AssertionError("must read stored grid")):
+   |                                                                                                     ^^^^^^
+73 |         assert client.get(url).json() == section
+74 |         assert client.post(url, {}, content_type="application/json").json() == section
+   |
+
+F811 Redefinition of unused `inputs` from line 14
+  --> tests/test_vayusim_frontend.py:80:76
+   |
+79 | @pytest.mark.django_db
+80 | def test_all_example_labels_and_shared_link_render_without_scripts(client, inputs, settings, tmp_path):
+   |                                                                            ^^^^^^ `inputs` redefined here
+81 |     value = submit(client, inputs, settings, tmp_path)
+82 |     first = ScenarioRun.objects.get(pk=value["run_id"])
+   |
+  ::: tests/test_vayusim_frontend.py:14:36
+   |
+12 | from apps.vayusim.models import ScenarioRun
+13 | from apps.vayusim.service import run_response
+14 | from tests.test_vayusim_api import inputs  # noqa: F401
+   |                                    ------ previous definition of `inputs` here
+help: Remove definition: `inputs`
+
+E501 Line too long (103 > 100)
+  --> tests/test_vayusim_frontend.py:80:101
+   |
+79 | @pytest.mark.django_db
+80 | def test_all_example_labels_and_shared_link_render_without_scripts(client, inputs, settings, tmp_path):
+   |                                                                                                     ^^^
+81 |     value = submit(client, inputs, settings, tmp_path)
+82 |     first = ScenarioRun.objects.get(pk=value["run_id"])
+   |
+
+E501 Line too long (101 > 100)
+  --> tests/test_vayusim_frontend.py:84:101
+   |
+82 |     first = ScenarioRun.objects.get(pk=value["run_id"])
+83 |     runs = [first]
+84 |     for index, (name, stability) in enumerate([("Delhi", "C"), ("Mumbai", "C"), ("Hyderabad", "F")]):
+   |                                                                                                     ^
+85 |         if index:
+86 |             cloned = copy.deepcopy(inputs)
+   |
+
+E501 Line too long (101 > 100)
+  --> tests/test_vayusim_frontend.py:96:101
+   |
+94 |         run.scenario.city.save(update_fields=["name"])
+95 |     with patch("apps.vayusim.views.EXAMPLE_HASHES", tuple(r.inputs_hash for r in runs)):
+96 |         for route in ["/vayusim/", "/simulator/", f"/vayusim/?scenario={first.scenario.share_slug}"]:
+   |                                                                                                     ^
+97 |             page = client.get(route)
+98 |             assert page.status_code == 200
+   |
+
+F811 Redefinition of unused `inputs` from line 14
+   --> tests/test_vayusim_frontend.py:110:67
+    |
+109 | @pytest.mark.django_db
+110 | def test_day_cache_keeps_ids_labels_and_numeric_summaries(client, inputs, settings, tmp_path):
+    |                                                                   ^^^^^^ `inputs` redefined here
+111 |     settings.BASE_DIR = tmp_path
+112 |     from datetime import datetime
+    |
+   ::: tests/test_vayusim_frontend.py:14:36
+    |
+ 12 | from apps.vayusim.models import ScenarioRun
+ 13 | from apps.vayusim.service import run_response
+ 14 | from tests.test_vayusim_api import inputs  # noqa: F401
+    |                                    ------ previous definition of `inputs` here
+help: Remove definition: `inputs`
+
+F811 Redefinition of unused `inputs` from line 14
+   --> tests/test_vayusim_frontend.py:133:76
+    |
+132 | @pytest.mark.django_db
+133 | def test_source_removed_comparison_uses_a_second_stored_zero_field(client, inputs, settings, tmp_path):
+    |                                                                            ^^^^^^ `inputs` redefined here
+134 |     first = submit(client, inputs, settings, tmp_path)
+135 |     inputs["sources"][0]["emission_gs"] = 0
+    |
+   ::: tests/test_vayusim_frontend.py:14:36
+    |
+ 12 | from apps.vayusim.models import ScenarioRun
+ 13 | from apps.vayusim.service import run_response
+ 14 | from tests.test_vayusim_api import inputs  # noqa: F401
+    |                                    ------ previous definition of `inputs` here
+help: Remove definition: `inputs`
+
+E501 Line too long (103 > 100)
+   --> tests/test_vayusim_frontend.py:133:101
+    |
+132 | @pytest.mark.django_db
+133 | def test_source_removed_comparison_uses_a_second_stored_zero_field(client, inputs, settings, tmp_path):
+    |                                                                                                     ^^^
+134 |     first = submit(client, inputs, settings, tmp_path)
+135 |     inputs["sources"][0]["emission_gs"] = 0
+    |
+
+E501 Line too long (115 > 100)
+   --> tests/test_vayusim_frontend.py:148:101
+    |
+146 |     assert client.get("/api/vayusim/runs/999999/export.png").status_code == 404
+147 |     assert client.get("/api/vayusim/runs/999999/section/").status_code == 404
+148 |     assert client.post("/api/vayusim/runs/999999/section/", {}, content_type="application/json").status_code == 404
+    |                                                                                                     ^^^^^^^^^^^^^^^
+
+Found 25 errors (3 fixed, 22 remaining).
+4 files reformatted, 2 files left unchanged
+apps/vayusim/static/vayusim/cinematic.js 217ms
+apps/vayusim/static/vayusim/cinematic.css 134ms
+..........                                                               [100%]
+10 passed in 16.38s
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 007-day-benchmark (2026-10-16T11:06:21.5811398+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6b/benchmark.py
+```
+
+```text
+{"city": "delhi", "mode": "cold", "seconds": 5.531972564000171, "available": 24, "cached": 0, "run_ids": [90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113], "validation_statuses": ["formula_check_only", "unvalidated_branch"]}
+{"city": "delhi", "mode": "warm", "seconds": 0.32942966100017657, "available": 24, "cached": 24, "run_ids": [90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113], "validation_statuses": ["formula_check_only", "unvalidated_branch"]}
+{"city": "mumbai", "mode": "cold", "seconds": 2.649020040000323, "available": 24, "cached": 0, "run_ids": [114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137], "validation_statuses": ["formula_check_only", "unvalidated_branch"]}
+{"city": "mumbai", "mode": "warm", "seconds": 0.2668031860002884, "available": 24, "cached": 24, "run_ids": [114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137], "validation_statuses": ["formula_check_only", "unvalidated_branch"]}
+{"city": "hyderabad", "mode": "cold", "seconds": 2.883380249999391, "available": 24, "cached": 0, "run_ids": [138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161], "validation_statuses": ["formula_check_only", "unvalidated_branch"]}
+{"city": "hyderabad", "mode": "warm", "seconds": 0.3114578229997278, "available": 24, "cached": 24, "run_ids": [138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161], "validation_statuses": ["formula_check_only", "unvalidated_branch"]}
+All three 24-hour cold and warm day requests completed.
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 008-lint-and-live-page (2026-10-16T11:06:45.6475825+05:30; exit 1)</summary>
+
+```powershell
+docker compose exec -T web ruff check apps/vayusim tests/test_vayusim_frontend.py enviroinsights/urls.py
+python -c "import urllib.request; r=urllib.request.urlopen('http://127.0.0.1:8000/vayusim/',timeout=30); print('GET /vayusim/',r.status); print('bytes',len(r.read()))"
+Get-Content apps/vayusim/presentation.py -Raw -Encoding UTF8
+Get-Content apps/vayusim/views.py -Raw -Encoding UTF8
+```
+
+```text
+All checks passed!
+python : Traceback (most recent call last):
+At line:2 char:1
++ python -c "import urllib.request; r=urllib.request.urlopen('http://12 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  File "<string>", line 1, in <module>
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\urllib\request.py", line 1352, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 1395, in getresponse
+    response.begin()
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 325, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\http\client.py", line 294, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+"""Stored supplementary artifacts; no alternative physics or fitted parameters."""
+
+import io
+import json
+from pathlib import Path
+
+import numpy as np
+from django.conf import settings
+from django.db import connection, transaction
+from PIL import Image, ImageDraw, PngImagePlugin
+from rest_framework.exceptions import ValidationError
+
+from .artifacts import overlay_png
+from .grid import build_grid, project_sources
+from .physics import ENGINE_VERSION, simulate
+from .service import ensure_grid, validation_status
+
+
+def section_path(run):
+    return Path(settings.BASE_DIR) / "data/results/vayusim" / str(run.pk) / "section-v1.json"
+
+
+def store_section(run):
+    path = section_path(run)
+    with transaction.atomic():
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT pg_advisory_xact_lock(%s)", [int(run.inputs_hash[:15], 16)])
+        if path.exists():
+            return
+        if run.engine_version != ENGINE_VERSION:
+            raise ValidationError("No retained vertical grid for this historical engine version")
+        inputs = run.inputs
+        weather = inputs["weather_values"]
+        grid = build_grid(inputs["centre"], weather["wind_direction_deg"], **inputs["grid"])
+        sources = project_sources(inputs["sources"], grid)
+        distances = np.arange(0, inputs["grid"]["width_m"] / 2 + 1, inputs["grid"]["resolution_m"])
+        heights = np.linspace(0, max(1000, max(s["height_m"] for s in sources) * 2), 61)
+        theta = np.deg2rad((weather["wind_direction_deg"] + 180) % 360)
+        east = sources[0]["east_m"] + distances * np.sin(theta)
+        north = sources[0]["north_m"] + distances * np.cos(theta)
+        values = [
+            simulate(east, north, sources, weather, float(z), inputs["environment"])[0].tolist()
+            for z in heights
+        ]
+        body = {
+            "run_id": run.pk,
+            "inputs_hash": run.inputs_hash,
+            "engine_version": run.engine_version,
+            "validation_status": validation_status(run),
+            "label": "Vertical cross-section from stored grid data only",
+            "method": (
+                "Supplementary grid from retained inputs; unchanged engine; "
+                "not inferred from the single-height horizontal grid"
+            ),
+            "origin": inputs["sources"][0]["location"],
+            "direction_from_deg": weather["wind_direction_deg"],
+            "distance_m": distances.tolist(),
+            "height_m": heights.tolist(),
+            "values_ugm3": values,
+            "limitations": run.summary["limitations"],
+        }
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = path.with_suffix(".tmp")
+        temporary.write_text(json.dumps(body, allow_nan=False), encoding="utf-8")
+        temporary.replace(path)
+
+
+def export_png(run):
+    ensure_grid(run)
+    path = Path(settings.BASE_DIR) / run.grid_file_path
+    values = np.fromfile(path, dtype="<f4").reshape(run.summary["grid"]["shape"])
+    overlay = Image.open(io.BytesIO(overlay_png(values))).convert("RGBA")
+    canvas = Image.new("RGB", (900, 860), "#101e26")
+    canvas.paste(
+        overlay.resize((560, 560), Image.Resampling.NEAREST),
+        (170, 112),
+        overlay.resize((560, 560), Image.Resampling.NEAREST),
+    )
+    draw = ImageDraw.Draw(canvas)
+    status = validation_status(run).replace("_", " ")
+    lines = [
+        ("VayuSim | " + run.scenario.city.name + " | stored run " + str(run.pk), "white"),
+        (
+            status.upper()
+            + " | "
+            + run.inputs.get("environment", "urban")
+            + " Briggs "
+            + run.stability_class,
+            "#ffc267",
+        ),
+        ("modelled increment from these sources only", "#d0e3db"),
+        (
+            "Peak: "
+            + format(run.summary["peak_ugm3"], ".6g")
+            + " ug/m3 | distance: "
+            + format(run.summary["distance_to_peak_m"], ".6g")
+            + " m",
+            "white",
+        ),
+    ]
+    for y, (text, color) in zip([18, 44, 70, 686], lines, strict=True):
+        draw.text((24, y), text, fill=color, font_size=18)
+    for y, text in zip(
+        [720, 744, 768, 792, 820],
+        [
+            "Primary PM2.5 only; flat terrain; steady state within the hour.",
+            "Educational estimate, not a regulatory assessment. Hourly increment is not AQI.",
+            "CPCB palette: <=30 green | <=60 light green | <=90 yellow | <=120 orange",
+            "<=250 red | >250 dark red (ug/m3). Values <=1 transparent. No basemap in export.",
+            "Input SHA256: " + run.inputs_hash,
+        ],
+        strict=True,
+    ):
+        draw.text((24, y), text, fill="#c1d2ce", font_size=14)
+    metadata = PngImagePlugin.PngInfo()
+    metadata.add_text("validation_status", validation_status(run))
+    metadata.add_text("Description", " | ".join(text for text, _ in lines))
+    stream = io.BytesIO()
+    canvas.save(stream, format="PNG", pnginfo=metadata)
+    return stream.getvalue()
+
+from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView
+
+from apps.warehouse.models import City
+
+from .models import Scenario, ScenarioRun
+from .service import run_response
+
+EXAMPLE_HASHES = (
+    "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+    "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+    "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+)
+
+
+class SimulatorPage(TemplateView):
+    template_name = "vayusim/cinematic.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cities"] = [
+            {"slug": city.slug, "name": city.name, "location": [city.location.x, city.location.y]}
+            for city in City.objects.order_by("name")
+        ]
+        examples = ScenarioRun.objects.select_related("scenario__city").filter(
+            inputs_hash__in=EXAMPLE_HASHES
+        )
+        context["examples"] = [
+            {"city": run.scenario.city.name, "inputs": run.scenario.inputs, **run_response(run)}
+            for run in sorted(examples, key=lambda run: EXAMPLE_HASHES.index(run.inputs_hash))
+        ]
+        selected = None
+        if self.request.GET.get("scenario"):
+            scenario = get_object_or_404(Scenario, share_slug=self.request.GET["scenario"])
+            selected = scenario.runs.select_related("scenario__city").order_by("-id").first()
+        elif self.request.GET.get("run"):
+            try:
+                run_id = int(self.request.GET["run"])
+            except ValueError:
+                run_id = -1
+            selected = get_object_or_404(
+                ScenarioRun.objects.select_related("scenario__city"), pk=run_id
+            )
+        elif context["examples"]:
+            selected = examples.get(inputs_hash=EXAMPLE_HASHES[0])
+        context["initial_run"] = (
+            {
+                "city": selected.scenario.city.name,
+                "inputs": selected.scenario.inputs,
+                **run_response(selected),
+            }
+            if selected
+            else None
+        )
+        return context
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 009-restart-web-for-new-routes (2026-10-16T11:06:53.4238353+05:30; exit 0)</summary>
+
+```powershell
+docker compose logs --tail 50 web
+docker compose restart web
+docker compose exec -T web python manage.py check
+```
+
+```text
+web-1  | [16/Oct/2026 10:31:55] "GET /api/vayusim/grid/64.json HTTP/1.1" 200 6345
+web-1  | [16/Oct/2026 10:33:01] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | /app/apps/vayusim/service.py changed, reloading.
+web-1  | /app/apps/vayusim/service.py changed, reloading.
+web-1  | Watching for file changes with StatReloader
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+web-1  | System check identified no issues (0 silenced).
+web-1  | October 16, 2026 - 11:01:00
+web-1  | Django version 5.2.18, using settings 'enviroinsights.settings.dev'
+web-1  | Starting development server at http://0.0.0.0:8000/
+web-1  | Quit the server with CONTROL-C.
+web-1  |
+web-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+web-1  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+web-1  | /app/apps/vayusim/views.py changed, reloading.
+web-1  | /app/apps/vayusim/views.py changed, reloading.
+web-1  | Watching for file changes with StatReloader
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+web-1  | System check identified no issues (0 silenced).
+web-1  | October 16, 2026 - 11:03:04
+web-1  | Django version 5.2.18, using settings 'enviroinsights.settings.dev'
+web-1  | Starting development server at http://0.0.0.0:8000/
+web-1  | Quit the server with CONTROL-C.
+web-1  |
+web-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+web-1  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+web-1  | /app/apps/vayusim/urls.py changed, reloading.
+web-1  | /app/apps/vayusim/urls.py changed, reloading.
+web-1  | Watching for file changes with StatReloader
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+web-1  | System check identified no issues (0 silenced).
+web-1  | October 16, 2026 - 11:06:13
+web-1  | Django version 5.2.18, using settings 'enviroinsights.settings.dev'
+web-1  | Starting development server at http://0.0.0.0:8000/
+web-1  | Quit the server with CONTROL-C.
+web-1  |
+web-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+web-1  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+web-1  | /app/apps/vayusim/presentation.py changed, reloading.
+web-1  | /app/apps/vayusim/presentation.py changed, reloading.
+web-1  | Watching for file changes with StatReloader
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+docker :  Container enviroinsights-india-web-1 Restarting
+At line:2 char:1
++ docker compose restart web
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( Container envi...b-1 Restarting :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+ Container enviroinsights-india-web-1 Started
+System check identified no issues (0 silenced).
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 010-browser-desktop-phone (2026-10-16T11:07:44.5467888+05:30; exit 1)</summary>
+
+```powershell
+node .tools/phase6b/browser.js
+```
+
+```text
+node : page.goto: net::ERR_EMPTY_RESPONSE at http://127.0.0.1:8000/vayusim/?run=62
+At line:1 char:1
++ node .tools/phase6b/browser.js
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (page.goto: net:...vayusim/?run=62:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Call log:
+[2m  - navigating to "http://127.0.0.1:8000/vayusim/?run=62", waiting until "domcontentloaded"[22m
+
+    at D:\EnviroInsights-India\.tools\phase6b\browser.js:16:35 {
+  log: [
+    '  - navigating to "http://127.0.0.1:8000/vayusim/?run=62", waiting until "domcontentloaded"'
+  ],
+  name: 'Error'
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 011-documentation-and-format-review (2026-10-16T11:08:01.4509471+05:30; exit 0)</summary>
+
+````powershell
+Get-Content apps/vayusim/static/vayusim/cinematic.js -Encoding UTF8 | Select-Object -Skip 380 -First 100
+Get-Content docs/ARCHITECTURE.md -Encoding UTF8 | Select-Object -Last 70
+Get-Content README.md -Encoding UTF8 | Select-Object -Last 70
+Get-Content docs/DATA_MODEL.md -Encoding UTF8 | Select-Object -Last 35
+rg --files docs | Select-String 'API|api'
+git diff --stat
+docker compose exec -T web ruff format --check apps/vayusim tests/test_vayusim_frontend.py
+````
+
+````text
+    $("peak").replaceChildren(document.createTextNode(format(s.peak_ugm3)));
+    const small = document.createElement("small");
+    small.textContent = "µg/m³ peak increment";
+    $("peak").append(small);
+    $("summary-stats").replaceChildren();
+    row(
+      $("summary-stats"),
+      "Distance to peak",
+      format(s.distance_to_peak_m, 0) + " m",
+    );
+    row(
+      $("summary-stats"),
+      "Peak lon, lat",
+      s.peak_location.map((v) => format(v, 5)).join(", "),
+    );
+    row(
+      $("summary-stats"),
+      "Stability / run",
+      run.stability_class + " / " + run.run_id,
+    );
+    row(
+      $("summary-stats"),
+      "IST hour",
+      s.weather_provenance.ist_hour_start || input?.datetime || "Unavailable",
+    );
+    $("population").replaceChildren();
+    if (s.exposure.available) {
+      for (const [threshold, value] of Object.entries(
+        s.exposure.population_above,
+      ))
+        row(
+          $("population"),
+          "> " + format(threshold) + " µg/m³",
+          format(value, 0) + " people",
+        );
+      $("support").textContent =
+        "Known population support: " +
+        format(100 * s.exposure.population_support_fraction, 1) +
+        "% of grid area. Modelled footprint only; unknown cells excluded.";
+    } else {
+      $("population").textContent = "Unavailable";
+      $("support").textContent = s.exposure.reason;
+    }
+    $("flags").replaceChildren();
+    for (const flag of run.flags) {
+      const li = document.createElement("li");
+      li.textContent = flag;
+      $("flags").append(li);
+    }
+    if (!run.flags.length) $("flags").textContent = "No flags returned.";
+    $("source-notes").textContent = run.interpretation.sources
+      .map((s) => s.label + ": " + s.assumptions)
+      .join(" · ");
+    $("all-limits").textContent = run.limitations.join(" · ");
+    const resolution = Math.hypot(s.grid.affine[0], s.grid.affine[3]);
+    $("grid-detail").textContent =
+      format((s.grid.shape[1] * resolution) / 1000) +
+      " km field · " +
+      format(resolution, 0) +
+      " m cells · receptor " +
+      format(s.grid.receptor_height_m) +
+      " m";
+    $("wind-detail").textContent =
+      "Wind FROM " +
+      format(s.weather.wind_direction_deg, 0) +
+      "° · " +
+      format(s.weather.wind_speed_ms) +
+      " m/s · " +
+      s.weather_provenance.mode +
+      " weather";
+    $("export-link").href = run.export_url;
+    $("export-link").removeAttribute("aria-disabled");
+    $("share-link").href = "/vayusim/?scenario=" + run.scenario_slug;
+    $("grid-link").href = run.grid_header_url;
+  }
+  async function stations(run) {
+    const serial = ++lastStations;
+    try {
+      const input = savedInputs;
+      const data = await api(
+        "/api/vayusim/stations/?" +
+          new URLSearchParams({
+            city: input.city,
+            datetime:
+              run.summary.weather_provenance.ist_hour_start || input.datetime,
+          }),
+      );
+      if (serial !== lastStations) return;
+      $("stations").replaceChildren();
+      for (const station of data.stations)
+        row(
+          $("stations"),
+          station.name + " · " + format(station.distance_km, 1) + " km",
+          format(station.value_ugm3) + " µg/m³",
+        );
+      if (!data.stations.length)
+        $("stations").textContent =
+          "No same-hour nearby quality-OK readings available.";
+      if (map?.getSource("stations"))
+        map
+linear source superposition. Geographic adapters use pyproj AEQD; the receptor
+grid's affine rotates with transport direction (meteorological wind FROM+180°).
+Area midpoint lattices and line midpoint segments conserve entered total g/s.
+Their near-field discretisation and the100m–10km coefficient range are flagged.
+
+DRF strictly validates finite values, geometry, city, source type and grid size.
+The adapter reads warehouse weather at the IST hour midpoint's UTC instant;
+missing BLH uses the cited, explicitly illustrative CDM2 class relationship.
+WorldPop counts become geodesic-area densities before area-weighted warping;
+a separately warped support mask prevents inflating partial nodata cells.
+Exposure includes known population only. Nearby quality-OK, spatially eligible
+CPCB/OpenCity CPCB readings are labelled measured totals and never added.
+
+Scenario inputs, actual weather values/provenance, population asset hash and
+engine version form a canonical SHA256. Transaction advisory locks plus a unique
+hash prevent duplicate runs. Atomic float32 files live under
+`data/results/vayusim/<run_id>/`. Day mode stores24 summaries, marks missing
+hours unavailable, and defers grid/contour files until requested. A second
+advisory lock serialises concurrent lazy materialisation.
+Materialisation reads the run's hashed input/weather snapshot, so later edits
+to its Scenario cannot change the historical field. An unmaterialised old-engine
+run cannot be silently rebuilt by a different engine version.
+
+Run/header responses carry limitations, units, affine, WKT CRS, shape, byte order
+and image corners. Threshold masks become WGS84 GeoJSON polygons. The PNG uses
+CPCB PM2.5 category colours only; hourly increments are not actual AQI.
+Scenario explanation validates the stored run and supplies its values as dataset
+evidence alongside library passages. Client parameters remain unverified.
+
+Run responses also derive `interpretation` from the run's retained input snapshot.
+Explicitly declared hypothetical examples are labelled `hypothetical 1 g/s source`;
+an emission rate of 1 alone does not establish that label. Disclosures explain
+linear Q scaling at fixed transport/release geometry and limit population values
+to the grid footprint and known raster support. This presentation metadata does
+not rewrite historical summaries or change numerical input hashes/engine version.
+The stable `highway` preset ID is displayed as road dust resuspension, citing
+AP-42 January 2011 §13.2.1.1 p.13.2.1-1 and §13.2.1.3 p.13.2.1-4. No exhaust,
+brake/tire or universal PM2.5 emission factor is supplied.
+
+The Phase 6A fix separates passing formula checks (Table 2.3 arithmetic and the
+Gaussian equation with published inputs) from Briggs-versus-Martin scheme
+comparisons using Cimbala PDF p.3. Differences of 14.13% sigma-y, 15.60% sigma-z
+and 10.66% concentration exceed unchanged 5%/10% tolerances; they are differences
+between schemes, not validation errors. Brune's rural-B table gives 152.554014 m
+at 1 km, matching code; the adjacent paragraph's 210 m reference is excluded.
+The source is unpaginated, and Turner physical pages remain unverified.
+No physical coefficients or city example outputs changed. See the revised
+tables in [PHASE6A](results/PHASE6A.md#fix-pass).
+
+Django templates serve the overview, forecast/research selectors, source library,
+assistant and simulator with shared responsive styling. MapLibre5.24.0 is vendored
+with its BSD licence; the map requests standard OSM tiles with visible attribution
+and normal browser caching, without tile prefetch or offline downloads. Scientific
+figures and saved results retain their original timestamps and caveats. Markdown
+answer tables render with raw HTML disabled and unsafe URL schemes rejected.
+
+
+The independent-reference command `verify_vayusim_references` reads a separate,
+manually transcribed fixture with source/page, literal values and dates. It
+compares unchanged physics against DOE's printed rural-D sigmas at 1000 m
+(p.213; errors 0.030135%/0.124886%, within 5%). This establishes that numeric
+case only, not field validity or a full plume-rise pipeline. Martin and Turner
+differences, physical-page uncertainty and excluded counts remain explicit.
+ISC3 p.1-19 equation-transcription tests cover all urban classes, including C/F;
+equation coverage does not clear independent numeric readiness. Urban C
+(Delhi/Mumbai) and F (Hyderabad) remain not independently validated. The future
+Phase6B frontend must display **unvalidated branch** for those scenarios as a
+condition of **Ready for 6B with caveats**. No Phase6B frontend changes were made
+in this task, and all example numbers, engine coefficients/presets and frozen
+evaluation sets are unchanged. See [Independent validation](results/PHASE6A.md#independent-validation).
+```
+
+Public bodies are hash-addressed under `data/raw/rag/`; Git retains only the
+manifest and source specifications. Download failures are explicit, not empty
+documents. The BGE encoder/reranker weights and deterministic computation caches
+persist on D: under `data/models/`. The internal `rag-models` service serializes
+CPU embedding inference; a separate single-slot `rag-reranker` retains the
+pinned cross-encoder. Parsing and completed embedding
+batches survive an interrupted command. Unchanged content with the same parser
+version is a no-op; an incompatible parser fix requires an explicitly versioned
+index rebuild. After upgrading ingestion code, restart the Celery worker before
+submitting new tasks so it imports the current parser.
+
+Upload and tag a PDF at `/admin/rag/document/add/` to queue ingestion after the
+database commit. Existing PDF bodies cannot be replaced; a changed file is a new
+SHA256 revision. HTML and Markdown have actual section citations and logical
+text pages; PDF citations use physical file pages, not printed-page labels.
+
+`LLM_PROVIDER=extractive` is the default even when provider keys are present.
+Explicit `LLM_PROVIDER=auto` opts into configured Anthropic, OpenAI, enabled Ollama,
+then extractive. Optional remote providers require both their API key and model
+name in `.env`; see `.env.example`. Extractive works without keys.
+
+For experimental local generation, first check container memory against actual
+model bytes plus 3 GiB headroom. This resource check does not certify answer
+quality. Set these opt-in values in `.env`, then run `.\scripts\dev.ps1 up`:
+
+```dotenv
+COMPOSE_PROFILES=llm
+OLLAMA_ENABLED=true
+OLLAMA_MODEL=qwen2.5:3b-instruct
+LLM_PROVIDER=ollama
+```
+
+To restore the default, stop Ollama with `docker compose --profile llm stop ollama`,
+clear `COMPOSE_PROFILES`, set `OLLAMA_ENABLED=false` and `LLM_PROVIDER=extractive`,
+then run `.\scripts\dev.ps1 up` to recreate the application containers.
+Installed RAM is 16 GiB, with `[wsl2] memory=9GB` in `%UserProfile%\.wslconfig`
+(60% of 16 GiB, rounded down). The current-settings backup is
+`C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`. A pre-change original
+could not be recovered; the earlier report's claim that none existed cannot be
+independently reconstructed. See [the fix pass](docs/results/PHASE6A.md#fix-pass).
+
+API examples:
+
+```json
+POST /api/rag/ask/
+{"question":"What was the annual mean PM2.5 in Delhi in 2025?"}
+
+POST /api/rag/explain/
+{"context_type":"forecast","payload":{"city":"delhi"}}
+
+POST /api/rag/explain/
+{"context_type":"scenario","payload":{"question":"What assumptions does AERMOD use?","scenario_id":"example"}}
+```
+
+`ask` accepts optional filters `category`, `year_min`, `year_max`, `city` (seeded
+slug). `GET /api/rag/documents/` lists sources and ingestion status;
+`GET /api/rag/documents/<id>/page/<n>/` exposes stored page text and provenance.
+Explain payloads select evidence; supplied scenario/chart values are not verified
+measurements or simulation results. Phase 6 must validate its actual scenario
+outputs before using them as numerical evidence. Phase 6A now supplies the
+read-only `vayusim_run(run_id)` tool for actual stored simulation results.
+
+The checked-in `data/eval/rag_eval.jsonl` has frozen real-source and database
+expectations. `evaluate_rag` resumes saved question/provider results under
+`data/results/rag-phase5/` and logs them to MLflow's `rag` experiment. Do not
+overwrite frozen questions in response to poor scores. `build_rag_eval` refuses
+to overwrite an existing evaluation file; its input is the authored question
+catalogue, with exact source excerpts verified against real stored chunks.
+`ForecastModelVersion.interval_policy` records per-level interval choices,
+empirical coverage/gate, original evaluation run/window, adoption time and
+explicit post-evaluation selection. Point model versions are not refitted.
+Changed bounds retain their original values in Forecast feature provenance.
+
+Dataset citations for `vayusim_run` reference the actual ScenarioRun, input hash,
+engine version and read-only run endpoint. They do not reuse an AnalysisRun ID
+for a simulator run. The immutable Phase5 evaluation remains unchanged; the five
+scenario questions live in separate `data/eval/vayusim_eval.jsonl`.
+
+Phase 6A audit response metadata (`interpretation`) is derived from the retained
+ScenarioRun input snapshot, never an edited Scenario. It labels explicitly
+hypothetical unit-release examples, explains fixed-condition linear Q scaling,
+and limits population to the modelled footprint and known raster support.
+It does not change stored inputs, numerical summaries, hashes or engine versions.
+The `highway` preset ID is retained for compatibility but means road dust
+resuspension only; its required total segment PM2.5 emission rate stays null.
+No exhaust factor is stored or inferred. The RAG feature is described as
+extractive retrieval with verified citations; a stored provider name and valid
+citations do not constitute answer-quality certification.
+Memory eligibility is likewise a timestamped resource measurement, separate from
+Query/provider identity and answer quality. The final audit gate failed for the
+installed 3B model. The fix pass defaults to `LLM_PROVIDER=extractive`, disables
+Ollama and leaves its Compose `llm` profile opt-in. Existing Query provider/model
+identities and evaluation artifacts are retained; no question, relevance label,
+prompt or generation parameter was tuned.
+
+Textbook references in `tests/fixtures/vayusim-textbook-audit.json` now distinguish
+formula checks, scheme comparisons and unverified physical pages. Rural-B
+Table 2.3 arithmetic yields sigma-y 152.554014 m at 1000 m; the inconsistent 210 m
+paragraph reference is retained as an excluded diagnostic. Briggs-versus-Martin
+differences (Cimbala PDF p.3: 14.13%/15.60%/10.66%) are scheme differences beyond
+5%/10% tolerances, not validation errors. Turner physical pages are unverified.
+This correction changes no ScenarioRun input hashes, engine version, stored
+numerical summaries or frozen Phase 3A.2/4/5 evaluation records.
+ apps/dashboard/templates/dashboard/base.html |    2 +-
+ apps/vayusim/api.py                          |   35 +-
+ apps/vayusim/service.py                      |   10 +
+ apps/vayusim/urls.py                         |   14 +-
+ apps/vayusim/views.py                        |   42 +-
+ docs/VALIDATION.md                           | 6033 ++++++++++++++++++++++++++
+ enviroinsights/urls.py                       |    1 +
+ 7 files changed, 6133 insertions(+), 4 deletions(-)
+26 files already formatted
+
+````
+
+</details>
+
+<details>
+<summary>Phase 6B: 012-connection-diagnosis (2026-10-16T11:08:11.2659296+05:30; exit 0)</summary>
+
+```powershell
+docker compose ps web
+docker compose logs --tail 30 web
+docker compose exec -T web python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8000/api/health/',timeout=10).read().decode())"
+Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | Format-Table LocalAddress,LocalPort,State,OwningProcess
+python -c "import urllib.request; op=urllib.request.build_opener(urllib.request.ProxyHandler({})); r=op.open('http://127.0.0.1:8000/vayusim/?run=62',timeout=15); print(r.status,len(r.read()))"
+```
+
+```text
+NAME                         IMAGE                      COMMAND                  SERVICE   CREATED        STATUS          PORTS
+enviroinsights-india-web-1   enviroinsights-india:dev   "/bin/sh /app/docker…"   web       12 hours ago   Up 50 seconds   127.0.0.1:8000->8000/tcp
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+web-1  | System check identified no issues (0 silenced).
+web-1  | October 16, 2026 - 11:06:13
+web-1  | Django version 5.2.18, using settings 'enviroinsights.settings.dev'
+web-1  | Starting development server at http://0.0.0.0:8000/
+web-1  | Quit the server with CONTROL-C.
+web-1  |
+web-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+web-1  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+web-1  | /app/apps/vayusim/presentation.py changed, reloading.
+web-1  | /app/apps/vayusim/presentation.py changed, reloading.
+web-1  | Watching for file changes with StatReloader
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+web-1  | Database is ready
+web-1  | Watching for file changes with StatReloader
+web-1  | Watching for file changes with StatReloader
+web-1  | Performing system checks...
+web-1  |
+web-1  | System check identified no issues (0 silenced).
+web-1  | October 16, 2026 - 11:08:04
+web-1  | Django version 5.2.18, using settings 'enviroinsights.settings.dev'
+web-1  | Starting development server at http://0.0.0.0:8000/
+web-1  | Quit the server with CONTROL-C.
+web-1  |
+web-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+web-1  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+{"ok":true,"checks":{"database":{"ok":true},"extensions":{"postgis":{"ok":true,"version":"3.6.4"},"timescaledb":{"ok":true,"version":"2.30.2"},"vector":{"ok":true,"version":"0.8.7"}},"redis":{"ok":true},"celery":{"ok":true}}}
+
+LocalAddress LocalPort    State OwningProcess
+------------ ---------    ----- -------------
+127.0.0.1         8000 TimeWait             0
+127.0.0.1         8000 TimeWait             0
+127.0.0.1         8000 TimeWait             0
+127.0.0.1         8000   Listen         29584
+
+
+200 28982
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 013-browser-desktop-phone-rerun (2026-10-16T11:08:24.1626772+05:30; exit 1)</summary>
+
+```powershell
+node .tools/phase6b/browser.js
+```
+
+```text
+node : apiRequestContext.get: Invalid URL
+At line:1 char:1
++ node .tools/phase6b/browser.js
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (apiRequestContext.get: Invalid URL:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+    at D:\EnviroInsights-India\.tools\phase6b\browser.js:27:43 {
+  log: [],
+  name: 'TypeError',
+  code: 'ERR_INVALID_URL'
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 014-browser-corrected-export-url (2026-10-16T11:08:36.0115355+05:30; exit 0)</summary>
+
+```powershell
+node .tools/phase6b/browser.js
+```
+
+```text
+{"city":"delhi","width":1440,"http_status":200,"webgl":false,"load_seconds":1.255,"status":"Stored run 62 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":[],"js_errors":[],"shared_url":"/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e","export_status":200,"frame":{"runId":62,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[]}}
+{"city":"mumbai","width":1440,"http_status":200,"webgl":false,"load_seconds":0.85,"status":"Stored run 63 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":[],"js_errors":[],"shared_url":"/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a","export_status":200,"frame":{"runId":63,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[]}}
+{"city":"hyderabad","width":1440,"http_status":200,"webgl":false,"load_seconds":0.876,"status":"Stored run 64 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":[],"js_errors":[],"shared_url":"/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296","export_status":200,"frame":{"runId":64,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[]}}
+{"city":"delhi","width":390,"http_status":200,"webgl":false,"load_seconds":0.755,"status":"Stored run 62 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":[],"js_errors":[],"shared_url":"/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e","export_status":200,"frame":{"runId":62,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[]}}
+{"city":"mumbai","width":390,"http_status":200,"webgl":false,"load_seconds":0.825,"status":"Stored run 63 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":[],"js_errors":[],"shared_url":"/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a","export_status":200,"frame":{"runId":63,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[]}}
+{"city":"hyderabad","width":390,"http_status":200,"webgl":false,"load_seconds":0.814,"status":"Stored run 64 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":[],"js_errors":[],"shared_url":"/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296","export_status":200,"frame":{"runId":64,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[]}}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 015-browser-maplibre-compatibility (2026-10-16T11:09:08.6521835+05:30; exit 0)</summary>
+
+```powershell
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write apps/vayusim/static/vayusim/cinematic.js
+node .tools/phase6b/browser.js
+```
+
+```text
+apps/vayusim/static/vayusim/cinematic.js 201ms
+{"city":"delhi","width":1440,"http_status":200,"webgl":true,"load_seconds":2.143,"status":"Stored run 62 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e","export_status":200,"frame":{"runId":62,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.3999999985098839,0.6999999955296516,0.10000000149011612],"drawnParticles":3}}
+{"city":"mumbai","width":1440,"http_status":200,"webgl":true,"load_seconds":1.318,"status":"Stored run 63 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a","export_status":200,"frame":{"runId":63,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[1.4000000059604645,0.3999999985098839,0.10000000149011612],"drawnParticles":3}}
+{"city":"hyderabad","width":1440,"http_status":200,"webgl":true,"load_seconds":1.28,"status":"Stored run 64 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296","export_status":200,"frame":{"runId":64,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.8000000044703484,1,0.09999999403953552],"drawnParticles":34}}
+{"city":"delhi","width":390,"http_status":200,"webgl":true,"load_seconds":1.219,"status":"Stored run 62 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e","export_status":200,"frame":{"runId":62,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.7000000029802322,0.7999999970197678,0.7000000029802322],"drawnParticles":3}}
+{"city":"mumbai","width":390,"http_status":200,"webgl":true,"load_seconds":1.052,"status":"Stored run 63 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a","export_status":200,"frame":{"runId":63,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.6000000014901161,0.20000000298023224,1],"drawnParticles":3}}
+{"city":"hyderabad","width":390,"http_status":200,"webgl":true,"load_seconds":1.294,"status":"Stored run 64 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296","export_status":200,"frame":{"runId":64,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.6000000014901161,0.19999999552965164,0.09999999403953552],"drawnParticles":34}}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 016-interactive-browser-verification (2026-10-16T11:10:32.1794408+05:30; exit 1)</summary>
+
+```powershell
+docker compose exec -T web ruff format apps/vayusim/views.py
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write apps/vayusim/static/vayusim/cinematic.js
+node .tools/phase6b/interactions.js
+```
+
+```text
+1 file reformatted
+apps/vayusim/static/vayusim/cinematic.js 175ms
+node : page.goto: net::ERR_EMPTY_RESPONSE at http://127.0.0.1:8000/vayusim/?run=62
+At line:3 char:1
++ node .tools/phase6b/interactions.js
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (page.goto: net:...vayusim/?run=62:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Call log:
+[2m  - navigating to "http://127.0.0.1:8000/vayusim/?run=62", waiting until "load"[22m
+
+    at D:\EnviroInsights-India\.tools\phase6b\interactions.js:12:14 {
+  log: [
+    '  - navigating to "http://127.0.0.1:8000/vayusim/?run=62", waiting until "load"'
+  ],
+  name: 'Error'
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 018-lint-deploy-schema (2026-10-16T11:11:27.2891598+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web ruff check .
+docker compose exec -T web ruff format --check .
+docker compose exec -T web python manage.py check --deploy --settings=enviroinsights.settings.prod
+docker compose exec -T web python manage.py spectacular --validate --file /tmp/phase6b-openapi.yml
+```
+
+```text
+All checks passed!
+269 files already formatted
+System check identified no issues (0 silenced).
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 019-interaction-request-trace (2026-10-16T11:11:50.6873758+05:30; exit 0)</summary>
+
+```powershell
+docker compose logs --tail 25 web
+Get-Content .tools/phase6b/interactions.json -ErrorAction SilentlyContinue
+```
+
+```text
+web-1  | System check identified no issues (0 silenced).
+web-1  | October 16, 2026 - 11:10:41
+web-1  | Django version 5.2.18, using settings 'enviroinsights.settings.dev'
+web-1  | Starting development server at http://0.0.0.0:8000/
+web-1  | Quit the server with CONTROL-C.
+web-1  |
+web-1  | WARNING: This is a development server. Do not use it in a production setting. Use a production WSGI or ASGI server instead.
+web-1  | For more information on production servers see: https://docs.djangoproject.com/en/5.2/howto/deployment/
+web-1  | [16/Oct/2026 11:10:59] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:02] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:05] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:08] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:11] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:14] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:17] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:20] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:23] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:27] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:29] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:32] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:36] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:39] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:42] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:45] "GET /api/health/ HTTP/1.1" 200 225
+web-1  | [16/Oct/2026 11:11:48] "GET /api/health/ HTTP/1.1" 200 225
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 017-interactions-after-reloader-ready (2026-10-16T11:10:57.2682775+05:30; exit -1)</summary>
+
+```powershell
+node .tools/phase6b/interactions.js
+```
+
+```text
+(no output)
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 020-interactions-bounded-page-readiness (2026-10-16T11:12:15.4952651+05:30; exit 1)</summary>
+
+```powershell
+Get-CimInstance Win32_Process -Filter "Name='node.exe'" | Where-Object { $_.CommandLine -like '*.tools/phase6b/interactions.js*' } | ForEach-Object { Write-Output "Stopping stale readiness probe PID $($_.ProcessId)"; Stop-Process -Id $_.ProcessId }
+node .tools/phase6b/interactions.js
+```
+
+```text
+Stopping stale readiness probe PID 32624
+node : page.waitForFunction: Timeout 30000ms exceeded.
+At line:2 char:1
++ node .tools/phase6b/interactions.js
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (page.waitForFun...000ms exceeded.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+    at D:\EnviroInsights-India\.tools\phase6b\interactions.js:15:59 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 022-progress-evidence (2026-10-16T11:13:00.2459321+05:30; exit 0)</summary>
+
+```powershell
+docker compose logs --tail 12 web
+Get-Content data/results/phase6b/interactions.json -Raw -Encoding UTF8
+```
+
+```text
+web-1  | [16/Oct/2026 11:12:18] "GET /static/vayusim/cinematic.js HTTP/1.1" 200 33653
+web-1  | [16/Oct/2026 11:12:18] "GET /static/dashboard/vendor/maplibre-gl.css HTTP/1.1" 200 70024
+web-1  | [16/Oct/2026 11:12:18] "GET /static/dashboard/vendor/maplibre-gl.js HTTP/1.1" 200 1056837
+web-1  | [16/Oct/2026 11:12:18] "GET /api/vayusim/presets/ HTTP/1.1" 200 4255
+web-1  | Not Found: /favicon.ico
+web-1  | Not Found: /favicon.ico
+web-1  | [16/Oct/2026 11:12:19] "GET /favicon.ico HTTP/1.1" 404 7884
+web-1  | [16/Oct/2026 11:12:19] "GET /api/vayusim/grid/62.json HTTP/1.1" 200 5317
+web-1  | [16/Oct/2026 11:12:19] "GET /api/vayusim/grid/62.bin HTTP/1.1" 200 160000
+web-1  | [16/Oct/2026 11:12:19] "GET /api/vayusim/stations/?city=delhi&datetime=2025-01-15T12%3A00%3A00%2B05%3A30 HTTP/1.1" 200 5195
+web-1  | [16/Oct/2026 11:12:19] "GET /api/vayusim/grid/62.png HTTP/1.1" 200 660
+web-1  | [16/Oct/2026 11:12:20] "POST /api/vayusim/run/ HTTP/1.1" 200 11127
+{}
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 023-interactions-weather-key-order-fix (2026-10-16T11:13:20.8766427+05:30; exit 1)</summary>
+
+```powershell
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write apps/vayusim/static/vayusim/cinematic.js
+node .tools/phase6b/interactions.js
+```
+
+```text
+apps/vayusim/static/vayusim/cinematic.js 166ms
+Initial stored run and map loaded
+Stored comparison passed {"source_run":62,"source_removed_run":162,"difference_label":"modelled increment from these sources only · stored runs 62 and 162 · source minus source-removed grid"}
+Stored vertical grid passed
+All 24 day fields cached
+node : AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+At line:2 char:1
++ node .tools/phase6b/interactions.js
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (AssertionError ... a falsy value::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+
+  assert(await fallback.locator('#fallback-image').evaluate(i=>i.complete&&i.naturalWidth>0))
+
+    at D:\EnviroInsights-India\.tools\phase6b\interactions.js:62:3 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 024-export-provenance-and-interaction-metrics (2026-10-16T11:14:18.7287359+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web ruff check apps/vayusim tests/test_vayusim_frontend.py --fix
+docker compose exec -T web ruff format apps/vayusim/presentation.py tests/test_vayusim_frontend.py
+Get-Content data/results/phase6b/interactions.json -Raw -Encoding UTF8
+```
+
+```text
+E501 Line too long (103 > 100)
+   --> apps/vayusim/presentation.py:107:101
+    |
+105 |         [
+106 |             "Retained hour: " + run.inputs["datetime"] + " | engine: " + run.engine_version,
+107 |             "Grid peak lon, lat: " + ", ".join(format(v, ".6f") for v in run.summary["peak_location"]),
+    |                                                                                                     ^^^
+108 |             "Wind FROM: " + format(run.summary["weather"]["wind_direction_deg"], ".6g")
+109 |             + " degrees | wind at 10 m: " + format(run.summary["weather"]["wind_speed_ms"], ".6g") + " m/s",
+    |
+
+E501 Line too long (108 > 100)
+   --> apps/vayusim/presentation.py:109:101
+    |
+107 |             "Grid peak lon, lat: " + ", ".join(format(v, ".6f") for v in run.summary["peak_location"]),
+108 |             "Wind FROM: " + format(run.summary["weather"]["wind_direction_deg"], ".6g")
+109 |             + " degrees | wind at 10 m: " + format(run.summary["weather"]["wind_speed_ms"], ".6g") + " m/s",
+    |                                                                                                     ^^^^^^^^
+110 |             "Source rates (g/s): " + ", ".join(format(s["emission_gs"], ".6g") for s in run.inputs["sources"]),
+111 |             "Primary PM2.5 only; flat terrain; steady state within the hour.",
+    |
+
+E501 Line too long (111 > 100)
+   --> apps/vayusim/presentation.py:110:101
+    |
+108 |             "Wind FROM: " + format(run.summary["weather"]["wind_direction_deg"], ".6g")
+109 |             + " degrees | wind at 10 m: " + format(run.summary["weather"]["wind_speed_ms"], ".6g") + " m/s",
+110 |             "Source rates (g/s): " + ", ".join(format(s["emission_gs"], ".6g") for s in run.inputs["sources"]),
+    |                                                                                                     ^^^^^^^^^^^
+111 |             "Primary PM2.5 only; flat terrain; steady state within the hour.",
+112 |             "Educational estimate, not a regulatory assessment. Hourly increment is not AQI.",
+    |
+
+Found 3 errors.
+1 file reformatted, 1 file left unchanged
+{
+  "comparison": {
+    "source_run": 62,
+    "source_removed_run": 162,
+    "difference_label": "modelled increment from these sources only · stored runs 62 and 162 · source minus source-removed grid"
+  },
+  "section": "unvalidated branch · Vertical cross-section from stored grid data only · origin 77.209, 28.6139 · 61 heights × 101 distances. All retained sources contribute; transect starts at first source.",
+  "keyboard_source": true,
+  "day": {
+    "prefetch_seconds": 8.145,
+    "available": 24,
+    "cached_scrub_grid_requests": 0,
+    "frame_selection_ms": [
+      117,
+      61,
+      47,
+      50,
+      53,
+      43,
+      45,
+      44,
+      56,
+      50,
+      42,
+      42,
+      45,
+      47,
+      39,
+      43,
+      45,
+      53,
+      38,
+      43,
+      67,
+      59,
+      42,
+      43
+    ],
+    "keyboard_timeline": true,
+    "playback": true,
+    "renderer": {
+      "runId": 165,
+      "validationStatus": "formula_check_only",
+      "cacheSize": 25,
+      "renderTimes": [
+        1,
+        0.7000000029802322,
+        0.5,
+        0.19999999552965164,
+        0.7000000029802322,
+        2,
+        0,
+        1.5999999940395355,
+        1.6000000014901161,
+        3.399999998509884,
+        1.8000000044703484,
+        2.3000000044703484,
+        2.5,
+        2.2999999970197678,
+        3.2000000029802322,
+        2.2000000029802322,
+        3.1999999955296516,
+        1.3000000044703484,
+        2.2999999970197678,
+        2.5,
+        1.9000000059604645,
+        1.6000000014901161,
+        3.1999999955296516,
+        4.100000001490116,
+        1.5999999940395355,
+        2.2000000029802322,
+        3.399999998509884,
+        6,
+        3.600000001490116,
+        1.3999999985098839,
+        1.2999999970197678,
+        1.5,
+        2.1999999955296516,
+        1.2999999970197678,
+        1.7000000029802322,
+        1.8999999985098839,
+        1.6000000014901161,
+        1.7000000029802322,
+        3.100000001490116,
+        2.100000001490116,
+        4.100000001490116,
+        2.899999998509884,
+        2.2000000029802322,
+        1.3999999985098839,
+        1.6999999955296516,
+        1.3000000044703484,
+        1.5,
+        1.6000000014901161,
+        1.8999999985098839,
+        3.2000000029802322,
+        1,
+        1.7999999970197678,
+        1.8999999985098839,
+        2.7000000029802322,
+        1.5,
+        5.5,
+        3.7999999970197678,
+        1.1999999955296516,
+        1.5,
+        3.9000000059604645,
+        1.6999999955296516,
+        1.1000000014901161,
+        1.2000000029802322,
+        2.7999999970197678,
+        3.600000001490116,
+        1.5,
+        3.2999999970197678,
+        3.899999998509884,
+        4.299999997019768,
+        4.300000004470348,
+        2.600000001490116,
+        2,
+        1.3999999985098839,
+        1.2000000029802322,
+        1.1000000014901161,
+        1.7999999970197678,
+        3.2999999970197678,
+        1,
+        2.1999999955296516,
+        1.6999999955296516,
+        1.3000000044703484,
+        4.299999997019768,
+        4.200000002980232,
+        3.899999998509884,
+        1.3999999985098839,
+        1.6000000014901161,
+        1.5,
+        3.600000001490116,
+        1.3000000044703484,
+        1.2000000029802322,
+        4.700000002980232,
+        1.7999999970197678,
+        2.399999998509884,
+        1.7999999970197678,
+        3,
+        5,
+        0.10000000149011612,
+        4.600000001490116,
+        3.6999999955296516,
+        0,
+        2.4000000059604645,
+        0,
+        2.1999999955296516,
+        1.2000000029802322,
+        0.29999999701976776,
+        2.7999999970197678,
+        2.7000000029802322,
+        0.6999999955296516,
+        4.199999995529652,
+        3.5,
+        0.5,
+        2.3000000044703484,
+        2.4000000059604645,
+        0.5,
+        2.2999999970197678,
+        2.100000001490116,
+        0.20000000298023224,
+        2.899999998509884,
+        1.7000000029802322,
+        0.20000000298023224,
+        2.4000000059604645,
+        1.5,
+        0.5,
+        2.7000000029802322,
+        2.9000000059604645,
+        0.30000000447034836,
+        4.300000004470348,
+        0.7000000029802322,
+        1.4000000059604645,
+        2.7000000029802322,
+        0.3999999985098839,
+        2.899999998509884,
+        2.100000001490116,
+        2.600000001490116,
+        0.10000000149011612,
+        0,
+        0,
+        0,
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612,
+        0,
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612,
+        0.09999999403953552,
+        0.10000000149011612,
+        0.10000000149011612,
+        0,
+        0,
+        0.10000000149011612,
+        0,
+        2.899999998509884,
+        0.10000000149011612
+      ],
+      "drawnParticles": 0
+    }
+  },
+  "light_mode": true,
+  "shared": [
+    {
+      "run_id": 62,
+      "label": "unvalidated branch"
+    },
+    {
+      "run_id": 63,
+      "label": "unvalidated branch"
+    },
+    {
+      "run_id": 64,
+      "label": "unvalidated branch"
+    }
+  ]
+}
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 021-full-suite (2026-10-16T11:12:33.3216298+05:30; exit 0)</summary>
+
+```powershell
+.\scripts\dev.ps1 test
+```
+
+```text
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 270 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  2%]
+tests/test_api.py ...                                                    [  3%]
+tests/test_database.py ......                                            [  5%]
+tests/test_deweather_diagnostics.py ...                                  [  6%]
+tests/test_forecast_operations.py ..                                     [  7%]
+tests/test_forecasting.py .                                              [  7%]
+tests/test_ingest_api.py ....                                            [  9%]
+tests/test_ingest_sources.py ...................                         [ 16%]
+tests/test_rag_audit.py .                                                [ 16%]
+tests/test_rag_pipeline.py .......................                       [ 25%]
+tests/test_research_api.py .                                             [ 25%]
+tests/test_research_clocks.py ..                                         [ 26%]
+tests/test_seed.py .                                                     [ 26%]
+tests/test_vayusim_api.py ..............                                 [ 31%]
+tests/test_vayusim_frontend.py ..........                                [ 35%]
+tests/test_vectors.py ..                                                 [ 36%]
+tests/test_database.py .                                                 [ 36%]
+tests/test_vayusim_api.py .                                              [ 37%]
+tests/test_worker.py .                                                   [ 37%]
+tests/test_analytics.py ...................                              [ 44%]
+tests/test_dashboard_evidence.py ..                                      [ 45%]
+tests/test_deweather_diagnostics.py ....                                 [ 46%]
+tests/test_forecast_intervals.py .                                       [ 47%]
+tests/test_forecast_operations.py ...                                    [ 48%]
+tests/test_forecasting.py .................                              [ 54%]
+tests/test_foundation.py .....................                           [ 62%]
+tests/test_ingest_sources.py ......                                      [ 64%]
+tests/test_ingest_units.py .....................                         [ 72%]
+tests/test_phase6a_audit.py .......                                      [ 74%]
+tests/test_phase6a_fix.py ...                                            [ 75%]
+tests/test_rag_pipeline.py ...........                                   [ 80%]
+tests/test_rag_resident_worker.py .                                      [ 80%]
+tests/test_research_methods.py .....                                     [ 82%]
+tests/test_vayusim_api.py ....                                           [ 83%]
+tests/test_vayusim_independent_references.py ........                    [ 86%]
+tests/test_vayusim_physics.py ....................................       [100%]
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 270 passed, 147 warnings in 88.42s (0:01:28) =================
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 025-interactions-complete (2026-10-16T11:14:56.8731739+05:30; exit 0)</summary>
+
+```powershell
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write apps/vayusim/static/vayusim/cinematic.js
+docker compose exec -T web ruff check .
+node .tools/phase6b/interactions.js
+```
+
+```text
+apps/vayusim/static/vayusim/cinematic.js 235ms
+All checks passed!
+Initial stored run and map loaded
+Stored comparison passed {"source_run":62,"source_removed_run":162,"difference_label":"modelled increment from these sources only · stored runs 62 and 162 · source minus source-removed grid"}
+Stored vertical grid passed
+All 24 day fields cached
+{
+  "comparison": {
+    "source_run": 62,
+    "source_removed_run": 162,
+    "difference_label": "modelled increment from these sources only · stored runs 62 and 162 · source minus source-removed grid"
+  },
+  "section": "unvalidated branch · Vertical cross-section from stored grid data only · origin 77.209, 28.6139 · 61 heights × 101 distances. All retained sources contribute; transect starts at first source.",
+  "keyboard_source": true,
+  "day": {
+    "prefetch_seconds": 2.905,
+    "available": 24,
+    "cached_scrub_grid_requests": 0,
+    "frame_selection_ms": [
+      64,
+      124,
+      50,
+      41,
+      39,
+      57,
+      49,
+      60,
+      49,
+      63,
+      55,
+      62,
+      47,
+      43,
+      49,
+      45,
+      53,
+      39,
+      62,
+      56,
+      41,
+      40,
+      50,
+      41
+    ],
+    "keyboard_timeline": true,
+    "playback": true,
+    "renderer": {
+      "runId": 165,
+      "validationStatus": "formula_check_only",
+      "cacheSize": 25,
+      "renderTimes": [
+        0.5,
+        0.30000000447034836,
+        0.29999999701976776,
+        0.19999999552965164,
+        0.29999999701976776,
+        1.4000000059604645,
+        0.10000000149011612,
+        2.100000001490116,
+        5.600000001490116,
+        3.100000001490116,
+        1.5,
+        3.5,
+        1.1000000014901161,
+        2,
+        2.100000001490116,
+        3.7000000029802322,
+        6.899999998509884,
+        1.6000000014901161,
+        1.8999999985098839,
+        2.2000000029802322,
+        7.200000002980232,
+        2.600000001490116,
+        2.6999999955296516,
+        1.5,
+        2,
+        1,
+        2.2000000029802322,
+        1.5,
+        3.899999998509884,
+        1.7000000029802322,
+        2.1999999955296516,
+        2.3000000044703484,
+        2.5,
+        3,
+        3.399999998509884,
+        1.7999999970197678,
+        1.9000000059604645,
+        1.5999999940395355,
+        1.2000000029802322,
+        2.399999998509884,
+        1.8000000044703484,
+        2.1999999955296516,
+        1.9000000059604645,
+        0.10000000149011612,
+        2.100000001490116,
+        0.10000000149011612,
+        5.200000002980232,
+        0.10000000149011612,
+        4.600000001490116,
+        1.2000000029802322,
+        0.29999999701976776,
+        1.1999999955296516,
+        2.600000001490116,
+        0.10000000149011612,
+        3.2000000029802322,
+        0.10000000149011612,
+        3.5,
+        3,
+        0.7999999970197678,
+        2.5,
+        0.3999999985098839,
+        3.2999999970197678,
+        2.5,
+        0.29999999701976776,
+        4,
+        2.3000000044703484,
+        0.10000000149011612,
+        2,
+        0.20000000298023224,
+        2.399999998509884,
+        2.5,
+        0.10000000149011612,
+        3,
+        3,
+        2.7000000029802322,
+        2.4000000059604645,
+        2,
+        0.29999999701976776,
+        1.6999999955296516,
+        2.7999999970197678,
+        0.6000000014901161,
+        2.1999999955296516,
+        1.7999999970197678,
+        1.6000000014901161,
+        0,
+        0,
+        0,
+        0,
+        0.19999999552965164,
+        0.10000000149011612,
+        0.10000000149011612,
+        0,
+        0.10000000149011612,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.10000000149011612,
+        0.20000000298023224,
+        0,
+        0.10000000149011612,
+        1.3000000044703484,
+        0.09999999403953552
+      ],
+      "drawnParticles": 0
+    }
+  },
+  "light_mode": true,
+  "shared": [
+    {
+      "run_id": 62,
+      "label": "unvalidated branch"
+    },
+    {
+      "run_id": 63,
+      "label": "unvalidated branch"
+    },
+    {
+      "run_id": 64,
+      "label": "unvalidated branch"
+    }
+  ],
+  "fallback": true,
+  "external_hosts": [
+    "tile.openstreetmap.org"
+  ],
+  "js_errors": []
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 026-documentation-consistency (2026-10-16T11:15:54.3300330+05:30; exit 0)</summary>
+
+```powershell
+rg -n '6B|simulator|unvalidated|validation_status' README.md docs/ARCHITECTURE.md docs/DATA_MODEL.md
+Get-Content data/results/phase6b/browser.json -Raw -Encoding UTF8
+```
+
+```text
+README.md:3:Open **http://127.0.0.1:8000/vayusim/** for the Phase 6B dispersion lab.
+README.md:7:annotated image exports. `/simulator/` remains an alias, including old share links.
+README.md:8:Urban Briggs C/F show **unvalidated branch** on the page, summary, day frames and
+README.md:10:of predictive performance. See [Phase 6B](docs/results/PHASE6B.md) for the exact
+README.md:18:[Ask](http://localhost:8000/ask/) and [VayuSim](http://localhost:8000/simulator/).
+README.md:36:is **Ready for 6B with caveats**, conditional on the future frontend displaying
+README.md:37:**unvalidated branch** for these scenarios. Phase6B has not been started.
+README.md:66:through `/simulator/?scenario=<slug>`. Explain uses a stored `run_id`; arbitrary
+docs/ARCHITECTURE.md:78:ML, RAG, exposure calculations and simulator logic were deferred at the Phase 2 handoff.
+docs/ARCHITECTURE.md:269:assistant and simulator with shared responsive styling. MapLibre5.24.0 is vendored
+docs/ARCHITECTURE.md:285:Phase6B frontend displays **unvalidated branch** for those scenarios as a
+docs/ARCHITECTURE.md:286:condition of **Ready for 6B with caveats**. All example numbers, engine
+docs/ARCHITECTURE.md:290:## Phase 6B presentation
+docs/ARCHITECTURE.md:292:`/vayusim/` and the compatible `/simulator/` route serve one Django page. Initial
+docs/ARCHITECTURE.md:308:Run/header/scenario/day responses expose `validation_status`, derived from
+docs/ARCHITECTURE.md:309:retained environment/class. Urban C/F is `unvalidated_branch`; all other
+docs/ARCHITECTURE.md:319:is required. See [PHASE6B](results/PHASE6B.md).
+docs/DATA_MODEL.md:339:for a simulator run. The immutable Phase5 evaluation remains unchanged; the five
+docs/DATA_MODEL.md:368:## Phase 6B stored presentation artifacts
+docs/DATA_MODEL.md:370:No model or schema change. `validation_status` is response metadata derived
+docs/DATA_MODEL.md:372:Scenario. Values are `unvalidated_branch` for urban C/F and `formula_check_only`
+[
+  {
+    "city": "delhi",
+    "width": 1440,
+    "http_status": 200,
+    "webgl": true,
+    "load_seconds": 2.143,
+    "status": "Stored run 62 · unvalidated branch",
+    "labels_visible": true,
+    "horizontal_overflow": false,
+    "external_hosts": [
+      "tile.openstreetmap.org"
+    ],
+    "js_errors": [],
+    "shared_url": "/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e",
+    "export_status": 200,
+    "frame": {
+      "runId": 62,
+      "validationStatus": "unvalidated_branch",
+      "cacheSize": 1,
+      "renderTimes": [
+        0.3999999985098839,
+        0.6999999955296516,
+        0.10000000149011612,
+        0.20000000298023224,
+        0.29999999701976776,
+        0.19999999552965164,
+        0.09999999403953552,
+        0.09999999403953552,
+        0.20000000298023224,
+        0.10000000149011612
+      ],
+      "drawnParticles": 3
+    }
+  },
+  {
+    "city": "mumbai",
+    "width": 1440,
+    "http_status": 200,
+    "webgl": true,
+    "load_seconds": 1.318,
+    "status": "Stored run 63 · unvalidated branch",
+    "labels_visible": true,
+    "horizontal_overflow": false,
+    "external_hosts": [
+      "tile.openstreetmap.org"
+    ],
+    "js_errors": [],
+    "shared_url": "/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a",
+    "export_status": 200,
+    "frame": {
+      "runId": 63,
+      "validationStatus": "unvalidated_branch",
+      "cacheSize": 1,
+      "renderTimes": [
+        1.4000000059604645,
+        0.3999999985098839,
+        0.10000000149011612,
+        0.10000000149011612,
+        1,
+        0.5
+      ],
+      "drawnParticles": 3
+    }
+  },
+  {
+    "city": "hyderabad",
+    "width": 1440,
+    "http_status": 200,
+    "webgl": true,
+    "load_seconds": 1.28,
+    "status": "Stored run 64 · unvalidated branch",
+    "labels_visible": true,
+    "horizontal_overflow": false,
+    "external_hosts": [
+      "tile.openstreetmap.org"
+    ],
+    "js_errors": [],
+    "shared_url": "/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296",
+    "export_status": 200,
+    "frame": {
+      "runId": 64,
+      "validationStatus": "unvalidated_branch",
+      "cacheSize": 1,
+      "renderTimes": [
+        0.8000000044703484,
+        1,
+        0.09999999403953552,
+        0.20000000298023224,
+        0.6999999955296516,
+        0.19999999552965164
+      ],
+      "drawnParticles": 34
+    }
+  },
+  {
+    "city": "delhi",
+    "width": 390,
+    "http_status": 200,
+    "webgl": true,
+    "load_seconds": 1.219,
+    "status": "Stored run 62 · unvalidated branch",
+    "labels_visible": true,
+    "horizontal_overflow": false,
+    "external_hosts": [
+      "tile.openstreetmap.org"
+    ],
+    "js_errors": [],
+    "shared_url": "/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e",
+    "export_status": 200,
+    "frame": {
+      "runId": 62,
+      "validationStatus": "unvalidated_branch",
+      "cacheSize": 1,
+      "renderTimes": [
+        0.7000000029802322,
+        0.7999999970197678,
+        0.7000000029802322,
+        0.10000000149011612,
+        0.19999999552965164,
+        0.8000000044703484,
+        0.19999999552965164
+      ],
+      "drawnParticles": 3
+    }
+  },
+  {
+    "city": "mumbai",
+    "width": 390,
+    "http_status": 200,
+    "webgl": true,
+    "load_seconds": 1.052,
+    "status": "Stored run 63 · unvalidated branch",
+    "labels_visible": true,
+    "horizontal_overflow": false,
+    "external_hosts": [
+      "tile.openstreetmap.org"
+    ],
+    "js_errors": [],
+    "shared_url": "/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a",
+    "export_status": 200,
+    "frame": {
+      "runId": 63,
+      "validationStatus": "unvalidated_branch",
+      "cacheSize": 1,
+      "renderTimes": [
+        0.6000000014901161,
+        0.20000000298023224,
+        1,
+        0.30000000447034836,
+        0,
+        0.09999999403953552
+      ],
+      "drawnParticles": 3
+    }
+  },
+  {
+    "city": "hyderabad",
+    "width": 390,
+    "http_status": 200,
+    "webgl": true,
+    "load_seconds": 1.294,
+    "status": "Stored run 64 · unvalidated branch",
+    "labels_visible": true,
+    "horizontal_overflow": false,
+    "external_hosts": [
+      "tile.openstreetmap.org"
+    ],
+    "js_errors": [],
+    "shared_url": "/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296",
+    "export_status": 200,
+    "frame": {
+      "runId": 64,
+      "validationStatus": "unvalidated_branch",
+      "cacheSize": 1,
+      "renderTimes": [
+        0.6000000014901161,
+        0.19999999552965164,
+        0.09999999403953552,
+        0.10000000149011612,
+        1.1999999955296516,
+        0.3999999985098839
+      ],
+      "drawnParticles": 34
+    }
+  }
+]
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 028-final-desktop-phone-screenshots (2026-10-16T11:16:49.5995932+05:30; exit 0)</summary>
+
+```powershell
+python -c "import json; from pathlib import Path; p=Path('data/results/phase6a-independent/manifest.json'); x=json.loads(p.read_text(encoding='utf-8')); print('manifest keys:',list(x)); print('artifact samples:',str(x.get('artifacts'))[:700]); print('code/report samples:',str(x.get('code_and_reports'))[:500])"
+node .tools/phase6b/browser.js
+```
+
+```text
+manifest keys: ['status', 'baseline_commit', 'phase6b_started', 'pushed', 'tests', 'ruff', 'gate', 'gate_condition', 'independent_case_scope', 'frozen_before', 'frozen_after', 'artifact_files', 'code_and_reports', 'journal']
+artifact samples: None
+code/report samples: {'README.md': {'sha256': '6f959cf2c5e3b6639a25f46f8ffbec97c9223f73e55377f2498f9234900a2369', 'bytes': 32850}, 'docs/ARCHITECTURE.md': {'sha256': '357b078c8142f8515f6f16e7a39f5b496300401a5261e5d265259bbd658395af', 'bytes': 19088}, 'docs/results/PHASE6A.md': {'sha256': 'a6fdcd2366d8b85044ba30c976053d1968f12b2c976dad52b9b9a22fee72b131', 'bytes': 85351}, 'docs/results/PHASE6A_INDEPENDENT_METRICS.json': {'sha256': '5773d4b6dba7c37b88b6348a6313dd00c5f5b02db84e4e2f91982354bdb5bbd2', 'bytes': 30131}, 'a
+{"city":"delhi","width":1440,"http_status":200,"webgl":true,"load_seconds":2.288,"status":"Stored run 62 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e","export_status":200,"frame":{"runId":62,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.8999999985098839,0.6999999955296516,0.3999999985098839],"drawnParticles":172}}
+{"city":"mumbai","width":1440,"http_status":200,"webgl":true,"load_seconds":1.514,"status":"Stored run 63 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a","export_status":200,"frame":{"runId":63,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.7999999970197678,0.7000000029802322,0.29999999701976776],"drawnParticles":130}}
+{"city":"hyderabad","width":1440,"http_status":200,"webgl":true,"load_seconds":1.951,"status":"Stored run 64 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296","export_status":200,"frame":{"runId":64,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[1.3999999985098839,1.1000000014901161,0.7999999970197678],"drawnParticles":752}}
+{"city":"delhi","width":390,"http_status":200,"webgl":true,"load_seconds":1.378,"status":"Stored run 62 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e","export_status":200,"frame":{"runId":62,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.9000000059604645,0.6000000014901161,1.8999999985098839],"drawnParticles":172}}
+{"city":"mumbai","width":390,"http_status":200,"webgl":true,"load_seconds":1.635,"status":"Stored run 63 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a","export_status":200,"frame":{"runId":63,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.7999999970197678,0.5,1.3999999985098839],"drawnParticles":130}}
+{"city":"hyderabad","width":390,"http_status":200,"webgl":true,"load_seconds":1.402,"status":"Stored run 64 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296","export_status":200,"frame":{"runId":64,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[2.399999998509884,1,0.6000000014901161],"drawnParticles":752}}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 029-preservation-review (2026-10-16T11:17:48.1679165+05:30; exit 0)</summary>
+
+```powershell
+python -c "import json; from pathlib import Path; x=json.loads(Path('data/results/phase6a-independent/manifest.json').read_text(encoding='utf-8')); print(type(x['artifact_files']).__name__); print(str(x['artifact_files'])[:1100])"
+docker compose exec -T web ruff check .
+docker compose exec -T web ruff format --check .
+```
+
+```text
+dict
+{'commands/001-first-reads-local-library.command.ps1': {'sha256': 'e03b5df693f14818f00c656faf915cf957752fd46cc6521477e992b1a565e950', 'bytes': 918}, 'commands/001-first-reads-local-library.log': {'sha256': 'cfc7482b42282912336bca3056b8994b647e4d737f4cd492bb33b831c18f3e61', 'bytes': 94928}, 'commands/002-frozen-before-reference-catalogue.command.ps1': {'sha256': 'd4fa90c64fec64a6bfff5a81f8987dab48ee7439b45b93f5e4c35ed28ba023ba', 'bytes': 466}, 'commands/002-frozen-before-reference-catalogue.log': {'sha256': '9b13288d8b557c0abbcb5fe6e41f70bb6ae5f3dbc253ea04bea47ce170164d6d', 'bytes': 7910}, 'commands/003-cached-pdf-library-search.command.ps1': {'sha256': 'b7c9cee4dee67ebd0b6a7c8a29548f765637d9592734eec40f3fa076ff4e358b', 'bytes': 137}, 'commands/003-cached-pdf-library-search.log': {'sha256': '00de3f3eca198145b7e9c515d8ea7108cc9454bf602ddeb4e14a0b871d890da1', 'bytes': 16364}, 'commands/004-independent-reference-comparisons.command.ps1': {'sha256': 'b28f6abde80851f7af1ff0683aa72a1aa4b08d0aa89d1882350d7b4970ddfb1d', 'bytes': 333}, 'commands/004-independent-reference-comparisons.log': {'sh
+All checks passed!
+269 files already formatted
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 027-final-full-suite (2026-10-16T11:16:29.9865759+05:30; exit 0)</summary>
+
+```powershell
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write apps/vayusim/static/vayusim/cinematic.js
+node --check apps/vayusim/static/vayusim/cinematic.js
+.\scripts\dev.ps1 test
+```
+
+```text
+apps/vayusim/static/vayusim/cinematic.js 249ms
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 270 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  2%]
+tests/test_api.py ...                                                    [  3%]
+tests/test_database.py ......                                            [  5%]
+tests/test_deweather_diagnostics.py ...                                  [  6%]
+tests/test_forecast_operations.py ..                                     [  7%]
+tests/test_forecasting.py .                                              [  7%]
+tests/test_ingest_api.py ....                                            [  9%]
+tests/test_ingest_sources.py ...................                         [ 16%]
+tests/test_rag_audit.py .                                                [ 16%]
+tests/test_rag_pipeline.py .......................                       [ 25%]
+tests/test_research_api.py .                                             [ 25%]
+tests/test_research_clocks.py ..                                         [ 26%]
+tests/test_seed.py .                                                     [ 26%]
+tests/test_vayusim_api.py ..............                                 [ 31%]
+tests/test_vayusim_frontend.py ..........                                [ 35%]
+tests/test_vectors.py ..                                                 [ 36%]
+tests/test_database.py .                                                 [ 36%]
+tests/test_vayusim_api.py .                                              [ 37%]
+tests/test_worker.py .                                                   [ 37%]
+tests/test_analytics.py ...................                              [ 44%]
+tests/test_dashboard_evidence.py ..                                      [ 45%]
+tests/test_deweather_diagnostics.py ....                                 [ 46%]
+tests/test_forecast_intervals.py .                                       [ 47%]
+tests/test_forecast_operations.py ...                                    [ 48%]
+tests/test_forecasting.py .................                              [ 54%]
+tests/test_foundation.py .....................                           [ 62%]
+tests/test_ingest_sources.py ......                                      [ 64%]
+tests/test_ingest_units.py .....................                         [ 72%]
+tests/test_phase6a_audit.py .......                                      [ 74%]
+tests/test_phase6a_fix.py ...                                            [ 75%]
+tests/test_rag_pipeline.py ...........                                   [ 80%]
+tests/test_rag_resident_worker.py .                                      [ 80%]
+tests/test_research_methods.py .....                                     [ 82%]
+tests/test_vayusim_api.py ....                                           [ 83%]
+tests/test_vayusim_independent_references.py ........                    [ 86%]
+tests/test_vayusim_physics.py ....................................       [100%]
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 270 passed, 147 warnings in 85.93s (0:01:25) =================
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 030-frozen-hashes-and-scientific-preservation (2026-10-16T11:18:39.1452638+05:30; exit 0)</summary>
+
+```powershell
+$browserSource = Get-Content .tools/phase6b/browser.js -Raw -Encoding UTF8
+$browserSource = $browserSource.Replace("require('../ui-preview/node_modules/playwright')", "require('../.tools/ui-preview/node_modules/playwright')")
+[IO.File]::WriteAllText('D:\EnviroInsights-India\scripts\verify_vayusim_browser.cjs', $browserSource, [Text.UTF8Encoding]::new($false))
+$interactionSource = Get-Content .tools/phase6b/interactions.js -Raw -Encoding UTF8
+$interactionSource = $interactionSource.Replace("require('../ui-preview/node_modules/playwright')", "require('../.tools/ui-preview/node_modules/playwright')")
+[IO.File]::WriteAllText('D:\EnviroInsights-India\scripts\verify_vayusim_interactions.cjs', $interactionSource, [Text.UTF8Encoding]::new($false))
+node -p "require('./.tools/ui-preview/node_modules/playwright/package.json').version"
+docker compose exec -T web ruff format tests/test_vayusim_frontend.py
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6b/preservation.py
+python .tools/phase6b/identity.py after
+```
+
+```text
+1.64.1
+1 file reformatted
+{
+  "prior_independent_artifacts_unchanged": 70,
+  "prior_scientific_code_and_reports_unchanged": 5,
+  "examples": [
+    {
+      "run_id": 62,
+      "city": "delhi",
+      "stability": "C",
+      "peak_ugm3": 15.641839027404785,
+      "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+      "grid_sha256": "d1aaf3e80b3890463af41998244f9c8136f549b0e649c814389968cd45ad9592",
+      "all_original_summary_values_identical": true
+    },
+    {
+      "run_id": 63,
+      "city": "mumbai",
+      "stability": "C",
+      "peak_ugm3": 11.536741256713867,
+      "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+      "grid_sha256": "6adfb341ceda54cf51e39be0a9a71a81cff112979cb662a6311caa46976f150c",
+      "all_original_summary_values_identical": true
+    },
+    {
+      "run_id": 64,
+      "city": "hyderabad",
+      "stability": "F",
+      "peak_ugm3": 18.990890502929688,
+      "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+      "grid_sha256": "528d6c0080dab5c48dd2bf7716529d4d26e0f49f1b0ce07d2292b54e1f562663",
+      "all_original_summary_values_identical": true
+    }
+  ]
+}
+{
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "existing_tests_and_fixtures": {
+    "files": 52,
+    "aggregate_sha256": "96269be9a5fac7370622731cc9bd2266c74ccf63e2f51aff4e49c112bb145416"
+  },
+  "physics_and_presets": {
+    "files": 6,
+    "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+  },
+  "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+  "stage": "after",
+  "identical_to_before": true
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 031-browser-qa-script-review (2026-10-16T11:23:48.6602736+05:30; exit 0)</summary>
+
+```powershell
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write scripts/verify_vayusim_browser.cjs scripts/verify_vayusim_interactions.cjs
+node --check scripts/verify_vayusim_browser.cjs
+node --check scripts/verify_vayusim_interactions.cjs
+git diff --check
+```
+
+```text
+scripts/verify_vayusim_browser.cjs 71ms
+scripts/verify_vayusim_interactions.cjs 56ms
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 033-summary-limit-placement (2026-10-16T11:24:49.3656649+05:30; exit 1)</summary>
+
+```powershell
+python -c "from pathlib import Path; p=Path('apps/vayusim/templates/vayusim/cinematic.html'); s=p.read_text(encoding='utf-8'); old='<a id=\"share-link\"'; new='<div class=\"summary-limits v-help\"><h3>Limits of this estimate</h3><p>Primary PM2.5 only<br>Flat terrain<br>Steady state within the hour<br>Educational estimate, not a regulatory assessment</p></div><a id=\"share-link\"'; assert old in s; p.write_text(s.replace(old,new),encoding='utf-8')"
+```
+
+```text
+python :   File "<string>", line 1
+At line:1 char:1
++ python -c "from pathlib import Path; p=Path('apps/vayusim/templates/v ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (  File "<string>", line 1:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+    from pathlib import Path; p=Path('apps/vayusim/templates/vayusim/cinematic.html');
+s=p.read_text(encoding='utf-8'); old='<a id=" share-link\';
+
+     ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 034-summary-limits-and-contour-legend (2026-10-16T11:25:04.8141981+05:30; exit 0)</summary>
+
+```powershell
+$phaseTemplatePath = 'D:\EnviroInsights-India\apps\vayusim\templates\vayusim\cinematic.html'
+$phaseTemplate = [IO.File]::ReadAllText($phaseTemplatePath)
+$phaseOld = '<a id="share-link"'
+$phaseNew = '<div class="summary-limits v-help"><h3>Limits of this estimate</h3><p>Primary PM2.5 only<br>Flat terrain<br>Steady state within the hour<br>Educational estimate, not a regulatory assessment</p></div><a id="share-link"'
+if (-not $phaseTemplate.Contains($phaseOld)) { throw 'Expected share link not found' }
+[IO.File]::WriteAllText($phaseTemplatePath, $phaseTemplate.Replace($phaseOld, $phaseNew), [Text.UTF8Encoding]::new($false))
+Write-Output 'Four required limits now also appear inside the scenario summary.'
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write apps/vayusim/static/vayusim/cinematic.js
+```
+
+```text
+Four required limits now also appear inside the scenario summary.
+apps/vayusim/static/vayusim/cinematic.js 242ms
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 035-prefetch-render-review (2026-10-16T11:25:50.5986413+05:30; exit 0)</summary>
+
+```powershell
+Get-Content apps/vayusim/static/vayusim/cinematic.js -Encoding UTF8 | Select-Object -Skip 310 -First 65
+Get-Content apps/vayusim/static/vayusim/cinematic.js -Encoding UTF8 | Select-Object -Skip 530 -First 65
+```
+
+```text
+      weather_mode: $("weather-mode").value,
+      datetime:
+        $("date-hour").value +
+        ($("date-hour").value.length === 16 ? ":00" : "") +
+        "+05:30",
+      thresholds: $("thresholds").value.trim()
+        ? $("thresholds")
+            .value.split(",")
+            .map((v) => {
+              if (!v.trim())
+                throw new Error("Enter comma-separated finite thresholds");
+              return Number(v);
+            })
+        : [],
+    };
+    if (body.weather_mode === "real") delete body.weather;
+    else {
+      body.weather = {
+        wind_speed_ms: num("wind"),
+        wind_direction_deg: num("direction"),
+        temperature_k: num("ambient"),
+        solar_radiation_wm2: num("solar"),
+        cloud_fraction: num("cloud"),
+        daytime: $("daytime").value === "day",
+      };
+      if ($("lid").value !== "") body.weather.mixing_height_m = num("lid");
+    }
+    if (body.thresholds.some((v) => !Number.isFinite(v)))
+      throw new Error("Thresholds must be finite numbers");
+    return body;
+  }
+  async function grid(run) {
+    if (cache.has(run.run_id)) return cache.get(run.run_id);
+    const promise = (async () => {
+      const header = await api(run.grid_header_url);
+      const response = await fetch(run.grid_url);
+      if (!response.ok) throw new Error("Grid unavailable: " + response.status);
+      const buffer = await response.arrayBuffer();
+      const count = header.shape[0] * header.shape[1];
+      if (
+        header.dtype !== "float32" ||
+        header.byte_order !== "little" ||
+        buffer.byteLength !== count * 4
+      )
+        throw new Error("Unsupported grid format");
+      const view = new DataView(buffer),
+        values = new Float32Array(count);
+      for (let i = 0; i < count; i++) values[i] = view.getFloat32(i * 4, true);
+      const active = [];
+      for (let i = 0; i < count; i++) if (values[i] > 1) active.push(i);
+      return { header, values, active };
+    })();
+    cache.set(run.run_id, promise);
+    if (cache.size > 52) cache.delete(cache.keys().next().value);
+    try {
+      return await promise;
+    } catch (error) {
+      cache.delete(run.run_id);
+      throw error;
+    }
+  }
+  function summary(run) {
+    const s = run.summary,
+      input = savedInputs;
+    for (const id of [
+          .getSource("plume")
+          .updateImage({ url: run.overlay_url, coordinates });
+      else {
+        map.addSource("plume", {
+          type: "image",
+          url: run.overlay_url,
+          coordinates,
+        });
+        map.addLayer({
+          id: "plume",
+          type: "raster",
+          source: "plume",
+          paint: { "raster-opacity": 0.8, "raster-fade-duration": 0 },
+        });
+      }
+      const contours = field.header.contours || {
+        type: "FeatureCollection",
+        features: [],
+      };
+      if (map.getSource("contours"))
+        map.getSource("contours").setData(contours);
+      else {
+        map.addSource("contours", { type: "geojson", data: contours });
+        map.addLayer({
+          id: "contours",
+          type: "line",
+          source: "contours",
+          paint: {
+            "line-color": "#f5eacb",
+            "line-width": 1.2,
+            "line-opacity": 0.85,
+          },
+        });
+      }
+      if (!map.getSource("stations")) {
+        map.addSource("stations", {
+          type: "geojson",
+          data: { type: "FeatureCollection", features: [] },
+        });
+        map.addLayer({
+          id: "stations",
+          type: "circle",
+          source: "stations",
+          paint: {
+            "circle-radius": 4,
+            "circle-color": "#8cbbf1",
+            "circle-stroke-width": 1,
+            "circle-stroke-color": "#132535",
+          },
+        });
+      }
+      if (focus) {
+        const bounds = new maplibregl.LngLatBounds();
+        coordinates.forEach((p) => bounds.extend(p));
+        map.fitBounds(bounds, { padding: 30, duration: 0 });
+      }
+      map.setLayoutProperty(
+        "contours",
+        "visibility",
+        $("contour-toggle").checked ? "visible" : "none",
+      );
+    }
+    stations(run);
+    draw(performance.now());
+    window.vayuState = {
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 036-cache-contract-review (2026-10-16T11:26:08.2929000+05:30; exit 0)</summary>
+
+```powershell
+rg -n 'gridRequests|bin|frame_selection|vayuDay|return.*field' scripts/verify_vayusim_interactions.cjs
+Get-Content tests/test_vayusim_frontend.py -Tail 45
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write apps/vayusim/static/vayusim/cinematic.js
+```
+
+```text
+87:    await page.waitForFunction(() => window.vayuDay?.available === 24, {
+92:    let gridRequests = 0;
+94:      if (/\/grid\/.*\.(bin|json)$/.test(new URL(r.url()).pathname))
+95:        gridRequests++;
+129:    assert.equal(gridRequests, 0);
+143:      cached_scrub_grid_requests: gridRequests,
+144:      frame_selection_ms: frames,
+    with patch("apps.vayusim.service.weather_for", return_value=(weather, proof, flags)):
+        first = client.post("/api/vayusim/day/", body, content_type="application/json").json()
+        second = client.post("/api/vayusim/day/", body, content_type="application/json").json()
+    assert len(first["hours"]) == 24 and ScenarioRun.objects.count() == 24
+    assert all(h["available"] and h["cached"] for h in second["hours"])
+    for a, b in zip(first["hours"], second["hours"], strict=True):
+        assert a["run_id"] == b["run_id"] and a["summary"] == b["summary"]
+        assert a["validation_status"] == b["validation_status"] == "unvalidated_branch"
+
+
+@pytest.mark.django_db
+def test_source_removed_comparison_uses_a_second_stored_zero_field(
+    client, inputs, settings, tmp_path
+):
+    first = submit(client, inputs, settings, tmp_path)
+    inputs["sources"][0]["emission_gs"] = 0
+    second = submit(client, inputs, settings, tmp_path)
+    assert first["run_id"] != second["run_id"] and ScenarioRun.objects.count() == 2
+    assert first["summary"]["weather"] == second["summary"]["weather"]
+    assert second["summary"]["peak_ugm3"] == 0
+    content = client.get(second["grid_url"])
+    assert not np.frombuffer(b"".join(content.streaming_content), dtype="<f4").any()
+
+
+@pytest.mark.django_db
+def test_new_artifact_routes_unknown_run(client):
+    assert client.get("/api/vayusim/runs/999999/export.png").status_code == 404
+    assert client.get("/api/vayusim/runs/999999/section/").status_code == 404
+    assert (
+        client.post(
+            "/api/vayusim/runs/999999/section/", {}, content_type="application/json"
+        ).status_code
+        == 404
+    )
+
+
+@pytest.mark.django_db
+def test_scenario_without_runs_has_no_branch_claim(client, inputs, settings, tmp_path):
+    value = submit(client, inputs, settings, tmp_path)
+    run = ScenarioRun.objects.get(pk=value["run_id"])
+    slug = run.scenario.share_slug
+    run.delete()
+    response = client.get(f"/api/vayusim/scenarios/{slug}/")
+    assert response.status_code == 200
+    assert response.json()["runs"] == [] and response.json()["validation_status"] is None
+apps/vayusim/static/vayusim/cinematic.js 218ms
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 032-final-checks-and-271-tests (2026-10-16T11:24:01.3382582+05:30; exit 1)</summary>
+
+```powershell
+docker compose exec -T web ruff check .
+docker compose exec -T web ruff format --check .
+docker compose exec -T web python manage.py check --deploy --settings=enviroinsights.settings.prod
+docker compose exec -T web python manage.py spectacular --validate --file /tmp/phase6b-openapi.yml
+.\scripts\dev.ps1 test
+```
+
+```text
+All checks passed!
+269 files already formatted
+System check identified no issues (0 silenced).
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 271 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  2%]
+tests/test_api.py ...                                                    [  3%]
+tests/test_database.py ......                                            [  5%]
+tests/test_deweather_diagnostics.py ...                                  [  6%]
+tests/test_forecast_operations.py ..                                     [  7%]
+tests/test_forecasting.py .                                              [  7%]
+tests/test_ingest_api.py ....                                            [  9%]
+tests/test_ingest_sources.py ...................                         [ 16%]
+tests/test_rag_audit.py .                                                [ 16%]
+tests/test_rag_pipeline.py .......................                       [ 25%]
+tests/test_research_api.py .                                             [ 25%]
+tests/test_research_clocks.py ..                                         [ 26%]
+tests/test_seed.py .                                                     [ 26%]
+tests/test_vayusim_api.py ..............                                 [ 31%]
+tests/test_vayusim_frontend.py ...........                               [ 35%]
+tests/test_vectors.py ..                                                 [ 36%]
+tests/test_database.py .                                                 [ 36%]
+tests/test_vayusim_api.py .                                              [ 37%]
+tests/test_worker.py .                                                   [ 37%]
+tests/test_analytics.py ...................                              [ 44%]
+tests/test_dashboard_evidence.py ..                                      [ 45%]
+tests/test_deweather_diagnostics.py ....                                 [ 46%]
+tests/test_forecast_intervals.py .                                       [ 47%]
+tests/test_forecast_operations.py ...                                    [ 48%]
+tests/test_forecasting.py .................                              [ 54%]
+tests/test_foundation.py .....................                           [ 62%]
+tests/test_ingest_sources.py ......                                      [ 64%]
+tests/test_ingest_units.py .....................                         [ 72%]
+tests/test_phase6a_audit.py .......                                      [ 74%]
+tests/test_phase6a_fix.py ...                                            [ 76%]
+tests/test_rag_pipeline.py ...........                                   [ 80%]
+tests/test_rag_resident_worker.py .                                      [ 80%]
+tests/test_research_methods.py .....                                     [ 82%]
+tests/test_vayusim_api.py ....                                           [ 83%]
+tests/test_vayusim_independent_references.py ........                    [ 86%]
+tests/test_vayusim_physics.py .........F..........................       [100%]
+
+=================================== FAILURES ===================================
+________________________ test_crosswind_mass_reflection ________________________
+
+    @given(q=POSITIVE, sy=POSITIVE, sz=POSITIVE, wind=st.floats(1, 20))
+>   @settings(max_examples=30)
+                   ^^^
+E   hypothesis.errors.FailedHealthCheck: Input generation is slow: Hypothesis only generated 2 valid inputs after 2.10 seconds.
+E
+E            count | fraction |    slowest draws (seconds)
+E     wind |    2  |    100%  |      --      --      --      --   2.102
+E      q   |    2  |      0%  |      --      --      --      --      --
+E      sz  |    2  |      0%  |      --      --      --      --      --
+E      sy  |    2  |      0%  |      --      --      --      --      --
+E
+E   This could be for a few reasons:
+E   1. This strategy could be generating too much data per input. Try decreasing the amount of data generated, for example by decreasing the minimum size of collection strategies like st.lists().
+E   2. Some other expensive computation could be running during input generation. For example, if @st.composite or st.data() is interspersed with an expensive computation, HealthCheck.too_slow is likely to trigger. If this computation is unrelated to input generation, move it elsewhere. Otherwise, try making it more efficient, or disable this health check if that is not possible.
+E
+E   If you expect input generation to take this long, you can disable this health check with @settings(suppress_health_check=[HealthCheck.too_slow]). See https://hypothesis.readthedocs.io/en/latest/reference/api.html#hypothesis.HealthCheck for details.
+
+tests/test_vayusim_physics.py:86: FailedHealthCheck
+---------------------------------- Hypothesis ----------------------------------
+You can reproduce this failure by adding @seed(11834759241183794461832688270277245639) to this test, or by running pytest with --hypothesis-seed=11834759241183794461832688270277245639.
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_vayusim_physics.py::test_crosswind_mass_reflection - hypoth...
+============ 1 failed, 270 passed, 147 warnings in 90.06s (0:01:30) ============
+docker compose exec -T -e OLLAMA_ENABLED=false -e LLM_PROVIDER=extractive -e
+HYPOTHESIS_STORAGE_DIRECTORY=/tmp/hypothesis web pytest --ds=enviroinsights.settings.test failed (exit 1).
+At D:\EnviroInsights-India\scripts\dev.ps1:52 char:9
++         throw "docker compose $($DockerArguments -join ' ') failed (e ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (docker compose ...ailed (exit 1).:String) [], RuntimeException
+    + FullyQualifiedErrorId : docker compose exec -T -e OLLAMA_ENABLED=false -e LLM_PROVIDER=extractive -e HYPOTHESIS_
+   STORAGE_DIRECTORY=/tmp/hypothesis web pytest --ds=enviroinsights.settings.test failed (exit 1).
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 037-final-browser-grids-and-overlays-cached (2026-10-16T11:26:44.9029855+05:30; exit 0)</summary>
+
+```powershell
+node .tools/ui-preview/node_modules/prettier/bin/prettier.cjs --write scripts/verify_vayusim_interactions.cjs
+node scripts/verify_vayusim_browser.cjs
+node scripts/verify_vayusim_interactions.cjs
+```
+
+```text
+scripts/verify_vayusim_interactions.cjs 93ms (unchanged)
+{"city":"delhi","width":1440,"http_status":200,"webgl":true,"load_seconds":2.373,"status":"Stored run 62 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e","export_status":200,"frame":{"runId":62,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.7999999970197678,1.5,0.6000000014901161],"drawnParticles":172}}
+{"city":"mumbai","width":1440,"http_status":200,"webgl":true,"load_seconds":1.653,"status":"Stored run 63 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a","export_status":200,"frame":{"runId":63,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.5,0.3999999985098839,0.30000000447034836],"drawnParticles":130}}
+{"city":"hyderabad","width":1440,"http_status":200,"webgl":true,"load_seconds":1.603,"status":"Stored run 64 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296","export_status":200,"frame":{"runId":64,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[1.5,1.1000000014901161,0.3999999985098839],"drawnParticles":752}}
+{"city":"delhi","width":390,"http_status":200,"webgl":true,"load_seconds":1.175,"status":"Stored run 62 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e","export_status":200,"frame":{"runId":62,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.6000000014901161,0.9000000059604645,0.3999999985098839],"drawnParticles":172}}
+{"city":"mumbai","width":390,"http_status":200,"webgl":true,"load_seconds":1.34,"status":"Stored run 63 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a","export_status":200,"frame":{"runId":63,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[0.6000000014901161,0.6000000014901161,0.3999999985098839],"drawnParticles":130}}
+{"city":"hyderabad","width":390,"http_status":200,"webgl":true,"load_seconds":1.263,"status":"Stored run 64 · unvalidated branch","labels_visible":true,"horizontal_overflow":false,"external_hosts":["tile.openstreetmap.org"],"js_errors":[],"shared_url":"/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296","export_status":200,"frame":{"runId":64,"validationStatus":"unvalidated_branch","cacheSize":1,"renderTimes":[1,0.7999999970197678,0.5],"drawnParticles":752}}
+Initial stored run and map loaded
+Stored comparison passed {"source_run":62,"source_removed_run":162,"difference_label":"modelled increment from these sources only · stored runs 62 and 162 · source minus source-removed grid"}
+Stored vertical grid passed
+All 24 day fields cached
+{
+  "comparison": {
+    "source_run": 62,
+    "source_removed_run": 162,
+    "difference_label": "modelled increment from these sources only · stored runs 62 and 162 · source minus source-removed grid"
+  },
+  "section": "unvalidated branch · Vertical cross-section from stored grid data only · origin 77.209, 28.6139 · 61 heights × 101 distances. All retained sources contribute; transect starts at first source.",
+  "keyboard_source": true,
+  "day": {
+    "prefetch_seconds": 2.742,
+    "available": 24,
+    "cached_scrub_grid_requests": 0,
+    "frame_selection_ms": [
+      59,
+      46,
+      42,
+      55,
+      38,
+      49,
+      45,
+      43,
+      40,
+      39,
+      39,
+      32,
+      33,
+      34,
+      50,
+      52,
+      36,
+      36,
+      39,
+      33,
+      42,
+      30,
+      28,
+      31
+    ],
+    "keyboard_timeline": true,
+    "playback": true,
+    "renderer": {
+      "runId": 165,
+      "validationStatus": "formula_check_only",
+      "cacheSize": 25,
+      "renderTimes": [
+        0.5,
+        0.4000000059604645,
+        0.10000000149011612,
+        0.20000000298023224,
+        0.3999999985098839,
+        1,
+        0.10000000149011612,
+        1.9000000059604645,
+        3.100000001490116,
+        1.3999999985098839,
+        2.2000000029802322,
+        1.8999999985098839,
+        2.399999998509884,
+        3.7000000029802322,
+        1.8999999985098839,
+        6.399999998509884,
+        2.3000000044703484,
+        2.899999998509884,
+        2.3000000044703484,
+        1.6000000014901161,
+        2.2000000029802322,
+        1.1999999955296516,
+        2.0999999940395355,
+        2,
+        1.7999999970197678,
+        1.3999999985098839,
+        1.2999999970197678,
+        4.699999995529652,
+        3.600000001490116,
+        1.2000000029802322,
+        3,
+        2.100000001490116,
+        2.5,
+        2,
+        2,
+        1.5999999940395355,
+        1.6000000014901161,
+        2.7000000029802322,
+        2.5,
+        1.1999999955296516,
+        1.5,
+        1.8999999985098839,
+        1.2000000029802322,
+        2.5,
+        0,
+        3.0999999940395355,
+        0.10000000149011612,
+        2.6999999955296516,
+        2.7999999970197678,
+        0,
+        2.2999999970197678,
+        3.1999999955296516,
+        0.10000000149011612,
+        3.2999999970197678,
+        2.600000001490116,
+        0.3999999985098839,
+        2.600000001490116,
+        1.6999999955296516,
+        1.3999999985098839,
+        0.19999999552965164,
+        1.2999999970197678,
+        1.7999999970197678,
+        0.19999999552965164,
+        2.399999998509884,
+        2,
+        0.20000000298023224,
+        1.4000000059604645,
+        2.399999998509884,
+        2.600000001490116,
+        0.3999999985098839,
+        1.5,
+        3.2000000029802322,
+        0.29999999701976776,
+        1.8999999985098839,
+        2.100000001490116,
+        2.8000000044703484,
+        0.3999999985098839,
+        1.3000000044703484,
+        1.7000000029802322,
+        0.10000000149011612,
+        0,
+        0,
+        0.10000000149011612,
+        0.10000000149011612,
+        0.20000000298023224,
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612,
+        0.20000000298023224,
+        0.10000000149011612,
+        0,
+        0,
+        0,
+        0,
+        0.10000000149011612,
+        0,
+        0.19999999552965164,
+        2.3000000044703484,
+        0.10000000149011612
+      ],
+      "drawnParticles": 0
+    }
+  },
+  "light_mode": true,
+  "shared": [
+    {
+      "run_id": 62,
+      "label": "unvalidated branch"
+    },
+    {
+      "run_id": 63,
+      "label": "unvalidated branch"
+    },
+    {
+      "run_id": 64,
+      "label": "unvalidated branch"
+    }
+  ],
+  "fallback": true,
+  "external_hosts": [
+    "tile.openstreetmap.org"
+  ],
+  "js_errors": []
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 038-test-healthcheck-resource-diagnosis (2026-10-16T11:27:09.8191108+05:30; exit 0)</summary>
+
+```powershell
+docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}'
+Get-Process -Name node,msedge,python -ErrorAction SilentlyContinue | Select-Object ProcessName,Id,CPU,WorkingSet64 | Sort-Object WorkingSet64 -Descending | Select-Object -First 8
+Get-Content README.md -Encoding UTF8 | Select-Object -First 90
+```
+
+```text
+NAME                                  CPU %     MEM USAGE / LIMIT
+climateresilience-db                  0.00%     192.7MiB / 8.729GiB
+enviroinsights-india-rag-models-1     0.03%     104.9MiB / 8.729GiB
+enviroinsights-india-beat-1           0.00%     138.9MiB / 8.729GiB
+enviroinsights-india-flower-1         0.02%     142.2MiB / 8.729GiB
+enviroinsights-india-mlflow-1         0.25%     486MiB / 8.729GiB
+enviroinsights-india-worker-1         0.41%     239.9MiB / 8.729GiB
+enviroinsights-india-web-1            2.23%     222.8MiB / 8.729GiB
+enviroinsights-india-rag-reranker-1   0.36%     160MiB / 8.729GiB
+enviroinsights-india-redis-1          0.95%     10.24MiB / 8.729GiB
+enviroinsights-india-db-1             1.11%     261.7MiB / 8.729GiB
+
+ProcessName    Id      CPU WorkingSet64
+-----------    --      --- ------------
+msedge      24620 14.59375     95125504
+msedge      31728  1.34375     84549632
+msedge      21152      3.5     38232064
+msedge      15984 0.140625     31014912
+msedge       4288  0.65625     18931712
+msedge       3996  0.09375     12746752
+msedge      29116  0.21875     11173888
+# EnviroInsights-India
+
+Open **http://127.0.0.1:8000/vayusim/** for the Phase 6B dispersion lab.
+It provides source placement, cited source families, archived/manual weather,
+binary-grid particles and contours, stored source-removal comparisons, a cached
+hourly timeline, separate CPCB totals, a stored vertical cross-section and
+annotated image exports. `/simulator/` remains an alias, including old share links.
+Urban Briggs C/F show **unvalidated branch** on the page, summary, day frames and
+exports. Other branches say **formula check only**. These labels are not evidence
+of predictive performance. See [Phase 6B](docs/results/PHASE6B.md) for the exact
+API contract, measured timings, browser screenshots and limitations.
+
+Phase6A adds **VayuSim**, an educational, source-specific Gaussian dispersion
+engine with archived weather, WorldPop2025 exposure, saved scenarios and a
+verification map. The website now has consistent desktop/mobile navigation:
+[Overview](http://localhost:8000/), [Forecasts](http://localhost:8000/forecasts/),
+[Research](http://localhost:8000/research/), [Library](http://localhost:8000/library/),
+[Ask](http://localhost:8000/ask/) and [VayuSim](http://localhost:8000/simulator/).
+Read [the Phase6A report](docs/results/PHASE6A.md) for actual verification and
+limitations. Forecast cards show archived replay dates; research comparisons
+do not establish causation or official NCAP compliance.
+
+The [fix pass](docs/results/PHASE6A.md#fix-pass) separates passing **formula checks**
+from a **scheme comparison**. Briggs versus Cimbala's Martin solution (PDF p.3)
+differs by 14.13% in sigma-y, 15.60% in sigma-z and 10.66% in concentration.
+These scheme differences exceed the unchanged 5%/10% tolerances; they are not
+validation errors. Brune Table 2.3 agrees with the code: rural-B sigma-y at 1 km
+is 152.554014 m; the adjacent paragraph's 210 m is inconsistent. Turner physical
+pages remain **unverified**. End-to-end physical validity is not established.
+
+The [independent-reference pass](docs/results/PHASE6A.md#independent-validation)
+verifies the published rural-D sigma pair at 1 km (DOE p.213): errors 0.030135%
+and 0.124886%, within 5%. This does not validate the **urban C** branches used by
+Delhi/Mumbai or **urban F** used by Hyderabad; those remain **not independently
+validated** against numeric cases. Their example values are unchanged. The gate
+is **Ready for 6B with caveats**. The Phase 6B frontend now displays
+**unvalidated branch** for these scenarios; the scientific caveats still apply.
+
+VayuSim inputs are explicit scenario assumptions, not measured facility
+inventories. All five source-family presets require emission rate, release
+height, diameter, exit velocity and temperature where no defensible universal
+default was established. Real weather uses the UTC midpoint of the selected
+IST hour. Station totals stay separate from the modelled increment. The
+population calculation is **hourly added exposure**, with fractional raster
+support; missing population is not extrapolated across unknown area.
+
+The audited examples each use a **hypothetical 1 g/s source**: Delhi (2025-01-15
+12:00 IST), Mumbai (2025-07-15 15:00 IST), and Hyderabad (2025-11-15 20:00 IST).
+Their peak increments are 15.641839, 11.536741 and 18.990891 µg/m³. For one source, at fixed
+weather, geometry, release parameters and grid, peak concentration scales
+linearly with emission rate Q. Population values cover the modelled footprint
+only and its known raster support; population above a fixed threshold does not
+scale linearly. These examples are not measured emission inventories.
+
+The stable preset ID `highway` now displays **Road dust resuspension**.
+[AP-42 13.2.1](https://www.epa.gov/sites/default/files/2020-10/documents/13.2.1_paved_roads.pdf),
+January 2011, printed pp.13.2.1-1 and 13.2.1-4, excludes exhaust, brake wear
+and tire wear from its road-dust equation. Enter total primary PM2.5 g/s for
+the complete segment; no exhaust factor or universal emission rate is supplied.
+
+The default grid is10km×10km at50m, with an AEQD CRS and a wind-rotated affine.
+`POST /api/vayusim/run/` returns summary, GeoJSON contours and binary/header/PNG
+URLs. `POST /api/vayusim/day/` uses a timezone-aware datetime to select an IST
+date and returns24 independent hourly summaries; missing hours remain
+unavailable, and grids are materialised on their first request. Share scenarios
+through `/simulator/?scenario=<slug>`. Explain uses a stored `run_id`; arbitrary
+client numbers never become verified evidence.
+
+The Windows test wrapper and Makefile force test settings, extractive answering
+and a `/tmp` Hypothesis cache, so enabling the local language model cannot make
+tests call it. Tests retain the real PostgreSQL and Celery integration. On this
+machine an earlier memory measurement enabled Qwen2.5:3b-instruct; source-model
+caches and all project data remain on D:. The default is **extractive retrieval
+with verified citations** (`LLM_PROVIDER=extractive`, `OLLAMA_ENABLED=false`,
+empty `COMPOSE_PROFILES`). The experimental Qwen provider is stopped and remains
+available through the opt-in `llm` profile. It takes minutes on CPU and has
+**not passed answer-quality acceptance**:
+its existing frozen evaluation retained only 2/80 literature answers and 0/30
+available-data answers. Exact support among those two retained answers does not
+establish useful question-answering quality. No prompt/provider tuning or new
+language-model evaluation was performed during the audit.
+The final audit measurement had 4,103,503,872 bytes available against the
+3B model's 5,151,137,904-byte memory requirement, so its **current memory gate
+also fails**. Earlier measurements passed; that eligibility varies with resident
+allocations. The default extractive path needs no language-model memory gate.
+Opting into experimental generation still requires a fresh resource check.
+
+Phase 5 adds [extractive retrieval with verified citations](#phase-5-extractive-retrieval-with-verified-citations),
+available at [Ask](http://localhost:8000/ask/). It uses real document passages
+and recorded project results, with extractive answers available without API keys.
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 039-original-seed-and-isolated-full-suite (2026-10-16T11:27:32.7350633+05:30; exit 1)</summary>
+
+```powershell
+$phaseSuiteExit = 1
+docker compose pause rag-models rag-reranker beat
+if ($LASTEXITCODE -ne 0) { throw 'Could not isolate background workloads' }
+try {
+    docker compose exec -T -e HYPOTHESIS_STORAGE_DIRECTORY=/tmp/hypothesis web pytest tests/test_vayusim_physics.py::test_crosswind_mass_reflection --hypothesis-seed=11834759241183794461832688270277245639 --ds=enviroinsights.settings.test -q
+    if ($LASTEXITCODE -ne 0) { throw 'Reported Hypothesis seed still fails' }
+    .\scripts\dev.ps1 test
+    $phaseSuiteExit = $LASTEXITCODE
+} finally {
+    docker compose unpause rag-models rag-reranker beat
+    if ($LASTEXITCODE -ne 0) { throw 'Failed to restore background services' }
+}
+$global:LASTEXITCODE = $phaseSuiteExit
+```
+
+```text
+docker :  Container enviroinsights-india-rag-models-1 Paused
+At line:2 char:1
++ docker compose pause rag-models rag-reranker beat
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( Container envi...odels-1 Paused :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+ Container enviroinsights-india-beat-1 Paused
+ Container enviroinsights-india-rag-reranker-1 Paused
+.                                                                        [100%]
+1 passed in 3.06s
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 271 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  2%]
+tests/test_api.py ...                                                    [  3%]
+tests/test_database.py ......                                            [  5%]
+tests/test_deweather_diagnostics.py ...                                  [  6%]
+tests/test_forecast_operations.py ..                                     [  7%]
+tests/test_forecasting.py .                                              [  7%]
+tests/test_ingest_api.py ....                                            [  9%]
+tests/test_ingest_sources.py ...................                         [ 16%]
+tests/test_rag_audit.py .                                                [ 16%]
+tests/test_rag_pipeline.py .......................                       [ 25%]
+tests/test_research_api.py .                                             [ 25%]
+tests/test_research_clocks.py ..                                         [ 26%]
+tests/test_seed.py .                                                     [ 26%]
+tests/test_vayusim_api.py ..............                                 [ 31%]
+tests/test_vayusim_frontend.py ...........                               [ 35%]
+tests/test_vectors.py ..                                                 [ 36%]
+tests/test_database.py .                                                 [ 36%]
+tests/test_vayusim_api.py .                                              [ 37%]
+tests/test_worker.py .                                                   [ 37%]
+tests/test_analytics.py ...................                              [ 44%]
+tests/test_dashboard_evidence.py ..                                      [ 45%]
+tests/test_deweather_diagnostics.py ....                                 [ 46%]
+tests/test_forecast_intervals.py .                                       [ 47%]
+tests/test_forecast_operations.py ...                                    [ 48%]
+tests/test_forecasting.py .................                              [ 54%]
+tests/test_foundation.py .....................                           [ 62%]
+tests/test_ingest_sources.py ......                                      [ 64%]
+tests/test_ingest_units.py .....................                         [ 72%]
+tests/test_phase6a_audit.py .......                                      [ 74%]
+tests/test_phase6a_fix.py ...                                            [ 76%]
+tests/test_rag_pipeline.py ...........                                   [ 80%]
+tests/test_rag_resident_worker.py .                                      [ 80%]
+tests/test_research_methods.py .....                                     [ 82%]
+tests/test_vayusim_api.py ....                                           [ 83%]
+tests/test_vayusim_independent_references.py ........                    [ 86%]
+tests/test_vayusim_physics.py .........F..........................       [100%]
+
+=================================== FAILURES ===================================
+________________________ test_crosswind_mass_reflection ________________________
+
+    @given(q=POSITIVE, sy=POSITIVE, sz=POSITIVE, wind=st.floats(1, 20))
+>   @settings(max_examples=30)
+                   ^^^
+E   hypothesis.errors.FailedHealthCheck: Input generation is slow: Hypothesis only generated 5 valid inputs after 1.76 seconds.
+E
+E            count | fraction |    slowest draws (seconds)
+E      sy  |    5  |    100%  |      --      --      --      --   1.762
+E     wind |    5  |      0%  |      --      --      --      --      --
+E      q   |    5  |      0%  |      --      --      --      --      --
+E      sz  |    5  |      0%  |      --      --      --      --      --
+E
+E   This could be for a few reasons:
+E   1. This strategy could be generating too much data per input. Try decreasing the amount of data generated, for example by decreasing the minimum size of collection strategies like st.lists().
+E   2. Some other expensive computation could be running during input generation. For example, if @st.composite or st.data() is interspersed with an expensive computation, HealthCheck.too_slow is likely to trigger. If this computation is unrelated to input generation, move it elsewhere. Otherwise, try making it more efficient, or disable this health check if that is not possible.
+E
+E   If you expect input generation to take this long, you can disable this health check with @settings(suppress_health_check=[HealthCheck.too_slow]). See https://hypothesis.readthedocs.io/en/latest/reference/api.html#hypothesis.HealthCheck for details.
+
+tests/test_vayusim_physics.py:86: FailedHealthCheck
+---------------------------------- Hypothesis ----------------------------------
+You can reproduce this failure by adding @seed(223729891148463192737216680591174145022) to this test, or by running pytest with --hypothesis-seed=223729891148463192737216680591174145022.
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_vayusim_physics.py::test_crosswind_mass_reflection - hypoth...
+============ 1 failed, 270 passed, 147 warnings in 89.89s (0:01:29) ============
+docker :  Container enviroinsights-india-rag-models-1 Unpaused
+At line:10 char:5
++     docker compose unpause rag-models rag-reranker beat
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ( Container envi...els-1 Unpaused :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+ Container enviroinsights-india-rag-reranker-1 Unpaused
+ Container enviroinsights-india-beat-1 Unpaused
+docker compose exec -T -e OLLAMA_ENABLED=false -e LLM_PROVIDER=extractive -e
+HYPOTHESIS_STORAGE_DIRECTORY=/tmp/hypothesis web pytest --ds=enviroinsights.settings.test failed (exit 1).
+At D:\EnviroInsights-India\scripts\dev.ps1:52 char:9
++         throw "docker compose $($DockerArguments -join ' ') failed (e ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (docker compose ...ailed (exit 1).:String) [], RuntimeException
+    + FullyQualifiedErrorId : docker compose exec -T -e OLLAMA_ENABLED=false -e LLM_PROVIDER=extractive -e HYPOTHESIS_
+   STORAGE_DIRECTORY=/tmp/hypothesis web pytest --ds=enviroinsights.settings.test failed (exit 1).
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 040-final-evidence-preparation (2026-10-16T11:29:37.6091333+05:30; exit 0)</summary>
+
+```powershell
+Get-Content .tools/phase6a-independent/finish_evidence.py -Encoding UTF8 | Select-Object -First 80
+Get-ChildItem .tools/phase6a-independent -File | Select-Object Name
+Get-Content data/results/phase6b/day-benchmark.json -Raw -Encoding UTF8 | Select-Object -First 1
+```
+
+```text
+"""Refresh measured metadata, archive source-reader records and normalize new logs."""
+import hashlib
+import json
+import re
+import shutil
+import subprocess
+from pathlib import Path
+
+root = Path(__file__).resolve().parents[2]
+folder = root / "data/results/phase6a-independent"
+tools = root / ".tools/phase6a-independent"
+metrics_path = root / "docs/results/PHASE6A_INDEPENDENT_METRICS.json"
+metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+metrics["comparison_run"] = json.loads((folder / "comparisons.json").read_text(encoding="utf-8"))
+test_log = (tools / "013-final-reference-and-suite.log").read_text(encoding="utf-16")
+matched = re.search(r"(\d+) passed, (\d+) warnings in ([\d.]+)s", test_log)
+assert matched and int(matched[1]) == 260
+metrics["tests"].update(passed=int(matched[1]), warnings=int(matched[2]), seconds=float(matched[3]))
+metrics["frozen_after"] = json.loads((folder / "identity-after-summary.json").read_text())
+for path in tools.glob("web-*.json"):
+    shutil.copyfile(path, folder / "web" / path.name)
+metrics["web_reader_calls_retained"] = len(list((folder / "web").glob("*.json")))
+metrics_path.write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
+report_path = root / "docs/results/PHASE6A.md"
+report = report_path.read_text(encoding="utf-8")
+report = re.sub(r"Web-container suite: \*\*260 passed, 147 warnings in [\d.]+s\*\*;", f"Web-container suite: **260 passed, 147 warnings in {metrics['tests']['seconds']:.2f}s**;", report)
+report_path.write_text(report, encoding="utf-8")
+validation = root / "docs/VALIDATION.md"
+extra = """
+<details>
+<summary>Additional Turner source-assumption read</summary>
+
+The final source-assumption read is retained with its exact request and returned
+output: [web-turner_assumptions.json](../data/results/phase6a-independent/web/web-turner_assumptions.json).
+It did not establish an exact physical page/class. Turner remains excluded.
+
+</details>
+"""
+validation.write_bytes(validation.read_bytes() + extra.encode("utf-8"))
+# The complete previous journal is preserved from its exact Git blob, not
+# rewritten by Windows newline translation. Only new console padding is trimmed.
+baseline = subprocess.check_output(["git", "show", "c154eaa:docs/VALIDATION.md"], cwd=root)
+normalized = validation.read_bytes().replace(b"\r\n", b"\n")
+base_normalized = baseline.replace(b"\r\n", b"\n")
+assert normalized.startswith(base_normalized)
+added = normalized[len(base_normalized):].decode("utf-8")
+rendered = "\n".join(line.rstrip() for line in added.splitlines()).rstrip() + "\n"
+validation.write_bytes(baseline + rendered.encode("utf-8"))
+# Current health verification rewrote identical bytes in the older local helper's
+# output file; prove its archived historical identity remains intact.
+old = root / "data/results/phase6a-fix"
+old_manifest = json.loads((old / "manifest.json").read_text())
+assert hashlib.sha256((old / "runtime.json").read_bytes()).hexdigest() == old_manifest["artifact_files"]["runtime.json"]["sha256"]
+print(json.dumps({"tests": metrics["tests"], "independent_scalar_passes": metrics["comparison_run"]["independent_numeric_passes"], "retained_web_reader_calls": metrics["web_reader_calls_retained"], "historical_runtime_artifact_unchanged": True, "previous_command_journal_preserved": True}, indent=2))
+
+Name
+----
+001-first-reads-local-library.command.ps1
+001-first-reads-local-library.log
+001-first-reads-local-library.md
+002-frozen-before-reference-catalogue.command.ps1
+002-frozen-before-reference-catalogue.log
+002-frozen-before-reference-catalogue.md
+003-cached-pdf-library-search.command.ps1
+003-cached-pdf-library-search.log
+003-cached-pdf-library-search.md
+004-independent-reference-comparisons.command.ps1
+004-independent-reference-comparisons.log
+004-independent-reference-comparisons.md
+005-lint-reference-run-full-suite.command.ps1
+005-lint-reference-run-full-suite.log
+005-lint-reference-run-full-suite.md
+006-lint-reference-run-full-suite.command.ps1
+006-lint-reference-run-full-suite.log
+006-lint-reference-run-full-suite.md
+007-unchanged-city-examples.command.ps1
+007-unchanged-city-examples.log
+007-unchanged-city-examples.md
+008-frozen-after-health.command.ps1
+008-frozen-after-health.log
+008-frozen-after-health.md
+009-measurements-and-source-state.command.ps1
+009-measurements-and-source-state.log
+009-measurements-and-source-state.md
+010-report-source-journal.command.ps1
+010-report-source-journal.log
+010-report-source-journal.md
+011-journal-completion-turner-assumptions.command.ps1
+011-journal-completion-turner-assumptions.log
+011-journal-completion-turner-assumptions.md
+012-turner-legacy-encoding-review.command.ps1
+012-turner-legacy-encoding-review.log
+012-turner-legacy-encoding-review.md
+013-final-reference-and-suite.command.ps1
+013-final-reference-and-suite.log
+013-final-reference-and-suite.md
+014-final-hash-claim-review.command.ps1
+014-final-hash-claim-review.log
+014-final-hash-claim-review.md
+015-final-evidence-archive.command.ps1
+015-final-evidence-archive.log
+015-final-evidence-archive.md
+archive.py
+checkpoint.json
+examples.py
+finalize_commit.py
+finish_evidence.py
+finish_web_journal.py
+identity.py
+Invoke-Audit.ps1
+library_scan.py
+local_turner_excerpt.py
+web-find_1.json
+web-find_2.json
+web-find_3.json
+web-find_4.json
+web-find_5.json
+web-find_6.json
+web-open_1.json
+web-open_2.json
+web-open_3.json
+web-open_4.json
+web-open_5.json
+web-open_6.json
+web-open_7.json
+web-open_8.json
+web-open_9.json
+web-screenshot.json
+web-search_1.json
+web-search_2.json
+web-search_3.json
+web-search_4.json
+web-search_5.json
+web-search_6.json
+web-turner_assumptions.json
+write_report.py
+[
+  {
+    "city": "delhi",
+    "original_run_id": 62,
+    "date": "2025-01-15T12:00:00+05:30",
+    "cold_definition": "first new canonical ScenarioRuns, not cold OS cache",
+    "request": {
+      "city": "delhi",
+      "grid": {
+        "width_m": 10000,
+        "resolution_m": 50
+      },
+      "name": "Phase6A explicit unit-release demonstration delhi",
+      "centre": [
+        77.209,
+        28.6139
+      ],
+      "sources": [
+        {
+          "type": "point",
+          "height_m": 50.0,
+          "location": [
+            77.209,
+            28.6139
+          ],
+          "diameter_m": 0.0,
+          "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect.; Phase 6B day benchmark 1792128988260114139",
+          "emission_gs": 1.0,
+          "exit_velocity_ms": 0.0,
+          "exit_temperature_k": 293.15
+        }
+      ],
+      "datetime": "2025-01-15T12:00:00+05:30",
+      "thresholds": [
+        5.0
+      ],
+      "environment": "urban",
+      "weather_mode": "real",
+      "receptor_height": 1.5
+    },
+    "cold": {
+      "seconds": 5.531972564000171,
+      "available": 24,
+      "cached": 0,
+      "run_ids": [
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "validation_statuses": [
+        "formula_check_only",
+        "unvalidated_branch"
+      ]
+    },
+    "warm": {
+      "seconds": 0.32942966100017657,
+      "available": 24,
+      "cached": 24,
+      "run_ids": [
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "validation_statuses": [
+        "formula_check_only",
+        "unvalidated_branch"
+      ]
+    }
+  },
+  {
+    "city": "mumbai",
+    "original_run_id": 63,
+    "date": "2025-07-15T15:00:00+05:30",
+    "cold_definition": "first new canonical ScenarioRuns, not cold OS cache",
+    "request": {
+      "city": "mumbai",
+      "grid": {
+        "width_m": 10000,
+        "resolution_m": 50
+      },
+      "name": "Phase6A explicit unit-release demonstration mumbai",
+      "centre": [
+        72.8777,
+        19.076
+      ],
+      "sources": [
+        {
+          "type": "point",
+          "height_m": 50.0,
+          "location": [
+            72.8777,
+            19.076
+          ],
+          "diameter_m": 0.0,
+          "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect.; Phase 6B day benchmark 1792128988260114139",
+          "emission_gs": 1.0,
+          "exit_velocity_ms": 0.0,
+          "exit_temperature_k": 293.15
+        }
+      ],
+      "datetime": "2025-07-15T15:00:00+05:30",
+      "thresholds": [
+        5.0
+      ],
+      "environment": "urban",
+      "weather_mode": "real",
+      "receptor_height": 1.5
+    },
+    "cold": {
+      "seconds": 2.649020040000323,
+      "available": 24,
+      "cached": 0,
+      "run_ids": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ],
+      "validation_statuses": [
+        "formula_check_only",
+        "unvalidated_branch"
+      ]
+    },
+    "warm": {
+      "seconds": 0.2668031860002884,
+      "available": 24,
+      "cached": 24,
+      "run_ids": [
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137
+      ],
+      "validation_statuses": [
+        "formula_check_only",
+        "unvalidated_branch"
+      ]
+    }
+  },
+  {
+    "city": "hyderabad",
+    "original_run_id": 64,
+    "date": "2025-11-15T20:00:00+05:30",
+    "cold_definition": "first new canonical ScenarioRuns, not cold OS cache",
+    "request": {
+      "city": "hyderabad",
+      "grid": {
+        "width_m": 10000,
+        "resolution_m": 50
+      },
+      "name": "Phase6A explicit unit-release demonstration hyderabad",
+      "centre": [
+        78.4867,
+        17.385
+      ],
+      "sources": [
+        {
+          "type": "point",
+          "height_m": 50.0,
+          "location": [
+            78.4867,
+            17.385
+          ],
+          "diameter_m": 0.0,
+          "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect.; Phase 6B day benchmark 1792128988260114139",
+          "emission_gs": 1.0,
+          "exit_velocity_ms": 0.0,
+          "exit_temperature_k": 293.15
+        }
+      ],
+      "datetime": "2025-11-15T20:00:00+05:30",
+      "thresholds": [
+        5.0
+      ],
+      "environment": "urban",
+      "weather_mode": "real",
+      "receptor_height": 1.5
+    },
+    "cold": {
+      "seconds": 2.883380249999391,
+      "available": 24,
+      "cached": 0,
+      "run_ids": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161
+      ],
+      "validation_statuses": [
+        "formula_check_only",
+        "unvalidated_branch"
+      ]
+    },
+    "warm": {
+      "seconds": 0.3114578229997278,
+      "available": 24,
+      "cached": 24,
+      "run_ids": [
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161
+      ],
+      "validation_statuses": [
+        "formula_check_only",
+        "unvalidated_branch"
+      ]
+    }
+  }
+]
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 042-runtime-observation-state (2026-10-16T11:31:59.3814244+05:30; exit 0)</summary>
+
+```powershell
+Get-Content apps/dashboard/static/dashboard/vendor/maplibre-LICENSE.txt -Encoding UTF8 | Select-Object -First 12
+Get-Content data/results/phase6b/gc-observation.json -Raw -Encoding UTF8 -ErrorAction SilentlyContinue
+```
+
+```text
+Copyright (c) 2023, MapLibre contributors
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 041-full-suite-garbage-collection-observation (2026-10-16T11:30:32.7693428+05:30; exit 0)</summary>
+
+```powershell
+Get-Content tests/test_vayusim_physics.py -Encoding UTF8 | Select-Object -First 125
+docker compose exec -T -e PYTHONPATH=/app -e OLLAMA_ENABLED=false -e LLM_PROVIDER=extractive -e HYPOTHESIS_STORAGE_DIRECTORY=/tmp/hypothesis web python .tools/phase6b/profile_suite.py
+```
+
+```text
+"""Physics checks run entirely offline; fixtures are not warehouse observations."""
+
+import json
+from pathlib import Path
+
+import numpy as np
+import pytest
+from hypothesis import given, settings
+from hypothesis import strategies as st
+
+from apps.vayusim.physics import concentration, expand_sources, simulate
+from apps.vayusim.physics.dispersion import sigmas
+from apps.vayusim.physics.meteorology import stability_class, wind_at_height
+from apps.vayusim.physics.rise import effective_height
+
+POSITIVE = st.floats(min_value=1, max_value=1000, allow_nan=False, allow_infinity=False)
+WEATHER = {
+    "wind_speed_ms": 4.0,
+    "wind_direction_deg": 270.0,
+    "temperature_k": 293.0,
+    "stability_class": "D",
+    "mixing_height_m": None,
+}
+SOURCE = {
+    "type": "point",
+    "east_m": 0.0,
+    "north_m": 0.0,
+    "emission_gs": 10.0,
+    "height_m": 0.0,
+    "diameter_m": 0.0,
+    "exit_velocity_ms": 0.0,
+    "exit_temperature_k": 293.0,
+}
+
+
+def test_turner_problem9_concentrations():
+    """Turner AP26 (1970), Chapter7 Problem9, Table7-4.
+
+    EPA copy https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT
+    Q=151g/s, u=4m/s, H=150m, x=1km, chart sy=157m, sz=110m.
+    Tests the Gaussian equation using published chart inputs, NOT substituting
+    Briggs for the workbook's different Pasquill chart parameterisation.
+    This EPA HTML transcription is unpaginated. The separately checked Cimbala
+    PDF example below provides the required exact-page worked example.
+    """
+    actual = concentration(
+        151.0, 4.0, 157.0, 110.0, 0.0, z=np.array([0.0, 30.0, 150.0]), height=150.0
+    )
+    np.testing.assert_allclose(actual, [278.0, 285.0, 358.0], rtol=0.10)
+
+
+def test_cimbala_reflecting_ground_worked_example():
+    """J.M.Cimbala, PSU ME433 Lesson06E, PDF p3 worked example (incl handwritten solution).
+
+    https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf
+    At4.85km: Q=110kg/s, u=5m/s, H=80+20=100m,
+    published Martin-model sy=278.97m, sz=87.51m, reflected C=149.3mg/m³.
+    Primitive validation uses those published sigmas; Briggs is checked separately.
+    """
+    value = concentration(110000.0, 5.0, 278.97, 87.51, 0.0, z=0.0, height=100.0)
+    assert value / 1000 == pytest.approx(149.3, rel=0.10)
+
+
+@pytest.mark.parametrize(
+    "environment,stability,expected",
+    [
+        ("rural", "A", (209.762, 200.0)),
+        ("rural", "B", (152.554, 120.0)),
+        ("rural", "D", (76.277, 37.947)),
+        ("rural", "F", (38.139, 12.308)),
+        ("urban", "A", (270.449, 339.411)),
+        ("urban", "D", (135.225, 122.788)),
+        ("urban", "F", (92.967, 50.596)),
+    ],
+)
+def test_briggs_published_table(environment, stability, expected):
+    """Brune, PSU METEO532 Table2.3 (unpaginated), independent table arithmetic at1km.
+
+    This is coefficient transcription validation, not a chart/worked-example sigma claim.
+    https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm
+    """
+    np.testing.assert_allclose(sigmas(1000.0, stability, environment), expected, rtol=0.05)
+
+
+@given(q=POSITIVE, sy=POSITIVE, sz=POSITIVE, wind=st.floats(1, 20))
+@settings(max_examples=30)
+def test_crosswind_mass_reflection(q, sy, sz, wind):
+    y = np.linspace(-10 * sy, 10 * sy, 2001)
+    integrated = np.trapezoid(concentration(q, wind, sy, sz, y, z=0.0, height=0.0), y)
+    assert integrated == pytest.approx(2 * q * 1e6 / (np.sqrt(2 * np.pi) * wind * sz), rel=1e-6)
+
+
+@given(y=st.floats(-5000, 5000), sy=POSITIVE, sz=POSITIVE)
+def test_crosswind_symmetry(y, sy, sz):
+    assert concentration(10.0, 4.0, sy, sz, y) == concentration(10.0, 4.0, sy, sz, -y)
+
+
+@given(q=POSITIVE, factor=st.floats(0.1, 10), sy=POSITIVE, sz=POSITIVE)
+def test_emission_linearity(q, factor, sy, sz):
+    assert concentration(q * factor, 4.0, sy, sz, 5.0) == pytest.approx(
+        factor * concentration(q, 4.0, sy, sz, 5.0), rel=1e-12
+    )
+
+
+@given(q1=POSITIVE, q2=POSITIVE, shift=st.floats(-100, 100))
+@settings(max_examples=30)
+def test_source_superposition(q1, q2, shift):
+    east, north = np.meshgrid(np.linspace(100, 5000, 20), np.linspace(-1000, 1000, 20))
+    a, b = {**SOURCE, "emission_gs": q1}, {**SOURCE, "emission_gs": q2, "north_m": shift}
+    combined, _ = simulate(east, north, [a, b], WEATHER)
+    first, _ = simulate(east, north, [a], WEATHER)
+    second, _ = simulate(east, north, [b], WEATHER)
+    np.testing.assert_allclose(combined, first + second, rtol=2e-6, atol=1e-8)
+
+
+@given(height=st.floats(0, 500), extra=st.floats(0, 500))
+def test_higher_release_cannot_raise_ground_maximum(height, extra):
+    # Identical transport/dispersion (fixed wind); z=0, no plume rise/lid.
+    sy, sz = sigmas(np.linspace(100, 10000, 1000), "D")
+    low = concentration(10.0, 4.0, sy, sz, 0.0, z=0.0, height=height)
+    high = concentration(10.0, 4.0, sy, sz, 0.0, z=0.0, height=height + extra)
+    assert high.max() <= low.max() * (1 + 1e-14)
+
+
+@given(x=st.floats(-10000, 0), y=st.floats(-10000, 10000))
+........................................................................ [ 26%]
+........................................................................ [ 53%]
+........................................................................ [ 79%]
+.......................................................                  [100%]
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+271 passed, 147 warnings in 81.90s (0:01:21)
+
+GC_PAUSE {"seconds": 0.5337860720001117, "cpu_seconds": 0.533467360000003, "test": "tests/test_vayusim_physics.py::test_stored_golden_fields[urban-stable-lid]", "stack": ["/usr/local/lib/python3.12/site-packages/_pytest/unraisableexception.py:33:gc_collect_harder", "/usr/local/lib/python3.12/site-packages/_pytest/unraisableexception.py:172:pytest_unconfigure", "/usr/local/lib/python3.12/site-packages/pluggy/_callers.py:121:_multicall", "/usr/local/lib/python3.12/site-packages/pluggy/_manager.py:120:_hookexec", "/usr/local/lib/python3.12/site-packages/pluggy/_hooks.py:512:__call__", "/usr/local/lib/python3.12/site-packages/_pytest/config/__init__.py:1212:_ensure_unconfigure", "/usr/local/lib/python3.12/site-packages/_pytest/main.py:372:wrap_session", "/usr/local/lib/python3.12/site-packages/_pytest/main.py:377:pytest_cmdline_main", "/usr/local/lib/python3.12/site-packages/pluggy/_callers.py:121:_multicall", "/usr/local/lib/python3.12/site-packages/pluggy/_manager.py:120:_hookexec", "/usr/local/lib/python3.12/site-packages/pluggy/_hooks.py:512:__call__", "/usr/local/lib/python3.12/site-packages/_pytest/config/__init__.py:229:_main"], "generation": 2, "collected": 3014, "uncollectable": 0}
+
+GC_PAUSE {"seconds": 0.39365192300010676, "cpu_seconds": 0.39361977400000114, "test": "tests/test_vayusim_physics.py::test_stored_golden_fields[urban-stable-lid]", "stack": ["/usr/local/lib/python3.12/site-packages/_pytest/unraisableexception.py:33:gc_collect_harder", "/usr/local/lib/python3.12/site-packages/_pytest/unraisableexception.py:99:cleanup", "/usr/local/lib/python3.12/contextlib.py:478:_exit_wrapper", "/usr/local/lib/python3.12/contextlib.py:595:__exit__", "/usr/local/lib/python3.12/contextlib.py:618:close", "/usr/local/lib/python3.12/site-packages/_pytest/config/__init__.py:1217:_ensure_unconfigure", "/usr/local/lib/python3.12/site-packages/_pytest/main.py:372:wrap_session", "/usr/local/lib/python3.12/site-packages/_pytest/main.py:377:pytest_cmdline_main", "/usr/local/lib/python3.12/site-packages/pluggy/_callers.py:121:_multicall", "/usr/local/lib/python3.12/site-packages/pluggy/_manager.py:120:_hookexec", "/usr/local/lib/python3.12/site-packages/pluggy/_hooks.py:512:__call__", "/usr/local/lib/python3.12/site-packages/_pytest/config/__init__.py:229:_main"], "generation": 2, "collected": 0, "uncollectable": 0}
+Observed GC pauses >=50ms: 13
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 043-page-serializer-allocation-baseline (2026-10-16T11:32:35.8684122+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6b/spec_benchmark.py before
+python -c "import json; from pathlib import Path; x=json.loads(Path('data/results/phase6b/gc-observation.json').read_text(encoding='utf-8')); print(json.dumps([{k:r[k] for k in ('test','seconds','cpu_seconds','generation','collected')} for r in x],indent=2))"
+```
+
+```text
+{
+  "calls": 100,
+  "seconds": 1.464717230000133,
+  "current_bytes": 450297,
+  "peak_bytes": 738499,
+  "gc_counts": [
+    24,
+    1,
+    18
+  ]
+}
+[
+  {
+    "test": "collection",
+    "seconds": 0.07509786399987206,
+    "cpu_seconds": 0.07509958500000025,
+    "generation": 2,
+    "collected": 36
+  },
+  {
+    "test": "collection",
+    "seconds": 0.22141886099961994,
+    "cpu_seconds": 0.2214053319999998,
+    "generation": 2,
+    "collected": 20
+  },
+  {
+    "test": "collection",
+    "seconds": 0.14064743600010843,
+    "cpu_seconds": 0.14064105699999985,
+    "generation": 2,
+    "collected": 0
+  },
+  {
+    "test": "collection",
+    "seconds": 0.14277789700008725,
+    "cpu_seconds": 0.14276854199999978,
+    "generation": 2,
+    "collected": 20
+  },
+  {
+    "test": "collection",
+    "seconds": 0.3120763490005629,
+    "cpu_seconds": 0.31203316899999933,
+    "generation": 2,
+    "collected": 199
+  },
+  {
+    "test": "collection",
+    "seconds": 0.1913313470004141,
+    "cpu_seconds": 0.19132173400000063,
+    "generation": 2,
+    "collected": 130
+  },
+  {
+    "test": "collection",
+    "seconds": 0.261165436999363,
+    "cpu_seconds": 0.26113884399999954,
+    "generation": 2,
+    "collected": 54
+  },
+  {
+    "test": "collection",
+    "seconds": 0.42314859599991905,
+    "cpu_seconds": 0.42299979400000076,
+    "generation": 2,
+    "collected": 25
+  },
+  {
+    "test": "collection",
+    "seconds": 0.44983295499969245,
+    "cpu_seconds": 0.449774675999997,
+    "generation": 2,
+    "collected": 73122
+  },
+  {
+    "test": "tests/test_database.py::test_reverse_hypertable_migration_preserves_rows_and_keys",
+    "seconds": 0.5438235559995519,
+    "cpu_seconds": 0.5437320400000019,
+    "generation": 2,
+    "collected": 39953
+  },
+  {
+    "test": "tests/test_vayusim_physics.py::test_upwind_zero",
+    "seconds": 0.532031516000643,
+    "cpu_seconds": 0.5316740150000001,
+    "generation": 2,
+    "collected": 122511
+  },
+  {
+    "test": "tests/test_vayusim_physics.py::test_stored_golden_fields[urban-stable-lid]",
+    "seconds": 0.5337860720001117,
+    "cpu_seconds": 0.533467360000003,
+    "generation": 2,
+    "collected": 3014
+  },
+  {
+    "test": "tests/test_vayusim_physics.py::test_stored_golden_fields[urban-stable-lid]",
+    "seconds": 0.39365192300010676,
+    "cpu_seconds": 0.39361977400000114,
+    "generation": 2,
+    "collected": 0
+  }
+]
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 044-serializer-review (2026-10-16T11:32:56.1573573+05:30; exit 0)</summary>
+
+```powershell
+Get-Content apps/vayusim/views.py -Encoding UTF8 | Select-Object -First 35
+```
+
+```text
+from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView
+
+from apps.warehouse.models import City
+
+from .models import Scenario, ScenarioRun
+from .serializers import RunSerializer
+from .service import run_response
+
+EXAMPLE_HASHES = (
+    "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+    "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+    "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+)
+
+
+def retained_spec(run):
+    return {
+        "name": run.scenario.name,
+        **{key: value for key, value in run.inputs.items() if key in RunSerializer().fields},
+    }
+
+
+class SimulatorPage(TemplateView):
+    template_name = "vayusim/cinematic.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["cities"] = [
+            {"slug": city.slug, "name": city.name, "location": [city.location.x, city.location.y]}
+            for city in City.objects.order_by("name")
+        ]
+        examples = ScenarioRun.objects.select_related("scenario__city").filter(
+            inputs_hash__in=EXAMPLE_HASHES
+        )
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 045-final-serializer-efficiency-and-full-suite (2026-10-16T11:33:04.7848729+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6b/spec_benchmark.py after
+docker compose exec -T web ruff check .
+docker compose exec -T web ruff format --check .
+.\scripts\dev.ps1 test
+```
+
+```text
+{
+  "calls": 100,
+  "seconds": 0.1293217780003033,
+  "current_bytes": 159066,
+  "peak_bytes": 362062,
+  "gc_counts": [
+    25,
+    5,
+    1
+  ]
+}
+All checks passed!
+269 files already formatted
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 271 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  2%]
+tests/test_api.py ...                                                    [  3%]
+tests/test_database.py ......                                            [  5%]
+tests/test_deweather_diagnostics.py ...                                  [  6%]
+tests/test_forecast_operations.py ..                                     [  7%]
+tests/test_forecasting.py .                                              [  7%]
+tests/test_ingest_api.py ....                                            [  9%]
+tests/test_ingest_sources.py ...................                         [ 16%]
+tests/test_rag_audit.py .                                                [ 16%]
+tests/test_rag_pipeline.py .......................                       [ 25%]
+tests/test_research_api.py .                                             [ 25%]
+tests/test_research_clocks.py ..                                         [ 26%]
+tests/test_seed.py .                                                     [ 26%]
+tests/test_vayusim_api.py ..............                                 [ 31%]
+tests/test_vayusim_frontend.py ...........                               [ 35%]
+tests/test_vectors.py ..                                                 [ 36%]
+tests/test_database.py .                                                 [ 36%]
+tests/test_vayusim_api.py .                                              [ 37%]
+tests/test_worker.py .                                                   [ 37%]
+tests/test_analytics.py ...................                              [ 44%]
+tests/test_dashboard_evidence.py ..                                      [ 45%]
+tests/test_deweather_diagnostics.py ....                                 [ 46%]
+tests/test_forecast_intervals.py .                                       [ 47%]
+tests/test_forecast_operations.py ...                                    [ 48%]
+tests/test_forecasting.py .................                              [ 54%]
+tests/test_foundation.py .....................                           [ 62%]
+tests/test_ingest_sources.py ......                                      [ 64%]
+tests/test_ingest_units.py .....................                         [ 72%]
+tests/test_phase6a_audit.py .......                                      [ 74%]
+tests/test_phase6a_fix.py ...                                            [ 76%]
+tests/test_rag_pipeline.py ...........                                   [ 80%]
+tests/test_rag_resident_worker.py .                                      [ 80%]
+tests/test_research_methods.py .....                                     [ 82%]
+tests/test_vayusim_api.py ....                                           [ 83%]
+tests/test_vayusim_independent_references.py ........                    [ 86%]
+tests/test_vayusim_physics.py ....................................       [100%]
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================ 271 passed, 147 warnings in 100.88s (0:01:40) =================
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 046-final-runtime-hashes-and-deploy (2026-10-16T11:36:42.7970221+05:30; exit 0)</summary>
+
+```powershell
+docker compose ps
+docker compose exec -T web python .tools/phase6b/runtime.py
+docker compose exec -T web python manage.py check --deploy --settings=enviroinsights.settings.prod
+docker compose exec -T web python manage.py spectacular --validate --file /tmp/phase6b-openapi.yml
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6b/preservation.py
+python .tools/phase6b/identity.py after
+git diff --exit-code -- apps/vayusim/physics apps/vayusim/presets.py docs/results/PHASE6A.md docs/results/PHASE6A_INDEPENDENT_METRICS.json
+```
+
+```text
+NAME                                  IMAGE                           COMMAND                  SERVICE        CREATED        STATUS                 PORTS
+enviroinsights-india-beat-1           enviroinsights-india:dev        "/bin/sh /app/docker…"   beat           12 hours ago   Up 2 hours             8000/tcp
+enviroinsights-india-db-1             timescale/timescaledb-ha:pg16   "/docker-entrypoint.…"   db             8 days ago     Up 2 hours (healthy)   127.0.0.1:5433->5432/tcp
+enviroinsights-india-flower-1         enviroinsights-india:dev        "/bin/sh /app/docker…"   flower         12 hours ago   Up 2 hours             127.0.0.1:5555->5555/tcp
+enviroinsights-india-mlflow-1         enviroinsights-india:dev        "/bin/sh /app/docker…"   mlflow         12 hours ago   Up 2 hours (healthy)   127.0.0.1:5000->5000/tcp
+enviroinsights-india-rag-models-1     enviroinsights-india:dev        "/bin/sh /app/docker…"   rag-models     12 hours ago   Up 2 hours (healthy)   8000/tcp
+enviroinsights-india-rag-reranker-1   enviroinsights-india:dev        "/bin/sh /app/docker…"   rag-reranker   12 hours ago   Up 2 hours (healthy)   8000/tcp
+enviroinsights-india-redis-1          redis:7.4.2-alpine              "docker-entrypoint.s…"   redis          8 days ago     Up 2 hours (healthy)   127.0.0.1:6380->6379/tcp
+enviroinsights-india-web-1            enviroinsights-india:dev        "/bin/sh /app/docker…"   web            12 hours ago   Up 29 minutes          127.0.0.1:8000->8000/tcp
+enviroinsights-india-worker-1         enviroinsights-india:dev        "/bin/sh /app/docker…"   worker         12 hours ago   Up 2 hours             8000/tcp
+{
+  "http": [
+    {
+      "path": "/api/health/",
+      "status": 200,
+      "body": {
+        "ok": true,
+        "checks": {
+          "database": {
+            "ok": true
+          },
+          "extensions": {
+            "postgis": {
+              "ok": true,
+              "version": "3.6.4"
+            },
+            "timescaledb": {
+              "ok": true,
+              "version": "2.30.2"
+            },
+            "vector": {
+              "ok": true,
+              "version": "0.8.7"
+            }
+          },
+          "redis": {
+            "ok": true
+          },
+          "celery": {
+            "ok": true
+          }
+        }
+      }
+    },
+    {
+      "path": "/vayusim/",
+      "status": 200
+    },
+    {
+      "path": "/simulator/",
+      "status": 200
+    }
+  ],
+  "assistant_provider": "extractive",
+  "ollama_enabled": "false",
+  "compose_profiles": ""
+}
+System check identified no issues (0 silenced).
+{
+  "prior_independent_artifacts_unchanged": 70,
+  "prior_scientific_code_and_reports_unchanged": 5,
+  "examples": [
+    {
+      "run_id": 62,
+      "city": "delhi",
+      "stability": "C",
+      "peak_ugm3": 15.641839027404785,
+      "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+      "grid_sha256": "d1aaf3e80b3890463af41998244f9c8136f549b0e649c814389968cd45ad9592",
+      "all_original_summary_values_identical": true
+    },
+    {
+      "run_id": 63,
+      "city": "mumbai",
+      "stability": "C",
+      "peak_ugm3": 11.536741256713867,
+      "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+      "grid_sha256": "6adfb341ceda54cf51e39be0a9a71a81cff112979cb662a6311caa46976f150c",
+      "all_original_summary_values_identical": true
+    },
+    {
+      "run_id": 64,
+      "city": "hyderabad",
+      "stability": "F",
+      "peak_ugm3": 18.990890502929688,
+      "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+      "grid_sha256": "528d6c0080dab5c48dd2bf7716529d4d26e0f49f1b0ce07d2292b54e1f562663",
+      "all_original_summary_values_identical": true
+    }
+  ]
+}
+{
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "existing_tests_and_fixtures": {
+    "files": 52,
+    "aggregate_sha256": "96269be9a5fac7370622731cc9bd2266c74ccf63e2f51aff4e49c112bb145416"
+  },
+  "physics_and_presets": {
+    "files": 6,
+    "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+  },
+  "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+  "stage": "after",
+  "identical_to_before": true
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 047-final-report-and-measurements (2026-10-16T11:42:39.2122020+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase6b/finish_evidence.py 045-final-serializer-efficiency-and-full-suite
+git diff --check
+git status --short --untracked-files=all
+Get-Content docs/results/PHASE6B.md -Encoding UTF8 -Tail 46
+```
+
+```text
+{
+  "tests": {
+    "passed": 271,
+    "warnings": 147,
+    "seconds": 100.88,
+    "command_log": "045-final-serializer-efficiency-and-full-suite"
+  },
+  "frozen_unchanged": true,
+  "examples_unchanged": true,
+  "prior_journal_bytes_preserved": true,
+  "report": "docs/results/PHASE6B.md"
+}
+ M README.md
+ M apps/dashboard/templates/dashboard/base.html
+ M apps/vayusim/api.py
+ M apps/vayusim/service.py
+ M apps/vayusim/urls.py
+ M apps/vayusim/views.py
+ M docs/ARCHITECTURE.md
+ M docs/DATA_MODEL.md
+ M docs/VALIDATION.md
+ M enviroinsights/urls.py
+?? apps/vayusim/presentation.py
+?? apps/vayusim/static/vayusim/cinematic.css
+?? apps/vayusim/static/vayusim/cinematic.js
+?? apps/vayusim/templates/vayusim/cinematic.html
+?? data/raw/forecast/live/bengaluru/2026-10-14_2026-10-18.json.manifest.json
+?? data/raw/forecast/live/chennai/2026-10-14_2026-10-18.json.manifest.json
+?? data/raw/forecast/live/delhi/2026-10-14_2026-10-18.json.manifest.json
+?? data/raw/forecast/live/hyderabad/2026-10-14_2026-10-18.json.manifest.json
+?? data/raw/forecast/live/kolkata/2026-10-14_2026-10-18.json.manifest.json
+?? data/raw/forecast/live/mumbai/2026-10-14_2026-10-18.json.manifest.json
+?? data/raw/forecast/live/pune/2026-10-14_2026-10-18.json.manifest.json
+?? data/raw/openmeteo/ahmedabad/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/ahmedabad/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/ahmedabad/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/ahmedabad/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/bengaluru/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/bengaluru/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/bengaluru/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/bengaluru/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/chennai/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/chennai/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/chennai/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/chennai/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/delhi/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/delhi/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/delhi/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/delhi/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/hyderabad/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/hyderabad/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/hyderabad/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/hyderabad/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/jaipur/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/jaipur/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/jaipur/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/jaipur/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/kanpur/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/kanpur/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/kanpur/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/kanpur/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/kolkata/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/kolkata/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/kolkata/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/kolkata/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/lucknow/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/lucknow/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/lucknow/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/lucknow/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/mumbai/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/mumbai/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/mumbai/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/mumbai/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/patna/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/patna/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/patna/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/patna/2026-10-08_2026-10-10.json.manifest.json
+?? data/raw/openmeteo/pune/2026-10-03_2026-10-05.json.manifest.json
+?? data/raw/openmeteo/pune/2026-10-05_2026-10-07.json.manifest.json
+?? data/raw/openmeteo/pune/2026-10-07_2026-10-09.json.manifest.json
+?? data/raw/openmeteo/pune/2026-10-08_2026-10-10.json.manifest.json
+?? docs/results/PHASE6B.md
+?? docs/results/PHASE6B_METRICS.json
+?? docs/results/phase6b-cross-section.png
+?? docs/results/phase6b-day.png
+?? docs/results/phase6b-delhi-1440.png
+?? docs/results/phase6b-delhi-390.png
+?? docs/results/phase6b-export-delhi.png
+?? docs/results/phase6b-export-hyderabad.png
+?? docs/results/phase6b-export-mumbai.png
+?? docs/results/phase6b-fallback-phone.png
+?? docs/results/phase6b-hyderabad-1440.png
+?? docs/results/phase6b-hyderabad-390.png
+?? docs/results/phase6b-light.png
+?? docs/results/phase6b-mumbai-1440.png
+?? docs/results/phase6b-mumbai-390.png
+?? scripts/verify_vayusim_browser.cjs
+?? scripts/verify_vayusim_interactions.cjs
+?? tests/test_vayusim_frontend.py
+hashes. Original example input hashes, binary SHA256s and every original summary
+value match before/after, including peaks:
+
+| Stored run | City / branch | Peak µg/m³, unchanged | Frontend label |
+| --- | --- | --- | --- |
+| 62 | Delhi urban C | 15.641839027404785 | unvalidated branch |
+| 63 | Mumbai urban C | 11.536741256713867 | unvalidated branch |
+| 64 | Hyderabad urban F | 18.990890502929688 | unvalidated branch |
+
+| Frozen set | Before SHA256 = after SHA256 |
+| --- | --- |
+| Phase 3A.2, 316 files | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` |
+| Phase 4, 776 files | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` |
+| Phase 5 questions/relevance | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` |
+
+The added offline tests cover status branches, run/header/scenario/PNG metadata,
+visible image annotation pixels, immutable page inputs, all example cards and
+shared rendering, section creation/read/cache, source-removed zero fields,
+unknown IDs, empty scenarios and cached 24-hour day identity. Existing tests
+and labels were not edited. Final unmodified web-container suite: **271 passed, 147 warnings in 100.88s**. Ruff and formatting pass; the production deployment check reports **0 issues (0 silenced)**; OpenAPI validation and migration drift checks pass. All nine default Compose services are restored/running and `/api/health/` returns **200**, with every check true. The assistant remains extractive and Ollama remains off. The 147 warnings are the existing NumPy/pandas timedelta, SHAP, compiled netCDF4 ABI and statsmodels fixture convergence warnings; none was silenced. The intermittent Hypothesis wall-clock health-check failures and the passing original-seed replay/observational run remain in the journal; no numerical assertion or health-check setting was altered. Allocation review also removed repeated serializer construction per input key; its separate measured 100-call benchmark is retained in the metrics.
+
+Structured evidence is retained in `data/results/phase6b/`; selected measured
+outputs are committed in `PHASE6B_METRICS.json`. Commands, failures and re-runs
+are recorded in [VALIDATION.md](../VALIDATION.md). Final Git commands and commit
+identity are retained in `data/results/phase6b/final-git.json` to avoid a
+self-referential commit hash in the committed report. No push is performed.
+
+## Remaining limitations
+
+Urban C/F retain the scientific limitations of Phase 6A. This frontend does not
+resolve independent numeric readiness or establish field predictive performance.
+Flat terrain, primary PM2.5 only, no chemistry/deposition, uniform hourly weather,
+steady state and near-field source discretisation still apply. Population is
+the supported grid footprint, not citywide census exposure or a health estimate.
+Measured totals and hourly source increments have different meanings.
+
+Particle movement is display shimmer; day mode switches independent steady
+hours, not a moving pollutant mass. Single-trial timings and software-rendered
+Edge screenshots are local-device observations, not hardware/browser guarantees.
+The cross-section is a new stored receptor grid with its own sampling, not a
+measured vertical profile or information recovered from the original 2-D field.
+All comparisons remain source-only. No full-site redesign, new physics,
+coefficient/preset tuning, inventory inference, paid infrastructure, hosting,
+scientific re-evaluation or later research phase is included in this task.
+
+Annotated example exports: [Delhi](phase6b-export-delhi.png), [Mumbai](phase6b-export-mumbai.png), [Hyderabad](phase6b-export-hyderabad.png).
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 048-precommit-scope-review (2026-10-16T11:44:02.9650801+05:30; exit 0)</summary>
+
+```powershell
+git diff -- apps/vayusim/api.py apps/vayusim/service.py apps/vayusim/views.py apps/vayusim/urls.py enviroinsights/urls.py
+python -c "import json; from pathlib import Path; x=json.loads(Path('docs/results/PHASE6B_METRICS.json').read_text(encoding='utf-8')); assert x['tests']['passed']==271; assert x['frozen_after']['identical_to_before']; assert x['interactions']['day']['cached_scrub_grid_requests']==0; print('Final report metrics agree with successful real runs.')"
+git diff --check
+```
+
+```text
+diff --git a/apps/vayusim/api.py b/apps/vayusim/api.py
+index 693f580..c6f039c 100644
+--- a/apps/vayusim/api.py
++++ b/apps/vayusim/api.py
+@@ -14,9 +14,10 @@ from apps.warehouse.models import City
+
+ from .artifacts import overlay_png
+ from .models import Scenario, ScenarioRun
++from .presentation import export_png, section_path, store_section
+ from .presets import presets
+ from .serializers import RunSerializer
+-from .service import ensure_grid, interpretation, run_response, run_scenario
++from .service import ensure_grid, interpretation, run_response, run_scenario, validation_status
+ from .weather import IST, background_stations
+
+
+@@ -49,6 +50,7 @@ class GridView(APIView):
+             return Response(
+                 {
+                     "run_id": run.pk,
++                    "validation_status": validation_status(run),
+                     "engine_version": run.engine_version,
+                     "inputs_hash": run.inputs_hash,
+                     **run.summary["grid"],
+@@ -73,16 +75,48 @@ class ScenarioView(APIView):
+     @extend_schema(responses=OpenApiTypes.OBJECT)
+     def get(self, request, slug):
+         scenario = get_object_or_404(Scenario, share_slug=slug)
++        runs = list(scenario.runs.order_by("id"))
+         return Response(
+             {
+                 "name": scenario.name,
+                 "slug": slug,
+                 "inputs": scenario.inputs,
+-                "runs": [run_response(r) for r in scenario.runs.order_by("id")],
++                "validation_status": validation_status(runs[-1]) if runs else None,
++                "runs": [run_response(r) for r in runs],
+             }
+         )
+
+
++class ExportView(APIView):
++    @extend_schema(responses=OpenApiTypes.BINARY)
++    def get(self, request, run_id):
++        run = get_object_or_404(ScenarioRun.objects.select_related("scenario__city"), pk=run_id)
++        response = HttpResponse(export_png(run), content_type="image/png")
++        response["Content-Disposition"] = f'attachment; filename="vayusim-{run.pk}.png"'
++        response["X-Validation-Status"] = validation_status(run)
++        return response
++
++
++class SectionView(APIView):
++    @extend_schema(responses=OpenApiTypes.OBJECT)
++    def get(self, request, run_id):
++        import json
++
++        run = get_object_or_404(ScenarioRun, pk=run_id)
++        path = section_path(run)
++        if not path.exists():
++            return Response(
++                {"detail": "No stored vertical grid; POST here to create it"}, status=404
++            )
++        return Response(json.loads(path.read_text(encoding="utf-8")))
++
++    @extend_schema(request=None, responses=OpenApiTypes.OBJECT)
++    def post(self, request, run_id):
++        run = get_object_or_404(ScenarioRun, pk=run_id)
++        store_section(run)
++        return self.get(request, run_id)
++
++
+ class DayView(APIView):
+     @extend_schema(request=RunSerializer, responses=OpenApiTypes.OBJECT)
+     def post(self, request):
+diff --git a/apps/vayusim/service.py b/apps/vayusim/service.py
+index a10c925..33196e2 100644
+--- a/apps/vayusim/service.py
++++ b/apps/vayusim/service.py
+@@ -235,6 +235,7 @@ def run_response(run, cached=False):
+         "inputs_hash": run.inputs_hash,
+         "engine_version": run.engine_version,
+         "stability_class": run.stability_class,
++        "validation_status": validation_status(run),
+         "flags": run.flags,
+         "runtime_ms": run.run_time_ms,
+         "summary": {k: v for k, v in run.summary.items() if k != "contours"},
+@@ -242,11 +243,20 @@ def run_response(run, cached=False):
+         "grid_url": prefix + ".bin",
+         "grid_header_url": prefix + ".json",
+         "overlay_url": prefix + ".png",
++        "export_url": f"/api/vayusim/runs/{run.pk}/export.png",
++        "section_url": f"/api/vayusim/runs/{run.pk}/section/",
+         "limitations": run.summary["limitations"],
+         "interpretation": interpretation(run.inputs),
+     }
+
+
++def validation_status(run):
++    """Scope disclosure, derived from immutable inputs rather than the Scenario."""
++    if run.inputs.get("environment", "urban") == "urban" and run.stability_class in {"C", "F"}:
++        return "unvalidated_branch"
++    return "formula_check_only"
++
++
+ def interpretation(inputs):
+     """Presentation disclosures from the retained input snapshot, including old runs."""
+     sources = []
+diff --git a/apps/vayusim/urls.py b/apps/vayusim/urls.py
+index d03b4fc..2fc2717 100644
+--- a/apps/vayusim/urls.py
++++ b/apps/vayusim/urls.py
+@@ -1,10 +1,22 @@
+ from django.urls import path
+
+-from .api import DayView, GridView, PresetsView, RunDetailView, RunView, ScenarioView, StationsView
++from .api import (
++    DayView,
++    ExportView,
++    GridView,
++    PresetsView,
++    RunDetailView,
++    RunView,
++    ScenarioView,
++    SectionView,
++    StationsView,
++)
+
+ urlpatterns = [
+     path("run/", RunView.as_view(), name="vayusim-run"),
+     path("runs/<int:run_id>/", RunDetailView.as_view(), name="vayusim-run-detail"),
++    path("runs/<int:run_id>/export.png", ExportView.as_view(), name="vayusim-export"),
++    path("runs/<int:run_id>/section/", SectionView.as_view(), name="vayusim-section"),
+     path("grid/<int:run_id>.bin", GridView.as_view(), {"kind": "bin"}, name="vayusim-grid"),
+     path(
+         "grid/<int:run_id>.json", GridView.as_view(), {"kind": "json"}, name="vayusim-grid-header"
+diff --git a/apps/vayusim/views.py b/apps/vayusim/views.py
+index 34b3733..6830267 100644
+--- a/apps/vayusim/views.py
++++ b/apps/vayusim/views.py
+@@ -1,10 +1,29 @@
++from django.shortcuts import get_object_or_404
+ from django.views.generic import TemplateView
+
+ from apps.warehouse.models import City
+
++from .models import Scenario, ScenarioRun
++from .serializers import RunSerializer
++from .service import run_response
++
++EXAMPLE_HASHES = (
++    "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
++    "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
++    "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
++)
++
++
++def retained_spec(run):
++    fields = RunSerializer().fields
++    return {
++        "name": run.scenario.name,
++        **{key: value for key, value in run.inputs.items() if key in fields},
++    }
++
+
+ class SimulatorPage(TemplateView):
+-    template_name = "vayusim/simulator.html"
++    template_name = "vayusim/cinematic.html"
+
+     def get_context_data(self, **kwargs):
+         context = super().get_context_data(**kwargs)
+@@ -12,4 +31,34 @@ class SimulatorPage(TemplateView):
+             {"slug": city.slug, "name": city.name, "location": [city.location.x, city.location.y]}
+             for city in City.objects.order_by("name")
+         ]
++        examples = ScenarioRun.objects.select_related("scenario__city").filter(
++            inputs_hash__in=EXAMPLE_HASHES
++        )
++        context["examples"] = [
++            {"city": run.scenario.city.name, "inputs": retained_spec(run), **run_response(run)}
++            for run in sorted(examples, key=lambda run: EXAMPLE_HASHES.index(run.inputs_hash))
++        ]
++        selected = None
++        if self.request.GET.get("scenario"):
++            scenario = get_object_or_404(Scenario, share_slug=self.request.GET["scenario"])
++            selected = scenario.runs.select_related("scenario__city").order_by("-id").first()
++        elif self.request.GET.get("run"):
++            try:
++                run_id = int(self.request.GET["run"])
++            except ValueError:
++                run_id = -1
++            selected = get_object_or_404(
++                ScenarioRun.objects.select_related("scenario__city"), pk=run_id
++            )
++        elif context["examples"]:
++            selected = examples.order_by("id").first()
++        context["initial_run"] = (
++            {
++                "city": selected.scenario.city.name,
++                "inputs": retained_spec(selected),
++                **run_response(selected),
++            }
++            if selected
++            else None
++        )
+         return context
+diff --git a/enviroinsights/urls.py b/enviroinsights/urls.py
+index 1b3e011..b0d9548 100644
+--- a/enviroinsights/urls.py
++++ b/enviroinsights/urls.py
+@@ -24,6 +24,7 @@ router.register("pollutants", PollutantViewSet)
+ urlpatterns = [
+     path("", HomeView.as_view(), name="home"),
+     path("simulator/", SimulatorPage.as_view(), name="simulator"),
++    path("vayusim/", SimulatorPage.as_view(), name="vayusim"),
+     path("forecasts/", ForecastPage.as_view(), name="forecasts"),
+     path("research/", ResearchPage.as_view(), name="research"),
+     path("library/", LibraryPage.as_view(), name="library"),
+Final report metrics agree with successful real runs.
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6B: 049-evidence-archive (2026-10-16T11:44:21.1929114+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase6b/archive.py
+git diff --check
+```
+
+```text
+{
+  "status": "complete",
+  "artifacts": 131,
+  "code_and_reports": 31,
+  "tests": {
+    "passed": 271,
+    "warnings": 147,
+    "seconds": 100.88,
+    "command_log": "045-final-serializer-efficiency-and-full-suite"
+  },
+  "frozen_sets_unchanged": true
+}
+
+```
+
+</details>
+
+
+### Phase 6B local finalization
+
+The frozen-set identities and scientific artifacts match their original hashes.
+The evidence archive is `data/results/phase6b/manifest.json`. Final Git commands
+use an explicit reviewed path list: `git add -- <paths>`, `git diff --cached
+--name-only`, `git diff --cached --check`, `git commit`, `git rev-parse HEAD`, and
+`git status --porcelain --untracked-files=no`. Exact arguments, stdout, stderr,
+exit codes and the resulting commit ID are recorded in
+[final-git.json](../data/results/phase6b/final-git.json). They are outside the
+commit to avoid a self-referential hash. No push command is used.

@@ -21,7 +21,7 @@
       <a href="{% url 'research' %}" {% if request.path == '/research/' %}aria-current="page"{% endif %}>Research</a>
       <a href="{% url 'library' %}" {% if request.path == '/library/' %}aria-current="page"{% endif %}>Library</a>
       <a href="{% url 'rag-ask-page' %}" {% if request.path == '/ask/' %}aria-current="page"{% endif %}>Ask</a>
-      <a class="nav-simulator" href="{% url 'simulator' %}" {% if request.path == '/simulator/' %}aria-current="page"{% endif %}>VayuSim <span aria-hidden="true">↗</span></a>
+      <a class="nav-simulator" href="{% url 'vayusim' %}" {% if request.path == '/simulator/' or request.path == '/vayusim/' %}aria-current="page"{% endif %}>VayuSim <span aria-hidden="true">↗</span></a>
     </nav>
   </div></header>
   <script>const navButton=document.querySelector('.nav-toggle'),siteHeader=document.querySelector('.site-header'),siteNavigation=document.getElementById('site-navigation');navButton.hidden=false;siteHeader.classList.add('nav-collapsed');navButton.addEventListener('click',()=>{const open=siteNavigation.classList.toggle('is-open');navButton.setAttribute('aria-expanded',String(open));});</script>

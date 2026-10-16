@@ -235,6 +235,7 @@ def run_response(run, cached=False):
         "inputs_hash": run.inputs_hash,
         "engine_version": run.engine_version,
         "stability_class": run.stability_class,
+        "validation_status": validation_status(run),
         "flags": run.flags,
         "runtime_ms": run.run_time_ms,
         "summary": {k: v for k, v in run.summary.items() if k != "contours"},
@@ -242,9 +243,18 @@ def run_response(run, cached=False):
         "grid_url": prefix + ".bin",
         "grid_header_url": prefix + ".json",
         "overlay_url": prefix + ".png",
+        "export_url": f"/api/vayusim/runs/{run.pk}/export.png",
+        "section_url": f"/api/vayusim/runs/{run.pk}/section/",
         "limitations": run.summary["limitations"],
         "interpretation": interpretation(run.inputs),
     }
+
+
+def validation_status(run):
+    """Scope disclosure, derived from immutable inputs rather than the Scenario."""
+    if run.inputs.get("environment", "urban") == "urban" and run.stability_class in {"C", "F"}:
+        return "unvalidated_branch"
+    return "formula_check_only"
 
 
 def interpretation(inputs):

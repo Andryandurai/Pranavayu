@@ -282,7 +282,38 @@ differences, physical-page uncertainty and excluded counts remain explicit.
 ISC3 p.1-19 equation-transcription tests cover all urban classes, including C/F;
 equation coverage does not clear independent numeric readiness. Urban C
 (Delhi/Mumbai) and F (Hyderabad) remain not independently validated. The future
-Phase6B frontend must display **unvalidated branch** for those scenarios as a
-condition of **Ready for 6B with caveats**. No Phase6B frontend changes were made
-in this task, and all example numbers, engine coefficients/presets and frozen
-evaluation sets are unchanged. See [Independent validation](results/PHASE6A.md#independent-validation).
+Phase6B frontend displays **unvalidated branch** for those scenarios as a
+condition of **Ready for 6B with caveats**. All example numbers, engine
+coefficients/presets and frozen evaluation sets are unchanged. See
+[Independent validation](results/PHASE6A.md#independent-validation).
+
+## Phase 6B presentation
+
+`/vayusim/` and the compatible `/simulator/` route serve one Django page. Initial
+example and shared-run labels are server-rendered. Builder inputs are taken
+from the retained run snapshot, even if its Scenario is subsequently edited.
+Native Canvas particles sample the little-endian binary field; MapLibre draws
+the registered PNG and returned GeoJSON over attributed OSM raster tiles.
+Only OSM tiles leave the origin; scripts, CSS and fonts are local/system assets.
+Particles are display shimmer, not a time-dependent transport simulation.
+
+The browser prefetches available model grids/headers with two concurrent tasks,
+caches at most 52 run fields in memory, and advances independent hourly frames
+at one-second intervals. Missing hours clear the field and summary rather than
+substituting zeros. It never prefetches tiles. Source removal stores another run
+with identical geometry and zero emission rates and checks the weather values
+and zero binary field before offering a difference. CPCB measured totals stay
+separate. Light/dark modes and a static PNG path require no additional library.
+
+Run/header/scenario/day responses expose `validation_status`, derived from
+retained environment/class. Urban C/F is `unvalidated_branch`; all other
+branches are `formula_check_only`. A separate `/runs/<id>/export.png` adds
+visible branch text and limits without altering the geographic overlay.
+
+POST `/api/vayusim/runs/<id>/section/` atomically stores a supplementary vertical
+grid from retained inputs using the unchanged engine. GET only reads that file
+and returns 404 until it exists. A run-hash advisory lock makes creation
+idempotent. Historical engines without that artifact cannot be recomputed.
+This is a new receptor grid, not a vertical reconstruction from a single-height
+field. No schema migration, physics/preset change or historical summary rewrite
+is required. See [PHASE6B](results/PHASE6B.md).

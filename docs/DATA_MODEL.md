@@ -364,3 +364,22 @@ differences (Cimbala PDF p.3: 14.13%/15.60%/10.66%) are scheme differences beyon
 5%/10% tolerances, not validation errors. Turner physical pages are unverified.
 This correction changes no ScenarioRun input hashes, engine version, stored
 numerical summaries or frozen Phase 3A.2/4/5 evaluation records.
+
+## Phase 6B stored presentation artifacts
+
+No model or schema change. `validation_status` is response metadata derived
+from `ScenarioRun.inputs.environment` and `stability_class`, never a mutable
+Scenario. Values are `unvalidated_branch` for urban C/F and `formula_check_only`
+otherwise. The same status accompanies shared scenarios, day entries, grid
+headers, supplementary sections and annotated exports. Original numerical
+summary values, input hashes and geographic grid/PNG formats are retained.
+
+`data/results/vayusim/<id>/section-v1.json` is an atomic, versioned supplementary
+vertical grid: run ID, input hash, engine version, status, origin, wind FROM,
+distance/height axes, row-major concentration matrix in µg/m³ and limitations.
+POST creates it once from the retained run snapshot; GET reads stored bytes.
+It samples the same engine at additional heights, not an inferred vertical
+extension of the original horizontal field. The transect begins at the first
+retained source, with all retained sources contributing. Sidecars do not mutate
+the parent run's numerical summary or original binary field. Source-removal
+comparisons use another normal ScenarioRun with all source rates explicitly zero.

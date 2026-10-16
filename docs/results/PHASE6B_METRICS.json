@@ -1,0 +1,1144 @@
+{
+  "baseline_commit": "b29083f",
+  "tests": {
+    "passed": 271,
+    "warnings": 147,
+    "seconds": 100.88,
+    "command_log": "045-final-serializer-efficiency-and-full-suite"
+  },
+  "day_benchmark": [
+    {
+      "city": "delhi",
+      "original_run_id": 62,
+      "date": "2025-01-15T12:00:00+05:30",
+      "cold_definition": "first new canonical ScenarioRuns, not cold OS cache",
+      "request": {
+        "city": "delhi",
+        "grid": {
+          "width_m": 10000,
+          "resolution_m": 50
+        },
+        "name": "Phase6A explicit unit-release demonstration delhi",
+        "centre": [
+          77.209,
+          28.6139
+        ],
+        "sources": [
+          {
+            "type": "point",
+            "height_m": 50.0,
+            "location": [
+              77.209,
+              28.6139
+            ],
+            "diameter_m": 0.0,
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect.; Phase 6B day benchmark 1792128988260114139",
+            "emission_gs": 1.0,
+            "exit_velocity_ms": 0.0,
+            "exit_temperature_k": 293.15
+          }
+        ],
+        "datetime": "2025-01-15T12:00:00+05:30",
+        "thresholds": [
+          5.0
+        ],
+        "environment": "urban",
+        "weather_mode": "real",
+        "receptor_height": 1.5
+      },
+      "cold": {
+        "seconds": 5.531972564000171,
+        "available": 24,
+        "cached": 0,
+        "run_ids": [
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113
+        ],
+        "validation_statuses": [
+          "formula_check_only",
+          "unvalidated_branch"
+        ]
+      },
+      "warm": {
+        "seconds": 0.32942966100017657,
+        "available": 24,
+        "cached": 24,
+        "run_ids": [
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113
+        ],
+        "validation_statuses": [
+          "formula_check_only",
+          "unvalidated_branch"
+        ]
+      }
+    },
+    {
+      "city": "mumbai",
+      "original_run_id": 63,
+      "date": "2025-07-15T15:00:00+05:30",
+      "cold_definition": "first new canonical ScenarioRuns, not cold OS cache",
+      "request": {
+        "city": "mumbai",
+        "grid": {
+          "width_m": 10000,
+          "resolution_m": 50
+        },
+        "name": "Phase6A explicit unit-release demonstration mumbai",
+        "centre": [
+          72.8777,
+          19.076
+        ],
+        "sources": [
+          {
+            "type": "point",
+            "height_m": 50.0,
+            "location": [
+              72.8777,
+              19.076
+            ],
+            "diameter_m": 0.0,
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect.; Phase 6B day benchmark 1792128988260114139",
+            "emission_gs": 1.0,
+            "exit_velocity_ms": 0.0,
+            "exit_temperature_k": 293.15
+          }
+        ],
+        "datetime": "2025-07-15T15:00:00+05:30",
+        "thresholds": [
+          5.0
+        ],
+        "environment": "urban",
+        "weather_mode": "real",
+        "receptor_height": 1.5
+      },
+      "cold": {
+        "seconds": 2.649020040000323,
+        "available": 24,
+        "cached": 0,
+        "run_ids": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137
+        ],
+        "validation_statuses": [
+          "formula_check_only",
+          "unvalidated_branch"
+        ]
+      },
+      "warm": {
+        "seconds": 0.2668031860002884,
+        "available": 24,
+        "cached": 24,
+        "run_ids": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137
+        ],
+        "validation_statuses": [
+          "formula_check_only",
+          "unvalidated_branch"
+        ]
+      }
+    },
+    {
+      "city": "hyderabad",
+      "original_run_id": 64,
+      "date": "2025-11-15T20:00:00+05:30",
+      "cold_definition": "first new canonical ScenarioRuns, not cold OS cache",
+      "request": {
+        "city": "hyderabad",
+        "grid": {
+          "width_m": 10000,
+          "resolution_m": 50
+        },
+        "name": "Phase6A explicit unit-release demonstration hyderabad",
+        "centre": [
+          78.4867,
+          17.385
+        ],
+        "sources": [
+          {
+            "type": "point",
+            "height_m": 50.0,
+            "location": [
+              78.4867,
+              17.385
+            ],
+            "diameter_m": 0.0,
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect.; Phase 6B day benchmark 1792128988260114139",
+            "emission_gs": 1.0,
+            "exit_velocity_ms": 0.0,
+            "exit_temperature_k": 293.15
+          }
+        ],
+        "datetime": "2025-11-15T20:00:00+05:30",
+        "thresholds": [
+          5.0
+        ],
+        "environment": "urban",
+        "weather_mode": "real",
+        "receptor_height": 1.5
+      },
+      "cold": {
+        "seconds": 2.883380249999391,
+        "available": 24,
+        "cached": 0,
+        "run_ids": [
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161
+        ],
+        "validation_statuses": [
+          "formula_check_only",
+          "unvalidated_branch"
+        ]
+      },
+      "warm": {
+        "seconds": 0.3114578229997278,
+        "available": 24,
+        "cached": 24,
+        "run_ids": [
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161
+        ],
+        "validation_statuses": [
+          "formula_check_only",
+          "unvalidated_branch"
+        ]
+      }
+    }
+  ],
+  "browser": [
+    {
+      "city": "delhi",
+      "width": 1440,
+      "http_status": 200,
+      "webgl": true,
+      "load_seconds": 2.373,
+      "status": "Stored run 62 \u00b7 unvalidated branch",
+      "labels_visible": true,
+      "horizontal_overflow": false,
+      "external_hosts": [
+        "tile.openstreetmap.org"
+      ],
+      "js_errors": [],
+      "shared_url": "/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e",
+      "export_status": 200,
+      "frame": {
+        "runId": 62,
+        "validationStatus": "unvalidated_branch",
+        "cacheSize": 1,
+        "renderTimes": [
+          0.7999999970197678,
+          1.5,
+          0.6000000014901161,
+          0.30000000447034836,
+          0.20000000298023224,
+          0.30000000447034836,
+          0.30000000447034836,
+          0.3999999985098839
+        ],
+        "drawnParticles": 172
+      }
+    },
+    {
+      "city": "mumbai",
+      "width": 1440,
+      "http_status": 200,
+      "webgl": true,
+      "load_seconds": 1.653,
+      "status": "Stored run 63 \u00b7 unvalidated branch",
+      "labels_visible": true,
+      "horizontal_overflow": false,
+      "external_hosts": [
+        "tile.openstreetmap.org"
+      ],
+      "js_errors": [],
+      "shared_url": "/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a",
+      "export_status": 200,
+      "frame": {
+        "runId": 63,
+        "validationStatus": "unvalidated_branch",
+        "cacheSize": 1,
+        "renderTimes": [
+          0.5,
+          0.3999999985098839,
+          0.30000000447034836,
+          0.19999999552965164,
+          0.10000000149011612,
+          2.2000000029802322,
+          0.19999999552965164
+        ],
+        "drawnParticles": 130
+      }
+    },
+    {
+      "city": "hyderabad",
+      "width": 1440,
+      "http_status": 200,
+      "webgl": true,
+      "load_seconds": 1.603,
+      "status": "Stored run 64 \u00b7 unvalidated branch",
+      "labels_visible": true,
+      "horizontal_overflow": false,
+      "external_hosts": [
+        "tile.openstreetmap.org"
+      ],
+      "js_errors": [],
+      "shared_url": "/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296",
+      "export_status": 200,
+      "frame": {
+        "runId": 64,
+        "validationStatus": "unvalidated_branch",
+        "cacheSize": 1,
+        "renderTimes": [
+          1.5,
+          1.1000000014901161,
+          0.3999999985098839,
+          0.7000000029802322,
+          0.5,
+          1,
+          0.3999999985098839
+        ],
+        "drawnParticles": 752
+      }
+    },
+    {
+      "city": "delhi",
+      "width": 390,
+      "http_status": 200,
+      "webgl": true,
+      "load_seconds": 1.175,
+      "status": "Stored run 62 \u00b7 unvalidated branch",
+      "labels_visible": true,
+      "horizontal_overflow": false,
+      "external_hosts": [
+        "tile.openstreetmap.org"
+      ],
+      "js_errors": [],
+      "shared_url": "/vayusim/?scenario=f09d4aa620614a81b313c3adc395095e",
+      "export_status": 200,
+      "frame": {
+        "runId": 62,
+        "validationStatus": "unvalidated_branch",
+        "cacheSize": 1,
+        "renderTimes": [
+          0.6000000014901161,
+          0.9000000059604645,
+          0.3999999985098839,
+          0.19999999552965164,
+          1,
+          0.10000000149011612
+        ],
+        "drawnParticles": 172
+      }
+    },
+    {
+      "city": "mumbai",
+      "width": 390,
+      "http_status": 200,
+      "webgl": true,
+      "load_seconds": 1.34,
+      "status": "Stored run 63 \u00b7 unvalidated branch",
+      "labels_visible": true,
+      "horizontal_overflow": false,
+      "external_hosts": [
+        "tile.openstreetmap.org"
+      ],
+      "js_errors": [],
+      "shared_url": "/vayusim/?scenario=5a1be3d53e00440792f5ed6926ac2c5a",
+      "export_status": 200,
+      "frame": {
+        "runId": 63,
+        "validationStatus": "unvalidated_branch",
+        "cacheSize": 1,
+        "renderTimes": [
+          0.6000000014901161,
+          0.6000000014901161,
+          0.3999999985098839,
+          0.5,
+          1.1999999955296516,
+          0.30000000447034836
+        ],
+        "drawnParticles": 130
+      }
+    },
+    {
+      "city": "hyderabad",
+      "width": 390,
+      "http_status": 200,
+      "webgl": true,
+      "load_seconds": 1.263,
+      "status": "Stored run 64 \u00b7 unvalidated branch",
+      "labels_visible": true,
+      "horizontal_overflow": false,
+      "external_hosts": [
+        "tile.openstreetmap.org"
+      ],
+      "js_errors": [],
+      "shared_url": "/vayusim/?scenario=e54ae9a9cd6d47a6a70165e17ce75296",
+      "export_status": 200,
+      "frame": {
+        "runId": 64,
+        "validationStatus": "unvalidated_branch",
+        "cacheSize": 1,
+        "renderTimes": [
+          1,
+          0.7999999970197678,
+          0.5,
+          1.1000000014901161,
+          2,
+          0.5
+        ],
+        "drawnParticles": 752
+      }
+    }
+  ],
+  "interactions": {
+    "comparison": {
+      "source_run": 62,
+      "source_removed_run": 162,
+      "difference_label": "modelled increment from these sources only \u00b7 stored runs 62 and 162 \u00b7 source minus source-removed grid"
+    },
+    "section": "unvalidated branch \u00b7 Vertical cross-section from stored grid data only \u00b7 origin 77.209, 28.6139 \u00b7 61 heights \u00d7 101 distances. All retained sources contribute; transect starts at first source.",
+    "keyboard_source": true,
+    "day": {
+      "prefetch_seconds": 2.742,
+      "available": 24,
+      "cached_scrub_grid_requests": 0,
+      "frame_selection_ms": [
+        59,
+        46,
+        42,
+        55,
+        38,
+        49,
+        45,
+        43,
+        40,
+        39,
+        39,
+        32,
+        33,
+        34,
+        50,
+        52,
+        36,
+        36,
+        39,
+        33,
+        42,
+        30,
+        28,
+        31
+      ],
+      "keyboard_timeline": true,
+      "playback": true,
+      "renderer": {
+        "runId": 165,
+        "validationStatus": "formula_check_only",
+        "cacheSize": 25,
+        "renderTimes": [
+          0.5,
+          0.4000000059604645,
+          0.10000000149011612,
+          0.20000000298023224,
+          0.3999999985098839,
+          1,
+          0.10000000149011612,
+          1.9000000059604645,
+          3.100000001490116,
+          1.3999999985098839,
+          2.2000000029802322,
+          1.8999999985098839,
+          2.399999998509884,
+          3.7000000029802322,
+          1.8999999985098839,
+          6.399999998509884,
+          2.3000000044703484,
+          2.899999998509884,
+          2.3000000044703484,
+          1.6000000014901161,
+          2.2000000029802322,
+          1.1999999955296516,
+          2.0999999940395355,
+          2,
+          1.7999999970197678,
+          1.3999999985098839,
+          1.2999999970197678,
+          4.699999995529652,
+          3.600000001490116,
+          1.2000000029802322,
+          3,
+          2.100000001490116,
+          2.5,
+          2,
+          2,
+          1.5999999940395355,
+          1.6000000014901161,
+          2.7000000029802322,
+          2.5,
+          1.1999999955296516,
+          1.5,
+          1.8999999985098839,
+          1.2000000029802322,
+          2.5,
+          0,
+          3.0999999940395355,
+          0.10000000149011612,
+          2.6999999955296516,
+          2.7999999970197678,
+          0,
+          2.2999999970197678,
+          3.1999999955296516,
+          0.10000000149011612,
+          3.2999999970197678,
+          2.600000001490116,
+          0.3999999985098839,
+          2.600000001490116,
+          1.6999999955296516,
+          1.3999999985098839,
+          0.19999999552965164,
+          1.2999999970197678,
+          1.7999999970197678,
+          0.19999999552965164,
+          2.399999998509884,
+          2,
+          0.20000000298023224,
+          1.4000000059604645,
+          2.399999998509884,
+          2.600000001490116,
+          0.3999999985098839,
+          1.5,
+          3.2000000029802322,
+          0.29999999701976776,
+          1.8999999985098839,
+          2.100000001490116,
+          2.8000000044703484,
+          0.3999999985098839,
+          1.3000000044703484,
+          1.7000000029802322,
+          0.10000000149011612,
+          0,
+          0,
+          0.10000000149011612,
+          0.10000000149011612,
+          0.20000000298023224,
+          0.10000000149011612,
+          0.10000000149011612,
+          0.10000000149011612,
+          0.20000000298023224,
+          0.10000000149011612,
+          0,
+          0,
+          0,
+          0,
+          0.10000000149011612,
+          0,
+          0.19999999552965164,
+          2.3000000044703484,
+          0.10000000149011612
+        ],
+        "drawnParticles": 0
+      }
+    },
+    "light_mode": true,
+    "shared": [
+      {
+        "run_id": 62,
+        "label": "unvalidated branch"
+      },
+      {
+        "run_id": 63,
+        "label": "unvalidated branch"
+      },
+      {
+        "run_id": 64,
+        "label": "unvalidated branch"
+      }
+    ],
+    "fallback": true,
+    "external_hosts": [
+      "tile.openstreetmap.org"
+    ],
+    "js_errors": []
+  },
+  "frozen_before": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "existing_tests_and_fixtures": {
+      "files": 52,
+      "aggregate_sha256": "96269be9a5fac7370622731cc9bd2266c74ccf63e2f51aff4e49c112bb145416"
+    },
+    "physics_and_presets": {
+      "files": 6,
+      "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+    },
+    "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "stage": "before",
+    "identical_to_before": false
+  },
+  "frozen_after": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "existing_tests_and_fixtures": {
+      "files": 52,
+      "aggregate_sha256": "96269be9a5fac7370622731cc9bd2266c74ccf63e2f51aff4e49c112bb145416"
+    },
+    "physics_and_presets": {
+      "files": 6,
+      "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+    },
+    "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "stage": "after",
+    "identical_to_before": true
+  },
+  "preservation": {
+    "prior_independent_artifacts_unchanged": 70,
+    "prior_scientific_code_and_reports_unchanged": 5,
+    "examples": [
+      {
+        "run_id": 62,
+        "city": "delhi",
+        "stability": "C",
+        "peak_ugm3": 15.641839027404785,
+        "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+        "grid_sha256": "d1aaf3e80b3890463af41998244f9c8136f549b0e649c814389968cd45ad9592",
+        "all_original_summary_values_identical": true
+      },
+      {
+        "run_id": 63,
+        "city": "mumbai",
+        "stability": "C",
+        "peak_ugm3": 11.536741256713867,
+        "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+        "grid_sha256": "6adfb341ceda54cf51e39be0a9a71a81cff112979cb662a6311caa46976f150c",
+        "all_original_summary_values_identical": true
+      },
+      {
+        "run_id": 64,
+        "city": "hyderabad",
+        "stability": "F",
+        "peak_ugm3": 18.990890502929688,
+        "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+        "grid_sha256": "528d6c0080dab5c48dd2bf7716529d4d26e0f49f1b0ce07d2292b54e1f562663",
+        "all_original_summary_values_identical": true
+      }
+    ]
+  },
+  "runtime": {
+    "http": [
+      {
+        "path": "/api/health/",
+        "status": 200,
+        "body": {
+          "ok": true,
+          "checks": {
+            "database": {
+              "ok": true
+            },
+            "extensions": {
+              "postgis": {
+                "ok": true,
+                "version": "3.6.4"
+              },
+              "timescaledb": {
+                "ok": true,
+                "version": "2.30.2"
+              },
+              "vector": {
+                "ok": true,
+                "version": "0.8.7"
+              }
+            },
+            "redis": {
+              "ok": true
+            },
+            "celery": {
+              "ok": true
+            }
+          }
+        }
+      },
+      {
+        "path": "/vayusim/",
+        "status": 200
+      },
+      {
+        "path": "/simulator/",
+        "status": 200
+      }
+    ],
+    "assistant_provider": "extractive",
+    "ollama_enabled": "false",
+    "compose_profiles": ""
+  },
+  "spec_before": {
+    "calls": 100,
+    "seconds": 1.464717230000133,
+    "current_bytes": 450297,
+    "peak_bytes": 738499,
+    "gc_counts": [
+      24,
+      1,
+      18
+    ]
+  },
+  "spec_after": {
+    "calls": 100,
+    "seconds": 0.1293217780003033,
+    "current_bytes": 159066,
+    "peak_bytes": 362062,
+    "gc_counts": [
+      25,
+      5,
+      1
+    ]
+  },
+  "gc_observation": [
+    {
+      "seconds": 0.07509786399987206,
+      "cpu_seconds": 0.07509958500000025,
+      "test": "collection",
+      "stack": [
+        "<frozen importlib._bootstrap_external>:757:_compile_bytecode",
+        "<frozen importlib._bootstrap_external>:1128:get_code",
+        "<frozen importlib._bootstrap_external>:995:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked",
+        "<frozen importlib._bootstrap>:1360:_find_and_load",
+        "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py:39:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:999:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked",
+        "<frozen importlib._bootstrap>:1360:_find_and_load"
+      ],
+      "generation": 2,
+      "collected": 36,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.22141886099961994,
+      "cpu_seconds": 0.2214053319999998,
+      "test": "collection",
+      "stack": [
+        "<string>:0:<module>",
+        "/usr/local/lib/python3.12/collections/__init__.py:441:namedtuple",
+        "/usr/local/lib/python3.12/site-packages/scipy/_lib/_util.py:460:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:999:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked",
+        "<frozen importlib._bootstrap>:1360:_find_and_load",
+        "/usr/local/lib/python3.12/site-packages/scipy/sparse/_compressed.py:8:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:999:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked"
+      ],
+      "generation": 2,
+      "collected": 20,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.14064743600010843,
+      "cpu_seconds": 0.14064105699999985,
+      "test": "collection",
+      "stack": [
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:1301:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked",
+        "<frozen importlib._bootstrap>:1360:_find_and_load",
+        "/usr/local/lib/python3.12/site-packages/sklearn/_loss/loss.py:27:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:999:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked",
+        "<frozen importlib._bootstrap>:1360:_find_and_load",
+        "/usr/local/lib/python3.12/site-packages/sklearn/_loss/__init__.py:9:<module>"
+      ],
+      "generation": 2,
+      "collected": 0,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.14277789700008725,
+      "cpu_seconds": 0.14276854199999978,
+      "test": "collection",
+      "stack": [
+        "/usr/local/lib/python3.12/site-packages/torch/nn/modules/lazy.py:43:_LazyProtocol",
+        "/usr/local/lib/python3.12/site-packages/torch/nn/modules/lazy.py:12:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:999:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked",
+        "<frozen importlib._bootstrap>:1360:_find_and_load",
+        "/usr/local/lib/python3.12/site-packages/torch/nn/modules/linear.py:10:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:999:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked"
+      ],
+      "generation": 2,
+      "collected": 20,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.3120763490005629,
+      "cpu_seconds": 0.31203316899999933,
+      "test": "collection",
+      "stack": [
+        "<frozen _collections_abc>:521:_is_param_expr",
+        "<frozen _collections_abc>:476:__new__",
+        "/usr/local/lib/python3.12/site-packages/torch/_prims_common/wrappers.py:257:out_wrapper",
+        "/usr/local/lib/python3.12/site-packages/torch/_refs/__init__.py:2394:_make_copy_from_view",
+        "/usr/local/lib/python3.12/site-packages/torch/_refs/__init__.py:6973:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:999:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked",
+        "<frozen importlib._bootstrap>:1360:_find_and_load",
+        "/usr/local/lib/python3.12/site-packages/torch/_decomp/__init__.py:302:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed"
+      ],
+      "generation": 2,
+      "collected": 199,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.1913313470004141,
+      "cpu_seconds": 0.19132173400000063,
+      "test": "collection",
+      "stack": [
+        "/usr/local/lib/python3.12/inspect.py:2743:__init__",
+        "/usr/local/lib/python3.12/inspect.py:2828:replace",
+        "/usr/local/lib/python3.12/site-packages/matplotlib/_api/deprecation.py:481:make_keyword_only",
+        "/usr/local/lib/python3.12/site-packages/matplotlib/axes/_axes.py:4641:Axes",
+        "/usr/local/lib/python3.12/site-packages/matplotlib/axes/_axes.py:88:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed",
+        "<frozen importlib._bootstrap_external>:999:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked",
+        "<frozen importlib._bootstrap>:1331:_find_and_load_unlocked",
+        "<frozen importlib._bootstrap>:1360:_find_and_load",
+        "/usr/local/lib/python3.12/site-packages/matplotlib/axes/__init__.py:2:<module>",
+        "<frozen importlib._bootstrap>:488:_call_with_frames_removed"
+      ],
+      "generation": 2,
+      "collected": 130,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.261165436999363,
+      "cpu_seconds": 0.26113884399999954,
+      "test": "collection",
+      "stack": [
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:984:visit_Name",
+        "/usr/local/lib/python3.12/ast.py:407:visit",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:1111:visit_Compare",
+        "/usr/local/lib/python3.12/ast.py:407:visit",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:1016:visit_BoolOp",
+        "/usr/local/lib/python3.12/ast.py:407:visit",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:880:visit_Assert",
+        "/usr/local/lib/python3.12/ast.py:407:visit",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:748:run",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:410:rewrite_asserts",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:349:_rewrite_test",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:179:exec_module"
+      ],
+      "generation": 2,
+      "collected": 54,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.42314859599991905,
+      "cpu_seconds": 0.42299979400000076,
+      "test": "collection",
+      "stack": [
+        "/usr/local/lib/python3.12/ast.py:257:iter_fields",
+        "/usr/local/lib/python3.12/ast.py:274:iter_child_nodes",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:547:traverse_node",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:548:traverse_node",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:548:traverse_node",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:959:visit_Assert",
+        "/usr/local/lib/python3.12/ast.py:407:visit",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:748:run",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:410:rewrite_asserts",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:349:_rewrite_test",
+        "/usr/local/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:179:exec_module",
+        "<frozen importlib._bootstrap>:935:_load_unlocked"
+      ],
+      "generation": 2,
+      "collected": 25,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.44983295499969245,
+      "cpu_seconds": 0.449774675999997,
+      "test": "collection",
+      "stack": [
+        "<frozen abc>:117:__instancecheck__",
+        "/usr/local/lib/python3.12/site-packages/django/utils/choices.py:86:normalize_choices",
+        "/usr/local/lib/python3.12/site-packages/django/db/models/fields/__init__.py:554:choices",
+        "/usr/local/lib/python3.12/site-packages/django/db/models/fields/__init__.py:228:__init__",
+        "/usr/local/lib/python3.12/site-packages/django/db/models/fields/json.py:44:__init__",
+        "/usr/local/lib/python3.12/site-packages/django/db/models/fields/__init__.py:672:clone",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:978:render",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:688:render_multiple",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:458:_reload",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:423:reload_model",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:124:add_model",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/operations/models.py:83:state_forwards"
+      ],
+      "generation": 2,
+      "collected": 73122,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.5438235559995519,
+      "cpu_seconds": 0.5437320400000019,
+      "test": "tests/test_database.py::test_reverse_hypertable_migration_preserves_rows_and_keys",
+      "stack": [
+        "/usr/local/lib/python3.12/site-packages/django/db/models/enums.py:123:__getattr__",
+        "/usr/local/lib/python3.12/site-packages/django/utils/choices.py:75:normalize_choices",
+        "/usr/local/lib/python3.12/site-packages/django/db/models/fields/__init__.py:554:choices",
+        "/usr/local/lib/python3.12/site-packages/django/db/models/fields/__init__.py:228:__init__",
+        "/usr/local/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1444:__init__",
+        "/usr/local/lib/python3.12/site-packages/django/db/models/fields/__init__.py:672:clone",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:978:render",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:688:render_multiple",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:458:_reload",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:423:reload_model",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:206:_append_option",
+        "/usr/local/lib/python3.12/site-packages/django/db/migrations/state.py:243:add_constraint"
+      ],
+      "generation": 2,
+      "collected": 39953,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.532031516000643,
+      "cpu_seconds": 0.5316740150000001,
+      "test": "tests/test_vayusim_physics.py::test_upwind_zero",
+      "stack": [
+        "/usr/local/lib/python3.12/inspect.py:2743:__init__",
+        "/usr/local/lib/python3.12/inspect.py:2442:_signature_from_function",
+        "/usr/local/lib/python3.12/inspect.py:2597:_signature_from_callable",
+        "/usr/local/lib/python3.12/inspect.py:3085:from_callable",
+        "/usr/local/lib/python3.12/inspect.py:3348:signature",
+        "/usr/local/lib/python3.12/site-packages/hypothesis/internal/reflection.py:148:get_signature",
+        "/usr/local/lib/python3.12/site-packages/hypothesis/internal/reflection.py:524:proxies",
+        "/usr/local/lib/python3.12/site-packages/hypothesis/core.py:1016:execute_once",
+        "/usr/local/lib/python3.12/site-packages/hypothesis/core.py:1222:_execute_once_for_engine",
+        "/usr/local/lib/python3.12/site-packages/hypothesis/internal/conjecture/engine.py:448:__stoppable_test_function",
+        "/usr/local/lib/python3.12/site-packages/hypothesis/internal/conjecture/engine.py:599:test_function",
+        "/usr/local/lib/python3.12/site-packages/hypothesis/internal/conjecture/engine.py:1359:generate_new_test_cases"
+      ],
+      "generation": 2,
+      "collected": 122511,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.5337860720001117,
+      "cpu_seconds": 0.533467360000003,
+      "test": "tests/test_vayusim_physics.py::test_stored_golden_fields[urban-stable-lid]",
+      "stack": [
+        "/usr/local/lib/python3.12/site-packages/_pytest/unraisableexception.py:33:gc_collect_harder",
+        "/usr/local/lib/python3.12/site-packages/_pytest/unraisableexception.py:172:pytest_unconfigure",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_callers.py:121:_multicall",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_manager.py:120:_hookexec",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_hooks.py:512:__call__",
+        "/usr/local/lib/python3.12/site-packages/_pytest/config/__init__.py:1212:_ensure_unconfigure",
+        "/usr/local/lib/python3.12/site-packages/_pytest/main.py:372:wrap_session",
+        "/usr/local/lib/python3.12/site-packages/_pytest/main.py:377:pytest_cmdline_main",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_callers.py:121:_multicall",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_manager.py:120:_hookexec",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_hooks.py:512:__call__",
+        "/usr/local/lib/python3.12/site-packages/_pytest/config/__init__.py:229:_main"
+      ],
+      "generation": 2,
+      "collected": 3014,
+      "uncollectable": 0
+    },
+    {
+      "seconds": 0.39365192300010676,
+      "cpu_seconds": 0.39361977400000114,
+      "test": "tests/test_vayusim_physics.py::test_stored_golden_fields[urban-stable-lid]",
+      "stack": [
+        "/usr/local/lib/python3.12/site-packages/_pytest/unraisableexception.py:33:gc_collect_harder",
+        "/usr/local/lib/python3.12/site-packages/_pytest/unraisableexception.py:99:cleanup",
+        "/usr/local/lib/python3.12/contextlib.py:478:_exit_wrapper",
+        "/usr/local/lib/python3.12/contextlib.py:595:__exit__",
+        "/usr/local/lib/python3.12/contextlib.py:618:close",
+        "/usr/local/lib/python3.12/site-packages/_pytest/config/__init__.py:1217:_ensure_unconfigure",
+        "/usr/local/lib/python3.12/site-packages/_pytest/main.py:372:wrap_session",
+        "/usr/local/lib/python3.12/site-packages/_pytest/main.py:377:pytest_cmdline_main",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_callers.py:121:_multicall",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_manager.py:120:_hookexec",
+        "/usr/local/lib/python3.12/site-packages/pluggy/_hooks.py:512:__call__",
+        "/usr/local/lib/python3.12/site-packages/_pytest/config/__init__.py:229:_main"
+      ],
+      "generation": 2,
+      "collected": 0,
+      "uncollectable": 0
+    }
+  ],
+  "ruff": "pass",
+  "format": "pass",
+  "deploy_check": "0 issues (0 silenced)",
+  "validation_status": {
+    "urban_C_F": "unvalidated_branch",
+    "other": "formula_check_only"
+  },
+  "pushed": false
+}

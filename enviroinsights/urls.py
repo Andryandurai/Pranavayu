@@ -24,6 +24,7 @@ router.register("pollutants", PollutantViewSet)
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
     path("simulator/", SimulatorPage.as_view(), name="simulator"),
+    path("vayusim/", SimulatorPage.as_view(), name="vayusim"),
     path("forecasts/", ForecastPage.as_view(), name="forecasts"),
     path("research/", ResearchPage.as_view(), name="research"),
     path("library/", LibraryPage.as_view(), name="library"),
