@@ -13,7 +13,7 @@
     "sigma_z_m": 87.51,
     "concentration_ugm3": 149300.0,
     "source_dispersion": "Martin; source meteorology is overcast, class D",
-    "scope": "Published-input Gaussian primitive validation; Briggs comparison must be reported separately"
+    "scope": "Gaussian formula check with published Martin inputs; Briggs versus Martin is a scheme comparison, not a validation error"
   },
   "turner": {
     "source_url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT",
@@ -35,13 +35,29 @@
   },
   "brune": {
     "source_url": "https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm",
-    "source_locator": "Section 2.2.5, paragraph following Table 2.3; unpaginated",
+    "source_locator": "Section 2.2.5, Table 2.3 rural row B; unpaginated (no physical page)",
     "x_m": 1000.0,
     "environment": "rural",
     "stability": "B",
-    "claimed_briggs_sigma_y_m": 210.0,
-    "claimed_briggs_sigma_z_m": 120.0,
-    "classification": "Source inconsistency diagnostic; paragraph's sigma-y conflicts with its class-B table formula"
+    "sigma_y_equation": "0.16*x*(1+0.0001*x)**(-0.5)",
+    "sigma_z_equation": "0.12*x",
+    "x_units": "m",
+    "sigma_units": "m",
+    "source_range_m": [100.0, 10000.0],
+    "sigma_y_coefficient": 0.16,
+    "sigma_y_distance_coefficient_per_m": 0.0001,
+    "sigma_y_power": -0.5,
+    "sigma_z_coefficient": 0.12,
+    "table_derived_sigma_y_m": 152.55401427929476,
+    "table_derived_sigma_z_m": 120.0,
+    "classification": "Formula check only: values calculated independently from the cited table equation, not printed numeric validation",
+    "excluded_paragraph_diagnostic": {
+      "source_locator": "Section 2.2.5, paragraph following Table 2.3; unpaginated",
+      "claimed_briggs_sigma_y_m": 210.0,
+      "claimed_briggs_sigma_z_m": 120.0,
+      "included_in_validation_pass_count": false,
+      "resolution": "Paragraph's class-B sigma-y is inconsistent with its own rural-B equation; code and table transcription agree. No publisher erratum or cause is verified."
+    }
   },
   "tolerances": {"sigma_relative": 0.05, "concentration_relative": 0.10}
 }

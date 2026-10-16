@@ -59,14 +59,14 @@ and explains that outcome instead of altering point forecasts or stretching boun
 ### Local language model
 
 Installed RAM was 17,179,869,184 bytes (16 GiB). The requested floor of 60% gives
-`[wsl2] memory=9GB` in `C:\Users\Andry\.wslconfig`. There was no existing file;
-no previous settings were lost. Docker/WSL were cleanly restarted. The resumed
+`[wsl2] memory=9GB` in `C:\Users\Andry\.wslconfig`. The earlier report stated there was no existing file;
+that historical absence cannot be independently reconstructed. Docker/WSL were cleanly restarted. The resumed
 2026-10-15 measurement gave MemAvailable 6,909,865,984 bytes, exceeding the actual
 model 1,929,912,432 bytes plus 3,221,225,472 bytes (3 GiB) headroom.
 
 The capability is **extractive retrieval with verified citations**, not a
-certified question-answering assistant. The experimental Ollama provider remains
-configured as the default with `qwen2.5:3b-instruct`, Q4_K_M, digest
+certified question-answering assistant. The fix pass now defaults to extractive retrieval and disables the `llm` profile.
+The retained experimental opt-in Ollama model is `qwen2.5:3b-instruct`, Q4_K_M, digest
 `357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b`.
 Model files and Docker's data disk reside on D:. Generation uses temperature 0,
 seed 20261010, context 16384, maximum 1600 new tokens, four CPU threads and
@@ -219,41 +219,14 @@ fallback. Open-Meteo/ERA5 grid-point meteorology is archived model/reanalysis
 data, not direct measurements of BLH. The provenance `observed` flag distinguishes
 a supplied warehouse value from the illustrative fallback, not an instrument.
 
-## Numerical validation
+## Numerical checks and scope
 
-Gaussian tests use the source's own published dispersion inputs. The exact-page
-worked example is [Cimbala ME433 Lesson06E, PDF p.3](https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf):
-Q=110 kg/s, u=5 m/s, effective H=100 m, x=4.85 km, Martin σy=278.97 m,
-σz=87.51 m, reflected ground concentration 149.3 mg/m³. These Martin sigmas
-are supplied to the Gaussian primitive; Briggs is a separate parameterisation.
-The extra [Turner AP26 Chapter 7 Problem 9 Table 7-4](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT)
-check uses an unpaginated EPA HTML transcription (no invented printed page).
-
-| Worked example | Published µg/m³ | Computed µg/m³ | Absolute error % |
-| --- | --- | --- | --- |
-| Turner Table7-4 z=0m | 278.0000 | 274.592426 | 1.225746 |
-| Turner Table7-4 z=30m | 285.0000 | 283.075948 | 0.675106 |
-| Turner Table7-4 z=150m | 358.0000 | 356.331422 | 0.466083 |
-| Cimbala Lesson06E PDF p3 | 149,300.0000 | 149,314.351448 | 0.009612 |
-
-All four supplied-sigma Gaussian comparisons above are below 10%; this does
-not establish that Briggs sigmas reproduce either source's parameterisation.
-The Turner physical page remains unverified, so its three rows are retained as
-**formula check only** in the audit. The following rounded arithmetic evaluates
-the same Briggs formulas as the implementation. It is **formula check only**,
-not independently printed numerical sigma validation. Treating it as evidence
-that the end-to-end parameterisation was validated would be circular. The audit
-reports the actual Briggs-versus-printed-Martin discrepancies separately.
-
-| Environment/class at 1 km | Computed σy / σz (m) | σy error % | σz error % |
-| --- | --- | --- | --- |
-| rural/A | 209.761770 / 200.000000 | 0.000110 | 0.000000 |
-| rural/B | 152.554014 / 120.000000 | 0.000009 | 0.000000 |
-| rural/D | 76.277007 / 37.947332 | 0.000009 | 0.000875 |
-| rural/F | 38.138504 / 12.307692 | 0.001302 | 0.002500 |
-| urban/A | 270.449362 / 339.411255 | 0.000134 | 0.000075 |
-| urban/D | 135.224681 / 122.788123 | 0.000236 | 0.000100 |
-| urban/F | 92.966968 / 50.596443 | 0.000034 | 0.000875 |
+The [fix pass](#fix-pass) contains the authoritative two tables: passing formula
+checks and Briggs-versus-Martin scheme comparisons. Same-formula arithmetic
+checks implementation, not independent physical validity. Cimbala PDF p.3 supplies
+the Gaussian inputs; Turner physical pages remain **unverified** and excluded
+from the validation pass count. The inconsistent Brune class-B paragraph is also
+excluded. No end-to-end physical validation is claimed.
 
 All six required Hypothesis properties pass: reflected crosswind mass integral,
 crosswind symmetry, Q linearity, source superposition, non-increasing ground
@@ -535,7 +508,8 @@ in [VALIDATION](../VALIDATION.md#phase-6a-audit-command-journal-15-october-2026)
    batch/model differences. Independently time actual uncached 24/32/40 RPCs.
 4. Relabel stable ID `highway` as road dust resuspension, because the verified
    January 2011 AP-42 pages exclude exhaust/brake/tire wear. Keep the rate required.
-5. Preserve prompts, provider configuration and frozen labels. Decline the optional
+5. At the audit, preserve prompts, provider configuration and frozen labels. The
+   later fix-pass decision below supersedes only the provider default. Decline the optional
    larger-model evaluation; this audit needs an accurate status, not model tuning.
 6. Back up the current 9GB WSL file. The prior report records no original existed;
    do not claim a nonexistent historical backup. Keep resource and quality gates separate.
@@ -547,69 +521,16 @@ in [VALIDATION](../VALIDATION.md#phase-6a-audit-command-journal-15-october-2026)
 
 ### Textbook audit and corrections to earlier claims
 
-The seven sigma tests contain literal rounded values, not calls to the engine
-to construct their expectations at test time. However, an independently printed
-numeric source for those 14 values could not be verified: PSU's Table 2.3 prints
-the same formulas. Their exact authoring provenance is **unverified** beyond
-the test docstring's arithmetic claim. They are useful transcription/formula
-checks, but using them as independent textbook/physical validation would be
-circular. They are now explicitly **formula check only**, even when below 5%.
-
-The independently transcribed Cimbala references come from
-[ME433 Lesson06E, physical PDF page 3](https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf).
-The handwritten solution shows sigma-y=278.97 m, sigma-z=87.51 m and 149.3 mg/m³
-(149300 µg/m³), at x=4850 m, Q=110 kg/s, effective H=100 m and transport wind=5 m/s,
-class D. The retained PDF SHA256 is
-`ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462`. Page 3 was visually inspected.
-The Gaussian primitive concentration expectation is therefore **not circular**.
-Those are Martin sigmas, so the audited Briggs rural-D comparison is disclosed
-separately; it fails the unchanged sigma and concentration tolerances. It is
-not an excuse to fit Briggs coefficients to the Martin lesson.
-
-[Turner AP26, Chapter 7 Problem 9 Table 7-4](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT)
-contains the independent HTML references 278/285/358 µg/m³ and chart inputs
-157/110 m. Its physical printed page is **unverified**: the attempted EPA PDF
-URL returned HTML. Under this audit's page requirement it remains **formula
-check only**. No printed page number is invented.
-
-[Brune §2.2.5 after Table 2.3](https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm)
-is unpaginated and claims 210/120 m for class B at 1 km. Its own rural-B formula
-gives 152.554014/120 m. The sigma-y discrepancy is 27.355231%; it resembles a
-class A value, but a class mix-up is an inference, not a verified publisher correction.
-
-Concentration references/results below are µg/m³; sigma references/results are m.
-Errors use `100 * abs(computed-reference) / abs(reference)`. All reference numbers and
-locators are retained in `tests/fixtures/vayusim-textbook-audit.json`.
-
-| Reference / check | Reference | Computed | Error % | Tolerance % | Result / scope |
-| --- | --- | --- | --- | --- | --- |
-| Cimbala PDF p3: Gaussian with published Martin sigmas | 149300.000000 | 149314.351448 | 0.009612 | 10.0 | within tolerance; textbook validation of Gaussian primitive only |
-| Cimbala PDF p3: Briggs rural-D sigma-y vs published Martin sigma-y | 278.970000 | 318.396657 | 14.132938 | 5.0 | **FAIL**; cross-parameterisation disagreement, not a calibration target |
-| Cimbala PDF p3: Briggs rural-D sigma-z vs published Martin sigma-z | 87.510000 | 101.160039 | 15.598262 | 5.0 | **FAIL**; cross-parameterisation disagreement, not a calibration target |
-| Cimbala PDF p3: Gaussian using Briggs rural-D sigmas | 149300.000000 | 133382.771845 | 10.661238 | 10.0 | **FAIL**; cross-parameterisation disagreement, not a calibration target |
-| Turner Table 7-4 z=0m | 278.000000 | 274.592426 | 1.225746 | 10.0 | within tolerance; formula check only; physical page unverified |
-| Turner Table 7-4 z=30m | 285.000000 | 283.075948 | 0.675106 | 10.0 | within tolerance; formula check only; physical page unverified |
-| Turner Table 7-4 z=150m | 358.000000 | 356.331422 | 0.466083 | 10.0 | within tolerance; formula check only; physical page unverified |
-| Brune paragraph class-B sigma-y | 210.000000 | 152.554014 | 27.355231 | 5.0 | **FAIL**; source paragraph/table inconsistency diagnostic |
-| Brune paragraph class-B sigma-z | 120.000000 | 120.000000 | 0.000000 | 5.0 | within tolerance; source paragraph/table inconsistency diagnostic |
-
-All 14 original rounded sigma checks follow. Their numeric errors are retained,
-but their tolerance result is not promoted to independent validation.
-
-| Same-formula case | Derived reference sigma-y / sigma-z m | Computed sigma-y / sigma-z m | Error y / z % |
-| --- | --- | --- | --- |
-| rural/A | 209.762 / 200.000 | 209.761770 / 200.000000 | 0.000109823 / 0.000000000 |
-| rural/B | 152.554 / 120.000 | 152.554014 / 120.000000 | 0.000009360 / 0.000000000 |
-| rural/D | 76.277 / 37.947 | 76.277007 / 37.947332 | 0.000009360 / 0.000874699 |
-| rural/F | 38.139 / 12.308 | 38.138504 / 12.307692 | 0.001301634 / 0.002499938 |
-| urban/A | 270.449 / 339.411 | 270.449362 / 339.411255 | 0.000133671 / 0.000075121 |
-| urban/D | 135.225 / 122.788 | 135.224681 / 122.788123 | 0.000236083 / 0.000099931 |
-| urban/F | 92.967 / 50.596 | 92.966968 / 50.596443 | 0.000034399 / 0.000874699 |
-
-The earlier 0.0096–1.23% range describes only the four supplied-sigma Gaussian
-checks. It does **not** describe full Briggs agreement: the additional errors
-are 14.132938%, 15.598262%, 10.661238% and the source inconsistency 27.355231%.
-Independent printed Briggs numeric sigma agreement within 5% remains unestablished.
+The original mixed pass/fail table is superseded by the [fix pass](#fix-pass).
+The 14 rounded sigma references are arithmetic from the same published formulas,
+not independently printed numeric observations. Their authoring provenance beyond
+the original test docstring remains **unverified**. Cimbala PDF p.3 supplies a
+published-input Gaussian formula check. Its Martin sigmas are a separate scheme
+from Briggs: their differences exceed 5%/10%, but are not validation errors.
+Turner physical pages remain unverified. Brune Table 2.3 agrees with the code;
+the adjacent paragraph is the inconsistent reference. All original measured
+values remain in the historical audit artifacts, without promoting them to
+independent physical validation.
 
 ### Highway citation decision
 
@@ -714,8 +635,8 @@ availability is **unverified**; no allocator/kernel change is asserted or tuned.
 No larger model was downloaded/evaluated, and no provider/prompt was tuned.
 
 The final description in README, Architecture, this report and the Ask page is
-**extractive retrieval with verified citations**. The configured experimental
-Qwen provider remains unchanged. Its existing 120-question evaluation retained
+**extractive retrieval with verified citations**. The earlier audit retained the experimental Qwen configuration; the fix pass
+now selects extractive by default and stops Ollama, keeping generation opt-in. Its existing 120-question evaluation retained
 only 2/80 literature answers, 0/30 available-data answers and refused 10/10
 unanswerable questions. Two supported citations do not certify answer quality.
 The earlier 0.9 data-snapshot match is not numeric answer correctness. The
@@ -822,15 +743,238 @@ hashes should be checked against that commit, not later changed documentation.
 ### Remaining limitations and claim changes
 
 Software regression checks pass; independent Briggs sigma validation within 5%
-has **not** been established. The source-parameterisation disagreements above
-remain disclosed failures. No dispersion coefficients or source defaults were
+has **not** been established. Briggs/Martin differences exceed the unchanged
+tolerances and are disclosed as scheme comparisons, not validation errors.
+No dispersion coefficients or source defaults were
 invented to erase them. The road preset means dust resuspension only.
 The Qwen quality gate remains failed, its final measured memory gate also fails,
-and no new generation is cleared by this audit. Provider configuration remains
-unchanged; explicit extractive mode remains available. CPU retrieval/generation remain slow,
+and no new generation is cleared by this audit. The later fix pass now selects
+extractive by default and stops Ollama; its local generation profile is opt-in.
+CPU retrieval/generation remain slow,
 known-gold relevance labels are incomplete, and upstream dependency/ABI warnings
 remain visible. Existing primary-PM2.5, steady wind, flat terrain, missing
 chemistry/deposition, near-field, BLH-transfer and fractional population-support
 limitations still apply. This audit makes no regulatory or predictive-validity
 certification and starts no Phase 6B work. No manual installation/restart/action
 is required to finish the audit.
+
+## Fix pass
+
+Completed on 16 October 2026 from commit `05ef914` in `D:\EnviroInsights-India`.
+The initial checks ran on 15 October; the user interrupted the session, then
+resumed it on 16 October. **Phase 6B has not been started.** Structured evidence:
+[PHASE6A_FIX_METRICS.json](PHASE6A_FIX_METRICS.json). Commands, failed attempts
+and real outputs are in [VALIDATION](../VALIDATION.md#phase-6a-fix-pass-command-journal--15-october-2026).
+
+### Decisions
+
+1. Treat Brune Table 2.3 as the stated equation authority. Correct the fixture's
+   reference/classification; keep the paragraph's 210 m as an excluded source
+   diagnostic. No coefficient change is justified by the source.
+2. Keep sigma 5% and concentration 10% tolerances. Formula checks and scheme
+   comparisons answer different questions; report both without counting scheme
+   differences or unverified Turner pages as validation passes.
+3. Set extractive as the code, example-env and actual local default, including
+   when API keys exist. Stop Ollama and clear the default Compose profile, while
+   retaining its model and opt-in profile. This explicitly supersedes the earlier
+   audit's decision to preserve provider configuration. No prompt, question,
+   relevance label or provider generation parameter was tuned.
+4. Keep WSL at 9GB. A readable backup of current settings is not a recoverable
+   pre-change original. Report the search scope and access limits honestly.
+5. Preserve the historical audit artifacts. Freshly recompute all three examples
+   even though physics is unchanged, and compare every reported numeric value.
+   Keep all 249 tests unchanged and add three focused regressions.
+
+### Brune resolution and code trace
+
+**The worked-example paragraph's numeric reference is wrong relative to its own
+table; the code and table transcription agree.** The requested 27.355231%
+discrepancy is against the paragraph's 210 m, not Table 2.3's class-B equation.
+Source: [Brune METEO532 §2.2.5, Table 2.3 rural row B and the following paragraph](https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm).
+This is an **unpaginated HTML source**, so no physical page number is available.
+The fresh HTTP 200 source body has SHA256
+`86bbdbb9ff24d66b8adaa02daffdd5deb075415960e18c1061ec673c5f28abf0`.
+
+The path was traced as follows:
+
+1. `weather.weather_for()` derives `stability_class`, which `service.compute()`
+   passes to `physics.engine.simulate()`. The reference check explicitly supplies
+   `B`; a separate synthetic day input (2.5 m/s, 800 W/m², cloud fraction 0.1)
+   also derives B. Daytime classification uses EPA Meteorological Monitoring
+   Guidance Table 6-7, printed p.6-16; it is the existing disclosed SRDT/night
+   cloud hybrid, not a new interpretation of Brune's example meteorology.
+2. The API defaults to **urban**; the reference check explicitly selects
+   **rural**. `sigmas()` indexes `COEFFICIENTS[environment][stability]` without
+   changing the supplied class. Rural B selects `(0.16, 0.0001, 0.12, 0, 0)`.
+   Table 2.3 supplies each nonzero coefficient and exponent: sigma-y is
+   `0.16*x*(1+0.0001*x)^(-1/2)`; sigma-z is `0.12*x`. The zero pair encodes
+   the absence of a sigma-z correction factor, rather than a fitted parameter.
+3. The grid's AEQD projection specifies `+units=m`; source/receptor deltas and
+   wind rotation preserve metres. The check converts **1 km to 1000 m once**.
+   Brune's stated range is `100 m < x < 10000 m`; 1000 m is inside it.
+   `sigmas()` floors x at 1 m, which does not affect this case; the engine flags
+   out-of-range extrapolation and excludes upwind/first-metre receptors.
+4. Evaluation gives sigma-y **152.55401427929476 m**, sigma-z **120 m**.
+   Urban B would instead give sigma-y **270.4493615131253 m**. Rural A gives
+   **209.7617696340303 m**, resembling the paragraph's 210 m, but the cause of
+   the paragraph error and any publisher erratum remain **unverified**.
+
+Code sigma-y before → after: **152.55401427929476 → 152.55401427929476 m**.
+Fixture reference focus, paragraph → table: **210 → 152.55401427929476 m**.
+The new primary entry is explicitly table-derived; the earlier fixture retained
+only the inconsistent paragraph as a diagnostic, rather than a table expectation.
+The paragraph's 210/120 m remains visible in an excluded diagnostic. Its
+sigma-y disagreement is **27.355231295573923%**. A new regression pins rural B
+at 1000 m and distinguishes urban B; no physics module was edited.
+
+### (a) Formula checks
+
+These check code against published equations, including rounded table arithmetic.
+They do not establish independent field accuracy. Sigma quantities are metres;
+the last row is concentration. There are **15 passing scalar formula checks**:
+14 sigma checks in seven pairs plus one supplied-sigma Gaussian check.
+
+| Check | Equation-derived or published-input reference | Computed | Difference % | Tolerance % | Scope / result |
+| --- | --- | --- | --- | --- | --- |
+| rural/A sigma-y / sigma-z at 1000 m | 209.762 / 200.000 | 209.761770 / 200.000000 | 0.000109823 / 0.000000000 | 5 / 5 | PASS, formula only |
+| rural/B sigma-y / sigma-z at 1000 m | 152.554 / 120.000 | 152.554014 / 120.000000 | 0.000009360 / 0.000000000 | 5 / 5 | PASS, formula only |
+| rural/D sigma-y / sigma-z at 1000 m | 76.277 / 37.947 | 76.277007 / 37.947332 | 0.000009360 / 0.000874699 | 5 / 5 | PASS, formula only |
+| rural/F sigma-y / sigma-z at 1000 m | 38.139 / 12.308 | 38.138504 / 12.307692 | 0.001301634 / 0.002499938 | 5 / 5 | PASS, formula only |
+| urban/A sigma-y / sigma-z at 1000 m | 270.449 / 339.411 | 270.449362 / 339.411255 | 0.000133671 / 0.000075121 | 5 / 5 | PASS, formula only |
+| urban/D sigma-y / sigma-z at 1000 m | 135.225 / 122.788 | 135.224681 / 122.788123 | 0.000236083 / 0.000099931 | 5 / 5 | PASS, formula only |
+| urban/F sigma-y / sigma-z at 1000 m | 92.967 / 50.596 | 92.966968 / 50.596443 | 0.000034399 / 0.000874699 | 5 / 5 | PASS, formula only |
+| Cimbala p.3 Gaussian, supplied Martin sigmas (concentration µg/m³) | 149300.000000 | 149314.351448 | 0.009612 | 10 | PASS, formula only |
+
+The Gaussian equation and independent supplied inputs are visible in
+[Cimbala ME433 Lesson 06E, physical PDF page 3](https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf):
+Q=110 kg/s (110000 g/s), u=5 m/s, effective H=100 m, x=4850 m, z=y=0,
+Martin sigma-y=278.97 m, sigma-z=87.51 m, concentration=149.3 mg/m³
+(149300 µg/m³). The retained PDF was visually checked and SHA256-verified:
+`ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462`.
+
+### (b) Scheme comparison: Briggs versus Martin
+
+At identical Cimbala p.3 class-D inputs, rural Briggs and the printed Martin
+solution differ as below. **These are differences between two dispersion schemes,
+not validation errors.** They exceed the unchanged **5% sigma / 10% concentration**
+tolerances. No coefficients were fitted to remove the differences. Differences
+use `100*abs(Briggs-Martin)/abs(Martin)`; concentration is µg/m³.
+
+| Quantity | Martin / printed lesson | Briggs | Difference % | Tolerance % | Interpretation |
+| --- | --- | --- | --- | --- | --- |
+| Briggs versus Martin sigma-y | 278.970000 | 318.396657 | 14.132938 | 5 | exceeds; scheme difference |
+| Briggs versus Martin sigma-z | 87.510000 | 101.160039 | 15.598262 | 5 | exceeds; scheme difference |
+| Briggs versus Martin concentration | 149300.000000 | 133382.771845 | 10.661238 | 10 | exceeds; scheme difference |
+
+**Unverified items, excluded from the validation pass count:** Turner AP26,
+Chapter 7 Problem 9 Table 7-4 is available as an
+[EPA HTML transcription](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT),
+but its physical source page remains unverified. At z=0/30/150 m the retained
+278/285/358 µg/m³ references give computed 274.592426/283.075948/356.331422 µg/m³,
+differences 1.225746%/0.675106%/0.466083%. Arithmetic within tolerance does not
+verify a physical page. The conflicting Brune paragraph is likewise excluded.
+Independent end-to-end physical validity remains unestablished.
+
+### Three city examples: before and after
+
+Fresh fields, distances, exposure summaries and API/header responses reproduce
+all archived numbers exactly. Every run/header endpoint returned HTTP 200 and
+retained its input hash. All examples are hypothetical 1 g/s sources. None uses
+rural B, and all five physics-module byte hashes match before/after.
+
+| City / run / dispersion | Peak before µg/m³ | Peak after µg/m³ | Comparison |
+| --- | --- | --- | --- |
+| Delhi / #62 / urban C | 15.641839027404785 | 15.641839027404785 | exact match |
+| Mumbai / #63 / urban C | 11.536741256713867 | 11.536741256713867 | exact match |
+| Hyderabad / #64 / urban F | 18.990890502929688 | 18.990890502929688 | exact match |
+
+Population, source-to-peak distance and weighted increments also match exactly;
+their full values are retained in the structured metrics. No example number or
+API-doc number needs changing. Engine version remains `gaussian-briggs-1.1.0`.
+
+### Default assistant and running application
+
+Code fallback, `.env.example` and actual `.env` now select `LLM_PROVIDER=extractive`.
+Actual/default env values are `OLLAMA_ENABLED=false`, empty `COMPOSE_PROFILES`;
+the installed `qwen2.5:3b-instruct` model is retained for opt-in use. Ollama is
+stopped, the existing Compose `llm` profile is retained, and normal `compose up`
+selects nine services. All nine are running; all five defined service healthchecks
+are healthy. The running web container selects `extractive` and lists only that
+provider as configured. No language-model generation or frozen-set evaluation ran.
+
+`GET /api/health/` returned **200**, `ok=true`; database, PostGIS 3.6.4,
+TimescaleDB 2.30.2, vector 0.8.7, Redis and Celery checks are all true. Production
+`manage.py check --deploy` reports **no issues (0 silenced)**. README documents
+explicit local opt-in and how to restore the extractive defaults. Existing
+Qwen answer-quality and variable memory limitations remain; neither is certified
+by infrastructure health.
+
+### WSL configuration and backup inventory
+
+The read-only search covered `C:\Users\Andry` and `D:\`, without traversing
+reparse points. It found the current `.wslconfig` and **one readable backup**:
+
+- `C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`; created **2026-10-15T15:54:42.370363+00:00**;
+  last modified **2026-10-12T10:35:22.988743+00:00** (timestamps UTC).
+  SHA256 `d4f748ea8f222563e1beb8319e62496c62635ce052aa4dd380ee332b73375268`, 20 bytes.
+
+Both backup and current file contain exactly:
+
+```ini
+[wsl2]
+memory=9GB
+```
+
+The current file was created/modified 2026-10-12T10:35:22.988743+00:00 and has
+the same SHA256. The backup preserves that modification timestamp; its creation
+timestamp identifies the later copy. **A pre-change original could not be
+recovered.** The earlier report says no file existed, but historical absence
+cannot be independently reconstructed from a later backup.
+The search recorded 6 inaccessible/invalid/disappearing paths,
+including Windows application aliases and protected System Volume Information;
+these limits are retained in the local inventory, not presented as a universal
+proof that no other backup exists. No setting was changed. Installed capacity
+is 17,179,869,184 bytes (16 GiB); `floor(0.60*16)=9` gives the requested **9 GB**
+limit. No concrete problem requiring a different value was found in this pass.
+
+### Checks and frozen identities
+
+Full web-container suite: **252 passed, 147 warnings in 55.80 s**
+(all 249 baseline tests plus three new regressions). Existing Python test files
+are byte-identical. The expressly requested textbook fixture correction is the
+only existing fixture changed; frozen evaluation data and labels are untouched.
+Ruff: **All checks passed!** Format: **264 files already formatted**.
+The warnings retain the earlier audited categories: pandas/NumPy generic
+timedelta, SHAP/matplotlib deprecations, compiled ndarray-size warning and
+statsmodels nonconvergence; none was suppressed. Django and migration checks
+also pass. No new model/provider evaluation or prompt tuning was performed.
+
+| Frozen set | Before SHA256 | After SHA256 | Expected |
+| --- | --- | --- | --- |
+| Phase 3A.2, 316 files | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | expected match |
+| Phase 4, 776 files | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | expected match |
+| Phase 5 questions/relevance | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | expected match |
+
+The entire four-file `data/eval` bundle is also unchanged, aggregate
+`51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23`.
+Per-file snapshots are retained locally under `data/results/phase6a-fix/`.
+
+### Failed attempts and resolutions
+
+- Recursive PowerShell WSL inventory hit a filesystem error. A read-only Python
+  walk completed with explicit access-error reporting; it found the backup above.
+  The first walk was interrupted by the user and was rerun after resume.
+- The first standalone physics script invocation lacked `/app` on its import
+  path. Rerunning with `PYTHONPATH=/app` completed all reference checks. This was
+  an audit-script invocation issue; application imports required no code change.
+- Docker was unavailable after the overnight interruption, so the first lint
+  attempt could not run. Started installed Docker Desktop in the background,
+  restored default Compose services and reran Ruff/full tests successfully.
+  PowerShell also decorates Docker's normal stderr progress as NativeCommandError;
+  actual Docker exit codes and final service states are recorded in the journal.
+
+Changes: provider fallback and env examples/local defaults; textbook fixture;
+three regression tests; README, architecture, data model, this report, structured
+metrics and the command journal. Historical artifacts remain separate. Commit
+creation/output is recorded by the final Git journal; **no push is performed**.
+No manual action is required for the default application. Phase 6B remains unstarted.

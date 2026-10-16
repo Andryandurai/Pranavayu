@@ -10,12 +10,13 @@ Read [the Phase6A report](docs/results/PHASE6A.md) for actual verification and
 limitations. Forecast cards show archived replay dates; research comparisons
 do not establish causation or official NCAP compliance.
 
-The audit distinguishes a published-input Gaussian check from independent Briggs
-validation. Rounded values derived from the Briggs formulas are **formula checks
-only**. The comparison with Cimbala's printed Martin sigmas exceeds the unchanged
-5% sigma and 10% concentration tolerances; no coefficients were tuned to hide it.
-Read the [full audit](docs/results/PHASE6A.md#phase-6a-audit) for references,
-discrepancies, reranker measurements and remaining limitations.
+The [fix pass](docs/results/PHASE6A.md#fix-pass) separates passing **formula checks**
+from a **scheme comparison**. Briggs versus Cimbala's Martin solution (PDF p.3)
+differs by 14.13% in sigma-y, 15.60% in sigma-z and 10.66% in concentration.
+These scheme differences exceed the unchanged 5%/10% tolerances; they are not
+validation errors. Brune Table 2.3 agrees with the code: rural-B sigma-y at 1 km
+is 152.554014 m; the adjacent paragraph's 210 m is inconsistent. Turner physical
+pages remain **unverified**. End-to-end physical validity is not established.
 
 VayuSim inputs are explicit scenario assumptions, not measured facility
 inventories. All five source-family presets require emission rate, release
@@ -50,10 +51,12 @@ client numbers never become verified evidence.
 The Windows test wrapper and Makefile force test settings, extractive answering
 and a `/tmp` Hypothesis cache, so enabling the local language model cannot make
 tests call it. Tests retain the real PostgreSQL and Celery integration. On this
-machine the measured memory gate enabled Qwen2.5:3b-instruct; source-model caches
-and all project data remain on D:. The product is **extractive retrieval with
-verified citations**. The experimental Qwen provider remains configured on this
-machine, takes minutes on CPU and has **not passed answer-quality acceptance**:
+machine an earlier memory measurement enabled Qwen2.5:3b-instruct; source-model
+caches and all project data remain on D:. The default is **extractive retrieval
+with verified citations** (`LLM_PROVIDER=extractive`, `OLLAMA_ENABLED=false`,
+empty `COMPOSE_PROFILES`). The experimental Qwen provider is stopped and remains
+available through the opt-in `llm` profile. It takes minutes on CPU and has
+**not passed answer-quality acceptance**:
 its existing frozen evaluation retained only 2/80 literature answers and 0/30
 available-data answers. Exact support among those two retained answers does not
 establish useful question-answering quality. No prompt/provider tuning or new
@@ -61,8 +64,8 @@ language-model evaluation was performed during the audit.
 The final audit measurement had 4,103,503,872 bytes available against the
 3B model's 5,151,137,904-byte memory requirement, so its **current memory gate
 also fails**. Earlier measurements passed; that eligibility varies with resident
-allocations. Use explicit extractive mode for evidence retrieval; the unchanged
-experimental local-provider configuration is not cleared for generation by this audit.
+allocations. The default extractive path needs no language-model memory gate.
+Opting into experimental generation still requires a fresh resource check.
 
 Phase 5 adds [extractive retrieval with verified citations](#phase-5-extractive-retrieval-with-verified-citations),
 available at [Ask](http://localhost:8000/ask/). It uses real document passages
@@ -515,15 +518,30 @@ database commit. Existing PDF bodies cannot be replaced; a changed file is a new
 SHA256 revision. HTML and Markdown have actual section citations and logical
 text pages; PDF citations use physical file pages, not printed-page labels.
 
-`LLM_PROVIDER=auto` selects configured Anthropic, OpenAI, enabled Ollama, then
-extractive. Optional remote providers require both their API key and model name
-in `.env`; see `.env.example`. Extractive works without keys. Phase 6A enabled
-the `llm` profile and Qwen after measuring the revised model-size-plus-3-GiB
-memory gate. That resource check does not certify answer quality. Installed RAM
-is 16 GiB, with `[wsl2] memory=9GB` in `%UserProfile%\.wslconfig`. The audit
-preserved that file at `C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`.
-No pre-Phase-6A file existed to back up; this is a backup of the current settings,
-not a fabricated original. See [the audit](docs/results/PHASE6A.md#phase-6a-audit).
+`LLM_PROVIDER=extractive` is the default even when provider keys are present.
+Explicit `LLM_PROVIDER=auto` opts into configured Anthropic, OpenAI, enabled Ollama,
+then extractive. Optional remote providers require both their API key and model
+name in `.env`; see `.env.example`. Extractive works without keys.
+
+For experimental local generation, first check container memory against actual
+model bytes plus 3 GiB headroom. This resource check does not certify answer
+quality. Set these opt-in values in `.env`, then run `.\scripts\dev.ps1 up`:
+
+```dotenv
+COMPOSE_PROFILES=llm
+OLLAMA_ENABLED=true
+OLLAMA_MODEL=qwen2.5:3b-instruct
+LLM_PROVIDER=ollama
+```
+
+To restore the default, stop Ollama with `docker compose --profile llm stop ollama`,
+clear `COMPOSE_PROFILES`, set `OLLAMA_ENABLED=false` and `LLM_PROVIDER=extractive`,
+then run `.\scripts\dev.ps1 up` to recreate the application containers.
+Installed RAM is 16 GiB, with `[wsl2] memory=9GB` in `%UserProfile%\.wslconfig`
+(60% of 16 GiB, rounded down). The current-settings backup is
+`C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`. A pre-change original
+could not be recovered; the earlier report's claim that none existed cannot be
+independently reconstructed. See [the fix pass](docs/results/PHASE6A.md#fix-pass).
 
 API examples:
 

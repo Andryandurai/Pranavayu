@@ -109,7 +109,7 @@ def configured_providers():
 
 
 def choose_provider(requested=None):
-    requested = requested or os.environ.get("LLM_PROVIDER", "auto")
+    requested = requested or os.environ.get("LLM_PROVIDER", "extractive")
     if requested not in {"auto", "anthropic", "openai", "ollama", "extractive"}:
         raise ValueError("Unknown LLM_PROVIDER")
     available = configured_providers()

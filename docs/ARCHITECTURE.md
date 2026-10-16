@@ -154,15 +154,17 @@ limitations rather than being hidden by service readiness.
 The user-facing capability is **extractive retrieval with verified citations**.
 The optional local Qwen generator failed answer-quality acceptance (2/80
 literature and 0/30 available-data answers retained in its completed evaluation).
-It remains an experimental configured provider, not a certified question-answering
-assistant. Exact citation support checks source text, not independent semantic
-correctness. The Phase 6A audit changes no prompts, provider configuration,
-frozen questions or relevance labels, and evaluates no additional language model.
+It remains an experimental opt-in provider. The default is the extractive path:
+`LLM_PROVIDER=extractive`, `OLLAMA_ENABLED=false`, empty `COMPOSE_PROFILES`.
+Ollama's existing `llm` Compose profile remains available but is stopped locally.
+Exact citation support checks source text, not independent semantic correctness.
+The Phase 6A fix changes the provider default only; prompts, frozen questions and
+relevance labels are unchanged, with no additional language-model evaluation.
 The final audit memory check also fails for the installed 3B model:
 4,103,503,872 available bytes versus 5,151,137,904 required. Earlier measurements
-passed; the precise cause of the lower final availability is unverified. Provider
-configuration remains unchanged for reproducibility; explicit extractive mode
-is available, and this audit does not clear new generation.
+passed; the precise cause of the lower final availability is unverified.
+Opt-in generation requires a new resource check; default extractive retrieval
+does not invoke a language model.
 
 `apps/rag/library.py` downloads public PDF/HTML and snapshots the five internal
 results/provenance documents. SHA256-addressed bodies, real retrieval times,
@@ -196,7 +198,8 @@ and the new `vayusim_run(run_id)` tool are explicitly whitelisted.
 Parameter serializers reject unknown fields/cities, bad date windows, nonfinite
 thresholds and out-of-range horizons. Tool results retain their actual data,
 normalisation, research or forecasting run and model IDs. No raw SQL is exposed.
-Provider order is configured Anthropic/OpenAI/Ollama/extractive. The generator
+The provider defaults to extractive, including when keys are configured. Explicit
+`auto` opts into configured Anthropic/OpenAI/Ollama/extractive order. The generator
 receives evidence only. The verifier requires each cited source to contain the
 claim and its numbers; unsupported lines are removed and empty evidence refuses.
 This conservative exact-text check is not a semantic entailment or medical-validity
@@ -252,11 +255,15 @@ The stable `highway` preset ID is displayed as road dust resuspension, citing
 AP-42 January 2011 §13.2.1.1 p.13.2.1-1 and §13.2.1.3 p.13.2.1-4. No exhaust,
 brake/tire or universal PM2.5 emission factor is supplied.
 
-The textbook audit distinguishes the Gaussian primitive, checked against the
-independently printed Cimbala PDF p.3 values, from Briggs coefficient arithmetic.
-The latter is a formula check only. Briggs rural-D and that lesson's Martin
-dispersion differ beyond the unchanged tolerances; no coefficients were fitted
-to erase that difference. See the full error table in the Phase 6A audit.
+The Phase 6A fix separates passing formula checks (Table 2.3 arithmetic and the
+Gaussian equation with published inputs) from Briggs-versus-Martin scheme
+comparisons using Cimbala PDF p.3. Differences of 14.13% sigma-y, 15.60% sigma-z
+and 10.66% concentration exceed unchanged 5%/10% tolerances; they are differences
+between schemes, not validation errors. Brune's rural-B table gives 152.554014 m
+at 1 km, matching code; the adjacent paragraph's 210 m reference is excluded.
+The source is unpaginated, and Turner physical pages remain unverified.
+No physical coefficients or city example outputs changed. See the revised
+tables in [PHASE6A](results/PHASE6A.md#fix-pass).
 
 Django templates serve the overview, forecast/research selectors, source library,
 assistant and simulator with shared responsive styling. MapLibre5.24.0 is vendored

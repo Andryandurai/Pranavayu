@@ -1,0 +1,603 @@
+{
+  "baseline_commit": "05ef914251ed0853a41db3e718de0f893cec71ee",
+  "phase6b_started": false,
+  "physics": {
+    "sources": {
+      "brune": {
+        "url": "https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm",
+        "http_status": 200,
+        "sha256": "86bbdbb9ff24d66b8adaa02daffdd5deb075415960e18c1061ec673c5f28abf0",
+        "locator": "Section 2.2.5, Table 2.3 rural row B; unpaginated (no physical page)"
+      },
+      "cimbala": {
+        "sha256": "ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462",
+        "physical_pdf_page": 3,
+        "visually_inspected": true
+      }
+    },
+    "formula_checks": [
+      {
+        "label": "Table 2.3 rural/A sigma-y at 1000 m",
+        "reference": 209.762,
+        "computed": 209.7617696340303,
+        "difference_percent": 0.0001098225463684439,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 rural/A sigma-z at 1000 m",
+        "reference": 200.0,
+        "computed": 200.0,
+        "difference_percent": 0.0,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 rural/B sigma-y at 1000 m",
+        "reference": 152.554,
+        "computed": 152.55401427929476,
+        "difference_percent": 9.360157557287651e-06,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 rural/B sigma-z at 1000 m",
+        "reference": 120.0,
+        "computed": 120.0,
+        "difference_percent": 0.0,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 rural/D sigma-y at 1000 m",
+        "reference": 76.277,
+        "computed": 76.27700713964738,
+        "difference_percent": 9.360157557287651e-06,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 rural/D sigma-z at 1000 m",
+        "reference": 37.947,
+        "computed": 37.94733192202055,
+        "difference_percent": 0.0008746989763348054,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 rural/F sigma-y at 1000 m",
+        "reference": 38.139,
+        "computed": 38.13850356982369,
+        "difference_percent": 0.0013016339608075756,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 rural/F sigma-z at 1000 m",
+        "reference": 12.308,
+        "computed": 12.307692307692307,
+        "difference_percent": 0.002499937501569957,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 urban/A sigma-y at 1000 m",
+        "reference": 270.449,
+        "computed": 270.4493615131253,
+        "difference_percent": 0.00013367145942959306,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 urban/A sigma-z at 1000 m",
+        "reference": 339.411,
+        "computed": 339.4112549695428,
+        "difference_percent": 7.512117840108056e-05,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 urban/D sigma-y at 1000 m",
+        "reference": 135.225,
+        "computed": 135.22468075656266,
+        "difference_percent": 0.0002360831483318961,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 urban/D sigma-z at 1000 m",
+        "reference": 122.788,
+        "computed": 122.78812270298408,
+        "difference_percent": 9.993076203393776e-05,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 urban/F sigma-y at 1000 m",
+        "reference": 92.967,
+        "computed": 92.96696802013683,
+        "difference_percent": 3.439915579345148e-05,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Table 2.3 urban/F sigma-z at 1000 m",
+        "reference": 50.596,
+        "computed": 50.59644256269407,
+        "difference_percent": 0.0008746989763535301,
+        "tolerance_percent": 5.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      },
+      {
+        "label": "Cimbala p3 Gaussian equation, supplied Martin sigmas",
+        "reference": 149300.0,
+        "computed": 149314.35144810504,
+        "difference_percent": 0.009612490358363684,
+        "tolerance_percent": 10.0,
+        "within_tolerance": true,
+        "status": "PASS (formula check only)"
+      }
+    ],
+    "scheme_comparisons": [
+      {
+        "label": "Briggs versus Martin sigma-y",
+        "reference": 278.97,
+        "computed": 318.39665666654065,
+        "difference_percent": 14.132937830784893,
+        "tolerance_percent": 5.0,
+        "within_tolerance": false,
+        "status": "scheme difference; exceeds tolerance; not a validation error"
+      },
+      {
+        "label": "Briggs versus Martin sigma-z",
+        "reference": 87.51,
+        "computed": 101.16003892012024,
+        "difference_percent": 15.598261821643511,
+        "tolerance_percent": 5.0,
+        "within_tolerance": false,
+        "status": "scheme difference; exceeds tolerance; not a validation error"
+      },
+      {
+        "label": "Briggs versus Martin concentration",
+        "reference": 149300.0,
+        "computed": 133382.77184471727,
+        "difference_percent": 10.66123788029654,
+        "tolerance_percent": 10.0,
+        "within_tolerance": false,
+        "status": "scheme difference; exceeds tolerance; not a validation error"
+      }
+    ],
+    "unverified": [
+      {
+        "label": "Turner Table 7-4 z=0 m",
+        "reference": 278.0,
+        "computed": 274.59242587296325,
+        "difference_percent": 1.2257460888621414,
+        "tolerance_percent": 10.0,
+        "within_tolerance": true,
+        "status": "unverified physical page; excluded from validation pass count"
+      },
+      {
+        "label": "Turner Table 7-4 z=30 m",
+        "reference": 285.0,
+        "computed": 283.0759483866468,
+        "difference_percent": 0.6751058292467318,
+        "tolerance_percent": 10.0,
+        "within_tolerance": true,
+        "status": "unverified physical page; excluded from validation pass count"
+      },
+      {
+        "label": "Turner Table 7-4 z=150 m",
+        "reference": 358.0,
+        "computed": 356.3314215728553,
+        "difference_percent": 0.4660833595376322,
+        "tolerance_percent": 10.0,
+        "within_tolerance": true,
+        "status": "unverified physical page; excluded from validation pass count"
+      }
+    ],
+    "brune_resolution": {
+      "wrong_side": "worked-example paragraph's numerical reference, not code or Table 2.3 transcription",
+      "stability_input": "B",
+      "environment_input": "rural",
+      "x_m": 1000,
+      "source_range_m": [
+        100.0,
+        10000.0
+      ],
+      "in_range": true,
+      "selected_coefficients": [
+        0.16,
+        0.0001,
+        0.12,
+        0.0,
+        0.0
+      ],
+      "table_sigma_y_equation": "0.16*x*(1+0.0001*x)**(-0.5)",
+      "table_sigma_z_equation": "0.12*x",
+      "units": "x and sigmas in metres; 1 km converted once to 1000 m",
+      "code_sigma_y_before_m": 152.55401427929476,
+      "code_sigma_y_after_m": 152.55401427929476,
+      "reference_sigma_y_before_m": 210.0,
+      "reference_sigma_y_after_m": 152.55401427929476,
+      "sigma_z_m": 120.0,
+      "paragraph_sigma_y_discrepancy_percent": 27.355231295573923,
+      "urban_b_sigma_y_m": 270.4493615131253,
+      "rural_a_sigma_y_m": 209.7617696340303,
+      "synthetic_daytime_input": {
+        "wind_ms": 2.5,
+        "solar_wm2": 800,
+        "cloud_fraction": 0.1,
+        "daytime": true,
+        "derived_class": "B"
+      },
+      "paragraph_in_validation_pass_count": false,
+      "publisher_erratum_or_cause": "unverified; resemblance to rural A is an inference only",
+      "physics_changed": false,
+      "example_impact": "None: Delhi/Mumbai use urban C; Hyderabad uses urban F; physics bytes unchanged"
+    },
+    "formula_pass_count": 15,
+    "independent_end_to_end_physical_validation": "not established"
+  },
+  "runtime": {
+    "environment": {
+      "LLM_PROVIDER": "extractive",
+      "OLLAMA_ENABLED": "false",
+      "OLLAMA_MODEL": "qwen2.5:3b-instruct",
+      "COMPOSE_PROFILES": ""
+    },
+    "selected_provider": "extractive",
+    "configured_provider_names": [
+      "extractive"
+    ],
+    "http_status": 200,
+    "health": {
+      "ok": true,
+      "checks": {
+        "database": {
+          "ok": true
+        },
+        "extensions": {
+          "postgis": {
+            "ok": true,
+            "version": "3.6.4"
+          },
+          "timescaledb": {
+            "ok": true,
+            "version": "2.30.2"
+          },
+          "vector": {
+            "ok": true,
+            "version": "0.8.7"
+          }
+        },
+        "redis": {
+          "ok": true
+        },
+        "celery": {
+          "ok": true
+        }
+      }
+    },
+    "language_model_called": false
+  },
+  "wsl_inventory": {
+    "search_roots": [
+      "C:\\Users\\Andry",
+      "D:\\"
+    ],
+    "reparse_points_traversed": false,
+    "files": {
+      "C:\\Users\\Andry\\.wslconfig": {
+        "created_at_utc": "2026-10-12T10:35:22.988743+00:00",
+        "modified_at_utc": "2026-10-12T10:35:22.988743+00:00",
+        "sha256": "d4f748ea8f222563e1beb8319e62496c62635ce052aa4dd380ee332b73375268",
+        "bytes": 20,
+        "contents": "[wsl2]\r\nmemory=9GB\r\n"
+      },
+      "C:\\Users\\Andry\\.wslconfig.phase6a-audit-20261015.bak": {
+        "created_at_utc": "2026-10-15T15:54:42.370363+00:00",
+        "modified_at_utc": "2026-10-12T10:35:22.988743+00:00",
+        "sha256": "d4f748ea8f222563e1beb8319e62496c62635ce052aa4dd380ee332b73375268",
+        "bytes": 20,
+        "contents": "[wsl2]\r\nmemory=9GB\r\n"
+      }
+    },
+    "inaccessible_paths": [
+      "[Errno 22] Invalid argument: 'C:\\\\Users\\\\Andry\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\\\\wslconfig.exe'",
+      "[Errno 22] Invalid argument: 'C:\\\\Users\\\\Andry\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\\\\MicrosoftCorporationII.WindowsSubsystemForLinux_8wekyb3d8bbwe\\\\wslconfig.exe'",
+      "[WinError 3] The system cannot find the path specified: 'C:\\\\Users\\\\Andry\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Andry-DADA-Portfolio\\\\d912b539-f8c2-4fa6-9c9e-84c10a51abdb\\\\scratchpad\\\\vercel-github\\\\.next\\\\server\\\\route-cache\\\\APP_PAGE\\\\019267d7d0c7835dd85222bbf6a05cbfe3887a4775e74d8581b6f6e2aa6b375d\\\\$\\\\work\\\\ddreams-arc.segments'",
+      "[WinError 3] The system cannot find the path specified: 'C:\\\\Users\\\\Andry\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Andry-DADA-Portfolio\\\\d912b539-f8c2-4fa6-9c9e-84c10a51abdb\\\\scratchpad\\\\vercel-github\\\\.next\\\\server\\\\route-cache\\\\APP_PAGE\\\\019267d7d0c7835dd85222bbf6a05cbfe3887a4775e74d8581b6f6e2aa6b375d\\\\$\\\\work\\\\ss-builders.segments'",
+      "[WinError 2] The system cannot find the file specified: 'C:\\\\Users\\\\Andry\\\\CrossDevice\\\\Andryan\\\\storage\\\\DCIM\\\\Cat.'",
+      "[WinError 5] Access is denied: 'D:\\\\System Volume Information'"
+    ],
+    "original_recovered": false,
+    "interpretation": "Current-file backup is not a pre-change original. Historical absence cannot be independently reconstructed. No WSL configuration was changed."
+  },
+  "examples": [
+    {
+      "run_id": 62,
+      "city": "delhi",
+      "label": "hypothetical 1 g/s source",
+      "peak_ugm3": 15.641839027404785,
+      "distance_to_peak_m": 176.77669529663723,
+      "exposure": {
+        "label": "hourly added exposure; WorldPop 2025 modelled population",
+        "population_support_fraction": 0.913056536128173,
+        "population_support_scope": "Mean fraction of cell area with population data",
+        "partially_supported_cells": 1041,
+        "supported_population": 2184007.044221276,
+        "population_above": {
+          "1.0": 11787.140769547765,
+          "5.0": 1155.6531529877152,
+          "15.0": 114.68803561663515,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "population_weighted_mean_added_ugm3": 0.025989982134662266,
+        "missing_population_cells": 2949,
+        "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+      },
+      "stability_class": "C",
+      "all_reported_numeric_values_match": true,
+      "fresh_compute": true,
+      "doubled_Q_peak_exactly_doubled": true,
+      "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45,
+      "http_status": 200,
+      "header_status": 200,
+      "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4",
+      "interpretation": {
+        "sources": [
+          {
+            "label": "hypothetical 1 g/s source",
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "scaling": "For a single source at fixed weather, geometry, release parameters and grid, concentration and peak scale linearly with emission rate Q. For multiple sources, contributions add; peak scales linearly with a common multiplier on all rates. Population above a fixed concentration threshold does not scale linearly.",
+        "population_scope": "Population values are for the modelled grid footprint only, restricted to known raster support. They are not citywide exposure, a census or health impact estimates."
+      }
+    },
+    {
+      "run_id": 63,
+      "city": "mumbai",
+      "label": "hypothetical 1 g/s source",
+      "peak_ugm3": 11.536741256713867,
+      "distance_to_peak_m": 176.77669529663748,
+      "exposure": {
+        "label": "hourly added exposure; WorldPop 2025 modelled population",
+        "population_support_fraction": 0.9390462437130813,
+        "population_support_scope": "Mean fraction of cell area with population data",
+        "partially_supported_cells": 692,
+        "supported_population": 1294658.3942227834,
+        "population_above": {
+          "1.0": 5906.777275622714,
+          "5.0": 643.0847214835771,
+          "15.0": 0.0,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "population_weighted_mean_added_ugm3": 0.029133751121464574,
+        "missing_population_cells": 2095,
+        "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+      },
+      "stability_class": "C",
+      "all_reported_numeric_values_match": true,
+      "fresh_compute": true,
+      "doubled_Q_peak_exactly_doubled": true,
+      "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45,
+      "http_status": 200,
+      "header_status": 200,
+      "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca",
+      "interpretation": {
+        "sources": [
+          {
+            "label": "hypothetical 1 g/s source",
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "scaling": "For a single source at fixed weather, geometry, release parameters and grid, concentration and peak scale linearly with emission rate Q. For multiple sources, contributions add; peak scales linearly with a common multiplier on all rates. Population above a fixed concentration threshold does not scale linearly.",
+        "population_scope": "Population values are for the modelled grid footprint only, restricted to known raster support. They are not citywide exposure, a census or health impact estimates."
+      }
+    },
+    {
+      "run_id": 64,
+      "city": "hyderabad",
+      "label": "hypothetical 1 g/s source",
+      "peak_ugm3": 18.990890502929688,
+      "distance_to_peak_m": 725.4309064273452,
+      "exposure": {
+        "label": "hourly added exposure; WorldPop 2025 modelled population",
+        "population_support_fraction": 0.9602198779686332,
+        "population_support_scope": "Mean fraction of cell area with population data",
+        "partially_supported_cells": 300,
+        "supported_population": 1518670.328867529,
+        "population_above": {
+          "1.0": 66300.35740581078,
+          "5.0": 31704.40710443302,
+          "15.0": 1608.2626922309853,
+          "60.0": 0.0,
+          "120.0": 0.0
+        },
+        "population_weighted_mean_added_ugm3": 0.24528510337466117,
+        "missing_population_cells": 1443,
+        "method": "geodesic count density; area-weighted warp with fractional support mask; known population only; unknown area not extrapolated"
+      },
+      "stability_class": "F",
+      "all_reported_numeric_values_match": true,
+      "fresh_compute": true,
+      "doubled_Q_peak_exactly_doubled": true,
+      "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45,
+      "http_status": 200,
+      "header_status": 200,
+      "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84",
+      "interpretation": {
+        "sources": [
+          {
+            "label": "hypothetical 1 g/s source",
+            "assumptions": "Declared hypothetical1g/s primary PM2.5 release at50m; no plume rise. Not a measured facility or preset default. Temperature arbitrary for zero-flow source and has no rise effect."
+          }
+        ],
+        "scaling": "For a single source at fixed weather, geometry, release parameters and grid, concentration and peak scale linearly with emission rate Q. For multiple sources, contributions add; peak scales linearly with a common multiplier on all rates. Population above a fixed concentration threshold does not scale linearly.",
+        "population_scope": "Population values are for the modelled grid footprint only, restricted to known raster support. They are not citywide exposure, a census or health impact estimates."
+      }
+    }
+  ],
+  "identity_before": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "existing_python_tests": {
+      "files": 28,
+      "aggregate_sha256": "63edc9d6a6717260002e8aa67bf1de43cc46e7821931d537db3151dfc36ed85c"
+    },
+    "physics_code": {
+      "files": 5,
+      "aggregate_sha256": "f809258e9006466faaf952e2879c54deb6c7c6b7e998f5e131489c345316196c"
+    },
+    "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "stage": "before",
+    "identical_to_before": false
+  },
+  "identity_after": {
+    "phase3a2": {
+      "files": 316,
+      "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+    },
+    "phase4": {
+      "files": 776,
+      "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+    },
+    "phase5": {
+      "files": 4,
+      "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+    },
+    "existing_python_tests": {
+      "files": 28,
+      "aggregate_sha256": "63edc9d6a6717260002e8aa67bf1de43cc46e7821931d537db3151dfc36ed85c"
+    },
+    "physics_code": {
+      "files": 5,
+      "aggregate_sha256": "f809258e9006466faaf952e2879c54deb6c7c6b7e998f5e131489c345316196c"
+    },
+    "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+    "stage": "after",
+    "identical_to_before": true
+  },
+  "tests": {
+    "passed": 252,
+    "warnings": 147,
+    "seconds": 55.8,
+    "baseline_tests_retained": 249,
+    "new_regressions": 3
+  },
+  "ruff": {
+    "check": "All checks passed!",
+    "format": "264 files already formatted"
+  },
+  "service_proof": {
+    "services": [
+      {
+        "Service": "beat",
+        "State": "running",
+        "Health": ""
+      },
+      {
+        "Service": "db",
+        "State": "running",
+        "Health": "healthy"
+      },
+      {
+        "Service": "flower",
+        "State": "running",
+        "Health": ""
+      },
+      {
+        "Service": "mlflow",
+        "State": "running",
+        "Health": "healthy"
+      },
+      {
+        "Service": "ollama",
+        "State": "exited",
+        "Health": ""
+      },
+      {
+        "Service": "rag-models",
+        "State": "running",
+        "Health": "healthy"
+      },
+      {
+        "Service": "rag-reranker",
+        "State": "running",
+        "Health": "healthy"
+      },
+      {
+        "Service": "redis",
+        "State": "running",
+        "Health": "healthy"
+      },
+      {
+        "Service": "web",
+        "State": "running",
+        "Health": ""
+      },
+      {
+        "Service": "worker",
+        "State": "running",
+        "Health": ""
+      }
+    ],
+    "default_services": [
+      "beat",
+      "db",
+      "flower",
+      "mlflow",
+      "rag-models",
+      "rag-reranker",
+      "redis",
+      "web",
+      "worker"
+    ],
+    "host_http_checks": [
+      {
+        "path": "/",
+        "http_status": 200,
+        "response_bytes": 7767
+      },
+      {
+        "path": "/ask/",
+        "http_status": 200,
+        "response_bytes": 4781
+      },
+      {
+        "path": "/api/health/",
+        "http_status": 200,
+        "response_bytes": 225
+      }
+    ],
+    "ollama_opt_in_only": true
+  }
+}

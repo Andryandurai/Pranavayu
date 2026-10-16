@@ -350,5 +350,17 @@ No exhaust factor is stored or inferred. The RAG feature is described as
 extractive retrieval with verified citations; a stored provider name and valid
 citations do not constitute answer-quality certification.
 Memory eligibility is likewise a timestamped resource measurement, separate from
-Query/provider identity and answer quality. The final audit gate fails for the
-installed 3B model; no larger model is evaluated and no provider parameters change.
+Query/provider identity and answer quality. The final audit gate failed for the
+installed 3B model. The fix pass defaults to `LLM_PROVIDER=extractive`, disables
+Ollama and leaves its Compose `llm` profile opt-in. Existing Query provider/model
+identities and evaluation artifacts are retained; no question, relevance label,
+prompt or generation parameter was tuned.
+
+Textbook references in `tests/fixtures/vayusim-textbook-audit.json` now distinguish
+formula checks, scheme comparisons and unverified physical pages. Rural-B
+Table 2.3 arithmetic yields sigma-y 152.554014 m at 1000 m; the inconsistent 210 m
+paragraph reference is retained as an excluded diagnostic. Briggs-versus-Martin
+differences (Cimbala PDF p.3: 14.13%/15.60%/10.66%) are scheme differences beyond
+5%/10% tolerances, not validation errors. Turner physical pages are unverified.
+This correction changes no ScenarioRun input hashes, engine version, stored
+numerical summaries or frozen Phase 3A.2/4/5 evaluation records.
