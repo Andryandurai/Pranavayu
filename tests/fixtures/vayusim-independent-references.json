@@ -1,0 +1,132 @@
+{
+  "transcription_date": "2026-10-16",
+  "transcription_method": "Manual transcription of published numbers and equations; no engine output was used to create reference values.",
+  "tolerances": {"printed_sigma_relative": 0.05, "concentration_relative": 0.10, "chart_read_relative": 0.10},
+  "sources": {
+    "doe2018": {
+      "title": "DOE-HDBK-1224-2018, Hazard and Accident Analysis Handbook",
+      "url": "https://www.energy.gov/documents/doe-hdbk-1224-2018pdf",
+      "printed_page": "213",
+      "pdf_page": 228,
+      "locator": "Section 6.4.2.4, worked example following Equation 6-10; coefficient Table 6-9 is on printed p.214 / PDF p.229",
+      "openly_accessible": true,
+      "read_method": "Web reader PDF text with page markers",
+      "scope": "Independently printed Briggs open-country D numbers, not field measurements"
+    },
+    "isc3": {
+      "title": "EPA-454/B-95-003b, ISC3 User's Guide Volume II: Description of Model Algorithms (1995)",
+      "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf",
+      "repo_path": "data/raw/vayusim/isc3v2.pdf",
+      "repo_sha256": "c34d6d7d7e1b109abcf182b24fc2bf3003a621d336c11cf6a8e8ccc5f057fe76",
+      "printed_page": "1-19",
+      "pdf_page": 32,
+      "locator": "Tables 1-3 and 1-4, all six urban McElroy-Pooler/Briggs classes; rural alternatives are on pp.1-14 to 1-18",
+      "openly_accessible": true,
+      "scope": "Equation/parameter transcription only; no printed urban C/F numeric point in these tables"
+    },
+    "cimbala": {
+      "title": "J. M. Cimbala, ME433 Lesson 06E: Reflecting Ground",
+      "url": "https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf",
+      "repo_path": "data/raw/vayusim/cimbala-reflecting.pdf",
+      "repo_sha256": "ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462",
+      "printed_page": null,
+      "pdf_page": 3,
+      "locator": "Physical PDF p.3 handwritten worked solution",
+      "openly_accessible": true,
+      "scope": "Printed Martin inputs and concentration: scheme comparison when Briggs supplies the sigmas"
+    },
+    "turner": {
+      "title": "D. Bruce Turner, Workbook of Atmospheric Dispersion Estimates, revised 1970",
+      "url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKHD.TXT",
+      "additional_repo_source": "data/raw/vayusim/turner-workbook.html",
+      "repo_source_url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT",
+      "printed_page": null,
+      "pdf_page": null,
+      "locator": "Chapter 7 Problems 4 and 9, Table 7-4; exact physical page remains unverified",
+      "openly_accessible": true,
+      "page_status": "unverified; EPA PDF reads failed, mirror metadata alone did not verify a page",
+      "scope": "Published Pasquill-Gifford chart-derived inputs, not a Briggs urban worked example; excluded from validation pass count"
+    }
+  },
+  "numeric_cases": [
+    {
+      "id": "doe-briggs-rural-d-1000m",
+      "source": "doe2018",
+      "transcription_date": "2026-10-16",
+      "environment": "rural",
+      "stability": "D",
+      "x_m": 1000.0,
+      "reference_kind": "printed-number",
+      "exact_printed_values": {"sigma_y_m": "76.3 m", "sigma_z_m": "37.9 m"},
+      "sigma_y_m": 76.3,
+      "sigma_z_m": 37.9,
+      "eligible_for_case_validation": true,
+      "scope": "Sigma pair at this distance only; no concentration or plume-rise validation"
+    },
+    {
+      "id": "cimbala-martin-d-4850m",
+      "source": "cimbala",
+      "transcription_date": "2026-10-16",
+      "environment": "rural",
+      "stability": "D",
+      "x_m": 4850.0,
+      "reference_kind": "printed-number",
+      "exact_printed_values": {"sigma_y_m": "278.97 m", "sigma_z_m": "87.51 m", "concentration": "149.3 mg/m^3", "q": "110 kg/s", "wind": "5.0 m/s", "stack_height": "80 m", "plume_rise": "20 m above stack exit"},
+      "sigma_y_m": 278.97,
+      "sigma_z_m": 87.51,
+      "concentration_ugm3": 149300.0,
+      "q_gs": 110000.0,
+      "transport_wind_ms": 5.0,
+      "physical_stack_height_m": 80.0,
+      "published_plume_rise_m": 20.0,
+      "effective_height_m": 100.0,
+      "receptor_y_m": 0.0,
+      "receptor_z_m": 0.0,
+      "eligible_for_case_validation": false,
+      "scope": "Briggs-versus-Martin scheme comparison at published effective H and transport wind; exit diameter, velocity and temperature are not specified for an end-to-end plume-rise comparison"
+    },
+    {
+      "id": "turner-pg-b-1000m",
+      "source": "turner",
+      "transcription_date": "2026-10-16",
+      "environment": "rural",
+      "stability": "B",
+      "stability_provenance": "B is the selected diagnostic branch; exact source-case classification is unverified from a physical page, so it cannot establish matched-branch validation.",
+      "x_m": 1000.0,
+      "reference_kind": "prior repo transcription (author chart-derived); physical page unverified",
+      "prior_repo_values": {"sigma_y_m": "157 m", "sigma_z_m": "110 m", "concentration_z0": "278 micrograms/m^3", "concentration_z30": "285 micrograms/m^3", "concentration_z150": "358 micrograms/m^3"},
+      "transcription_note": "Retained manually from the existing cited textbook fixture, not asserted to be a newly verified physical-page transcription. Exact printed glyphs/page remain unverified; excluded from pass count.",
+      "sigma_y_m": 157.0,
+      "sigma_z_m": 110.0,
+      "q_gs": 151.0,
+      "transport_wind_ms": 4.0,
+      "effective_height_m": 150.0,
+      "receptor_y_m": 0.0,
+      "rows": [{"z_m": 0.0, "concentration_ugm3": 278.0}, {"z_m": 30.0, "concentration_ugm3": 285.0}, {"z_m": 150.0, "concentration_ugm3": 358.0}],
+      "eligible_for_case_validation": false,
+      "scope": "Unverified exact page; cross-scheme diagnostics only, never urban evidence"
+    }
+  ],
+  "urban_equation_transcription": {
+    "source": "isc3",
+    "transcription_date": "2026-10-16",
+    "x_units": "m",
+    "sigma_units": "m",
+    "sigma_y_equation": "ay*x*(1+by*x)**(-1/2)",
+    "sigma_z_equation": "az*x*(1+bz*x)**power",
+    "coefficient_order": ["ay", "by", "az", "bz", "power"],
+    "rows": {
+      "A": [0.32, 0.0004, 0.24, 0.001, 0.5],
+      "B": [0.32, 0.0004, 0.24, 0.001, 0.5],
+      "C": [0.22, 0.0004, 0.20, 0.0, 0.0],
+      "D": [0.16, 0.0004, 0.14, 0.0003, -0.5],
+      "E": [0.11, 0.0004, 0.08, 0.0015, -0.5],
+      "F": [0.11, 0.0004, 0.08, 0.0015, -0.5]
+    },
+    "note": "For C the printed sigma-z is simply 0.20*x; zero bz/power encode no correction factor. These are printed equation coefficients, not independently printed sigma values. No numeric branch-readiness credit."
+  },
+  "example_branch_gate": {
+    "urban/C": {"status": "not independently validated", "examples": ["Delhi #62", "Mumbai #63"], "reason": "No verified page-cited matching numeric or visually verified chart-read sigma pair located; equation transcription only"},
+    "urban/F": {"status": "not independently validated", "examples": ["Hyderabad #64"], "reason": "No verified page-cited matching numeric or visually verified chart-read sigma pair located; equation transcription only"}
+  }
+}

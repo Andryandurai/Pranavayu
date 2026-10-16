@@ -1,5 +1,11 @@
 # Phase 6A: VayuSim engine, data integration and API
 
+**Gate: Ready for 6B with caveats.** Urban C (Delhi/Mumbai) and urban F
+(Hyderabad) remain **not independently validated**. Phase6B must display an
+**unvalidated branch** label for these scenarios before presenting them. This
+is a conditional frontend acceptance requirement; **Phase6B has not started**.
+See [Independent validation](#independent-validation) for the exact case scope.
+
 The engine, real-data adapters, API and verification map are implemented in
 `D:\EnviroInsights-India`. The user's subsequent whole-site presentation request
 covers the overview, forecasts, research, library, assistant and simulator pages.
@@ -978,3 +984,232 @@ three regression tests; README, architecture, data model, this report, structure
 metrics and the command journal. Historical artifacts remain separate. Commit
 creation/output is recorded by the final Git journal; **no push is performed**.
 No manual action is required for the default application. Phase 6B remains unstarted.
+
+## Independent validation
+
+Completed 16 October 2026 from `c154eaa` in `D:\EnviroInsights-India`.
+The reproducible command is:
+
+```powershell
+docker compose exec -T web python manage.py verify_vayusim_references
+```
+
+Hand-transcribed references, their dates and exact printed values are in
+`tests/fixtures/vayusim-independent-references.json`. Actual outputs are in
+[PHASE6A_INDEPENDENT_METRICS.json](PHASE6A_INDEPENDENT_METRICS.json).
+Commands and linked raw web-reader outputs are in [VALIDATION](../VALIDATION.md).
+
+### Decisions
+
+1. Keep every physics module, coefficient, preset, tolerance, existing test and
+   existing fixture unchanged. New expectations come from external printed
+   values, not the engine or calculations copied from its implementation.
+2. Separate an independent **printed numeric case** from equation transcription,
+   cross-scheme comparisons and empirical field validation. A published equation
+   alone, including a new page citation, cannot clear numeric branch readiness.
+3. Use 5% for printed sigma values and 10% for concentrations. Use 10% only for
+   an actual manually read chart point; none could be visually verified in this
+   run. Turner's author-derived chart inputs are printed numbers in the retained
+   fixture, so their diagnostic sigma comparison retains 5%, not a relaxed 10%.
+4. Count only the DOE rural-D printed sigma pair at 1000 m as an independent
+   numerical case. Keep the Martin and Turner diagnostics visible, including
+   failures, but out of matched-scheme independent pass counts. Do not equate
+   separate scalar values with separate experiments.
+5. Do not manufacture missing urban C/F numeric reference values from equations,
+   another class, a rural curve, inaccessible figures or a search snippet.
+   Equation coefficients are transcribed separately and tested for all six
+   urban classes; they do not qualify as independent numeric sigma references.
+6. Use the available web reader for public sources; no separate named WebFetch
+   tool was exposed. Perform no shell network downloads. ZIP-only data and
+   unsuccessful PDF/chart reads remain explicit access/verification limits.
+7. Record **Ready for 6B with caveats**, conditional on the future Phase 6B
+   frontend displaying **unvalidated branch** for urban C/F scenarios, including
+   all three examples. This is a mandatory future acceptance condition, not a
+   claim that the label has already been implemented. Do not start Phase 6B here.
+
+### Source search and accessibility
+
+The repository was searched first: the cached VayuSim sources, research library
+and all cached RAG PDFs. Relevant local hits include ISC3, the meteorological
+guide, AERMOD formulation and dispersion references inside city reports; no
+matched independent urban C/F numeric pair was established from them. Public
+search then examined the sources below. Raw requests and returned outputs are
+retained separately; inaccessible sources do not contribute reference values.
+
+| Source | Page / table / locator | Access and use |
+| --- | --- | --- |
+| [Brune METEO532](https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm) | Section 2.2.5, Table 2.3; unpaginated | cached primary lecture table, all rural/urban A-F formulas; equation source, not numeric validation |
+| [DOE-HDBK-1224-2018](https://www.energy.gov/documents/doe-hdbk-1224-2018pdf) | printed p.213 / PDF p.228 example after Eq.6-10; Table6-9 p.214 / PDF p.229 | accessible PDF text with page markers; independently printed rural D numeric case |
+| [EPA ISC3 Volume II (1995)](https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf) | Tables1-3/1-4 p.1-19 / PDF p.32; rural pp.1-14 to1-18 | cached and accessible primary PDF; all urban equations, different rural PG equations |
+| [Turner revised 1970](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKHD.TXT) | Problems4/9, Table7-4; exact physical page unverified | HTML readable; EPA PDF fetch failed; prior numeric transcription excluded from pass count |
+| [Turner workbook mirror](https://www.keysolutionsinc.com/references/Turner%20Workbook.pdf) | 92-page metadata detected; needed page not verified | subsequent reads timed out/failed; no verified chart readings |
+| [Turner workbook in EPA docket](https://downloads.regulations.gov/EPA-HQ-OAR-2003-0062-0323/attachment_2.pdf) | page unverified | 403 Forbidden |
+| [Cimbala ME433 Lesson06E](https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf) | physical PDF p.3 | cached primary PDF available and SHA verified; remote read failed; Martin scheme comparison only |
+| [EPA ISC3 test distribution](https://gaftp.epa.gov/AIR/aqmg/SCRAM/models/other/isc3/iscst.zip) | distribution archive | public directory readable; web reader rejects application/zip; no shell download performed |
+| [EPA ISC3 Volume I](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=000031VJ.TXT) | sample TEST-ST run and input/output instructions | HTML readable; PDF fetch failed; no complete matching isolated urban C/F input-output tuple verified |
+| [EPA AERMOD sample run](https://gaftp.epa.gov/Air/aqmg/SCRAM/models/preferred/aermod/AERMOD_Sample_Run_Instructions.pdf) | pp.17-21, especially p.20 Section4.3; AppendixA p.31 | readable primary guide; original outputs are in separate sample/test ZIPs; no matched Briggs-only numeric case verified |
+| [GENII v2 design Rev3](https://www.pnnl.gov/main/publications/external/technical_reports/PNNL-14584Rev3.pdf) | 338-page metadata detected; needed numeric page unverified | initial PDF identified; follow-up needed-page searches/reads failed; no numerical reference used |
+| [DOE-HDBK-1224-2024](https://www.energy.gov/documents/doe-hdbk-1224-2024pdf) | needed numerical page unverified | PDF identified; relevant-page reads failed; no value promoted from search snippets or independent Doxcelerate mirror |
+
+**Formula provenance for all classes:** Brune Table2.3 and DOE Table6-9 on
+printed p.214 cover rural/urban A-F. The latter discusses Briggs (1973) with
+Griffiths (1994) updates; an original 1973 report page was not independently
+verified. ISC3 Tables1-3/1-4, printed p.1-19, explicitly list all six urban
+classes, use x in metres and agree with the implemented urban coefficients.
+Rural ISC3 instead uses Pasquill-Gifford fits (pp.1-14–1-18), not this engine's
+Briggs rural equations. An ISC rural output is therefore not an interchangeable
+Briggs reference.
+
+The DOE2018 extracted Table6-9 rural-E `b_y` appears as 0.00001, whereas the
+cached Brune table uses 0.0001. That glyph/typographical discrepancy was not
+resolved from a visual source page; it is **unverified** and was not used to
+change a coefficient or establish an E-case pass. DOE p.214 also explicitly
+warns that the urban E/F sigma-z factor 0.00015 found in some references is
+incorrect, giving 0.0015 instead. ISC3 p.1-19 and the code use 0.0015. No source
+variant was silently substituted or used to tune the engine.
+
+Turner chapter3 describes open-country/rural applicability and urban limitations;
+no verified matching Briggs-urban C/F worked case was found. The revised-1970
+HTML's Table7-4 is identifiable, but its physical page is still unverified.
+The EPA catalogue title of the older cached copy says revised1969 while its
+title-page transcription says revised1970; the new record uses the explicitly
+revised1970 catalogue entry and preserves that distinction.
+
+EPA's AERMOD guide p.20 Section4.3 explains comparison with the separate original
+output files. Those sample outputs and meteorological profiles are not a
+single published Briggs-only C/F sigma pair. The ISC ZIP is public but the web
+reader returned unsupported `application/zip`; its contents were not inspected.
+No exact-input ISC/AERMOD end-to-end numerical match is claimed.
+DOE p.341 Table9-6 does print ALOHA concentrations, including urban F, but
+the necessary equivalent stack/effective height, receptor and evaporation/
+averaging assumptions were not established as a matching VayuSim case. Filling
+those gaps with guesses would not be independent validation.
+
+### Validation table
+
+Sigma values are metres; concentrations are µg/m³. Differences are
+`100*abs(engine-reference)/abs(reference)`. All rows below come from the actual
+new run. **PASS/FAIL tolerance** on a diagnostic is not independent branch
+validation. The only eligible case is explicitly marked.
+
+| Point / quantity / method | Source | Reference | Engine | Error % | Tolerance % | Result / scope |
+| --- | --- | --- | --- | --- | --- | --- |
+| doe-briggs-rural-d-1000m / sigma_y_m / engine sigma | DOE p.213 / PDF228 | 76.300000 | 76.277007 | 0.030135 | 5 | PASS; independent numeric case |
+| doe-briggs-rural-d-1000m / sigma_z_m / engine sigma | DOE p.213 / PDF228 | 37.900000 | 37.947332 | 0.124886 | 5 | PASS; independent numeric case |
+| cimbala-martin-d-4850m / sigma_y_m / engine sigma | Cimbala PDF3 | 278.970000 | 318.396657 | 14.132938 | 5 | FAIL tolerance; scheme comparison |
+| cimbala-martin-d-4850m / sigma_z_m / engine sigma | Cimbala PDF3 | 87.510000 | 101.160039 | 15.598262 | 5 | FAIL tolerance; scheme comparison |
+| cimbala-martin-d-4850m / concentration_ugm3 at z=0 m / engine sigma -> Gaussian, prescribed H/u | Cimbala PDF3 | 149300.000000 | 133382.771845 | 10.661238 | 10 | FAIL tolerance; scheme comparison |
+| cimbala-martin-d-4850m / concentration_ugm3 at z=0 m / Gaussian only, source-supplied sigmas/H/u | Cimbala PDF3 | 149300.000000 | 149314.351448 | 0.009612 | 10 | PASS; Gaussian formula only |
+| turner-pg-b-1000m / sigma_y_m / engine sigma | Turner Table7-4, page unverified | 157.000000 | 152.554014 | 2.831838 | 5 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / sigma_z_m / engine sigma | Turner Table7-4, page unverified | 110.000000 | 120.000000 | 9.090909 | 5 | FAIL tolerance; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=0 m / engine sigma -> Gaussian, prescribed H/u | Turner Table7-4, page unverified | 278.000000 | 300.517407 | 8.099787 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=0 m / Gaussian only, source-supplied sigmas/H/u | Turner Table7-4, page unverified | 278.000000 | 274.592426 | 1.225746 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=30 m / engine sigma -> Gaussian, prescribed H/u | Turner Table7-4, page unverified | 285.000000 | 305.609816 | 7.231514 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=30 m / Gaussian only, source-supplied sigmas/H/u | Turner Table7-4, page unverified | 285.000000 | 283.075948 | 0.675106 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=150 m / engine sigma -> Gaussian, prescribed H/u | Turner Table7-4, page unverified | 358.000000 | 342.615072 | 4.297466 | 10 | PASS; page unverified; excluded |
+| turner-pg-b-1000m / concentration_ugm3 at z=150 m / Gaussian only, source-supplied sigmas/H/u | Turner Table7-4, page unverified | 358.000000 | 356.331422 | 0.466083 | 10 | PASS; page unverified; excluded |
+
+There is **one independent printed numerical case**, comprising **two passing
+scalar sigma comparisons** and zero failing eligible comparisons: rural D at
+1000 m. It is **independently validated for these cases only**: sigma-y against
+the printed 76.3 m and sigma-z against 37.9 m in DOE p.213. This is independent
+reference-case verification, not a field-data validation or evidence of accuracy
+for Indian city conditions.
+
+The Cimbala sigma and concentration differences exceed 5%/10%; their cause is
+the source's Martin scheme versus this engine's Briggs rural D. They remain
+**scheme differences, not coding/validation errors**, and do not justify changing
+Briggs. Supplying the lesson's sigmas makes the Gaussian primitive agree within
+0.009612%, demonstrating the distinction without validating the dispersion branch.
+The Turner B sigma-z diagnostic differs by 9.090909%, exceeding 5%; its P-G chart
+parameterisation differs from Briggs and its physical page remains unverified.
+Here B is the selected diagnostic branch; its exact source-case classification
+has not been verified from a physical page. All Turner inputs/rows remain excluded.
+Neither case was tuned or reclassified into an independent pass.
+
+**Concentration scope:** the sigma-to-Gaussian calculations use exactly the
+published Q, transport wind, receptor height and effective H. Cimbala prints
+physical stack80 m plus rise20 m, giving H100 m, but omits the diameter, exit
+velocity and exit/ambient temperatures needed to reproduce that rise through
+the engine. It is therefore a complete prescribed-H concentration calculation,
+not a verification of the full physical-stack/wind-profile/plume-rise pipeline.
+Those missing inputs were not invented. No plume-rise, mixing-lid, population
+or empirical full-pipeline validation is established by this run.
+
+### Branch coverage and not-validated list
+
+Six new urban equation-transcription tests cover A–F, specifically C and F,
+against ISC3 p.1-19. Two new sigma tests pin the independently printed rural-D
+pair. Existing tests and reference fixtures are unchanged.
+
+| Branch / scope | Independent numeric status | Examples affected |
+| --- | --- | --- |
+| rural D sigmas, x=1000 m | validated for this printed case only | none |
+| rural D other distances / full concentration pipeline | not independently validated | none |
+| rural A/B/C/E/F | not independently validated; B diagnostics do not qualify | none |
+| urban A/B/D/E | equation coverage only; not independently validated | none of these three examples |
+| urban C | **not independently validated** | Delhi #62, Mumbai #63 |
+| urban F | **not independently validated** | Hyderabad #64 |
+
+There are zero verified chart-read points; chart-only candidates were left
+unverified and excluded rather than assigned fabricated coordinates or values.
+No printed-number or visual-chart evidence for urban C/F was verified in the
+sources successfully accessed. This is a bounded search result, not proof that
+no such reference exists anywhere.
+
+### Example claims and gate
+
+All three examples now have the explicit claim **not independently validated for
+their urban dispersion branch**. They remain hypothetical 1 g/s educational
+scenarios with archived weather and WorldPop support, not observed facilities.
+Fresh recomputation reproduced every peak, distance, exposure summary and input
+hash exactly. Run/header endpoints all returned200. No number changed.
+
+| Example | Branch | Peak before µg/m³ | Peak after µg/m³ | Claim |
+| --- | --- | --- | --- | --- |
+| Delhi #62 | urban C | 15.641839027404785 | 15.641839027404785 | not independently validated |
+| Mumbai #63 | urban C | 11.536741256713867 | 11.536741256713867 | not independently validated |
+| Hyderabad #64 | urban F | 18.990890502929688 | 18.990890502929688 | not independently validated |
+
+**Ready for 6B with caveats** is conditional: the Phase6B frontend must label
+urban C/F scenarios **unvalidated branch**, including these three examples, and
+retain the educational/no-regulatory-validity caveats. That frontend label is
+not implemented or asserted to exist by this task; **Phase6B has not started**.
+Equation agreement or a health200 response cannot remove this requirement.
+
+### Software checks, frozen identities and command outcomes
+
+Web-container suite: **260 passed, 147 warnings in 51.74s**;
+all 252 existing tests plus two independent-number and six equation-transcription
+regressions. Ruff: **All checks passed!** Format: **266 files already formatted**.
+Django system and migration checks pass. Warnings remain visible and unsuppressed
+in the same upstream categories documented in the fix pass. Current default
+provider remains extractive, Ollama disabled; health returned200 with all checks
+true. No model/provider evaluation or prompt tuning ran.
+
+| Frozen set | Before SHA256 | After SHA256 | Expected |
+| --- | --- | --- | --- |
+| Phase3A.2, 316 files | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | expected match |
+| Phase4, 776 files | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | expected match |
+| Phase5 questions/relevance | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | expected match |
+
+All 50 existing test/support/fixture files also match before and after:
+`3ca434500859bf7230fc713bb6c85e1262213b8bb637a090302fa364cddc3fd6`.
+All six physics/preset files match before and after:
+`60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e`.
+The complete four-file evaluation catalogue remains unchanged as well.
+
+The first local glob search used a literal Windows wildcard path rejected by
+`rg`; the subsequent directory search completed. The first Ruff run found one
+overlong string in the new command; wrapping that string fixed it, with no
+coefficient, tolerance or test changes. Public-read failures are retained in
+the source inventory and raw web journal. No scientific mismatch was hidden.
+The report helper initially used the Windows default decoder for UTF-8 research
+records; explicit UTF-8 completed the journal without duplicating the report.
+A cached legacy EPA HTML read needed Windows-1252 decoding; the source bytes
+were retained unchanged. Neither decoder issue affected numerical computations.
+
+Files added: the manually transcribed fixture, reproducible management command,
+eight regressions, structured result metrics and evidence manifest. README,
+architecture, this report and the command journal now state the limited case
+result and conditional gate. No Phase6B frontend or engine feature was added.

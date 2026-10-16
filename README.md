@@ -18,6 +18,14 @@ validation errors. Brune Table 2.3 agrees with the code: rural-B sigma-y at 1 km
 is 152.554014 m; the adjacent paragraph's 210 m is inconsistent. Turner physical
 pages remain **unverified**. End-to-end physical validity is not established.
 
+The [independent-reference pass](docs/results/PHASE6A.md#independent-validation)
+verifies the published rural-D sigma pair at 1 km (DOE p.213): errors 0.030135%
+and 0.124886%, within 5%. This does not validate the **urban C** branches used by
+Delhi/Mumbai or **urban F** used by Hyderabad; those remain **not independently
+validated** against numeric cases. Their example values are unchanged. The gate
+is **Ready for 6B with caveats**, conditional on the future frontend displaying
+**unvalidated branch** for these scenarios. Phase6B has not been started.
+
 VayuSim inputs are explicit scenario assumptions, not measured facility
 inventories. All five source-family presets require emission rate, release
 height, diameter, exit velocity and temperature where no defensible universal

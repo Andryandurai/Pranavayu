@@ -24354,3 +24354,3329 @@ hash are retained in [the local final Git output journal](../data/results/phase6
 That output is written after commit so this committed Markdown need not contain
 its own commit hash. The finalizer performs no push. Raw command logs retain
 console whitespace; Markdown entries trim only display padding.
+
+## Phase 6A independent validation command journal — 16 October 2026
+
+Started from c154eaa in D:\EnviroInsights-India. Bootstrap read the attached request, confirmed this HEAD and a clean tracked worktree, and found no AGENTS.md. Created an ignored journal helper from the fix-pass helper, changing only its directory, entry label and mutex. No scientific inputs, tests, coefficients or presets changed before the identity snapshot. Public sources will be read with the available web reader; no shell downloads will be used.
+
+
+<details>
+<summary>Phase 6A independent: 001-first-reads-local-library (2026-10-16T10:20:27.6173115+05:30; exit 0)</summary>
+
+````powershell
+Get-Location
+git log -1 --oneline
+Get-Content docs/results/PHASE6A.md -Encoding UTF8 | Select-Object -First 65
+Get-Content docs/results/PHASE6A.md -Encoding UTF8 | Select-Object -Skip 755
+Get-Content docs/VALIDATION.md -Encoding UTF8 -TotalCount 40
+Get-Content apps/vayusim/physics/dispersion.py -Encoding UTF8 -Raw
+Get-Content apps/vayusim/physics/meteorology.py -Encoding UTF8 -Raw
+Get-Content apps/vayusim/physics/rise.py -Encoding UTF8 -Raw
+Get-Content apps/vayusim/physics/engine.py -Encoding UTF8 -Raw
+Get-Content tests/test_vayusim_physics.py -Encoding UTF8 -Raw
+Get-Content tests/fixtures/vayusim-textbook-audit.json -Encoding UTF8 -Raw
+Get-ChildItem data/raw -Directory | Select-Object Name
+Get-ChildItem data/raw/vayusim -File | Select-Object Name,Length
+rg -n -i 'Briggs|Turner|ISC3|AERMOD|dispersion' docs/DATA_SOURCES.md tests/fixtures/vayusim* data/raw/vayusim -g '*.manifest.json'
+$global:LASTEXITCODE=0
+````
+
+````text
+
+Path
+----
+D:\EnviroInsights-India
+c154eaa Fix Phase 6A reference scope and default to extractive retrieval
+# Phase 6A: VayuSim engine, data integration and API
+
+The engine, real-data adapters, API and verification map are implemented in
+`D:\EnviroInsights-India`. The user's subsequent whole-site presentation request
+covers the overview, forecasts, research, library, assistant and simulator pages.
+This report separates measured software/scientific checks from predictive validity.
+The [Phase 6A audit](#phase-6a-audit) below narrows the original validation claims;
+it includes discrepancies beyond the original supplied-sigma concentration checks.
+The full Phase 6B frontend is outside this implementation.
+
+## Step 0 outcomes
+
+### Forecast intervals
+
+Existing Run 21 archived-weather evaluation results selected the closest coverage
+to nominal among methods no more than five percentage points below it, separately
+for each city, horizon and level. The policy is stored on all 147 model versions.
+No point model was refitted. At the change, all 3,885 existing rows and their point
+values were retained; 19 latest issuance rows had revised bounds. Earlier bounds
+remain in provenance and `forecast-intervals-before.json`. Scheduled jobs may add
+subsequent rows; 3,885 is the snapshot count, not a permanent database total.
+
+Coverage below is retrospective selection evidence, **not independent validation**
+of the selected policy. Fourteen of 42 level choices have no qualifying method;
+the closest existing method is retained with an explicit failure flag. If needed,
+issued 95% bounds are widened to contain the 80% interval. The archived coverage
+table describes each selected family, not an independently rescored combined
+nesting policy.
+
+| City | Horizon | 80% method / coverage / gate | 95% method / coverage / gate |
+| --- | --- | --- | --- |
+| bengaluru | 1 | quantile_lightgbm / 71.20% / FAIL | quantile_lightgbm / 89.13% / FAIL |
+| bengaluru | 2 | quantile_lightgbm / 73.37% / FAIL | quantile_lightgbm / 86.96% / FAIL |
+| bengaluru | 3 | quantile_lightgbm / 73.37% / FAIL | quantile_lightgbm / 86.41% / FAIL |
+| chennai | 1 | quantile_lightgbm / 72.83% / FAIL | quantile_lightgbm / 91.30% / pass |
+| chennai | 2 | quantile_lightgbm / 73.91% / FAIL | quantile_lightgbm / 91.30% / pass |
+| chennai | 3 | quantile_lightgbm / 74.46% / FAIL | quantile_lightgbm / 94.02% / pass |
+| delhi | 1 | quantile_lightgbm / 80.43% / pass | quantile_lightgbm / 96.74% / pass |
+| delhi | 2 | quantile_lightgbm / 79.89% / pass | quantile_lightgbm / 96.20% / pass |
+| delhi | 3 | quantile_lightgbm / 85.87% / pass | quantile_lightgbm / 97.28% / pass |
+| hyderabad | 1 | conformal / 78.26% / pass | conformal / 96.20% / pass |
+| hyderabad | 2 | quantile_lightgbm / 78.80% / pass | quantile_lightgbm / 96.20% / pass |
+| hyderabad | 3 | quantile_lightgbm / 78.80% / pass | quantile_lightgbm / 95.65% / pass |
+| kolkata | 1 | quantile_lightgbm / 80.43% / pass | quantile_lightgbm / 94.02% / pass |
+| kolkata | 2 | quantile_lightgbm / 82.61% / pass | quantile_lightgbm / 94.57% / pass |
+| kolkata | 3 | quantile_lightgbm / 79.89% / pass | quantile_lightgbm / 95.65% / pass |
+| mumbai | 1 | quantile_lightgbm / 82.07% / pass | quantile_lightgbm / 96.20% / pass |
+| mumbai | 2 | quantile_lightgbm / 83.15% / pass | quantile_lightgbm / 96.20% / pass |
+| mumbai | 3 | conformal / 78.80% / pass | quantile_lightgbm / 95.65% / pass |
+| pune | 1 | conformal / 71.20% / FAIL | conformal / 88.59% / FAIL |
+| pune | 2 | quantile_lightgbm / 70.65% / FAIL | quantile_lightgbm / 86.41% / FAIL |
+| pune | 3 | quantile_lightgbm / 73.91% / FAIL | quantile_lightgbm / 91.30% / pass |
+
+Failures: Bengaluru all three horizons at both levels; Chennai all three at 80%;
+Pune all three at 80%, and horizons 1–2 at 95%. Quantile target distributions can
+place the separate unchanged point model outside an interval. The API/UI retains
+and explains that outcome instead of altering point forecasts or stretching bounds.
+
+### Local language model
+
+Installed RAM was 17,179,869,184 bytes (16 GiB). The requested floor of 60% gives
+`[wsl2] memory=9GB` in `C:\Users\Andry\.wslconfig`. The earlier report stated there was no existing file;
+that historical absence cannot be independently reconstructed. Docker/WSL were cleanly restarted. The resumed
+2026-10-15 measurement gave MemAvailable 6,909,865,984 bytes, exceeding the actual
+model 1,929,912,432 bytes plus 3,221,225,472 bytes (3 GiB) headroom.
+chemistry/deposition, near-field, BLH-transfer and fractional population-support
+limitations still apply. This audit makes no regulatory or predictive-validity
+certification and starts no Phase 6B work. No manual installation/restart/action
+is required to finish the audit.
+
+## Fix pass
+
+Completed on 16 October 2026 from commit `05ef914` in `D:\EnviroInsights-India`.
+The initial checks ran on 15 October; the user interrupted the session, then
+resumed it on 16 October. **Phase 6B has not been started.** Structured evidence:
+[PHASE6A_FIX_METRICS.json](PHASE6A_FIX_METRICS.json). Commands, failed attempts
+and real outputs are in [VALIDATION](../VALIDATION.md#phase-6a-fix-pass-command-journal--15-october-2026).
+
+### Decisions
+
+1. Treat Brune Table 2.3 as the stated equation authority. Correct the fixture's
+   reference/classification; keep the paragraph's 210 m as an excluded source
+   diagnostic. No coefficient change is justified by the source.
+2. Keep sigma 5% and concentration 10% tolerances. Formula checks and scheme
+   comparisons answer different questions; report both without counting scheme
+   differences or unverified Turner pages as validation passes.
+3. Set extractive as the code, example-env and actual local default, including
+   when API keys exist. Stop Ollama and clear the default Compose profile, while
+   retaining its model and opt-in profile. This explicitly supersedes the earlier
+   audit's decision to preserve provider configuration. No prompt, question,
+   relevance label or provider generation parameter was tuned.
+4. Keep WSL at 9GB. A readable backup of current settings is not a recoverable
+   pre-change original. Report the search scope and access limits honestly.
+5. Preserve the historical audit artifacts. Freshly recompute all three examples
+   even though physics is unchanged, and compare every reported numeric value.
+   Keep all 249 tests unchanged and add three focused regressions.
+
+### Brune resolution and code trace
+
+**The worked-example paragraph's numeric reference is wrong relative to its own
+table; the code and table transcription agree.** The requested 27.355231%
+discrepancy is against the paragraph's 210 m, not Table 2.3's class-B equation.
+Source: [Brune METEO532 §2.2.5, Table 2.3 rural row B and the following paragraph](https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm).
+This is an **unpaginated HTML source**, so no physical page number is available.
+The fresh HTTP 200 source body has SHA256
+`86bbdbb9ff24d66b8adaa02daffdd5deb075415960e18c1061ec673c5f28abf0`.
+
+The path was traced as follows:
+
+1. `weather.weather_for()` derives `stability_class`, which `service.compute()`
+   passes to `physics.engine.simulate()`. The reference check explicitly supplies
+   `B`; a separate synthetic day input (2.5 m/s, 800 W/m², cloud fraction 0.1)
+   also derives B. Daytime classification uses EPA Meteorological Monitoring
+   Guidance Table 6-7, printed p.6-16; it is the existing disclosed SRDT/night
+   cloud hybrid, not a new interpretation of Brune's example meteorology.
+2. The API defaults to **urban**; the reference check explicitly selects
+   **rural**. `sigmas()` indexes `COEFFICIENTS[environment][stability]` without
+   changing the supplied class. Rural B selects `(0.16, 0.0001, 0.12, 0, 0)`.
+   Table 2.3 supplies each nonzero coefficient and exponent: sigma-y is
+   `0.16*x*(1+0.0001*x)^(-1/2)`; sigma-z is `0.12*x`. The zero pair encodes
+   the absence of a sigma-z correction factor, rather than a fitted parameter.
+3. The grid's AEQD projection specifies `+units=m`; source/receptor deltas and
+   wind rotation preserve metres. The check converts **1 km to 1000 m once**.
+   Brune's stated range is `100 m < x < 10000 m`; 1000 m is inside it.
+   `sigmas()` floors x at 1 m, which does not affect this case; the engine flags
+   out-of-range extrapolation and excludes upwind/first-metre receptors.
+4. Evaluation gives sigma-y **152.55401427929476 m**, sigma-z **120 m**.
+   Urban B would instead give sigma-y **270.4493615131253 m**. Rural A gives
+   **209.7617696340303 m**, resembling the paragraph's 210 m, but the cause of
+   the paragraph error and any publisher erratum remain **unverified**.
+
+Code sigma-y before → after: **152.55401427929476 → 152.55401427929476 m**.
+Fixture reference focus, paragraph → table: **210 → 152.55401427929476 m**.
+The new primary entry is explicitly table-derived; the earlier fixture retained
+only the inconsistent paragraph as a diagnostic, rather than a table expectation.
+The paragraph's 210/120 m remains visible in an excluded diagnostic. Its
+sigma-y disagreement is **27.355231295573923%**. A new regression pins rural B
+at 1000 m and distinguishes urban B; no physics module was edited.
+
+### (a) Formula checks
+
+These check code against published equations, including rounded table arithmetic.
+They do not establish independent field accuracy. Sigma quantities are metres;
+the last row is concentration. There are **15 passing scalar formula checks**:
+14 sigma checks in seven pairs plus one supplied-sigma Gaussian check.
+
+| Check | Equation-derived or published-input reference | Computed | Difference % | Tolerance % | Scope / result |
+| --- | --- | --- | --- | --- | --- |
+| rural/A sigma-y / sigma-z at 1000 m | 209.762 / 200.000 | 209.761770 / 200.000000 | 0.000109823 / 0.000000000 | 5 / 5 | PASS, formula only |
+| rural/B sigma-y / sigma-z at 1000 m | 152.554 / 120.000 | 152.554014 / 120.000000 | 0.000009360 / 0.000000000 | 5 / 5 | PASS, formula only |
+| rural/D sigma-y / sigma-z at 1000 m | 76.277 / 37.947 | 76.277007 / 37.947332 | 0.000009360 / 0.000874699 | 5 / 5 | PASS, formula only |
+| rural/F sigma-y / sigma-z at 1000 m | 38.139 / 12.308 | 38.138504 / 12.307692 | 0.001301634 / 0.002499938 | 5 / 5 | PASS, formula only |
+| urban/A sigma-y / sigma-z at 1000 m | 270.449 / 339.411 | 270.449362 / 339.411255 | 0.000133671 / 0.000075121 | 5 / 5 | PASS, formula only |
+| urban/D sigma-y / sigma-z at 1000 m | 135.225 / 122.788 | 135.224681 / 122.788123 | 0.000236083 / 0.000099931 | 5 / 5 | PASS, formula only |
+| urban/F sigma-y / sigma-z at 1000 m | 92.967 / 50.596 | 92.966968 / 50.596443 | 0.000034399 / 0.000874699 | 5 / 5 | PASS, formula only |
+| Cimbala p.3 Gaussian, supplied Martin sigmas (concentration µg/m³) | 149300.000000 | 149314.351448 | 0.009612 | 10 | PASS, formula only |
+
+The Gaussian equation and independent supplied inputs are visible in
+[Cimbala ME433 Lesson 06E, physical PDF page 3](https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf):
+Q=110 kg/s (110000 g/s), u=5 m/s, effective H=100 m, x=4850 m, z=y=0,
+Martin sigma-y=278.97 m, sigma-z=87.51 m, concentration=149.3 mg/m³
+(149300 µg/m³). The retained PDF was visually checked and SHA256-verified:
+`ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462`.
+
+### (b) Scheme comparison: Briggs versus Martin
+
+At identical Cimbala p.3 class-D inputs, rural Briggs and the printed Martin
+solution differ as below. **These are differences between two dispersion schemes,
+not validation errors.** They exceed the unchanged **5% sigma / 10% concentration**
+tolerances. No coefficients were fitted to remove the differences. Differences
+use `100*abs(Briggs-Martin)/abs(Martin)`; concentration is µg/m³.
+
+| Quantity | Martin / printed lesson | Briggs | Difference % | Tolerance % | Interpretation |
+| --- | --- | --- | --- | --- | --- |
+| Briggs versus Martin sigma-y | 278.970000 | 318.396657 | 14.132938 | 5 | exceeds; scheme difference |
+| Briggs versus Martin sigma-z | 87.510000 | 101.160039 | 15.598262 | 5 | exceeds; scheme difference |
+| Briggs versus Martin concentration | 149300.000000 | 133382.771845 | 10.661238 | 10 | exceeds; scheme difference |
+
+**Unverified items, excluded from the validation pass count:** Turner AP26,
+Chapter 7 Problem 9 Table 7-4 is available as an
+[EPA HTML transcription](https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT),
+but its physical source page remains unverified. At z=0/30/150 m the retained
+278/285/358 µg/m³ references give computed 274.592426/283.075948/356.331422 µg/m³,
+differences 1.225746%/0.675106%/0.466083%. Arithmetic within tolerance does not
+verify a physical page. The conflicting Brune paragraph is likewise excluded.
+Independent end-to-end physical validity remains unestablished.
+
+### Three city examples: before and after
+
+Fresh fields, distances, exposure summaries and API/header responses reproduce
+all archived numbers exactly. Every run/header endpoint returned HTTP 200 and
+retained its input hash. All examples are hypothetical 1 g/s sources. None uses
+rural B, and all five physics-module byte hashes match before/after.
+
+| City / run / dispersion | Peak before µg/m³ | Peak after µg/m³ | Comparison |
+| --- | --- | --- | --- |
+| Delhi / #62 / urban C | 15.641839027404785 | 15.641839027404785 | exact match |
+| Mumbai / #63 / urban C | 11.536741256713867 | 11.536741256713867 | exact match |
+| Hyderabad / #64 / urban F | 18.990890502929688 | 18.990890502929688 | exact match |
+
+Population, source-to-peak distance and weighted increments also match exactly;
+their full values are retained in the structured metrics. No example number or
+API-doc number needs changing. Engine version remains `gaussian-briggs-1.1.0`.
+
+### Default assistant and running application
+
+Code fallback, `.env.example` and actual `.env` now select `LLM_PROVIDER=extractive`.
+Actual/default env values are `OLLAMA_ENABLED=false`, empty `COMPOSE_PROFILES`;
+the installed `qwen2.5:3b-instruct` model is retained for opt-in use. Ollama is
+stopped, the existing Compose `llm` profile is retained, and normal `compose up`
+selects nine services. All nine are running; all five defined service healthchecks
+are healthy. The running web container selects `extractive` and lists only that
+provider as configured. No language-model generation or frozen-set evaluation ran.
+
+`GET /api/health/` returned **200**, `ok=true`; database, PostGIS 3.6.4,
+TimescaleDB 2.30.2, vector 0.8.7, Redis and Celery checks are all true. Production
+`manage.py check --deploy` reports **no issues (0 silenced)**. README documents
+explicit local opt-in and how to restore the extractive defaults. Existing
+Qwen answer-quality and variable memory limitations remain; neither is certified
+by infrastructure health.
+
+### WSL configuration and backup inventory
+
+The read-only search covered `C:\Users\Andry` and `D:\`, without traversing
+reparse points. It found the current `.wslconfig` and **one readable backup**:
+
+- `C:\Users\Andry\.wslconfig.phase6a-audit-20261015.bak`; created **2026-10-15T15:54:42.370363+00:00**;
+  last modified **2026-10-12T10:35:22.988743+00:00** (timestamps UTC).
+  SHA256 `d4f748ea8f222563e1beb8319e62496c62635ce052aa4dd380ee332b73375268`, 20 bytes.
+
+Both backup and current file contain exactly:
+
+```ini
+[wsl2]
+memory=9GB
+```
+
+The current file was created/modified 2026-10-12T10:35:22.988743+00:00 and has
+the same SHA256. The backup preserves that modification timestamp; its creation
+timestamp identifies the later copy. **A pre-change original could not be
+recovered.** The earlier report says no file existed, but historical absence
+cannot be independently reconstructed from a later backup.
+The search recorded 6 inaccessible/invalid/disappearing paths,
+including Windows application aliases and protected System Volume Information;
+these limits are retained in the local inventory, not presented as a universal
+proof that no other backup exists. No setting was changed. Installed capacity
+is 17,179,869,184 bytes (16 GiB); `floor(0.60*16)=9` gives the requested **9 GB**
+limit. No concrete problem requiring a different value was found in this pass.
+
+### Checks and frozen identities
+
+Full web-container suite: **252 passed, 147 warnings in 55.80 s**
+(all 249 baseline tests plus three new regressions). Existing Python test files
+are byte-identical. The expressly requested textbook fixture correction is the
+only existing fixture changed; frozen evaluation data and labels are untouched.
+Ruff: **All checks passed!** Format: **264 files already formatted**.
+The warnings retain the earlier audited categories: pandas/NumPy generic
+timedelta, SHAP/matplotlib deprecations, compiled ndarray-size warning and
+statsmodels nonconvergence; none was suppressed. Django and migration checks
+also pass. No new model/provider evaluation or prompt tuning was performed.
+
+| Frozen set | Before SHA256 | After SHA256 | Expected |
+| --- | --- | --- | --- |
+| Phase 3A.2, 316 files | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | expected match |
+| Phase 4, 776 files | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | expected match |
+| Phase 5 questions/relevance | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | expected match |
+
+The entire four-file `data/eval` bundle is also unchanged, aggregate
+`51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23`.
+Per-file snapshots are retained locally under `data/results/phase6a-fix/`.
+
+### Failed attempts and resolutions
+
+- Recursive PowerShell WSL inventory hit a filesystem error. A read-only Python
+  walk completed with explicit access-error reporting; it found the backup above.
+  The first walk was interrupted by the user and was rerun after resume.
+- The first standalone physics script invocation lacked `/app` on its import
+  path. Rerunning with `PYTHONPATH=/app` completed all reference checks. This was
+  an audit-script invocation issue; application imports required no code change.
+- Docker was unavailable after the overnight interruption, so the first lint
+  attempt could not run. Started installed Docker Desktop in the background,
+  restored default Compose services and reran Ruff/full tests successfully.
+  PowerShell also decorates Docker's normal stderr progress as NativeCommandError;
+  actual Docker exit codes and final service states are recorded in the journal.
+
+Changes: provider fallback and env examples/local defaults; textbook fixture;
+three regression tests; README, architecture, data model, this report, structured
+metrics and the command journal. Historical artifacts remain separate. Commit
+creation/output is recorded by the final Git journal; **no push is performed**.
+No manual action is required for the default application. Phase 6B remains unstarted.
+# Phase 1 live verification
+
+Recorded 7 October 2026 (Asia/Kolkata). **All nine verification steps passed.**
+All project commands and edits now use **D:\EnviroInsights-India**. No Phase 2
+features were added, and all ten test source files are unchanged by SHA-256 comparison.
+
+## Environment
+
+| Component | Actual verified state |
+| --- | --- |
+| Active checkout and /app bind mount | D:\EnviroInsights-India |
+| Docker Desktop / Engine / Compose | 4.94.0 / 29.8.2 / v5.5.1 |
+| Engine context / container mode | desktop-linux / OSType: linux |
+| WSL | 3.0.1.0; docker-desktop uses WSL 2 |
+| Registered Docker WSL VM | D:\DockerDesktopData\main\ext4.vhdx; WSL registry BasePath points to D: |
+| Image, container and volume data disk | D:\DockerDesktopData\disk\docker_data.vhdx |
+| Docker compatibility paths | Original AppData wsl\main and wsl\disk directories are junctions to D: |
+| Docker CLI temporary files | D:\EnviroInsights-India\.tools\temp, scoped by the PowerShell wrapper |
+| Python / Django | 3.12.15 / 5.2.18 in Linux containers |
+| PostgreSQL | 16.15 (Ubuntu 16.15-1.pgdg22.04+2) |
+| PostgreSQL host / container endpoints | 127.0.0.1:5433 / db:5432 |
+| Redis host / container endpoints | 127.0.0.1:6380 / redis:6379 |
+| Web / Flower | http://localhost:8000/ / http://localhost:5555/ |
+
+Docker's large VM/data storage and the active checkout are physically on D:.
+Docker Desktop's Windows executable and Windows-managed settings/registry metadata
+remain in their normal Windows locations. The old C: checkout is retained as a
+backup while the client still has it open; it is not serving the containers.
+
+The original space-containing path parsed correctly. Relocation followed the user's
+request, not a quoting failure. The project copy was verified against the original:
+100 source/environment files had matching SHA-256 hashes before later D: edits.
+Docker was stopped before relocation. WSL's own --manage --move command moved its
+registered VM; the separate offline data disk was copied and hash-verified before
+source removal and creation of compatibility junctions. Docker restarted successfully,
+and hello-world passed again from the relocated engine.
+
+## Nine verification steps
+
+| Step | Result | Command and key real output |
+"""Briggs (1973) closed forms, x in metres, range 100m to 10km.
+
+Penn State METEO532, W.H. Brune, Table2.3 (unpaginated lecture):
+https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm
+The adjacent worked example has an inconsistent sigma-y; use the table.
+"""
+
+import numpy as np
+
+# Each entry: sy a, sy b, sz a, sz b, sz exponent; sy exponent is -1/2.
+COEFFICIENTS = {
+    "rural": {
+        "A": (0.22, 0.0001, 0.20, 0.0, 0.0),
+        "B": (0.16, 0.0001, 0.12, 0.0, 0.0),
+        "C": (0.11, 0.0001, 0.08, 0.0002, -0.5),
+        "D": (0.08, 0.0001, 0.06, 0.0015, -0.5),
+        "E": (0.06, 0.0001, 0.03, 0.0003, -1.0),
+        "F": (0.04, 0.0001, 0.016, 0.0003, -1.0),
+    },
+    "urban": {
+        "A": (0.32, 0.0004, 0.24, 0.001, 0.5),
+        "B": (0.32, 0.0004, 0.24, 0.001, 0.5),
+        "C": (0.22, 0.0004, 0.20, 0.0, 0.0),
+        "D": (0.16, 0.0004, 0.14, 0.0003, -0.5),
+        "E": (0.11, 0.0004, 0.08, 0.0015, -0.5),
+        "F": (0.11, 0.0004, 0.08, 0.0015, -0.5),
+    },
+}
+
+
+def sigmas(x, stability, environment="urban"):
+    x = np.maximum(np.asarray(x, dtype=float), 1.0)
+    ay, by, az, bz, power = COEFFICIENTS[environment][stability]
+    return ay * x / np.sqrt(1 + by * x), az * x * (1 + bz * x) ** power
+
+"""Published stability and wind-profile tables; SI inputs throughout."""
+
+import numpy as np
+
+# EPA ISC3 Volume II, EPA-454/B-95-003b, printed p.1-5, Table 1-1.
+# https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf
+WIND_EXPONENTS = {
+    "rural": dict(zip("ABCDEF", [0.07, 0.07, 0.10, 0.15, 0.35, 0.55], strict=True)),
+    "urban": dict(zip("ABCDEF", [0.15, 0.15, 0.20, 0.25, 0.30, 0.30], strict=True)),
+}
+
+
+def stability_class(wind_ms, solar_wm2, cloud_fraction, daytime):
+    """Measured-radiation SRDT daytime / Turner cloud-table nighttime hybrid.
+
+    EPA Meteorological Monitoring Guidance (2000), Table 6-7, printed p.6-16
+    supplies daytime thresholds 925/675/175 W/m². Night uses Turner (1970)
+    Table 3-1: >=half cloud versus clear. Cloud ceiling and nighttime delta-T
+    are unavailable, so this is explicitly an approximation, not full Turner.
+    """
+    if not np.isfinite(wind_ms) or wind_ms < 0:
+        raise ValueError("Wind must be finite and nonnegative")
+    if daytime:
+        if solar_wm2 is None or not np.isfinite(solar_wm2) or solar_wm2 < 0:
+            raise ValueError("Daytime solar radiation is required")
+        band = int(np.searchsorted([2, 3, 5, 6], wind_ms, side="right"))
+        radiation = (
+            0 if solar_wm2 >= 925 else 1 if solar_wm2 >= 675 else 2 if solar_wm2 >= 175 else 3
+        )
+        return ["AABD", "ABCD", "BBCD", "CCDD", "CDDD"][band][radiation]
+    if cloud_fraction is None or not np.isfinite(cloud_fraction) or not 0 <= cloud_fraction <= 1:
+        raise ValueError("Nighttime cloud fraction is required")
+    if cloud_fraction >= 0.875:  # Turner overcast: neutral, day or night.
+        return "D"
+    if wind_ms >= 5:
+        return "D"
+    if cloud_fraction >= 0.5:
+        return "E" if wind_ms < 3 else "D"
+    return "F" if wind_ms < 3 else "E"
+
+
+def wind_at_height(wind_ms, height_m, stability, environment="urban"):
+    """ISC3 Eq.1-6 at release height, with the published minimum wind1m/s."""
+    exponent = WIND_EXPONENTS[environment][stability]
+    return np.maximum(1.0, wind_ms * (np.maximum(height_m, 0.0) / 10.0) ** exponent)
+
+
+def fallback_mixing_height(stability, daytime):
+    """Illustrative, source-backed anchors, NOT local observed/climatological BLH.
+
+    CDM2 User Guide Table5, printed p.15: A=1.5L, B/C/Dday=L,
+    Dnight=(L+Lmin)/2, E/F=Lmin. Adopt L=1500m from Turner Problem6
+    and Lmin=500m from EPA Screening Procedures Fig4-19, printed p.4-62 (a screening
+    example, not a recommended Indian nighttime climatology).
+    This transfer assumption must be exposed in every affected result.
+    """
+    if stability == "A":
+        return 2250.0
+    if stability in "EF":
+        return 500.0
+    return 1000.0 if stability == "D" and not daytime else 1500.0
+
+"""ISC3 Vol II, printed pp.1-6--1-11, Briggs rise, Eqs.1-7--1-29.
+
+https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf
+No building-downwash/terrain/chemistry or regulatory-model equivalence.
+"""
+
+import numpy as np
+
+G = 9.80616  # ISC3 Eq.1-8, not a fitted coefficient.
+
+
+def effective_height(
+    x,
+    height_m,
+    diameter_m,
+    exit_velocity_ms,
+    exit_temperature_k,
+    ambient_temperature_k,
+    wind_ms,
+    stability,
+):
+    x = np.maximum(np.asarray(x, dtype=float), 0.0)
+    v, d, ts, ta, u = (
+        exit_velocity_ms,
+        diameter_m,
+        exit_temperature_k,
+        ambient_temperature_k,
+        wind_ms,
+    )
+    v, d, ts, ta, u, height_m = np.broadcast_arrays(v, d, ts, ta, u, height_m)
+    enabled = (v > 0) & (d > 0)
+    tip = np.where(v / u < 1.5, np.maximum(0.0, height_m + 2 * d * (v / u - 1.5)), height_m)
+    fb = np.maximum(0.0, G * v * d * d * (ts - ta) / (4 * ts))
+    fm = v * v * d * d * ta / (4 * ts)
+    beta = 1 / 3 + u / np.where(v > 0, v, 1.0)
+    stable = stability in "EF"
+    if stable:
+        s = G / ta * (0.020 if stability == "E" else 0.035)
+        crossover = 0.019582 * ts * v * np.sqrt(s)
+        final_b = 2.6 * np.cbrt(fb / (u * s))
+        final_m = np.minimum(1.5 * np.cbrt(fm / (u * np.sqrt(s))), 3 * d * v / u)
+        buoyancy = np.minimum(1.6 * np.cbrt(fb) * x ** (2 / 3) / u, final_b)
+        capped = np.minimum(x * np.sqrt(s) / u, np.pi / 2)
+        momentum = np.minimum(
+            np.cbrt(3 * fm * np.sin(capped) / (beta * beta * u * np.sqrt(s))), final_m
+        )
+    else:
+        crossover = np.where(
+            fb < 55,
+            0.0297 * ts * v ** (1 / 3) * d ** (2 / 3),
+            0.00575 * ts * v ** (2 / 3) * d ** (1 / 3),
+        )
+        final_b = np.where(fb < 55, 21.425 * fb**0.75, 38.71 * fb**0.6) / u
+        final_m = 3 * d * v / u
+        buoyancy = np.minimum(1.6 * np.cbrt(fb) * x ** (2 / 3) / u, final_b)
+        momentum = np.minimum(np.cbrt(3 * fm * x / (beta * beta * u * u)), final_m)
+    rise = np.where((ts - ta >= crossover) & (fb > 0), buoyancy, momentum)
+    return np.where(enabled, tip + rise, height_m)
+
+"""Reflected Gaussian fields; concentrations returned in µg/m³, Q in g/s."""
+
+import numpy as np
+
+from .dispersion import sigmas
+from .meteorology import wind_at_height
+from .rise import effective_height
+
+ENGINE_VERSION = "gaussian-briggs-1.1.0"
+
+
+def concentration(q_gs, u_ms, sigma_y, sigma_z, y, z=1.5, height=0.0, mixing_height=None):
+    """Gaussian primitive with independently supplied dispersion coefficients.
+
+    ISC3 VolII Eq1-50, printed pp.1-32--1-33: reflected image series;
+    switch at sigma-z/L>=1.6 to vertical uniform mixing. Effective release
+    above the lid is excluded (inversion penetration), not folded below it.
+    Relative convergence is elementwise, including tiny nonzero tails.
+    """
+    sy, sz, yy, zz, hh = np.broadcast_arrays(sigma_y, sigma_z, y, z, height)
+    vertical = np.exp(-0.5 * ((zz - hh) / sz) ** 2) + np.exp(-0.5 * ((zz + hh) / sz) ** 2)
+    if mixing_height is not None:
+        lid = float(mixing_height)
+        if lid <= 0:
+            raise ValueError("Mixing height must be positive")
+        mixed = sz >= 1.6 * lid
+        active = ~mixed & (hh <= lid) & (zz <= lid)
+        for n in range(1, 100):
+            addition = sum(
+                np.exp(-0.5 * ((zz + sign * hh + shift * 2 * n * lid) / sz) ** 2)
+                for sign in (-1, 1)
+                for shift in (-1, 1)
+            )
+            vertical += np.where(active, addition, 0.0)
+            if np.all(~active | (addition <= 1e-6 * np.maximum(vertical, np.finfo(float).tiny))):
+                break
+        else:
+            raise ArithmeticError("Mixing-lid images did not converge")
+        vertical = np.where(mixed, np.sqrt(2 * np.pi) * sz / lid, vertical)
+        vertical = np.where((hh <= lid) & (zz <= lid), vertical, 0.0)
+    return q_gs * 1e6 / (2 * np.pi * u_ms * sy * sz) * np.exp(-0.5 * (yy / sy) ** 2) * vertical
+
+
+def expand_sources(sources):
+    """Area midpoint lattice / line midpoint segments, conserving total Q.
+
+    These are documented numerical point approximations, not ISC area/line
+    integrals. Refinement is user-controlled; near-field peaks depend on it.
+    Local coordinates are east/north metres, geographic conversion is external.
+    """
+    result = []
+    for source in sources:
+        kind = source.get("type", "point")
+        if kind == "point":
+            result.append(dict(source))
+            continue
+        count = source["subdivisions"]
+        if kind == "area":
+            offsets = (np.arange(count) + 0.5) / count - 0.5
+            xx, yy = np.meshgrid(offsets * source["width_m"], offsets * source["length_m"])
+            positions = np.column_stack(
+                (xx.ravel() + source["east_m"], yy.ravel() + source["north_m"])
+            )
+        elif kind == "line":
+            fraction = (np.arange(count) + 0.5) / count
+            positions = np.column_stack(
+                (
+                    source["east_m"] + fraction * (source["end_east_m"] - source["east_m"]),
+                    source["north_m"] + fraction * (source["end_north_m"] - source["north_m"]),
+                )
+            )
+        else:
+            raise ValueError("Unknown source type")
+        result.extend(
+            {
+                **source,
+                "type": "point",
+                "east_m": float(e),
+                "north_m": float(n),
+                "emission_gs": source["emission_gs"] / len(positions),
+            }
+            for e, n in positions
+        )
+    return result
+
+
+def simulate(east, north, sources, weather, receptor_height=1.5, environment="urban"):
+    """Vectorised receptors with bounded source batches, linear superposition."""
+    east, north = np.broadcast_arrays(east, north)
+    total = np.zeros(east.shape, dtype=float)
+    theta = np.deg2rad((weather["wind_direction_deg"] + 180) % 360)
+    ne, nn = np.sin(theta), np.cos(theta)
+    flags = set()
+    if weather["wind_speed_ms"] < 1:
+        flags.add("low-wind: Gaussian plume unreliable")
+    if weather.get("mixing_height_m") is not None and receptor_height > weather["mixing_height_m"]:
+        flags.add("Receptor above mixing lid: concentration excluded")
+    points = expand_sources(sources)
+    # Source/receptor broadcasting in bounded batches avoids a Python loop per
+    # source while keeping400x400 grids within a predictable memory envelope.
+    for offset in range(0, len(points), 20):
+        batch = points[offset : offset + 20]
+        shape = (len(batch),) + (1,) * east.ndim
+        columns = {
+            field: np.asarray([s[field] for s in batch], dtype=float).reshape(shape)
+            for field in [
+                "east_m",
+                "north_m",
+                "emission_gs",
+                "height_m",
+                "diameter_m",
+                "exit_velocity_ms",
+                "exit_temperature_k",
+            ]
+        }
+        if np.any(
+            (columns["exit_temperature_k"] < weather["temperature_k"])
+            & (columns["exit_velocity_ms"] > 0)
+        ):
+            flags.add("Cold exhaust: momentum-only rise; dense-gas sinking not modelled")
+        de, dn = east - columns["east_m"], north - columns["north_m"]
+        x, y = de * ne + dn * nn, -de * nn + dn * ne
+        active = x >= 1.0
+        if np.any(active & ((x < 100) | (x > 10000))):
+            flags.add("Briggs coefficients extrapolated outside 100m–10km")
+        sy, sz = sigmas(x, weather["stability_class"], environment)
+        u = wind_at_height(
+            weather["wind_speed_ms"], columns["height_m"], weather["stability_class"], environment
+        )
+        if np.any(u <= 1.0):
+            flags.add("low-wind: Gaussian plume unreliable; release-height wind floored at1m/s")
+        h = effective_height(
+            x,
+            columns["height_m"],
+            columns["diameter_m"],
+            columns["exit_velocity_ms"],
+            columns["exit_temperature_k"],
+            weather["temperature_k"],
+            u,
+            weather["stability_class"],
+        )
+        lid = weather.get("mixing_height_m")
+        if lid is not None and np.any(active & (h > lid)):
+            flags.add("Effective release above mixing lid: ground contribution excluded")
+        values = concentration(columns["emission_gs"], u, sy, sz, y, receptor_height, h, lid)
+        total += np.where(active, values, 0.0).sum(axis=0)
+    if any(s.get("type") in {"area", "line"} for s in sources):
+        flags.add("Area/line point discretisation: near-field peaks depend on subdivisions")
+    return total.astype(np.float32), sorted(flags)
+
+"""Physics checks run entirely offline; fixtures are not warehouse observations."""
+
+import json
+from pathlib import Path
+
+import numpy as np
+import pytest
+from hypothesis import given, settings
+from hypothesis import strategies as st
+
+from apps.vayusim.physics import concentration, expand_sources, simulate
+from apps.vayusim.physics.dispersion import sigmas
+from apps.vayusim.physics.meteorology import stability_class, wind_at_height
+from apps.vayusim.physics.rise import effective_height
+
+POSITIVE = st.floats(min_value=1, max_value=1000, allow_nan=False, allow_infinity=False)
+WEATHER = {
+    "wind_speed_ms": 4.0,
+    "wind_direction_deg": 270.0,
+    "temperature_k": 293.0,
+    "stability_class": "D",
+    "mixing_height_m": None,
+}
+SOURCE = {
+    "type": "point",
+    "east_m": 0.0,
+    "north_m": 0.0,
+    "emission_gs": 10.0,
+    "height_m": 0.0,
+    "diameter_m": 0.0,
+    "exit_velocity_ms": 0.0,
+    "exit_temperature_k": 293.0,
+}
+
+
+def test_turner_problem9_concentrations():
+    """Turner AP26 (1970), Chapter7 Problem9, Table7-4.
+
+    EPA copy https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT
+    Q=151g/s, u=4m/s, H=150m, x=1km, chart sy=157m, sz=110m.
+    Tests the Gaussian equation using published chart inputs, NOT substituting
+    Briggs for the workbook's different Pasquill chart parameterisation.
+    This EPA HTML transcription is unpaginated. The separately checked Cimbala
+    PDF example below provides the required exact-page worked example.
+    """
+    actual = concentration(
+        151.0, 4.0, 157.0, 110.0, 0.0, z=np.array([0.0, 30.0, 150.0]), height=150.0
+    )
+    np.testing.assert_allclose(actual, [278.0, 285.0, 358.0], rtol=0.10)
+
+
+def test_cimbala_reflecting_ground_worked_example():
+    """J.M.Cimbala, PSU ME433 Lesson06E, PDF p3 worked example (incl handwritten solution).
+
+    https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf
+    At4.85km: Q=110kg/s, u=5m/s, H=80+20=100m,
+    published Martin-model sy=278.97m, sz=87.51m, reflected C=149.3mg/m³.
+    Primitive validation uses those published sigmas; Briggs is checked separately.
+    """
+    value = concentration(110000.0, 5.0, 278.97, 87.51, 0.0, z=0.0, height=100.0)
+    assert value / 1000 == pytest.approx(149.3, rel=0.10)
+
+
+@pytest.mark.parametrize(
+    "environment,stability,expected",
+    [
+        ("rural", "A", (209.762, 200.0)),
+        ("rural", "B", (152.554, 120.0)),
+        ("rural", "D", (76.277, 37.947)),
+        ("rural", "F", (38.139, 12.308)),
+        ("urban", "A", (270.449, 339.411)),
+        ("urban", "D", (135.225, 122.788)),
+        ("urban", "F", (92.967, 50.596)),
+    ],
+)
+def test_briggs_published_table(environment, stability, expected):
+    """Brune, PSU METEO532 Table2.3 (unpaginated), independent table arithmetic at1km.
+
+    This is coefficient transcription validation, not a chart/worked-example sigma claim.
+    https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm
+    """
+    np.testing.assert_allclose(sigmas(1000.0, stability, environment), expected, rtol=0.05)
+
+
+@given(q=POSITIVE, sy=POSITIVE, sz=POSITIVE, wind=st.floats(1, 20))
+@settings(max_examples=30)
+def test_crosswind_mass_reflection(q, sy, sz, wind):
+    y = np.linspace(-10 * sy, 10 * sy, 2001)
+    integrated = np.trapezoid(concentration(q, wind, sy, sz, y, z=0.0, height=0.0), y)
+    assert integrated == pytest.approx(2 * q * 1e6 / (np.sqrt(2 * np.pi) * wind * sz), rel=1e-6)
+
+
+@given(y=st.floats(-5000, 5000), sy=POSITIVE, sz=POSITIVE)
+def test_crosswind_symmetry(y, sy, sz):
+    assert concentration(10.0, 4.0, sy, sz, y) == concentration(10.0, 4.0, sy, sz, -y)
+
+
+@given(q=POSITIVE, factor=st.floats(0.1, 10), sy=POSITIVE, sz=POSITIVE)
+def test_emission_linearity(q, factor, sy, sz):
+    assert concentration(q * factor, 4.0, sy, sz, 5.0) == pytest.approx(
+        factor * concentration(q, 4.0, sy, sz, 5.0), rel=1e-12
+    )
+
+
+@given(q1=POSITIVE, q2=POSITIVE, shift=st.floats(-100, 100))
+@settings(max_examples=30)
+def test_source_superposition(q1, q2, shift):
+    east, north = np.meshgrid(np.linspace(100, 5000, 20), np.linspace(-1000, 1000, 20))
+    a, b = {**SOURCE, "emission_gs": q1}, {**SOURCE, "emission_gs": q2, "north_m": shift}
+    combined, _ = simulate(east, north, [a, b], WEATHER)
+    first, _ = simulate(east, north, [a], WEATHER)
+    second, _ = simulate(east, north, [b], WEATHER)
+    np.testing.assert_allclose(combined, first + second, rtol=2e-6, atol=1e-8)
+
+
+@given(height=st.floats(0, 500), extra=st.floats(0, 500))
+def test_higher_release_cannot_raise_ground_maximum(height, extra):
+    # Identical transport/dispersion (fixed wind); z=0, no plume rise/lid.
+    sy, sz = sigmas(np.linspace(100, 10000, 1000), "D")
+    low = concentration(10.0, 4.0, sy, sz, 0.0, z=0.0, height=height)
+    high = concentration(10.0, 4.0, sy, sz, 0.0, z=0.0, height=height + extra)
+    assert high.max() <= low.max() * (1 + 1e-14)
+
+
+@given(x=st.floats(-10000, 0), y=st.floats(-10000, 10000))
+def test_upwind_zero(x, y):
+    values, _ = simulate(np.array([x]), np.array([y]), [SOURCE], WEATHER)
+    assert values[0] == 0.0
+
+
+def test_mixing_lid_integral_and_uniform_limit():
+    z = np.linspace(0, 200, 4001)
+    for sz in [5.0, 80.0, 319.0, 320.0, 1000.0]:
+        actual = concentration(10.0, 4.0, 100.0, sz, 0.0, z=z, height=50.0, mixing_height=200.0)
+        assert np.trapezoid(actual, z) == pytest.approx(
+            10e6 / (np.sqrt(2 * np.pi) * 4 * 100), rel=1e-5
+        )
+    assert (
+        concentration(10.0, 4.0, 100.0, 400.0, 0.0, z=0.0, height=300.0, mixing_height=200.0) == 0
+    )
+
+
+@pytest.mark.parametrize(
+    "wind,solar,cloud,day,expected",
+    [
+        (1, 1000, 0.1, True, "A"),
+        (2.5, 800, 0.1, True, "B"),
+        (4, 400, 0.1, True, "C"),
+        (7, 50, 0.1, True, "D"),
+        (2, 0, 0.1, False, "F"),
+        (4, 0, 0.1, False, "E"),
+        (2, 0, 0.6, False, "E"),
+        (4, 0, 0.6, False, "D"),
+        (1, 0, 1, False, "D"),
+    ],
+)
+def test_stability_table(wind, solar, cloud, day, expected):
+    assert stability_class(wind, solar, cloud, day) == expected
+
+
+def test_power_profile_and_rise_limits():
+    assert wind_at_height(4.0, 100.0, "D", "urban") == pytest.approx(4 * 10**0.25)
+    assert wind_at_height(4.0, 5.0, "D", "urban") == pytest.approx(4 * 0.5**0.25)
+    assert wind_at_height(0.1, 100.0, "F", "rural") == 1.0
+    for stability in "ABCDEF":
+        h = effective_height(
+            np.array([0.0, 100.0, 1000.0, 10000.0]), 100.0, 2.0, 15.0, 400.0, 293.0, 4.0, stability
+        )
+        assert np.isfinite(h).all() and (np.diff(h) >= 0).all()
+        assert h[0] == 100.0
+    assert effective_height(np.array([1000.0]), 10.0, 2.0, 1.0, 293.0, 293.0, 4.0, "D")[0] < 10.0
+
+
+def test_area_line_mass_conserved():
+    for source in [
+        {**SOURCE, "type": "area", "width_m": 100, "length_m": 200, "subdivisions": 5},
+        {**SOURCE, "type": "line", "end_east_m": 500, "end_north_m": 500, "subdivisions": 20},
+    ]:
+        assert sum(s["emission_gs"] for s in expand_sources([source])) == pytest.approx(
+            source["emission_gs"]
+        )
+
+
+@pytest.mark.parametrize("stability", list("ABCDEF"))
+def test_heterogeneous_rising_sources_batch_superposition(stability):
+    east, north = np.meshgrid(np.linspace(100, 5000, 25), np.linspace(-1000, 1000, 25))
+    sources = [
+        {
+            **SOURCE,
+            "height_m": 30.0,
+            "diameter_m": 2.0,
+            "exit_velocity_ms": 10.0,
+            "exit_temperature_k": 400.0,
+        },
+        {
+            **SOURCE,
+            "height_m": 70.0,
+            "north_m": 75.0,
+            "east_m": 200.0,
+            "diameter_m": 1.0,
+            "exit_velocity_ms": 20.0,
+            "exit_temperature_k": 300.0,
+        },
+    ]
+    weather = {**WEATHER, "stability_class": stability}
+    combined, _ = simulate(east, north, sources, weather)
+    one, _ = simulate(east, north, [sources[0]], weather)
+    two, _ = simulate(east, north, [sources[1]], weather)
+    np.testing.assert_allclose(combined, one + two, rtol=2e-6, atol=1e-10)
+
+
+@pytest.mark.parametrize("name", ["urban-neutral", "rural-unstable", "urban-stable-lid"])
+def test_stored_golden_fields(name):
+    fixture = json.loads((Path(__file__).parent / "fixtures" / "vayusim-golden.json").read_text())[
+        name
+    ]
+    east, north = np.meshgrid(fixture["east"], fixture["north"])
+    actual, _ = simulate(
+        east,
+        north,
+        [fixture["source"]],
+        fixture["weather"],
+        receptor_height=fixture["receptor_height"],
+        environment=fixture["environment"],
+    )
+    np.testing.assert_allclose(actual, fixture["expected"], rtol=2e-6, atol=1e-12)
+
+{
+  "cimbala": {
+    "source_url": "https://www.me.psu.edu/cimbala/me433/Lesson_Notes/ME433_Lesson_06_E_Reflecting_Ground.pdf",
+    "source_sha256": "ce00801de32bd1b085c8ac86096352cc398f0923b569820e622eef471ae79462",
+    "pdf_page": 3,
+    "reference_method": "Hand-transcribed from the page's handwritten solution, independently of engine output",
+    "x_m": 4850.0,
+    "q_gs": 110000.0,
+    "transport_wind_ms": 5.0,
+    "effective_height_m": 100.0,
+    "z_m": 0.0,
+    "sigma_y_m": 278.97,
+    "sigma_z_m": 87.51,
+    "concentration_ugm3": 149300.0,
+    "source_dispersion": "Martin; source meteorology is overcast, class D",
+    "scope": "Gaussian formula check with published Martin inputs; Briggs versus Martin is a scheme comparison, not a validation error"
+  },
+  "turner": {
+    "source_url": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT",
+    "source_locator": "Chapter 7 Problem 9, Table 7-4; EPA HTML transcription",
+    "printed_page": null,
+    "printed_page_status": "unverified; paginated PDF fetch returned non-PDF HTML",
+    "classification": "formula check only until a physical source page is verified",
+    "x_m": 1000.0,
+    "q_gs": 151.0,
+    "transport_wind_ms": 4.0,
+    "effective_height_m": 150.0,
+    "sigma_y_m": 157.0,
+    "sigma_z_m": 110.0,
+    "rows": [
+      {"z_m": 0.0, "concentration_ugm3": 278.0},
+      {"z_m": 30.0, "concentration_ugm3": 285.0},
+      {"z_m": 150.0, "concentration_ugm3": 358.0}
+    ]
+  },
+  "brune": {
+    "source_url": "https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm",
+    "source_locator": "Section 2.2.5, Table 2.3 rural row B; unpaginated (no physical page)",
+    "x_m": 1000.0,
+    "environment": "rural",
+    "stability": "B",
+    "sigma_y_equation": "0.16*x*(1+0.0001*x)**(-0.5)",
+    "sigma_z_equation": "0.12*x",
+    "x_units": "m",
+    "sigma_units": "m",
+    "source_range_m": [100.0, 10000.0],
+    "sigma_y_coefficient": 0.16,
+    "sigma_y_distance_coefficient_per_m": 0.0001,
+    "sigma_y_power": -0.5,
+    "sigma_z_coefficient": 0.12,
+    "table_derived_sigma_y_m": 152.55401427929476,
+    "table_derived_sigma_z_m": 120.0,
+    "classification": "Formula check only: values calculated independently from the cited table equation, not printed numeric validation",
+    "excluded_paragraph_diagnostic": {
+      "source_locator": "Section 2.2.5, paragraph following Table 2.3; unpaginated",
+      "claimed_briggs_sigma_y_m": 210.0,
+      "claimed_briggs_sigma_z_m": 120.0,
+      "included_in_validation_pass_count": false,
+      "resolution": "Paragraph's class-B sigma-y is inconsistent with its own rural-B equation; code and table transcription agree. No publisher erratum or cause is verified."
+    }
+  },
+  "tolerances": {"sigma_relative": 0.05, "concentration_relative": 0.10}
+}
+
+
+Name : boundaries
+
+
+Name : cpcb
+
+
+Name : forecast
+
+
+Name : opencity
+
+
+Name : openmeteo
+
+
+Name : rag
+
+
+Name : research_library
+
+
+Name : vayusim
+
+
+Name : worldpop
+
+
+Name   : ap42-paved-roads.pdf
+Length : 771383
+
+
+Name   : ap42-paved-roads.pdf.manifest.json
+Length : 195
+
+
+Name   : briggs-table.html
+Length : 160968
+
+
+Name   : briggs-table.html.manifest.json
+Length : 320
+
+
+Name   : cdm2-guide.html
+Length : 299172
+
+
+Name   : cdm2-guide.html.manifest.json
+Length : 313
+
+
+Name   : cimbala-reflecting.pdf
+Length : 464213
+
+
+Name   : cimbala-reflecting.pdf.manifest.json
+Length : 203
+
+
+Name   : isc3v2.pdf
+Length : 584135
+
+
+Name   : isc3v2.pdf.manifest.json
+Length : 323
+
+
+Name   : meteorological-guidance.pdf
+Length : 693588
+
+
+Name   : meteorological-guidance.pdf.manifest.json
+Length : 333
+
+
+Name   : screening-procedures.html
+Length : 127047
+
+
+Name   : screening-procedures.html.manifest.json
+Length : 315
+
+
+Name   : turner-workbook.html
+Length : 202258
+
+
+Name   : turner-workbook.html.manifest.json
+Length : 310
+
+rg : rg: tests/fixtures/vayusim*: The filename, directory name, or volume label syntax is incorrect. (os error 123)
+At line:14 char:1
++ rg -n -i 'Briggs|Turner|ISC3|AERMOD|dispersion' docs/DATA_SOURCES.md  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (rg: tests/fixtu... (os error 123):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+data/raw/vayusim\isc3v2.pdf.manifest.json:2:  "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf",
+
+
+
+````
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 002-frozen-before-reference-catalogue (2026-10-16T10:20:46.1704882+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase6a-independent/identity.py before
+if ($LASTEXITCODE -ne 0) { throw 'Frozen baseline mismatch' }
+rg -n -i 'Briggs|Turner|ISC3|AERMOD|dispersion' data/raw/research_library data/raw/rag data/raw/vayusim -g '*.manifest.json'
+Get-ChildItem data/raw/research_library -File | Select-Object Name,Length
+Get-ChildItem data/raw/rag -File | Select-Object -First 12 Name,Length
+Get-Content data/raw/vayusim/isc3v2.pdf.manifest.json -Raw
+$global:LASTEXITCODE=0
+```
+
+```text
+{
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "existing_tests_and_fixtures": {
+    "files": 50,
+    "aggregate_sha256": "3ca434500859bf7230fc713bb6c85e1262213b8bb637a090302fa364cddc3fd6"
+  },
+  "physics_and_presets": {
+    "files": 6,
+    "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+  },
+  "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+  "stage": "before",
+  "identical_to_before": false
+}
+data/raw/rag\library.manifest.json:241:  "aermod": {
+data/raw/rag\library.manifest.json:242:    "key": "aermod",
+data/raw/rag\library.manifest.json:243:    "title": "AERMOD Model Formulation, EPA-454/B-26-003 (July 2026)",
+data/raw/rag\library.manifest.json:244:    "category": "dispersion",
+data/raw/rag\library.manifest.json:245:    "requested_url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+data/raw/rag\library.manifest.json:250:        "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+data/raw/rag\library.manifest.json:254:        "resolved_url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf"
+data/raw/rag\library.manifest.json:259:    "path": "data/raw/rag/aermod-2552f49db15ad0c2.pdf",
+data/raw/rag\library.manifest.json:262:    "source_url": "https://gaftp.epa.gov/aqmg/SCRAM/models/preferred/aermod/aermod_mfd.pdf",
+data/raw/vayusim\isc3v2.pdf.manifest.json:2:  "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf",
+
+Name                                       Length
+----                                       ------
+cpcb_aqi.html                              340648
+cpcb_aqi.txt                               207450
+grange_2018.pdf                           1318053
+grange_2018.txt                             76564
+manifest.json                                2721
+ncap_2023_official.html                   1384755
+ncap_2023_official.txt                     260644
+ncap_2024_update.html                      815902
+ncap_2024_update.txt                       136888
+ncap_2026_update.html                       94194
+ncap_2026_update.txt                        27385
+ncap_apex.pdf                             2330242
+ncap_apex.txt                               51516
+ncap_city_list.pdf                          68473
+ncap_city_list.txt                           2189
+shi_2021.html                              187999
+shi_2021.pdf                              1333242
+shi_2021.txt                                74784
+who_2021.html                               91324
+who_2021.txt                                19459
+aermod-2552f49db15ad0c2.pdf               2152987
+aermod.download.url                            71
+berkeley_equivalence.download.url              66
+city_plan_ahmedabad-a4bdc7f7249bcfb4.pdf  1004069
+city_plan_ahmedabad.download.url               44
+city_plan_bengaluru-952d87bdd911430a.pdf  8450642
+city_plan_bengaluru.download.url               44
+city_plan_chennai-7bbe4c626f4a17e3.pdf    5261470
+city_plan_chennai.download.url                 68
+city_plan_delhi-036d9ae4d7edbdb0.pdf     25053490
+city_plan_delhi.download.url                   40
+city_plan_hyderabad-76fdc9c13823ee89.pdf 21059012
+{
+  "url": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf",
+  "bytes": 584135,
+  "sha256": "c34d6d7d7e1b109abcf182b24fc2bf3003a621d336c11cf6a8e8ccc5f057fe76",
+  "section": "EPA454/B95-003b,1995, pp1-5--1-11,1-32--1-33",
+  "note": "Primary source used for implementation; no coefficient fitted to outcomes"
+}
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 003-cached-pdf-library-search (2026-10-16T10:21:15.1768876+05:30; exit 0)</summary>
+
+```powershell
+docker version --format '{{.Server.Version}} {{.Server.Os}}'
+docker compose exec -T web python .tools/phase6a-independent/library_scan.py
+```
+
+```text
+29.8.2 linux
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+{"path": "data/raw/vayusim/isc3v2.pdf", "pages": 128, "hit_pages": [1, 3, 4, 8, 18, 19, 20, 21, 22, 23, 27, 28, 29, 30, 31, 32, 34, 43, 51, 52, 82, 111, 113, 114, 115, 117, 119, 120, 121, 122, 124, 125, 127]}
+ISC PDF page 33 1-20
+x y '
+Fyo
+p
+1/ q
+(1-35)
+x z '
+Fzo
+a
+1/ b
+(1-36)
+1.1.5.2 Lateral and Vertical Virtual Distances.
+The equations in Tables 1-1 through 1-4 define the
+dispersion parameters for an ideal point source.  However,
+volume sources have initial lateral and vertical dimensions.
+Also, as discussed below, building wake effects can enhance the
+initial growth of stack plumes.  In these cases, lateral (xy)
+and vertical (xz) virtual distances are added by the ISC models
+to the actual downwind distance x for the Fy and Fz
+calculations.  The lateral virtual distance in kilometers for
+the rural mode is given by:
+where the stability-dependent coefficients p and q are given in
+Table 1-5 and Fyo is the standard deviation in meters of the
+lateral concentration distribution at the source.  Similarly,
+the vertical virtual distance in kilometers for the rural mode
+is given by:
+where the coefficients a and b are obtained form Table 1-2 and
+Fzo is the standard deviation in meters of the vertical
+concentration distribution at the source.  It is important to
+note that the ISC model programs check to ensure that the xz
+used to calculate Fz at (x + xz) in the rural mode is the xz
+calculated using the coefficients a and b that correspond to
+the distance category specified by the quantity (x + xz).
+To determine virtual distances for the urban mode, the
+functions displayed in Tables 1-3 and 1-4 are solved for x.
+The solutions are quadratic formulas for the lateral virtual
+distances; and for vertical virtual distances the solutions are
+cubic equations for stability classes A and B, a linear
+equation for stability class C, and quadratic equations for
+
+ISC PDF page 34 1-21
+stability classes D, E, and F.  The cubic equations are solved
+by iteration using Newton's method.
+TABLE 1-5
+COEFFICIENTS USED TO CALCULATE LATERAL VIRTUAL DISTANCES
+FOR PASQUILL-GIFFORD DISPERSION RATES
+x y '
+Fyo
+p
+1/ q
+Pasquill
+Stability
+Category
+p
+q
+A
+209.14
+0.890
+B
+154.46
+0.902
+C
+103.26
+0.917
+D
+68.26
+0.919
+E
+51.06
+0.921
+F
+33.92
+0.919
+1.1.5.3 Procedures Used to Account for the Effects of
+Building Wakes on Effluent Dispersion.
+The procedures used by the ISC models to account for the
+effects of the aerodynamic wakes and eddies produced by plant
+buildings and structures on plume dispersion originally
+followed the suggestions of Huber (1977) and Snyder (1976).
+Their suggestions are principally based on the results of
+wind-tunnel experiments using a model building with a crosswind
+dimension double that of the building height.  The atmospheric
+turbulence simulated in the wind-tunnel experiments was
+intermediate between the turbulence intensity associated with
+the slightly unstable Pasquill C category and the turbulence
+intensity associated with the neutral D category.  Thus, the
+data reported by Huber and Snyder reflect a specific stability,
+building shape and building orientation with respect to the
+mean wind direction.  It follows that the ISC wake-effects
+
+ISC PDF page 60 1-47
+plume.  Therefore, Equation (1-1) is also used to calculate
+concentrations produced by volume source emissions.
+There are two types of volume sources:  surface-based
+sources, which may also be modeled as area sources, and
+elevated sources.  An example of a surface-based source is a
+surface rail line.  The effective emission height he for a
+surface-based source is usually set equal to zero.  An example
+of an elevated source is an elevated rail line with an
+effective emission height he set equal to the height of the
+rail line.  If the volume source is elevated, the user assigns
+the effective emission height he, i.e., there is no plume rise
+associated with volume sources.  The user also assigns initial
+lateral (Fyo) and vertical (Fzo) dimensions for the volume
+source.  Lateral (xy) and vertical (xz) virtual distances are
+added to the actual downwind distance x for the Fy and Fz
+calculations.  The virtual distances are calculated from
+solutions to the sigma equations as is done for point sources
+with building downwash.
+The volume source model is used to simulate the effects of
+emissions from sources such as building roof monitors and for
+line sources (for example, conveyor belts and rail lines).  The
+north-south and east-west dimensions of each volume source used
+in the model must be the same.  Table 1-6 summarizes the
+general procedures suggested for estimating initial lateral
+(Fyo) and vertical (Fzo) dimensions for single volume sources
+and for multiple volume sources used to represent a line
+source.  In the case of a long and narrow line source such as a
+rail line, it may not be practical to divide the source into N
+volume sources, where N is given by the length of the line
+source divided by its width.  The user can obtain an
+approximate representation of the line source by placing a
+smaller number of volume sources at equal intervals along the
+line source, as shown in Figure 1-8.  In general, the spacing
+between individual volume sources should not be greater than
+
+ISC PDF page 62 1-49
+TABLE 1-6
+SUMMARY OF SUGGESTED PROCEDURES FOR ESTIMATING
+INITIAL LATERAL DIMENSIONS Fyo AND
+INITIAL VERTICAL DIMENSIONS Fzo FOR VOLUME AND LINE SOURCES
+Type of Source
+Procedure for Obtaining
+Initial Dimension
+(a)  Initial Lateral Dimensions (Fyo)
+Single Volume Source
+ Fyo =
+length of side divided
+by 4.3
+Line Source Represented by
+Adjacent Volume Sources (see
+Figure 1-8(a))
+ Fyo =
+length of side divided
+by 2.15
+Line Source Represented by
+Separated Volume Sources (see
+Figure 1-8(b))
+ Fyo =
+center to center
+distance divided by
+2.15
+(b)  Initial Vertical Dimensions (Fzo)
+Surface-Based Source (he - 0)
+ Fzo =
+vertical dimension of
+source divided by 2.15
+Elevated Source (he > 0) on or
+Adjacent to a Building
+ Fzo =
+building height
+divided by 2.15
+Elevated Source (he > 0) not
+on or Adjacent to a Building
+ Fzo =
+vertical dimension of
+source divided by 4.3
+1.2.3 The Short-Term Area Source Model
+The ISC Short Term area source model is based on a
+numerical integration over the area in the upwind and crosswind
+directions of the Gaussian point source plume formula given in
+Equation (1-1).  Individual area sources may be represented as
+rectangles with aspect ratios (length/width) of up to 10 to 1.
+In addition, the rectangles may be rotated relative to a north-
+south and east-west orientation.  As shown by Figure 1-9, the
+effects of an irregularly shaped area can be simulated by
+dividing the area source into multiple areas.  Note that the
+size and shape of the individual area sources in Figure 1-9
+varies; the only requirement is that each area source must be a
+
+{"path": "data/raw/vayusim/meteorological-guidance.pdf", "pages": 171, "hit_pages": [9, 13, 21, 53, 59, 60, 61, 62, 63, 64, 66, 67, 69, 70, 78, 80, 163, 164, 165]}
+{"path": "data/raw/rag/aermod-2552f49db15ad0c2.pdf", "pages": 179, "hit_pages": [1, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 25, 27, 35, 36, 38, 39, 41, 42, 44, 48, 50, 51, 52, 54, 55, 56, 58, 60, 61, 62, 63, 64, 66, 67, 68, 69, 71, 72, 73, 74, 76, 81, 82, 85, 86, 87, 88, 91, 93, 94, 95, 97, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 118, 121, 123, 124, 125, 126, 128, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 150, 152, 153, 154, 155, 156, 157, 158, 161, 162, 163, 164, 165, 166, 167, 168, 171, 172, 173, 174, 175, 176, 177, 178]}
+{"path": "data/raw/rag/iit_kanpur_delhi_2016-d03b06f219615455.pdf", "pages": 334, "hit_pages": [55, 56, 300, 302, 303, 333]}
+{"path": "data/raw/rag/teri_arai_2018-d7e8f189691f21f5.pdf", "pages": 560, "hit_pages": [468]}
+Local cached reference search complete; no network downloads.
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 004-independent-reference-comparisons (2026-10-16T10:30:00.0055323+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web ruff format apps/vayusim/management/commands/verify_vayusim_references.py tests/test_vayusim_independent_references.py
+if ($LASTEXITCODE -ne 0) { throw 'Format failed' }
+docker compose exec -T web python manage.py verify_vayusim_references
+if ($LASTEXITCODE -ne 0) { throw 'Comparison computation failed' }
+```
+
+```text
+1 file reformatted, 1 file left unchanged
+doe-briggs-rural-d-1000m | sigma_y_m | engine sigma | reference=76.3 engine=76.2770071396 error=0.030135% tolerance=5% | PASS; independent numeric
+doe-briggs-rural-d-1000m | sigma_z_m | engine sigma | reference=37.9 engine=37.947331922 error=0.124886% tolerance=5% | PASS; independent numeric
+cimbala-martin-d-4850m | sigma_y_m | engine sigma | reference=278.97 engine=318.396656667 error=14.132938% tolerance=5% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | sigma_z_m | engine sigma | reference=87.51 engine=101.16003892 error=15.598262% tolerance=5% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | concentration_ugm3 at z=0 m | engine sigma -> Gaussian, prescribed H/u | reference=149300 engine=133382.771845 error=10.661238% tolerance=10% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | concentration_ugm3 at z=0 m | Gaussian only, source-supplied sigmas/H/u | reference=149300 engine=149314.351448 error=0.009612% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | sigma_y_m | engine sigma | reference=157 engine=152.554014279 error=2.831838% tolerance=5% | PASS; diagnostic only
+turner-pg-b-1000m | sigma_z_m | engine sigma | reference=110 engine=120 error=9.090909% tolerance=5% | FAIL tolerance; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=0 m | engine sigma -> Gaussian, prescribed H/u | reference=278 engine=300.517407183 error=8.099787% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=0 m | Gaussian only, source-supplied sigmas/H/u | reference=278 engine=274.592425873 error=1.225746% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=30 m | engine sigma -> Gaussian, prescribed H/u | reference=285 engine=305.609816066 error=7.231514% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=30 m | Gaussian only, source-supplied sigmas/H/u | reference=285 engine=283.075948387 error=0.675106% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=150 m | engine sigma -> Gaussian, prescribed H/u | reference=358 engine=342.615072154 error=4.297466% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=150 m | Gaussian only, source-supplied sigmas/H/u | reference=358 engine=356.331421573 error=0.466083% tolerance=10% | PASS; diagnostic only
+{
+  "fixture_sha256": "1eb3c413903f3bbb0e53ce874b746c21edd244102f95a128b10fbf963a3b18ed",
+  "urban_equation_transcription_matches": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "D": true,
+    "E": true,
+    "F": true
+  },
+  "independent_numeric_passes": 2,
+  "independent_numeric_failures": 0,
+  "independently_validated_cases": [
+    "rural/D sigmas at 1000 m"
+  ],
+  "example_branches": {
+    "urban/C": {
+      "status": "not independently validated",
+      "examples": [
+        "Delhi #62",
+        "Mumbai #63"
+      ],
+      "reason": "No verified page-cited matching numeric or visually verified chart-read sigma pair located; equation transcription only"
+    },
+    "urban/F": {
+      "status": "not independently validated",
+      "examples": [
+        "Hyderabad #64"
+      ],
+      "reason": "No verified page-cited matching numeric or visually verified chart-read sigma pair located; equation transcription only"
+    }
+  },
+  "gate": "Ready for 6B with caveats",
+  "gate_condition": "Phase 6B must show an 'unvalidated branch' label for urban C and F before presenting these scenarios; no Phase 6B implementation in this task",
+  "physical_field_validity": "not established",
+  "end_to_end_plume_rise_validity": "not established"
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 005-lint-reference-run-full-suite (2026-10-16T10:30:47.7975397+05:30; exit 1)</summary>
+
+```powershell
+docker compose exec -T web ruff check .
+if ($LASTEXITCODE -ne 0) { throw 'Ruff failed' }
+docker compose exec -T web ruff format --check .
+if ($LASTEXITCODE -ne 0) { throw 'Format failed' }
+docker compose exec -T web python manage.py verify_vayusim_references
+if ($LASTEXITCODE -ne 0) { throw 'Comparison failed' }
+.\scripts\dev.ps1 test
+if ($LASTEXITCODE -ne 0) { throw 'Full suite failed' }
+```
+
+```text
+E501 Line too long (174 > 100)
+   --> apps/vayusim/management/commands/verify_vayusim_references.py:106:101
+    |
+104 | …
+105 | …
+106 | …h' label for urban C and F before presenting these scenarios; no Phase 6B implementation in this task",
+    |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+107 | …
+108 | …
+    |
+
+Found 1 error.
+Ruff failed
+At line:2 char:28
++ if ($LASTEXITCODE -ne 0) { throw 'Ruff failed' }
++                            ~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Ruff failed:String) [], RuntimeException
+    + FullyQualifiedErrorId : Ruff failed
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 007-unchanged-city-examples (2026-10-16T10:31:51.6742544+05:30; exit 0)</summary>
+
+```powershell
+$independentExamples = (Get-Content .tools/phase6a-fix/examples.py -Raw).Replace('data/results/phase6a-fix', 'data/results/phase6a-independent')
+[IO.File]::WriteAllText((Join-Path (Get-Location) '.tools/phase6a-independent/examples.py'), $independentExamples, [Text.UTF8Encoding]::new($false))
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6a-independent/examples.py
+if ($LASTEXITCODE -ne 0) { throw 'Example identity changed' }
+```
+
+```text
+{"run_id": 62, "city": "delhi", "label": "hypothetical 1 g/s source", "peak_ugm3": 15.641839027404785, "distance_to_peak_m": 176.77669529663723, "stability_class": "C", "all_reported_numeric_values_match": true, "fresh_compute": true, "doubled_Q_peak_exactly_doubled": true, "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45, "http_status": 200, "header_status": 200, "inputs_hash": "492de71df7303cc0f71468f5acc9f74fd53c6cf9a818bb0bc511e2fd1a0ed4c4"}
+{"run_id": 63, "city": "mumbai", "label": "hypothetical 1 g/s source", "peak_ugm3": 11.536741256713867, "distance_to_peak_m": 176.77669529663748, "stability_class": "C", "all_reported_numeric_values_match": true, "fresh_compute": true, "doubled_Q_peak_exactly_doubled": true, "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45, "http_status": 200, "header_status": 200, "inputs_hash": "bf7cda428744e8aab1e69de374b9838f9ce05742e41be720348fb3c2b79238ca"}
+{"run_id": 64, "city": "hyderabad", "label": "hypothetical 1 g/s source", "peak_ugm3": 18.990890502929688, "distance_to_peak_m": 725.4309064273452, "stability_class": "F", "all_reported_numeric_values_match": true, "fresh_compute": true, "doubled_Q_peak_exactly_doubled": true, "doubled_Q_field_max_absolute_delta_ugm3": 1.401298464324817e-45, "http_status": 200, "header_status": 200, "inputs_hash": "c2807c34a76bc3e9a5d6e6bf9b1ed5fe2cb9e308ebd539e6dc033eb070808e84"}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 006-lint-reference-run-full-suite (2026-10-16T10:31:00.0985226+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web ruff check .
+if ($LASTEXITCODE -ne 0) { throw 'Ruff failed' }
+docker compose exec -T web ruff format --check .
+if ($LASTEXITCODE -ne 0) { throw 'Format failed' }
+docker compose exec -T web python manage.py verify_vayusim_references
+if ($LASTEXITCODE -ne 0) { throw 'Comparison failed' }
+.\scripts\dev.ps1 test
+if ($LASTEXITCODE -ne 0) { throw 'Full suite failed' }
+```
+
+```text
+All checks passed!
+266 files already formatted
+doe-briggs-rural-d-1000m | sigma_y_m | engine sigma | reference=76.3 engine=76.2770071396 error=0.030135% tolerance=5% | PASS; independent numeric
+doe-briggs-rural-d-1000m | sigma_z_m | engine sigma | reference=37.9 engine=37.947331922 error=0.124886% tolerance=5% | PASS; independent numeric
+cimbala-martin-d-4850m | sigma_y_m | engine sigma | reference=278.97 engine=318.396656667 error=14.132938% tolerance=5% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | sigma_z_m | engine sigma | reference=87.51 engine=101.16003892 error=15.598262% tolerance=5% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | concentration_ugm3 at z=0 m | engine sigma -> Gaussian, prescribed H/u | reference=149300 engine=133382.771845 error=10.661238% tolerance=10% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | concentration_ugm3 at z=0 m | Gaussian only, source-supplied sigmas/H/u | reference=149300 engine=149314.351448 error=0.009612% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | sigma_y_m | engine sigma | reference=157 engine=152.554014279 error=2.831838% tolerance=5% | PASS; diagnostic only
+turner-pg-b-1000m | sigma_z_m | engine sigma | reference=110 engine=120 error=9.090909% tolerance=5% | FAIL tolerance; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=0 m | engine sigma -> Gaussian, prescribed H/u | reference=278 engine=300.517407183 error=8.099787% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=0 m | Gaussian only, source-supplied sigmas/H/u | reference=278 engine=274.592425873 error=1.225746% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=30 m | engine sigma -> Gaussian, prescribed H/u | reference=285 engine=305.609816066 error=7.231514% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=30 m | Gaussian only, source-supplied sigmas/H/u | reference=285 engine=283.075948387 error=0.675106% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=150 m | engine sigma -> Gaussian, prescribed H/u | reference=358 engine=342.615072154 error=4.297466% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=150 m | Gaussian only, source-supplied sigmas/H/u | reference=358 engine=356.331421573 error=0.466083% tolerance=10% | PASS; diagnostic only
+{
+  "fixture_sha256": "5f6b08360d816f911080c8c863d800400552eaefa0031dd090db93f643bbddce",
+  "urban_equation_transcription_matches": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "D": true,
+    "E": true,
+    "F": true
+  },
+  "independent_numeric_passes": 2,
+  "independent_numeric_failures": 0,
+  "independently_validated_cases": [
+    "rural/D sigmas at 1000 m"
+  ],
+  "example_branches": {
+    "urban/C": {
+      "status": "not independently validated",
+      "examples": [
+        "Delhi #62",
+        "Mumbai #63"
+      ],
+      "reason": "No verified page-cited matching numeric or visually verified chart-read sigma pair located; equation transcription only"
+    },
+    "urban/F": {
+      "status": "not independently validated",
+      "examples": [
+        "Hyderabad #64"
+      ],
+      "reason": "No verified page-cited matching numeric or visually verified chart-read sigma pair located; equation transcription only"
+    }
+  },
+  "gate": "Ready for 6B with caveats",
+  "gate_condition": "Phase 6B must show an 'unvalidated branch' label for urban C and F before presenting these scenarios; no Phase 6B implementation in this task",
+  "physical_field_validity": "not established",
+  "end_to_end_plume_rise_validity": "not established"
+}
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 260 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  2%]
+tests/test_api.py ...                                                    [  3%]
+tests/test_database.py ......                                            [  5%]
+tests/test_deweather_diagnostics.py ...                                  [  6%]
+tests/test_forecast_operations.py ..                                     [  7%]
+tests/test_forecasting.py .                                              [  8%]
+tests/test_ingest_api.py ....                                            [  9%]
+tests/test_ingest_sources.py ...................                         [ 16%]
+tests/test_rag_audit.py .                                                [ 17%]
+tests/test_rag_pipeline.py .......................                       [ 26%]
+tests/test_research_api.py .                                             [ 26%]
+tests/test_research_clocks.py ..                                         [ 27%]
+tests/test_seed.py .                                                     [ 27%]
+tests/test_vayusim_api.py ..............                                 [ 33%]
+tests/test_vectors.py ..                                                 [ 33%]
+tests/test_database.py .                                                 [ 34%]
+tests/test_vayusim_api.py .                                              [ 34%]
+tests/test_worker.py .                                                   [ 35%]
+tests/test_analytics.py ...................                              [ 42%]
+tests/test_dashboard_evidence.py ..                                      [ 43%]
+tests/test_deweather_diagnostics.py ....                                 [ 44%]
+tests/test_forecast_intervals.py .                                       [ 45%]
+tests/test_forecast_operations.py ...                                    [ 46%]
+tests/test_forecasting.py .................                              [ 52%]
+tests/test_foundation.py .....................                           [ 60%]
+tests/test_ingest_sources.py ......                                      [ 63%]
+tests/test_ingest_units.py .....................                         [ 71%]
+tests/test_phase6a_audit.py .......                                      [ 73%]
+tests/test_phase6a_fix.py ...                                            [ 75%]
+tests/test_rag_pipeline.py ...........                                   [ 79%]
+tests/test_rag_resident_worker.py .                                      [ 79%]
+tests/test_research_methods.py .....                                     [ 81%]
+tests/test_vayusim_api.py ....                                           [ 83%]
+tests/test_vayusim_independent_references.py ........                    [ 86%]
+tests/test_vayusim_physics.py ....................................       [100%]
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 260 passed, 147 warnings in 45.61s ======================
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 008-frozen-after-health (2026-10-16T10:32:47.9326812+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase6a-independent/identity.py after
+if ($LASTEXITCODE -ne 0) { throw 'Frozen files changed' }
+docker compose exec -T -e PYTHONPATH=/app web python .tools/phase6a-fix/runtime.py
+if ($LASTEXITCODE -ne 0) { throw 'Runtime health failed' }
+```
+
+```text
+{
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "existing_tests_and_fixtures": {
+    "files": 50,
+    "aggregate_sha256": "3ca434500859bf7230fc713bb6c85e1262213b8bb637a090302fa364cddc3fd6"
+  },
+  "physics_and_presets": {
+    "files": 6,
+    "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+  },
+  "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+  "stage": "after",
+  "identical_to_before": true
+}
+{
+  "environment": {
+    "LLM_PROVIDER": "extractive",
+    "OLLAMA_ENABLED": "false",
+    "OLLAMA_MODEL": "qwen2.5:3b-instruct",
+    "COMPOSE_PROFILES": ""
+  },
+  "selected_provider": "extractive",
+  "configured_provider_names": [
+    "extractive"
+  ],
+  "http_status": 200,
+  "health": {
+    "ok": true,
+    "checks": {
+      "database": {
+        "ok": true
+      },
+      "extensions": {
+        "postgis": {
+          "ok": true,
+          "version": "3.6.4"
+        },
+        "timescaledb": {
+          "ok": true,
+          "version": "2.30.2"
+        },
+        "vector": {
+          "ok": true,
+          "version": "0.8.7"
+        }
+      },
+      "redis": {
+        "ok": true
+      },
+      "celery": {
+        "ok": true
+      }
+    }
+  },
+  "language_model_called": false
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 009-measurements-and-source-state (2026-10-16T10:33:50.5119605+05:30; exit 0)</summary>
+
+```powershell
+Get-Content .tools/phase6a-independent/006-lint-reference-run-full-suite.log -Encoding Unicode | Select-Object -Last 2
+Get-Content apps/vayusim/management/commands/verify_vayusim_references.py -Encoding UTF8 | Select-Object -Skip 78 -First 65
+Get-Content data/raw/vayusim/briggs-table.html.manifest.json -Encoding UTF8 -Raw
+Get-ChildItem .tools/phase6a-independent -Filter 'web-*.json' | Measure-Object
+```
+
+```text
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 260 passed, 147 warnings in 45.61s ======================
+                    add(
+                        case,
+                        f"concentration_ugm3 at z={row['z_m']:g} m",
+                        row["concentration_ugm3"],
+                        value,
+                        fixture["tolerances"]["concentration_relative"],
+                        method,
+                        eligible=False,
+                    )
+        urban = fixture["urban_equation_transcription"]["rows"]
+        equation_coverage = {
+            stability: list(COEFFICIENTS["urban"][stability]) == coefficients
+            for stability, coefficients in urban.items()
+        }
+        eligible = [row for row in results if row["eligible_for_case_validation"]]
+        output = {
+            "fixture_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "fixture": fixture,
+            "comparisons": results,
+            "urban_equation_transcription_matches": equation_coverage,
+            "independent_numeric_passes": sum(row["within_tolerance"] for row in eligible),
+            "independent_numeric_failures": sum(not row["within_tolerance"] for row in eligible),
+            "independently_validated_cases": ["rural/D sigmas at 1000 m"]
+            if eligible and all(row["within_tolerance"] for row in eligible)
+            else [],
+            "example_branches": fixture["example_branch_gate"],
+            "gate": "Ready for 6B with caveats",
+            "gate_condition": (
+                "Phase 6B must show an 'unvalidated branch' label for urban C and F "
+                "before presenting these scenarios; no Phase 6B implementation in this task"
+            ),
+            "physical_field_validity": "not established",
+            "end_to_end_plume_rise_validity": "not established",
+        }
+        target = Path(options["output"])
+        if not target.is_absolute():
+            target = settings.BASE_DIR / target
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(output, indent=2) + "\n")
+        for row in results:
+            scope = (
+                "independent numeric" if row["eligible_for_case_validation"] else "diagnostic only"
+            )
+            status = "PASS" if row["within_tolerance"] else "FAIL tolerance"
+            self.stdout.write(
+                f"{row['case']} | {row['variable']} | {row['method']} | "
+                f"reference={row['reference']:.9g} engine={row['engine']:.12g} "
+                f"error={row['absolute_percentage_error']:.6f}% "
+                f"tolerance={row['tolerance_percent']:g}% | {status}; {scope}"
+            )
+        self.stdout.write(
+            json.dumps(
+                {
+                    key: value
+                    for key, value in output.items()
+                    if key not in {"fixture", "comparisons"}
+                },
+                indent=2,
+            )
+        )
+{
+  "url": "https://personal.ems.psu.edu/~brune/m532/m532_theatmosphere.htm",
+  "bytes": 160968,
+  "sha256": "86bbdbb9ff24d66b8adaa02daffdd5deb075415960e18c1061ec673c5f28abf0",
+  "section": "W.H.Brune METEO532 Table2.3 unpaginated",
+  "note": "Primary source used for implementation; no coefficient fitted to outcomes"
+}
+
+
+Count    : 22
+Average  :
+Sum      :
+Maximum  :
+Minimum  :
+Property :
+
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 010-report-source-journal (2026-10-16T10:36:14.8224706+05:30; exit 1)</summary>
+
+```powershell
+python .tools/phase6a-independent/write_report.py
+if ($LASTEXITCODE -ne 0) { throw 'Report generation failed' }
+git diff --stat
+git diff --check
+```
+
+```text
+python : Traceback (most recent call last):
+At line:1 char:1
++ python .tools/phase6a-independent/write_report.py
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  File "D:\EnviroInsights-India\.tools\phase6a-independent\write_report.py", line 286, in <module>
+    record = json.loads(path.read_text())
+                        ^^^^^^^^^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1059, in read_text
+    return f.read()
+           ^^^^^^^^
+  File "C:\Users\Andry\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 817: character maps to <undefined>
+Report generation failed
+At line:2 char:28
++ if ($LASTEXITCODE -ne 0) { throw 'Report generation failed' }
++                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Report generation failed:String) [], RuntimeException
+    + FullyQualifiedErrorId : Report generation failed
+
+
+
+```
+
+</details>
+
+### Public web-reader request/output journal
+
+Public sources were read through the available web reader. No shell network
+downloads were used. Linked JSON records retain exact requests and complete
+returned outputs, including failed source reads.
+
+
+<details>
+<summary>web-find_1.json</summary>
+
+```json
+{
+  "find": [
+    {
+      "ref_id": "turn118view2",
+      "pattern": "Problem 9"
+    },
+    {
+      "ref_id": "turn118view2",
+      "pattern": "157"
+    },
+    {
+      "ref_id": "turn118view2",
+      "pattern": "urban"
+    },
+    {
+      "ref_id": "turn118view1",
+      "pattern": "TABLE 1-3"
+    },
+    {
+      "ref_id": "turn118view0",
+      "pattern": "SIGMAZ."
+    },
+    {
+      "ref_id": "turn118view3",
+      "pattern": "test"
+    }
+  ],
+  "open": [
+    {
+      "ref_id": "https://www.energy.gov/sites/prod/files/2018/02/f49/Yuan%20et%20al%201995_RISKIND.pdf"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-find_1.json](../data/results/phase6a-independent/web/web-find_1.json).
+
+</details>
+
+
+<details>
+<summary>web-find_2.json</summary>
+
+```json
+{
+  "find": [
+    {
+      "ref_id": "turn123view0",
+      "pattern": "76.3"
+    },
+    {
+      "ref_id": "turn123view0",
+      "pattern": "Figure 6-9"
+    },
+    {
+      "ref_id": "turn123view0",
+      "pattern": "Urban Conditions"
+    },
+    {
+      "ref_id": "turn123view2",
+      "pattern": "TEST"
+    },
+    {
+      "ref_id": "turn123view1",
+      "pattern": ".pdf"
+    }
+  ],
+  "open": [
+    {
+      "ref_id": "https://www.keysolutionsinc.com/references/Turner%20Workbook.pdf",
+      "lineno": 2500
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-find_2.json](../data/results/phase6a-independent/web/web-find_2.json).
+
+</details>
+
+
+<details>
+<summary>web-find_3.json</summary>
+
+```json
+{
+  "find": [
+    {
+      "ref_id": "turn125view4",
+      "pattern": "Table 7-4"
+    },
+    {
+      "ref_id": "turn125view4",
+      "pattern": "PROBLEM 9"
+    },
+    {
+      "ref_id": "turn125view4",
+      "pattern": "urban"
+    },
+    {
+      "ref_id": "turn125view0",
+      "pattern": "Table 5.5"
+    },
+    {
+      "ref_id": "turn125view0",
+      "pattern": "Figure 5.6"
+    }
+  ],
+  "search_query": [
+    {
+      "q": "\"Workbook\" \"Turner\" \"157\" \"110\" filetype:pdf"
+    },
+    {
+      "q": "\"Workbook\" \"Turner\" \"TABLE 7-4\" \"48\""
+    },
+    {
+      "q": "\"Briggs\" \"urban\" \"sigma\" \"worked example\" C F"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-find_3.json](../data/results/phase6a-independent/web/web-find_3.json).
+
+</details>
+
+
+<details>
+<summary>web-find_4.json</summary>
+
+```json
+{
+  "find": [
+    {
+      "ref_id": "turn130view1",
+      "pattern": "76.3"
+    },
+    {
+      "ref_id": "turn130view1",
+      "pattern": "Table 6-7."
+    },
+    {
+      "ref_id": "turn125view0",
+      "pattern": "0.0015"
+    },
+    {
+      "ref_id": "turn125view0",
+      "pattern": "Figure 5.1"
+    }
+  ],
+  "click": [
+    {
+      "ref_id": "turn129search4",
+      "id": 9
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-find_4.json](../data/results/phase6a-independent/web/web-find_4.json).
+
+</details>
+
+
+<details>
+<summary>web-find_5.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "https://www.energy.gov/documents/doe-hdbk-1224-2024pdf",
+      "lineno": 9330
+    }
+  ],
+  "find": [
+    {
+      "ref_id": "turn132view0",
+      "pattern": "Table 6-7. Fitting"
+    },
+    {
+      "ref_id": "turn125view4",
+      "pattern": "44"
+    },
+    {
+      "ref_id": "turn125view0",
+      "pattern": "Briggs"
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-find_5.json](../data/results/phase6a-independent/web/web-find_5.json).
+
+</details>
+
+
+<details>
+<summary>web-find_6.json</summary>
+
+```json
+{
+  "find": [
+    {
+      "ref_id": "turn135view0",
+      "pattern": "PROBLEM 9"
+    },
+    {
+      "ref_id": "turn135view0",
+      "pattern": "Table 7-4"
+    },
+    {
+      "ref_id": "turn135view0",
+      "pattern": "urban"
+    },
+    {
+      "ref_id": "turn135view2",
+      "pattern": "TEST-ST"
+    },
+    {
+      "ref_id": "turn135view2",
+      "pattern": "URBAN"
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-find_6.json](../data/results/phase6a-independent/web/web-find_6.json).
+
+</details>
+
+
+<details>
+<summary>web-open_1.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101EO4F.TXT"
+    },
+    {
+      "ref_id": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/isc3v2.pdf"
+    },
+    {
+      "ref_id": "https://www.keysolutionsinc.com/references/Turner%20Workbook.pdf"
+    },
+    {
+      "ref_id": "https://www.epa.gov/scram/air-quality-dispersion-modeling-preferred-and-recommended-models"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-open_1.json](../data/results/phase6a-independent/web/web-open_1.json).
+
+</details>
+
+
+<details>
+<summary>web-open_2.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "https://directives.doe.doxcelerate.com/documents/doe-hdbk-1224-2018-hazard-and-accident-analysis-handbook-2"
+    },
+    {
+      "ref_id": "https://www.energy.gov/ehss/doe-hdbk-1224-2018-hazard-and-accident-analysis-handbook"
+    },
+    {
+      "ref_id": "https://gaftp.epa.gov/aqmg/SCRAM/models/other/isc3/iscst3z1.txt"
+    }
+  ],
+  "click": [
+    {
+      "ref_id": "turn118view3",
+      "id": 27
+    }
+  ],
+  "screenshot": [
+    {
+      "ref_id": "turn118view2",
+      "pageno": 5
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-open_2.json](../data/results/phase6a-independent/web/web-open_2.json).
+
+</details>
+
+
+<details>
+<summary>web-open_3.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "https://www.energy.gov/documents/doe-hdbk-1224-2018pdf"
+    },
+    {
+      "ref_id": "https://www.pnnl.gov/publications/genii-version-2-software-design-document-0"
+    },
+    {
+      "ref_id": "https://gaftp.epa.gov/AIR/aqmg/SCRAM/models/other/isc3/iscst3z1.txt"
+    },
+    {
+      "ref_id": "https://gaftp.epa.gov/AIR/aqmg/SCRAM/models/other/isc3/isc3v1.pdf"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-open_3.json](../data/results/phase6a-independent/web/web-open_3.json).
+
+</details>
+
+
+<details>
+<summary>web-open_4.json</summary>
+
+```json
+{
+  "find": [
+    {
+      "ref_id": "turn123view0",
+      "pattern": "Table 9-6."
+    }
+  ],
+  "open": [
+    {
+      "ref_id": "https://www.pnnl.gov/main/publications/external/technical_reports/PNNL-14584Rev3.pdf"
+    },
+    {
+      "ref_id": "https://www.osti.gov/servlets/purl/15008867"
+    },
+    {
+      "ref_id": "https://gaftp.epa.gov/AIR/aqmg/SCRAM/models/other/isc3/isc3v1.pdf"
+    },
+    {
+      "ref_id": "https://nepis.epa.gov/Exe/ZyPDF.cgi/9101GKEZ.PDF?Dockey=9101GKEZ.PDF"
+    },
+    {
+      "ref_id": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKEZ.TXT"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-open_4.json](../data/results/phase6a-independent/web/web-open_4.json).
+
+</details>
+
+
+<details>
+<summary>web-open_5.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "turn125view0",
+      "lineno": 2770
+    },
+    {
+      "ref_id": "turn123view0",
+      "lineno": 9500
+    },
+    {
+      "ref_id": "https://www.keysolutionsinc.com/references/Turner%20Workbook.pdf"
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-open_5.json](../data/results/phase6a-independent/web/web-open_5.json).
+
+</details>
+
+
+<details>
+<summary>web-open_6.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "https://downloads.regulations.gov/EPA-HQ-OAR-2003-0062-0323/attachment_2.pdf"
+    },
+    {
+      "ref_id": "https://www.energy.gov/documents/doe-hdbk-1224-2024pdf"
+    },
+    {
+      "ref_id": "https://people.math.sfu.ca/~stockie/atmos/"
+    }
+  ],
+  "find": [
+    {
+      "ref_id": "turn125view0",
+      "pattern": "Urban Condition"
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-open_6.json](../data/results/phase6a-independent/web/web-open_6.json).
+
+</details>
+
+
+<details>
+<summary>web-open_7.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "https://archives.standards.doxcelerate.com/documents/doe-hdbk-1224-2024-hazard-and-accident-analysis-handbook"
+    },
+    {
+      "ref_id": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=2000GRN3.TXT"
+    },
+    {
+      "ref_id": "https://www.keysolutionsinc.com/references/Turner%20Workbook.pdf#page=47"
+    },
+    {
+      "ref_id": "https://nepis.epa.gov/Exe/moresame.cgi?Source=D%3A%5CZYFILES%5CINDEX+DATA%5C76THRU80%5CTXT%5C00000003%5C2000GRN3.txt&span=5&start=0"
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-open_7.json](../data/results/phase6a-independent/web/web-open_7.json).
+
+</details>
+
+
+<details>
+<summary>web-open_8.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=9101GKHD.TXT"
+    },
+    {
+      "ref_id": "https://nepis.epa.gov/Exe/ZyPDF.cgi/9101GKHD.PDF?Dockey=9101GKHD.PDF"
+    },
+    {
+      "ref_id": "https://nepis.epa.gov/Exe/ZyPURL.cgi?Dockey=000031VJ.TXT"
+    }
+  ],
+  "find": [
+    {
+      "ref_id": "turn123view0",
+      "pattern": "213"
+    },
+    {
+      "ref_id": "turn118view1",
+      "pattern": "Briggs"
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-open_8.json](../data/results/phase6a-independent/web/web-open_8.json).
+
+</details>
+
+
+<details>
+<summary>web-open_9.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "https://gaftp.epa.gov/AIR/aqmg/SCRAM/models/other/isc3/iscst.zip"
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-open_9.json](../data/results/phase6a-independent/web/web-open_9.json).
+
+</details>
+
+
+<details>
+<summary>web-screenshot.json</summary>
+
+```json
+{
+  "screenshot": [
+    {
+      "ref_id": "https://www.keysolutionsinc.com/references/Turner%20Workbook.pdf",
+      "pageno": 5
+    },
+    {
+      "ref_id": "https://www.energy.gov/documents/doe-hdbk-1224-2018pdf",
+      "pageno": 227
+    }
+  ],
+  "response_length": "short"
+}
+```
+
+Actual returned output: [web-screenshot.json](../data/results/phase6a-independent/web/web-screenshot.json).
+
+</details>
+
+
+<details>
+<summary>web-search_1.json</summary>
+
+```json
+{
+  "search_query": [
+    {
+      "q": "Briggs urban rural dispersion coefficients sigma Table 1973 PDF EPA"
+    },
+    {
+      "q": "Turner 1970 Workbook Atmospheric Dispersion Estimates pdf 64 urban"
+    },
+    {
+      "q": "EPA ISC3 validation test cases urban concentration output test"
+    },
+    {
+      "q": "Briggs urban stability C F sigma worked example 1000"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-search_1.json](../data/results/phase6a-independent/web/web-search_1.json).
+
+</details>
+
+
+<details>
+<summary>web-search_2.json</summary>
+
+```json
+{
+  "open": [
+    {
+      "ref_id": "turn118view2",
+      "lineno": 0
+    },
+    {
+      "ref_id": "turn118view2",
+      "lineno": 3300
+    },
+    {
+      "ref_id": "turn118view0",
+      "lineno": 1710
+    }
+  ],
+  "search_query": [
+    {
+      "q": "site.epa.gov \"Briggs\" \"sigma\" \"1000\" urban C F"
+    },
+    {
+      "q": "site.epa.gov isc3 test cases validation iscst3 output sigmay sigmaz"
+    },
+    {
+      "q": "site.energy.gov Briggs dispersion coefficients \"Table\" rural urban"
+    },
+    {
+      "q": "site.pnnl.gov GENII software design document Briggs Figure 5"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-search_2.json](../data/results/phase6a-independent/web/web-search_2.json).
+
+</details>
+
+
+<details>
+<summary>web-search_3.json</summary>
+
+```json
+{
+  "search_query": [
+    {
+      "q": "\"DOE-HDBK-1224-2018\" pdf"
+    },
+    {
+      "q": "\"Briggs\" \"Urban\" \"sigma\" \"200\" \"92.97\""
+    },
+    {
+      "q": "\"Briggs\" \"urban\" \"sigma\" \"185.93\""
+    },
+    {
+      "q": "\"Turner Workbook.pdf\" \"Problem\""
+    }
+  ],
+  "open": [
+    {
+      "ref_id": "https://www.keysolutionsinc.com/references/Turner%20Workbook.pdf",
+      "lineno": 2100
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-search_3.json](../data/results/phase6a-independent/web/web-search_3.json).
+
+</details>
+
+
+<details>
+<summary>web-search_4.json</summary>
+
+```json
+{
+  "search_query": [
+    {
+      "q": "site:pnnl.gov GENII verification validation Briggs urban sigma numeric"
+    },
+    {
+      "q": "\"Briggs\" \"urban\" \"sigma-y\" \"Table\" \"1000\""
+    },
+    {
+      "q": "\"Turner\" \"Workbook\" \"pdf\" -site:scribd.com -site:researchgate.net -site:pdfcoffee.com -site:books.google.com"
+    },
+    {
+      "q": "site:energy.gov \"Briggs\" \"urban\" \"C\" \"1000\" \"sigma\""
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-search_4.json](../data/results/phase6a-independent/web/web-search_4.json).
+
+</details>
+
+
+<details>
+<summary>web-search_5.json</summary>
+
+```json
+{
+  "search_query": [
+    {
+      "q": "site:energy.gov \"DOE-HDBK-1224-2024\" filetype:pdf"
+    },
+    {
+      "q": "site:pnnl.gov \"GENII\" \"verification\" \"urban\""
+    },
+    {
+      "q": "\"workbook of atmospheric dispersion estimates\" \"pdf\" Turner 1970 keysolutions -site:scribd.com"
+    }
+  ],
+  "find": [
+    {
+      "ref_id": "turn125view0",
+      "pattern": "Briggs Urban"
+    },
+    {
+      "ref_id": "turn125view0",
+      "pattern": "Briggs Open"
+    },
+    {
+      "ref_id": "turn125view4",
+      "pattern": "PROBLEM 4:"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-search_5.json](../data/results/phase6a-independent/web/web-search_5.json).
+
+</details>
+
+
+<details>
+<summary>web-search_6.json</summary>
+
+```json
+{
+  "search_query": [
+    {
+      "q": "site:nepis.epa.gov \"Workbook\" \"Revised 1970\" \"PROBLEM 9\""
+    },
+    {
+      "q": "site:nepis.epa.gov \"Workbook\" \"Revised 1970\" \"157\""
+    },
+    {
+      "q": "site:pnnl.gov \"GENII\" \"Verification and Validation\" report"
+    },
+    {
+      "q": "\"Turner\" \"Workbook\" \"1970\" \"pdf\" site:edu"
+    }
+  ],
+  "response_length": "long"
+}
+```
+
+Actual returned output: [web-search_6.json](../data/results/phase6a-independent/web/web-search_6.json).
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 011-journal-completion-turner-assumptions (2026-10-16T10:36:56.3407233+05:30; exit 1)</summary>
+
+```powershell
+python .tools/phase6a-independent/finish_web_journal.py
+if ($LASTEXITCODE -ne 0) { throw 'Web journal completion failed' }
+docker compose exec -T web python .tools/phase6a-independent/local_turner_excerpt.py
+if ($LASTEXITCODE -ne 0) { throw 'Cached Turner read failed' }
+Get-Content docs/results/PHASE6A.md -Encoding UTF8 -TotalCount 16
+git diff --stat
+```
+
+```text
+Completed 22 UTF-8 research journal records. Reports written before the decoding failure were retained without duplication.
+docker : Traceback (most recent call last):
+At line:3 char:1
++ docker compose exec -T web python .tools/phase6a-independent/local_tu ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  File "/app/.tools/phase6a-independent/local_turner_excerpt.py", line 7, in <module>
+    text = html.unescape(re.sub(r"<[^>]*>", " ", path.read_text()))
+                                                 ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/pathlib.py", line 1028, in read_text
+    return f.read()
+           ^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x84 in position 5990: invalid start byte
+Cached Turner read failed
+At line:4 char:28
++ if ($LASTEXITCODE -ne 0) { throw 'Cached Turner read failed' }
++                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Cached Turner read failed:String) [], RuntimeException
+    + FullyQualifiedErrorId : Cached Turner read failed
+
+
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 012-turner-legacy-encoding-review (2026-10-16T10:37:09.9124496+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web python .tools/phase6a-independent/local_turner_excerpt.py
+if ($LASTEXITCODE -ne 0) { throw 'Cached Turner read failed' }
+Get-Content docs/results/PHASE6A.md -Encoding UTF8 -TotalCount 16
+git diff --stat
+```
+
+```text
+Legacy HTML rendered as Windows-1252; stored source bytes unchanged.
+PATTERN PROBLEM\s+4\s*: HITS 0
+PATTERN B\s+stability HITS 4
+ 10
+                10
+                                                                                                100
+                                                    DISTANCE, km
+Figure  3-5B.  xu  Q with distance for various  heights of emission (H) and  limits to vertical dispersion (L), B stability.
+12
+ATMOSPHERIC DISPERSION ESTLMATES
+
+-------
+
+                                                           DISTANCE, km
+Figure 3-5C.  xu/Q with distance  for various  heights  of emission (H) and limits to vertical dispersion (I), C stability.
+Estimates
+
+13
+
+-------
+          i
+
+
+
+          O
+                                       -iS~;^P^S5
+                                                  DISTANCE, km
+
+
+
+
+Figure 3-5D.  \u Q with distance for various heights  of emission (H) and limits to vertical dispersion (L), D stability.
+
+
+
+
+
+
+14                                                              ATMOSPHERIC  DISPERSION ESTIMATES
+
+-------
+                        mia               • • p
+
+
+
+                                                      DISTANCE, km
+
+
+
+Figure 3-5E.   xu/Q with  distance for  various  heights  of  emission (H) and  limits to  vertical  dispersion (L), E stability.
+Estimates
+                                                                                                                 15
+
+-------
+                10
+
+                 10'
+                                                    DISTANCE, km
+Figure 3-5F.  xu/Q with distance  for various  heights of emission  (H) and limits to vertical dispersion (L), F stability.
+16
+ATMOSPHERIC DISPERSION ESTIMATES
+
+-------
+   From Table A-l  (Appendix 3) when exp
+From Figure 3-2, for stability B and x = 600 m,
+-------
+n
+o
+w
+                                   CLASS  A   STABILITY
+
+                                            H = 0
+f*
+tt ' '
+fff*
+-i .
+...{••••
+
+n
+• • • • TT "
+t
+[1 ft
+1 * 1
+n fi
+[|
+
+
+111
+• lo 3
+: \ 1
+
+I
+"IT" "
+
+• t '
+
+- - --
+•ji:
+1 '
+
+i
+
+                                                                  3                 4
+
+
+                                                                    DOWNWIND DISTANCE
+                                            Figure 3-6A.  Isoplelhs  of xu/Q for a ground-level  source, A stability.
+
+-------
+M
+en
+
+a
+
+
+a
+                                            CLASS  B  STABILITY
+
+
+                                                       H = 0
+                KJ3   10
+
+                4
+
+
+                                                                    DOWNWIND DISTANCE
+                                            Figure 3-6A.  Isoplelhs  of xu/Q for a ground-level  source, A stability.
+
+-------
+M
+en
+
+a
+
+
+a
+                                            CLASS  B  STABILITY
+
+
+                                                       H = 0
+                KJ3   10
+                                                                     DOWNWIND DISTANCE («|.  km
+                                              Figure 3-6B.  Isopleths of xu/Q for a ground level source, B stability.
+
+-------
+O
+D
+                                  CLASS  C   STABILITY
+                                          H=0
+                                                                  DOWNWIND DISTANCt (•). km
+                                             Figure 3-6C.  Isopleths of xu/Q for  a  ground-level source, C  stability.
+
+-------
+                  CLASS   D   STABILITY
+                            H= 0
+ICT3    3xio4
+                                                   3                 4
+
+                                                 DOWNWIND DISTANCE (,). k
+                             Figure 3-6D.  Isopleths of  xu  Q for  a  ground-level source, D stability.
+
+-------
+ro
+                                      I    I
+                                  CLASS E    STABILITY
+                                          H=0
+                                                                3
+
+                                                              DOWNWIND DISTANCE (•), Vm
+O
+D
+M
+W)
+C/5
+                                  CLASS       STABILITY
+                                            H=0
+    3                4
+
+DOWNWIND DISTANCE {«). tm
+                                      Figure 3-6E, F.  Isopleths  of \u/Q for a ground level  source,  E and F stabilities.
+
+-------
+                                  CLASS  A   STABILITY
+                                           H = IOO
+                                                                 3                4
+
+                                                               DOWNWIND DISTANCE  (>). km
+IS
+Figure 3-7A.  Isopleths of ,\u/Q for a source 100 meters high, A stability.
+
+-------
+o
+a
+                                  CLASS  I   STABILITY
+                                           H = IOO
+8
+   3
+
+DOWNWIND DISTANCE (>). Vm
+                                          Figure 3-7B.  Isopleths
+ STABILITY
+
+
+                                                       H = 0
+                KJ3   10
+                                                                     DOWNWIND DISTANCE («|.  km
+                                              Figure 3-6B.  Isopleths of xu/Q for a ground level source, B stability.
+
+-------
+O
+D
+                                  CLASS  C   STABILITY
+                                          H=0
+                                                                  DOWNWIND DISTANCt (•). km
+                                             Figure 3-6C.  Isopleths of xu/Q for  a  ground-level source, C  stability.
+
+-------
+                  CLASS   D   STABILITY
+                            H= 0
+ICT3    3xio4
+                                                   3                 4
+
+                                                 DOWNWIND DISTANCE (,). k
+                             Figure 3-6D.  Isopleths of  xu  Q for  a  ground-level source, D stability.
+
+-------
+ro
+                                      I    I
+                                  CLASS E    STABILITY
+                                          H=0
+                                                                3
+
+                                                              DOWNWIND DISTANCE (•), Vm
+O
+D
+M
+W)
+C/5
+                                  CLASS       STABILITY
+                                            H=0
+    3                4
+
+DOWNWIND DISTANCE {«). tm
+                                      Figure 3-6E, F.  Isopleths  of \u/Q for a ground level  source,  E and F stabilities.
+
+-------
+                                  CLASS  A   STABILITY
+                                           H = IOO
+                                                                 3                4
+
+                                                               DOWNWIND DISTANCE  (>). km
+IS
+Figure 3-7A.  Isopleths of ,\u/Q for a source 100 meters high, A stability.
+
+-------
+o
+a
+                                  CLASS  I   STABILITY
+                                           H = IOO
+8
+   3
+
+DOWNWIND DISTANCE (>). Vm
+                                          Figure 3-7B.  Isopleths of \u/Q for a source 100 meters high, B stability.
+
+-------
+*  sr
+   8
+                                       CLASS C   STABILITY
+                                               H = IOO
+                                                                       3                 4
+
+
+PATTERN PROBLEM\s+9\s*: HITS 0
+# Phase 6A: VayuSim engine, data integration and API
+
+**Gate: Ready for 6B with caveats.** Urban C (Delhi/Mumbai) and urban F
+(Hyderabad) remain **not independently validated**. Phase6B must display an
+**unvalidated branch** label for these scenarios before presenting them. This
+is a conditional frontend acceptance requirement; **Phase6B has not started**.
+See [Independent validation](#independent-validation) for the exact case scope.
+
+The engine, real-data adapters, API and verification map are implemented in
+`D:\EnviroInsights-India`. The user's subsequent whole-site presentation request
+covers the overview, forecasts, research, library, assistant and simulator pages.
+This report separates measured software/scientific checks from predictive validity.
+The [Phase 6A audit](#phase-6a-audit) below narrows the original validation claims;
+it includes discrepancies beyond the original supplied-sigma concentration checks.
+The full Phase 6B frontend is outside this implementation.
+
+ README.md               |    8 +
+ docs/ARCHITECTURE.md    |   15 +
+ docs/VALIDATION.md      | 2656 +++++++++++++++++++++++++++++++++++++++++++++++
+ docs/results/PHASE6A.md |  229 ++++
+ 4 files changed, 2908 insertions(+)
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 013-final-reference-and-suite (2026-10-16T10:38:25.7649163+05:30; exit 0)</summary>
+
+```powershell
+docker compose exec -T web python manage.py verify_vayusim_references
+if ($LASTEXITCODE -ne 0) { throw 'Final reference run failed' }
+docker compose exec -T web ruff check .
+if ($LASTEXITCODE -ne 0) { throw 'Ruff failed' }
+docker compose exec -T web ruff format --check .
+if ($LASTEXITCODE -ne 0) { throw 'Format check failed' }
+.\scripts\dev.ps1 test
+if ($LASTEXITCODE -ne 0) { throw 'Final full suite failed' }
+```
+
+```text
+doe-briggs-rural-d-1000m | sigma_y_m | engine sigma | reference=76.3 engine=76.2770071396 error=0.030135% tolerance=5% | PASS; independent numeric
+doe-briggs-rural-d-1000m | sigma_z_m | engine sigma | reference=37.9 engine=37.947331922 error=0.124886% tolerance=5% | PASS; independent numeric
+cimbala-martin-d-4850m | sigma_y_m | engine sigma | reference=278.97 engine=318.396656667 error=14.132938% tolerance=5% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | sigma_z_m | engine sigma | reference=87.51 engine=101.16003892 error=15.598262% tolerance=5% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | concentration_ugm3 at z=0 m | engine sigma -> Gaussian, prescribed H/u | reference=149300 engine=133382.771845 error=10.661238% tolerance=10% | FAIL tolerance; diagnostic only
+cimbala-martin-d-4850m | concentration_ugm3 at z=0 m | Gaussian only, source-supplied sigmas/H/u | reference=149300 engine=149314.351448 error=0.009612% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | sigma_y_m | engine sigma | reference=157 engine=152.554014279 error=2.831838% tolerance=5% | PASS; diagnostic only
+turner-pg-b-1000m | sigma_z_m | engine sigma | reference=110 engine=120 error=9.090909% tolerance=5% | FAIL tolerance; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=0 m | engine sigma -> Gaussian, prescribed H/u | reference=278 engine=300.517407183 error=8.099787% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=0 m | Gaussian only, source-supplied sigmas/H/u | reference=278 engine=274.592425873 error=1.225746% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=30 m | engine sigma -> Gaussian, prescribed H/u | reference=285 engine=305.609816066 error=7.231514% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=30 m | Gaussian only, source-supplied sigmas/H/u | reference=285 engine=283.075948387 error=0.675106% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=150 m | engine sigma -> Gaussian, prescribed H/u | reference=358 engine=342.615072154 error=4.297466% tolerance=10% | PASS; diagnostic only
+turner-pg-b-1000m | concentration_ugm3 at z=150 m | Gaussian only, source-supplied sigmas/H/u | reference=358 engine=356.331421573 error=0.466083% tolerance=10% | PASS; diagnostic only
+{
+  "fixture_sha256": "da53169d4e1a4b711f9272d1ad3fc67e522bd8ec8648c619a36f266da1c3b60e",
+  "urban_equation_transcription_matches": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "D": true,
+    "E": true,
+    "F": true
+  },
+  "independent_numeric_passes": 2,
+  "independent_numeric_failures": 0,
+  "independently_validated_cases": [
+    "rural/D sigmas at 1000 m"
+  ],
+  "example_branches": {
+    "urban/C": {
+      "status": "not independently validated",
+      "examples": [
+        "Delhi #62",
+        "Mumbai #63"
+      ],
+      "reason": "No verified page-cited matching numeric or visually verified chart-read sigma pair located; equation transcription only"
+    },
+    "urban/F": {
+      "status": "not independently validated",
+      "examples": [
+        "Hyderabad #64"
+      ],
+      "reason": "No verified page-cited matching numeric or visually verified chart-read sigma pair located; equation transcription only"
+    }
+  },
+  "gate": "Ready for 6B with caveats",
+  "gate_condition": "Phase 6B must show an 'unvalidated branch' label for urban C and F before presenting these scenarios; no Phase 6B implementation in this task",
+  "physical_field_validity": "not established",
+  "end_to_end_plume_rise_validity": "not established"
+}
+All checks passed!
+266 files already formatted
+System check identified no issues (0 silenced).
+No changes detected
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.6.0
+cachedir: /tmp/pytest-cache
+django: version: 5.2.18, settings: enviroinsights.settings.test (from option)
+rootdir: /app
+configfile: pyproject.toml
+testpaths: tests
+plugins: platformdirs-4.12.3, hypothesis-6.169.1, django-4.14.0, anyio-4.15.1, Faker-40.41.0
+collected 260 items
+
+tests/test_admin.py ..                                                   [  0%]
+tests/test_analytics.py ....                                             [  2%]
+tests/test_api.py ...                                                    [  3%]
+tests/test_database.py ......                                            [  5%]
+tests/test_deweather_diagnostics.py ...                                  [  6%]
+tests/test_forecast_operations.py ..                                     [  7%]
+tests/test_forecasting.py .                                              [  8%]
+tests/test_ingest_api.py ....                                            [  9%]
+tests/test_ingest_sources.py ...................                         [ 16%]
+tests/test_rag_audit.py .                                                [ 17%]
+tests/test_rag_pipeline.py .......................                       [ 26%]
+tests/test_research_api.py .                                             [ 26%]
+tests/test_research_clocks.py ..                                         [ 27%]
+tests/test_seed.py .                                                     [ 27%]
+tests/test_vayusim_api.py ..............                                 [ 33%]
+tests/test_vectors.py ..                                                 [ 33%]
+tests/test_database.py .                                                 [ 34%]
+tests/test_vayusim_api.py .                                              [ 34%]
+tests/test_worker.py .                                                   [ 35%]
+tests/test_analytics.py ...................                              [ 42%]
+tests/test_dashboard_evidence.py ..                                      [ 43%]
+tests/test_deweather_diagnostics.py ....                                 [ 44%]
+tests/test_forecast_intervals.py .                                       [ 45%]
+tests/test_forecast_operations.py ...                                    [ 46%]
+tests/test_forecasting.py .................                              [ 52%]
+tests/test_foundation.py .....................                           [ 60%]
+tests/test_ingest_sources.py ......                                      [ 63%]
+tests/test_ingest_units.py .....................                         [ 71%]
+tests/test_phase6a_audit.py .......                                      [ 73%]
+tests/test_phase6a_fix.py ...                                            [ 75%]
+tests/test_rag_pipeline.py ...........                                   [ 79%]
+tests/test_rag_resident_worker.py .                                      [ 79%]
+tests/test_research_methods.py .....                                     [ 81%]
+tests/test_vayusim_api.py ....                                           [ 83%]
+tests/test_vayusim_independent_references.py ........                    [ 86%]
+tests/test_vayusim_physics.py ....................................       [100%]
+
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:47: PendingDeprecationWarning: The set_bad function will be deprecated in a future version. Use cmap.with_extremes(bad=...) or Colormap(bad=...) instead.
+    red_blue.set_bad(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:48: PendingDeprecationWarning: The set_over function will be deprecated in a future version. Use cmap.with_extremes(over=...) or Colormap(over=...) instead.
+    red_blue.set_over(gray_rgb.tolist(), 1.0)
+
+../usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49
+  /usr/local/lib/python3.12/site-packages/shap/plots/colors/_colors.py:49: PendingDeprecationWarning: The set_under function will be deprecated in a future version. Use cmap.with_extremes(under=...) or Colormap(under=...) instead.
+    red_blue.set_under(gray_rgb.tolist(), 1.0)  # "under" is incorrectly used instead of "bad" in the scatter plot
+
+<frozen importlib._bootstrap>:488
+  <frozen importlib._bootstrap>:488: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 16 from C header, got 96 from PyObject
+
+tests/test_forecast_operations.py: 96 warnings
+tests/test_forecasting.py: 32 warnings
+  /app/tests/test_forecasting.py:66: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    "available_by": issue_end(day.date()) - pd.Timedelta(hours=12),
+
+tests/test_forecast_operations.py::test_sarimax_state_never_assimilates_future_target_labels
+  /usr/local/lib/python3.12/site-packages/statsmodels/tsa/statespace/mlemodel.py:737: ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals
+    mlefit = super().fit(
+
+tests/test_forecasting.py::test_every_feature_available_by_issue_end_and_future_pm_has_no_effect
+  /app/tests/test_forecasting.py:91: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    bad["weather_available_by"] = cutoff + pd.Timedelta(hours=1)
+
+tests/test_forecasting.py::test_rolling_origins_and_tuning_calibration_labels_are_purged
+  /app/tests/test_forecasting.py:102: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    {"issued_for_date": dates, "target_date": dates + pd.Timedelta(days=3), "y": 20.0},
+
+tests/test_research_methods.py: 12 warnings
+  /app/tests/test_research_methods.py:84: DeprecationWarning: The 'generic' unit for NumPy timedelta is deprecated, and will raise an error in the future. This includes implicit conversion of bare integers (e.g. `+ 1`). Please use a specific unit instead.
+    first - pd.Timedelta(hours=24), first + pd.Timedelta(days=8), inclusive="left"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 260 passed, 147 warnings in 51.74s ======================
+
+```
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 014-final-hash-claim-review (2026-10-16T10:40:01.2510917+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase6a-independent/identity.py after
+if ($LASTEXITCODE -ne 0) { throw 'Frozen or existing files changed' }
+Get-Content docs/results/PHASE6A.md -Encoding UTF8 | Select-Object -Last 55
+Get-Content README.md -Encoding UTF8 -TotalCount 33
+git status --short --untracked-files=no
+```
+
+```text
+{
+  "phase3a2": {
+    "files": 316,
+    "aggregate_sha256": "c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350"
+  },
+  "phase4": {
+    "files": 776,
+    "aggregate_sha256": "35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4"
+  },
+  "phase5": {
+    "files": 4,
+    "aggregate_sha256": "51c3354d68206b082d1f2c240c76c8c230da06ffc23754c2a147e624b6ec0d23"
+  },
+  "existing_tests_and_fixtures": {
+    "files": 50,
+    "aggregate_sha256": "3ca434500859bf7230fc713bb6c85e1262213b8bb637a090302fa364cddc3fd6"
+  },
+  "physics_and_presets": {
+    "files": 6,
+    "aggregate_sha256": "60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e"
+  },
+  "rag_eval_sha256": "f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4",
+  "stage": "after",
+  "identical_to_before": true
+}
+
+All three examples now have the explicit claim **not independently validated for
+their urban dispersion branch**. They remain hypothetical 1 g/s educational
+scenarios with archived weather and WorldPop support, not observed facilities.
+Fresh recomputation reproduced every peak, distance, exposure summary and input
+hash exactly. Run/header endpoints all returned200. No number changed.
+
+| Example | Branch | Peak before µg/m³ | Peak after µg/m³ | Claim |
+| --- | --- | --- | --- | --- |
+| Delhi #62 | urban C | 15.641839027404785 | 15.641839027404785 | not independently validated |
+| Mumbai #63 | urban C | 11.536741256713867 | 11.536741256713867 | not independently validated |
+| Hyderabad #64 | urban F | 18.990890502929688 | 18.990890502929688 | not independently validated |
+
+**Ready for 6B with caveats** is conditional: the Phase6B frontend must label
+urban C/F scenarios **unvalidated branch**, including these three examples, and
+retain the educational/no-regulatory-validity caveats. That frontend label is
+not implemented or asserted to exist by this task; **Phase6B has not started**.
+Equation agreement or a health200 response cannot remove this requirement.
+
+### Software checks, frozen identities and command outcomes
+
+Web-container suite: **260 passed, 147 warnings in 45.61s**;
+all 252 existing tests plus two independent-number and six equation-transcription
+regressions. Ruff: **All checks passed!** Format: **266 files already formatted**.
+Django system and migration checks pass. Warnings remain visible and unsuppressed
+in the same upstream categories documented in the fix pass. Current default
+provider remains extractive, Ollama disabled; health returned200 with all checks
+true. No model/provider evaluation or prompt tuning ran.
+
+| Frozen set | Before SHA256 | After SHA256 | Expected |
+| --- | --- | --- | --- |
+| Phase3A.2, 316 files | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | `c64f5280ed274fe25dd6556028d7e924da6b5c2196c4214f1fc11d7da944c350` | expected match |
+| Phase4, 776 files | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | `35ea23dbb976c1ddf5cb176c6f095d9226063e891bca23ba355087369945b8b4` | expected match |
+| Phase5 questions/relevance | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | `f9e6d1eb712a772d4fac98479a98676b54ab9e7fb05219df8a1ecf667ee960b4` | expected match |
+
+All 50 existing test/support/fixture files also match before and after:
+`3ca434500859bf7230fc713bb6c85e1262213b8bb637a090302fa364cddc3fd6`.
+All six physics/preset files match before and after:
+`60f44bf7573b84522f49d5dc3fba3a2e97483b1995ccd6d2765e429deb815a0e`.
+The complete four-file evaluation catalogue remains unchanged as well.
+
+The first local glob search used a literal Windows wildcard path rejected by
+`rg`; the subsequent directory search completed. The first Ruff run found one
+overlong string in the new command; wrapping that string fixed it, with no
+coefficient, tolerance or test changes. Public-read failures are retained in
+the source inventory and raw web journal. No scientific mismatch was hidden.
+The report helper initially used the Windows default decoder for UTF-8 research
+records; explicit UTF-8 completed the journal without duplicating the report.
+A cached legacy EPA HTML read needed Windows-1252 decoding; the source bytes
+were retained unchanged. Neither decoder issue affected numerical computations.
+
+Files added: the manually transcribed fixture, reproducible management command,
+eight regressions, structured result metrics and evidence manifest. README,
+architecture, this report and the command journal now state the limited case
+result and conditional gate. No Phase6B frontend or engine feature was added.
+# EnviroInsights-India
+
+Phase6A adds **VayuSim**, an educational, source-specific Gaussian dispersion
+engine with archived weather, WorldPop2025 exposure, saved scenarios and a
+verification map. The website now has consistent desktop/mobile navigation:
+[Overview](http://localhost:8000/), [Forecasts](http://localhost:8000/forecasts/),
+[Research](http://localhost:8000/research/), [Library](http://localhost:8000/library/),
+[Ask](http://localhost:8000/ask/) and [VayuSim](http://localhost:8000/simulator/).
+Read [the Phase6A report](docs/results/PHASE6A.md) for actual verification and
+limitations. Forecast cards show archived replay dates; research comparisons
+do not establish causation or official NCAP compliance.
+
+The [fix pass](docs/results/PHASE6A.md#fix-pass) separates passing **formula checks**
+from a **scheme comparison**. Briggs versus Cimbala's Martin solution (PDF p.3)
+differs by 14.13% in sigma-y, 15.60% in sigma-z and 10.66% in concentration.
+These scheme differences exceed the unchanged 5%/10% tolerances; they are not
+validation errors. Brune Table 2.3 agrees with the code: rural-B sigma-y at 1 km
+is 152.554014 m; the adjacent paragraph's 210 m is inconsistent. Turner physical
+pages remain **unverified**. End-to-end physical validity is not established.
+
+The [independent-reference pass](docs/results/PHASE6A.md#independent-validation)
+verifies the published rural-D sigma pair at 1 km (DOE p.213): errors 0.030135%
+and 0.124886%, within 5%. This does not validate the **urban C** branches used by
+Delhi/Mumbai or **urban F** used by Hyderabad; those remain **not independently
+validated** against numeric cases. Their example values are unchanged. The gate
+is **Ready for 6B with caveats**, conditional on the future frontend displaying
+**unvalidated branch** for these scenarios. Phase6B has not been started.
+
+VayuSim inputs are explicit scenario assumptions, not measured facility
+inventories. All five source-family presets require emission rate, release
+height, diameter, exit velocity and temperature where no defensible universal
+default was established. Real weather uses the UTC midpoint of the selected
+IST hour. Station totals stay separate from the modelled increment. The
+ M README.md
+ M docs/ARCHITECTURE.md
+ M docs/VALIDATION.md
+ M docs/results/PHASE6A.md
+
+```
+
+</details>
+
+<details>
+<summary>Additional Turner source-assumption read</summary>
+
+The final source-assumption read is retained with its exact request and returned
+output: [web-turner_assumptions.json](../data/results/phase6a-independent/web/web-turner_assumptions.json).
+It did not establish an exact physical page/class. Turner remains excluded.
+
+</details>
+
+<details>
+<summary>Phase 6A independent: 015-final-evidence-archive (2026-10-16T10:40:34.8122886+05:30; exit 0)</summary>
+
+```powershell
+python .tools/phase6a-independent/finish_evidence.py
+if ($LASTEXITCODE -ne 0) { throw 'Evidence metadata verification failed' }
+git diff --check
+if ($LASTEXITCODE -ne 0) { throw 'Diff check failed' }
+python .tools/phase6a-independent/archive.py
+if ($LASTEXITCODE -ne 0) { throw 'Evidence archive failed' }
+```
+
+```text
+{
+  "tests": {
+    "passed": 260,
+    "warnings": 147,
+    "seconds": 51.74,
+    "existing_tests_retained": 252,
+    "new_numeric_regressions": 2,
+    "new_equation_transcription_regressions": 6
+  },
+  "independent_scalar_passes": 2,
+  "retained_web_reader_calls": 23,
+  "historical_runtime_artifact_unchanged": true,
+  "previous_command_journal_preserved": true
+}
+{
+  "status": "complete",
+  "artifact_files": 70,
+  "code_and_reports": 7,
+  "gate": "Ready for 6B with caveats",
+  "independent_case_scope": [
+    "rural/D sigmas at 1000 m"
+  ]
+}
+
+```
+
+</details>
+
+### Independent-reference final Git command and output
+
+```powershell
+python .tools/phase6a-independent/finalize_commit.py
+```
+
+The finalizer verifies retained measurement/source-reader/code/report hashes,
+checks the baseline HEAD, stages only these nine validation files, checks the
+staged diff, commits, resolves the commit hash and checks tracked cleanliness.
+Actual Git commands, stdout/stderr, exit codes and the final commit hash are
+retained in [the local final Git output](../data/results/phase6a-independent/final-git.json).
+This final output is written after commit to avoid requiring the committed
+Markdown to contain its own hash. No push or Phase6B work is performed.

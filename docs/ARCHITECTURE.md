@@ -271,3 +271,18 @@ with its BSD licence; the map requests standard OSM tiles with visible attributi
 and normal browser caching, without tile prefetch or offline downloads. Scientific
 figures and saved results retain their original timestamps and caveats. Markdown
 answer tables render with raw HTML disabled and unsafe URL schemes rejected.
+
+
+The independent-reference command `verify_vayusim_references` reads a separate,
+manually transcribed fixture with source/page, literal values and dates. It
+compares unchanged physics against DOE's printed rural-D sigmas at 1000 m
+(p.213; errors 0.030135%/0.124886%, within 5%). This establishes that numeric
+case only, not field validity or a full plume-rise pipeline. Martin and Turner
+differences, physical-page uncertainty and excluded counts remain explicit.
+ISC3 p.1-19 equation-transcription tests cover all urban classes, including C/F;
+equation coverage does not clear independent numeric readiness. Urban C
+(Delhi/Mumbai) and F (Hyderabad) remain not independently validated. The future
+Phase6B frontend must display **unvalidated branch** for those scenarios as a
+condition of **Ready for 6B with caveats**. No Phase6B frontend changes were made
+in this task, and all example numbers, engine coefficients/presets and frozen
+evaluation sets are unchanged. See [Independent validation](results/PHASE6A.md#independent-validation).
