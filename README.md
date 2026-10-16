@@ -132,5 +132,7 @@ use. Detailed provenance is in [DATA_SOURCES.md](docs/DATA_SOURCES.md).
 - [Architecture](docs/ARCHITECTURE.md), [data model](docs/DATA_MODEL.md),
   [command journal](docs/VALIDATION.md).
 
-No remote is configured in the audited checkout. Earlier publication elsewhere
-is unverified. This finishing pass commits locally and does not push.
+Source repository: [Andryandurai/Pranavayu](https://github.com/Andryandurai/Pranavayu)
+(private; GitHub access required). Earlier phase reports retain the remote state
+at their audit dates. Git contains the source, tests and committed evidence;
+the retained database, large artifacts and local secrets need separate backups.

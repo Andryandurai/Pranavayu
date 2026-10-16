@@ -10,7 +10,11 @@ hosting, TLS, recovery or uptime test. The exact Phase 7 check output is in
 Install Git and Docker Desktop; enable WSL 2 and Linux containers. Restart when
 required and wait for the engine. Confirm `docker info` reports Linux and run
 `docker run --rm hello-world`. Copy/clone the code into a simple D: path. This
-checkout has no remote configured, so a public clone URL is not supplied.
+repository is private: clone
+`https://github.com/Andryandurai/Pranavayu.git` using authorised GitHub access.
+For a new checkout, run
+`git clone https://github.com/Andryandurai/Pranavayu.git D:\EnviroInsights-India`.
+Skip cloning if that directory already contains this project.
 The recorded 16 GiB laptop caps WSL at 9 GB. Size other machines for their actual
 workload, retaining any original `.wslconfig` before editing it. Docker data and
 model caches on this machine reside on D:; the repo does not relocate them.

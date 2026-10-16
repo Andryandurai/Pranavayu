@@ -56786,3 +56786,133 @@ exit codes and final commit ID are retained in
 commit to avoid a self-referential hash, following the existing convention.
 No remote was configured; no push command is used. Unrelated raw manifests
 and previous local evidence remain excluded from this commit.
+
+<details>
+<summary>Phase 7 fix: 042-publication-preflight (2026-10-16T14:11:24.9031897+05:30; exit 0)</summary>
+
+```powershell
+Write-Output 'Publication requested by user for https://github.com/Andryandurai/Pranavayu. Bootstrap checks: branch master, HEAD accb035e2f5cb555f88fc6a98d24aab9c0acc892; tracked worktree clean; gh api user login Andryandurai; destination PRIVATE and empty; no existing remote; no .env or private-key filenames in tracked history.'
+python .tools/publish/preflight.py
+```
+
+```text
+Publication requested by user for https://github.com/Andryandurai/Pranavayu. Bootstrap checks: branch master, HEAD accb035e2f5cb555f88fc6a98d24aab9c0acc892; tracked worktree clean; gh api user login Andryandurai; destination PRIVATE and empty; no existing remote; no .env or private-key filenames in tracked history.
+{
+  "history_blobs_scanned": 2072,
+  "secret_values_printed": false,
+  "current_nonexample_secret_keys_checked": [
+    "DJANGO_SECRET_KEY",
+    "FLOWER_BASIC_AUTH",
+    "POSTGRES_PASSWORD"
+  ],
+  "findings": [],
+  "largest_history_blobs": [
+    {
+      "bytes": 4873890,
+      "path": "tests/fixtures/boundary-alias-states.geojson"
+    },
+    {
+      "bytes": 3884625,
+      "path": "docs/VALIDATION.md"
+    },
+    {
+      "bytes": 2735182,
+      "path": "docs/VALIDATION.md"
+    },
+    {
+      "bytes": 2517514,
+      "path": "docs/VALIDATION.md"
+    },
+    {
+      "bytes": 1823041,
+      "path": "docs/VALIDATION.md"
+    },
+    {
+      "bytes": 1767942,
+      "path": "docs/validation/PHASE2_STATION_MONTH_COMPLETENESS.csv"
+    },
+    {
+      "bytes": 1310545,
+      "path": "docs/VALIDATION.md"
+    },
+    {
+      "bytes": 1177223,
+      "path": "docs/VALIDATION.md"
+    }
+  ],
+  "env_tracked": false
+}
+
+```
+
+</details>
+
+<details>
+<summary>Phase 7 fix: 043-configure-authorized-github-remote (2026-10-16T14:12:06.5900986+05:30; exit 0)</summary>
+
+```powershell
+git remote add origin https://github.com/Andryandurai/Pranavayu.git
+git remote -v
+git diff --check
+git diff -- README.md docs/DEPLOYMENT.md
+```
+
+```text
+origin	https://github.com/Andryandurai/Pranavayu.git (fetch)
+origin	https://github.com/Andryandurai/Pranavayu.git (push)
+diff --git a/README.md b/README.md
+index a6a1b83..4b894b9 100644
+--- a/README.md
++++ b/README.md
+@@ -132,5 +132,7 @@ use. Detailed provenance is in [DATA_SOURCES.md](docs/DATA_SOURCES.md).
+ - [Architecture](docs/ARCHITECTURE.md), [data model](docs/DATA_MODEL.md),
+   [command journal](docs/VALIDATION.md).
+
+-No remote is configured in the audited checkout. Earlier publication elsewhere
+-is unverified. This finishing pass commits locally and does not push.
++Source repository: [Andryandurai/Pranavayu](https://github.com/Andryandurai/Pranavayu)
++(private; GitHub access required). Earlier phase reports retain the remote state
++at their audit dates. Git contains the source, tests and committed evidence;
++the retained database, large artifacts and local secrets need separate backups.
+diff --git a/docs/DEPLOYMENT.md b/docs/DEPLOYMENT.md
+index e7628fd..39611e6 100644
+--- a/docs/DEPLOYMENT.md
++++ b/docs/DEPLOYMENT.md
+@@ -10,7 +10,11 @@ hosting, TLS, recovery or uptime test. The exact Phase 7 check output is in
+ Install Git and Docker Desktop; enable WSL 2 and Linux containers. Restart when
+ required and wait for the engine. Confirm `docker info` reports Linux and run
+ `docker run --rm hello-world`. Copy/clone the code into a simple D: path. This
+-checkout has no remote configured, so a public clone URL is not supplied.
++repository is private: clone
++`https://github.com/Andryandurai/Pranavayu.git` using authorised GitHub access.
++For a new checkout, run
++`git clone https://github.com/Andryandurai/Pranavayu.git D:\EnviroInsights-India`.
++Skip cloning if that directory already contains this project.
+ The recorded 16 GiB laptop caps WSL at 9 GB. Size other machines for their actual
+ workload, retaining any original `.wslconfig` before editing it. Docker data and
+ model caches on this machine reside on D:; the repo does not relocate them.
+
+```
+
+</details>
+
+
+### Publication to the user-specified GitHub repository
+
+The user explicitly authorised pushing this project to
+https://github.com/Andryandurai/Pranavayu, superseding the earlier no-push
+restriction for this action. GitHub confirmed the authenticated owner, an empty
+private destination and no remote branches to overwrite. The history preflight
+found no current non-example environment secrets or supported token/private-key
+patterns. Local .env, database, caches and large artifacts remain excluded.
+README and deployment notes now identify the private source repository.
+
+The final commands stage only README.md, docs/DEPLOYMENT.md and this journal,
+commit these documentation changes, and push the existing master branch with
+its full committed history using `git push --set-upstream origin master`.
+The credential helper uses the existing authenticated GitHub CLI for that
+command only; no token is printed or committed. No force push or history rewrite.
+Exact arguments, actual stdout/stderr, exit codes, remote hash, upstream status
+and GitHub metadata are retained in
+[push.json](../data/results/publication/push.json), outside the commit to avoid
+a self-referential hash. Historical audits retain their original remote status.
